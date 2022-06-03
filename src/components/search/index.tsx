@@ -7,7 +7,7 @@ import { isNullOrUndefined } from '@bodynarf/utils/common';
 
 import Button from '@app/components/button';
 
-type SearchProps = {
+export type SearchProps = {
     /** Search caption */
     caption: string;
 

@@ -8,7 +8,7 @@ import { ButtonType } from './types';
 import { ButtonWithIcon } from './components/buttonWithIcon/buttonWithIcon';
 import { SimpleButton } from './components/simpleButton/simpleButton';
 
-type ButtonProps = {
+export type ButtonProps = {
     /** Button displaying text */
     caption?: string;
 

@@ -7,7 +7,7 @@ import { isStringEmpty } from '@bodynarf/utils/common';
 import { BaseInputElementProps, InputLabel } from '../types';
 
 /** Date input conponent props type */
-type DateProps = Omit<BaseInputElementProps<Date | undefined>, 'placeholder'> & {
+export type DateProps = Omit<BaseInputElementProps<Date | undefined>, 'placeholder'> & {
     /** Label configuration */
     label: InputLabel;
 }

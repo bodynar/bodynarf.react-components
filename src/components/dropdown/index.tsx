@@ -12,7 +12,7 @@ import { BaseElementProps } from '../types';
 import DropdownItem from './components/dropdownItem/dropdownItem';
 import DropdownLabel from './components/dropdownLabel/dropdownLabel';
 
-type DropdownProps = BaseElementProps & {
+export type DropdownProps = BaseElementProps & {
     /** Items which can be selected */
     items: Array<SelectableItem>;
 

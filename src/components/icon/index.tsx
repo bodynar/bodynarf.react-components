@@ -3,7 +3,7 @@ import './icon.scss';
 import { IconSize } from '../types';
 
 /** Icon component props */
-type IconProps = {
+export type IconProps = {
     /**
      * Class name for icon.
      * Used to display icon from bootstrap-icons
