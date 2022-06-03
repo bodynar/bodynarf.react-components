@@ -1,4 +1,4 @@
-import { useComponentOutsideClick } from "@app/hooks/useComponentOutsideClick";
+import { useComponentOutsideClick } from "src/hooks/useComponentOutsideClick";
 
 export {
     useComponentOutsideClick,

@@ -5,7 +5,7 @@ import './search.scss';
 import { generateGuid } from '@bodynarf/utils/guid';
 import { isNullOrUndefined } from '@bodynarf/utils/common';
 
-import Button from '@app/components/button';
+import Button from 'src/components/button';
 
 export type SearchProps = {
     /** Search caption */

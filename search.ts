@@ -1,4 +1,4 @@
-import Search, { SearchProps } from "@app/components/search";
+import Search, { SearchProps } from "src/components/search";
 
 export default Search;
 

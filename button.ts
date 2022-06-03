@@ -1,5 +1,5 @@
-import Button, { ButtonProps } from "@app/components/button";
-import { ButtonType, ButtonWithIconProps, SimpleButtonProps } from "@app/components/button/types";
+import Button, { ButtonProps } from "src/components/button";
+import { ButtonType, ButtonWithIconProps, SimpleButtonProps } from "src/components/button/types";
 
 export default Button;
 

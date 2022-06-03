@@ -1,4 +1,4 @@
-import Date, { DateProps } from "@app/components/date";
+import Date, { DateProps } from "src/components/primitives/date";
 
 export default Date;
 

@@ -4,7 +4,7 @@ import './dropdown.scss';
 
 import { isNullOrEmpty, isNullOrUndefined } from '@bodynarf/utils/common';
 
-import { useComponentOutsideClick } from '@app/hooks/useComponentOutsideClick';
+import { useComponentOutsideClick } from 'src/hooks/useComponentOutsideClick';
 
 import { SelectableItem } from './types';
 import { BaseElementProps } from '../types';

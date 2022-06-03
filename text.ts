@@ -1,4 +1,4 @@
-import Text, { TextProps } from "@app/components/text";
+import Text, { TextProps } from "src/components/primitives/text";
 
 export default Text;
 

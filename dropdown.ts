@@ -1,5 +1,5 @@
-import Dropdown, { DropdownProps } from "@app/components/dropdown";
-import { SelectableItem } from "@app/components/dropdown/types";
+import Dropdown, { DropdownProps } from "src/components/dropdown";
+import { SelectableItem } from "src/components/dropdown/types";
 
 export default Dropdown;
 

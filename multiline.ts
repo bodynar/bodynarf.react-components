@@ -1,4 +1,4 @@
-import Multiline, { MultilineProps } from "@app/components/multiline";
+import Multiline, { MultilineProps } from "src/components/primitives/multiline";
 
 export default Multiline;
 

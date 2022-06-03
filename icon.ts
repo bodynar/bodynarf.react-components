@@ -1,4 +1,4 @@
-import Icon, { IconProps } from "@app/components/icon";
+import Icon, { IconProps } from "src/components/icon";
 
 export default Icon;
 

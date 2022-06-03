@@ -1,7 +1,7 @@
 
 import { isNullOrEmpty } from '@bodynarf/utils/common';
 
-import Icon from '@app/components/icon';
+import Icon from 'src/components/icon';
 
 import { ButtonWithIconProps } from '../../types';
 
