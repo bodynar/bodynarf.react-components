@@ -39,6 +39,6 @@ export default function Icon({ size = 'medium', name, className }: IconProps): J
     ]);
 
     return (
-        <i className={className}></i>
+        <i className={classNames}></i>
     );
 }
