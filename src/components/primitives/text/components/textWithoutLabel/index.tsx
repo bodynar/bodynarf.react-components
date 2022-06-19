@@ -1,7 +1,6 @@
 import { ChangeEvent, useCallback } from 'react';
 
-import { generateGuid } from '@bodynarf/utils/guid';
-import { getClassName } from '@bodynarf/utils/component';
+import { generateGuid, getClassName } from '@bodynarf/utils';
 
 import { TextProps } from '../..';
 

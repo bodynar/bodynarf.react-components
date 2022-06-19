@@ -1,12 +1,12 @@
-import { isNullOrEmpty, isNullOrUndefined, isStringEmpty } from '@bodynarf/utils/common';
+import { isNullOrEmpty, isStringEmpty, isNullOrUndefined, getClassName } from '@bodynarf/utils';
 
 import './button.scss';
 
 import { ElementIcon, IconSize } from '../types';
 
 import { ButtonType } from './types';
-import { ButtonWithIcon } from './components/buttonWithIcon/buttonWithIcon';
-import { SimpleButton } from './components/simpleButton/simpleButton';
+import { ButtonWithIcon } from './components/buttonWithIcon';
+import { SimpleButton } from './components/simpleButton';
 
 export type ButtonProps = {
     /** Button displaying text */
@@ -54,13 +54,14 @@ export default function Button(props: ButtonProps): JSX.Element {
         throw new Error("No button content provided.");
     }
 
-    const className: string =
-        `button is-${props.type}`
-        + (props.light === true ? ' is-light' : '')
-        + (!isNullOrUndefined(props.size) ? ` is-${props.size}` : '')
-        + (props.outlined === true ? ' is-outlined' : '')
-        + (props.rounded === true ? ' is-rounded' : '')
-        + (props.isLoading === true ? ' is-loading' : '');
+    const className: string = getClassName([
+        `button is-${props.type}`,
+        props.light === true ? 'is-light' : '',
+        !isNullOrUndefined(props.size) ? `is-${props.size}` : '',
+        props.outlined === true ? 'is-outlined' : '',
+        props.rounded === true ? 'is-rounded' : '',
+        props.isLoading === true ? 'is-loading' : '',
+    ]);
 
     if (!isNullOrUndefined(props.icon)) {
         return (

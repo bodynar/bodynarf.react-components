@@ -1,8 +1,8 @@
 import { MouseEvent } from 'react';
 
-import { isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils/common";
+import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import Icon from 'src/components/icon';
+import Icon from '../../../icon';
 
 import { SelectableItem } from "../../types";
 
@@ -30,13 +30,12 @@ const DropdownLabel = ({ caption, selectedItem, onClick, deselectable }: Dropdow
 
     const deselectVisible = deselectable && itemSelected;
 
-    const className = [
+    const className = getClassName([
         "dropdown-trigger",
         "app-dropdown__label",
         itemSelected ? "" : "app-dropdown__label--default",
         "button"
-    ].filter(x => !isNullOrEmpty(x))
-        .join(" ");
+    ]);
 
     return (
         <label

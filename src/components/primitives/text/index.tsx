@@ -1,4 +1,4 @@
-import { isNullOrUndefined } from '@bodynarf/utils/common';
+import { isNullOrUndefined } from '@bodynarf/utils';
 
 import { BaseInputElementProps } from '../types';
 

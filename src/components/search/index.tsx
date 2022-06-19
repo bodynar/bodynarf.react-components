@@ -1,11 +1,10 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 
+import { generateGuid, getClassName, isNullOrUndefined } from '@bodynarf/utils';
+
 import './search.scss';
 
-import { generateGuid } from '@bodynarf/utils/guid';
-import { isNullOrUndefined } from '@bodynarf/utils/common';
-
-import Button from 'src/components/button';
+import Button from '../button';
 
 export type SearchProps = {
     /** Search caption */
@@ -68,21 +67,20 @@ export default function Search(props: SearchProps): JSX.Element {
             setSearchValue(elementValue);
         }, [props, searchType]);
 
-    const onSearchButtonClick = useCallback(
-        () => {
-            props.onSearch(searchValue);
-        }, [props, searchValue]);
+    const onSearchButtonClick = useCallback(() => props.onSearch(searchValue), [props, searchValue]);
 
-    const className: string = 'app-search control'
-        + ` is-${(props.size || 'normal')}`
-        + (props.isLoading === true ? ' is-loading' : '')
-        + (searchType === 'byButton' ? ' is-expanded': '')
-        ;
+    const className: string = getClassName([
+        'app-search control',
+        `is-${(props.size || 'normal')}`,
+        props.isLoading === true ? 'is-loading' : '',
+        searchType === 'byButton' ? 'is-expanded' : '',
+    ]);
 
-    const inputClassName: string = 'input is-unselectable'
-        + ` is-${(props.size || 'normal')}`
-        + (props.rounded === true ? ' is-rounded' : '')
-        ;
+    const inputClassName: string = getClassName([
+        'input is-unselectable',
+        `is-${(props.size || 'normal')}`,
+        props.rounded === true ? 'is-rounded' : '',
+    ]);
 
     if (searchType === 'byButton') {
         return (

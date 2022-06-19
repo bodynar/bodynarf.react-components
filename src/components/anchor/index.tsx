@@ -1,11 +1,11 @@
-import { isNullOrEmpty, isNullOrUndefined } from '@bodynarf/utils/common';
+import { isNullOrUndefined, isNullOrEmpty } from '@bodynarf/utils';
 
 import './anchor.scss';
 
 import { ElementIcon } from '../types';
 
-import { SimpleAnchor } from './components/simpleAnchor/simpleAnchor';
-import { AnchorWithIcon } from './components/anchorWithIcon/anchorWithIcon';
+import { SimpleAnchor } from './components/simpleAnchor';
+import { AnchorWithIcon } from './components/anchorWithIcon';
 
 export type AnchorProps = {
     /** Link destination */

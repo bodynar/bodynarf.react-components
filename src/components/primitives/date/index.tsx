@@ -1,8 +1,6 @@
 import { ChangeEvent, useCallback } from 'react';
 
-import { generateGuid } from '@bodynarf/utils/guid';
-import { getClassName } from '@bodynarf/utils/component';
-import { isStringEmpty } from '@bodynarf/utils/common';
+import { generateGuid, getClassName, isStringEmpty } from '@bodynarf/utils';
 
 import { BaseInputElementProps, InputLabel } from '../types';
 

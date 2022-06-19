@@ -1,16 +1,16 @@
 import { MouseEvent, useCallback, useId, useState } from 'react';
 
+import { isNullOrUndefined, isNullOrEmpty, getClassName } from '@bodynarf/utils';
+
 import './dropdown.scss';
 
-import { isNullOrEmpty, isNullOrUndefined } from '@bodynarf/utils/common';
-
-import { useComponentOutsideClick } from 'src/hooks/useComponentOutsideClick';
+import { useComponentOutsideClick } from '../../hooks/useComponentOutsideClick';
 
 import { SelectableItem } from './types';
 import { BaseElementProps } from '../types';
 
-import DropdownItem from './components/dropdownItem/dropdownItem';
-import DropdownLabel from './components/dropdownLabel/dropdownLabel';
+import DropdownItem from './components/dropdownItem';
+import DropdownLabel from './components/dropdownLabel';
 
 export type DropdownProps = BaseElementProps & {
     /** Items which can be selected */
@@ -97,14 +97,12 @@ const Dropdown = ({ value, items, onSelect, caption, deselectable, className, hi
         hideOnOuterClick,
     );
 
-    const classNames: string = [
+    const classNames: string = getClassName([
         "app-dropdown",
         isListVisible ? "is-active" : "",
         className,
         "dropdown"
-    ]
-        .filter(x => !isNullOrEmpty(x))
-        .join(" ");
+    ]);
 
     return (
         <div

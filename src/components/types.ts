@@ -13,16 +13,18 @@ export type BaseElementProps = {
     };
 };
 
-export type IconSize =
+/** Allowed element sizes */
+export type ElementSize =
     | 'small'
     | 'medium' /** default size */
     | 'large';
 
+/** Allowed icon position */
 export type IconPosition =
     | 'left'
     | 'right';
 
-/** Icon for component configuration */
+/** Icon for component  */
 export type ElementIcon = {
     /**
      * Class name for icon.
@@ -31,7 +33,7 @@ export type ElementIcon = {
     className: string;
 
     /** Icon size */
-    size?: IconSize;
+    size?: ElementSize;
 
     /**
      * Position

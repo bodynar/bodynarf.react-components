@@ -1,6 +1,6 @@
-import { isNullOrEmpty } from '@bodynarf/utils/common';
+import { isNullOrEmpty } from '@bodynarf/utils';
 
-import Icon from 'src/components/icon';
+import Icon from '../../../icon';
 
 import { AnchorWithIconProps } from "../../types";
 
