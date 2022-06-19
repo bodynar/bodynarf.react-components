@@ -8,7 +8,7 @@
  */
 export const generatePageNumbers = (page: number, count: number, size: number = 3): Array<number> => {
     if (page < 0 || count <= 0 || page > count || size > count) {
-        throw new Error("getPageNumbers has ivalid config");
+        return [];
     }
 
     return [

@@ -13,12 +13,12 @@ export type PaginatorProps = {
     /** Page change handler */
     onPageChange: (page: number) => void;
 
-    /** Current page. Starts from 1 */
+    /** Current page */
     currentPage?: number;
 
     /**
      * Page numbers position.
-     * Usefull with showNextButtons = true
+     * Usefull with `showNextButtons = true`
     */
     position?:
     | 'left' /* default */
@@ -37,6 +37,12 @@ export type PaginatorProps = {
 
     /** Display "Previous" \ "Next" buttons */
     showNextButtons?: boolean;
+
+    /**
+     * Max amount of pages from left & right from current page. `3` by default
+     * @description If set to 2 it will show `[1, 2], 3, [4, 5]`
+    */
+    nearPagesCount?: number;
 }
 
 /**
@@ -46,7 +52,7 @@ export type PaginatorProps = {
 export default function Paginator({
     count, onPageChange, currentPage,
     position, rounded, size, className,
-    showNextButtons,
+    showNextButtons, nearPagesCount
 }: PaginatorProps): JSX.Element {
     const page = currentPage || 0;
 
@@ -62,13 +68,12 @@ export default function Paginator({
 
             const page = +pageRaw!;
 
-            if (page !== currentPage
-                && page > 0 && page <= count) {
+            if (page !== currentPage && page > 0 && page <= count) {
                 onPageChange(page);
             }
         }, [onPageChange, currentPage, count]);
 
-    const pageNumbers = useMemo(() => generatePageNumbers(page, count), [page, count]);
+    const pageNumbers = useMemo(() => generatePageNumbers(page, count, nearPagesCount), [page, count]);
 
     const canGoBack = useMemo(() => page > 1, [page]);
     const canGoForward = useMemo(() => page < count, [page, count]);
