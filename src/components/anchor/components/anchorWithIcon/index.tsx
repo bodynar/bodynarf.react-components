@@ -8,7 +8,7 @@ import { AnchorWithIconProps } from "../../types";
 export const AnchorWithIcon = ({ href, className, onClick, caption, title, target, icon }: AnchorWithIconProps): JSX.Element => {
     const iconPosition = icon.position || 'left';
 
-    const iconClassName: string = isNullOrEmpty(caption)
+    const iconClassName: string | undefined = isNullOrEmpty(caption)
         ? icon.className
         : iconPosition === 'left'
             ? `${icon.className} app-icon--left`
@@ -24,7 +24,7 @@ export const AnchorWithIcon = ({ href, className, onClick, caption, title, targe
                 target={target}
                 onClick={onClick}
             >
-                <Icon {...icon} name={iconClassName} />
+                <Icon {...icon} className={iconClassName} />
                 {caption}
             </a>
         );
@@ -39,7 +39,7 @@ export const AnchorWithIcon = ({ href, className, onClick, caption, title, targe
             onClick={onClick}
         >
             {caption}
-            <Icon {...icon} name={iconClassName} />
+            <Icon {...icon} className={iconClassName} />
         </a>
     );
 };

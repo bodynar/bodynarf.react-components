@@ -27,10 +27,15 @@ export type IconPosition =
 /** Icon for component  */
 export type ElementIcon = {
     /**
-     * Class name for icon.
-     * Used to display icon from bootstrap-icons
+     * Icon name. Must be without `bi-`
+     * @example ["Arrow repeat", "arrow-repeat"]
+     * // Icon name to icon class name.
+     * // For class name check bootstrap icons website
     */
-    className: string;
+    name: string;
+
+    /** Additional classname */
+    className?: string;
 
     /** Icon size */
     size?: ElementSize;

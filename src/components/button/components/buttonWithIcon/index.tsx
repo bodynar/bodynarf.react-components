@@ -8,7 +8,7 @@ import { ButtonWithIconProps } from '../../types';
 export const ButtonWithIcon = ({ className, disabled, onClick, caption, title, icon }: ButtonWithIconProps): JSX.Element => {
     const iconPosition = icon.position || 'left';
 
-    const iconClassName: string = isNullOrEmpty(caption)
+    const iconClassName: string | undefined = isNullOrEmpty(caption)
         ? icon.className
         : iconPosition === 'left'
             ? `${icon.className} app-icon--left`
@@ -26,7 +26,7 @@ export const ButtonWithIcon = ({ className, disabled, onClick, caption, title, i
                 onClick={onClick}
                 title={title}
             >
-                <Icon {...icon} name={iconClassName} />
+                <Icon {...icon} className={iconClassName} />
                 {caption}
             </button>
         );
@@ -40,7 +40,7 @@ export const ButtonWithIcon = ({ className, disabled, onClick, caption, title, i
             title={title}
         >
             {caption}
-            <Icon {...icon} name={iconClassName} />
+            <Icon {...icon} className={iconClassName} />
         </button>
     );
 };
