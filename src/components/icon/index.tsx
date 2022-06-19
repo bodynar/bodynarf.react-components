@@ -1,6 +1,6 @@
 import './icon.scss';
 
-import { IconSize } from '../types';
+import { ElementSize } from '../types';
 
 /** Icon component props */
 export type IconProps = {
@@ -11,10 +11,10 @@ export type IconProps = {
     className: string;
 
     /** Icon size */
-    size?: IconSize;
+    size?: ElementSize;
 }
 
-const sizeToClassMap: Map<IconSize, string> = new Map([
+const sizeToClassMap: Map<ElementSize, string> = new Map([
     ['small', ' app-icon--smal'],
     ['medium', ''],
     ['large', ' app-icon--large']
@@ -24,7 +24,7 @@ const sizeToClassMap: Map<IconSize, string> = new Map([
  * Icon component. Based on bootstrap icons
  */
 export default function Icon(props: IconProps): JSX.Element {
-    const size: IconSize = props.size || 'medium';
+    const size: ElementSize = props.size || 'medium';
 
     const className = `app-icon bi bi-${props.className}${sizeToClassMap.get(size)}`;
 

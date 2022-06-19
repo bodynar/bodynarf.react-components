@@ -2,7 +2,7 @@ import { isNullOrEmpty, isStringEmpty, isNullOrUndefined, getClassName } from '@
 
 import './button.scss';
 
-import { ElementIcon, IconSize } from '../types';
+import { ElementIcon, ElementSize } from '../types';
 
 import { ButtonType } from './types';
 import { ButtonWithIcon } from './components/buttonWithIcon';
@@ -19,7 +19,7 @@ export type ButtonProps = {
     icon?: ElementIcon;
 
     /** Button size  */
-    size?: IconSize; // TODO: fix this type using
+    size?: ElementSize;
 
     /** Title on hover */
     title?: string;
