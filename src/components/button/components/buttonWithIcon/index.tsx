@@ -26,7 +26,7 @@ export const ButtonWithIcon = ({ className, disabled, onClick, caption, title, i
                 onClick={onClick}
                 title={title}
             >
-                <Icon {...icon} className={iconClassName} />
+                <Icon {...icon} name={iconClassName} />
                 {caption}
             </button>
         );
@@ -40,7 +40,7 @@ export const ButtonWithIcon = ({ className, disabled, onClick, caption, title, i
             title={title}
         >
             {caption}
-            <Icon {...icon} className={iconClassName} />
+            <Icon {...icon} name={iconClassName} />
         </button>
     );
 };

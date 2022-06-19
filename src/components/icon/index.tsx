@@ -1,14 +1,20 @@
 import './icon.scss';
 
 import { ElementSize } from '../types';
+import { getClassName } from '@bodynarf/utils';
 
 /** Icon component props */
 export type IconProps = {
     /**
-     * Class name for icon.
-     * Used to display icon from bootstrap-icons
+     * Icon name. Must be without `bi-`
+     * @example ["Arrow repeat", "arrow-repeat"]
+     * // Icon name to icon class name.
+     * // For class name check bootstrap icons website
     */
-    className: string;
+    name: string;
+
+    /** Additional classname */
+    className?: string;
 
     /** Icon size */
     size?: ElementSize;
@@ -23,10 +29,14 @@ const sizeToClassMap: Map<ElementSize, string> = new Map([
 /**
  * Icon component. Based on bootstrap icons
  */
-export default function Icon(props: IconProps): JSX.Element {
-    const size: ElementSize = props.size || 'medium';
-
-    const className = `app-icon bi bi-${props.className}${sizeToClassMap.get(size)}`;
+export default function Icon({ size = 'medium', name, className }: IconProps): JSX.Element {
+    const classNames = getClassName([
+        "app-icon",
+        "bi",
+        `bi-${name}`,
+        sizeToClassMap.has(size) ? sizeToClassMap.get(size) : "",
+        className
+    ]);
 
     return (
         <i className={className}></i>

@@ -19,7 +19,7 @@ export type SearchProps = {
     /** 
      * Search type: by typing, starts from minimum characters to search
      * or by clicking on button next to search bar.
-     * Default is byTyping
+     * Default `is byTyping`
     */
     searchType?: 'byTyping' | 'byButton';
 
@@ -38,7 +38,7 @@ export type SearchProps = {
     /** Is search bar disabled */
     disabled?: boolean;
 
-    /** Should loading icon be displayed in search bar*/
+    /** Should loading icon be displayed in search bar */
     isLoading?: boolean;
 };
 

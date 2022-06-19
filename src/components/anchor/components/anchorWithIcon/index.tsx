@@ -24,7 +24,7 @@ export const AnchorWithIcon = ({ href, className, onClick, caption, title, targe
                 target={target}
                 onClick={onClick}
             >
-                <Icon {...icon} className={iconClassName} />
+                <Icon {...icon} name={iconClassName} />
                 {caption}
             </a>
         );
@@ -39,7 +39,7 @@ export const AnchorWithIcon = ({ href, className, onClick, caption, title, targe
             onClick={onClick}
         >
             {caption}
-            <Icon {...icon} className={iconClassName} />
+            <Icon {...icon} name={iconClassName} />
         </a>
     );
 };

@@ -43,7 +43,7 @@ const DropdownLabel = ({ caption, selectedItem, onClick, deselectable }: Dropdow
             onClick={onClick}
         >
             {deselectVisible &&
-                <Icon className="plus-lg" />
+                <Icon name="plus-lg" />
             }
             <span
                 className={deselectVisible ? "mx-2" : "mr-2"}
@@ -51,7 +51,7 @@ const DropdownLabel = ({ caption, selectedItem, onClick, deselectable }: Dropdow
             >
                 {text}
             </span>
-            <Icon className="arrow-up" />
+            <Icon name="arrow-up" />
         </label>
     );
 };

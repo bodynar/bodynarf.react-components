@@ -23,8 +23,7 @@ export type DropdownProps = BaseElementProps & {
     value?: SelectableItem;
 
     /**
-     * Action to update selected value,
-     *  which stored outside
+     * Action to update selected value, which stored outside
      */
     onSelect: (item?: SelectableItem) => void;
 
