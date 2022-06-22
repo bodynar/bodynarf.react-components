@@ -1,0 +1,4 @@
+.is-checkradio[type="checkbox"].has-background-color.m-has-background-color:not(:checked) + label::before {
+    border-color: #dbdbdb !important;
+    background-color: transparent !important;
+}

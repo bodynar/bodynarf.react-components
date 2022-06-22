@@ -12,6 +12,7 @@ Small library with react components based on Bulma CSS framework&nbsp; <a href="
 2. Install [Bulma](https://bulma.io/)
 3. Make sure you imported bulma styles in parent container
 4. *(Optional)* To use **Icon** component - install [Bootstrap Icons](https://icons.getbootstrap.com/) and make sure you imported these styles in parent container
+5. *(Optional)* To use **Checkbox** component - install [bulma-checkradio](https://www.npmjs.com/package/bulma-checkradio) and make sure you imported these styles in parent container
 
 ## Description
 ### Simple components
@@ -24,6 +25,7 @@ Simple react components based on html elements.
  - **Button**
  - **Icon** - *see p.4 of installation*
  - **Dropdown** - custom dropdown component, based on html div elements & css. Allows to use icon in elements
+ - **Checkbox** - (*see p.5 of installation*) Checkbox component based on [bulma-checkradio](https://wikiki.github.io/form/checkradio/1)
 
 ### Complex components
 Complex components is set of components built via combining simple components or represent complex logical component
