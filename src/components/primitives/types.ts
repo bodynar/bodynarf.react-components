@@ -43,6 +43,15 @@ export type InputLabel = {
 
     /** Should component be on same line with label */
     horizontal?: boolean;
+
+    /** Additional class names */
+    className?: string;
+
+    /** Class name for label parent container in horizontal mode */
+    horizontalContainerClassName?: string;
+
+    /** Class name for input parent container in horizontal mode */
+    horizontalFieldContainerClassName?: string;
 };
 
 /** Input component size variety */

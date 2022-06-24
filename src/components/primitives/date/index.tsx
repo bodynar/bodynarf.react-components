@@ -43,18 +43,35 @@ const DatePicker = (props: DateProps): JSX.Element => {
     const label = props.label;
     const defaultValue = props.defaultValue?.toISOString().split("T")[0];
 
+    const labelClassName = getClassName([
+        "label",
+        label.horizontal !== true ? size : "",
+        label.className
+    ]);
+
     if (label.horizontal === true) {
+        const labelContainerClassName = getClassName([
+            "field-label",
+            size,
+            label.horizontalContainerClassName
+        ]);
+
+        const fieldContainerClassName = getClassName([
+            "field-body",
+            label.horizontalFieldContainerClassName
+        ]);
+
         return (
             <div className="app-input field is-horizontal">
-                <div className={`field-label ${size}`}>
+                <div className={labelContainerClassName}>
                     <label
-                        className="label"
+                        className={labelClassName}
                         htmlFor={id}
                     >
                         {label.caption}
                     </label>
                 </div>
-                <div className="field-body">
+                <div className={fieldContainerClassName}>
                     <div className="field">
                         <div className={inputContainerClassName}>
                             <input
@@ -77,7 +94,7 @@ const DatePicker = (props: DateProps): JSX.Element => {
     return (
         <div className="app-input field">
             <label
-                className={`label ${size}`}
+                className={labelClassName}
                 htmlFor={id}
             >
                 {label.caption}

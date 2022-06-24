@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 
-import { generateGuid, getClassName, isNullOrUndefined } from '@bodynarf/utils';
+import { generateGuid, getClassName } from '@bodynarf/utils';
 
 import './search.scss';
 
@@ -54,10 +54,7 @@ export default function Search(props: SearchProps): JSX.Element {
             const elementValue: string = event.target.value;
 
             if (searchType === 'byTyping') {
-                const minCharsToSearch: number =
-                    isNullOrUndefined(props.minCharsToSearch)
-                        ? 3
-                        : props.minCharsToSearch as number;
+                const minCharsToSearch = props.minCharsToSearch || 3;
 
                 if (elementValue.length >= minCharsToSearch) {
                     props.onSearch(elementValue);

@@ -25,10 +25,27 @@ Simple react components based on html elements.
  - **Button**
  - **Icon** - *see p.4 of installation*
  - **Dropdown** - custom dropdown component, based on html div elements & css. Allows to use icon in elements
- - **Checkbox** - (*see p.5 of installation*) Checkbox component based on [bulma-checkradio](https://wikiki.github.io/form/checkradio/1)
+ - **Checkbox** - (*see p.5 of installation*) Checkbox component based on [bulma-checkradio](https://wikiki.github.io/form/checkradio)
 
 ### Complex components
 Complex components is set of components built via combining simple components or represent complex logical component
  - **Search** - Search bar with optional button to perform search
  - **Paginator** - Pagination elements to navigate through paged list
+	Example:
+	```tsx
+		const [{ currentPage, pagesCount, onPageChange }, paginate] = usePagination(items.length, ITEMS_PER_PAGE);
+		const pageItems = useMemo(() => paginate(items), [paginate, items]);
+
+		// ...
+
+		<Paginator
+			count={pagesCount}
+			currentPage={currentPage}
+			onPageChange={onPageChange}
+		/>
+	```
  
+### Hooks
+
+ - **useComponentOutsideClick** - Attach watcher for mouse clicks and emmit event when click was outside of component
+ - **usePagination** - Create a pagination config to easily manipulate with Paginator component

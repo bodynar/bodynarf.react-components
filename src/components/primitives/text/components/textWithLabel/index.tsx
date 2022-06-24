@@ -31,23 +31,40 @@ const TextWithLabel = (props: TextProps): JSX.Element => {
 
     const label = props.label!;
 
+    const labelClassName = getClassName([
+        "label",
+        label.horizontal !== true ? size : "",
+        label.className
+    ]);
+
     if (label.horizontal === true) {
+        const labelContainerClassName = getClassName([
+            "field-label",
+            size,
+            label.horizontalContainerClassName
+        ]);
+
+        const fieldContainerClassName = getClassName([
+            "field-body",
+            label.horizontalFieldContainerClassName
+        ]);
+
         return (
             <div className="app-input field is-horizontal">
-                <div className={`field-label ${size}`}>
+                <div className={labelContainerClassName}>
                     <label
-                        className="label"
+                        className={labelClassName}
                         htmlFor={id}
                     >
                         {label.caption}
                     </label>
                 </div>
-                <div className="field-body">
+                <div className={fieldContainerClassName}>
                     <div className="field">
                         <div className={inputContainerClassName}>
                             <input
-                                className={className}
                                 type="text"
+                                className={className}
                                 placeholder={props.placeholder}
                                 readOnly={props.readonly}
                                 disabled={props.disabled}
@@ -66,15 +83,15 @@ const TextWithLabel = (props: TextProps): JSX.Element => {
     return (
         <div className="app-input field">
             <label
-                className={`label ${size}`}
+                className={labelClassName}
                 htmlFor={id}
             >
                 {label.caption}
             </label>
             <div className={inputContainerClassName}>
                 <input
-                    className={className}
                     type="text"
+                    className={className}
                     placeholder={props.placeholder}
                     readOnly={props.readonly}
                     disabled={props.disabled}
