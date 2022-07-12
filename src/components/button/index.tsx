@@ -48,9 +48,7 @@ export type ButtonProps = {
  * @throws Caption is not defined and icon configuration is not defined at the same time
  */
 export default function Button(props: ButtonProps): JSX.Element {
-    if ((isNullOrEmpty(props.caption))
-        && (isNullOrUndefined(props.icon) || isStringEmpty(props.icon?.className as string))
-    ) {
+    if (isNullOrEmpty(props.caption) && isNullOrUndefined(props.icon)) {
         throw new Error("No button content provided.");
     }
 
