@@ -3,10 +3,10 @@
     transition-property: background-color, border-color;
 
     &--icon-only {
-        padding: 0.55rem;
+        padding: 0.55rem !important;
     }
 
     &.is-warning.is-outlined:not([disabled]):hover {
-        color: #000;
+        color: #000 !important;
     }
 }
