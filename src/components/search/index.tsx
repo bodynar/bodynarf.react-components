@@ -5,8 +5,16 @@ import { generateGuid, getClassName } from '@bodynarf/utils';
 import './search.scss';
 
 import Button from '../button';
+import { ElementSize } from '../types';
 
 export type SearchProps = {
+    /** 
+     * Search type: by typing, starts from minimum characters to search
+     * or by clicking on button next to search bar.
+     * Default `is byTyping`
+    */
+    searchType: 'byTyping' | 'byButton';
+
     /** Search caption */
     caption: string;
 
@@ -16,21 +24,11 @@ export type SearchProps = {
     /** Initial search value */
     defaultValue?: string;
 
-    /** 
-     * Search type: by typing, starts from minimum characters to search
-     * or by clicking on button next to search bar.
-     * Default `is byTyping`
-    */
-    searchType?: 'byTyping' | 'byButton';
-
     /** Control name. If empty - will be replaced by random guid */
     name?: string;
 
-    /** Minimum amount of characters to search */
-    minCharsToSearch?: number;
-
     /** Size of search bar */
-    size?: 'small' | 'normal' | 'medium' | 'large';
+    size?: ElementSize;
 
     /** Should search bar be rounded */
     rounded?: boolean;
@@ -43,40 +41,38 @@ export type SearchProps = {
 };
 
 /** Search component */
-export default function Search(props: SearchProps): JSX.Element {
-    const [name] = useState<string>(props.name || generateGuid());
-    const [searchValue, setSearchValue] = useState<string>(props.defaultValue || '');
-
-    const searchType = props.searchType || 'byTyping';
+export default function Search({
+    searchType, onSearch, caption,
+    name, defaultValue,
+    size, isLoading, rounded, disabled,
+}: SearchProps): JSX.Element {
+    const [elementName] = useState<string>(name || generateGuid());
+    const [searchValue, setSearchValue] = useState<string>(defaultValue || '');
 
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => {
             const elementValue: string = event.target.value;
 
             if (searchType === 'byTyping') {
-                const minCharsToSearch = props.minCharsToSearch || 3;
-
-                if (elementValue.length >= minCharsToSearch) {
-                    props.onSearch(elementValue);
-                }
+                onSearch(elementValue);
             }
 
             setSearchValue(elementValue);
-        }, [props, searchType]);
+        }, [onSearch, searchType]);
 
-    const onSearchButtonClick = useCallback(() => props.onSearch(searchValue), [props, searchValue]);
+    const onSearchButtonClick = useCallback(() => onSearch(searchValue), [onSearch, searchValue]);
 
     const className: string = getClassName([
         'app-search control',
-        `is-${(props.size || 'normal')}`,
-        props.isLoading === true ? 'is-loading' : '',
+        `is-${(size || 'normal')}`,
+        isLoading === true ? 'is-loading' : '',
         searchType === 'byButton' ? 'is-expanded' : '',
     ]);
 
     const inputClassName: string = getClassName([
         'input is-unselectable',
-        `is-${(props.size || 'normal')}`,
-        props.rounded === true ? 'is-rounded' : '',
+        `is-${(size || 'normal')}`,
+        rounded === true ? 'is-rounded' : '',
     ]);
 
     if (searchType === 'byButton') {
@@ -85,12 +81,12 @@ export default function Search(props: SearchProps): JSX.Element {
                 <div className={className}>
                     <input
                         type='search'
-                        name={name}
+                        name={elementName}
                         defaultValue={searchValue}
                         className={inputClassName}
-                        disabled={props.disabled}
+                        disabled={disabled}
                         onChange={onChange}
-                        placeholder={props.caption}
+                        placeholder={caption}
                     />
                 </div>
                 <div className="control">
@@ -98,7 +94,7 @@ export default function Search(props: SearchProps): JSX.Element {
                         caption="Search"
                         type="info"
                         onClick={onSearchButtonClick}
-                        isLoading={props.isLoading}
+                        isLoading={isLoading}
                     />
                 </div>
             </div>
@@ -109,12 +105,12 @@ export default function Search(props: SearchProps): JSX.Element {
             <div className={className}>
                 <input
                     type='search'
-                    name={name}
+                    name={elementName}
                     defaultValue={searchValue}
                     className={inputClassName}
-                    disabled={props.disabled}
+                    disabled={disabled}
                     onChange={onChange}
-                    placeholder={props.caption}
+                    placeholder={caption}
                 />
             </div>
         );
