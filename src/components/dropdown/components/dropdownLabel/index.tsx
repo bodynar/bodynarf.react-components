@@ -51,7 +51,7 @@ const DropdownLabel = ({ caption, selectedItem, onClick, deselectable }: Dropdow
             >
                 {text}
             </span>
-            <Icon name="arrow-up" />
+            <Icon name="arrow-down" />
         </label>
     );
 };
