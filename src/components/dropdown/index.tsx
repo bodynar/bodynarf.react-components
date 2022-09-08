@@ -24,13 +24,13 @@ export type DropdownProps = BaseElementProps & {
 
     /**
      * Action to update selected value, which stored outside
-     */
+    */
     onSelect: (item?: SelectableItem) => void;
 
     /** 
      * Caption.
      * Appears only no element selected
-     */
+    */
     caption: string;
 
     /** Hide dropdown list when its opened and user click outside */
@@ -38,10 +38,13 @@ export type DropdownProps = BaseElementProps & {
 
     /** Can user deselect */
     deselectable?: boolean;
+
+    /** Custom dropdown list height property */
+    listHeight?: string;
 }
 
 /** Dropdown component */
-const Dropdown = ({ value, items, onSelect, caption, deselectable, className, hideOnOuterClick }: DropdownProps): JSX.Element => {
+const Dropdown = ({ value, items, onSelect, caption, deselectable, className, hideOnOuterClick, listHeight }: DropdownProps): JSX.Element => {
     const id = useId();
 
     const [isListVisible, setListVisible] = useState<boolean>(false);
@@ -99,6 +102,7 @@ const Dropdown = ({ value, items, onSelect, caption, deselectable, className, hi
     const classNames: string = getClassName([
         "app-dropdown",
         isListVisible ? "is-active" : "",
+        isNullOrEmpty(listHeight) ? "app-dropdown--height-default" : "",
         className,
         "dropdown"
     ]);
@@ -117,7 +121,7 @@ const Dropdown = ({ value, items, onSelect, caption, deselectable, className, hi
             />
             <div className="dropdown-menu">
                 {items.length > 0
-                    ? <ul className="dropdown-content">
+                    ? <ul className="dropdown-content" style={{ height: listHeight }}>
                         {items.map(item =>
                             <DropdownItem
                                 key={item.id}

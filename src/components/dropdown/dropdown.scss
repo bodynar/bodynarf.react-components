@@ -2,22 +2,12 @@
     min-width: 7.5rem;
     width: fit-content;
 
-    &__list {
-        position: absolute;
-
-        opacity: 0;
-        visibility: collapse;
-
-        transition: 0.15s ease-in-out opacity;
-    }
-
     & .dropdown-menu {
         min-width: 11.75rem;
-    }
 
-    span.dropdown-item {
-        color: gray;
-        text-align: center;
+        & .dropdown-content {
+            overflow: auto;
+        }
     }
 
     &__label {
@@ -80,10 +70,11 @@
         .app-dropdown__label .app-icon.bi-arrow-up::before {
             transform: rotate(180deg);
         }
+    }
 
-        .app-dropdown__list {
-            opacity: 1;
-            visibility: visible;
+    &--height-default {
+        .dropdown-menu .dropdown-content {
+            height: 15vw;
         }
     }
 }
