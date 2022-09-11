@@ -74,7 +74,7 @@
 
     &--height-default {
         .dropdown-menu .dropdown-content {
-            height: 15vw;
+            max-height: 15vw;
         }
     }
 }

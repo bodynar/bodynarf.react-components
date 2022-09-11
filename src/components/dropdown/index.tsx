@@ -39,12 +39,12 @@ export type DropdownProps = BaseElementProps & {
     /** Can user deselect */
     deselectable?: boolean;
 
-    /** Custom dropdown list height property */
-    listHeight?: string;
+    /** Custom dropdown list max-height property */
+    listMaxHeight?: string;
 }
 
 /** Dropdown component */
-const Dropdown = ({ value, items, onSelect, caption, deselectable, className, hideOnOuterClick, listHeight }: DropdownProps): JSX.Element => {
+const Dropdown = ({ value, items, onSelect, caption, deselectable, className, hideOnOuterClick, listMaxHeight }: DropdownProps): JSX.Element => {
     const id = useId();
 
     const [isListVisible, setListVisible] = useState<boolean>(false);
@@ -102,7 +102,7 @@ const Dropdown = ({ value, items, onSelect, caption, deselectable, className, hi
     const classNames: string = getClassName([
         "app-dropdown",
         isListVisible ? "is-active" : "",
-        isNullOrEmpty(listHeight) ? "app-dropdown--height-default" : "",
+        isNullOrEmpty(listMaxHeight) ? "app-dropdown--height-default" : "",
         className,
         "dropdown"
     ]);
@@ -121,7 +121,7 @@ const Dropdown = ({ value, items, onSelect, caption, deselectable, className, hi
             />
             <div className="dropdown-menu">
                 {items.length > 0
-                    ? <ul className="dropdown-content" style={{ height: listHeight }}>
+                    ? <ul className="dropdown-content" style={{ maxHeight: listMaxHeight }}>
                         {items.map(item =>
                             <DropdownItem
                                 key={item.id}
