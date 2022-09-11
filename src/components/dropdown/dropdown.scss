@@ -33,7 +33,7 @@
                 color: #0d6efd;
             }
 
-            &.bi-arrow-up::before {
+            &.bi-arrow-down::before {
                 transition: 0.25s ease-in-out transform;
             }
 
@@ -67,7 +67,7 @@
     }
 
     &.is-active {
-        .app-dropdown__label .app-icon.bi-arrow-up::before {
+        .app-dropdown__label .app-icon.bi-arrow-down::before {
             transform: rotate(180deg);
         }
     }
