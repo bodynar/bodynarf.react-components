@@ -8,6 +8,9 @@ import { BaseInputElementProps, InputLabel } from '../types';
 export type DateProps = Omit<BaseInputElementProps<Date | undefined>, 'placeholder'> & {
     /** Label configuration */
     label: InputLabel;
+
+    /** Focus out event handler */
+    onBlur?: () => void;
 }
 
 /** Date input component */
@@ -81,6 +84,7 @@ const DatePicker = (props: DateProps): JSX.Element => {
                                 disabled={props.disabled}
                                 defaultValue={defaultValue}
                                 onChange={onValueChange}
+                                onBlur={props.onBlur}
                                 name={id}
                                 id={id}
                             />
@@ -107,6 +111,7 @@ const DatePicker = (props: DateProps): JSX.Element => {
                     disabled={props.disabled}
                     defaultValue={props.defaultValue?.toLocaleDateString()}
                     onChange={onValueChange}
+                    onBlur={props.onBlur}
                     name={id}
                     id={id}
                 />

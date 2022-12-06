@@ -70,6 +70,7 @@ const MultilineWithLabel = (props: MultilineProps): JSX.Element => {
                                 disabled={props.disabled}
                                 defaultValue={props.defaultValue}
                                 onChange={onValueChange}
+                                onBlur={props.onBlur}
                                 name={id}
                                 id={id}
                                 rows={props.rows}
@@ -97,6 +98,7 @@ const MultilineWithLabel = (props: MultilineProps): JSX.Element => {
                     disabled={props.disabled}
                     defaultValue={props.defaultValue}
                     onChange={onValueChange}
+                    onBlur={props.onBlur}
                     name={id}
                     id={id}
                     rows={props.rows}

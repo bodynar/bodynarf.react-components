@@ -12,6 +12,9 @@ export type MultilineProps = BaseInputElementProps<string> & {
 
     /** Number of initial rows count */
     rows?: number;
+
+    /** Focus out event handler */
+    onBlur?: () => void;
 };
 
 /** Multiline textual input component */

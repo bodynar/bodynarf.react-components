@@ -38,6 +38,7 @@ const MultilineWithoutLabel = (props: MultilineProps): JSX.Element => {
                     placeholder={props.placeholder}
                     defaultValue={props.defaultValue}
                     onChange={onValueChange}
+                    onBlur={props.onBlur}
                     id={id}
                     name={id}
                     rows={props.rows}

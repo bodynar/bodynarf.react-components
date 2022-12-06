@@ -38,6 +38,7 @@ const TextWithoutLabel = (props: TextProps): JSX.Element => {
                 disabled={props.disabled}
                 defaultValue={props.defaultValue}
                 onChange={onValueChange}
+                onBlur={props.onBlur}
                 name={id}
                 id={id}
             />
