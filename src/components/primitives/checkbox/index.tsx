@@ -2,7 +2,7 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import './checkbox.scss';
+import "./checkbox.scss";
 
 import { BaseInputElementProps } from "../types";
 
@@ -13,12 +13,16 @@ export type CheckBoxProps = BaseInputElementProps<boolean> & {
     /** Remove the checkbox border */
     withoutBorder?: boolean;
 
-    /** Checkbox has background color */
+    /** 
+     * Checkbox has background color.
+     * Only works if style is set
+    */
     hasBackgroundColor?: boolean;
 
     /**
      * Set unchecked background as transparent.
-     * Only used with `hasBackgroundColor` 
+     * Only used with `hasBackgroundColor` set as `true`
+     * @example `{ style: InputColor.Info, hasBackgrounColor: true, fixBackgroundColor: true }` -
     */
     fixBackgroundColor?: boolean;
 };
@@ -37,15 +41,15 @@ const CheckBox = ({
     const id = name || generateGuid();
 
     const className = getClassName([
-        "m-check-radio",
         "is-checkradio",
-        hasBackgroundColor == true ? "has-background-color" : "",
-        fixBackgroundColor === true && hasBackgroundColor == true ? "m-has-background-color" : "",
-        isNullOrUndefined(style) ? "" : size === 'normal' ? "" : `is-${size}`,
-        rounded === true ? "is-circle" : "",
+        "m-check-radio",
+        (hasBackgroundColor ?? false) ? "has-background-color" : "",
+        (fixBackgroundColor ?? false) && (hasBackgroundColor ?? false) ? "m-has-background-color" : "",
+        isNullOrUndefined(size) ? "" : size === "normal" ? "" : `is-${size}`,
+        (rounded ?? false) ? "is-circle" : "",
         isNullOrUndefined(style) ? "" : `is-${style}`,
-        block === true ? "is-block" : "",
-        withoutBorder === true ? "has-no-border" : "",
+        (block ?? false) ? "is-block" : "",
+        (withoutBorder ?? false) ? "has-no-border" : "",
     ]);
 
     return (
