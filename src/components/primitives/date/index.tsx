@@ -1,11 +1,14 @@
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, isStringEmpty } from '@bodynarf/utils';
+import { generateGuid, getClassName, getValueOrDefault, isStringEmpty } from "@bodynarf/utils";
 
-import { BaseInputElementProps, InputLabel } from '../types';
+import "../../../common.scss";
+
+import { BaseInputElementProps, InputLabel, InputSize } from "../types";
+import { getValidationValues } from "../../../utils";
 
 /** Date input conponent props type */
-export type DateProps = Omit<BaseInputElementProps<Date | undefined>, 'placeholder'> & {
+export type DateProps = Omit<BaseInputElementProps<Date | undefined>, "placeholder"> & {
     /** Label configuration */
     label: InputLabel;
 
@@ -14,48 +17,52 @@ export type DateProps = Omit<BaseInputElementProps<Date | undefined>, 'placehold
 }
 
 /** Date input component */
-const DatePicker = (props: DateProps): JSX.Element => {
-    const onValueChange = useCallback(
+const DatePicker = ({
+    defaultValue, onValueChange, readonly, disabled, validationState,
+    name,
+    size, className, rounded, loading, style,
+    label,
+    onBlur
+}: DateProps): JSX.Element => {
+    const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) =>
-            props.onValueChange(
+            onValueChange(
                 isStringEmpty(event.target.value)
                     ? undefined
                     : new Date(event.target.value)
             ),
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [props.onValueChange]
+        [onValueChange]
     );
 
-    const id = props.name || generateGuid();
+    const id = name || generateGuid();
+    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, InputSize.Normal));
 
-    const size = `is-${(props.size || 'normal')}`;
+    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
 
-    const className = getClassName([
-        props.className,
-        size,
-        props.rounded === true ? 'is-rounded' : '',
+    const elClassName = getClassName([
+        className,
+        elSizeClassName,
+        styleClassName,
+        rounded === true ? "is-rounded" : "",
         "input",
     ]);
 
     const inputContainerClassName = getClassName([
         "control",
-        props.loading === true ? 'is-loading' : '',
-        (props.style || 'default') === 'default' ? '' : `is-${props.style}`
+        loading === true ? "is-loading" : "",
     ]);
-
-    const label = props.label;
-    const defaultValue = props.defaultValue?.toISOString().split("T")[0];
+    const stingifiedDefValue = defaultValue?.toISOString().split("T")[0];
 
     const labelClassName = getClassName([
         "label",
-        label.horizontal !== true ? size : "",
+        !label.horizontal ? elSizeClassName : "",
         label.className
     ]);
 
-    if (label.horizontal === true) {
+    if (label.horizontal) {
         const labelContainerClassName = getClassName([
             "field-label",
-            size,
+            elSizeClassName,
             label.horizontalContainerClassName
         ]);
 
@@ -65,7 +72,7 @@ const DatePicker = (props: DateProps): JSX.Element => {
         ]);
 
         return (
-            <div className="app-input field is-horizontal">
+            <div className="field is-horizontal">
                 <div className={labelContainerClassName}>
                     <label
                         className={labelClassName}
@@ -79,16 +86,19 @@ const DatePicker = (props: DateProps): JSX.Element => {
                         <div className={inputContainerClassName}>
                             <input
                                 type="date"
-                                className={className}
-                                readOnly={props.readonly}
-                                disabled={props.disabled}
-                                defaultValue={defaultValue}
-                                onChange={onValueChange}
-                                onBlur={props.onBlur}
+                                className={elClassName}
+                                readOnly={readonly}
+                                disabled={disabled}
+                                defaultValue={stingifiedDefValue}
+                                onChange={onChange}
+                                onBlur={onBlur}
                                 name={id}
                                 id={id}
                             />
                         </div>
+                        {isValidationDefined && validationMessages.length > 0 &&
+                            <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
+                        }
                     </div>
                 </div>
             </div>
@@ -96,7 +106,7 @@ const DatePicker = (props: DateProps): JSX.Element => {
     }
 
     return (
-        <div className="app-input field">
+        <div className="field">
             <label
                 className={labelClassName}
                 htmlFor={id}
@@ -106,16 +116,19 @@ const DatePicker = (props: DateProps): JSX.Element => {
             <div className={inputContainerClassName}>
                 <input
                     type="date"
-                    className={className}
-                    readOnly={props.readonly}
-                    disabled={props.disabled}
-                    defaultValue={props.defaultValue?.toLocaleDateString()}
-                    onChange={onValueChange}
-                    onBlur={props.onBlur}
+                    className={elClassName}
+                    readOnly={readonly}
+                    disabled={disabled}
+                    defaultValue={stingifiedDefValue}
+                    onChange={onChange}
+                    onBlur={onBlur}
                     name={id}
                     id={id}
                 />
             </div>
+            {isValidationDefined && validationMessages.length > 0 &&
+                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
+            }
         </div>
     );
 };

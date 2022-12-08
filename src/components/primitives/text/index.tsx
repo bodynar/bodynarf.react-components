@@ -1,9 +1,11 @@
-import { isNullOrUndefined } from '@bodynarf/utils';
+import { isNullOrUndefined } from "@bodynarf/utils";
 
-import { BaseInputElementProps } from '../types';
+import "../../../common.scss";
 
-import TextWithLabel from './components/textWithLabel';
-import TextWithoutLabel from './components/textWithoutLabel';
+import { BaseInputElementProps } from "../types";
+
+import TextWithLabel from "./components/textWithLabel";
+import TextWithoutLabel from "./components/textWithoutLabel";
 
 /** Text input conponent props type */
 export type TextProps = BaseInputElementProps<string> & {
@@ -14,10 +16,10 @@ export type TextProps = BaseInputElementProps<string> & {
 /** Textual input component */
 const Text = (props: TextProps): JSX.Element => {
     if (isNullOrUndefined(props.label)) {
-        return (<TextWithoutLabel {...props}/>);
+        return (<TextWithoutLabel {...props} />);
     }
     else {
-        return (<TextWithLabel {...props}/>);
+        return (<TextWithLabel {...props} />);
     }
 };
 

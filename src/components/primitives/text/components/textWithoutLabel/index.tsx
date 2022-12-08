@@ -1,48 +1,62 @@
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName } from '@bodynarf/utils';
+import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
 
-import { TextProps } from '../..';
+import { InputSize } from "../../../types";
+import { TextProps } from "../..";
+import { getValidationValues } from "../../../../../utils";
 
 /** Textual input without describing label */
-const TextWithoutLabel = (props: TextProps): JSX.Element => {
-    const onValueChange = useCallback(
-        (event: ChangeEvent<HTMLInputElement>) => props.onValueChange(event.target.value),
+const TextWithoutLabel = ({
+    onValueChange, readonly, disabled, defaultValue, validationState,
+    name,
+    className, size, style, rounded, loading,
+    placeholder,
+    onBlur,
+}: TextProps): JSX.Element => {
+    const onChange = useCallback(
+        (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [props.onValueChange]
+        [onValueChange]
     );
 
-    const className = getClassName([
-        props.className,
-        `is-${(props.size || 'normal')}`,
-        props.rounded === true ? 'is-rounded' : '',
+    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
+
+    const elClassName = getClassName([
+        className,
+        "is-{0}".format(getValueOrDefault(size, InputSize.Normal)),
+        rounded === true ? "is-rounded" : "",
+        styleClassName,
         "input",
     ]);
 
     const containerClassName = getClassName([
-        "app-input",
         "control",
-        props.loading === true ? 'is-loading' : '',
-        (props.style || 'default') === 'default' ? '' : `is-${props.style}`
+        loading === true ? "is-loading" : "",
     ]);
 
-    const id = props.name || generateGuid();
+    const id = name || generateGuid();
 
     return (
-        <div className={containerClassName}>
-            <input
-                className={className}
-                type="text"
-                placeholder={props.placeholder}
-                readOnly={props.readonly}
-                disabled={props.disabled}
-                defaultValue={props.defaultValue}
-                onChange={onValueChange}
-                onBlur={props.onBlur}
-                name={id}
-                id={id}
-            />
-        </div>
+        <>
+            <div className={containerClassName}>
+                <input
+                    className={elClassName}
+                    type="text"
+                    placeholder={placeholder}
+                    readOnly={readonly}
+                    disabled={disabled}
+                    defaultValue={defaultValue}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    name={id}
+                    id={id}
+                />
+            </div>
+            {isValidationDefined && validationMessages.length > 0 &&
+                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
+            }
+        </>
     );
 };
 

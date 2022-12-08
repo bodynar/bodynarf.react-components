@@ -1,52 +1,58 @@
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, } from '@bodynarf/utils';
+import { generateGuid, getClassName, getValueOrDefault, } from "@bodynarf/utils";
 
-import { TextProps } from '../..';
+import { InputSize } from "../../../types";
+import { TextProps } from "../..";
+import { getValidationValues } from "../../../../../utils";
 
 /** Textual input with describing label */
-const TextWithLabel = (props: TextProps): JSX.Element => {
-    const onValueChange = useCallback(
-        (event: ChangeEvent<HTMLInputElement>) => props.onValueChange(event.target.value),
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [props.onValueChange]
+const TextWithLabel = ({
+    onValueChange, readonly, disabled, defaultValue, validationState,
+    name,
+    className, size, style, rounded, loading,
+    label, placeholder,
+    onBlur,
+}: TextProps): JSX.Element => {
+    const onChange = useCallback(
+        (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
+        [onValueChange]
     );
 
-    const id = props.name || generateGuid();
+    const id = name || generateGuid();
+    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, InputSize.Normal));
 
-    const size = `is-${(props.size || 'normal')}`;
+    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
 
-    const className = getClassName([
-        props.className,
-        size,
-        props.rounded === true ? 'is-rounded' : '',
+    const elClassName = getClassName([
+        className,
+        elSizeClassName,
+        rounded === true ? "is-rounded" : "",
+        styleClassName,
         "input",
     ]);
 
     const inputContainerClassName = getClassName([
         "control",
-        props.loading === true ? 'is-loading' : '',
-        (props.style || 'default') === 'default' ? '' : `is-${props.style}`
+        loading === true ? "is-loading" : "",
     ]);
-
-    const label = props.label!;
 
     const labelClassName = getClassName([
         "label",
-        label.horizontal !== true ? size : "",
-        label.className
+        !label!.horizontal ? elSizeClassName : "",
+        label!.className
     ]);
 
-    if (label.horizontal === true) {
+    if (label!.horizontal) {
         const labelContainerClassName = getClassName([
             "field-label",
-            size,
-            label.horizontalContainerClassName
+            elSizeClassName,
+            label!.horizontalContainerClassName
         ]);
 
         const fieldContainerClassName = getClassName([
             "field-body",
-            label.horizontalFieldContainerClassName
+            label!.horizontalFieldContainerClassName
         ]);
 
         return (
@@ -56,7 +62,7 @@ const TextWithLabel = (props: TextProps): JSX.Element => {
                         className={labelClassName}
                         htmlFor={id}
                     >
-                        {label.caption}
+                        {label!.caption}
                     </label>
                 </div>
                 <div className={fieldContainerClassName}>
@@ -64,17 +70,20 @@ const TextWithLabel = (props: TextProps): JSX.Element => {
                         <div className={inputContainerClassName}>
                             <input
                                 type="text"
-                                className={className}
-                                placeholder={props.placeholder}
-                                readOnly={props.readonly}
-                                disabled={props.disabled}
-                                defaultValue={props.defaultValue}
-                                onChange={onValueChange}
-                                onBlur={props.onBlur}
+                                className={elClassName}
+                                placeholder={placeholder}
+                                readOnly={readonly}
+                                disabled={disabled}
+                                defaultValue={defaultValue}
+                                onChange={onChange}
+                                onBlur={onBlur}
                                 name={id}
                                 id={id}
                             />
                         </div>
+                        {isValidationDefined && validationMessages.length > 0 &&
+                            <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
+                        }
                     </div>
                 </div>
             </div>
@@ -82,27 +91,30 @@ const TextWithLabel = (props: TextProps): JSX.Element => {
     }
 
     return (
-        <div className="app-input field">
+        <div className="field">
             <label
                 className={labelClassName}
                 htmlFor={id}
             >
-                {label.caption}
+                {label!.caption}
             </label>
             <div className={inputContainerClassName}>
                 <input
                     type="text"
-                    className={className}
-                    placeholder={props.placeholder}
-                    readOnly={props.readonly}
-                    disabled={props.disabled}
-                    defaultValue={props.defaultValue}
-                    onChange={onValueChange}
-                    onBlur={props.onBlur}
+                    className={elClassName}
+                    placeholder={placeholder}
+                    readOnly={readonly}
+                    disabled={disabled}
+                    defaultValue={defaultValue}
+                    onChange={onChange}
+                    onBlur={onBlur}
                     name={id}
                     id={id}
                 />
             </div>
+            {isValidationDefined && validationMessages.length > 0 &&
+                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
+            }
         </div>
     );
 };

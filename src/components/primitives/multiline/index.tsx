@@ -1,9 +1,11 @@
-import { isNullOrUndefined } from '@bodynarf/utils';
+import { isNullOrUndefined } from "@bodynarf/utils";
 
-import { BaseInputElementProps } from '../types';
+import "../../../common.scss";
 
-import MultilineWithoutLabel from './components/multilineWithoutLabel';
-import MultilineWithLabel from './components/multilineWithLabel';
+import { BaseInputElementProps } from "../types";
+
+import MultilineWithoutLabel from "./components/multilineWithoutLabel";
+import MultilineWithLabel from "./components/multilineWithLabel";
 
 /** Multiline textual input conponent props type */
 export type MultilineProps = BaseInputElementProps<string> & {

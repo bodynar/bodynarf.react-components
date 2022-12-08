@@ -1,49 +1,58 @@
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName } from '@bodynarf/utils';
+import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
 
-import { MultilineProps } from '../..';
+import { InputSize } from "../../../types";
+import { MultilineProps } from "../..";
+import { getValidationValues } from "../../../../../utils";
 
 /** Multiline textual input component without describing label*/
-const MultilineWithoutLabel = (props: MultilineProps): JSX.Element => {
-    const onValueChange = useCallback(
-        (event: ChangeEvent<HTMLTextAreaElement>) => props.onValueChange(event.target.value),
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [props.onValueChange]
+const MultilineWithoutLabel = ({
+    onValueChange, defaultValue, validationState,
+    name, placeholder,
+    onBlur,
+    className, size, style, rounded, loading,
+    fixed, rows,
+}: MultilineProps): JSX.Element => {
+    const onChange = useCallback(
+        (event: ChangeEvent<HTMLTextAreaElement>) => onValueChange(event.target.value),
+        [onValueChange]
     );
 
-    const id = props.name || generateGuid();
+    const id = name || generateGuid();
+    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
 
-    const size = `is-${(props.size || 'normal')}`;
-
-    const className = getClassName([
-        props.className,
-        size,
-        props.rounded === true ? 'is-rounded' : '',
+    const elClassName = getClassName([
+        className,
+        "is-{0}".format(getValueOrDefault(size, InputSize.Normal)),
+        rounded === true ? "is-rounded" : "",
+        styleClassName,
         "textarea",
-        props.fixed === true ? 'has-fixed-size': '',
+        fixed === true ? "has-fixed-size" : "",
     ]);
 
     const inputContainerClassName = getClassName([
         "control",
-        props.loading === true ? 'is-loading' : '',
-        (props.style || 'default') === 'default' ? '' : `is-${props.style}`
+        loading === true ? "is-loading" : "",
     ]);
 
     return (
         <div className="field">
             <div className={inputContainerClassName}>
                 <textarea
-                    className={className}
-                    placeholder={props.placeholder}
-                    defaultValue={props.defaultValue}
-                    onChange={onValueChange}
-                    onBlur={props.onBlur}
+                    className={elClassName}
+                    placeholder={placeholder}
+                    defaultValue={defaultValue}
+                    onChange={onChange}
+                    onBlur={onBlur}
                     id={id}
                     name={id}
-                    rows={props.rows}
+                    rows={rows}
                 />
             </div>
+            {isValidationDefined && validationMessages.length > 0 &&
+                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
+            }
         </div>
     );
 };
