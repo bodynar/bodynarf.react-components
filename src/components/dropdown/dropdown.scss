@@ -21,7 +21,7 @@
         cursor: pointer;
         user-select: none;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
 
         span {
             white-space: nowrap;
@@ -40,8 +40,11 @@
                 color: #0d6efd;
             }
 
-            &.bi-arrow-down::before {
-                transition: 0.25s ease-in-out transform;
+            &.bi-arrow-down {
+                margin-left: auto;
+                &::before {
+                    transition: 0.25s ease-in-out transform;
+                }
             }
 
             &.bi-plus-lg::before {
