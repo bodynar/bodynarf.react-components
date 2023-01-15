@@ -17,7 +17,7 @@ const DropdownItem = ({ item, selected, onClick }: DropdownItemProps): JSX.Eleme
     return (
         <li
             key={item.id}
-            className={`app-dropdown-item dropdown-item${selected ? " is-active" : ""}`}
+            className={`bbr-dropdown-item dropdown-item${selected ? " is-active" : ""}`}
             onClick={onClick}
             data-dropdown-item-value={item.value}
             title={item.displayValue}

@@ -1,6 +1,13 @@
-.app-dropdown {
+.bbr-dropdown {
     min-width: 7.5rem;
-    width: fit-content;
+
+    &:not(.bbr-dropdown--compact) {
+        display: block;
+    }
+
+    &--compact {
+        width: fit-content;
+    }
 
     & .dropdown-menu {
         min-width: 11.75rem;
@@ -41,6 +48,13 @@
                 transform: rotate(45deg);
             }
         }
+
+        &.is-success--md {
+            border-color: #48c78e;
+        }
+        &.is-danger--md {
+            border-color: #f14668;
+        }
     }
 
     &-item {
@@ -67,7 +81,7 @@
     }
 
     &.is-active {
-        .app-dropdown__label .app-icon.bi-arrow-down::before {
+        .bbr-dropdown__label .app-icon.bi-arrow-down::before {
             transform: rotate(180deg);
         }
     }

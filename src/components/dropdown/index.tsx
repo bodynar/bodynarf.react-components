@@ -1,16 +1,13 @@
-import { MouseEvent, useCallback, useId, useState } from 'react';
-
-import { isNullOrUndefined, isNullOrEmpty, getClassName } from '@bodynarf/utils';
+import { isNullOrUndefined } from '@bodynarf/utils';
 
 import './dropdown.scss';
 
-import { useComponentOutsideClick } from '../../hooks/useComponentOutsideClick';
+import { BaseElementProps } from '../types';
+import { InputLabel, ValidationState } from '../primitives';
 
 import { SelectableItem } from './types';
-import { BaseElementProps } from '../types';
-
-import DropdownItem from './components/dropdownItem';
-import DropdownLabel from './components/dropdownLabel';
+import DropdownWithLabel from './components/withLabel';
+import DropdownCompact from './components/compact';
 
 export type DropdownProps = BaseElementProps & {
     /** Items which can be selected */
@@ -41,101 +38,30 @@ export type DropdownProps = BaseElementProps & {
 
     /** Custom dropdown list max-height property */
     listMaxHeight?: string;
+
+    /**
+     * Should dropdown be compact
+     * Will have width by maximum current selection item width
+     */
+    compact?: boolean;
+
+    /** Input element placeholder */
+    placeholder: string;
+
+    /** Label configuration */
+    label?: InputLabel;
+
+    /** Current validation state */
+    validationState?: ValidationState;
 }
 
 /** Dropdown component */
-const Dropdown = ({ value, items, onSelect, caption, deselectable, className, hideOnOuterClick, listMaxHeight }: DropdownProps): JSX.Element => {
-    const id = useId();
-
-    const [isListVisible, setListVisible] = useState<boolean>(false);
-
-    const onItemClick = useCallback(
-        (event: React.MouseEvent<HTMLLIElement>) => {
-            const target = event.target as HTMLLIElement;
-
-            if (isNullOrUndefined(target)) {
-                return;
-            }
-
-            const dataValue = target.dataset['dropdownItemValue'];
-
-            if (isNullOrEmpty(dataValue)) {
-                return;
-            }
-
-            const item = items.find(x => x.value === dataValue);
-
-            if (isNullOrUndefined(item)) {
-                return;
-            }
-
-            if (value === item) {
-                setListVisible(false);
-                return;
-            }
-
-            onSelect(item);
-            setListVisible(false);
-        }, [setListVisible, value, items, onSelect]);
-
-    const onLabelClick = useCallback(
-        (event: MouseEvent<HTMLLabelElement>): void => {
-            const target = event.target as HTMLElement;
-
-            if (isNullOrUndefined(target)) {
-                return;
-            }
-
-            if (target.classList.contains("bi-plus-lg")) {
-                onSelect(undefined);
-            } else {
-                setListVisible(state => !state);
-            }
-        }, [onSelect, setListVisible]);
-
-    useComponentOutsideClick(
-        `[data-dropdown-id="${id}"]`, isListVisible,
-        () => setListVisible(false),
-        hideOnOuterClick,
-    );
-
-    const classNames: string = getClassName([
-        "app-dropdown",
-        isListVisible ? "is-active" : "",
-        isNullOrEmpty(listMaxHeight) ? "app-dropdown--height-default" : "",
-        className,
-        "dropdown"
-    ]);
-
-    return (
-        <div
-            key={id}
-            className={classNames}
-            data-dropdown-id={id}
-        >
-            <DropdownLabel
-                caption={caption}
-                deselectable={deselectable === true}
-                selectedItem={value}
-                onClick={onLabelClick}
-            />
-            <div className="dropdown-menu">
-                {items.length > 0
-                    ? <ul className="dropdown-content" style={{ maxHeight: listMaxHeight }}>
-                        {items.map(item =>
-                            <DropdownItem
-                                key={item.id}
-                                item={item}
-                                selected={value?.value === item.value}
-                                onClick={onItemClick}
-                            />
-                        )}
-                    </ul>
-                    : <span className="dropdown-content dropdown-item">No items found</span>
-                }
-            </div>
-        </div>
-    );
+const Dropdown = (props: DropdownProps): JSX.Element => {
+    if (!isNullOrUndefined(props.label)) {
+        return <DropdownWithLabel {...props} />;
+    } else {
+        return <DropdownCompact {...props} />;
+    }
 };
 
 export default Dropdown;

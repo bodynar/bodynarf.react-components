@@ -1,12 +1,12 @@
 import { MouseEvent } from 'react';
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
 import Icon from '../../../icon';
 
 import { SelectableItem } from "../../types";
 
-interface DropdownLabelProps {
+export interface DropdownLabelProps {
     /** Caption when no items selected */
     caption: string;
 
@@ -16,12 +16,19 @@ interface DropdownLabelProps {
     /** Selected item */
     selectedItem?: SelectableItem;
 
+    /** Element classnames */
+    className?: string;
+
     /** Click handler*/
     onClick: (event: MouseEvent<HTMLLabelElement>) => void;
 }
 
 /** Label component */
-const DropdownLabel = ({ caption, selectedItem, onClick, deselectable }: DropdownLabelProps): JSX.Element => {
+const DropdownLabel = ({
+    caption,
+    selectedItem, onClick,
+    deselectable, className,
+}: DropdownLabelProps): JSX.Element => {
     const itemSelected = !isNullOrUndefined(selectedItem);
 
     const text = itemSelected
@@ -30,16 +37,17 @@ const DropdownLabel = ({ caption, selectedItem, onClick, deselectable }: Dropdow
 
     const deselectVisible = deselectable && itemSelected;
 
-    const className = getClassName([
+    const elClassName = getClassName([
         "dropdown-trigger",
-        "app-dropdown__label",
-        itemSelected ? "" : "app-dropdown__label--default",
+        "bbr-dropdown__label",
+        isNullOrEmpty(className) ? "" : `${className}--md`,
+        itemSelected ? "" : "bbr-dropdown__label--default",
         "button"
     ]);
 
     return (
         <label
-            className={className}
+            className={elClassName}
             onClick={onClick}
         >
             {deselectVisible &&
