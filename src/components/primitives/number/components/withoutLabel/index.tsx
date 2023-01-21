@@ -2,20 +2,20 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
 
-import { InputSize } from "../../../types";
-import { TextProps } from "../..";
+import { NumberProps } from "../..";
+import { InputSize } from "../../..";
 import { getValidationValues } from "../../../../../utils";
 
-/** Textual input without describing label */
-const TextWithoutLabel = ({
+/** Number component without label */
+const NumberWithoutLabel = ({
     onValueChange, readonly, disabled, defaultValue, validationState,
     name,
     className, size, style, rounded, loading,
     placeholder,
     onBlur,
-}: TextProps): JSX.Element => {
+}: NumberProps): JSX.Element => {
     const onChange = useCallback(
-        (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
+        (event: ChangeEvent<HTMLInputElement>) => onValueChange(+event.target.value),
         [onValueChange]
     );
 
@@ -40,8 +40,8 @@ const TextWithoutLabel = ({
         <>
             <div className={containerClassName}>
                 <input
+                    type="number"
                     className={elClassName}
-                    type="text"
                     placeholder={placeholder}
                     readOnly={readonly}
                     disabled={disabled}
@@ -59,4 +59,4 @@ const TextWithoutLabel = ({
     );
 };
 
-export default TextWithoutLabel;
+export default NumberWithoutLabel;

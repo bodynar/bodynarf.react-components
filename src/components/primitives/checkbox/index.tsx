@@ -6,7 +6,7 @@ import "./checkbox.scss";
 
 import { BaseInputElementProps } from "../types";
 
-export type CheckBoxProps = BaseInputElementProps<boolean> & {
+export interface CheckBoxProps extends BaseInputElementProps<boolean> {
     /** Is full colored checkbox */
     block?: boolean;
 
@@ -27,6 +27,7 @@ export type CheckBoxProps = BaseInputElementProps<boolean> & {
     fixBackgroundColor?: boolean;
 };
 
+/** Boolean input component */
 const CheckBox = ({
     label,
     onValueChange, defaultValue,
