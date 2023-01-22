@@ -97,7 +97,7 @@ const DropdownWithLabel = ({
         ]);
 
         return (
-            <div className="bbr-input field is-horizontal">
+            <div className="bbr-dropdown__root-container--with-label bbr-input field is-horizontal">
                 <div className={labelContainerClassName}>
                     <label
                         className={labelClassName}

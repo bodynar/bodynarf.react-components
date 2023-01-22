@@ -1,6 +1,10 @@
 .bbr-dropdown {
     min-width: 7.5rem;
 
+    &__root-container--with-label.is-horizontal {
+        align-items: center;
+    }
+
     &:not(.bbr-dropdown--compact) {
         display: block;
     }
