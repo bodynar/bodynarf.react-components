@@ -7,11 +7,19 @@
 
     &--compact {
         width: fit-content;
+
+        & .dropdown-menu {
+            min-width: 11.75rem;
+        }
+    }
+
+    &:not(.bbr-dropdown--compact) {
+        & .dropdown-menu {
+            min-width: 100%;
+        }
     }
 
     & .dropdown-menu {
-        min-width: 11.75rem;
-
         & .dropdown-content {
             overflow: auto;
         }
