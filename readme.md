@@ -23,6 +23,8 @@ Simple react components based on html elements.
  - **Text**- single line text input;
  - **Anchor**
  - **Button**
+ - **Number**
+ - **Password** - single line password input (requires icon, see *p.4*)
  - **Icon** - *see p.4 of installation*
  - **Dropdown** - custom dropdown component, based on html div elements & css. Allows to use icon in elements
  - **Checkbox** - (*see p.5 of installation*) Checkbox component based on [bulma-checkradio](https://wikiki.github.io/form/checkradio)

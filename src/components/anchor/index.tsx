@@ -1,4 +1,4 @@
-import { isNullOrUndefined, isNullOrEmpty } from '@bodynarf/utils';
+import { isNullOrUndefined, isNullOrEmpty, getClassName } from '@bodynarf/utils';
 
 import './anchor.scss';
 
@@ -39,9 +39,11 @@ export default function Anchor(props: AnchorProps): JSX.Element {
         throw new Error("No anchor content provided");
     }
 
-    const className: string = 'app-anchor'
-        + (!isNullOrEmpty(props.className) ? ` ${props.className}` : '')
-        + (props.disableHovering === true ? ' app-anchor--unhoverable' : '');
+    const className: string = getClassName([
+        'bbr-anchor',
+        !isNullOrEmpty(props.className) ? ` ${props.className}` : '',
+        props.disableHovering === true ? ' bbr-anchor--unhoverable' : ''
+    ]);
 
     if (isNullOrUndefined(props.icon)) {
         return (

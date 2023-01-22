@@ -31,7 +31,7 @@ const sizeToClassMap: Map<ElementSize, string> = new Map([
  */
 export default function Icon({ size = 'medium', name, className }: IconProps): JSX.Element {
     const classNames = getClassName([
-        "app-icon",
+        "bbr-icon",
         "bi",
         `bi-${name}`,
         sizeToClassMap.has(size) ? sizeToClassMap.get(size) : "",

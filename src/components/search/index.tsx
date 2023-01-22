@@ -63,14 +63,16 @@ export default function Search({
     const onSearchButtonClick = useCallback(() => onSearch(searchValue), [onSearch, searchValue]);
 
     const className: string = getClassName([
-        'app-search control',
+        "bbr-search",
+        "control",
         `is-${(size || 'normal')}`,
         isLoading === true ? 'is-loading' : '',
         searchType === 'byButton' ? 'is-expanded' : '',
     ]);
 
     const inputClassName: string = getClassName([
-        'input is-unselectable',
+        "input",
+        "is-unselectable",
         `is-${(size || 'normal')}`,
         rounded === true ? 'is-rounded' : '',
     ]);

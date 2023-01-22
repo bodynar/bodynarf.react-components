@@ -11,8 +11,8 @@ export const AnchorWithIcon = ({ href, className, onClick, caption, title, targe
     const iconClassName: string | undefined = isNullOrEmpty(caption)
         ? icon.className
         : iconPosition === 'left'
-            ? `${icon.className} app-icon--left`
-            : `${icon.className} app-icon--right`;
+            ? `${icon.className} bbr-icon--left`
+            : `${icon.className} bbr-icon--right`;
 
 
     if (iconPosition === 'left') {

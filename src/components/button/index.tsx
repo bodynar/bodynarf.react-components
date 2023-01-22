@@ -1,4 +1,4 @@
-import { isNullOrEmpty, isStringEmpty, isNullOrUndefined, getClassName } from '@bodynarf/utils';
+import { isNullOrEmpty, isNullOrUndefined, getClassName } from '@bodynarf/utils';
 
 import './button.scss';
 
@@ -53,7 +53,9 @@ export default function Button(props: ButtonProps): JSX.Element {
     }
 
     const className: string = getClassName([
-        `button is-${props.type}`,
+        "button",
+        "bbr-button",
+        `is-${props.type}`,
         props.light === true ? 'is-light' : '',
         !isNullOrUndefined(props.size) ? `is-${props.size}` : '',
         props.outlined === true ? 'is-outlined' : '',

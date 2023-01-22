@@ -11,11 +11,11 @@ export const ButtonWithIcon = ({ className, disabled, onClick, caption, title, i
     const iconClassName: string | undefined = isNullOrEmpty(caption)
         ? icon.className
         : iconPosition === 'left'
-            ? `${icon.className} app-icon--left`
-            : `${icon.className} app-icon--right`;
+            ? `${icon.className} bbr-icon--left`
+            : `${icon.className} bbr-icon--right`;
 
     className = isNullOrEmpty(caption)
-        ? `${className} button--icon-only`
+        ? `${className} bbr-button--icon-only`
         : className;
 
     if (iconPosition === 'left') {
