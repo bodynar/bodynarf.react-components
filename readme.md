@@ -15,6 +15,8 @@ Small library with react components based on Bulma CSS framework&nbsp; <a href="
 5. *(Optional)* To use **Checkbox** component - install [bulma-checkradio](https://www.npmjs.com/package/bulma-checkradio) and make sure you imported these styles in parent container
 
 ## Description
+
+Mostly all components have root class with `bbr-` prefix. BBR - Bodynarf Bulma React
 ### Simple components
 Simple react components based on html elements.
 
