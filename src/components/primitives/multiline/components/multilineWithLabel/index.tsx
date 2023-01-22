@@ -58,7 +58,7 @@ const MultilineWithLabel = ({
         ]);
 
         return (
-            <div className="app-input field is-horizontal">
+            <div className="bbr-input field is-horizontal">
                 <div className={labelContainerClassName}>
                     <label
                         className={labelClassName}
@@ -93,7 +93,7 @@ const MultilineWithLabel = ({
     }
 
     return (
-        <div className="app-input field">
+        <div className="bbr-input field">
             <label
                 className={labelClassName}
                 htmlFor={id}

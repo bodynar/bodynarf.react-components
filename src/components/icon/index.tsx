@@ -21,9 +21,9 @@ export type IconProps = {
 }
 
 const sizeToClassMap: Map<ElementSize, string> = new Map([
-    ['small', ' app-icon--smal'],
+    ['small', ' bbr-icon--smal'],
     ['medium', ''],
-    ['large', ' app-icon--large']
+    ['large', ' bbr-icon--large']
 ]);
 
 /**

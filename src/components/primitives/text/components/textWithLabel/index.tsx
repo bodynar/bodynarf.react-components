@@ -56,7 +56,7 @@ const TextWithLabel = ({
         ]);
 
         return (
-            <div className="app-input field is-horizontal">
+            <div className="bbr-input field is-horizontal">
                 <div className={labelContainerClassName}>
                     <label
                         className={labelClassName}
