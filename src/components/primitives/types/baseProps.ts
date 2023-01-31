@@ -4,7 +4,7 @@ import { BaseElementProps } from "../../types";
 /** Base properties for input components */
 export type BaseInputElementProps<TValue> = BaseElementProps & {
     /** Value change handler. Changed value must be stored outside of component */
-    onValueChange: (value: TValue) => void;
+    onValueChange: (value?: TValue) => void;
 
     /** Default value of input component*/
     defaultValue?: TValue;

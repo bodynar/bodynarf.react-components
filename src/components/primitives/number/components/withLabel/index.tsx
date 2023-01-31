@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
+import { generateGuid, getClassName, getValueOrDefault, isStringEmpty } from "@bodynarf/utils";
 
 import { NumberProps } from "../..";
 import { InputSize } from "../../..";
@@ -15,7 +15,8 @@ const NumberWithLabel = ({
     onBlur,
 }: NumberProps): JSX.Element => {
     const onChange = useCallback(
-        (event: ChangeEvent<HTMLInputElement>) => onValueChange(+event.target.value),
+        (event: ChangeEvent<HTMLInputElement>) =>
+            onValueChange(isStringEmpty(event.target.value) ? undefined : +event.target.value),
         [onValueChange]
     );
 
