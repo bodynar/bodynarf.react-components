@@ -1,4 +1,10 @@
-.is-checkradio[type="checkbox"].m-check-radio.has-background-color.m-has-background-color:not(:checked) + label::before {
-    border-color: #dbdbdb !important;
-    background-color: transparent !important;
+.is-checkradio.m-check-radio {
+    & + label {
+        padding: 0;
+    }
+
+    &[type="checkbox"].has-background-color.m-has-background-color:not(:checked) + label::before {
+        border-color: #dbdbdb !important;
+        background-color: transparent !important;
+    }
 }

@@ -88,6 +88,7 @@ const DropdownWithLabel = ({
     if (label!.horizontal) {
         const labelContainerClassName = getClassName([
             "field-label",
+            "is-normal",
             label!.horizontalContainerClassName
         ]);
 
