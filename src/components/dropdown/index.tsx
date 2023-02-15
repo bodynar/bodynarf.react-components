@@ -13,22 +13,19 @@ export type DropdownProps = BaseElementProps & {
     /** Items which can be selected */
     items: Array<SelectableItem>;
 
-    /**
-     * Selected value.
-     * Must be stored outside
-    */
-    value?: SelectableItem;
+    /** Input element placeholder */
+    placeholder: string;
 
     /**
      * Action to update selected value, which stored outside
     */
     onSelect: (item?: SelectableItem) => void;
 
-    /** 
-     * Caption.
-     * Appears only no element selected
+    /**
+     * Selected value.
+     * Must be stored outside
     */
-    caption: string;
+    value?: SelectableItem;
 
     /** Hide dropdown list when its opened and user click outside */
     hideOnOuterClick: boolean;
@@ -45,8 +42,10 @@ export type DropdownProps = BaseElementProps & {
      */
     compact?: boolean;
 
-    /** Input element placeholder */
-    placeholder: string;
+    /**
+     * Is element disabled
+     */
+    disabled?: boolean;
 
     /** Label configuration */
     label?: InputLabel;

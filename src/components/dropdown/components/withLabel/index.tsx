@@ -15,7 +15,7 @@ const DropdownWithLabel = ({
     deselectable,
     className, hideOnOuterClick, listMaxHeight,
 
-    label, placeholder
+    label, placeholder, disabled
 }: DropdownProps): JSX.Element => {
     const id = useId();
 
@@ -24,6 +24,10 @@ const DropdownWithLabel = ({
 
     const onItemClick = useCallback(
         (event: React.MouseEvent<HTMLLIElement>) => {
+            if (disabled ?? false) {
+                return;
+            }
+
             const target = event.target as HTMLLIElement;
 
             if (isNullOrUndefined(target)) {
@@ -49,10 +53,14 @@ const DropdownWithLabel = ({
 
             onSelect(item);
             setListVisible(false);
-        }, [setListVisible, value, items, onSelect]);
+        }, [setListVisible, value, items, onSelect, disabled]);
 
     const onLabelClick = useCallback(
         (event: MouseEvent<HTMLLabelElement>): void => {
+            if (disabled ?? false) {
+                return;
+            }
+
             const target = event.target as HTMLElement;
 
             if (isNullOrUndefined(target)) {
@@ -64,7 +72,7 @@ const DropdownWithLabel = ({
             } else {
                 setListVisible(state => !state);
             }
-        }, [onSelect, setListVisible]);
+        }, [onSelect, setListVisible, disabled]);
 
     useComponentOutsideClick(
         `[data-dropdown-id="${id}"]`, isListVisible,
@@ -74,6 +82,7 @@ const DropdownWithLabel = ({
 
     const classNames: string = getClassName([
         "bbr-dropdown",
+        (disabled ?? false) ? "bbr-dropdown--disabled" : "",
         isListVisible ? "is-active" : "",
         isNullOrEmpty(listMaxHeight) ? "bbr-dropdown--height-default" : "",
         className,
