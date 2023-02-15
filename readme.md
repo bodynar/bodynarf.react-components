@@ -35,6 +35,7 @@ Simple react components based on html elements.
 Complex components is set of components built via combining simple components or represent complex logical component
  - **Search** - Search bar with optional button to perform search
  - **Paginator** - Pagination elements to navigate through paged list
+  
 	Example:
 	```tsx
 		const [{ currentPage, pagesCount, onPageChange }, paginate] = usePagination(items.length, ITEMS_PER_PAGE);
