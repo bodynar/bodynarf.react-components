@@ -13,6 +13,7 @@ const NumberWithoutLabel = ({
     className, size, style, rounded, loading,
     placeholder,
     onBlur,
+    step,
 }: NumberProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(+event.target.value),
@@ -50,6 +51,7 @@ const NumberWithoutLabel = ({
                     onBlur={onBlur}
                     name={id}
                     id={id}
+                    step={step ?? 1}
                 />
             </div>
             {isValidationDefined && validationMessages.length > 0 &&

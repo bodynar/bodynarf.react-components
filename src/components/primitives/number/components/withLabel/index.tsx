@@ -13,6 +13,7 @@ const NumberWithLabel = ({
     className, size, style, rounded, loading,
     label, placeholder,
     onBlur,
+    step,
 }: NumberProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) =>
@@ -80,6 +81,7 @@ const NumberWithLabel = ({
                                 onBlur={onBlur}
                                 name={id}
                                 id={id}
+                                step={step ?? 1}
                             />
                         </div>
                         {isValidationDefined && validationMessages.length > 0 &&
@@ -111,6 +113,7 @@ const NumberWithLabel = ({
                     onBlur={onBlur}
                     name={id}
                     id={id}
+                    step={step ?? 1}
                 />
             </div>
             {isValidationDefined && validationMessages.length > 0 &&
