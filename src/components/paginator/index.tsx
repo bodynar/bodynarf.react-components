@@ -78,7 +78,7 @@ export default function Paginator({
     const canGoBack = useMemo(() => page > 1, [page]);
     const canGoForward = useMemo(() => page < count, [page, count]);
 
-    if (pageNumbers.length === 0) {
+    if (pageNumbers.length <= 1) {
         return <></>;
     }
 
