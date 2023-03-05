@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { DependencyList, useCallback, useEffect, useMemo, useState } from "react";
 
 /** Paginator hook state */
 export interface PaginationState {
@@ -20,9 +20,10 @@ const defaultPageSize: number = 30;
  * @param length Pagionation items count
  * @param size Page size. Default is 30
  * @param initPage Initial page. Default is 1
+ * @param dependencies List of dependencies. On any dependency update current page will be set to 1
  * @returns Pair of hook-stored state and handler for slicing current page items
  */
-export const usePagination = (length: number, size: number = defaultPageSize, initPage: number = 1): [PaginationState, (data: Array<any>) => Array<any>] => {
+export const usePagination = (length: number, size: number = defaultPageSize, initPage: number = 1, dependencies: DependencyList): [PaginationState, (data: Array<any>) => Array<any>] => {
     const [currentPage, setCurrentPage] = useState(initPage);
     const count = useMemo(() => Math.ceil(length / size), [size, length]);
     const onChange = useCallback((page: number) => setCurrentPage(page), [setCurrentPage]);
@@ -42,6 +43,8 @@ export const usePagination = (length: number, size: number = defaultPageSize, in
         pagesCount: count,
         onPageChange: onChange
     }), [currentPage, count, onChange]);
+
+    useEffect(() => setCurrentPage(1), dependencies);
 
     return [state, paginate];
 };
