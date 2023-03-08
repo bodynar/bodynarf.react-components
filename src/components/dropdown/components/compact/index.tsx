@@ -5,8 +5,8 @@ import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils"
 import { useComponentOutsideClick } from "../../../../hooks";
 import { DropdownProps } from "../..";
 
-import DropdownItem from '../item';
-import DropdownLabel from '../label';
+import DropdownItem from "../item";
+import DropdownLabel from "../label";
 
 const DropdownCompact = ({
     items,
@@ -31,7 +31,7 @@ const DropdownCompact = ({
                 return;
             }
 
-            const dataValue = target.dataset['dropdownItemValue'];
+            const dataValue = target.dataset["dropdownItemValue"];
 
             if (isNullOrEmpty(dataValue)) {
                 return;

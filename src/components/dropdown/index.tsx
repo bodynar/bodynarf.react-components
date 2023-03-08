@@ -1,13 +1,13 @@
-import { isNullOrUndefined } from '@bodynarf/utils';
+import { isNullOrUndefined } from "@bodynarf/utils";
 
-import './dropdown.scss';
+import "./dropdown.scss";
 
-import { BaseElementProps } from '../types';
-import { InputLabel, ValidationState } from '../primitives';
+import { BaseElementProps } from "..";
+import { InputLabel, ValidationState } from "../primitives";
 
-import { SelectableItem } from './types';
-import DropdownWithLabel from './components/withLabel';
-import DropdownCompact from './components/compact';
+import { SelectableItem } from "./types";
+import DropdownWithLabel from "./components/withLabel";
+import DropdownCompact from "./components/compact";
 
 export type DropdownProps = BaseElementProps & {
     /** Items which can be selected */

@@ -1,16 +1,16 @@
-import { isNullOrEmpty } from '@bodynarf/utils';
+import { isNullOrEmpty } from "@bodynarf/utils";
 
-import Icon from '../../../icon';
+import Icon from "../../../icon";
 
-import { ButtonWithIconProps } from '../../types';
+import { ButtonWithIconProps } from "../../types";
 
 /** Button with icon component */
 export const ButtonWithIcon = ({ className, disabled, onClick, caption, title, icon }: ButtonWithIconProps): JSX.Element => {
-    const iconPosition = icon.position || 'left';
+    const iconPosition = icon.position || "left";
 
     const iconClassName: string | undefined = isNullOrEmpty(caption)
         ? icon.className
-        : iconPosition === 'left'
+        : iconPosition === "left"
             ? `${icon.className} bbr-icon--left`
             : `${icon.className} bbr-icon--right`;
 
@@ -18,7 +18,7 @@ export const ButtonWithIcon = ({ className, disabled, onClick, caption, title, i
         ? `${className} bbr-button--icon-only`
         : className;
 
-    if (iconPosition === 'left') {
+    if (iconPosition === "left") {
         return (
             <button
                 className={className}

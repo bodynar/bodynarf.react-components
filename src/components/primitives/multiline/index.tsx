@@ -2,7 +2,7 @@ import { isNullOrUndefined } from "@bodynarf/utils";
 
 import "../../../common.scss";
 
-import { BaseInputElementProps } from "../types";
+import { BaseInputElementProps } from "..";
 
 import MultilineWithoutLabel from "./components/multilineWithoutLabel";
 import MultilineWithLabel from "./components/multilineWithLabel";

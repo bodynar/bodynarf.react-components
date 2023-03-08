@@ -38,9 +38,9 @@ export const useComponentOutsideClick = (
 
     useEffect(() => {
         if (isNullOrUndefined(clickListenCondition) || clickListenCondition === true) {
-            document.addEventListener('click', onDocumentClick);
+            document.addEventListener("click", onDocumentClick);
 
-            return (): void => document.removeEventListener('click', onDocumentClick);
+            return (): void => document.removeEventListener("click", onDocumentClick);
         }
 
         return () => { };

@@ -1,21 +1,21 @@
-import { isNullOrEmpty } from '@bodynarf/utils';
+import { isNullOrEmpty } from "@bodynarf/utils";
 
-import Icon from '../../../icon';
+import Icon from "../../../icon";
 
 import { AnchorWithIconProps } from "../../types";
 
 /** Anchor with icon component */
 export const AnchorWithIcon = ({ href, className, onClick, caption, title, target, icon }: AnchorWithIconProps): JSX.Element => {
-    const iconPosition = icon.position || 'left';
+    const iconPosition = icon.position || "left";
 
     const iconClassName: string | undefined = isNullOrEmpty(caption)
         ? icon.className
-        : iconPosition === 'left'
+        : iconPosition === "left"
             ? `${icon.className} bbr-icon--left`
             : `${icon.className} bbr-icon--right`;
 
 
-    if (iconPosition === 'left') {
+    if (iconPosition === "left") {
         return (
             <a
                 href={href}

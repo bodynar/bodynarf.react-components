@@ -2,9 +2,10 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault, isStringEmpty } from "@bodynarf/utils";
 
-import { NumberProps } from "../..";
-import { InputSize } from "../../..";
+import { ElementSize } from "../../../..";
 import { getValidationValues } from "../../../../../utils";
+
+import { NumberProps } from "../..";
 
 /** Number component with label */
 const NumberWithLabel = ({
@@ -22,7 +23,7 @@ const NumberWithLabel = ({
     );
 
     const id = name || generateGuid();
-    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, InputSize.Normal));
+    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
 
     const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
 

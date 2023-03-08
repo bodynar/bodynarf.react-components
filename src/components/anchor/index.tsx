@@ -1,11 +1,11 @@
-import { isNullOrUndefined, isNullOrEmpty, getClassName } from '@bodynarf/utils';
+import { isNullOrUndefined, isNullOrEmpty, getClassName } from "@bodynarf/utils";
 
-import './anchor.scss';
+import "./anchor.scss";
 
-import { ElementIcon } from '../types';
+import { ElementIcon } from "..";
 
-import { SimpleAnchor } from './components/simpleAnchor';
-import { AnchorWithIcon } from './components/anchorWithIcon';
+import { SimpleAnchor } from "./components/simpleAnchor";
+import { AnchorWithIcon } from "./components/anchorWithIcon";
 
 export type AnchorProps = {
     /** Link destination */
@@ -24,7 +24,7 @@ export type AnchorProps = {
     title?: string;
 
     /** Where to open the linked document */
-    target?: '_blank' | '_top';
+    target?: "_blank" | "_top";
 
     /** Additional class names */
     className?: string;
@@ -40,9 +40,9 @@ export default function Anchor(props: AnchorProps): JSX.Element {
     }
 
     const className: string = getClassName([
-        'bbr-anchor',
-        !isNullOrEmpty(props.className) ? ` ${props.className}` : '',
-        props.disableHovering === true ? ' bbr-anchor--unhoverable' : ''
+        "bbr-anchor",
+        !isNullOrEmpty(props.className) ? ` ${props.className}` : "",
+        props.disableHovering === true ? " bbr-anchor--unhoverable" : ""
     ]);
 
     if (isNullOrUndefined(props.icon)) {

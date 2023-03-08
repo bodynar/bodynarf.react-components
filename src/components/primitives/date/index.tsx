@@ -4,7 +4,7 @@ import { generateGuid, getClassName, getValueOrDefault, isStringEmpty } from "@b
 
 import "../../../common.scss";
 
-import { BaseInputElementProps, InputLabel, InputSize } from "../types";
+import { BaseInputElementProps, InputLabel, ElementSize } from "../..";
 import { getValidationValues } from "../../../utils";
 
 /** Date input conponent props type */
@@ -35,7 +35,7 @@ const DatePicker = ({
     );
 
     const id = name || generateGuid();
-    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, InputSize.Normal));
+    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
 
     const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
 

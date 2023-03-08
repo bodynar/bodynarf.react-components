@@ -1,8 +1,8 @@
-import { MouseEvent } from 'react';
+import { MouseEvent } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import Icon from '../../../icon';
+import Icon from "../../../icon";
 
 import { SelectableItem } from "../../types";
 

@@ -5,7 +5,7 @@ import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
 import Icon from "../../../../icon";
 
 import { getValidationValues } from "../../../../../utils";
-import { InputSize } from "../../../";
+import { ElementSize } from "../../../..";
 
 import { PasswordProps } from "../..";
 
@@ -25,7 +25,7 @@ const PasswordWithLabel = ({
     const onIconClick = useCallback(() => setContentIsHidden(state => !state), [setContentIsHidden]);
 
     const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
-    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, InputSize.Normal));
+    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
     const id = name || generateGuid();
 
     const elClassName = getClassName([

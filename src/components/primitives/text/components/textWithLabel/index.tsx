@@ -2,9 +2,10 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault, } from "@bodynarf/utils";
 
-import { InputSize } from "../../../types";
-import { TextProps } from "../..";
+import { ElementSize } from "../../../..";
 import { getValidationValues } from "../../../../../utils";
+
+import { TextProps } from "../..";
 
 /** Textual input with describing label */
 const TextWithLabel = ({
@@ -20,7 +21,7 @@ const TextWithLabel = ({
     );
 
     const id = name || generateGuid();
-    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, InputSize.Normal));
+    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
 
     const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
 

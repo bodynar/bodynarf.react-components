@@ -1,11 +1,11 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from "react";
 
-import { generateGuid, getClassName } from '@bodynarf/utils';
+import { generateGuid, getClassName } from "@bodynarf/utils";
 
-import './search.scss';
+import "./search.scss";
 
-import Button from '../button';
-import { ElementSize } from '../types';
+import Button from "../button";
+import { ElementSize } from "../types";
 
 export type SearchProps = {
     /** 
@@ -13,7 +13,7 @@ export type SearchProps = {
      * or by clicking on button next to search bar.
      * Default `is byTyping`
     */
-    searchType: 'byTyping' | 'byButton';
+    searchType: "byTyping" | "byButton";
 
     /** Search caption */
     caption: string;
@@ -47,13 +47,13 @@ export default function Search({
     size, isLoading, rounded, disabled,
 }: SearchProps): JSX.Element {
     const [elementName] = useState<string>(name || generateGuid());
-    const [searchValue, setSearchValue] = useState<string>(defaultValue || '');
+    const [searchValue, setSearchValue] = useState<string>(defaultValue || "");
 
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => {
             const elementValue: string = event.target.value;
 
-            if (searchType === 'byTyping') {
+            if (searchType === "byTyping") {
                 onSearch(elementValue);
             }
 
@@ -65,24 +65,24 @@ export default function Search({
     const className: string = getClassName([
         "bbr-search",
         "control",
-        `is-${(size || 'normal')}`,
-        isLoading === true ? 'is-loading' : '',
-        searchType === 'byButton' ? 'is-expanded' : '',
+        `is-${(size || "normal")}`,
+        isLoading === true ? "is-loading" : "",
+        searchType === "byButton" ? "is-expanded" : "",
     ]);
 
     const inputClassName: string = getClassName([
         "input",
         "is-unselectable",
-        `is-${(size || 'normal')}`,
-        rounded === true ? 'is-rounded' : '',
+        `is-${(size || "normal")}`,
+        rounded === true ? "is-rounded" : "",
     ]);
 
-    if (searchType === 'byButton') {
+    if (searchType === "byButton") {
         return (
             <div className="field has-addons">
                 <div className={className}>
                     <input
-                        type='search'
+                        type="search"
                         name={elementName}
                         defaultValue={searchValue}
                         className={inputClassName}
@@ -106,7 +106,7 @@ export default function Search({
         return (
             <div className={className}>
                 <input
-                    type='search'
+                    type="search"
                     name={elementName}
                     defaultValue={searchValue}
                     className={inputClassName}

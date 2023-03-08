@@ -1,7 +1,6 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { InputColor, InputSize } from "../primitives";
-import { BaseElementProps } from "../types";
+import { ElementColor, ElementSize, BaseElementProps } from "..";
 
 import "./style.scss";
 
@@ -12,12 +11,12 @@ interface TagProps extends BaseElementProps {
 
     /**
      * Element size.
-     * `Small` isn't allowed
+     * `Small` isn"t allowed
     */
-    size?: InputSize;
+    size?: ElementSize;
 
     /** Element color */
-    style?: InputColor;
+    style?: ElementColor;
 
     /** Is element with rounded border */
     rounded?: boolean;
@@ -47,21 +46,21 @@ const Tag = ({
     className, title,
 }: TagProps): JSX.Element => {
 
-    size ??= InputSize.Normal;
-    style ??= InputColor.Default;
+    size ??= ElementSize.Normal;
+    style ??= ElementColor.Default;
 
     if (!isNullOrUndefined(customColor)) {
-        style = InputColor.Default;
+        style = ElementColor.Default;
     }
 
     const elClassName = getClassName([
         "bbr-tag",
         "tag",
-        style === InputColor.Default ? "" : `is-${style}`,
+        style === ElementColor.Default ? "" : `is-${style}`,
         !isNullOrUndefined(customColor) ? "bbr-tag--custom" : "",
         lightColor === true && isNullOrUndefined(customColor) ? "is-light" : "",
         rounded === true ? "is-rounded" : "",
-        size === InputSize.Normal || size === InputSize.Small ? "" : `is-${size}`,
+        size === ElementSize.Normal || size === ElementSize.Small ? "" : `is-${size}`,
         isNullOrUndefined(onClick) ? "" : "bbr-tag--clickable",
         className,
     ]);

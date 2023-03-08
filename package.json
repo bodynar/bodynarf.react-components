@@ -1,6 +1,6 @@
 {
     "name": "@bodynarf/react.components",
-    "version": "1.5.1",
+    "version": "1.5.3",
     "author": {
         "name": "Artem",
         "email": "bodynar@gmail.com"
@@ -30,7 +30,7 @@
         "typescript": "^4.7.3"
     },
     "dependencies": {
-        "@bodynarf/utils": "^1.0.14",
+        "@bodynarf/utils": "^1.1.1",
         "bulma": "^0.9.4",
         "react": "^18.1.0",
         "react-dom": "^18.1.0"

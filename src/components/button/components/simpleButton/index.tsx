@@ -1,5 +1,5 @@
 
-import { SimpleButtonProps } from '../../types';
+import { SimpleButtonProps } from "../../types";
 
 /** Simple button component, without icon */
 export const SimpleButton = ({ className, disabled, onClick, caption, title }: SimpleButtonProps): JSX.Element => {

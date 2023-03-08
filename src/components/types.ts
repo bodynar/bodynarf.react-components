@@ -13,16 +13,49 @@ export type BaseElementProps = {
     };
 };
 
-/** Allowed element sizes */
-export type ElementSize =
-    | 'small'
-    | 'medium' /** default size */
-    | 'large';
+/** Input component size variety */
+export enum ElementSize {
+    /** Font size is 0.75rem */
+    Small = "small",
+
+    /** Font size is 1rem. Default */
+    Normal = "normal",
+
+    /** Font size is 1.25rem */
+    Medium = "medium",
+
+    /** Font size is 1.5rem */
+    Large = "large",
+}
+
+/** Input component border-color type */
+export enum ElementColor {
+    /** color: transparent */
+    Default = "default",
+
+    /** color: seawave green */
+    Primary = "primary",
+
+    /** color: blue-violet */
+    Link = "link",
+
+    /** color: sky-blue */
+    Info = "info",
+
+    /** color: green */
+    Success = "success",
+
+    /** color: yellow */
+    Warning = "warning",
+
+    /** color: red */
+    Danger = "danger",
+};
 
 /** Allowed icon position */
 export type IconPosition =
-    | 'left'
-    | 'right';
+    | "left"
+    | "right";
 
 /** Icon for component  */
 export type ElementIcon = {

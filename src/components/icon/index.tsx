@@ -1,7 +1,8 @@
-import './icon.scss';
+import { getClassName } from "@bodynarf/utils";
 
-import { ElementSize } from '../types';
-import { getClassName } from '@bodynarf/utils';
+import "./icon.scss";
+
+import { ElementSize } from "..";
 
 /** Icon component props */
 export type IconProps = {
@@ -21,15 +22,19 @@ export type IconProps = {
 }
 
 const sizeToClassMap: Map<ElementSize, string> = new Map([
-    ['small', ' bbr-icon--smal'],
-    ['medium', ''],
-    ['large', ' bbr-icon--large']
+    [ElementSize.Small, "bbr-icon--size-smal"],
+    [ElementSize.Normal, ""],
+    [ElementSize.Medium, "bbr-icon--size-medium"],
+    [ElementSize.Large, "bbr-icon--size-large"]
 ]);
 
 /**
  * Icon component. Based on bootstrap icons
  */
-export default function Icon({ size = 'medium', name, className }: IconProps): JSX.Element {
+export default function Icon({
+    name, size = ElementSize.Normal,
+    className,
+}: IconProps): JSX.Element {
     const classNames = getClassName([
         "bbr-icon",
         "bi",

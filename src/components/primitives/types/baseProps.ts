@@ -1,5 +1,5 @@
-import { InputColor, InputLabel, InputSize, ValidationState } from ".";
-import { BaseElementProps } from "../../types";
+import { InputLabel, ValidationState } from ".";
+import { BaseElementProps, ElementColor, ElementSize } from "../../types";
 
 /** Base properties for input components */
 export type BaseInputElementProps<TValue> = BaseElementProps & {
@@ -22,7 +22,7 @@ export type BaseInputElementProps<TValue> = BaseElementProps & {
     readonly?: boolean;
 
     /** Component size */
-    size?: InputSize;
+    size?: ElementSize;
 
     /** Label configuration */
     label?: InputLabel;
@@ -31,7 +31,7 @@ export type BaseInputElementProps<TValue> = BaseElementProps & {
     loading?: boolean;
 
     /** Style. Colors the border */
-    style?: InputColor;
+    style?: ElementColor;
 
     /** Name of element. Required for form elements */
     name?: string;

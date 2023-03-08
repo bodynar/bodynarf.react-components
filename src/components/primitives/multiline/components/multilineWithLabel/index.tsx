@@ -2,9 +2,10 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
 
-import { InputSize } from "../../../types";
-import { MultilineProps } from "../..";
+import { ElementSize } from "../../../..";
 import { getValidationValues } from "../../../../../utils";
+
+import { MultilineProps } from "../..";
 
 /** Multiline textual input component with describing label */
 const MultilineWithLabel = ({
@@ -21,7 +22,7 @@ const MultilineWithLabel = ({
     );
 
     const id = name || generateGuid();
-    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, InputSize.Normal));
+    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
 
     const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
 

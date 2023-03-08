@@ -2,9 +2,10 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
 
-import { NumberProps } from "../..";
-import { InputSize } from "../../..";
+import { ElementSize } from "../../../..";
 import { getValidationValues } from "../../../../../utils";
+
+import { NumberProps } from "../..";
 
 /** Number component without label */
 const NumberWithoutLabel = ({
@@ -24,7 +25,7 @@ const NumberWithoutLabel = ({
 
     const elClassName = getClassName([
         className,
-        "is-{0}".format(getValueOrDefault(size, InputSize.Normal)),
+        "is-{0}".format(getValueOrDefault(size, ElementSize.Normal)),
         rounded === true ? "is-rounded" : "",
         styleClassName,
         "input",

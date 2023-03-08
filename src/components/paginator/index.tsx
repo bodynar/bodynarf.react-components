@@ -1,10 +1,10 @@
-import { useCallback, useMemo, MouseEvent } from 'react';
+import { useCallback, useMemo, MouseEvent } from "react";
 
-import { getClassName, isNullOrEmpty } from '@bodynarf/utils';
+import { getClassName, isNullOrEmpty } from "@bodynarf/utils";
 
-import { ElementSize } from '../types';
+import { ElementSize } from "..";
 
-import { generatePageNumbers } from './utils';
+import { generatePageNumbers } from "./utils";
 
 export type PaginatorProps = {
     /** Amount of pages */
@@ -21,9 +21,9 @@ export type PaginatorProps = {
      * Usefull with `showNextButtons = true`
     */
     position?:
-    | 'left' /* default */
-    | 'center'
-    | 'right'
+    | "left" /* default */
+    | "center"
+    | "right"
     ;
 
     /** Buttons should have rounded borders */
@@ -60,7 +60,7 @@ export default function Paginator({
         (event: MouseEvent<HTMLElement>) => {
             const target = event.target as HTMLElement;
 
-            const pageRaw = target.dataset['page'];
+            const pageRaw = target.dataset["page"];
 
             if (isNullOrEmpty(pageRaw)) {
                 return;

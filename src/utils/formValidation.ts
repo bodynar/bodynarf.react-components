@@ -1,6 +1,6 @@
 import { isNullOrUndefined } from "@bodynarf/utils";
 
-import { InputColor, ValidationState, ValidationStatus } from "../components/primitives";
+import { ElementColor, ValidationState, ValidationStatus } from "../components";
 
 /**
  * Get current validation state values
@@ -8,7 +8,7 @@ import { InputColor, ValidationState, ValidationStatus } from "../components/pri
  * @param validationState Current form item validation state
  * @returns [Is validation applicable; classname attribute value; validation messages]
  */
-export const getValidationValues = (style?: InputColor, validationState?: ValidationState): [boolean, string, Array<string>] => {
+export const getValidationValues = (style?: ElementColor, validationState?: ValidationState): [boolean, string, Array<string>] => {
     const validationStateDefined = !isNullOrUndefined(validationState) && validationState!.status !== ValidationStatus.None;
     const styleClassName = getStyleClassName(style, validationState);
 
@@ -23,7 +23,7 @@ export const getValidationValues = (style?: InputColor, validationState?: Valida
  * @param validationState Current form item validation state
  * @returns Classname attribute value
  */
-export const getStyleClassName = (style?: InputColor, validationState?: ValidationState): string => {
+export const getStyleClassName = (style?: ElementColor, validationState?: ValidationState): string => {
     if (isNullOrUndefined(validationState)) {
         return isNullOrUndefined(style) ? "" : `is-${style}`;
     }

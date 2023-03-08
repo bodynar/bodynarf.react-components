@@ -2,9 +2,10 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
 
-import { InputSize } from "../../../types";
-import { TextProps } from "../..";
+import { ElementSize } from "../../../..";
 import { getValidationValues } from "../../../../../utils";
+
+import { TextProps } from "../..";
 
 /** Textual input without describing label */
 const TextWithoutLabel = ({
@@ -23,7 +24,7 @@ const TextWithoutLabel = ({
 
     const elClassName = getClassName([
         className,
-        "is-{0}".format(getValueOrDefault(size, InputSize.Normal)),
+        "is-{0}".format(getValueOrDefault(size, ElementSize.Normal)),
         rounded === true ? "is-rounded" : "",
         styleClassName,
         "input",

@@ -1,12 +1,12 @@
-import { isNullOrEmpty, isNullOrUndefined, getClassName } from '@bodynarf/utils';
+import { isNullOrEmpty, isNullOrUndefined, getClassName } from "@bodynarf/utils";
 
-import './button.scss';
+import "./button.scss";
 
-import { ElementIcon, ElementSize } from '../types';
+import { ElementIcon, ElementSize } from "..";
 
-import { ButtonType } from './types';
-import { ButtonWithIcon } from './components/buttonWithIcon';
-import { SimpleButton } from './components/simpleButton';
+import { ButtonType } from "./types";
+import { ButtonWithIcon } from "./components/buttonWithIcon";
+import { SimpleButton } from "./components/simpleButton";
 
 export type ButtonProps = {
     /** Button displaying text */
@@ -56,11 +56,11 @@ export default function Button(props: ButtonProps): JSX.Element {
         "button",
         "bbr-button",
         `is-${props.type}`,
-        props.light === true ? 'is-light' : '',
-        !isNullOrUndefined(props.size) ? `is-${props.size}` : '',
-        props.outlined === true ? 'is-outlined' : '',
-        props.rounded === true ? 'is-rounded' : '',
-        props.isLoading === true ? 'is-loading' : '',
+        props.light === true ? "is-light" : "",
+        !isNullOrUndefined(props.size) ? `is-${props.size}` : "",
+        props.outlined === true ? "is-outlined" : "",
+        props.rounded === true ? "is-rounded" : "",
+        props.isLoading === true ? "is-loading" : "",
     ]);
 
     if (!isNullOrUndefined(props.icon)) {

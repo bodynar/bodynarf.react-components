@@ -1,4 +1,4 @@
-import { ElementIcon } from "../types";
+import { ElementIcon } from "..";
 
 export type SimpleAnchorProps = {
     /** Link destination */
@@ -17,7 +17,7 @@ export type SimpleAnchorProps = {
     title?: string;
 
     /** Where to open the linked document */
-    target?: '_blank' | '_top';
+    target?: "_blank" | "_top";
 };
 
 export type AnchorWithIconProps = SimpleAnchorProps & {

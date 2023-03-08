@@ -4,7 +4,7 @@ import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import "./checkbox.scss";
 
-import { BaseInputElementProps } from "../types";
+import { BaseInputElementProps } from "..";
 
 export interface CheckBoxProps extends BaseInputElementProps<boolean> {
     /** Is full colored checkbox */
@@ -22,7 +22,7 @@ export interface CheckBoxProps extends BaseInputElementProps<boolean> {
     /**
      * Set unchecked background as transparent.
      * Only used with `hasBackgroundColor` set as `true`
-     * @example `{ style: InputColor.Info, hasBackgrounColor: true, fixBackgroundColor: true }` -
+     * @example `{ style: ElementColor.Info, hasBackgrounColor: true, fixBackgroundColor: true }` -
     */
     fixBackgroundColor?: boolean;
 

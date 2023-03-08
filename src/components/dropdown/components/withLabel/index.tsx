@@ -1,13 +1,13 @@
-import { MouseEvent, useCallback, useId, useState } from 'react';
+import { MouseEvent, useCallback, useId, useState } from "react";
 
-import { isNullOrUndefined, isNullOrEmpty, getClassName } from '@bodynarf/utils';
+import { isNullOrUndefined, isNullOrEmpty, getClassName } from "@bodynarf/utils";
 
-import { getValidationValues } from '../../../../utils';
-import { useComponentOutsideClick } from '../../../../hooks';
-import { DropdownProps } from '../..';
+import { getValidationValues } from "../../../../utils";
+import { useComponentOutsideClick } from "../../../../hooks";
+import { DropdownProps } from "../..";
 
-import DropdownItem from '../item';
-import DropdownLabel from '../label';
+import DropdownItem from "../item";
+import DropdownLabel from "../label";
 
 const DropdownWithLabel = ({
     items,
@@ -34,7 +34,7 @@ const DropdownWithLabel = ({
                 return;
             }
 
-            const dataValue = target.dataset['dropdownItemValue'];
+            const dataValue = target.dataset["dropdownItemValue"];
 
             if (isNullOrEmpty(dataValue)) {
                 return;
