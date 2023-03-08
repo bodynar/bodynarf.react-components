@@ -1,0 +1,27 @@
+.bbr-tag {
+    border: 1px solid transparent;
+    transition: border-color 0.15s ease-in-out;
+
+    &--clickable {
+        cursor: pointer;
+
+        &.is-light {
+            &:hover {
+                border-color: rgba(0, 0, 0, 0.25);
+            }
+            &:focus,
+            &:active {
+                border-color: rgba(0, 0, 0, 0.5);
+            }
+        }
+        &:not(.is-light) {
+            &:hover {
+                border-color: rgba(0, 0, 0, 0.35);
+            }
+            &:focus,
+            &:active {
+                border-color: rgba(0, 0, 0, 0.75);
+            }
+        }
+    }
+}
