@@ -64,6 +64,7 @@ const PasswordWithoutLabel = ({
                     >
                         <Icon
                             name={contentIsHidden ? "eye" : "eye-slash"}
+                            size={ElementSize.Medium}
                         />
                     </span>
                 }

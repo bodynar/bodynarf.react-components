@@ -4,6 +4,7 @@ import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils"
 
 import Icon from "../../../icon";
 
+import { ElementSize } from "../../..";
 import { SelectableItem } from "../../types";
 
 export interface DropdownLabelProps {
@@ -51,7 +52,7 @@ const DropdownLabel = ({
             onClick={onClick}
         >
             {deselectVisible &&
-                <Icon name="plus-lg" />
+                <Icon name="plus-lg" size={ElementSize.Medium} />
             }
             <span
                 className={deselectVisible ? "mx-2" : "mr-2"}
@@ -59,7 +60,7 @@ const DropdownLabel = ({
             >
                 {text}
             </span>
-            <Icon name="arrow-down" />
+            <Icon name="arrow-down" size={ElementSize.Medium} />
         </label>
     );
 };

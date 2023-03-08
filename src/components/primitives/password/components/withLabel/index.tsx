@@ -93,6 +93,7 @@ const PasswordWithLabel = ({
                                 >
                                     <Icon
                                         name={contentIsHidden ? "eye" : "eye-slash"}
+                                        size={ElementSize.Medium}
                                     />
                                 </span>
                             }
@@ -132,6 +133,7 @@ const PasswordWithLabel = ({
                     >
                         <Icon
                             name={contentIsHidden ? "eye" : "eye-slash"}
+                            size={ElementSize.Medium}
                         />
                     </span>
                 }
