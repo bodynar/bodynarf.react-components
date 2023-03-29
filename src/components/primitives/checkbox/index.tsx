@@ -107,7 +107,7 @@ const CheckBox = ({
     }
 
     return (
-        <div className="field">
+        <div className="bbr-input field">
             <input
                 type="checkbox"
                 name={id}

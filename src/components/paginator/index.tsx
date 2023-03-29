@@ -83,6 +83,7 @@ export default function Paginator({
     }
 
     const classNames = getClassName([
+        "bbr-paginator",
         "pagination",
         paginationPositionToClassMap.has(position || "") ? paginationPositionToClassMap.get(position || "") : "",
         rounded == true ? "is-rounded" : "",

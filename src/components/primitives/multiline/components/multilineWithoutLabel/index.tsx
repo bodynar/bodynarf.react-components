@@ -34,6 +34,7 @@ const MultilineWithoutLabel = ({
 
     const inputContainerClassName = getClassName([
         "control",
+        "bbr-input",
         loading === true ? "is-loading" : "",
     ]);
 

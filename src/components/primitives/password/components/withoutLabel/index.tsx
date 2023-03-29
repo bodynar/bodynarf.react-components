@@ -39,6 +39,7 @@ const PasswordWithoutLabel = ({
 
     const containerClassName = getClassName([
         "control",
+        "bbr-input",
         loading === true ? "is-loading" : "",
         canShowPassword ? "has-icons-right" : "",
         "bbr-password__wrapper",

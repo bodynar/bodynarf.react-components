@@ -92,7 +92,7 @@ const TextWithLabel = ({
     }
 
     return (
-        <div className="field">
+        <div className="bbr-input field">
             <label
                 className={labelClassName}
                 htmlFor={id}

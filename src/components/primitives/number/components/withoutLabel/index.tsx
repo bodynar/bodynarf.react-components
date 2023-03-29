@@ -33,6 +33,7 @@ const NumberWithoutLabel = ({
 
     const containerClassName = getClassName([
         "control",
+        "bbr-input",
         loading === true ? "is-loading" : "",
     ]);
 
