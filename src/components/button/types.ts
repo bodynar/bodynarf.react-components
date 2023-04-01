@@ -1,3 +1,4 @@
+import { ButtonProps } from ".";
 import { ElementIcon } from "../types";
 
 /** Button types according to Bulma framework */
@@ -17,24 +18,13 @@ export type ButtonType =
     | "ghost" /** Blue underline text with color: transparent */
     ;
 
-export type SimpleButtonProps = {
+/** Simple button props type */
+export interface SimpleButtonProps extends Omit<ButtonProps, 'className'> {
     /** Button class name*/
     className: string;
-
-    /** Button click handler */
-    onClick?: () => void;
-
-    /** Button caption */
-    caption?: string;
-
-    /** Disabled attribute value*/
-    disabled?: boolean;
-
-    /** Title on hover */
-    title?: string;
 };
 
-export type ButtonWithIconProps = SimpleButtonProps & {
+export interface ButtonWithIconProps extends SimpleButtonProps {
     /** Icon configuration */
     icon: ElementIcon;
 };

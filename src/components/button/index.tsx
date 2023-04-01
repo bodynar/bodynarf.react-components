@@ -2,13 +2,15 @@ import { isNullOrEmpty, isNullOrUndefined, getClassName } from "@bodynarf/utils"
 
 import "./button.scss";
 
-import { ElementIcon, ElementSize } from "..";
+import { BaseElementProps, ElementIcon, ElementSize } from "..";
+
+import { mapDataAttributes } from "../../utils";
 
 import { ButtonType } from "./types";
 import { ButtonWithIcon } from "./components/buttonWithIcon";
 import { SimpleButton } from "./components/simpleButton";
 
-export type ButtonProps = {
+export interface ButtonProps extends BaseElementProps {
     /** Button displaying text */
     caption?: string;
 
@@ -20,9 +22,6 @@ export type ButtonProps = {
 
     /** Button size  */
     size?: ElementSize;
-
-    /** Title on hover */
-    title?: string;
 
     /** Is button uses light version of color  */
     light?: boolean;
@@ -38,6 +37,9 @@ export type ButtonProps = {
 
     /** Is button disabled */
     disabled?: boolean;
+
+    /** Is non-interactive button */
+    static?: boolean;
 
     /** Click action handler */
     onClick?: () => void;
@@ -55,13 +57,19 @@ export default function Button(props: ButtonProps): JSX.Element {
     const className: string = getClassName([
         "button",
         "bbr-button",
+        props.className,
         `is-${props.type}`,
         props.light === true ? "is-light" : "",
         !isNullOrUndefined(props.size) ? `is-${props.size}` : "",
         props.outlined === true ? "is-outlined" : "",
         props.rounded === true ? "is-rounded" : "",
         props.isLoading === true ? "is-loading" : "",
+        props.static === true ? "is-static" : "",
     ]);
+
+    const data = isNullOrUndefined(props.data)
+        ? undefined
+        : mapDataAttributes(props.data!);
 
     if (!isNullOrUndefined(props.icon)) {
         return (
@@ -70,6 +78,7 @@ export default function Button(props: ButtonProps): JSX.Element {
                 className={className}
                 onClick={props.onClick}
                 icon={props.icon as ElementIcon}
+                data={data}
             />
         );
     } else {
@@ -78,6 +87,7 @@ export default function Button(props: ButtonProps): JSX.Element {
                 {...props}
                 className={className}
                 onClick={props.onClick}
+                data={data}
             />
         );
     }
