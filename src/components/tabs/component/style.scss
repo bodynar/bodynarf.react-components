@@ -1,0 +1,12 @@
+.bbr-tabs {
+    &__tab {
+        .bbr-icon {
+            &:first-child {
+                margin-right: 0.5rem;
+            }
+            &:last-child {
+                margin-left: 0.5rem;
+            }
+        }
+    }
+}

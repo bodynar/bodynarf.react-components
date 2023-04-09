@@ -15,4 +15,7 @@ export * from "./components/primitives";
 export * from "./components/primitives/types";
 
 export * from "./components/search";
+
+export * from "./components/tabs";
+
 export * from "./hooks";

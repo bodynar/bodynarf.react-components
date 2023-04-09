@@ -7,3 +7,4 @@ export * from "./paginator";
 export * from "./primitives";
 export * from "./search";
 export * from "./tag";
+export * from "./tabs";
