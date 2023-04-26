@@ -2,19 +2,11 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault, isStringEmpty } from "@bodynarf/utils";
 
-import "../../../common.scss";
+import "../../../../common.scss";
 
-import { BaseInputElementProps, InputLabel, ElementSize } from "../..";
-import { getValidationValues } from "../../../utils";
-
-/** Date input conponent props type */
-export type DateProps = Omit<BaseInputElementProps<Date | undefined>, "placeholder"> & {
-    /** Label configuration */
-    label: InputLabel;
-
-    /** Focus out event handler */
-    onBlur?: () => void;
-}
+import { ElementSize } from "../../..";
+import { getValidationValues } from "../../../../utils";
+import { DateProps } from "../..";
 
 /** Date input component */
 const DatePicker = ({

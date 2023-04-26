@@ -1,0 +1,12 @@
+.bbr-button {
+    transition: 0.15s ease-in-out;
+    transition-property: background-color, border-color;
+
+    &--icon-only {
+        padding: 0.55rem !important;
+    }
+
+    &.is-warning.is-outlined:not([disabled]):hover {
+        color: #000 !important;
+    }
+}

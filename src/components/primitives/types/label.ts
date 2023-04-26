@@ -1,5 +1,5 @@
 /** Input label configuration */
-export type InputLabel = {
+export interface InputLabel {
     /** Label textual content to describe input requirements */
     caption: string;
 
@@ -14,4 +14,4 @@ export type InputLabel = {
 
     /** Class name for input parent container in horizontal mode */
     horizontalFieldContainerClassName?: string;
-};
+}

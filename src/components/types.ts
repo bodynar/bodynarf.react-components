@@ -1,5 +1,5 @@
 /** Base interface for component props */
-export type BaseElementProps = {
+export interface BaseElementProps {
     /** Additional class names */
     className?: string;
 
@@ -8,7 +8,7 @@ export type BaseElementProps = {
 
     /** Extra data-* attributes */
     data?: DataAttributes;
-};
+}
 
 /**
  * Html data-* attributes
@@ -64,7 +64,7 @@ export type IconPosition =
     | "right";
 
 /** Icon for component  */
-export type ElementIcon = {
+export interface ElementIcon {
     /**
      * Icon name. Must be without `bi-`
      * @example ["Arrow repeat", "arrow-repeat"]
@@ -84,4 +84,4 @@ export type ElementIcon = {
      * Works only with other content
     */
     position?: IconPosition;
-};
+}

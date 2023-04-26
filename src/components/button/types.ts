@@ -1,5 +1,39 @@
-import { ButtonProps } from ".";
-import { ElementIcon } from "../types";
+import { BaseElementProps, ElementIcon, ElementSize } from "../types";
+
+export interface ButtonProps extends BaseElementProps {
+    /** Button displaying text */
+    caption?: string;
+
+    /** Type of button (color)  */
+    type: ButtonType;
+
+    /** Configuration of inner icon */
+    icon?: ElementIcon;
+
+    /** Button size  */
+    size?: ElementSize;
+
+    /** Is button uses light version of color  */
+    light?: boolean;
+
+    /** Is button outlined */
+    outlined?: boolean;
+
+    /** Should button corners be rounded  */
+    rounded?: boolean;
+
+    /** Display loading icon */
+    isLoading?: boolean;
+
+    /** Is button disabled */
+    disabled?: boolean;
+
+    /** Is non-interactive button */
+    static?: boolean;
+
+    /** Click action handler */
+    onClick?: () => void;
+};
 
 /** Button types according to Bulma framework */
 export type ButtonType =

@@ -1,0 +1,21 @@
+.bbr-icon {
+    transition: 0.15s ease-in-out color;
+    font-size: 1rem;
+
+    &--size-small {
+        font-size: 0.85rem;
+    }
+    &--size-medium {
+        font-size: 1.25rem;
+    }
+    &--size-large {
+        font-size: 2rem;
+    }
+
+    &--right {
+        margin-left: 0.5rem;
+    }
+    &--left {
+        margin-right: 0.5rem;
+    }
+}

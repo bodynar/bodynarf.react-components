@@ -2,7 +2,7 @@ import { InputLabel, ValidationState } from ".";
 import { BaseElementProps, ElementColor, ElementSize } from "../../types";
 
 /** Base properties for input components */
-export type BaseInputElementProps<TValue> = BaseElementProps & {
+export interface BaseInputElementProps<TValue> extends BaseElementProps {
     /** Value change handler. Changed value must be stored outside of component */
     onValueChange: (value?: TValue) => void;
 
@@ -38,4 +38,4 @@ export type BaseInputElementProps<TValue> = BaseElementProps & {
 
     /** Current validation state */
     validationState?: ValidationState;
-};
+}

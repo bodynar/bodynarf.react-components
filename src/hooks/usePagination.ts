@@ -23,7 +23,12 @@ const defaultPageSize: number = 30;
  * @param dependencies List of dependencies. On any dependency update current page will be set to 1
  * @returns Pair of hook-stored state and handler for slicing current page items
  */
-export const usePagination = (length: number, size: number = defaultPageSize, initPage: number = 1, dependencies: DependencyList = []): [PaginationState, (data: Array<any>) => Array<any>] => {
+export const usePagination = (
+    length: number,
+    size: number = defaultPageSize,
+    initPage: number = 1,
+    dependencies: DependencyList = []
+): [PaginationState, (data: Array<any>) => Array<any>] => {
     const [currentPage, setCurrentPage] = useState(initPage);
     const count = useMemo(() => Math.ceil(length / size), [size, length]);
     const onChange = useCallback((page: number) => setCurrentPage(page), [setCurrentPage]);

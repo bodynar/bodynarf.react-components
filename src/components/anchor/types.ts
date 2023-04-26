@@ -1,6 +1,33 @@
 import { ElementIcon } from "..";
 
-export type SimpleAnchorProps = {
+/** Anchor component props type */
+export interface AnchorProps {
+    /** Link destination */
+    href?: string;
+
+    /** Link caption  */
+    caption?: string;
+
+    /** Click handler */
+    onClick?: () => void;
+
+    /** Configuration od inner icon */
+    icon?: ElementIcon;
+
+    /** Title of anchor */
+    title?: string;
+
+    /** Where to open the linked document */
+    target?: "_blank" | "_top";
+
+    /** Additional class names */
+    className?: string;
+
+    /** Should css hovering effects be disabled */
+    disableHovering?: boolean;
+}
+
+export interface SimpleAnchorProps {
     /** Link destination */
     href?: string;
 
@@ -18,9 +45,10 @@ export type SimpleAnchorProps = {
 
     /** Where to open the linked document */
     target?: "_blank" | "_top";
-};
+}
 
-export type AnchorWithIconProps = SimpleAnchorProps & {
+export interface AnchorWithIconProps extends SimpleAnchorProps {
     /** Configuration of icon */
     icon: ElementIcon;
-};
+}
+
