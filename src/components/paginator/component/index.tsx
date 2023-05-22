@@ -6,7 +6,7 @@ import { generatePageNumbers, PaginatorProps } from "@bbr/components/paginator";
 
 /**
  * Paginator component.
- * Used for visualization of pagging configuration
+ * Used for visualization of paging configuration
 */
 export default function Paginator({
     count, onPageChange, currentPage,

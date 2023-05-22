@@ -17,7 +17,7 @@ const defaultPageSize: number = 30;
 
 /**
  * Hook to pagination state, return hooked values and handler for pagination
- * @param length Pagionation items count
+ * @param length Pagination items count
  * @param size Page size. Default is 30
  * @param initPage Initial page. Default is 1
  * @param dependencies List of dependencies. On any dependency update current page will be set to 1
@@ -36,9 +36,9 @@ export const usePagination = (
     const paginate = useCallback(
         (data: Array<any>): Array<any> => {
             const limit = size;
-            const offstet = (currentPage - 1) * size;
+            const offset = (currentPage - 1) * size;
 
-            return data.slice(offstet, offstet + limit);
+            return data.slice(offset, offset + limit);
         },
         [size, currentPage]
     );

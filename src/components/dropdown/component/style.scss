@@ -17,7 +17,7 @@
         }
     }
 
-    &__label {
+    label&__label {
         cursor: pointer;
         user-select: none;
         display: flex;
@@ -84,7 +84,7 @@
     }
 
     &.is-active {
-        .bbr-dropdown__label .bbr-icon.bi-arrow-down::before {
+        label.bbr-dropdown__label .bbr-icon.bi-arrow-down::before {
             transform: rotate(180deg);
         }
     }
@@ -104,7 +104,7 @@
     }
 
     &--disabled {
-        .bbr-dropdown__label {
+        label.bbr-dropdown__label {
             background-color: hsl(0deg, 0%, 96%);
             border-color: hsl(0deg, 0%, 96%);
             box-shadow: none;

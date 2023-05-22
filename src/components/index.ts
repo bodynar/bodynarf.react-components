@@ -1,3 +1,5 @@
+export * from "./types";
+
 export * from "./accordion";
 export * from "./anchor";
 export * from "./button";
@@ -9,5 +11,3 @@ export * from "./tabs";
 export * from "./tag";
 
 export * from "./primitives";
-
-export * from "./types";
