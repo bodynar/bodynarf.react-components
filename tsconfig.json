@@ -9,9 +9,31 @@
 		"skipLibCheck": true,
 		"declaration": true,
 		"declarationMap": true,
-		"outDir": "dist",
+		"outDir": "./dist",
 		"incremental": true,
-		"moduleResolution": "Node"
+		"moduleResolution": "Node",
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"baseUrl": "./",
+		"paths": {
+			"@bbr": [
+				"./src"
+			],
+			"@bbr/components": [
+				"./src/components"
+			],
+			"@bbr/components/*": [
+				"./src/components/*",
+				"./src/components/primitives/*"
+			],
+			"@bbr/hooks": [
+				"./src/hooks"
+			],
+			"@bbr/utils": [
+				"./src/utils"
+			]
+		}
 	},
 	"exclude": [
 		"node_modules",

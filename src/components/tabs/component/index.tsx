@@ -4,11 +4,11 @@ import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils"
 
 import "./style.scss";
 
-import { BaseElementProps, ElementSize } from "../..";
-import { mapDataAttributes } from "../../../utils";
+import { BaseElementProps, ElementSize } from "@bbr/components";
+import { mapDataAttributes } from "@bbr/utils";
 
-import { TabItem, TabsPosition, TabsStyle } from "..";
-import TabItemComponent from "../components/item";
+import { TabItem, TabsPosition, TabsStyle } from "@bbr/components/tabs";
+import TabItemComponent from "@bbr/components/tabs/components/item";
 
 /** Tabs component props type */
 export interface TabsProps extends BaseElementProps {

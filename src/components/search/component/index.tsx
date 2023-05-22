@@ -4,8 +4,9 @@ import { generateGuid, getClassName } from "@bodynarf/utils";
 
 import "./style.scss";
 
-import { SearchProps } from "../..";
-import Button from "../../button";
+import Button from "@bbr/components/button";
+
+import { SearchProps } from "@bbr/components/search";
 
 /** Search component */
 export default function Search({

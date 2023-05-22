@@ -1,4 +1,4 @@
-import { BaseInputElementProps } from "..";
+import { BaseInputElementProps } from "@bbr/components";
 
 /** Number component props type */
 export interface NumberProps extends BaseInputElementProps<number> {

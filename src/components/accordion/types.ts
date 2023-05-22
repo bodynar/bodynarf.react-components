@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementColor, ElementSize } from "..";
+import { BaseElementProps, ElementColor, ElementSize } from "@bbr/components";
 
 /** Accordion panel props type */
 export interface AccordionProps extends BaseElementProps {
@@ -8,7 +8,7 @@ export interface AccordionProps extends BaseElementProps {
     /** Collapsible panel caption */
     caption: string;
 
-    /** Default expandned state */
+    /** Default expanded state */
     defaultExpanded?: boolean;
 
     /** Panel size */

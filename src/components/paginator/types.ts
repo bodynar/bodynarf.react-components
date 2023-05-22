@@ -1,4 +1,4 @@
-import { ElementSize } from "..";
+import { ElementSize } from "@bbr/components";
 
 export interface PaginatorProps {
     /** Amount of pages */
@@ -12,7 +12,7 @@ export interface PaginatorProps {
 
     /**
      * Page numbers position.
-     * Usefull with `showNextButtons = true`
+     * Useful with `showNextButtons = true`
     */
     position?:
     | "left" /* default */

@@ -4,12 +4,12 @@ import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import "./style.scss";
 
-import { ElementSize } from "../..";
-import Icon from "../../icon";
+import { ElementSize } from "@bbr/components";
+import Icon from "@bbr/components/icon";
 
-import { mapDataAttributes } from "../../..";
+import { mapDataAttributes } from "@bbr/utils";
 
-import { AccordionProps } from "..";
+import { AccordionProps } from "@bbr/components/accordion";
 
 /** Accordion panel */
 const Accordion = ({

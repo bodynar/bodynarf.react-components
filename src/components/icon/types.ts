@@ -1,4 +1,4 @@
-import { ElementSize } from "..";
+import { ElementSize } from "@bbr/components";
 
 /** Icon component props */
 export interface IconProps {

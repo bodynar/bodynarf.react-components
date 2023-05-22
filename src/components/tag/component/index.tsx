@@ -1,6 +1,7 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementColor, ElementSize, TagProps } from "../..";
+import { ElementColor, ElementSize } from "@bbr/components";
+import { TagProps } from "@bbr/components/tag";
 
 import "./style.scss";
 

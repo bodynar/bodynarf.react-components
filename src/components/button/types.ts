@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementIcon, ElementSize } from "../types";
+import { BaseElementProps, ElementIcon, ElementSize } from "@bbr/components";
 
 export interface ButtonProps extends BaseElementProps {
     /** Button displaying text */
@@ -38,7 +38,7 @@ export interface ButtonProps extends BaseElementProps {
 /** Button types according to Bulma framework */
 export type ButtonType =
     "default" /** color: transparent */
-    | "primary" /** color: seawave green */
+    | "primary" /** color: sea-wave green */
     | "link" /** color: blue-violet */
     | "info" /** color: sky-blue */
     | "success" /** color: green */

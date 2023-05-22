@@ -2,12 +2,11 @@ import { ChangeEvent, useCallback, useState } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
 
-import Icon from "../../../../icon";
+import { ElementSize } from "@bbr/components";
+import { getValidationValues } from "@bbr/utils";
+import Icon from "@bbr/components/icon";
 
-import { ElementSize } from "../../../..";
-import { getValidationValues } from "../../../../../utils";
-
-import { PasswordProps } from "../..";
+import { PasswordProps } from "@bbr/components/password";
 
 const PasswordWithoutLabel = ({
     onValueChange, disabled, validationState,

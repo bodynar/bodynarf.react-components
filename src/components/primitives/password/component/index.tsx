@@ -2,10 +2,10 @@ import { isNullOrUndefined } from "@bodynarf/utils";
 
 import "./style.scss";
 
-import { PasswordProps } from "..";
+import { PasswordProps } from "@bbr/components/password";
 
-import PasswordWithLabel from "../components/withLabel";
-import PasswordWithoutLabel from "../components/withoutLabel";
+import PasswordWithLabel from "@bbr/components/password/components/withLabel";
+import PasswordWithoutLabel from "@bbr/components/password/components/withoutLabel";
 
 /** Password input component */
 const Password = (props: PasswordProps): JSX.Element => {

@@ -1,6 +1,6 @@
 {
     "name": "@bodynarf/react.components",
-    "version": "1.6.4",
+    "version": "1.7.61",
     "author": {
         "name": "Artem",
         "email": "bodynar@gmail.com"
@@ -21,15 +21,19 @@
         "bulma"
     ],
     "scripts": {
-        "build": "npx tsc",
-        "publish_pkg": "npx tsc && copy package.json dist && copy readme.md dist && cd dist && npm publish --access=public"
+        "build": "npx tsc && tsc-alias -p tsconfig.json",
+        "transfer": "copy package.json dist && copy readme.md dist",
+        "build_transfer": "npm run build && npm run transfer",
+        "prepublish": "npm run build_transfer && cd dist && npm pack --dry-run",
+        "publish_pkg": "npm run build_transfer && cd dist && npm publish --access=public"
     },
     "devDependencies": {
         "@types/react": "^18.0.11",
         "@types/react-dom": "^18.0.5",
+        "tsc-alias": "^1.8.6",
         "typescript": "^4.7.3"
     },
-    "dependencies": {
+    "peerDependencies": {
         "@bodynarf/utils": "^1.1.1",
         "bulma": "^0.9.4",
         "react": "^18.1.0",

@@ -2,11 +2,12 @@ import { getClassName } from "@bodynarf/utils";
 
 import "./style.scss";
 
-import { IconProps } from "..";
-import { ElementSize } from "../..";
+import { ElementSize } from "@bbr/components";
+
+import { IconProps } from "@bbr/components/icon";
 
 const sizeToClassMap: Map<ElementSize, string> = new Map([
-    [ElementSize.Small, "bbr-icon--size-smal"],
+    [ElementSize.Small, "bbr-icon--size-small"],
     [ElementSize.Normal, ""],
     [ElementSize.Medium, "bbr-icon--size-medium"],
     [ElementSize.Large, "bbr-icon--size-large"]

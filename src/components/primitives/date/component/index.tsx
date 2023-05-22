@@ -4,9 +4,10 @@ import { generateGuid, getClassName, getValueOrDefault, isStringEmpty } from "@b
 
 import "../../../../common.scss";
 
-import { ElementSize } from "../../..";
-import { getValidationValues } from "../../../../utils";
-import { DateProps } from "../..";
+import { ElementSize } from "@bbr/components";
+import { getValidationValues } from "@bbr/utils";
+
+import { DateProps } from "@bbr/components/date";
 
 /** Date input component */
 const DatePicker = ({

@@ -1,7 +1,8 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { TabItem as Item } from "../..";
-import Icon from "../../../icon";
+import Icon from "@bbr/components/icon";
+
+import { TabItem as Item } from "@bbr/components/tabs";
 
 /** Tabs panel single tab item component props type */
 export interface TabItemProps {

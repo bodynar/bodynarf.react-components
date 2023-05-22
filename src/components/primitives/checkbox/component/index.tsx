@@ -4,7 +4,7 @@ import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import "./style.scss";
 
-import { CheckBoxProps } from "..";
+import { CheckBoxProps } from "@bbr/components/checkbox";
 
 /** Boolean input component */
 const CheckBox = ({

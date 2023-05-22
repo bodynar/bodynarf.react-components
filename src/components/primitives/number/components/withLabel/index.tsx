@@ -2,10 +2,10 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault, isStringEmpty } from "@bodynarf/utils";
 
-import { ElementSize } from "../../../..";
-import { getValidationValues } from "../../../../../utils";
+import { ElementSize } from "@bbr/components";
+import { getValidationValues } from "@bbr/utils";
 
-import { NumberProps } from "../..";
+import { NumberProps } from "@bbr/components/number";
 
 /** Number component with label */
 const NumberWithLabel = ({

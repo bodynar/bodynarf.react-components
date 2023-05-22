@@ -1,4 +1,4 @@
-import { BaseInputElementProps } from "..";
+import { BaseInputElementProps } from "@bbr/components";
 
 /** Checkbox component props type */
 export interface CheckBoxProps extends BaseInputElementProps<boolean> {
@@ -17,7 +17,7 @@ export interface CheckBoxProps extends BaseInputElementProps<boolean> {
     /**
      * Set unchecked background as transparent.
      * Only used with `hasBackgroundColor` set as `true`
-     * @example `{ style: ElementColor.Info, hasBackgrounColor: true, fixBackgroundColor: true }` -
+     * @example `{ style: ElementColor.Info, hasBackgroundColor: true, fixBackgroundColor: true }` -
     */
     fixBackgroundColor?: boolean;
 

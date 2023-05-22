@@ -1,4 +1,4 @@
-import { ElementSize } from "..";
+import { ElementSize } from "@bbr/components";
 
 /** Search component props type */
 export interface SearchProps {

@@ -1,6 +1,6 @@
-import { BaseInputElementProps } from "..";
+import { BaseInputElementProps } from "@bbr/components";
 
-/** Multiline textual input conponent props type */
+/** Multiline textual input component props type */
 export interface MultilineProps extends BaseInputElementProps<string> {
     /** Is input should be resizable */
     fixed?: boolean;

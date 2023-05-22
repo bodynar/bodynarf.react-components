@@ -1,5 +1,4 @@
-
-import { SimpleButtonProps } from "../../types";
+import { SimpleButtonProps } from "@bbr/components/button";
 
 /** Simple button component, without icon */
 export const SimpleButton = ({

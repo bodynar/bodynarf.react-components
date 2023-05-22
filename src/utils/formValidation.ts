@@ -1,6 +1,6 @@
 import { isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementColor, ValidationState, ValidationStatus } from "../components";
+import { ElementColor, ValidationState, ValidationStatus } from "@bbr/components";
 
 /**
  * Get current validation state values

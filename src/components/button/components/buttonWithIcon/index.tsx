@@ -1,8 +1,8 @@
 import { isNullOrEmpty } from "@bodynarf/utils";
 
-import Icon from "../../../icon";
+import Icon from "@bbr/components/icon";
 
-import { ButtonWithIconProps } from "../../types";
+import { ButtonWithIconProps } from "@bbr/components/button";
 
 /** Button with icon component */
 export const ButtonWithIcon = ({

@@ -1,4 +1,4 @@
-import { ElementIcon } from "..";
+import { ElementIcon } from "@bbr/components";
 
 /** Anchor component props type */
 export interface AnchorProps {

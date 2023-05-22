@@ -1,5 +1,6 @@
+import { BaseElementProps, ElementColor, ElementSize } from "@bbr/components";
+
 import { InputLabel, ValidationState } from ".";
-import { BaseElementProps, ElementColor, ElementSize } from "../../types";
 
 /** Base properties for input components */
 export interface BaseInputElementProps<TValue> extends BaseElementProps {

@@ -2,10 +2,10 @@ import { isNullOrUndefined, isNullOrEmpty, getClassName } from "@bodynarf/utils"
 
 import "./style.scss";
 
-import { AnchorProps, ElementIcon } from "../..";
+import { AnchorProps, ElementIcon } from "@bbr/components";
 
-import { SimpleAnchor } from "../components/simpleAnchor";
-import { AnchorWithIcon } from "../components/anchorWithIcon";
+import { SimpleAnchor } from "@bbr/components/anchor/components/simpleAnchor";
+import { AnchorWithIcon } from "@bbr/components/anchor/components/anchorWithIcon";
 
 /** Anchor component */
 export default function Anchor(props: AnchorProps): JSX.Element {

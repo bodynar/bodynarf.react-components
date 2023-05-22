@@ -1,8 +1,8 @@
 import { isNullOrEmpty } from "@bodynarf/utils";
 
-import Icon from "../../../icon";
+import Icon from "@bbr/components/icon";
 
-import { AnchorWithIconProps } from "../../types";
+import { AnchorWithIconProps } from "@bbr/components/anchor";
 
 /** Anchor with icon component */
 export const AnchorWithIcon = ({ href, className, onClick, caption, title, target, icon }: AnchorWithIconProps): JSX.Element => {

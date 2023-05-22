@@ -1,6 +1,6 @@
-import { BaseInputElementProps } from "..";
+import { BaseInputElementProps } from "@bbr/components";
 
-/** Text input conponent props type */
+/** Text input component props type */
 export interface TextProps extends BaseInputElementProps<string> {
     /** Focus out event handler */
     onBlur?: () => void;

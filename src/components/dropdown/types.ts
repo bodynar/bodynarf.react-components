@@ -1,4 +1,4 @@
-import { BaseElementProps, InputLabel, ValidationState } from "..";
+import { BaseElementProps, InputLabel, ValidationState } from "@bbr/components";
 
 /** Dropdown item */
 export interface SelectableItem {

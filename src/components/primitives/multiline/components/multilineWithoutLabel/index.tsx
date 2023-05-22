@@ -2,10 +2,10 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
 
-import { ElementSize } from "../../../../";
-import { getValidationValues } from "../../../../../utils";
+import { ElementSize } from "@bbr/components";
+import { getValidationValues } from "@bbr/utils";
 
-import { MultilineProps } from "../..";
+import { MultilineProps } from "@bbr/components/multiline";
 
 /** Multiline textual input component without describing label*/
 const MultilineWithoutLabel = ({

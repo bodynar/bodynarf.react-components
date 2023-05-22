@@ -2,10 +2,10 @@ import { MouseEvent } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import Icon from "../../../icon";
+import { ElementSize } from "@bbr/components";
+import Icon from "@bbr/components/icon";
 
-import { ElementSize } from "../../..";
-import { SelectableItem } from "../../types";
+import { SelectableItem } from "@bbr/components/dropdown";
 
 export interface DropdownLabelProps {
     /** Caption when no items selected */

@@ -2,10 +2,10 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault, } from "@bodynarf/utils";
 
-import { ElementSize } from "../../../..";
-import { getValidationValues } from "../../../../../utils";
+import { ElementSize } from "@bbr/components";
+import { getValidationValues } from "@bbr/utils";
 
-import { TextProps } from "../..";
+import { TextProps } from "@bbr/components/text";
 
 /** Textual input with describing label */
 const TextWithLabel = ({

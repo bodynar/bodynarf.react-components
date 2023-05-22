@@ -1,4 +1,4 @@
-import { SelectableItem } from "../../types";
+import { SelectableItem } from "@bbr/components/dropdown";
 
 /** Dropdown item props */
 interface DropdownItemProps {

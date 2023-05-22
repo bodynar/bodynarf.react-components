@@ -2,12 +2,12 @@ import { MouseEvent, useCallback, useId, useState } from "react";
 
 import { isNullOrUndefined, isNullOrEmpty, getClassName } from "@bodynarf/utils";
 
-import { getValidationValues } from "../../../../utils";
-import { useComponentOutsideClick } from "../../../../hooks";
-import { DropdownProps } from "../..";
+import { getValidationValues } from "@bbr/utils";
+import { useComponentOutsideClick } from "@bbr/hooks";
 
-import DropdownItem from "../item";
-import DropdownLabel from "../label";
+import { DropdownProps } from "@bbr/components/dropdown";
+import DropdownItem from "@bbr/components/dropdown/components/item";
+import DropdownLabel from "@bbr/components/dropdown/components/label";
 
 const DropdownWithLabel = ({
     items,
