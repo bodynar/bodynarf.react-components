@@ -17,7 +17,7 @@
         }
     }
 
-    label&__label {
+    label#{&}__label {
         cursor: pointer;
         user-select: none;
         display: flex;
