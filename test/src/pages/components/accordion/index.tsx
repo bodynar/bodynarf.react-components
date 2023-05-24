@@ -1,7 +1,7 @@
 import { ElementColor } from "@bodynarf/react.components";
 import AccordionComponent from "@bodynarf/react.components/components/accordion";
 
-import { AllColorsString } from "../../../shared";
+import { AllColorsString, AllSizesString } from "../../../shared";
 
 /** Accordion component demo */
 function Accordion() {
@@ -11,7 +11,10 @@ function Accordion() {
                 <p style={{ whiteSpace: "pre-line" }}>
                     Accordion component
                 </p>
-                Available colors: [{AllColorsString}]
+                <ul>
+                    <li>Available colors: [{AllColorsString}]</li>
+                    <li>Available sizes: [{AllSizesString}]</li>
+                </ul>
             </div>
             <div className="block">
                 <pre>{`<AccordionComponent
