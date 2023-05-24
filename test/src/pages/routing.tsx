@@ -4,6 +4,7 @@ import Home from "./home";
 
 import Icon from "./components/icon";
 import Accordion from "./components/accordion";
+import Anchor from "./components/anchor";
 
 /** Route menu item */
 export interface RouteItem {
@@ -50,6 +51,11 @@ export const routes: Array<RouteItem> = [
                 path: "/components/accordion",
                 caption: "Accordion",
                 component: <Accordion />,
+            },
+            {
+                path: "/components/anchor",
+                caption: "Anchor",
+                component: <Anchor />,
             },
         ]
     },
