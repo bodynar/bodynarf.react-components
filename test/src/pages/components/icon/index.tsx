@@ -1,10 +1,29 @@
-import { ElementSize } from "@bodynarf/react.components";
+import { useCallback, useState } from "react";
+
+import { isNullOrUndefined } from "@bodynarf/utils";
+import { ElementSize, SelectableItem } from "@bodynarf/react.components";
 import IconComponent from "@bodynarf/react.components/components/icon";
 
 import { Sizes } from "../../../shared";
+import Dropdown from "@bodynarf/react.components/components/dropdown";
 
 /** Icon component demo */
 function Icon() {
+    const [selectedSize, setSelectedSize] = useState(Sizes.selectableItems[0]);
+
+    const onSizeSelect = useCallback(
+        (item?: SelectableItem) => {
+            if (isNullOrUndefined(item)) {
+                return;
+            }
+
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            setSelectedSize(item!);
+        }, []);
+
+    const size = selectedSize!.value as ElementSize;
+
+
     return (
         <section>
             <div className="block">
@@ -13,42 +32,36 @@ function Icon() {
                     {`\n`}To use - pass name without <code>bi-</code>
                 </p>
                 Available sizes: [{Sizes.string}]
+                <br />
+                <br />
+                <IconComponent name="alarm" /> = <code>
+                    {`<Icon name="alarm" />`}
+                </code>
             </div>
             <div className="block">
                 <h4 className="subtitle is-5">
-                    Small size
+                    Sizes
                 </h4>
-                <IconComponent name="alarm" size={ElementSize.Small} /> = <code>
-                    {`<Icon name="alarm" size={ElementSize.Small} />`}
-                </code>
+                <div className="columns">
+                    <div className="column is-2">
+                        <Dropdown
+                            hideOnOuterClick={true}
+                            items={Sizes.selectableItems}
+                            onSelect={onSizeSelect}
+                            value={selectedSize}
+                            placeholder="Size"
+                            deselectable={false}
+                        />
+                    </div>
+                    <div className="column">
+                        <pre>{`<Icon name="alarm" size={ElementSize.${Sizes.keys[+selectedSize!.id]}} />`}
+                        </pre>
+                    </div>
+                </div>
+
+                <IconComponent name="alarm" size={size} />
             </div>
 
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    Normal size (default)
-                </h4>
-                <IconComponent name="alarm" size={ElementSize.Normal} /> = <code>
-                    {`<Icon name="alarm" size={ElementSize.Normal} />`}
-                </code>
-            </div>
-
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    Medium size
-                </h4>
-                <IconComponent name="alarm" size={ElementSize.Medium} /> = <code>
-                    {`<Icon name="alarm" size={ElementSize.Medium} />`}
-                </code>
-            </div>
-
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    Large size
-                </h4>
-                <IconComponent name="alarm" size={ElementSize.Large} /> = <code>
-                    {`<Icon name="alarm" size={ElementSize.Large} />`}
-                </code>
-            </div>
         </section>
     )
 }
