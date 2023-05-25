@@ -1,7 +1,7 @@
 import { ElementSize } from "@bodynarf/react.components";
 import IconComponent from "@bodynarf/react.components/components/icon";
 
-import { AllSizesString } from "../../../shared";
+import { Sizes } from "../../../shared";
 
 /** Icon component demo */
 function Icon() {
@@ -12,7 +12,7 @@ function Icon() {
                     Icon component via <a className="is-underlined" href="https://icons.getbootstrap.com/" target="_blank">Bootstrap-icons</a>
                     {`\n`}To use - pass name without <code>bi-</code>
                 </p>
-                Available sizes: [{AllSizesString}]
+                Available sizes: [{Sizes.string}]
             </div>
             <div className="block">
                 <h4 className="subtitle is-5">

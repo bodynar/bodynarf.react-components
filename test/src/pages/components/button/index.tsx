@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { ElementSize } from "@bodynarf/react.components";
 import ButtonComponent, { ButtonType } from "@bodynarf/react.components/components/button";
 
-import { AllColorsString, AllSizesString } from "../../../shared";
+import { Sizes, Colors } from "../../../shared";
 
 /** Button component demo */
 function Button() {
@@ -21,8 +21,8 @@ function Button() {
                     Button component
                 </p>
                 <ul>
-                    <li>Available colors: [{AllColorsString}]</li>
-                    <li>Available sizes: [{AllSizesString}]</li>
+                    <li>Available colors: [{Colors.string}]</li>
+                    <li>Available sizes: [{Sizes.string}]</li>
                 </ul>
             </div>
             <details>

@@ -1,23 +1,47 @@
-import { ElementColor, ElementSize } from "@bodynarf/react.components";
-import AccordionComponent from "@bodynarf/react.components/components/accordion";
+import { useCallback, useState } from "react";
 
-import { AllColorsString, AllSizesString } from "../../../shared";
+import { isNullOrUndefined } from "@bodynarf/utils";
+
+import { ElementColor, ElementSize, SelectableItem } from "@bodynarf/react.components";
+import AccordionComponent from "@bodynarf/react.components/components/accordion";
+import Dropdown from "@bodynarf/react.components/components/dropdown/component";
+
+import { Colors, Sizes } from "../../../shared";
 
 /** Accordion component demo */
 function Accordion() {
-    const colors = Object.keys(ElementColor);
-    const values = Object.values(ElementColor);
-    
+    const [selectedSize, setSelectedSize] = useState(Sizes.selectableItems[0]);
+    const [selectedColor, setSelectedColor] = useState(Colors.selectableItems[0]);
+
+    const onSizeSelect = useCallback(
+        (item?: SelectableItem) => {
+            if (isNullOrUndefined(item)) {
+                return;
+            }
+
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            setSelectedSize(item!);
+        }, []);    
+
+    const onColorSelect = useCallback(
+        (item?: SelectableItem) => {
+            if (isNullOrUndefined(item)) {
+                return;
+            }
+
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            setSelectedColor(item!);
+        }, []);
+
+    const size = selectedSize!.value as ElementSize;
+    const color = selectedColor!.value as ElementColor;
+
     return (
         <section>
             <div className="block">
                 <p style={{ whiteSpace: "pre-line" }}>
                     Accordion component
                 </p>
-                <ul>
-                    <li>Available colors: [{AllColorsString}]</li>
-                    <li>Available sizes: [{AllSizesString}]</li>
-                </ul>
             </div>
             <div className="block">
                 <pre>{`<AccordionComponent
@@ -37,58 +61,67 @@ function Accordion() {
                     Content
                 </AccordionComponent>
             </div>
-            <details>
-                <summary className="subtitle is-5">Sizes</summary>
-                <div className="block">
-                    <pre>{`<AccordionComponent caption="Header" size={ElementSize.Small}>
+            <div className="block">
+                <h4 className="subtitle is-5">
+                    Sizes
+                </h4>
+                <div className="columns">
+                    <div className="column is-2">
+                        <Dropdown
+                            hideOnOuterClick={true}
+                            items={Sizes.selectableItems}
+                            onSelect={onSizeSelect}
+                            value={selectedSize}
+                            placeholder="Size"
+                            deselectable={false}
+                        />
+                    </div>
+                    <div className="column">
+                        <pre>{`<AccordionComponent caption="Header" size={ElementSize.${Sizes.keys[+selectedSize!.id]}}>
     Content
 </AccordionComponent>`}
-                    </pre>
-                    <AccordionComponent caption="Header" size={ElementSize.Small} className="mt-1">
-                        Content
-                    </AccordionComponent>
-
-                    <pre>{`<AccordionComponent caption="Header" size={ElementSize.Normal}>
-    Content
-</AccordionComponent>`}
-                    </pre>
-                    <AccordionComponent caption="Header" size={ElementSize.Normal} className="mt-1">
-                        Content
-                    </AccordionComponent>
-
-                    <pre>{`<AccordionComponent caption="Header" size={ElementSize.Medium}>
-    Content
-</AccordionComponent>`}
-                    </pre>
-                    <AccordionComponent caption="Header" size={ElementSize.Medium} className="mt-1">
-                        Content
-                    </AccordionComponent>
-
-                    <pre>{`<AccordionComponent caption="Header" size={ElementSize.Large}>
-    Content
-</AccordionComponent>`}
-                    </pre>
-                    <AccordionComponent caption="Header" size={ElementSize.Large} className="mt-1">
-                        Content
-                    </AccordionComponent>
+                        </pre>
+                    </div>
                 </div>
-            </details>
-            <details>
-                <summary className="subtitle is-5">Colors</summary>
-                <div className="block">
-                    {colors.map((color, i) =>
-                        <>
-                            <pre>{`<AccordionComponent caption="Header" style={ElementColor.${color}}>
+
+                <AccordionComponent
+                    caption="Header"
+                    size={size}
+                >
+                    Content
+                </AccordionComponent>
+            </div>
+            <div className="block">
+                <h4 className="subtitle is-5">
+                    Colors
+                </h4>
+                <div className="columns">
+                    <div className="column is-2">
+                        <Dropdown
+                            hideOnOuterClick={true}
+                            items={Colors.selectableItems}
+                            onSelect={onColorSelect}
+                            value={selectedColor}
+                            placeholder="Color"
+                            deselectable={false}
+                        />
+                    </div>
+                    <div className="column">
+                        <pre>{`<AccordionComponent caption="Header" style={ElementColor.${Colors.keys[+selectedColor!.id]}}>
     Content
 </AccordionComponent>`}
-                            </pre>
-                            <AccordionComponent caption="Header" style={values[i] as ElementColor} className="mt-1">
-                                Content
-                            </AccordionComponent>
-                        </>
-                    )}
+                        </pre>
+                    </div>
                 </div>
-            </details>
+
+                <AccordionComponent
+                    caption="Header"
+                    style={color}
+                    size={ElementSize.Small}
+                >
+                    Content
+                </AccordionComponent>
+            </div>
         </section>
     )
 }
