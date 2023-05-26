@@ -44,13 +44,13 @@ function Accordion() {
                 </p>
             </div>
             <div className="block">
-                <pre>{`<AccordionComponent
+                <pre>{`<Accordion
     caption="Header"
     defaultExpanded={true}
     style={ElementColor.Warning}
 >
     Content
-</AccordionComponent>`}
+</Accordion>`}
                 </pre>
                 <AccordionComponent
                     caption="Header"
@@ -77,9 +77,9 @@ function Accordion() {
                         />
                     </div>
                     <div className="column">
-                        <pre>{`<AccordionComponent caption="Header" size={ElementSize.${Sizes.keys[+selectedSize!.id]}}>
+                        <pre>{`<Accordion caption="Header" size={ElementSize.${Sizes.keys[+selectedSize!.id]}}>
     Content
-</AccordionComponent>`}
+</Accordion>`}
                         </pre>
                     </div>
                 </div>
@@ -107,9 +107,9 @@ function Accordion() {
                         />
                     </div>
                     <div className="column">
-                        <pre>{`<AccordionComponent caption="Header" style={ElementColor.${Colors.keys[+selectedColor!.id]}}>
+                        <pre>{`<Accordion caption="Header" style={ElementColor.${Colors.keys[+selectedColor!.id]}}>
     Content
-</AccordionComponent>`}
+</Accordion>`}
                         </pre>
                     </div>
                 </div>

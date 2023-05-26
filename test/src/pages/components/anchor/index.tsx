@@ -14,7 +14,7 @@ function Anchor() {
                     Default
                 </h4>
                 <code>
-                    {`<AnchorComponent caption={\`I"m the anchor\`} href="#" />`}
+                    {`<Anchor caption={\`I"m the anchor\`} href="#" />`}
                 </code>
                 <br />
                 <br />
@@ -25,7 +25,7 @@ function Anchor() {
                     Without hover effects
                 </h4>
                 <code>
-                    {`<AnchorComponent caption={\`I"m the anchor\`} href="#" disableHovering={true} />`}
+                    {`<Anchor caption={\`I"m the anchor\`} href="#" disableHovering={true} />`}
                 </code>
                 <br />
                 <br />
@@ -36,7 +36,7 @@ function Anchor() {
                     Icon content
                 </h4>
                 <code>
-                    {`<AnchorComponent caption={\`I"m the anchor\`} href="#" icon={{ name: "basket2", position: "right" }} />`}
+                    {`<Anchor caption={\`I"m the anchor\`} href="#" icon={{ name: "basket2", position: "right" }} />`}
                 </code>
                 <br />
                 <br />
