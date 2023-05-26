@@ -25,7 +25,7 @@ function App() {
 			<main className="container my-4">
 				<section className="columns">
 					<aside className="column is-2">
-						<div className="menu box">
+						<div className="menu box" style={{ top: "4em", position: "sticky" }}>
 							<LeftMenu activeItem={activeItem} />
 						</div>
 
