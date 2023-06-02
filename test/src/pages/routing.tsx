@@ -1,11 +1,9 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import Home from "./home";
 
-import Icon from "./components/icon";
-import Accordion from "./components/accordion";
-import Anchor from "./components/anchor";
-import Button from "./components/button";
+import { components } from "./components";
+import { controls } from "./controls";
 
 /** Route menu item */
 export interface RouteItem {
@@ -27,44 +25,12 @@ export interface RouteItem {
 
 export const routes: Array<RouteItem> = [
     {
-        path: "",
-        caption: "",
-        component: <Navigate to="/home" replace />,
-        display: false,
-    },
-    {
         path: "/home",
         caption: "Home",
         component: <Home />,
     },
-    {
-        path: "/components",
-        caption: "Components",
-        component: <Outlet />,
-        display: false,
-        children: [
-            {
-                path: "/components/icon",
-                caption: "Icon",
-                component: <Icon />,
-            },
-            {
-                path: "/components/accordion",
-                caption: "Accordion",
-                component: <Accordion />,
-            },
-            {
-                path: "/components/anchor",
-                caption: "Anchor",
-                component: <Anchor />,
-            },
-            {
-                path: "/components/button",
-                caption: "Button",
-                component: <Button />,
-            },
-        ]
-    },
+    components,
+    controls,
     {
         path: "*",
         caption: "",
