@@ -5,6 +5,7 @@ import Icon from "./icon";
 import Accordion from "./accordion";
 import Anchor from "./anchor";
 import Button from "./button";
+import Tag from "./tag";
 
 export const components: RouteItem = {
     path: "/components",
@@ -32,5 +33,10 @@ export const components: RouteItem = {
             caption: "Button",
             component: <Button />,
         },
+        {
+            path: "/components/tag",
+            caption: "Tag",
+            component: <Tag />,
+        }
     ]
 };
