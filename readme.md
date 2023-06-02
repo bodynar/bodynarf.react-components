@@ -20,9 +20,10 @@ Mostly all components have root class with `bbr-` prefix. BBR - Bodynarf Bulma R
 ### Simple components
 Simple react components based on html elements.
 
+ - **ColorPicker** - control that allows picking color (with preview option)
  - **Date** - date input;
  - **Multiline** - multiline text input;
- - **Text**- single line text input;
+ - **Text** - single line text input;
  - **Anchor**
  - **Button**
  - **Number**

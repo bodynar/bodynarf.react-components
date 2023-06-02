@@ -1,0 +1,21 @@
+.bbr-color-picker {
+    input[type="color"]:not([disabled]) {
+        cursor: pointer;
+    }
+
+    &__preview {
+        --color-picker__background-color: transparent;
+        --color-picker__color: black;
+
+        transition: 0.15s ease-in-out;
+        transition-property: background-color, color;
+
+        background-color: var(--color-picker__background-color) !important;
+        color: var(--color-picker__color) !important;
+
+        &:focus {
+            box-shadow: none !important;
+            border-color: hsl(0, 0%, 86%) !important;
+        }
+    }
+}
