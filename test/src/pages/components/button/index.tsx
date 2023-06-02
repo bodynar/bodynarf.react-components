@@ -1,11 +1,9 @@
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, } from "react";
 
-import { isNullOrUndefined } from "@bodynarf/utils";
-
-import { ElementSize, SelectableItem } from "@bodynarf/react.components";
+import { SelectableItem } from "@bodynarf/react.components";
 import ButtonComponent, { ButtonType } from "@bodynarf/react.components/components/button";
 
-import { Sizes } from "../../../shared";
+import { Sizes, useGenericSelection, useSizeSelection } from "../../../shared";
 import Dropdown from "@bodynarf/react.components/components/dropdown";
 
 /** Button component demo */
@@ -26,29 +24,8 @@ function Button() {
         []
     );
 
-    const [selectedSize, setSelectedSize] = useState(Sizes.selectableItems[0]);
-    const [selectedType, setSelectedType] = useState(typesAsSelectItems[0]);
-
-    const onSizeSelect = useCallback(
-        (item?: SelectableItem) => {
-            if (isNullOrUndefined(item)) {
-                return;
-            }
-
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            setSelectedSize(item!);
-        }, []);
-    const onTypeSelect = useCallback(
-        (item?: SelectableItem) => {
-            if (isNullOrUndefined(item)) {
-                return;
-            }
-
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            setSelectedType(item!);
-        }, []);
-
-    const size = selectedSize!.value as ElementSize;
+    const buttonTypeLookupParams = useGenericSelection<ButtonType>(typesAsSelectItems);
+    const sizeLookupParams = useSizeSelection();
 
     return (
         <section>
@@ -138,18 +115,18 @@ function Button() {
                         <Dropdown
                             hideOnOuterClick={true}
                             items={typesAsSelectItems}
-                            onSelect={onTypeSelect}
-                            value={selectedType}
+                            onSelect={buttonTypeLookupParams.onValueSelect}
+                            value={buttonTypeLookupParams.selectedValue}
                             placeholder="Size"
                             deselectable={false}
                         />
                     </div>
                     <div className="column">
-                        <pre>{`<Button caption="Click me" type="${selectedType!.value}" />`}</pre>
+                        <pre>{`<Button caption="Click me" type="${buttonTypeLookupParams.selectedValue!.value}" />`}</pre>
                     </div>
                 </div>
 
-                <ButtonComponent type={selectedType!.value as ButtonType} caption="Click me" />
+                <ButtonComponent type={buttonTypeLookupParams.value} caption="Click me" />
             </div>
             <div className="block">
                 <h4 className="subtitle is-5">
@@ -160,19 +137,19 @@ function Button() {
                         <Dropdown
                             hideOnOuterClick={true}
                             items={Sizes.selectableItems}
-                            onSelect={onSizeSelect}
-                            value={selectedSize}
+                            onSelect={sizeLookupParams.onValueSelect}
+                            value={sizeLookupParams.selectedValue}
                             placeholder="Size"
                             deselectable={false}
                         />
                     </div>
                     <div className="column">
-                        <pre>{`<Button type="success" caption="Click me" size={ElementSize.${Sizes.keys[+selectedSize!.id]}} />`}
+                        <pre>{`<Button type="success" caption="Click me" size={ElementSize.${Sizes.keys[+sizeLookupParams.selectedValue!.id]}} />`}
                         </pre>
                     </div>
                 </div>
 
-                <ButtonComponent type="success" caption="Click me" size={size} />
+                <ButtonComponent type="success" caption="Click me" size={sizeLookupParams.value} />
             </div>
         </section>
     )

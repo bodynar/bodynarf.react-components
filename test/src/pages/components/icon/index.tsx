@@ -1,28 +1,11 @@
-import { useCallback, useState } from "react";
-
-import { isNullOrUndefined } from "@bodynarf/utils";
-import { ElementSize, SelectableItem } from "@bodynarf/react.components";
 import IconComponent from "@bodynarf/react.components/components/icon";
 
-import { Sizes } from "../../../shared";
+import { Sizes, useSizeSelection } from "../../../shared";
 import Dropdown from "@bodynarf/react.components/components/dropdown";
 
 /** Icon component demo */
 function Icon() {
-    const [selectedSize, setSelectedSize] = useState(Sizes.selectableItems[0]);
-
-    const onSizeSelect = useCallback(
-        (item?: SelectableItem) => {
-            if (isNullOrUndefined(item)) {
-                return;
-            }
-
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            setSelectedSize(item!);
-        }, []);
-
-    const size = selectedSize!.value as ElementSize;
-
+    const sizeHookValues = useSizeSelection();
 
     return (
         <section>
@@ -47,19 +30,19 @@ function Icon() {
                         <Dropdown
                             hideOnOuterClick={true}
                             items={Sizes.selectableItems}
-                            onSelect={onSizeSelect}
-                            value={selectedSize}
+                            onSelect={sizeHookValues.onValueSelect}
+                            value={sizeHookValues.selectedValue}
                             placeholder="Size"
                             deselectable={false}
                         />
                     </div>
                     <div className="column">
-                        <pre>{`<Icon name="alarm" size={ElementSize.${Sizes.keys[+selectedSize!.id]}} />`}
+                        <pre>{`<Icon name="alarm" size={ElementSize.${Sizes.keys[+sizeHookValues.selectedValue!.id]}} />`}
                         </pre>
                     </div>
                 </div>
 
-                <IconComponent name="alarm" size={size} />
+                <IconComponent name="alarm" size={sizeHookValues.value} />
             </div>
 
         </section>

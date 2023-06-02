@@ -1,40 +1,13 @@
-import { useCallback, useState } from "react";
-
-import { isNullOrUndefined } from "@bodynarf/utils";
-
-import { ElementColor, ElementSize, SelectableItem } from "@bodynarf/react.components";
+import { ElementColor, ElementSize } from "@bodynarf/react.components";
 import AccordionComponent from "@bodynarf/react.components/components/accordion";
 import Dropdown from "@bodynarf/react.components/components/dropdown/component";
 
-import { Colors, Sizes } from "../../../shared";
+import { Colors, Sizes, useColorSelection, useSizeSelection } from "../../../shared";
 
 /** Accordion component demo */
 function Accordion() {
-    const [selectedSize, setSelectedSize] = useState(Sizes.selectableItems[0]);
-    const [selectedColor, setSelectedColor] = useState(Colors.selectableItems[0]);
-
-    const onSizeSelect = useCallback(
-        (item?: SelectableItem) => {
-            if (isNullOrUndefined(item)) {
-                return;
-            }
-
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            setSelectedSize(item!);
-        }, []);    
-
-    const onColorSelect = useCallback(
-        (item?: SelectableItem) => {
-            if (isNullOrUndefined(item)) {
-                return;
-            }
-
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            setSelectedColor(item!);
-        }, []);
-
-    const size = selectedSize!.value as ElementSize;
-    const color = selectedColor!.value as ElementColor;
+    const sizeHookValues = useSizeSelection();
+    const colorHookValues = useColorSelection();
 
     return (
         <section>
@@ -70,14 +43,14 @@ function Accordion() {
                         <Dropdown
                             hideOnOuterClick={true}
                             items={Sizes.selectableItems}
-                            onSelect={onSizeSelect}
-                            value={selectedSize}
+                            onSelect={sizeHookValues.onValueSelect}
+                            value={sizeHookValues.selectedValue}
                             placeholder="Size"
                             deselectable={false}
                         />
                     </div>
                     <div className="column">
-                        <pre>{`<Accordion caption="Header" size={ElementSize.${Sizes.keys[+selectedSize!.id]}}>
+                        <pre>{`<Accordion caption="Header" size={ElementSize.${Sizes.keys[+sizeHookValues.selectedValue!.id]}}>
     Content
 </Accordion>`}
                         </pre>
@@ -86,7 +59,7 @@ function Accordion() {
 
                 <AccordionComponent
                     caption="Header"
-                    size={size}
+                    size={sizeHookValues.value}
                 >
                     Content
                 </AccordionComponent>
@@ -100,14 +73,14 @@ function Accordion() {
                         <Dropdown
                             hideOnOuterClick={true}
                             items={Colors.selectableItems}
-                            onSelect={onColorSelect}
-                            value={selectedColor}
+                            onSelect={colorHookValues.onValueSelect}
+                            value={colorHookValues.selectedValue}
                             placeholder="Color"
                             deselectable={false}
                         />
                     </div>
                     <div className="column">
-                        <pre>{`<Accordion caption="Header" style={ElementColor.${Colors.keys[+selectedColor!.id]}}>
+                        <pre>{`<Accordion caption="Header" style={ElementColor.${Colors.keys[+colorHookValues.selectedValue!.id]}}>
     Content
 </Accordion>`}
                         </pre>
@@ -116,7 +89,7 @@ function Accordion() {
 
                 <AccordionComponent
                     caption="Header"
-                    style={color}
+                    style={colorHookValues.value}
                     size={ElementSize.Small}
                 >
                     Content

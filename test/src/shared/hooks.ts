@@ -23,25 +23,7 @@ export interface LookupSelectionParams<T> {
  * @returns Lookup parameters to use with components
  */
 export const useSizeSelection = (): LookupSelectionParams<ElementSize> => {
-    const [item, setItem] = useState(Sizes.selectableItems[0]);
-
-    const onItemSelect = useCallback(
-        (item?: SelectableItem) => {
-            if (isNullOrUndefined(item)) {
-                return;
-            }
-
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            setItem(item!);
-        }, []);
-
-    const size = item!.value as ElementSize;
-
-    return {
-        selectedValue: item,
-        value: size,
-        onValueSelect: onItemSelect
-    };
+    return useGenericSelection<ElementSize>(Sizes.selectableItems);
 };
 
 /**
@@ -49,7 +31,16 @@ export const useSizeSelection = (): LookupSelectionParams<ElementSize> => {
  * @returns Lookup parameters to use with components
  */
 export const useColorSelection = (): LookupSelectionParams<ElementColor> => {
-    const [item, setItem] = useState(Colors.selectableItems[0]);
+    return useGenericSelection<ElementColor>(Colors.selectableItems);
+};
+
+/**
+ * Get custom lookup parameters
+ * @param lookupValues Lookup values
+ * @returns Lookup parameters to use with components
+ */
+export const useGenericSelection = <TValue>(lookupValues: Array<SelectableItem>): LookupSelectionParams<TValue> => {
+    const [item, setItem] = useState(lookupValues[0]);
 
     const onItemSelect = useCallback(
         (item?: SelectableItem) => {
@@ -61,11 +52,11 @@ export const useColorSelection = (): LookupSelectionParams<ElementColor> => {
             setItem(item!);
         }, []);
 
-    const size = item!.value as ElementColor;
+    const value = item!.value as TValue;
 
     return {
         selectedValue: item,
-        value: size,
+        value,
         onValueSelect: onItemSelect
     };
 };
