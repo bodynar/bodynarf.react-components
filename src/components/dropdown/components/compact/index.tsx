@@ -2,6 +2,7 @@ import { useCallback, useId, useState, MouseEvent } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
+import { getValidationValues } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
 
 import { DropdownProps } from "@bbr/components/dropdown";
@@ -14,6 +15,7 @@ const DropdownCompact = ({
     deselectable,
     className, hideOnOuterClick, listMaxHeight,
     placeholder, compact, disabled,
+    validationState,
 }: DropdownProps): JSX.Element => {
     const id = useId();
 
@@ -77,6 +79,8 @@ const DropdownCompact = ({
         hideOnOuterClick,
     );
 
+    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(undefined, validationState);
+
     const classNames: string = getClassName([
         "bbr-dropdown",
         (disabled ?? false) ? "bbr-dropdown--disabled" : "",
@@ -84,37 +88,44 @@ const DropdownCompact = ({
         isListVisible ? "is-active" : "",
         isNullOrEmpty(listMaxHeight) ? "bbr-dropdown--height-default" : "",
         className,
-        "dropdown"
+        "dropdown",
     ]);
 
+
     return (
-        <div
-            key={id}
-            className={classNames}
-            data-dropdown-id={id}
-        >
-            <DropdownLabel
-                caption={placeholder}
-                deselectable={deselectable === true}
-                selectedItem={value}
-                onClick={onLabelClick}
-            />
-            <div className="dropdown-menu">
-                {items.length > 0
-                    ? <ul className="dropdown-content" style={{ maxHeight: listMaxHeight }}>
-                        {items.map(item =>
-                            <DropdownItem
-                                key={item.id}
-                                item={item}
-                                selected={value?.value === item.value}
-                                onClick={onItemClick}
-                            />
-                        )}
-                    </ul>
-                    : <span className="dropdown-content dropdown-item">No items found</span>
-                }
+        <>
+            <div
+                key={id}
+                className={classNames}
+                data-dropdown-id={id}
+            >
+                <DropdownLabel
+                    selectedItem={value}
+                    caption={placeholder}
+                    onClick={onLabelClick}
+                    className={styleClassName}
+                    deselectable={deselectable === true}
+                />
+                <div className="dropdown-menu">
+                    {items.length > 0
+                        ? <ul className="dropdown-content" style={{ maxHeight: listMaxHeight }}>
+                            {items.map(item =>
+                                <DropdownItem
+                                    item={item}
+                                    key={item.id}
+                                    onClick={onItemClick}
+                                    selected={value?.value === item.value}
+                                />
+                            )}
+                        </ul>
+                        : <span className="dropdown-content dropdown-item">No items found</span>
+                    }
+                </div>
             </div>
-        </div>
+            {isValidationDefined && validationMessages.length > 0 &&
+                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
+            }
+        </>
     );
 };
 
