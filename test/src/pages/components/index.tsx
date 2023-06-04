@@ -6,6 +6,7 @@ import Accordion from "./accordion";
 import Anchor from "./anchor";
 import Button from "./button";
 import Tag from "./tag";
+import Dropdown from "./dropdown";
 
 export const components: RouteItem = {
     path: "/components",
@@ -37,6 +38,11 @@ export const components: RouteItem = {
             path: "/components/tag",
             caption: "Tag",
             component: <Tag />,
-        }
+        },
+        {
+            path: "/components/dropdown",
+            caption: "Dropdown",
+            component: <Dropdown />
+        },
     ]
 };
