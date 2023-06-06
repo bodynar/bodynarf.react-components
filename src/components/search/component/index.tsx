@@ -65,6 +65,7 @@ export default function Search({
                         type="info"
                         onClick={onSearchButtonClick}
                         isLoading={isLoading}
+                        size={size}
                     />
                 </div>
             </div>
