@@ -7,6 +7,7 @@ import Anchor from "./anchor";
 import Button from "./button";
 import Tag from "./tag";
 import Dropdown from "./dropdown";
+import Tabs from "./tabs";
 
 export const components: RouteItem = {
     path: "/components",
@@ -43,6 +44,11 @@ export const components: RouteItem = {
             path: "/components/dropdown",
             caption: "Dropdown",
             component: <Dropdown />
+        },
+        {
+            path: "/components/tabs",
+            caption: "Tabs",
+            component: <Tabs />
         },
     ]
 };
