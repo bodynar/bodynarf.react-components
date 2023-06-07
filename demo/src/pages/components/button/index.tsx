@@ -30,9 +30,9 @@ function Button() {
     return (
         <section>
             <div className="block">
-                <p style={{ whiteSpace: "pre-line" }}>
+                <h4 className="title is-4">
                     Button component
-                </p>
+                </h4>
             </div>
             <div className="block">
                 <h4 className="subtitle is-5">

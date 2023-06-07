@@ -10,9 +10,11 @@ function Icon() {
     return (
         <section>
             <div className="block">
-                <p style={{ whiteSpace: "pre-line" }}>
+                <h4 className="title is-4">
                     Icon component via <a className="is-underlined" href="https://icons.getbootstrap.com/" target="_blank">Bootstrap-icons</a>
-                    {`\n`}To use - pass name without <code>bi-</code>
+                </h4>
+                <p>
+                    To use - pass name without <code>bi-</code>
                 </p>
                 Available sizes: [{Sizes.string}]
                 <br />

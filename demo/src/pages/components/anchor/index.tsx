@@ -5,9 +5,9 @@ function Anchor() {
     return (
         <section>
             <div className="block">
-                <p style={{ whiteSpace: "pre-line" }}>
-                    Anchor component for simple links
-                </p>
+                <h4 className="title is-4">
+                    Anchor component
+                </h4>
             </div>
             <div className="block">
                 <h4 className="subtitle is-5">

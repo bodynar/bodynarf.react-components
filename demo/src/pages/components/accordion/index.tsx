@@ -12,9 +12,9 @@ function Accordion() {
     return (
         <section>
             <div className="block">
-                <p style={{ whiteSpace: "pre-line" }}>
+                <h4 className="title is-4">
                     Accordion component
-                </p>
+                </h4>
             </div>
             <div className="block">
                 <pre>{`<Accordion

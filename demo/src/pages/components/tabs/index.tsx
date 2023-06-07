@@ -37,9 +37,10 @@ function Tabs() {
     return (
         <section>
             <div className="block">
-                <span>
+                <h4 className="title is-4">
                     Tabs component
-                    <br />
+                </h4>
+                <span>
                     Displays commonly know tabs to manage displaying content
                 </span>
 
@@ -69,7 +70,7 @@ const handler = useCallback((item: TabItem) => { /** handler */}, []);
             </span>
             <div className="block">
                 <span>
-                    Default active tab
+                    <code>Default active tab</code>
                     <br />
                     By default first tab is active, but this can be configured
                 </span>
@@ -163,7 +164,7 @@ const handler = useCallback((item: TabItem) => { /** handler */}, []);
                     </div>
                 </div>
             </div>
-            <hr/>
+            <hr />
             <div className="block">
                 <span>
                     <code>position</code> describes where tabs will be floated. Have no meaning with fullWidth. Default is left

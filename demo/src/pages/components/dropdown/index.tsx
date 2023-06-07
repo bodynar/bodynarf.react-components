@@ -18,7 +18,9 @@ function Dropdown() {
         <section>
             <div className="block">
                 <span>
-                    Dropdown component
+                    <h4 className="title is-4">
+                        Dropdown component
+                    </h4>
                     <br />
                     In this demo all dropdowns share <b>same</b> items source and data binding to value
                 </span>

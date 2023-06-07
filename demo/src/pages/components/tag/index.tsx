@@ -14,12 +14,13 @@ function Tag() {
     return (
         <section>
             <div className="block">
-                <p style={{ whiteSpace: "pre-line" }}>
+                <h4 className="title is-4">
                     Tag component
-                </p>
-                Default
-                <br />
-                <br />
+                </h4>
+
+                <h4 className="title is-5">
+                    Default
+                </h4>
                 <TagComponent content="Tag content" /> = <code>
                     {`<Tag content="Tag content" />`}
                 </code>

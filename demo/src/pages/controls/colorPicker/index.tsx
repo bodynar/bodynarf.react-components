@@ -5,13 +5,12 @@ function Color() {
     return (
         <section>
             <div className="block">
-                <p style={{ whiteSpace: "pre-line" }}>
+                <h4 className="title is-4">
                     Color picker
-                </p>
-
-                <br />
-                <br />
-                <span>Default</span>
+                </h4>
+                <h5 className="title is-5">
+                    Default
+                </h5>
                 <div className="columns is-align-items-center">
                     <div className="column is-2">
                         <code>{`<Color />`}</code>

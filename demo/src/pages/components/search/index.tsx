@@ -11,7 +11,9 @@ function Search() {
     return (
         <section>
             <div className="block">
-                Search component
+                <h4 className="title is-4">
+                    Search component
+                </h4>
             </div>
             <div className="block">
                 <h4 className="subtitle is-5">
