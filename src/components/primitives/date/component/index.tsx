@@ -44,7 +44,7 @@ const DatePicker = ({
         "control",
         loading === true ? "is-loading" : "",
     ]);
-    const stingifiedDefValue = defaultValue?.toISOString().split("T")[0];
+    const stringifiedDefValue = defaultValue?.toISOString().split("T")[0];
 
     const labelClassName = getClassName([
         "label",
@@ -82,7 +82,7 @@ const DatePicker = ({
                                 className={elClassName}
                                 readOnly={readonly}
                                 disabled={disabled}
-                                defaultValue={stingifiedDefValue}
+                                defaultValue={stringifiedDefValue}
                                 onChange={onChange}
                                 onBlur={onBlur}
                                 name={id}
@@ -112,7 +112,7 @@ const DatePicker = ({
                     className={elClassName}
                     readOnly={readonly}
                     disabled={disabled}
-                    defaultValue={stingifiedDefValue}
+                    defaultValue={stringifiedDefValue}
                     onChange={onChange}
                     onBlur={onBlur}
                     name={id}
