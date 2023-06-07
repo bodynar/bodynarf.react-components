@@ -9,6 +9,7 @@ import Tag from "./tag";
 import Dropdown from "./dropdown";
 import Tabs from "./tabs";
 import Search from "./search";
+import Paginator from "./paginator";
 
 export const components: RouteItem = {
     path: "/components",
@@ -56,5 +57,10 @@ export const components: RouteItem = {
             caption: "Search",
             component: <Search />
         },
-    ]
+        {
+            path: "/components/paginator",
+            caption: "Paginator",
+            component: <Paginator />
+        },
+    ].sort((x, y) => x.caption.localeCompare(y.caption))
 };
