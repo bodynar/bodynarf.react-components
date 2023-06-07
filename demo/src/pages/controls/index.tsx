@@ -4,6 +4,7 @@ import { RouteItem } from "../routing";
 
 import ColorPicker from "./colorPicker";
 import Checkbox from "./checkbox";
+import Date from "./date";
 
 export const controls: RouteItem = {
     path: "/controls",
@@ -18,8 +19,13 @@ export const controls: RouteItem = {
         },
         {
             path: "/controls/checkbox",
-            caption: "CheckBox",
+            caption: "Check box",
             component: <Checkbox />
+        },
+        {
+            path: "/controls/date",
+            caption: "Date picker",
+            component: <Date />
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };

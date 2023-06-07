@@ -80,6 +80,7 @@ function Checkbox() {
                 <CheckboxComponent onValueChange={emptyFn} withoutBorder label={{ caption: "Default checkbox", horizontal: false }} />
             </div>
 
+            <hr />
             <div className="block">
                 <h4 className="subtitle is-5">
                     Sizes
