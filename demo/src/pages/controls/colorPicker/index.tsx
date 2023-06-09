@@ -1,4 +1,7 @@
+import { ValidationStatus } from "@bodynarf/react.components";
 import ColorComponent from "@bodynarf/react.components/components/primitives/color";
+
+import ComponentUseCase from "../../../shared/components/useCase";
 
 /** Color component demo */
 function Color() {
@@ -8,63 +11,46 @@ function Color() {
                 <h4 className="title is-4">
                     Color picker
                 </h4>
-                <h5 className="title is-5">
-                    Default
-                </h5>
-                <div className="columns is-align-items-center">
-                    <div className="column is-2">
-                        <code>{`<Color />`}</code>
-                    </div>
-                    <div className="column">
-                        <ColorComponent />
-                    </div>
-                </div>
             </div>
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    With preview
-                </h4>
-                <code>
-                    <code>{`<Color showPreview={true} />`}</code>
-                </code>
-                <br />
-                <br />
-                <ColorComponent showPreview />
-            </div>
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    With label (no preview)
-                </h4>
-                <code>
-                    <code>{`<Color label={{ caption: "Color picker label", horizontal: true }} />`}</code>
-                </code>
-                <br />
-                <br />
-                <ColorComponent label={{ caption: "Color picker label", horizontal: true }} />
-            </div>
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    With label (with preview)
-                </h4>
-                <code>
-                    <code>{`<Color showPreview={true} label={{ caption: "Color picker label", horizontal: true }} />`}</code>
-                </code>
-                <br />
-                <br />
-                <ColorComponent showPreview label={{ caption: "Color picker label", horizontal: true }} />
-            </div>
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    Disabled state with default value
-                </h4>
-                <code>
-                    <code>{`<Color disabled={true} defaultValue={{ blue: 240, green: 200, red: 140 }} />`}</code>
-                </code>
-                <br />
-                <br />
-                <ColorComponent disabled defaultValue={{ blue: 240, green: 200, red: 140 }} />
-            </div>
-
+            <ComponentUseCase
+                caption="Default"
+                code={`<Color />`}
+                description="Control could be used without any configuration"
+                component={<ColorComponent />}
+            />
+            <ComponentUseCase
+                caption="With preview"
+                code={`<Color showPreview />`}
+                description="Option allows control to have tag with selected color set as background color"
+                component={<ColorComponent showPreview />}
+            />
+            <ComponentUseCase
+                caption="With label (no preview)"
+                code={`<Color label={{ caption: "Color picker label", horizontal: true }} />`}
+                description="Control could (and must) have describing label"
+                component={<ColorComponent label={{ caption: "Color picker label", horizontal: true }} />}
+            />
+            <ComponentUseCase
+                caption="Disabled state with default value"
+                code={`<Color disabled={true} defaultValue={{ blue: 240, green: 200, red: 140 }} />`}
+                description="Control could have disabled state & represent default value"
+                component={<ColorComponent disabled defaultValue={{ blue: 240, green: 200, red: 140 }} />}
+            />
+            <ComponentUseCase
+                caption="validationState"
+                captionIsCode
+                code={`<Color validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} />`}
+                description="Like other form controls color picker could have validation state"
+                component={
+                    <ColorComponent
+                        label={{ caption: "color picker label", horizontal: true }}
+                        validationState={{
+                            messages: ["Message 1", "Message 2"],
+                            status: ValidationStatus.Invalid,
+                        }}
+                    />
+                }
+            />
         </section>
     )
 }
