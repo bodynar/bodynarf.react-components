@@ -28,7 +28,7 @@ function Anchor() {
                 component={<AnchorComponent caption={`I"m the anchor`} href="#" icon={{ name: "basket2", position: "right" }} />}
             />
         </section>
-    )
+    );
 }
 
 export default Anchor;

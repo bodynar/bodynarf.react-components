@@ -11,7 +11,6 @@ function Accordion() {
     return (
         <section>
             <DemoComponentTitleInfoMessage name="Accordion" />
-
             <ComponentUseCase
                 caption="Default"
                 code={`<Accordion caption="Header">Content</Accordion>`}
@@ -70,7 +69,7 @@ function Accordion() {
                 }
             />
         </section>
-    )
+    );
 }
 
 export default Accordion;

@@ -95,7 +95,7 @@ function Checkbox() {
                 component={<CheckboxComponent rounded onValueChange={emptyFn} style={ElementColor.Success} label={{ caption: "Rounded checkbox", horizontal: false }} />}
             />
         </section>
-    )
+    );
 }
 
 export default Checkbox;

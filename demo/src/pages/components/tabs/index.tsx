@@ -26,7 +26,7 @@ function Tabs() {
     }));
 
     const positionLookupValues = [
-        [TabsPosition.left + "_", "left"], // small hack to suppress dropdown value validation
+        [TabsPosition.left, "left"],
         [TabsPosition.center, "center"],
         [TabsPosition.right, "right"],
     ].map((x, i) => ({

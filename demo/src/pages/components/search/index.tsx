@@ -71,7 +71,7 @@ function Search() {
                 }
             />
         </section>
-    )
+    );
 }
 
 export default Search;

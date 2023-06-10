@@ -71,7 +71,7 @@ function Tag() {
                 }
             />
         </section>
-    )
+    );
 }
 
 export default Tag;
