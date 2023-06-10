@@ -91,8 +91,15 @@ function Checkbox() {
                 caption="rounded"
                 captionIsCode
                 code={`<Checkbox rounded />`}
-                description="Speak for itself. Turns control into circle"
+                description="Control will have rounded corners after setting this prop"
                 component={<CheckboxComponent rounded onValueChange={emptyFn} style={ElementColor.Success} label={{ caption: "Rounded checkbox", horizontal: false }} />}
+            />
+            <ComponentUseCase
+                caption="disabled"
+                captionIsCode
+                code={`<Checkbox disabled />`}
+                description="Control will be disabled"
+                component={<CheckboxComponent disabled label={{ caption: "Disabled", horizontal: true }} onValueChange={emptyFn} />}
             />
         </section>
     );
