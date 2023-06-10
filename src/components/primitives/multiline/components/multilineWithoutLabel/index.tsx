@@ -12,7 +12,7 @@ const MultilineWithoutLabel = ({
     onValueChange, defaultValue, validationState,
     name, placeholder,
     onBlur,
-    className, size, style, rounded = false, loading = false,
+    className, size, style, loading = false,
     fixed = false, rows,
 }: MultilineProps): JSX.Element => {
     const onChange = useCallback(
@@ -26,7 +26,6 @@ const MultilineWithoutLabel = ({
     const elClassName = getClassName([
         className,
         "is-{0}".format(getValueOrDefault(size, ElementSize.Normal)),
-        rounded ? "is-rounded" : "",
         styleClassName,
         "textarea",
         fixed ? "has-fixed-size" : "",

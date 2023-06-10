@@ -14,7 +14,7 @@ import { AccordionProps } from "@bbr/components/accordion";
 /** Accordion panel */
 const Accordion = ({
     children, caption,
-    style, size = ElementSize.Medium,
+    style, size = ElementSize.Normal,
     defaultExpanded = false,
     onToggle,
     className, data, title,

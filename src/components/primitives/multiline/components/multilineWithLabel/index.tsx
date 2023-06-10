@@ -11,7 +11,7 @@ import { MultilineProps } from "@bbr/components/multiline";
 const MultilineWithLabel = ({
     defaultValue, onValueChange, validationState, readonly, disabled,
     name,
-    className, size, style, rounded = false, loading = false,
+    className, size, style, loading = false,
     label, placeholder,
     fixed = false, rows,
     onBlur
@@ -29,7 +29,6 @@ const MultilineWithLabel = ({
     const elClassName = getClassName([
         className,
         elSizeClassName,
-        rounded ? "is-rounded" : "",
         styleClassName,
         "textarea",
         fixed ? "has-fixed-size" : "",
