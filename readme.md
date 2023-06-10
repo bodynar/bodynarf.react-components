@@ -14,6 +14,9 @@ Small library with react components based on Bulma CSS framework&nbsp; <a href="
 4. *(Optional)* To use **Icon** component - install [Bootstrap Icons](https://icons.getbootstrap.com/) and make sure you imported these styles in parent container
 5. *(Optional)* To use **Checkbox** component - install [bulma-checkradio](https://www.npmjs.com/package/bulma-checkradio) and make sure you imported these styles in parent container
 
+
+## Demo
+Demo of using all components can be found on https://bodynar.github.io/bodynarf.react-components/ (or open latest build in github repository)
 ## Description
 Mostly all components have root css class with `bbr-` prefix. BBR - Bodynarf Bulma React
 
