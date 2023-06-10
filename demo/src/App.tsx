@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import { RouteItem, routes } from "./pages/routing";
@@ -8,6 +8,10 @@ import LeftMenu from "./components/leftMenu";
 /** Bootstrap component */
 function App() {
 	const { pathname } = useLocation();
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
 
 	const menuItems = useMemo(() =>
 		routes

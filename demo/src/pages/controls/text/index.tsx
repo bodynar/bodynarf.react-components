@@ -17,7 +17,7 @@ function Text() {
                 caption="Default"
                 code={`<Text onValueChange={onValueChangeHandler} label={{ caption: "text label", horizontal: true }} />`}
                 description="Control must have label and value change handler as base configuration"
-                component={<TextComponent label={{ caption: "text label", horizontal: true }} onValueChange={emptyFn} />}
+                component={<TextComponent label={{ caption: "Text label", horizontal: true }} onValueChange={emptyFn} />}
             />
             <CommonPropsSuppressExampleInfoMessage />
             <ComponentSizeCase
@@ -42,7 +42,7 @@ function Text() {
                         <TextComponent
                             onValueChange={emptyFn}
                             style={style}
-                            label={{ caption: "Colored text", horizontal: false }}
+                            label={{ caption: "Colored text", horizontal: true }}
                         />
                 }
             />
@@ -79,7 +79,7 @@ function Text() {
                 captionIsCode
                 code={`<Text validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} />`}
                 description="As usual control text could be configured with validation state"
-                component={<TextComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} label={{ caption: "Loading text", horizontal: true }} onValueChange={emptyFn} />}
+                component={<TextComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} label={{ caption: "Validation state", horizontal: true }} onValueChange={emptyFn} />}
             />
         </section>
     )

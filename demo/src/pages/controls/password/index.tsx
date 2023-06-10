@@ -42,7 +42,7 @@ function Password() {
                         <PasswordComponent
                             onValueChange={emptyFn}
                             style={style}
-                            label={{ caption: "Colored password", horizontal: false }}
+                            label={{ caption: "Colored password", horizontal: true }}
                         />
                 }
             />
@@ -72,14 +72,14 @@ function Password() {
                 captionIsCode
                 code={`<Password validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} />`}
                 description="As usual control password could be configured with validation state"
-                component={<PasswordComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} label={{ caption: "Loading password", horizontal: true }} onValueChange={emptyFn} />}
+                component={<PasswordComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} label={{ caption: "Validation state", horizontal: true }} onValueChange={emptyFn} />}
             />
             <ComponentUseCase
                 caption="canShowPassword"
                 captionIsCode
                 code={`<Password canShowPassword />`}
                 description="Allows user to see password after clicking on eye icon"
-                component={<PasswordComponent canShowPassword label={{ caption: "Loading password", horizontal: true }} onValueChange={emptyFn} />}
+                component={<PasswordComponent canShowPassword label={{ caption: "Can show passowrd", horizontal: true }} onValueChange={emptyFn} />}
             />
         </section>
     );

@@ -1,4 +1,4 @@
-import { isNullOrEmpty, isUndefined } from "@bodynarf/utils";
+import { isUndefined } from "@bodynarf/utils";
 
 import Icon from "@bodynarf/react.components/components/icon";
 
@@ -23,7 +23,7 @@ const DemoComponentTitleInfoMessage = ({
             <span style={{ fontStyle: "italic", whiteSpace: "pre-line" }}>
                 <hr />
                 <Icon name="exclamation-triangle-fill" className="mr-1" />
-                Not all props listed bellow, only those which can be displayed.
+                Not all props listed bellow, mostly those which can be displayed.
                 {`\n`}
                 For full props list see type definition & its description
             </span>

@@ -16,6 +16,7 @@ function Tabs() {
     }));
 
     const styleLookupValues = [
+        [TabsStyle.default, "default"],
         [TabsStyle.boxed, "boxed"],
         [TabsStyle.radioButton, "radioButton"],
         [TabsStyle.radioButtonRounded, "radioButtonRounded"],
@@ -62,7 +63,7 @@ const handler = useCallback((item: TabItem) => { /** handler */}, []);
             <ComponentUseCase
                 caption="fullWidth"
                 captionIsCode
-                code={`<Tabs defaultActive={items[4]} />`}
+                code={`<Tabs fullWidth />`}
                 description="Shrinks tabs to end and make them same width"
                 component={<TabsComponent fullWidth items={tabs} onActiveItemChange={emptyFn} />}
             />

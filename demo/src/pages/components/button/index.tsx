@@ -44,7 +44,7 @@ function Button() {
             />
             <ComponentUseCase
                 caption="Icon + text as content"
-                code={`<Button type="success" icon={{ name: "broadcast", position: "right" }} caption="Book" />`}
+                code={`<Button icon={{ name: "broadcast", position: "right" }} caption="Book" />`}
                 description="Caption could be as string value but also icon configuration"
                 component={<ButtonComponent type="success" icon={{ name: "broadcast", position: "right" }} caption="Start" />}
             />
@@ -73,7 +73,7 @@ function Button() {
             <ComponentUseCase
                 caption="Loading state mode"
                 code={`<Button isLoading />`}
-                description="Button will display loading spinner instead of caption"
+                description="Button will display loading spinner instead of caption and click isn't doing anything"
                 component={<ButtonComponent isLoading type="success" caption="Start" />}
             />
             <ComponentUseCase

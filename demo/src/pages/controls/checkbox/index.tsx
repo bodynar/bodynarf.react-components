@@ -23,7 +23,7 @@ function Checkbox() {
             <CommonPropsSuppressExampleInfoMessage />
             <ComponentUseCase
                 caption="Without label"
-                code={`<Checkbox onValueChange={emptyFn} />`}
+                code={`<Checkbox />`}
                 description="Control could be used without any description label. In case you want to implement some custom logic"
                 component={<CheckboxComponent onValueChange={emptyFn} />}
             />
@@ -32,13 +32,13 @@ function Checkbox() {
                 captionIsCode
                 code={`<Checkbox block />`}
                 description="Control and label will have own gray background"
-                component={<CheckboxComponent onValueChange={emptyFn} block label={{ caption: "Default checkbox", horizontal: false }} />}
+                component={<CheckboxComponent onValueChange={emptyFn} block label={{ caption: "Block", horizontal: false }} />}
             />
             <ComponentUseCase
                 caption="Without border"
                 code={`<Checkbox withoutBorder />`}
                 description="Removes border from control"
-                component={<CheckboxComponent onValueChange={emptyFn} withoutBorder label={{ caption: "Default checkbox", horizontal: false }} />}
+                component={<CheckboxComponent onValueChange={emptyFn} withoutBorder label={{ caption: "Without border", horizontal: false }} />}
             />
             <ComponentSizeCase
                 caption="Sizes"
@@ -85,14 +85,14 @@ function Checkbox() {
                 captionIsCode
                 code={`<Checkbox isFormLabel />`}
                 description="Organizes markup to make label looks like in forms"
-                component={<CheckboxComponent isFormLabel onValueChange={emptyFn} style={ElementColor.Success} label={{ caption: "Form label checkbox", horizontal: false }} />}
+                component={<CheckboxComponent isFormLabel onValueChange={emptyFn} style={ElementColor.Success} label={{ caption: "Form label", horizontal: false }} />}
             />
             <ComponentUseCase
                 caption="rounded"
                 captionIsCode
                 code={`<Checkbox rounded />`}
                 description="Control will have rounded corners after setting this prop"
-                component={<CheckboxComponent rounded onValueChange={emptyFn} style={ElementColor.Success} label={{ caption: "Rounded checkbox", horizontal: false }} />}
+                component={<CheckboxComponent rounded onValueChange={emptyFn} style={ElementColor.Success} label={{ caption: "Rounded", horizontal: false }} />}
             />
             <ComponentUseCase
                 caption="disabled"

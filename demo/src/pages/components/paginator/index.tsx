@@ -81,7 +81,7 @@ function Paginator() {
                 captionIsCode
                 caption="nearPagesCount"
                 code={`<Paginator nearPagesCount={1} />`}
-                description={<pre>Determine how many buttons will be rendered from each side of current page. <code>3</code> is default</pre>}
+                description={<>Determine how many buttons will be rendered from each side of current page. <code>3</code> is default</>}
                 component={<PaginatorComponent nearPagesCount={1} count={100} currentPage={50} onPageChange={emptyFn} />}
             />
         </section>

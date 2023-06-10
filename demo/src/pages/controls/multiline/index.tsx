@@ -42,23 +42,16 @@ function Multiline() {
                         <MultilineComponent
                             onValueChange={emptyFn}
                             style={style}
-                            label={{ caption: "Colored multiline", horizontal: false }}
+                            label={{ caption: "Colored multiline", horizontal: true }}
                         />
                 }
-            />
-            <ComponentUseCase
-                caption="rounded"
-                captionIsCode
-                code={`<Multiline rounded />`}
-                description="Control will have rounded corners after setting this prop"
-                component={<MultilineComponent rounded label={{ caption: "Rounded multiline", horizontal: true }} onValueChange={emptyFn} />}
             />
             <ComponentUseCase
                 caption="loading"
                 captionIsCode
                 code={`<Multiline loading />`}
                 description="Control will have loading state with loading spinner on the end of the control"
-                component={<MultilineComponent loading label={{ caption: "Loading multiline", horizontal: true }} onValueChange={emptyFn} />}
+                component={<MultilineComponent loading label={{ caption: "Loading", horizontal: true }} onValueChange={emptyFn} />}
             />
             <ComponentUseCase
                 caption="readonly"
@@ -79,13 +72,13 @@ function Multiline() {
                 captionIsCode
                 code={`<Multiline validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} />`}
                 description="As usual control multiline could be configured with validation state"
-                component={<MultilineComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} label={{ caption: "Loading multiline", horizontal: true }} onValueChange={emptyFn} />}
+                component={<MultilineComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} label={{ caption: "Validation state", horizontal: true }} onValueChange={emptyFn} />}
             />
             <ComponentUseCase
                 caption="Initial rows count"
                 code={`<Multiline rows={10} />`}
                 description="Initial rows count (height) could be configured"
-                component={<MultilineComponent rows={10} label={{ caption: "Loading multiline", horizontal: true }} onValueChange={emptyFn} />}
+                component={<MultilineComponent rows={10} label={{ caption: "Rows", horizontal: true }} onValueChange={emptyFn} />}
             />
             <ComponentUseCase
                 caption="Fixed size"
@@ -95,7 +88,7 @@ function Multiline() {
                     <br />
                     Works even better with <code>rows</code> prop
                 </>}
-                component={<MultilineComponent fixed label={{ caption: "Loading multiline", horizontal: true }} onValueChange={emptyFn} />}
+                component={<MultilineComponent fixed label={{ caption: "Fixed", horizontal: true }} onValueChange={emptyFn} />}
             />
         </section>
     )

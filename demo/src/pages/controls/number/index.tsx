@@ -42,7 +42,7 @@ function Number() {
                         <NumberComponent
                             onValueChange={emptyFn}
                             style={style}
-                            label={{ caption: "Colored number", horizontal: false }}
+                            label={{ caption: "Colored number", horizontal: true }}
                         />
                 }
             />
@@ -51,14 +51,14 @@ function Number() {
                 captionIsCode
                 code={`<Number rounded />`}
                 description="Control will have rounded corners after setting this prop"
-                component={<NumberComponent rounded label={{ caption: "Rounded number", horizontal: true }} onValueChange={emptyFn} />}
+                component={<NumberComponent rounded label={{ caption: "Rounded", horizontal: true }} onValueChange={emptyFn} />}
             />
             <ComponentUseCase
                 caption="loading"
                 captionIsCode
                 code={`<Number loading />`}
                 description="Control will have loading state with loading spinner on the end of the control"
-                component={<NumberComponent loading label={{ caption: "Loading number", horizontal: true }} onValueChange={emptyFn} />}
+                component={<NumberComponent loading label={{ caption: "Loading", horizontal: true }} onValueChange={emptyFn} />}
             />
             <ComponentUseCase
                 caption="readonly"
@@ -79,14 +79,14 @@ function Number() {
                 captionIsCode
                 code={`<Number validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} />`}
                 description="As usual control number could be configured with validation state"
-                component={<NumberComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} label={{ caption: "Loading number", horizontal: true }} onValueChange={emptyFn} />}
+                component={<NumberComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} label={{ caption: "Validation state", horizontal: true }} onValueChange={emptyFn} />}
             />
             <ComponentUseCase
                 caption="step"
                 captionIsCode
                 code={`<Number step={1000} />`}
                 description="Prop configures difference which is used to make a step using control increase\decrease buttons"
-                component={<NumberComponent step={1000} label={{ caption: "Loading number", horizontal: true }} onValueChange={emptyFn} />}
+                component={<NumberComponent step={1000} label={{ caption: "Step", horizontal: true }} onValueChange={emptyFn} />}
             />
         </section>
     )
