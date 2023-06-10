@@ -1,12 +1,14 @@
-import { ElementColor } from "@bodynarf/react.components";
-import Dropdown from "@bodynarf/react.components/components/dropdown";
+import Dropdown, { SelectableItem } from "@bodynarf/react.components/components/dropdown";
 
-import { Colors, useColorSelection } from "../..";
+import { useGenericSelection } from "../..";
 
-/** Component color use case props type */
-interface ComponentColorCaseProps {
+/** Component enum use case props type */
+interface ComponentEnumCaseProps<TEnum> {
     /** Caption */
     caption: string;
+
+    /** Lookup placeholder */
+    placeholder: string;
 
     /** Is caption must be highlighted as code */
     captionIsCode?: boolean;
@@ -14,20 +16,27 @@ interface ComponentColorCaseProps {
     /** Description */
     description: string | React.ReactNode;
 
-    /** Example of component with current color */
-    componentProvider: (color: ElementColor) => React.ReactNode;
+    /** Available items to select */
+    lookupValues: Array<SelectableItem>;
 
-    /** Code to represent selected color */
+    /** Keys of enum */
+    enumNames: Array<string>;
+
+    /** Example of component with current enum */
+    componentProvider: (color: TEnum) => React.ReactNode;
+
+    /** Code to represent selected enum */
     codeProvider: (id: string) => string;
 }
 
-/** Component color variants case */
-const ComponentColorCase = ({
+/** Component enum variants case */
+function ComponentEnumCase<TEnum>({
     caption, captionIsCode = false,
     description,
     codeProvider, componentProvider,
-}: ComponentColorCaseProps): JSX.Element => {
-    const colorHookValues = useColorSelection();
+    lookupValues, enumNames, placeholder,
+}: ComponentEnumCaseProps<TEnum>): JSX.Element {
+    const hookValues = useGenericSelection<TEnum>(lookupValues);
 
     return (
         <>
@@ -47,24 +56,24 @@ const ComponentColorCase = ({
                     <div className="column is-2">
                         <Dropdown
                             hideOnOuterClick
-                            items={Colors.selectableItems}
-                            onSelect={colorHookValues.onValueSelect}
-                            value={colorHookValues.selectedValue}
-                            placeholder="Color"
+                            items={lookupValues}
+                            onSelect={hookValues.onValueSelect}
+                            value={hookValues.selectedValue}
+                            placeholder={placeholder}
                             deselectable={false}
                         />
                     </div>
                     <div className="column">
                         <pre>
-                            {codeProvider(Colors.keys[+colorHookValues.selectedValue!.id])}
+                            {codeProvider(enumNames[+hookValues.selectedValue!.id])}
                         </pre>
                     </div>
                 </div>
 
-                {componentProvider(colorHookValues.value)}
+                {componentProvider(hookValues.value)}
             </div>
         </>
     );
-};
+}
 
-export default ComponentColorCase;
+export default ComponentEnumCase;

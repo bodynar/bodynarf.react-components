@@ -7,30 +7,26 @@ import ComponentUseCase from "../../../shared/components/useCase";
 import ComponentSizeCase from "../../../shared/components/sizeUse";
 import ComponentColorCase from "../../../shared/components/colorUse";
 import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
+import DemoComponentTitleInfoMessage from "../../../shared/components/title";
 
 /** Checkbox component demo */
 function Checkbox() {
     return (
         <section>
-            <div className="block">
-                <h4 className="title is-4">
-                    Checkbox
-                </h4>
-            </div>
-
+            <DemoComponentTitleInfoMessage name="Checkbox" />
             <ComponentUseCase
                 caption="Default"
                 code={`<Checkbox onValueChange={onValueChangeHandler} label={{ caption: "Default checkbox", horizontal: false }} />`}
                 description="Control works fine even without label. But for more convenience its recommended to have label.caption as on example bellow:"
                 component={<CheckboxComponent onValueChange={emptyFn} label={{ caption: "Default checkbox", horizontal: false }} />}
             />
+            <CommonPropsSuppressExampleInfoMessage />
             <ComponentUseCase
                 caption="Without label"
                 code={`<Checkbox onValueChange={emptyFn} />`}
                 description="Control could be used without any description label. In case you want to implement some custom logic"
                 component={<CheckboxComponent onValueChange={emptyFn} />}
             />
-            <CommonPropsSuppressExampleInfoMessage />
             <ComponentUseCase
                 caption="block"
                 captionIsCode
@@ -46,7 +42,7 @@ function Checkbox() {
             />
             <ComponentSizeCase
                 caption="Sizes"
-                codeProvider={id => `<Checkbox size={ElementSize.${id}}/>`}
+                codeProvider={id => `<Checkbox size={ElementSize.${id}} />`}
                 description="Control supports all available sizes"
                 componentProvider={
                     size =>
@@ -59,7 +55,7 @@ function Checkbox() {
             />
             <ComponentColorCase
                 caption="Colors"
-                codeProvider={id => `<Checkbox style={ElementColor.${id}}/>`}
+                codeProvider={id => `<Checkbox style={ElementColor.${id}} />`}
                 description="Control supports all available colors"
                 componentProvider={
                     style =>

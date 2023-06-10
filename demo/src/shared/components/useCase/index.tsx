@@ -13,7 +13,7 @@ interface ComponentUseCaseProps {
     component: React.ReactNode;
 
     /** Code to represent case */
-    code: string;
+    code: string | React.ReactNode;
 }
 
 /** Component use case */
@@ -32,11 +32,18 @@ const ComponentUseCase = ({
                         : <>{caption}</>
                     }
                 </h5>
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {description}
-                </p>
+                {typeof description === "string"
+                    ?
+                    <p style={{ whiteSpace: "pre-line" }}>
+                        {description}
+                    </p>
+                    : description
+                }
                 <br />
-                <code>{code}</code>
+                {typeof code === "string"
+                    ? <code>{code}</code>
+                    : code
+                }
                 <br />
                 <br />
                 {component}

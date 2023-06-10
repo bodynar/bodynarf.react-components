@@ -6,17 +6,14 @@ import ComponentUseCase from "../../../shared/components/useCase";
 import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
 import ComponentSizeCase from "../../../shared/components/sizeUse";
 import ComponentColorCase from "../../../shared/components/colorUse";
+import DemoComponentTitleInfoMessage from "../../../shared/components/title";
 
 /** Date component demo */
 function Date() {
 
     return (
         <section>
-            <div className="block">
-                <h4 className="title is-4">
-                    Date picker
-                </h4>
-            </div>
+            <DemoComponentTitleInfoMessage name="Date picker" />
             <ComponentUseCase
                 caption="Default"
                 code={`<Date onValueChange={onValueChangeHandler} label={{ caption: "date picker label", horizontal: true }} />`}
@@ -26,7 +23,7 @@ function Date() {
             <CommonPropsSuppressExampleInfoMessage />
             <ComponentSizeCase
                 caption="Sizes"
-                codeProvider={id => `<Date size={ElementSize.${id}}/>`}
+                codeProvider={id => `<Date size={ElementSize.${id}} />`}
                 description="Control supports all available sizes"
                 componentProvider={
                     size =>
@@ -39,7 +36,7 @@ function Date() {
             />
             <ComponentColorCase
                 caption="Colors"
-                codeProvider={id => `<Date style={ElementColor.${id}}/>`}
+                codeProvider={id => `<Date style={ElementColor.${id}} />`}
                 description="Control supports all available colors"
                 componentProvider={
                     style =>

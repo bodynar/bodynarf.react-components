@@ -12,7 +12,7 @@ interface ComponentSizeCaseProps {
     captionIsCode?: boolean;
 
     /** Description */
-    description: string;
+    description: string | React.ReactNode;
 
     /** Example of component with current size */
     componentProvider: (size: ElementSize) => React.ReactNode;
@@ -46,7 +46,7 @@ const ComponentSizeCase = ({
                 <div className="columns">
                     <div className="column is-2">
                         <Dropdown
-                            hideOnOuterClick={true}
+                            hideOnOuterClick
                             items={Sizes.selectableItems}
                             onSelect={sizeHookValues.onValueSelect}
                             value={sizeHookValues.selectedValue}

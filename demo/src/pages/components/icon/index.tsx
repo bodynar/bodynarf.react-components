@@ -1,54 +1,40 @@
 import IconComponent from "@bodynarf/react.components/components/icon";
 
-import { Sizes, useSizeSelection } from "../../../shared";
-import Dropdown from "@bodynarf/react.components/components/dropdown";
+import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
+import DemoComponentTitleInfoMessage from "../../../shared/components/title";
+import ComponentUseCase from "../../../shared/components/useCase";
+import ComponentSizeCase from "../../../shared/components/sizeUse";
 
 /** Icon component demo */
 function Icon() {
-    const sizeHookValues = useSizeSelection();
-
     return (
         <section>
-            <div className="block">
-                <h4 className="title is-4">
-                    Icon component via <a className="is-underlined" href="https://icons.getbootstrap.com/" target="_blank">Bootstrap-icons</a>
-                </h4>
-                <p>
-                    To use - pass name without <code>bi-</code>
-                </p>
-                Available sizes: [{Sizes.string}]
-                <br />
-                <br />
-                <IconComponent name="alarm" /> = <code>
-                    {`<Icon name="alarm" />`}
-                </code>
-            </div>
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    Sizes
-                </h4>
-                <div className="columns">
-                    <div className="column is-2">
-                        <Dropdown
-                            hideOnOuterClick={true}
-                            items={Sizes.selectableItems}
-                            onSelect={sizeHookValues.onValueSelect}
-                            value={sizeHookValues.selectedValue}
-                            placeholder="Size"
-                            deselectable={false}
-                        />
-                    </div>
-                    <div className="column">
-                        <pre>{`<Icon name="alarm" size={ElementSize.${Sizes.keys[+sizeHookValues.selectedValue!.id]}} />`}
-                        </pre>
-                    </div>
-                </div>
-
-                <IconComponent name="alarm" size={sizeHookValues.value} />
-            </div>
-
+            <DemoComponentTitleInfoMessage
+                name="Icon"
+                description={<>
+                    Works via <a className="is-underlined" href="https://icons.getbootstrap.com/" target="_blank">Bootstrap-icons</a>
+                    {`\n`}
+                    To use - pass name without
+                </>}
+            />
+            <ComponentUseCase
+                caption="Default"
+                code={`<Icon name="alarm" />`}
+                description="Usually only name prop is fine for component use"
+                component={<IconComponent name="alarm" />}
+            />
+            <CommonPropsSuppressExampleInfoMessage />
+            <ComponentSizeCase
+                caption="Sizes"
+                codeProvider={id => `<Icon size={ElementSize.${id}}/>`}
+                description="Component supports all available sizes"
+                componentProvider={
+                    size =>
+                        <IconComponent name="alarm" size={size} />
+                }
+            />
         </section>
-    )
+    );
 }
 
 export default Icon;

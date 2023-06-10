@@ -1,7 +1,12 @@
-import Dropdown from "@bodynarf/react.components/components/dropdown";
+import { emptyFn } from "@bodynarf/utils";
+
 import TabsComponent, { TabItem, TabsPosition, TabsStyle } from "@bodynarf/react.components/components/tabs";
 
-import { Sizes, useGenericSelection, useSizeSelection } from "../../../shared";
+import DemoComponentTitleInfoMessage from "../../../shared/components/title";
+import ComponentUseCase from "../../../shared/components/useCase";
+import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
+import ComponentSizeCase from "../../../shared/components/sizeUse";
+import ComponentEnumCase from "../../../shared/components/enumSelectionCase";
 
 /** Tabs component demo */
 function Tabs() {
@@ -14,188 +19,88 @@ function Tabs() {
         [TabsStyle.boxed, "boxed"],
         [TabsStyle.radioButton, "radioButton"],
         [TabsStyle.radioButtonRounded, "radioButtonRounded"],
-    ].map(x => ({
-        id: x[0],
+    ].map((x, i) => ({
+        id: `${i}`,
         value: x[0],
         displayValue: x[1],
     }));
 
     const positionLookupValues = [
-        [TabsPosition.left, "left"],
+        [TabsPosition.left + "_", "left"], // small hack to suppress dropdown value validation
         [TabsPosition.center, "center"],
         [TabsPosition.right, "right"],
-    ].map(x => ({
-        id: x[0],
-        value: x[1],
+    ].map((x, i) => ({
+        id: `${i}`,
+        value: x[0],
         displayValue: x[1],
     }));
 
-    const sizeLookupParams = useSizeSelection();
-    const styleLookupParams = useGenericSelection<TabsStyle>(styleLookupValues);
-    const positionLookupParams = useGenericSelection<TabsPosition>(positionLookupValues);
-
     return (
         <section>
-            <div className="block">
-                <h4 className="title is-4">
-                    Tabs component
-                </h4>
-                <span>
-                    Displays commonly know tabs to manage displaying content
-                </span>
-
-                <br />
-                <br />
-                <pre>
-                    {`const items: Array<TabItem> = [...];
+            <DemoComponentTitleInfoMessage
+                name="Tabs"
+                description="Displays commonly know tabs to manage displaying content"
+            />
+            <ComponentUseCase
+                caption="Default"
+                code={<pre>{`const items: Array<TabItem> = [...];
 const handler = useCallback((item: TabItem) => { /** handler */}, []);
 
 /* ... */
 
-<TabsComponent
-    items={tabs}
-    onActiveItemChange={onItemChange}
-/>`}
-                </pre>
-                <br />
-                <TabsComponent
-                    items={tabs}
-                    onActiveItemChange={() => console.log()}
-                />
-            </div>
-            <span>
-                <hr />
-                In next examples these common props configuration will not be presented to save space
-                <hr />
-            </span>
-            <div className="block">
-                <span>
-                    <code>Default active tab</code>
-                    <br />
-                    By default first tab is active, but this can be configured
-                </span>
-                <br />
-                <br />
-                <pre>
-                    {`<TabsComponent defaultActive={items[4]} />`}
-                </pre>
-                <br />
-                <TabsComponent
-                    items={tabs}
-                    onActiveItemChange={() => console.log()}
-                    defaultActive={tabs[4]}
-                />
-            </div>
-            <hr />
-            <div className="block">
-                <span>
-                    <code>fullWidth</code>
-                    <br />
-                    Shrinks tabs to end and make them same width
-                </span>
-                <br />
-                <br />
-                <pre>
-                    {`<TabsComponent fullWidth />`}
-                </pre>
-                <br />
-                <TabsComponent
-                    fullWidth
-                    items={tabs}
-                    onActiveItemChange={() => console.log()}
-                />
-            </div>
-            <hr />
-            <div className="block">
-                <span>
-                    <code>Size</code>
-                </span>
-                <br />
-                <br />
-                <div className="columns">
-                    <div className="column is-2">
-                        <Dropdown
-                            hideOnOuterClick={true}
-                            items={Sizes.selectableItems}
-                            onSelect={sizeLookupParams.onValueSelect}
-                            value={sizeLookupParams.selectedValue}
-                            placeholder="Size"
-                            deselectable={false}
-                        />
-                    </div>
-                    <div className="column">
-                        <TabsComponent
-                            size={sizeLookupParams.value}
-                            items={tabs}
-                            onActiveItemChange={() => console.log()}
-                        />
-                        <pre>
-                            {`<TabsComponent size="ElementSize.${Sizes.keys[+sizeLookupParams.selectedValue!.id]}" />`}
-                        </pre>
-                    </div>
-                </div>
-            </div>
-            <div className="block">
-                <span>
-                    <code>style</code> is different from other controls. Tabs have its own styles.
-                </span>
-                <br />
-                <br />
-                <div className="columns">
-                    <div className="column is-2">
-                        <Dropdown
-                            hideOnOuterClick={true}
-                            items={styleLookupValues}
-                            onSelect={styleLookupParams.onValueSelect}
-                            value={styleLookupParams.selectedValue}
-                            placeholder="Style"
-                            deselectable={false}
-                        />
-                    </div>
-                    <div className="column">
-                        <TabsComponent
-                            style={styleLookupParams.value}
-                            items={tabs}
-                            onActiveItemChange={() => console.log()}
-                        />
-                        <pre>
-                            {`<TabsComponent style="TabsStyle.${styleLookupParams.selectedValue!.displayValue}" />`}
-                        </pre>
-                    </div>
-                </div>
-            </div>
-            <hr />
-            <div className="block">
-                <span>
-                    <code>position</code> describes where tabs will be floated. Have no meaning with fullWidth. Default is left
-                </span>
-                <br />
-                <br />
-                <div className="columns">
-                    <div className="column is-2">
-                        <Dropdown
-                            hideOnOuterClick={true}
-                            items={positionLookupValues}
-                            onSelect={positionLookupParams.onValueSelect}
-                            value={positionLookupParams.selectedValue}
-                            placeholder="Position"
-                            deselectable={false}
-                        />
-                    </div>
-                    <div className="column">
-                        <TabsComponent
-                            position={positionLookupParams.selectedValue.id as TabsPosition}
-                            items={tabs}
-                            onActiveItemChange={() => console.log()}
-                        />
-                        <pre>
-                            {`<TabsComponent position="TabsPosition.${positionLookupParams.selectedValue!.displayValue}" />`}
-                        </pre>
-                    </div>
-                </div>
-            </div>
+<Tabs items={tabs} onActiveItemChange={onItemChange} />`}</pre>}
+                description="By default component requires tab items and tab item change handler like on example"
+                component={<TabsComponent items={tabs} onActiveItemChange={emptyFn} />}
+            />
+            <CommonPropsSuppressExampleInfoMessage />
+            <ComponentUseCase
+                caption="Default active tab"
+                code={`<Tabs defaultActive={items[4]} />`}
+                description={<>By default first tab is active, but this can be configured via <code>defaultActive</code> prop</>}
+                component={<TabsComponent defaultActive={tabs[4]} items={tabs} onActiveItemChange={emptyFn} />}
+            />
+            <ComponentUseCase
+                caption="fullWidth"
+                captionIsCode
+                code={`<Tabs defaultActive={items[4]} />`}
+                description="Shrinks tabs to end and make them same width"
+                component={<TabsComponent fullWidth items={tabs} onActiveItemChange={emptyFn} />}
+            />
+            <ComponentSizeCase
+                caption="Sizes"
+                codeProvider={id => `<Tabs size={ElementSize.${id}} />`}
+                description="Component supports all available sizes"
+                componentProvider={
+                    size =>
+                        <TabsComponent items={tabs} onActiveItemChange={emptyFn} size={size} />
+                }
+            />
+            <ComponentEnumCase
+                caption="Styles"
+                enumNames={["default", "boxed", "radioButton", "radioButtonRounded"]}
+                placeholder="Style"
+                lookupValues={styleLookupValues}
+                description="Control supports only custom styles"
+                codeProvider={id => `<Tabs style={TabsStyle.${id}} />`}
+                componentProvider={
+                    (style: TabsStyle) =>
+                        <TabsComponent items={tabs} onActiveItemChange={emptyFn} style={style} />
+                }
+            />
+            <ComponentEnumCase
+                caption="Positions"
+                enumNames={["left", "center", "right"]}
+                placeholder="Position"
+                lookupValues={positionLookupValues}
+                description="Control supports 3 different positions"
+                codeProvider={id => `<Tabs position={TabsPosition.${id}} />`}
+                componentProvider={
+                    (position: TabsPosition) =>
+                        <TabsComponent position={position} items={tabs} onActiveItemChange={emptyFn} />
+                }
+            />
         </section>
-    )
+    );
 }
 
 export default Tabs;

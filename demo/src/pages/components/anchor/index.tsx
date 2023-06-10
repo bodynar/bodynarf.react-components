@@ -1,48 +1,32 @@
 import AnchorComponent from "@bodynarf/react.components/components/anchor";
+import ComponentUseCase from "../../../shared/components/useCase";
+import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
+import DemoComponentTitleInfoMessage from "../../../shared/components/title";
 
 /** Anchor component demo */
 function Anchor() {
     return (
         <section>
-            <div className="block">
-                <h4 className="title is-4">
-                    Anchor component
-                </h4>
-            </div>
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    Default
-                </h4>
-                <code>
-                    {`<Anchor caption={\`I"m the anchor\`} href="#" />`}
-                </code>
-                <br />
-                <br />
-                <AnchorComponent caption={`I"m the anchor`} href="#" />
-            </div>
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    Without hover effects
-                </h4>
-                <code>
-                    {`<Anchor caption={\`I"m the anchor\`} href="#" disableHovering={true} />`}
-                </code>
-                <br />
-                <br />
-                <AnchorComponent caption={`I"m the anchor`} href="#" disableHovering={true} />
-            </div>
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    Icon content
-                </h4>
-                <code>
-                    {`<Anchor caption={\`I"m the anchor\`} href="#" icon={{ name: "basket2", position: "right" }} />`}
-                </code>
-                <br />
-                <br />
-                <AnchorComponent caption={`I"m the anchor`} href="#" icon={{ name: "basket2", position: "right" }} />
-            </div>
-
+            <DemoComponentTitleInfoMessage name="Anchor" />
+            <ComponentUseCase
+                caption="Default"
+                code={`<Anchor caption={\`I"m the anchor\`} href="#" />`}
+                description="Default configuration is caption and href"
+                component={<AnchorComponent caption={`I"m the anchor`} href="#" />}
+            />
+            <CommonPropsSuppressExampleInfoMessage />
+            <ComponentUseCase
+                caption="Without hover effects"
+                code={`<Anchor disableHovering />`}
+                description="Hover effects could be disabled (link wont have underline effect on hover). But why?.."
+                component={<AnchorComponent caption={`I"m the anchor`} href="#" disableHovering />}
+            />
+            <ComponentUseCase
+                caption="With icon"
+                code={`<Anchor icon={{ name: "basket2", position: "right" }} />`}
+                description="Component could held an icon in its content"
+                component={<AnchorComponent caption={`I"m the anchor`} href="#" icon={{ name: "basket2", position: "right" }} />}
+            />
         </section>
     )
 }

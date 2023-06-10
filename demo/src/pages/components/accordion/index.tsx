@@ -1,100 +1,74 @@
-import { ElementColor, ElementSize } from "@bodynarf/react.components";
 import AccordionComponent from "@bodynarf/react.components/components/accordion";
-import Dropdown from "@bodynarf/react.components/components/dropdown/component";
 
-import { Colors, Sizes, useColorSelection, useSizeSelection } from "../../../shared";
+import ComponentUseCase from "../../../shared/components/useCase";
+import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
+import ComponentSizeCase from "../../../shared/components/sizeUse";
+import ComponentColorCase from "../../../shared/components/colorUse";
+import DemoComponentTitleInfoMessage from "../../../shared/components/title";
 
 /** Accordion component demo */
 function Accordion() {
-    const sizeHookValues = useSizeSelection();
-    const colorHookValues = useColorSelection();
-
     return (
         <section>
-            <div className="block">
-                <h4 className="title is-4">
-                    Accordion component
-                </h4>
-            </div>
-            <div className="block">
-                <pre>{`<Accordion
-    caption="Header"
-    defaultExpanded={true}
-    style={ElementColor.Warning}
->
-    Content
-</Accordion>`}
-                </pre>
-                <AccordionComponent
-                    caption="Header"
-                    defaultExpanded={true}
-                    style={ElementColor.Warning}
-                    className="mt-2"
-                >
-                    Content
-                </AccordionComponent>
-            </div>
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    Sizes
-                </h4>
-                <div className="columns">
-                    <div className="column is-2">
-                        <Dropdown
-                            hideOnOuterClick={true}
-                            items={Sizes.selectableItems}
-                            onSelect={sizeHookValues.onValueSelect}
-                            value={sizeHookValues.selectedValue}
-                            placeholder="Size"
-                            deselectable={false}
-                        />
-                    </div>
-                    <div className="column">
-                        <pre>{`<Accordion caption="Header" size={ElementSize.${Sizes.keys[+sizeHookValues.selectedValue!.id]}}>
-    Content
-</Accordion>`}
-                        </pre>
-                    </div>
-                </div>
+            <DemoComponentTitleInfoMessage name="Accordion" />
 
-                <AccordionComponent
-                    caption="Header"
-                    size={sizeHookValues.value}
-                >
-                    Content
-                </AccordionComponent>
-            </div>
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    Colors
-                </h4>
-                <div className="columns">
-                    <div className="column is-2">
-                        <Dropdown
-                            hideOnOuterClick={true}
-                            items={Colors.selectableItems}
-                            onSelect={colorHookValues.onValueSelect}
-                            value={colorHookValues.selectedValue}
-                            placeholder="Color"
-                            deselectable={false}
-                        />
-                    </div>
-                    <div className="column">
-                        <pre>{`<Accordion caption="Header" style={ElementColor.${Colors.keys[+colorHookValues.selectedValue!.id]}}>
-    Content
-</Accordion>`}
-                        </pre>
-                    </div>
-                </div>
-
-                <AccordionComponent
-                    caption="Header"
-                    style={colorHookValues.value}
-                    size={ElementSize.Small}
-                >
-                    Content
-                </AccordionComponent>
-            </div>
+            <ComponentUseCase
+                caption="Default"
+                code={`<Accordion caption="Header">Content</Accordion>`}
+                description="Default configuration requires only caption"
+                component={
+                    <AccordionComponent
+                        caption="Header"
+                        className="mt-2"
+                    >
+                        Content
+                    </AccordionComponent>
+                }
+            />
+            <CommonPropsSuppressExampleInfoMessage />
+            <ComponentUseCase
+                caption="defaultExpanded"
+                captionIsCode
+                code={`<Accordion defaultExpanded> ...`}
+                description="Content will be displayed & accordion will be opened by default"
+                component={
+                    <AccordionComponent
+                        defaultExpanded
+                        caption="Header"
+                        className="mt-2"
+                    >
+                        Content
+                    </AccordionComponent>
+                }
+            />
+            <ComponentSizeCase
+                caption="Sizes"
+                codeProvider={id => `<Accordion size={ElementSize.${id}} > ...`}
+                description="Component supports all available sizes"
+                componentProvider={
+                    size =>
+                        <AccordionComponent
+                            caption="Size"
+                            size={size}
+                        >
+                            Content
+                        </AccordionComponent>
+                }
+            />
+            <ComponentColorCase
+                caption="Colors"
+                codeProvider={id => `<Accordion style={ElementColor.${id}} > ...`}
+                description="Component supports all available colors"
+                componentProvider={
+                    style =>
+                        <AccordionComponent
+                            caption="Color"
+                            style={style}
+                        >
+                            Content
+                        </AccordionComponent>
+                }
+            />
         </section>
     )
 }

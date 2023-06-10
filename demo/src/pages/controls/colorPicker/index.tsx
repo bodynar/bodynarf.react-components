@@ -2,16 +2,13 @@ import { ValidationStatus } from "@bodynarf/react.components";
 import ColorComponent from "@bodynarf/react.components/components/primitives/color";
 
 import ComponentUseCase from "../../../shared/components/useCase";
+import DemoComponentTitleInfoMessage from "../../../shared/components/title";
 
 /** Color component demo */
 function Color() {
     return (
         <section>
-            <div className="block">
-                <h4 className="title is-4">
-                    Color picker
-                </h4>
-            </div>
+            <DemoComponentTitleInfoMessage name="Color picker" />
             <ComponentUseCase
                 caption="Default"
                 code={`<Color />`}

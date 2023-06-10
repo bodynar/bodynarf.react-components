@@ -1,132 +1,75 @@
 import SearchComponent from "@bodynarf/react.components/components/search";
 
-import { Sizes, useSizeSelection } from "../../../shared";
-import Dropdown from "@bodynarf/react.components/components/dropdown";
 import { emptyFn } from "@bodynarf/utils";
+import DemoComponentTitleInfoMessage from "../../../shared/components/title";
+import ComponentUseCase from "../../../shared/components/useCase";
+import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
+import ComponentSizeCase from "../../../shared/components/sizeUse";
 
 /** Search component demo */
 function Search() {
-    const sizeLookupParams = useSizeSelection();
-
     return (
         <section>
-            <div className="block">
-                <h4 className="title is-4">
-                    Search component
-                </h4>
-            </div>
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    Default
-                </h4>
-                <code>{`<Search caption="Default search" onSearch={onSearchHandler} searchType="byButton" />`}</code>
-                <br />
-                <br />
-                <SearchComponent caption="Default search" onSearch={emptyFn} searchType="byButton" />
-            </div>
-            <span>
-                <hr />
-                In next examples these common props configuration will not be presented to save space
-                <hr />
-            </span>
-            <hr />
-            <div className="block">
-                <p>
-                    <code>searchType</code> describes way to call search function.
-                    It either by special button ("byButton"), either by typing text.
-                    <br />
-                    "byButton" will render a button and search handler will be invoked only after click on that button
-                </p>
-                <br />
-                <code>{`<Search searchType="byButton" />`}</code>
-                <br />
-                <br />
-                <SearchComponent caption="searchType" onSearch={emptyFn} searchType="byButton" />
-            </div>
-
-            <hr />
-            <div className="block">
-                <p>
-                    <code>searchType</code> "byTyping" will not render button and will emit search handler after each inserted symbol
-                </p>
-                <br />
-                <code>{`<Search searchType="byTyping" />`}</code>
-                <br />
-                <br />
-                <SearchComponent caption="searchType" onSearch={emptyFn} searchType="byTyping" />
-            </div>
-
-            <hr />
-            <div className="block">
-                <p>
-                    <code>defaultValue</code> Value that would be used as initial value
-                </p>
-                <br />
-                <code>{`<Search defaultValue="defaultValue" />`}</code>
-                <br />
-                <br />
-                <SearchComponent caption="searchType" onSearch={emptyFn} searchType="byButton" defaultValue="defaultValue" />
-            </div>
-
-            <hr />
-            <div className="block">
-                <p>
-                    <code>rounded</code> Input field will have rounded corners
-                </p>
-                <br />
-                <code>{`<Search rounded />`}</code>
-                <br />
-                <br />
-                <SearchComponent caption="searchType" onSearch={emptyFn} searchType="byTyping" rounded />
-            </div>
-
-            <hr />
-            <div className="block">
-                <p>
-                    <code>disabled</code> Input field will be disabled
-                </p>
-                <br />
-                <code>{`<Search disabled />`}</code>
-                <br />
-                <br />
-                <SearchComponent caption="searchType" onSearch={emptyFn} searchType="byTyping" disabled />
-            </div>
-
-            <hr />
-            <div className="block">
-                <p>
-                    <code>isLoading</code> Displays loading spinner in the end of the control
-                </p>
-                <br />
-                <code>{`<Search isLoading />`}</code>
-                <br />
-                <br />
-                <SearchComponent caption="searchType" onSearch={emptyFn} searchType="byTyping" isLoading />
-            </div>
-
-            <div className="block">
-                <h4 className="subtitle is-5">
-                    Sizes
-                </h4>
-                <div className="columns">
-                    <div className="column is-2">
-                        <Dropdown
-                            hideOnOuterClick={true}
-                            items={Sizes.selectableItems}
-                            onSelect={sizeLookupParams.onValueSelect}
-                            value={sizeLookupParams.selectedValue}
-                            placeholder="Size"
-                            deselectable={false}
-                        />
-                    </div>
-                    <div className="column">
-                        <pre>{`<Search size={ElementSize.${Sizes.keys[+sizeLookupParams.selectedValue!.id]}} />`}
-                        </pre>
-                    </div>
-                </div>
-
-                <SearchComponent caption="searchType" onSearch={emptyFn} searchType="byTyping" size={sizeLookupParams.value} />
-            </div>
+            <DemoComponentTitleInfoMessage name="Search" />
+            <ComponentUseCase
+                caption="Default"
+                code={`<Search caption="Default search" onSearch={onSearchHandler} searchType="byButton" />`}
+                description="Default search props is caption, search handler and type"
+                component={<SearchComponent caption="Default search" onSearch={emptyFn} searchType="byButton" />}
+            />
+            <CommonPropsSuppressExampleInfoMessage />
+            <ComponentUseCase
+                caption="searchType"
+                captionIsCode
+                code={`<Search searchType="byButton" />`}
+                description={`Type describes way to call search function. It either by special button, either by typing text.
+                "By button" will render a button and search handler will be invoked only after click on that button`}
+                component={<SearchComponent searchType="byButton" caption="Default search" onSearch={emptyFn} />}
+            />
+            <ComponentUseCase
+                caption="searchType"
+                captionIsCode
+                code={`<Search searchType="byTyping" />`}
+                description={`"By typing" will not render button and will emit search handler after each inserted symbol`}
+                component={<SearchComponent searchType="byTyping" caption="Default search" onSearch={emptyFn} />}
+            />
+            <ComponentUseCase
+                caption="defaultValue"
+                captionIsCode
+                code={`<Search defaultValue="defaultValue" />`}
+                description={`Value that would be used as initial value`}
+                component={<SearchComponent defaultValue="defaultValue" caption="Default search" onSearch={emptyFn} searchType="byButton" />}
+            />
+            <ComponentUseCase
+                caption="rounded"
+                captionIsCode
+                code={`<Search rounded />`}
+                description={`Input field will have rounded corners`}
+                component={<SearchComponent rounded caption="Default search" onSearch={emptyFn} searchType="byButton" />}
+            />
+            <ComponentUseCase
+                caption="disabled"
+                captionIsCode
+                code={`<Search disabled />`}
+                description={`Input field will be disabled`}
+                component={<SearchComponent disabled caption="Default search" onSearch={emptyFn} searchType="byButton" />}
+            />
+            <ComponentUseCase
+                caption="isLoading"
+                captionIsCode
+                code={`<Search isLoading />`}
+                description={`Displays loading spinner in the end of the control`}
+                component={<SearchComponent isLoading caption="Default search" onSearch={emptyFn} searchType="byButton" />}
+            />
+            <ComponentSizeCase
+                caption="Sizes"
+                codeProvider={id => `<Search size={ElementSize.${id}}/>`}
+                description="Component supports all available sizes"
+                componentProvider={
+                    size =>
+                        <SearchComponent size={size} caption="Default search" onSearch={emptyFn} searchType="byButton" />
+                }
+            />
         </section>
     )
 }
