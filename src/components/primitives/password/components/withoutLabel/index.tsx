@@ -11,9 +11,10 @@ import { PasswordProps } from "@bbr/components/password";
 const PasswordWithoutLabel = ({
     onValueChange, disabled, validationState,
     name,
-    className, size, style, rounded, loading,
+    className, size, style,
+    rounded = false, loading = false,
     placeholder,
-    canShowPassword,
+    canShowPassword = false,
 }: PasswordProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
@@ -30,7 +31,7 @@ const PasswordWithoutLabel = ({
     const elClassName = getClassName([
         className,
         elSizeClassName,
-        rounded === true ? "is-rounded" : "",
+        rounded ? "is-rounded" : "",
         styleClassName,
         "bbr-password",
         "input",
@@ -39,7 +40,7 @@ const PasswordWithoutLabel = ({
     const containerClassName = getClassName([
         "control",
         "bbr-input",
-        loading === true ? "is-loading" : "",
+        loading ? "is-loading" : "",
         canShowPassword ? "has-icons-right" : "",
         "bbr-password__wrapper",
     ]);

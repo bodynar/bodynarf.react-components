@@ -11,7 +11,8 @@ import { TextProps } from "@bbr/components/text";
 const TextWithLabel = ({
     onValueChange, readonly, disabled, defaultValue, validationState,
     name,
-    className, size, style, rounded, loading,
+    className, size, style,
+    rounded = false, loading = false,
     label, placeholder,
     onBlur,
 }: TextProps): JSX.Element => {
@@ -28,14 +29,14 @@ const TextWithLabel = ({
     const elClassName = getClassName([
         className,
         elSizeClassName,
-        rounded === true ? "is-rounded" : "",
+        rounded ? "is-rounded" : "",
         styleClassName,
         "input",
     ]);
 
     const inputContainerClassName = getClassName([
         "control",
-        loading === true ? "is-loading" : "",
+        loading ? "is-loading" : "",
     ]);
 
     const labelClassName = getClassName([

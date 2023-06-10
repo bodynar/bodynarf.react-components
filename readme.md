@@ -15,26 +15,30 @@ Small library with react components based on Bulma CSS framework&nbsp; <a href="
 5. *(Optional)* To use **Checkbox** component - install [bulma-checkradio](https://www.npmjs.com/package/bulma-checkradio) and make sure you imported these styles in parent container
 
 ## Description
+Mostly all components have root css class with `bbr-` prefix. BBR - Bodynarf Bulma React
 
-Mostly all components have root class with `bbr-` prefix. BBR - Bodynarf Bulma React
 ### Simple components
 Simple react components based on html elements.
 
- - **ColorPicker** - control that allows picking color (with preview option)
- - **Date** - date input;
- - **Multiline** - multiline text input;
- - **Text** - single line text input;
- - **Anchor**
- - **Button**
- - **Number**
- - **Password** - single line password input (requires icon, see *p.4*)
- - **Icon** - *see p.4 of installation*
- - **Dropdown** - custom dropdown component, based on html div elements & css. Allows to use icon in elements
+#### Controls
  - **Checkbox** - (*see p.5 of installation*) Checkbox component based on [bulma-checkradio](https://wikiki.github.io/form/checkradio)
+ - **ColorPicker** - control that allows picking color (with preview option)
+ - **Date** - date input
+ - **Multiline** - multiline text input
+ - **Number** - number input with step
+ - **Password** - single line password input (requires icon, see icon component description)
+ - **Text** - single line text input;
+
+#### Components
+ - **Anchor** - simple anchor (link) component
+ - **Button** - button that allows user to interact with system by clicking it _(assume everyone knows what is button)_
+ - **Icon** - *see p.4 of installation*
+ - **Tag** - small component stands for tag visualization
 
 ### Complex components
 Complex components is set of components built via combining simple components or represent complex logical component
- - **Search** - Search bar with optional button to perform search
+ - **Accordion** - Collapsible container that can hide some content inside
+ - **Dropdown** - custom dropdown component, based on html div elements & css (requires icon, see icon component description)
  - **Paginator** - Pagination elements to navigate through paged list
   
 	Example:
@@ -50,8 +54,10 @@ Complex components is set of components built via combining simple components or
 			onPageChange={onPageChange}
 		/>
 	```
+ - **Search** - Search bar with optional button to perform search
+ - **Tabs** - Container for multi-content with option of switching displaying content without refreshing\scrolling page
  
 ### Hooks
 
- - **useComponentOutsideClick** - Attach watcher for mouse clicks and emmit event when click was outside of component
+ - **useComponentOutsideClick** - Attach watcher for mouse clicks and emit event when click was outside of component
  - **usePagination** - Create a pagination config to easily manipulate with Paginator component

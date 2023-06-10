@@ -11,7 +11,8 @@ import { TextProps } from "@bbr/components/text";
 const TextWithoutLabel = ({
     onValueChange, readonly, disabled, defaultValue, validationState,
     name,
-    className, size, style, rounded, loading,
+    className, size, style,
+    rounded = false, loading = false,
     placeholder,
     onBlur,
 }: TextProps): JSX.Element => {
@@ -25,7 +26,7 @@ const TextWithoutLabel = ({
     const elClassName = getClassName([
         className,
         "is-{0}".format(getValueOrDefault(size, ElementSize.Normal)),
-        rounded === true ? "is-rounded" : "",
+        rounded ? "is-rounded" : "",
         styleClassName,
         "input",
     ]);
@@ -33,7 +34,7 @@ const TextWithoutLabel = ({
     const containerClassName = getClassName([
         "control",
         "bbr-input",
-        loading === true ? "is-loading" : "",
+        loading ? "is-loading" : "",
     ]);
 
     const id = name || generateGuid();

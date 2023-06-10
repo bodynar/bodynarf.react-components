@@ -14,7 +14,7 @@ const DropdownCompact = ({
     value, onSelect,
     deselectable,
     className, hideOnOuterClick, listMaxHeight,
-    placeholder, compact, disabled,
+    placeholder, compact = false, disabled = false,
     validationState,
 }: DropdownProps): JSX.Element => {
     const id = useId();
@@ -35,7 +35,7 @@ const DropdownCompact = ({
 
             const dataValue = target.dataset["dropdownItemValue"];
 
-            if (isNullOrEmpty(dataValue)) {
+            if (isNullOrUndefined(dataValue)) {
                 return;
             }
 
@@ -83,14 +83,13 @@ const DropdownCompact = ({
 
     const classNames: string = getClassName([
         "bbr-dropdown",
-        (disabled ?? false) ? "bbr-dropdown--disabled" : "",
-        (compact ?? false) ? "bbr-dropdown--compact" : "",
+        disabled ? "bbr-dropdown--disabled" : "",
+        compact ? "bbr-dropdown--compact" : "",
         isListVisible ? "is-active" : "",
         isNullOrEmpty(listMaxHeight) ? "bbr-dropdown--height-default" : "",
         className,
         "dropdown",
     ]);
-
 
     return (
         <>

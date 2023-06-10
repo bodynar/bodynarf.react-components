@@ -47,7 +47,7 @@ export interface TabsProps extends BaseElementProps {
 const Tabs = ({
     items, onActiveItemChange,
     defaultActive,
-    size, position, style, fullWidth,
+    size, position, style, fullWidth = false,
 
     className, title, data,
 }: TabsProps): JSX.Element => {
@@ -101,7 +101,7 @@ const Tabs = ({
         position ?? TabsPosition.left,
         getSizeClassName(size, [ElementSize.Normal]),
         style ?? TabsStyle.default,
-        fullWidth === true ? "is-fullwidth" : "",
+        fullWidth ? "is-fullwidth" : "",
         className,
     ]);
 

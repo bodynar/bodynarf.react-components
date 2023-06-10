@@ -8,15 +8,13 @@ import "./style.scss";
 /** Single tag item */
 const Tag = ({
     content,
-    size, style, rounded, lightColor, customColor,
+    size = ElementSize.Normal,
+    style = ElementColor.Default,
+    rounded = false, lightColor = false, customColor,
     onClick,
 
     className, title,
 }: TagProps): JSX.Element => {
-
-    size ??= ElementSize.Normal;
-    style ??= ElementColor.Default;
-
     if (!isNullOrUndefined(customColor)) {
         style = ElementColor.Default;
     }
@@ -26,8 +24,8 @@ const Tag = ({
         "tag",
         style === ElementColor.Default ? "" : `is-${style}`,
         !isNullOrUndefined(customColor) ? "bbr-tag--custom" : "",
-        lightColor === true && isNullOrUndefined(customColor) ? "is-light" : "",
-        rounded === true ? "is-rounded" : "",
+        lightColor && isNullOrUndefined(customColor) ? "is-light" : "",
+        rounded ? "is-rounded" : "",
         size === ElementSize.Normal || size === ElementSize.Small ? "" : `is-${size}`,
         isNullOrUndefined(onClick) ? "" : "bbr-tag--clickable",
         className,

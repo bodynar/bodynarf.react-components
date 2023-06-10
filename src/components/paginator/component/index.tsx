@@ -10,7 +10,7 @@ import { generatePageNumbers, PaginatorProps } from "@bbr/components/paginator";
 */
 export default function Paginator({
     count, onPageChange, currentPage,
-    position, rounded, size, className,
+    position, rounded = false, size, className,
     showNextButtons, nearPagesCount
 }: PaginatorProps): JSX.Element {
     const page = currentPage || 0;
@@ -45,7 +45,7 @@ export default function Paginator({
         "bbr-paginator",
         "pagination",
         paginationPositionToClassMap.has(position || "") ? paginationPositionToClassMap.get(position || "") : "",
-        rounded == true ? "is-rounded" : "",
+        rounded ? "is-rounded" : "",
         isNullOrEmpty(size) ? "" : `is-${size}`,
         className
     ]);

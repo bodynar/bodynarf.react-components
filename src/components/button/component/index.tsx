@@ -18,17 +18,25 @@ export default function Button(props: ButtonProps): JSX.Element {
         throw new Error("No button content provided.");
     }
 
+    const {
+        light = false,
+        outlined = false,
+        rounded = false,
+        isLoading = false,
+        static: isStatic = false
+    } = props;
+
     const className: string = getClassName([
         "button",
         "bbr-button",
         props.className,
         `is-${props.type}`,
-        props.light === true ? "is-light" : "",
+        light ? "is-light" : "",
         !isNullOrUndefined(props.size) ? `is-${props.size}` : "",
-        props.outlined === true ? "is-outlined" : "",
-        props.rounded === true ? "is-rounded" : "",
-        props.isLoading === true ? "is-loading" : "",
-        props.static === true ? "is-static" : "",
+        outlined ? "is-outlined" : "",
+        rounded ? "is-rounded" : "",
+        isLoading ? "is-loading" : "",
+        isStatic ? "is-static" : "",
     ]);
 
     const data = isNullOrUndefined(props.data)

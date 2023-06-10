@@ -12,7 +12,8 @@ import { SearchProps } from "@bbr/components/search";
 export default function Search({
     searchType, onSearch, caption,
     name, defaultValue,
-    size, isLoading, rounded, disabled,
+    size,
+    isLoading = false, rounded = false, disabled,
 }: SearchProps): JSX.Element {
     const [elementName] = useState<string>(name || generateGuid());
     const [searchValue, setSearchValue] = useState<string>(defaultValue || "");
@@ -34,7 +35,7 @@ export default function Search({
         "bbr-search",
         "control",
         `is-${(size || "normal")}`,
-        isLoading === true ? "is-loading" : "",
+        isLoading ? "is-loading" : "",
         searchType === "byButton" ? "is-expanded" : "",
     ]);
 
@@ -42,7 +43,7 @@ export default function Search({
         "input",
         "is-unselectable",
         `is-${(size || "normal")}`,
-        rounded === true ? "is-rounded" : "",
+        rounded ? "is-rounded" : "",
     ]);
 
     if (searchType === "byButton") {

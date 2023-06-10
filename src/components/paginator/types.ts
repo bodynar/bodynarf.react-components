@@ -14,7 +14,7 @@ export interface PaginatorProps {
      * Page numbers position.
      * Useful with `showNextButtons = true`
     */
-    position?:
+    position?: // TODO: to enum (ElementPosition ?)
     | "left" /* default */
     | "center"
     | "right"
