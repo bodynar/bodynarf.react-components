@@ -10,8 +10,10 @@ import { generatePageNumbers, PaginatorProps } from "@bbr/components/paginator";
 */
 export default function Paginator({
     count, onPageChange, currentPage,
-    position, rounded = false, size, className,
-    showNextButtons, nearPagesCount
+    position,
+    size, className,
+    rounded = false, showNextButtons = false,
+    nearPagesCount
 }: PaginatorProps): JSX.Element {
     const page = currentPage || 0;
 
@@ -52,7 +54,7 @@ export default function Paginator({
 
     return (
         <nav className={classNames} role="navigation" aria-label="pagination">
-            {showNextButtons === true &&
+            {showNextButtons &&
                 <>
                     <a
                         className={`pagination-previous${canGoBack ? "" : " is-disabled"}`}

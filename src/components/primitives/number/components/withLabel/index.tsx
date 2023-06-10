@@ -11,10 +11,10 @@ import { NumberProps } from "@bbr/components/number";
 const NumberWithLabel = ({
     onValueChange, readonly, disabled, defaultValue, validationState,
     name,
-    className, size, style, rounded, loading,
+    className, size, style, rounded = false, loading = false,
     label, placeholder,
     onBlur,
-    step,
+    step = 1,
 }: NumberProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) =>
@@ -30,14 +30,14 @@ const NumberWithLabel = ({
     const elClassName = getClassName([
         className,
         elSizeClassName,
-        rounded === true ? "is-rounded" : "",
+        rounded ? "is-rounded" : "",
         styleClassName,
         "input",
     ]);
 
     const inputContainerClassName = getClassName([
         "control",
-        loading === true ? "is-loading" : "",
+        loading ? "is-loading" : "",
     ]);
 
     const labelClassName = getClassName([
@@ -82,7 +82,7 @@ const NumberWithLabel = ({
                                 onBlur={onBlur}
                                 name={id}
                                 id={id}
-                                step={step ?? 1}
+                                step={step}
                             />
                         </div>
                         {isValidationDefined && validationMessages.length > 0 &&
@@ -114,7 +114,7 @@ const NumberWithLabel = ({
                     onBlur={onBlur}
                     name={id}
                     id={id}
-                    step={step ?? 1}
+                    step={step}
                 />
             </div>
             {isValidationDefined && validationMessages.length > 0 &&

@@ -1,24 +1,9 @@
 import { ElementIcon } from "@bbr/components";
 
 /** Anchor component props type */
-export interface AnchorProps {
-    /** Link destination */
-    href?: string;
-
-    /** Link caption  */
-    caption?: string;
-
-    /** Click handler */
-    onClick?: () => void;
-
+export interface AnchorProps extends Omit<SimpleAnchorProps, "className"> {
     /** Configuration od inner icon */
     icon?: ElementIcon;
-
-    /** Title of anchor */
-    title?: string;
-
-    /** Where to open the linked document */
-    target?: "_blank" | "_top";
 
     /** Additional class names */
     className?: string;

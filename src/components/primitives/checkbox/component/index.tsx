@@ -11,8 +11,9 @@ const CheckBox = ({
     label,
     onValueChange, defaultValue,
     name, disabled,
-    rounded, size, style, block, withoutBorder, hasBackgroundColor, fixBackgroundColor,
-    isFormLabel,
+    size, style,
+    rounded = false, block = false, withoutBorder = false, hasBackgroundColor = false, fixBackgroundColor = false,
+    isFormLabel = false,
 }: CheckBoxProps): JSX.Element => {
     const onChecked = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.checked),
@@ -24,16 +25,16 @@ const CheckBox = ({
     const className = getClassName([
         "is-checkradio",
         "m-check-radio",
-        (hasBackgroundColor ?? false) ? "has-background-color" : "",
-        (fixBackgroundColor ?? false) && (hasBackgroundColor ?? false) ? "m-has-background-color" : "",
+        hasBackgroundColor ? "has-background-color" : "",
+        fixBackgroundColor && hasBackgroundColor ? "m-has-background-color" : "",
         isNullOrUndefined(size) ? "" : size === "normal" ? "" : `is-${size}`,
-        (rounded ?? false) ? "is-circle" : "",
+        rounded ? "is-circle" : "",
         isNullOrUndefined(style) ? "" : `is-${style}`,
-        (block ?? false) ? "is-block" : "",
-        (withoutBorder ?? false) ? "has-no-border" : "",
+        block ? "is-block" : "",
+        withoutBorder ? "has-no-border" : "",
     ]);
 
-    if (!isNullOrUndefined(label) && isFormLabel === true) {
+    if (!isNullOrUndefined(label) && isFormLabel) {
         const labelClassName = getClassName([
             "label",
             label!.className

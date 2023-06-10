@@ -14,13 +14,14 @@ import { AccordionProps } from "@bbr/components/accordion";
 /** Accordion panel */
 const Accordion = ({
     children, caption,
-    style, size, defaultExpanded,
+    style, size = ElementSize.Medium,
+    defaultExpanded = false,
     onToggle,
     className, data, title,
 }: AccordionProps): JSX.Element => {
     const expandablePanelRef = useRef<HTMLDivElement>(null);
-    const [isExpanded, setIsExpanded] = useState(defaultExpanded ?? false);
-    const [maxHeight, setMaxHeight] = useState<number | undefined>(defaultExpanded === true ? undefined : 0);
+    const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+    const [maxHeight, setMaxHeight] = useState<number | undefined>(defaultExpanded ? undefined : 0);
 
     const toggleCollapse = useCallback(
         () => setMaxHeight(isExpanded ? 0 : expandablePanelRef.current!.scrollHeight),
@@ -28,7 +29,7 @@ const Accordion = ({
     );
 
     useEffect(() => {
-        if (defaultExpanded === true && !isNullOrUndefined(expandablePanelRef.current)) {
+        if (defaultExpanded && !isNullOrUndefined(expandablePanelRef.current)) {
             setMaxHeight(expandablePanelRef.current!.scrollHeight);
         }
     }, [defaultExpanded]);
@@ -65,7 +66,7 @@ const Accordion = ({
                 </span>
                 <Icon
                     name="arrow-down"
-                    size={size ?? ElementSize.Medium}
+                    size={size}
                 />
             </div>
             <div

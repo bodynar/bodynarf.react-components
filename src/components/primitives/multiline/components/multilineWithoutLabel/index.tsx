@@ -12,8 +12,8 @@ const MultilineWithoutLabel = ({
     onValueChange, defaultValue, validationState,
     name, placeholder,
     onBlur,
-    className, size, style, rounded, loading,
-    fixed, rows,
+    className, size, style, rounded = false, loading = false,
+    fixed = false, rows,
 }: MultilineProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLTextAreaElement>) => onValueChange(event.target.value),
@@ -26,16 +26,16 @@ const MultilineWithoutLabel = ({
     const elClassName = getClassName([
         className,
         "is-{0}".format(getValueOrDefault(size, ElementSize.Normal)),
-        rounded === true ? "is-rounded" : "",
+        rounded ? "is-rounded" : "",
         styleClassName,
         "textarea",
-        fixed === true ? "has-fixed-size" : "",
+        fixed ? "has-fixed-size" : "",
     ]);
 
     const inputContainerClassName = getClassName([
         "control",
         "bbr-input",
-        loading === true ? "is-loading" : "",
+        loading ? "is-loading" : "",
     ]);
 
     return (

@@ -12,8 +12,9 @@ function ColorPickerWithoutLabel({
     showPreview,
     name,
     defaultValue, validationState,
-    onChange,
-    data, disabled,
+    onValueChange,
+    data,
+    disabled = false, rounded = false,
 }: ColorPickerProps) {
     const defaultColor = isNullOrUndefined(defaultValue)
         ? whiteHex
@@ -21,14 +22,14 @@ function ColorPickerWithoutLabel({
 
     const [value, setValue] = useState(defaultColor);
 
-    const onValueChange = useCallback(
+    const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value),
         [setValue]
     );
 
     useEffect(
-        () => onChange?.call(undefined, hexToRgb(value)!),
-        [onChange, value]
+        () => onValueChange?.call(undefined, hexToRgb(value)!),
+        [onValueChange, value]
     );
 
     const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(undefined, validationState);
@@ -36,6 +37,7 @@ function ColorPickerWithoutLabel({
     const elClassName = getClassName([
         className,
         styleClassName,
+        rounded ? "is-rounded" : "",
         "input",
     ]);
 
@@ -60,7 +62,7 @@ function ColorPickerWithoutLabel({
                     disabled={disabled}
                     showPreview={showPreview}
                     defaultColor={defaultColor}
-                    onValueChange={onValueChange}
+                    onValueChange={onChange}
                     value={value}
                     id={id}
                     title={title}
@@ -81,7 +83,7 @@ function ColorPickerWithoutLabel({
                 disabled={disabled}
                 showPreview={showPreview}
                 defaultColor={defaultColor}
-                onValueChange={onValueChange}
+                onValueChange={onChange}
                 value={value}
                 id={id}
                 title={title}

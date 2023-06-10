@@ -11,9 +11,9 @@ import { MultilineProps } from "@bbr/components/multiline";
 const MultilineWithLabel = ({
     defaultValue, onValueChange, validationState, readonly, disabled,
     name,
-    className, size, style, rounded, loading,
+    className, size, style, rounded = false, loading = false,
     label, placeholder,
-    fixed, rows,
+    fixed = false, rows,
     onBlur
 }: MultilineProps): JSX.Element => {
     const onChange = useCallback(
@@ -29,15 +29,15 @@ const MultilineWithLabel = ({
     const elClassName = getClassName([
         className,
         elSizeClassName,
-        rounded === true ? "is-rounded" : "",
+        rounded ? "is-rounded" : "",
         styleClassName,
         "textarea",
-        fixed === true ? "has-fixed-size" : "",
+        fixed ? "has-fixed-size" : "",
     ]);
 
     const inputContainerClassName = getClassName([
         "control",
-        loading === true ? "is-loading" : "",
+        loading ? "is-loading" : "",
     ]);
 
     const labelClassName = getClassName([

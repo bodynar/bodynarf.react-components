@@ -12,7 +12,7 @@ import DropdownLabel from "@bbr/components/dropdown/components/label";
 const DropdownCompact = ({
     items,
     value, onSelect,
-    deselectable,
+    deselectable = false,
     className, hideOnOuterClick, listMaxHeight,
     placeholder, compact = false, disabled = false,
     validationState,
@@ -23,7 +23,7 @@ const DropdownCompact = ({
 
     const onItemClick = useCallback(
         (event: React.MouseEvent<HTMLLIElement>) => {
-            if (disabled ?? false) {
+            if (disabled) {
                 return;
             }
 
@@ -56,7 +56,7 @@ const DropdownCompact = ({
 
     const onLabelClick = useCallback(
         (event: MouseEvent<HTMLLabelElement>): void => {
-            if (disabled ?? false) {
+            if (disabled) {
                 return;
             }
 
@@ -103,7 +103,7 @@ const DropdownCompact = ({
                     caption={placeholder}
                     onClick={onLabelClick}
                     className={styleClassName}
-                    deselectable={deselectable === true}
+                    deselectable={deselectable}
                 />
                 <div className="dropdown-menu">
                     {items.length > 0

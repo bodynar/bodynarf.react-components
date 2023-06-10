@@ -13,7 +13,7 @@ import { DateProps } from "@bbr/components/date";
 const DatePicker = ({
     defaultValue, onValueChange, readonly, disabled, validationState,
     name,
-    size, className, rounded, loading, style,
+    size, className, rounded = false, loading = false, style,
     label,
     onBlur
 }: DateProps): JSX.Element => {
@@ -36,13 +36,13 @@ const DatePicker = ({
         className,
         elSizeClassName,
         styleClassName,
-        rounded === true ? "is-rounded" : "",
+        rounded ? "is-rounded" : "",
         "input",
     ]);
 
     const inputContainerClassName = getClassName([
         "control",
-        loading === true ? "is-loading" : "",
+        loading ? "is-loading" : "",
     ]);
     const stringifiedDefValue = defaultValue?.toISOString().split("T")[0];
 

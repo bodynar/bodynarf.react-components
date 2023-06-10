@@ -59,7 +59,7 @@ export enum ElementColor {
 };
 
 /** Allowed icon position */
-export type IconPosition =
+export type IconPosition = // TODO: To Enum
     | "left"
     | "right";
 

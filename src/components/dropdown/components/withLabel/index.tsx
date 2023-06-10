@@ -12,7 +12,7 @@ import DropdownLabel from "@bbr/components/dropdown/components/label";
 const DropdownWithLabel = ({
     items,
     value, onSelect, validationState,
-    deselectable,
+    deselectable = false,
     className, hideOnOuterClick, listMaxHeight,
 
     label, placeholder, disabled = false,
@@ -126,7 +126,7 @@ const DropdownWithLabel = ({
                             <DropdownLabel
                                 className={styleClassName}
                                 caption={placeholder}
-                                deselectable={deselectable === true}
+                                deselectable={deselectable}
                                 selectedItem={value}
                                 onClick={onLabelClick}
                             />
@@ -171,7 +171,7 @@ const DropdownWithLabel = ({
                 <DropdownLabel
                     className={styleClassName}
                     caption={placeholder}
-                    deselectable={deselectable === true}
+                    deselectable={deselectable}
                     selectedItem={value}
                     onClick={onLabelClick}
                 />

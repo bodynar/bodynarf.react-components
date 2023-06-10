@@ -36,7 +36,7 @@ export interface ButtonProps extends BaseElementProps {
 };
 
 /** Button types according to Bulma framework */
-export type ButtonType =
+export type ButtonType = // TODO: to enum
     "default" /** color: transparent */
     | "primary" /** color: sea-wave green */
     | "link" /** color: blue-violet */

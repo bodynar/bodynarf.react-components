@@ -1,28 +1,14 @@
-import { Color } from "@bodynarf/utils";
-
-import { BaseElementProps, InputLabel, ValidationState } from "@bbr";
 import { CSSProperties } from "react";
 
+import { Color } from "@bodynarf/utils";
+
+import { BaseInputElementProps } from "@bbr";
+
 /** Color picker props type */
-export interface ColorPickerProps extends BaseElementProps {
-    /** Default color value */
-    defaultValue?: Color;
-
-    /** Label configuration */
-    label?: InputLabel;
-
-    /** Change extra handler */
-    onChange?: (color: Color) => void;
-
-    /** Name of element. Required for form elements */
-    name?: string;
-
-    /** Should be component disabled. Selecting is not allowed */
-    disabled?: boolean;
-
-    /** Current validation state */
-    validationState?: ValidationState;
-
+export interface ColorPickerProps extends Omit<BaseInputElementProps<Color>,
+    "style" | "loading"
+    | "size" | "readonly" | "placeholder"
+> {
     /**
      * Show text with color preview.
      * If set - outlined button-like element on the right will be rendered

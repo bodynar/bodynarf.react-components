@@ -46,8 +46,8 @@ export interface TabsProps extends BaseElementProps {
  */
 const Tabs = ({
     items, onActiveItemChange,
-    defaultActive,
-    size, position, style, fullWidth = false,
+    defaultActive = items[0],
+    size, position = TabsPosition.left, style = TabsStyle.default, fullWidth = false,
 
     className, title, data,
 }: TabsProps): JSX.Element => {
@@ -55,7 +55,7 @@ const Tabs = ({
         throw new Error("Invalid configuration. Tab items must be defined");
     }
 
-    const [activeItem, setActiveItem] = useState<TabItem>(defaultActive ?? items[0]);
+    const [activeItem, setActiveItem] = useState<TabItem>(defaultActive);
     const isFirstRun = useRef(true);
 
     const onTabsClick = useCallback(
@@ -98,9 +98,9 @@ const Tabs = ({
     const elClassName = getClassName([
         "bbr-tabs",
         "tabs",
-        position ?? TabsPosition.left,
+        position,
         getSizeClassName(size, [ElementSize.Normal]),
-        style ?? TabsStyle.default,
+        style,
         fullWidth ? "is-fullwidth" : "",
         className,
     ]);
