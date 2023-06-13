@@ -44,7 +44,7 @@ function App() {
 				</section>
 			</main>
 		</main>
-	)
+	);
 }
 
 /**
