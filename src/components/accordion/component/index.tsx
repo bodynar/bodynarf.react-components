@@ -28,14 +28,14 @@ const Accordion = ({
         [isExpanded]
     );
 
-    useEffect(() => {
+    useEffect((): void => {
         if (defaultExpanded && !isNullOrUndefined(expandablePanelRef.current)) {
             setMaxHeight(expandablePanelRef.current!.scrollHeight);
         }
     }, [defaultExpanded]);
 
-    useEffect(() => setIsExpanded(maxHeight !== 0), [maxHeight]);
-    useEffect(() => {
+    useEffect((): void => setIsExpanded(maxHeight !== 0), [maxHeight]);
+    useEffect((): void => {
         onToggle?.call(undefined, !isExpanded);
     }, [isExpanded, onToggle]);
 

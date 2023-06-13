@@ -24,12 +24,12 @@ function ColorPickerWithLabel({
     const [value, setValue] = useState(defaultColor);
 
     const onChange = useCallback(
-        (event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value),
+        (event: ChangeEvent<HTMLInputElement>): void => setValue(event.target.value),
         [setValue]
     );
 
     useEffect(
-        () => onValueChange?.call(undefined, hexToRgb(value)!),
+        (): void => onValueChange.call(undefined, hexToRgb(value)!),
         [onValueChange, value]
     );
 
