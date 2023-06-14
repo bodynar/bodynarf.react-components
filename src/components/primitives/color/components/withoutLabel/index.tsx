@@ -28,7 +28,7 @@ function ColorPickerWithoutLabel({
     );
 
     useEffect(
-        (): void => onValueChange.call(undefined, hexToRgb(value)!),
+        () => onValueChange(hexToRgb(value)!),
         [onValueChange, value]
     );
 
