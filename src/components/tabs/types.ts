@@ -28,7 +28,7 @@ export enum TabsStyle {
 /**
  * Tabs items position on component
  */
-export enum TabsPosition {
+export enum TabsPosition { // TODO: Use ElementPosition & map in component to get classname
     /** On the left side. Default value */
     "left" = "",
 
