@@ -120,28 +120,28 @@ const PickerWithPreview = ({
 
     const color = getFontColorFromString(value);
 
-    const controlClassNames = getClassName([
-        className,
+    const controlContainerClassName = getClassName([
+        containerClassName,
         "is-flex-grow-1",
-        previewConfig!.position === ElementPosition.Left ? "ml-1" : "mr-1"
+        previewConfig!.position === ElementPosition.Left ? "ml-1" : "mr-1",
     ]);
 
     if (previewConfig!.position === ElementPosition.Left) {
         return (
             <div className="is-flex is-flex-direction-row is-flex-wrap-nowrap is-justify-content-start">
-                <div className={containerClassName}>
-                    <button
-                        className={classNames}
-                        style={{
-                            "--color-picker__background-color": value,
-                            "--color-picker__color": color,
-                        } as ColorPickerCssProperties}
-                    >
-                        {value}
-                    </button>
+                <button
+                    className={classNames}
+                    style={{
+                        "--color-picker__background-color": value,
+                        "--color-picker__color": color,
+                    } as ColorPickerCssProperties}
+                >
+                    {value}
+                </button>
+                <div className={controlContainerClassName}>
                     <input
                         type="color"
-                        className={controlClassNames}
+                        className={className}
                         disabled={disabled}
                         defaultValue={defaultColor}
                         onChange={onValueChange}
@@ -160,10 +160,10 @@ const PickerWithPreview = ({
 
     return (
         <div className="is-flex is-flex-direction-row is-flex-wrap-nowrap is-justify-content-start">
-            <div className={containerClassName}>
+            <div className={controlContainerClassName}>
                 <input
                     type="color"
-                    className={controlClassNames}
+                    className={className}
                     disabled={disabled}
                     defaultValue={defaultColor}
                     onChange={onValueChange}
