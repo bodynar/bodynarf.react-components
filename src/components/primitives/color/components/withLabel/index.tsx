@@ -9,12 +9,12 @@ import ColorPickerControl from "../picker";
 /** Color picker component with form label */
 function ColorPickerWithLabel({
     className, title,
-    showPreview,
+    preview,
     name,
     defaultValue, validationState,
     onValueChange,
     data,
-    disabled = false, rounded = false,
+    disabled = false, rounded = false, size,
     label,
 }: ColorPickerProps) {
     const defaultColor = isNullOrUndefined(defaultValue)
@@ -39,13 +39,13 @@ function ColorPickerWithLabel({
         className,
         styleClassName,
         rounded ? "is-rounded" : "",
+        isNullOrUndefined(size) ? "" : `is-${size}`,
         "input",
     ]);
 
     const inputContainerClassName = getClassName([
         "control",
         "bbr-input",
-        showPreview ? "column" : "",
     ]);
 
     const dataAttributes = isNullOrUndefined(data)
@@ -84,19 +84,19 @@ function ColorPickerWithLabel({
                 <div className={fieldContainerClassName}>
                     <div className="field">
                         <ColorPickerControl
-                            containerClassName={inputContainerClassName}
-                            className={elClassName}
-                            disabled={disabled}
-                            showPreview={showPreview}
-                            defaultColor={defaultColor}
-                            onValueChange={onChange}
-                            value={value}
                             id={id}
+                            value={value}
                             title={title}
-                            dataAttributes={dataAttributes}
-                            isValidationDefined={isValidationDefined}
-                            validationMessages={validationMessages}
+                            disabled={disabled}
+                            previewConfig={preview}
+                            className={elClassName}
+                            onValueChange={onChange}
+                            defaultColor={defaultColor}
                             styleClassName={styleClassName}
+                            dataAttributes={dataAttributes}
+                            validationMessages={validationMessages}
+                            isValidationDefined={isValidationDefined}
+                            containerClassName={inputContainerClassName}
                         />
                     </div>
                 </div>
@@ -113,19 +113,19 @@ function ColorPickerWithLabel({
                 {label!.caption}
             </label>
             <ColorPickerControl
-                containerClassName={inputContainerClassName}
-                className={elClassName}
-                disabled={disabled}
-                showPreview={showPreview}
-                defaultColor={defaultColor}
-                onValueChange={onChange}
-                value={value}
                 id={id}
+                value={value}
                 title={title}
+                disabled={disabled}
+                previewConfig={preview}
+                className={elClassName}
+                onValueChange={onChange}
+                defaultColor={defaultColor}
                 dataAttributes={dataAttributes}
-                isValidationDefined={isValidationDefined}
-                validationMessages={validationMessages}
                 styleClassName={styleClassName}
+                validationMessages={validationMessages}
+                isValidationDefined={isValidationDefined}
+                containerClassName={inputContainerClassName}
             />
         </div>
     );
