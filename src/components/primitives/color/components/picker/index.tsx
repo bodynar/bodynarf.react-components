@@ -122,7 +122,7 @@ const PickerWithPreview = ({
 
     const controlClassNames = getClassName([
         className,
-        "is-flex-grow-0",
+        "is-flex-grow-1",
         previewConfig!.position === ElementPosition.Left ? "ml-1" : "mr-1"
     ]);
 
@@ -173,17 +173,15 @@ const PickerWithPreview = ({
                     {...dataAttributes}
                 />
             </div>
-            <div className="column is-2">
-                <button
-                    className={classNames}
-                    style={{
-                        "--color-picker__background-color": value,
-                        "--color-picker__color": color,
-                    } as ColorPickerCssProperties}
-                >
-                    {value}
-                </button>
-            </div>
+            <button
+                className={classNames}
+                style={{
+                    "--color-picker__background-color": value,
+                    "--color-picker__color": color,
+                } as ColorPickerCssProperties}
+            >
+                {value}
+            </button>
             {isValidationDefined && validationMessages.length > 0 &&
                 <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
             }
