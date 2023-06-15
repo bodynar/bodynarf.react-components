@@ -58,6 +58,21 @@ export enum ElementColor {
     Danger = "danger",
 };
 
+/** Position of element */
+export enum ElementPosition {
+    /** Left aligned */
+    Left = "left",
+
+    /** Center aligned */
+    Center = "center",
+
+    /** Right aligned */
+    Right = "right",
+}
+
+/** Element position, but without center placement */
+export type ElementFloatPosition = ElementPosition.Left | ElementPosition.Right;
+
 /** Allowed icon position */
 export type IconPosition = // TODO: To Enum
     | "left"

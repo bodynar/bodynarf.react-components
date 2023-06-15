@@ -9,12 +9,12 @@ import ColorPickerControl from "../picker";
 /** Color picker component without form label */
 function ColorPickerWithoutLabel({
     className, title,
-    showPreview,
+    preview,
     name,
     defaultValue, validationState,
     onValueChange,
     data,
-    disabled = false, rounded = false,
+    disabled = false, rounded = false, size,
 }: ColorPickerProps) {
     const defaultColor = isNullOrUndefined(defaultValue)
         ? whiteHex
@@ -28,7 +28,7 @@ function ColorPickerWithoutLabel({
     );
 
     useEffect(
-        () => onValueChange?.call(undefined, hexToRgb(value)!),
+        () => onValueChange(hexToRgb(value)!),
         [onValueChange, value]
     );
 
@@ -38,13 +38,13 @@ function ColorPickerWithoutLabel({
         className,
         styleClassName,
         rounded ? "is-rounded" : "",
+        isNullOrUndefined(size) ? "" : `is-${size}`,
         "input",
     ]);
 
     const containerClassName = getClassName([
         "control",
         "bbr-input",
-        showPreview ? "column" : "",
     ]);
 
     const dataAttributes = isNullOrUndefined(data)
@@ -53,44 +53,22 @@ function ColorPickerWithoutLabel({
 
     const id = name || generateGuid();
 
-    if (showPreview) {
-        return (
-            <div className="bbr-color-picker">
-                <ColorPickerControl
-                    containerClassName={containerClassName}
-                    className={elClassName}
-                    disabled={disabled}
-                    showPreview={showPreview}
-                    defaultColor={defaultColor}
-                    onValueChange={onChange}
-                    value={value}
-                    id={id}
-                    title={title}
-                    dataAttributes={dataAttributes}
-                    isValidationDefined={isValidationDefined}
-                    validationMessages={validationMessages}
-                    styleClassName={styleClassName}
-                />
-            </div>
-        );
-    }
-
     return (
         <div className="bbr-color-picker">
             <ColorPickerControl
-                containerClassName={containerClassName}
-                className={elClassName}
-                disabled={disabled}
-                showPreview={showPreview}
-                defaultColor={defaultColor}
-                onValueChange={onChange}
-                value={value}
                 id={id}
                 title={title}
+                value={value}
+                disabled={disabled}
+                className={elClassName}
+                previewConfig={preview}
+                onValueChange={onChange}
+                defaultColor={defaultColor}
                 dataAttributes={dataAttributes}
-                isValidationDefined={isValidationDefined}
-                validationMessages={validationMessages}
                 styleClassName={styleClassName}
+                validationMessages={validationMessages}
+                containerClassName={containerClassName}
+                isValidationDefined={isValidationDefined}
             />
         </div>
     );

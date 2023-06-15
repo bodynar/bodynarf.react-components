@@ -9,7 +9,7 @@ function Navbar() {
                 @bodynarf/react.components
             </div>
         </nav>
-    )
+    );
 }
 
 export default Navbar;

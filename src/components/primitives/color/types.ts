@@ -2,18 +2,18 @@ import { CSSProperties } from "react";
 
 import { Color } from "@bodynarf/utils";
 
-import { BaseInputElementProps } from "@bbr";
+import { BaseInputElementProps, ElementFloatPosition } from "@bbr";
 
 /** Color picker props type */
 export interface ColorPickerProps extends Omit<BaseInputElementProps<Color>,
     "style" | "loading"
-    | "size" | "readonly" | "placeholder"
+    | "readonly" | "placeholder"
 > {
     /**
-     * Show text with color preview.
-     * If set - outlined button-like element on the right will be rendered
+     * Preview text configuration.
+     * If provided - outlined button-like element will be rendered near picker according to configuration
      */
-    showPreview?: boolean;
+    preview?: ColorPickerPreviewConfig;
 }
 
 /** Color picker custom css properties */
@@ -23,4 +23,10 @@ export interface ColorPickerCssProperties extends CSSProperties {
 
     /** Color of text to contrast with background color */
     "--color-picker__color": string;
+}
+
+/** Configuration type for preview element of color picker */
+export interface ColorPickerPreviewConfig {
+    /** Placement of preview element */
+    position: ElementFloatPosition;
 }
