@@ -53,20 +53,21 @@ export default function Search({
                     <input
                         type="search"
                         name={elementName}
-                        defaultValue={searchValue}
-                        className={inputClassName}
                         disabled={disabled}
                         onChange={onChange}
                         placeholder={caption}
+                        defaultValue={searchValue}
+                        className={inputClassName}
                     />
                 </div>
                 <div className="control">
                     <Button
-                        caption="Search"
                         type="info"
-                        onClick={onSearchButtonClick}
-                        isLoading={isLoading}
+                        caption="Search"
                         size={size}
+                        disabled={disabled}
+                        isLoading={isLoading}
+                        onClick={onSearchButtonClick}
                     />
                 </div>
             </div>
