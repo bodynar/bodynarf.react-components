@@ -34,7 +34,7 @@ export default function Paginator({
             }
         }, [onPageChange, currentPage, count]);
 
-    const pageNumbers = useMemo(() => generatePageNumbers(page, count, nearPagesCount), [page, count]);
+    const pageNumbers = useMemo(() => generatePageNumbers(page, count, nearPagesCount), [page, count, nearPagesCount]);
 
     const canGoBack = useMemo(() => page > 1, [page]);
     const canGoForward = useMemo(() => page < count, [page, count]);

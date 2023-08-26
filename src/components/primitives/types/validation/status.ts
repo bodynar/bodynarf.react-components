@@ -8,4 +8,4 @@ export enum ValidationStatus {
 
     /** Value is invalid due some validator check */
     Invalid = "invalid",
-};
+}

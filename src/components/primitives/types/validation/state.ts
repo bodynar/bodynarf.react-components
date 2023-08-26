@@ -7,4 +7,4 @@ export interface ValidationState {
 
     /** Current status messages */
     messages: Array<string>;
-};
+}

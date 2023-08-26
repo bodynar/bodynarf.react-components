@@ -33,7 +33,7 @@ export interface ButtonProps extends BaseElementProps {
 
     /** Click action handler */
     onClick?: () => void;
-};
+}
 
 /** Button types according to Bulma framework */
 export type ButtonType = // TODO: to enum
@@ -56,9 +56,9 @@ export type ButtonType = // TODO: to enum
 export interface SimpleButtonProps extends Omit<ButtonProps, 'className'> {
     /** Button class name*/
     className: string;
-};
+}
 
 export interface ButtonWithIconProps extends SimpleButtonProps {
     /** Icon configuration */
     icon: ElementIcon;
-};
+}

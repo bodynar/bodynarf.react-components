@@ -56,7 +56,7 @@ export enum ElementColor {
 
     /** color: red */
     Danger = "danger",
-};
+}
 
 /** Position of element */
 export enum ElementPosition {
