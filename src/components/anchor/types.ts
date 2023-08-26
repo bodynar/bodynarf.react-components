@@ -36,4 +36,3 @@ export interface AnchorWithIconProps extends SimpleAnchorProps {
     /** Configuration of icon */
     icon: ElementIcon;
 }
-
