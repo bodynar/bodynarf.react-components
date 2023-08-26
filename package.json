@@ -23,16 +23,23 @@
     "scripts": {
         "build": "npx tsc && tsc-alias -p tsconfig.json",
         "copy_styles": "copyfiles -u 1 src/**/*.scss dist",
-        "copy_main" : "copyfiles package.json readme.md dist",
+        "copy_main": "copyfiles package.json readme.md dist",
         "transfer": "npm run copy_styles && npm run copy_main",
         "build_transfer": "npm run build && npm run transfer",
         "prepublish": "npm run build_transfer && cd dist && npm pack --dry-run",
-        "publish_pkg": "npm run build_transfer && cd dist && npm publish --access=public"
+        "publish_pkg": "npm run build_transfer && cd dist && npm publish --access=public",
+        "lint": "npx eslint src/**/*.ts src/**/*.tsx"
     },
     "devDependencies": {
         "@types/react": "^18.0.11",
         "@types/react-dom": "^18.0.5",
+        "@typescript-eslint/eslint-plugin": "^6.4.1",
+        "@typescript-eslint/parser": "^6.4.1",
         "copyfiles": "^2.4.1",
+        "eslint": "^8.48.0",
+        "eslint-plugin-import": "^2.28.1",
+        "eslint-plugin-react": "^7.33.2",
+        "eslint-plugin-react-hooks": "^4.6.0",
         "tsc-alias": "^1.8.6",
         "typescript": "^4.7.3"
     },
