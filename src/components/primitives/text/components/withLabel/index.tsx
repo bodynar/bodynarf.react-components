@@ -1,25 +1,24 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault, isStringEmpty } from "@bodynarf/utils";
+import { generateGuid, getClassName, getValueOrDefault, } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/components";
 import { getValidationValues } from "@bbr/utils";
 
-import { NumberProps } from "@bbr/components/number";
+import { TextProps } from "@bbr/components/text";
 import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
 
-/** Number component with label */
-const NumberWithLabel = ({
+/** Textual input with describing label */
+const TextWithLabel = ({
     onValueChange, readonly, disabled, defaultValue, validationState,
     name,
-    className, size, style, rounded = false, loading = false,
+    className, size, style,
+    rounded = false, loading = false,
     label, placeholder,
     onBlur,
-    step = 1,
-}: NumberProps): JSX.Element => {
+}: TextProps): JSX.Element => {
     const onChange = useCallback(
-        (event: ChangeEvent<HTMLInputElement>) =>
-            onValueChange(isStringEmpty(event.target.value) ? undefined : +event.target.value),
+        (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
         [onValueChange]
     );
 
@@ -49,7 +48,7 @@ const NumberWithLabel = ({
         >
             <div className={inputContainerClassName}>
                 <input
-                    type="number"
+                    type="text"
                     className={elClassName}
                     placeholder={placeholder}
                     readOnly={readonly}
@@ -59,7 +58,6 @@ const NumberWithLabel = ({
                     onBlur={onBlur}
                     name={id}
                     id={id}
-                    step={step}
                 />
             </div>
             {isValidationDefined && validationMessages.length > 0 &&
@@ -69,4 +67,4 @@ const NumberWithLabel = ({
     );
 };
 
-export default NumberWithLabel;
+export default TextWithLabel;

@@ -1,25 +1,24 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault, isStringEmpty } from "@bodynarf/utils";
+import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/components";
 import { getValidationValues } from "@bbr/utils";
 
-import { NumberProps } from "@bbr/components/number";
+import { MultilineProps } from "@bbr/components/multiline";
 import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
 
-/** Number component with label */
-const NumberWithLabel = ({
-    onValueChange, readonly, disabled, defaultValue, validationState,
+/** Multiline textual input component with describing label */
+const MultilineWithLabel = ({
+    defaultValue, onValueChange, validationState, readonly, disabled,
     name,
-    className, size, style, rounded = false, loading = false,
+    className, size, style, loading = false,
     label, placeholder,
-    onBlur,
-    step = 1,
-}: NumberProps): JSX.Element => {
+    fixed = false, rows,
+    onBlur
+}: MultilineProps): JSX.Element => {
     const onChange = useCallback(
-        (event: ChangeEvent<HTMLInputElement>) =>
-            onValueChange(isStringEmpty(event.target.value) ? undefined : +event.target.value),
+        (event: ChangeEvent<HTMLTextAreaElement>) => onValueChange(event.target.value),
         [onValueChange]
     );
 
@@ -31,9 +30,9 @@ const NumberWithLabel = ({
     const elClassName = getClassName([
         className,
         elSizeClassName,
-        rounded ? "is-rounded" : "",
         styleClassName,
-        "input",
+        "textarea",
+        fixed ? "has-fixed-size" : "",
     ]);
 
     const inputContainerClassName = getClassName([
@@ -48,8 +47,7 @@ const NumberWithLabel = ({
             size={getValueOrDefault(size, ElementSize.Normal)}
         >
             <div className={inputContainerClassName}>
-                <input
-                    type="number"
+                <textarea
                     className={elClassName}
                     placeholder={placeholder}
                     readOnly={readonly}
@@ -59,7 +57,7 @@ const NumberWithLabel = ({
                     onBlur={onBlur}
                     name={id}
                     id={id}
-                    step={step}
+                    rows={rows}
                 />
             </div>
             {isValidationDefined && validationMessages.length > 0 &&
@@ -69,4 +67,4 @@ const NumberWithLabel = ({
     );
 };
 
-export default NumberWithLabel;
+export default MultilineWithLabel;

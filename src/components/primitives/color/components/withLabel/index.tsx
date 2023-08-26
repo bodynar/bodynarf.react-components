@@ -3,9 +3,10 @@ import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { generateGuid, getClassName, hexToRgb, isNullOrUndefined, rgbToHex, whiteHex } from "@bodynarf/utils";
 
 import { ElementSize, getValidationValues, mapDataAttributes } from "@bbr";
+import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
+
 import { ColorPickerProps } from "../..";
 import ColorPickerControl from "../picker";
-import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
 
 /** Color picker component with form label */
 function ColorPickerWithLabel({
@@ -78,82 +79,6 @@ function ColorPickerWithLabel({
             />
         </ComponentWithLabel>
     );
-
-    // const labelClassName = getClassName([
-    //     "label",
-    //     label!.className
-    // ]);
-
-    // if (label!.horizontal) {
-    //     const labelContainerClassName = getClassName([
-    //         "field-label",
-    //         "is-normal",
-    //         label!.horizontalContainerClassName
-    //     ]);
-
-    //     const fieldContainerClassName = getClassName([
-    //         "field-body",
-    //         label!.horizontalFieldContainerClassName
-    //     ]);
-
-    //     return (
-    //         <div className="bbr-color-picker bbr-input field is-horizontal">
-    //             <div className={labelContainerClassName}>
-    //                 <label
-    //                     className={labelClassName}
-    //                     htmlFor={id}
-    //                 >
-    //                     {label!.caption}
-    //                 </label>
-    //             </div>
-    //             <div className={fieldContainerClassName}>
-    //                 <div className="field">
-    //                     <ColorPickerControl
-    //                         id={id}
-    //                         value={value}
-    //                         title={title}
-    //                         disabled={disabled}
-    //                         previewConfig={preview}
-    //                         className={elClassName}
-    //                         onValueChange={onChange}
-    //                         defaultColor={defaultColor}
-    //                         styleClassName={styleClassName}
-    //                         dataAttributes={dataAttributes}
-    //                         validationMessages={validationMessages}
-    //                         isValidationDefined={isValidationDefined}
-    //                         containerClassName={inputContainerClassName}
-    //                     />
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     );
-    // }
-
-    // return (
-    //     <div className="bbr-color-picker bbr-input field">
-    //         <label
-    //             className={labelClassName}
-    //             htmlFor={id}
-    //         >
-    //             {label!.caption}
-    //         </label>
-    //         <ColorPickerControl
-    //             id={id}
-    //             value={value}
-    //             title={title}
-    //             disabled={disabled}
-    //             previewConfig={preview}
-    //             className={elClassName}
-    //             onValueChange={onChange}
-    //             defaultColor={defaultColor}
-    //             dataAttributes={dataAttributes}
-    //             styleClassName={styleClassName}
-    //             validationMessages={validationMessages}
-    //             isValidationDefined={isValidationDefined}
-    //             containerClassName={inputContainerClassName}
-    //         />
-    //     </div>
-    // );
 }
 
 export default ColorPickerWithLabel;

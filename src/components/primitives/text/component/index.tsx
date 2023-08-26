@@ -4,8 +4,8 @@ import "../../../../common.scss";
 
 import { TextProps } from "@bbr/components";
 
-import TextWithLabel from "@bbr/components/text/components/textWithLabel";
-import TextWithoutLabel from "@bbr/components/text/components/textWithoutLabel";
+import TextWithLabel from "@bbr/components/primitives/text/components/withLabel";
+import TextWithoutLabel from "@bbr/components/primitives/text/components/withoutLabel";
 
 /** Textual input component */
 const Text = (props: TextProps): JSX.Element => {
