@@ -6,6 +6,7 @@ import "../../../../common.scss";
 
 import { ElementSize } from "@bbr/components";
 import { getValidationValues } from "@bbr/utils";
+import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
 
 import { DateProps } from "@bbr/components/date";
 
@@ -46,66 +47,12 @@ const DatePicker = ({
     ]);
     const stringifiedDefValue = defaultValue?.toISOString().split("T")[0];
 
-    const labelClassName = getClassName([
-        "label",
-        !label.horizontal ? elSizeClassName : "",
-        label.className
-    ]);
-
-    if (label.horizontal) {
-        const labelContainerClassName = getClassName([
-            "field-label",
-            elSizeClassName,
-            label.horizontalContainerClassName
-        ]);
-
-        const fieldContainerClassName = getClassName([
-            "field-body",
-            label.horizontalFieldContainerClassName
-        ]);
-
-        return (
-            <div className="bbr-input field is-horizontal">
-                <div className={labelContainerClassName}>
-                    <label
-                        className={labelClassName}
-                        htmlFor={id}
-                    >
-                        {label.caption}
-                    </label>
-                </div>
-                <div className={fieldContainerClassName}>
-                    <div className="field">
-                        <div className={inputContainerClassName}>
-                            <input
-                                type="date"
-                                className={elClassName}
-                                readOnly={readonly}
-                                disabled={disabled}
-                                defaultValue={stringifiedDefValue}
-                                onChange={onChange}
-                                onBlur={onBlur}
-                                name={id}
-                                id={id}
-                            />
-                        </div>
-                        {isValidationDefined && validationMessages.length > 0 &&
-                            <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-                        }
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div className="bbr-input field">
-            <label
-                className={labelClassName}
-                htmlFor={id}
-            >
-                {label.caption}
-            </label>
+        <ComponentWithLabel
+            id={id}
+            label={label!}
+            size={getValueOrDefault(size, ElementSize.Normal)}
+        >
             <div className={inputContainerClassName}>
                 <input
                     type="date"
@@ -122,7 +69,7 @@ const DatePicker = ({
             {isValidationDefined && validationMessages.length > 0 &&
                 <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
             }
-        </div>
+        </ComponentWithLabel>
     );
 };
 
