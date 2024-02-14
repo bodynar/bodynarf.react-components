@@ -10,6 +10,8 @@ export interface SelectableItem {
 
     /** Displaying text */
     displayValue: string;
+
+    // TODO: add title for hover for extra info
 }
 
 /** Dropdown component props type */
