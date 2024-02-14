@@ -2,6 +2,8 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
+import { mapDataAttributes } from "@bbr/utils";
+
 import "./style.scss";
 
 import { CheckBoxProps } from "@bbr/components/checkbox";
@@ -14,6 +16,8 @@ const CheckBox = ({
     size, style,
     rounded = false, block = false, withoutBorder = false, hasBackgroundColor = false, fixBackgroundColor = false,
     isFormLabel = false,
+
+    className, title, data,
 }: CheckBoxProps): JSX.Element => {
     const onChecked = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.checked),
@@ -22,9 +26,10 @@ const CheckBox = ({
 
     const id = name || generateGuid();
 
-    const className = getClassName([
+    const elClassName = getClassName([
         "is-checkradio",
         "m-check-radio",
+        className,
         hasBackgroundColor ? "has-background-color" : "",
         fixBackgroundColor && hasBackgroundColor ? "m-has-background-color" : "",
         isNullOrUndefined(size) ? "" : size === "normal" ? "" : `is-${size}`,
@@ -33,6 +38,10 @@ const CheckBox = ({
         block ? "is-block" : "",
         withoutBorder ? "has-no-border" : "",
     ]);
+
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
 
     if (!isNullOrUndefined(label) && isFormLabel) {
         const labelClassName = getClassName([
@@ -63,12 +72,16 @@ const CheckBox = ({
                     <div className="field">
                         <input
                             type="checkbox"
-                            name={id}
+
                             id={id}
+                            name={id}
                             disabled={disabled}
                             onChange={onChecked}
-                            className={className}
+                            className={elClassName}
                             defaultChecked={defaultValue}
+
+                            title={title}
+                            {...dataAttributes}
                         />
                         <label
                             htmlFor={id}
@@ -84,12 +97,16 @@ const CheckBox = ({
         <div className="bbr-input field">
             <input
                 type="checkbox"
-                name={id}
+
                 id={id}
+                name={id}
                 disabled={disabled}
                 onChange={onChecked}
-                className={className}
+                className={elClassName}
                 defaultChecked={defaultValue}
+
+                title={title}
+                {...dataAttributes}
             />
             <label
                 htmlFor={id}

@@ -1,9 +1,9 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
+import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/components";
-import { getValidationValues } from "@bbr/utils";
+import { getValidationValues, mapDataAttributes } from "@bbr/utils";
 
 import { MultilineProps } from "@bbr/components/multiline";
 
@@ -12,8 +12,10 @@ const MultilineWithoutLabel = ({
     onValueChange, defaultValue, validationState,
     name, placeholder,
     onBlur,
-    className, size, style, loading = false,
+    size, style, loading = false,
     fixed = false, rows,
+
+    className, title, data,
 }: MultilineProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLTextAreaElement>) => onValueChange(event.target.value),
@@ -37,18 +39,25 @@ const MultilineWithoutLabel = ({
         loading ? "is-loading" : "",
     ]);
 
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
     return (
         <div className="field">
             <div className={inputContainerClassName}>
                 <textarea
-                    className={elClassName}
-                    placeholder={placeholder}
-                    defaultValue={defaultValue}
-                    onChange={onChange}
-                    onBlur={onBlur}
                     id={id}
                     name={id}
                     rows={rows}
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    className={elClassName}
+                    placeholder={placeholder}
+                    defaultValue={defaultValue}
+
+                    title={title}
+                    {...dataAttributes}
                 />
             </div>
             {isValidationDefined && validationMessages.length > 0 &&

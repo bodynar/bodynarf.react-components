@@ -1,11 +1,11 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault, isStringEmpty } from "@bodynarf/utils";
+import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined, isStringEmpty } from "@bodynarf/utils";
 
 import "../../../../common.scss";
 
 import { ElementSize } from "@bbr/components";
-import { getValidationValues } from "@bbr/utils";
+import { getValidationValues, mapDataAttributes } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
 
 import { DateProps } from "@bbr/components/date";
@@ -14,9 +14,11 @@ import { DateProps } from "@bbr/components/date";
 const DatePicker = ({
     defaultValue, onValueChange, readonly, disabled, validationState,
     name,
-    size, className, rounded = false, loading = false, style,
+    size, rounded = false, loading = false, style,
     label,
-    onBlur
+    onBlur,
+
+    className, title, data,
 }: DateProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) =>
@@ -45,7 +47,12 @@ const DatePicker = ({
         "control",
         loading ? "is-loading" : "",
     ]);
+
     const stringifiedDefValue = defaultValue?.toISOString().split("T")[0];
+
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
 
     return (
         <ComponentWithLabel
@@ -56,14 +63,18 @@ const DatePicker = ({
             <div className={inputContainerClassName}>
                 <input
                     type="date"
-                    className={elClassName}
+
+                    id={id}
+                    name={id}
+                    onBlur={onBlur}
                     readOnly={readonly}
                     disabled={disabled}
-                    defaultValue={stringifiedDefValue}
                     onChange={onChange}
-                    onBlur={onBlur}
-                    name={id}
-                    id={id}
+                    className={elClassName}
+                    defaultValue={stringifiedDefValue}
+
+                    title={title}
+                    {...dataAttributes}
                 />
             </div>
             {isValidationDefined && validationMessages.length > 0 &&

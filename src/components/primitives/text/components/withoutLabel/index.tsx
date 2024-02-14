@@ -1,9 +1,9 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
+import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/components";
-import { getValidationValues } from "@bbr/utils";
+import { getValidationValues, mapDataAttributes } from "@bbr/utils";
 
 import { TextProps } from "@bbr/components/text";
 
@@ -11,10 +11,12 @@ import { TextProps } from "@bbr/components/text";
 const TextWithoutLabel = ({
     onValueChange, readonly, disabled, defaultValue, validationState,
     name,
-    className, size, style,
+    size, style,
     rounded = false, loading = false,
     placeholder,
     onBlur,
+
+    className, title, data,
 }: TextProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
@@ -39,20 +41,28 @@ const TextWithoutLabel = ({
 
     const id = name || generateGuid();
 
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
     return (
         <>
             <div className={containerClassName}>
                 <input
-                    className={elClassName}
                     type="text"
-                    placeholder={placeholder}
+
+                    id={id}
+                    name={id}
+                    onBlur={onBlur}
                     readOnly={readonly}
                     disabled={disabled}
-                    defaultValue={defaultValue}
                     onChange={onChange}
-                    onBlur={onBlur}
-                    name={id}
-                    id={id}
+                    className={elClassName}
+                    placeholder={placeholder}
+                    defaultValue={defaultValue}
+
+                    title={title}
+                    {...dataAttributes}
                 />
             </div>
             {isValidationDefined && validationMessages.length > 0 &&

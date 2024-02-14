@@ -1,8 +1,8 @@
 import { ChangeEvent, useCallback, useState } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
+import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
 
-import { getValidationValues } from "@bbr/utils";
+import { getValidationValues, mapDataAttributes } from "@bbr/utils";
 import { ElementSize } from "@bbr/components";
 import Icon from "@bbr/components/icon";
 
@@ -12,10 +12,12 @@ import ComponentWithLabel from "@bbr/components/primitives/internal/componentWit
 const PasswordWithLabel = ({
     onValueChange, disabled, validationState,
     name,
-    className, size, style,
+    size, style,
     rounded = false, loading = false,
     label, placeholder,
     canShowPassword = false,
+
+    className, title, data,
 }: PasswordProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
@@ -30,11 +32,11 @@ const PasswordWithLabel = ({
     const id = name || generateGuid();
 
     const elClassName = getClassName([
+        "bbr-password",
         className,
         elSizeClassName,
         rounded ? "is-rounded" : "",
         styleClassName,
-        "bbr-password",
         "input",
     ]);
 
@@ -45,6 +47,10 @@ const PasswordWithLabel = ({
         "bbr-password__wrapper",
     ]);
 
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
     return (
         <ComponentWithLabel
             id={id}
@@ -54,12 +60,16 @@ const PasswordWithLabel = ({
             <div className={inputContainerClassName}>
                 <input
                     type={contentIsHidden ? "password" : "text"}
-                    className={elClassName}
-                    placeholder={placeholder}
+
+                    id={id}
+                    name={id}
                     disabled={disabled}
                     onChange={onChange}
-                    name={id}
-                    id={id}
+                    className={elClassName}
+                    placeholder={placeholder}
+
+                    title={title}
+                    {...dataAttributes}
                 />
                 {canShowPassword && !loading &&
                     <span

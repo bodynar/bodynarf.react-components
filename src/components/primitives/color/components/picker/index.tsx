@@ -83,12 +83,14 @@ const ColorPickerControl = ({
             <div className={containerClassName}>
                 <input
                     type="color"
-                    className={className}
-                    disabled={disabled}
-                    defaultValue={defaultColor}
-                    onChange={onValueChange}
-                    name={id}
+
                     id={id}
+                    name={id}
+                    disabled={disabled}
+                    className={className}
+                    onChange={onValueChange}
+                    defaultValue={defaultColor}
+
                     title={title}
                     {...dataAttributes}
                 />
@@ -141,12 +143,14 @@ const PickerWithPreview = ({
                 <div className={controlContainerClassName}>
                     <input
                         type="color"
-                        className={className}
-                        disabled={disabled}
-                        defaultValue={defaultColor}
-                        onChange={onValueChange}
-                        name={id}
+
                         id={id}
+                        name={id}
+                        disabled={disabled}
+                        className={className}
+                        onChange={onValueChange}
+                        defaultValue={defaultColor}
+
                         title={title}
                         {...dataAttributes}
                     />
@@ -163,12 +167,14 @@ const PickerWithPreview = ({
             <div className={controlContainerClassName}>
                 <input
                     type="color"
-                    className={className}
-                    disabled={disabled}
-                    defaultValue={defaultColor}
-                    onChange={onValueChange}
-                    name={id}
+
                     id={id}
+                    name={id}
+                    disabled={disabled}
+                    className={className}
+                    onChange={onValueChange}
+                    defaultValue={defaultColor}
+
                     title={title}
                     {...dataAttributes}
                 />
@@ -187,4 +193,4 @@ const PickerWithPreview = ({
             }
         </div>
     );
-}
+};

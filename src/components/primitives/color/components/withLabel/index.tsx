@@ -10,14 +10,14 @@ import ColorPickerControl from "../picker";
 
 /** Color picker component with form label */
 function ColorPickerWithLabel({
-    className, title,
     preview,
     name,
     defaultValue, validationState,
     onValueChange,
-    data,
     disabled = false, rounded = false, size,
     label,
+
+    className, title, data,
 }: ColorPickerProps) {
     const defaultColor = isNullOrUndefined(defaultValue)
         ? whiteHex

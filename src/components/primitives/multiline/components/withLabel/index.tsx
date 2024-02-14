@@ -1,9 +1,9 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
+import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/components";
-import { getValidationValues } from "@bbr/utils";
+import { getValidationValues, mapDataAttributes } from "@bbr/utils";
 
 import { MultilineProps } from "@bbr/components/multiline";
 import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
@@ -12,10 +12,12 @@ import ComponentWithLabel from "@bbr/components/primitives/internal/componentWit
 const MultilineWithLabel = ({
     defaultValue, onValueChange, validationState, readonly, disabled,
     name,
-    className, size, style, loading = false,
+    size, style, loading = false,
     label, placeholder,
     fixed = false, rows,
-    onBlur
+    onBlur,
+
+    className, title, data,
 }: MultilineProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLTextAreaElement>) => onValueChange(event.target.value),
@@ -40,6 +42,10 @@ const MultilineWithLabel = ({
         loading ? "is-loading" : "",
     ]);
 
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
     return (
         <ComponentWithLabel
             id={id}
@@ -48,16 +54,19 @@ const MultilineWithLabel = ({
         >
             <div className={inputContainerClassName}>
                 <textarea
-                    className={elClassName}
-                    placeholder={placeholder}
+                    id={id}
+                    name={id}
+                    rows={rows}
+                    onBlur={onBlur}
                     readOnly={readonly}
                     disabled={disabled}
-                    defaultValue={defaultValue}
                     onChange={onChange}
-                    onBlur={onBlur}
-                    name={id}
-                    id={id}
-                    rows={rows}
+                    className={elClassName}
+                    placeholder={placeholder}
+                    defaultValue={defaultValue}
+
+                    title={title}
+                    {...dataAttributes}
                 />
             </div>
             {isValidationDefined && validationMessages.length > 0 &&

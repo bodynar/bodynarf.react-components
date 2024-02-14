@@ -1,9 +1,9 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
+import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/components";
-import { getValidationValues } from "@bbr/utils";
+import { getValidationValues, mapDataAttributes } from "@bbr/utils";
 
 import { NumberProps } from "@bbr/components/number";
 
@@ -11,10 +11,12 @@ import { NumberProps } from "@bbr/components/number";
 const NumberWithoutLabel = ({
     onValueChange, readonly, disabled, defaultValue, validationState,
     name,
-    className, size, style, rounded = false, loading = false,
+    size, style, rounded = false, loading = false,
     placeholder,
     onBlur,
     step = 1,
+
+    className, title, data,
 }: NumberProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(+event.target.value),
@@ -39,21 +41,29 @@ const NumberWithoutLabel = ({
 
     const id = name || generateGuid();
 
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
     return (
         <>
             <div className={containerClassName}>
                 <input
                     type="number"
-                    className={elClassName}
-                    placeholder={placeholder}
+
+                    id={id}
+                    name={id}
+                    step={step}
+                    onBlur={onBlur}
+                    onChange={onChange}
                     readOnly={readonly}
                     disabled={disabled}
+                    className={elClassName}
+                    placeholder={placeholder}
                     defaultValue={defaultValue}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    name={id}
-                    id={id}
-                    step={step}
+
+                    title={title}
+                    {...dataAttributes}
                 />
             </div>
             {isValidationDefined && validationMessages.length > 0 &&
