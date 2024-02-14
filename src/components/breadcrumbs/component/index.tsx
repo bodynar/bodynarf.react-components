@@ -1,11 +1,11 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementSize } from "@bbr";
+import { BaseElementProps, ElementSize, mapDataAttributes } from "@bbr";
 
 import { BreadCrumb } from "../types";
 
 /** Breadcrumbs component props type */
-export interface BreadcrumbsProps {
+export interface BreadcrumbsProps extends BaseElementProps {
     /** Breadcrumbs items */
     items: Array<BreadCrumb>;
 
@@ -34,17 +34,15 @@ export interface BreadcrumbsProps {
 
     /** Items separator. By default `arrow` */
     separator?: "arrow" | "bullet" | "dot" | "succeeds";
-
-    /** Container extra class name */
-    className?: string;
 }
 
 /** Breadcrumbs navigation panel */
 const BreadCrumbs = ({
     items,
     size, position, separator = "arrow",
-    className,
     elementGenerator,
+
+    className, title, data,
 }: BreadcrumbsProps): JSX.Element => {
     if (items.length <= 1) {
         return <></>;
@@ -52,16 +50,23 @@ const BreadCrumbs = ({
 
     const elClassName = getClassName([
         "breadcrumb",
+        className,
         isNullOrUndefined(size) ? undefined : `is-${size}`,
         `has-${separator}-separator`,
         isNullOrUndefined(position) ? undefined : `is-${position}`,
-        className
     ]);
+
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
 
     return (
         <nav
             className={elClassName}
             aria-label="breadcrumbs"
+
+            title={title}
+            {...dataAttributes}
         >
             <ul>
                 {items.map(breadCrumb =>

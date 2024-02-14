@@ -1,8 +1,9 @@
 import { useCallback, useMemo, MouseEvent } from "react";
 
-import { getClassName, isNullOrEmpty } from "@bodynarf/utils";
+import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
 import { generatePageNumbers, PaginatorProps } from "@bbr/components/paginator";
+import { mapDataAttributes } from "@bbr/utils";
 
 /**
  * Paginator component.
@@ -11,9 +12,11 @@ import { generatePageNumbers, PaginatorProps } from "@bbr/components/paginator";
 export default function Paginator({
     count, onPageChange, currentPage,
     position,
-    size, className,
+    size,
     rounded = false, showNextButtons = false,
-    nearPagesCount
+    nearPagesCount,
+
+    className, title, data,
 }: PaginatorProps): JSX.Element {
     const page = currentPage || 0;
 
@@ -46,14 +49,25 @@ export default function Paginator({
     const classNames = getClassName([
         "bbr-paginator",
         "pagination",
+        className,
         paginationPositionToClassMap.has(position || "") ? paginationPositionToClassMap.get(position || "") : "",
         rounded ? "is-rounded" : "",
         isNullOrEmpty(size) ? "" : `is-${size}`,
-        className
     ]);
 
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
     return (
-        <nav className={classNames} role="navigation" aria-label="pagination">
+        <nav
+            className={classNames}
+            role="navigation"
+            aria-label="pagination"
+
+            title={title}
+            {...dataAttributes}
+        >
             {showNextButtons &&
                 <>
                     <a

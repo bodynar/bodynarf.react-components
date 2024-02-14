@@ -2,7 +2,7 @@ import { MouseEvent, useCallback, useId, useState } from "react";
 
 import { isNullOrUndefined, isNullOrEmpty, getClassName } from "@bodynarf/utils";
 
-import { getValidationValues } from "@bbr/utils";
+import { getValidationValues, mapDataAttributes } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
 
 import { DropdownProps } from "@bbr/components/dropdown";
@@ -13,9 +13,10 @@ const DropdownWithLabel = ({
     items,
     value, onSelect, validationState,
     deselectable = false,
-    className, hideOnOuterClick, listMaxHeight,
-
+    hideOnOuterClick, listMaxHeight,
     label, placeholder, disabled = false,
+
+    className, title, data,
 }: DropdownProps): JSX.Element => {
     const id = useId();
 
@@ -82,10 +83,10 @@ const DropdownWithLabel = ({
 
     const classNames: string = getClassName([
         "bbr-dropdown",
+        className,
         disabled ? "bbr-dropdown--disabled" : "",
         isListVisible ? "is-active" : "",
         isNullOrEmpty(listMaxHeight) ? "bbr-dropdown--height-default" : "",
-        className,
         "dropdown"
     ]);
 
@@ -93,6 +94,10 @@ const DropdownWithLabel = ({
         "label",
         label!.className
     ]);
+
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
 
     if (label!.horizontal) {
         const labelContainerClassName = getClassName([
@@ -122,6 +127,9 @@ const DropdownWithLabel = ({
                             key={id}
                             className={classNames}
                             data-dropdown-id={id}
+
+                            title={title}
+                            {...dataAttributes}
                         >
                             <DropdownLabel
                                 className={styleClassName}
@@ -167,6 +175,9 @@ const DropdownWithLabel = ({
                 key={id}
                 className={classNames}
                 data-dropdown-id={id}
+
+                title={title}
+                {...dataAttributes}
             >
                 <DropdownLabel
                     className={styleClassName}

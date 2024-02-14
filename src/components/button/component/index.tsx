@@ -1,10 +1,8 @@
 import { isNullOrEmpty, isNullOrUndefined, getClassName } from "@bodynarf/utils";
 
-import "./style.scss";
-
 import { ButtonProps, ElementIcon } from "@bbr/components";
 
-import { mapDataAttributes } from "@bbr/utils";
+import "./style.scss";
 
 import { ButtonWithIcon } from "@bbr/components/button/components/buttonWithIcon";
 import { SimpleButton } from "@bbr/components/button/components/simpleButton";
@@ -39,10 +37,6 @@ export default function Button(props: ButtonProps): JSX.Element {
         isStatic ? "is-static" : "",
     ]);
 
-    const data = isNullOrUndefined(props.data)
-        ? undefined
-        : mapDataAttributes(props.data!);
-
     if (!isNullOrUndefined(props.icon)) {
         return (
             <ButtonWithIcon
@@ -50,7 +44,6 @@ export default function Button(props: ButtonProps): JSX.Element {
                 className={className}
                 onClick={props.onClick}
                 icon={props.icon as ElementIcon}
-                data={data}
             />
         );
     } else {
@@ -59,7 +52,6 @@ export default function Button(props: ButtonProps): JSX.Element {
                 {...props}
                 className={className}
                 onClick={props.onClick}
-                data={data}
             />
         );
     }

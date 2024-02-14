@@ -17,7 +17,8 @@ const Accordion = ({
     style, size = ElementSize.Normal,
     defaultExpanded = false,
     onToggle,
-    className, data, title,
+
+    className, title, data,
 }: AccordionProps): JSX.Element => {
     const expandablePanelRef = useRef<HTMLDivElement>(null);
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
@@ -55,6 +56,7 @@ const Accordion = ({
         <article
             className={elClassName}
             aria-expanded={isExpanded}
+
             {...dataAttributes}
         >
             <div

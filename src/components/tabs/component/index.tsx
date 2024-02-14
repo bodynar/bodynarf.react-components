@@ -98,11 +98,11 @@ const Tabs = ({
     const elClassName = getClassName([
         "bbr-tabs",
         "tabs",
+        className,
         position,
         getSizeClassName(size, [ElementSize.Normal]),
         style,
         fullWidth ? "is-fullwidth" : "",
-        className,
     ]);
 
     const dataAttributes = isNullOrUndefined(data)
@@ -111,8 +111,9 @@ const Tabs = ({
 
     return (
         <nav
-            className={elClassName}
             onClick={onTabsClick}
+            className={elClassName}
+
             title={title}
             {...dataAttributes}
         >

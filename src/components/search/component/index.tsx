@@ -1,12 +1,12 @@
 import { ChangeEvent, useCallback, useState } from "react";
 
-import { generateGuid, getClassName } from "@bodynarf/utils";
+import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+
+import { mapDataAttributes } from "@bbr/utils";
+import Button from "@bbr/components/button";
+import { SearchProps } from "@bbr/components/search";
 
 import "./style.scss";
-
-import Button from "@bbr/components/button";
-
-import { SearchProps } from "@bbr/components/search";
 
 /** Search component */
 export default function Search({
@@ -14,6 +14,8 @@ export default function Search({
     name, defaultValue,
     size,
     isLoading = false, rounded = false, disabled,
+
+    className, title, data,
 }: SearchProps): JSX.Element {
     const [elementName] = useState<string>(name || generateGuid());
     const [searchValue, setSearchValue] = useState<string>(defaultValue || "");
@@ -31,9 +33,10 @@ export default function Search({
 
     const onSearchButtonClick = useCallback(() => onSearch(searchValue), [onSearch, searchValue]);
 
-    const className: string = getClassName([
+    const elClassName: string = getClassName([
         "bbr-search",
         "control",
+        className,
         `is-${(size || "normal")}`,
         isLoading ? "is-loading" : "",
         searchType === "byButton" ? "is-expanded" : "",
@@ -46,10 +49,14 @@ export default function Search({
         rounded ? "is-rounded" : "",
     ]);
 
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
     if (searchType === "byButton") {
         return (
             <div className="field has-addons">
-                <div className={className}>
+                <div className={elClassName}>
                     <input
                         type="search"
                         name={elementName}
@@ -58,13 +65,16 @@ export default function Search({
                         placeholder={caption}
                         defaultValue={searchValue}
                         className={inputClassName}
+
+                        title={title}
+                        {...dataAttributes}
                     />
                 </div>
                 <div className="control">
                     <Button
                         type="info"
-                        caption="Search"
                         size={size}
+                        caption="Search"
                         disabled={disabled}
                         isLoading={isLoading}
                         onClick={onSearchButtonClick}
@@ -75,15 +85,18 @@ export default function Search({
     }
     else {
         return (
-            <div className={className}>
+            <div className={elClassName}>
                 <input
                     type="search"
                     name={elementName}
-                    defaultValue={searchValue}
-                    className={inputClassName}
                     disabled={disabled}
                     onChange={onChange}
                     placeholder={caption}
+                    defaultValue={searchValue}
+                    className={inputClassName}
+
+                    title={title}
+                    {...dataAttributes}
                 />
             </div>
         );

@@ -1,15 +1,17 @@
-import { isNullOrEmpty } from "@bodynarf/utils";
+import { isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
 import Icon from "@bbr/components/icon";
 
 import { ButtonWithIconProps } from "@bbr/components/button";
+import { mapDataAttributes } from "@bbr/utils";
 
 /** Button with icon component */
 export const ButtonWithIcon = ({
     className, disabled,
     onClick,
-    caption, title, icon,
-    data,
+    caption, icon,
+
+    title, data,
 }: ButtonWithIconProps): JSX.Element => {
     const iconPosition = icon.position || "left";
 
@@ -23,14 +25,19 @@ export const ButtonWithIcon = ({
         ? `${className} bbr-button--icon-only`
         : className;
 
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
     if (iconPosition === "left") {
         return (
             <button
-                className={className}
-                disabled={disabled}
                 onClick={onClick}
+                disabled={disabled}
+                className={className}
+
                 title={title}
-                {...data}
+                {...dataAttributes}
             >
                 <Icon {...icon} className={iconClassName} />
                 {caption}
@@ -40,11 +47,12 @@ export const ButtonWithIcon = ({
 
     return (
         <button
-            className={className}
-            disabled={disabled}
             onClick={onClick}
+            disabled={disabled}
+            className={className}
+
             title={title}
-            {...data}
+            {...dataAttributes}
         >
             {caption}
             <Icon {...icon} className={iconClassName} />

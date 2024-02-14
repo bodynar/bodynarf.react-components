@@ -32,9 +32,9 @@ export default function Anchor(props: AnchorProps): JSX.Element {
     return (
         <AnchorWithIcon
             {...props}
+            icon={props.icon!}
             className={className}
             onClick={props.onClick}
-            icon={props.icon!}
         />
     );
 }

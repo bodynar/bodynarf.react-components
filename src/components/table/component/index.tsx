@@ -1,10 +1,13 @@
-import { getClassName } from "@bodynarf/utils";
+import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+
+import { BaseElementProps } from "@bbr/components/types";
+import { mapDataAttributes } from "@bbr/utils";
 
 import { SortColumn, TableHeading } from "..";
 import TableHeader from "../components/heading";
 
 /** Table props type */
-export interface TableProps<TItem> {
+export interface TableProps<TItem> extends BaseElementProps {
     /** Header row */
     headings: Array<TableHeading<TItem>>;
 
@@ -41,9 +44,6 @@ export interface TableProps<TItem> {
     */
     zebra?: boolean;
 
-    /** Additional table element class names */
-    className?: string;
-
     /** Current sort column */
     currentSortColumn?: SortColumn<TItem>;
 
@@ -58,12 +58,15 @@ export interface TableProps<TItem> {
 function Table<TItem>({
     headings,
     hasBorder, hoverable, narrow, fullWidth, zebra, headerBorderless,
-    hasStickyHeader, headerWithBorder, className,
+    hasStickyHeader, headerWithBorder,
     currentSortColumn, onHeaderClick,
     children,
+
+    className, title, data,
 }: TableProps<TItem>): JSX.Element {
     const elClassName = getClassName([
         "table",
+        className,
         hasBorder ? "is-bordered" : "",
         hoverable ? "is-hoverable" : "",
         narrow ? "is-narrow" : "",
@@ -72,11 +75,19 @@ function Table<TItem>({
         hasStickyHeader ? "has-sticky-header" : "",
         headerWithBorder ? "has-borderless-header has-shadow-bordered-header" : "",
         headerBorderless ? "has-borderless-header" : "",
-        className,
     ]);
 
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
     return (
-        <table className={elClassName}>
+        <table
+            className={elClassName}
+
+            title={title}
+            {...dataAttributes}
+        >
             <thead>
                 <tr>
                     {headings.map((heading, i) =>

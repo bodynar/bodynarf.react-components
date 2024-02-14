@@ -2,7 +2,7 @@ import { useCallback, useId, useState, MouseEvent } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import { getValidationValues } from "@bbr/utils";
+import { getValidationValues, mapDataAttributes } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
 
 import { DropdownProps } from "@bbr/components/dropdown";
@@ -13,9 +13,11 @@ const DropdownCompact = ({
     items,
     value, onSelect,
     deselectable = false,
-    className, hideOnOuterClick, listMaxHeight,
+    hideOnOuterClick, listMaxHeight,
     placeholder, compact = false, disabled = false,
     validationState,
+
+    className, title, data,
 }: DropdownProps): JSX.Element => {
     const id = useId();
 
@@ -83,13 +85,17 @@ const DropdownCompact = ({
 
     const classNames: string = getClassName([
         "bbr-dropdown",
+        className,
         disabled ? "bbr-dropdown--disabled" : "",
         compact ? "bbr-dropdown--compact" : "",
         isListVisible ? "is-active" : "",
         isNullOrEmpty(listMaxHeight) ? "bbr-dropdown--height-default" : "",
-        className,
         "dropdown",
     ]);
+
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
 
     return (
         <>
@@ -97,6 +103,9 @@ const DropdownCompact = ({
                 key={id}
                 className={classNames}
                 data-dropdown-id={id}
+
+                title={title}
+                {...dataAttributes}
             >
                 <DropdownLabel
                     selectedItem={value}
