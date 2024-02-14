@@ -1,6 +1,6 @@
-import { ElementSize } from "@bbr/components";
+import { BaseElementProps, ElementSize } from "@bbr/components";
 
-export interface PaginatorProps {
+export interface PaginatorProps extends BaseElementProps {
     /** Amount of pages */
     count: number;
 
@@ -25,9 +25,6 @@ export interface PaginatorProps {
 
     /** Size of paginator component elements */
     size?: ElementSize;
-
-    /** Additional class names */
-    className?: string;
 
     /** Display "Previous" \ "Next" buttons */
     showNextButtons?: boolean;

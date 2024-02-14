@@ -1,7 +1,7 @@
-import { ElementSize } from "@bbr/components";
+import { BaseElementProps, ElementSize } from "@bbr/components";
 
 /** Search component props type */
-export interface SearchProps {
+export interface SearchProps extends BaseElementProps {
     /** 
      * Search type: by typing, starts from minimum characters to search
      * or by clicking on button next to search bar.

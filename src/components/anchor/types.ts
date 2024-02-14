@@ -1,4 +1,4 @@
-import { ElementIcon } from "@bbr/components";
+import { BaseElementProps, ElementIcon } from "@bbr/components";
 
 /** Anchor component props type */
 export interface AnchorProps extends Omit<SimpleAnchorProps, "className"> {
@@ -12,21 +12,15 @@ export interface AnchorProps extends Omit<SimpleAnchorProps, "className"> {
     disableHovering?: boolean;
 }
 
-export interface SimpleAnchorProps {
+export interface SimpleAnchorProps extends BaseElementProps {
     /** Link destination */
     href?: string;
-
-    /** Class names */
-    className: string;
 
     /** Click handler */
     onClick?: () => void;
 
     /** Link caption  */
     caption?: string;
-
-    /** Title of anchor */
-    title?: string;
 
     /** Where to open the linked document */
     target?: "_blank" | "_top";
