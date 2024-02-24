@@ -3,10 +3,11 @@ import { ChangeEvent, useCallback } from "react";
 import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined, isStringEmpty } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/components";
-import { getValidationValues, mapDataAttributes } from "@bbr/utils";
+import { mapDataAttributes } from "@bbr/utils";
 
 import { NumberProps } from "@bbr/components/number";
 import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
+import InternalHint from "@bbr/components/primitives/internal/hint";
 
 /** Number component with label */
 const NumberWithLabel = ({
@@ -18,6 +19,7 @@ const NumberWithLabel = ({
     step = 1,
 
     className, title, data,
+    hint,
 }: NumberProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) =>
@@ -28,13 +30,11 @@ const NumberWithLabel = ({
     const id = name || generateGuid();
     const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
 
-    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
-
     const elClassName = getClassName([
         className,
         elSizeClassName,
         rounded ? "is-rounded" : "",
-        styleClassName,
+        isNullOrUndefined(style) ? "" : `is-${style}`,
         "input",
     ]);
 
@@ -72,9 +72,10 @@ const NumberWithLabel = ({
                     {...dataAttributes}
                 />
             </div>
-            {isValidationDefined && validationMessages.length > 0 &&
-                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-            }
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </ComponentWithLabel>
     );
 };

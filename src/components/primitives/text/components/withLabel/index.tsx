@@ -3,10 +3,11 @@ import { ChangeEvent, useCallback } from "react";
 import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined, } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/components";
-import { getValidationValues, mapDataAttributes } from "@bbr/utils";
+import { mapDataAttributes } from "@bbr/utils";
 
 import { TextProps } from "@bbr/components/text";
 import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
+import InternalHint from "@bbr/components/primitives/internal/hint";
 
 /** Textual input with describing label */
 const TextWithLabel = ({
@@ -18,6 +19,7 @@ const TextWithLabel = ({
     onBlur,
 
     className, title, data,
+    hint,
 }: TextProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
@@ -27,13 +29,11 @@ const TextWithLabel = ({
     const id = name || generateGuid();
     const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
 
-    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
-
     const elClassName = getClassName([
         className,
         elSizeClassName,
         rounded ? "is-rounded" : "",
-        styleClassName,
+        isNullOrUndefined(style) ? "" : `is-${style}`,
         "input",
     ]);
 
@@ -70,9 +70,10 @@ const TextWithLabel = ({
                     {...dataAttributes}
                 />
             </div>
-            {isValidationDefined && validationMessages.length > 0 &&
-                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-            }
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </ComponentWithLabel>
     );
 };

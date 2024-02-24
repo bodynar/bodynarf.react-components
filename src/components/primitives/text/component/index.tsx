@@ -9,12 +9,9 @@ import TextWithoutLabel from "@bbr/components/primitives/text/components/without
 
 /** Textual input component */
 const Text = (props: TextProps): JSX.Element => {
-    if (isNullOrUndefined(props.label)) {
-        return (<TextWithoutLabel {...props} />);
-    }
-    else {
-        return (<TextWithLabel {...props} />);
-    }
+    return isNullOrUndefined(props.label)
+        ? <TextWithoutLabel {...props} />
+        : <TextWithLabel {...props} />;
 };
 
 export default Text;

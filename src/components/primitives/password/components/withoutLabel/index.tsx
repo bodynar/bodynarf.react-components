@@ -3,10 +3,11 @@ import { ChangeEvent, useCallback, useState } from "react";
 import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/components";
-import { getValidationValues, mapDataAttributes } from "@bbr/utils";
+import { mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
 import { PasswordProps } from "@bbr/components/password";
+import InternalHint from "@bbr/components/primitives/internal/hint";
 
 const PasswordWithoutLabel = ({
     onValueChange, disabled, validationState,
@@ -17,6 +18,7 @@ const PasswordWithoutLabel = ({
     canShowPassword = false,
 
     className, title, data,
+    hint,
 }: PasswordProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
@@ -26,7 +28,6 @@ const PasswordWithoutLabel = ({
     const [contentIsHidden, setContentIsHidden] = useState(true);
     const onIconClick = useCallback(() => setContentIsHidden(state => !state), [setContentIsHidden]);
 
-    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
     const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
     const id = name || generateGuid();
 
@@ -35,7 +36,7 @@ const PasswordWithoutLabel = ({
         className,
         elSizeClassName,
         rounded ? "is-rounded" : "",
-        styleClassName,
+        isNullOrUndefined(style) ? "" : `is-${style}`,
         "input",
     ]);
 
@@ -80,9 +81,10 @@ const PasswordWithoutLabel = ({
                     </span>
                 }
             </div>
-            {isValidationDefined && validationMessages.length > 0 &&
-                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-            }
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </>
     );
 };

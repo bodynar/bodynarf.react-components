@@ -4,6 +4,7 @@ import { BaseInputElementProps } from "@bbr/components";
 export interface CheckBoxProps extends Omit<BaseInputElementProps<boolean>,
     "readonly" | "validationState"
     | "loading" | "placeholder"
+    | "hint"
 > {
     /** Is full colored checkbox */
     block?: boolean;

@@ -3,10 +3,11 @@ import { ChangeEvent, useCallback } from "react";
 import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/components";
-import { getValidationValues, mapDataAttributes } from "@bbr/utils";
+import { mapDataAttributes } from "@bbr/utils";
 
 import { MultilineProps } from "@bbr/components/multiline";
 import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
+import InternalHint from "@bbr/components/primitives/internal/hint";
 
 /** Multiline textual input component with describing label */
 const MultilineWithLabel = ({
@@ -18,21 +19,20 @@ const MultilineWithLabel = ({
     onBlur,
 
     className, title, data,
+    hint,
 }: MultilineProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLTextAreaElement>) => onValueChange(event.target.value),
         [onValueChange]
     );
 
-    const id = name || generateGuid();
+    const id = name ?? generateGuid();
     const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
-
-    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
 
     const elClassName = getClassName([
         className,
         elSizeClassName,
-        styleClassName,
+        isNullOrUndefined(style) ? "" : `is-${style}`,
         "textarea",
         fixed ? "has-fixed-size" : "",
     ]);
@@ -69,9 +69,10 @@ const MultilineWithLabel = ({
                     {...dataAttributes}
                 />
             </div>
-            {isValidationDefined && validationMessages.length > 0 &&
-                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-            }
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </ComponentWithLabel>
     );
 };

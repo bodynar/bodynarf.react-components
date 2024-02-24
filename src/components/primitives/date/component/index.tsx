@@ -5,10 +5,11 @@ import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined, isStr
 import "../../../../common.scss";
 
 import { ElementSize } from "@bbr/components";
-import { getValidationValues, mapDataAttributes } from "@bbr/utils";
+import { mapDataAttributes } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
 
 import { DateProps } from "@bbr/components/date";
+import InternalHint from "@bbr/components/internal/hint";
 
 /** Date input component */
 const DatePicker = ({
@@ -19,6 +20,7 @@ const DatePicker = ({
     onBlur,
 
     className, title, data,
+    hint,
 }: DateProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) =>
@@ -30,15 +32,13 @@ const DatePicker = ({
         [onValueChange]
     );
 
-    const id = name || generateGuid();
+    const id = name ?? generateGuid();
     const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
-
-    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
 
     const elClassName = getClassName([
         className,
         elSizeClassName,
-        styleClassName,
+        isNullOrUndefined(style) ? "" : `is-${style}`,
         rounded ? "is-rounded" : "",
         "input",
     ]);
@@ -77,9 +77,10 @@ const DatePicker = ({
                     {...dataAttributes}
                 />
             </div>
-            {isValidationDefined && validationMessages.length > 0 &&
-                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-            }
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </ComponentWithLabel>
     );
 };

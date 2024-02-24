@@ -9,11 +9,9 @@ import PasswordWithoutLabel from "@bbr/components/password/components/withoutLab
 
 /** Password input component */
 const Password = (props: PasswordProps): JSX.Element => {
-    if (isNullOrUndefined(props.label)) {
-        return <PasswordWithoutLabel {...props} />;
-    }
-
-    return <PasswordWithLabel {...props} />;
+    return isNullOrUndefined(props.label)
+        ? <PasswordWithoutLabel {...props} />
+        : <PasswordWithLabel {...props} />;
 };
 
 export default Password;

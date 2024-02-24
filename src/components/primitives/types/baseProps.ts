@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementColor, ElementSize } from "@bbr/components";
+import { BaseElementProps, ElementColor, ElementIcon, ElementSize } from "@bbr/components";
 
 import { InputLabel, ValidationState } from ".";
 
@@ -39,4 +39,27 @@ export interface BaseInputElementProps<TValue> extends BaseElementProps {
 
     /** Current validation state */
     validationState?: ValidationState;
+
+    /**
+     * Field hint configuration.
+     * Provides additional information to user to help fill the field
+     * 
+     * (!) Hint will be overridden by the validation state, if specified
+     */
+    hint?: HintConfiguration;
+}
+
+/** Hint configuration */
+export interface HintConfiguration {
+    /** Textual content */
+    content: string;
+
+    /** Is hint in italic style */
+    italic?: boolean;
+
+    /** Is hint has grey color */
+    grey?: boolean;
+
+    /** Optional icon */
+    icon?: ElementIcon;
 }
