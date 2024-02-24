@@ -2,12 +2,13 @@ import { MouseEvent, useCallback, useId, useState } from "react";
 
 import { isNullOrUndefined, isNullOrEmpty, getClassName } from "@bodynarf/utils";
 
-import { getValidationValues, mapDataAttributes } from "@bbr/utils";
+import { mapDataAttributes } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
 
 import { DropdownProps } from "@bbr/components/dropdown";
 import DropdownItem from "@bbr/components/dropdown/components/item";
 import DropdownLabel from "@bbr/components/dropdown/components/label";
+import InternalHint from "@bbr/components/primitives/internal/hint";
 
 const DropdownWithLabel = ({
     items,
@@ -17,11 +18,11 @@ const DropdownWithLabel = ({
     label, placeholder, disabled = false,
 
     className, title, data,
+    hint,
 }: DropdownProps): JSX.Element => {
     const id = useId();
 
     const [isListVisible, setListVisible] = useState<boolean>(false);
-    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(undefined, validationState);
 
     const onItemClick = useCallback(
         (event: React.MouseEvent<HTMLLIElement>) => {
@@ -132,11 +133,10 @@ const DropdownWithLabel = ({
                             {...dataAttributes}
                         >
                             <DropdownLabel
-                                className={styleClassName}
-                                caption={placeholder}
-                                deselectable={deselectable}
                                 selectedItem={value}
+                                caption={placeholder}
                                 onClick={onLabelClick}
+                                deselectable={deselectable}
                             />
                             <div className="dropdown-menu">
                                 {items.length > 0
@@ -154,9 +154,10 @@ const DropdownWithLabel = ({
                                 }
                             </div>
                         </div>
-                        {isValidationDefined && validationMessages.length > 0 &&
-                            <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-                        }
+                        <InternalHint
+                            hint={hint}
+                            validationState={validationState}
+                        />
                     </div>
                 </div>
             </div>
@@ -180,11 +181,10 @@ const DropdownWithLabel = ({
                 {...dataAttributes}
             >
                 <DropdownLabel
-                    className={styleClassName}
-                    caption={placeholder}
-                    deselectable={deselectable}
                     selectedItem={value}
+                    caption={placeholder}
                     onClick={onLabelClick}
+                    deselectable={deselectable}
                 />
                 <div className="dropdown-menu">
                     {items.length > 0
@@ -202,9 +202,10 @@ const DropdownWithLabel = ({
                     }
                 </div>
             </div>
-            {isValidationDefined && validationMessages.length > 0 &&
-                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-            }
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </div>
     );
 };

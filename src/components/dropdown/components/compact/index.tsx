@@ -2,12 +2,13 @@ import { useCallback, useId, useState, MouseEvent } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import { getValidationValues, mapDataAttributes } from "@bbr/utils";
+import { mapDataAttributes } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
 
 import { DropdownProps } from "@bbr/components/dropdown";
 import DropdownItem from "@bbr/components/dropdown/components/item";
 import DropdownLabel from "@bbr/components/dropdown/components/label";
+import InternalHint from "@bbr/components/primitives/internal/hint";
 
 const DropdownCompact = ({
     items,
@@ -18,6 +19,7 @@ const DropdownCompact = ({
     validationState,
 
     className, title, data,
+    hint,
 }: DropdownProps): JSX.Element => {
     const id = useId();
 
@@ -81,8 +83,6 @@ const DropdownCompact = ({
         hideOnOuterClick,
     );
 
-    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(undefined, validationState);
-
     const classNames: string = getClassName([
         "bbr-dropdown",
         className,
@@ -111,7 +111,6 @@ const DropdownCompact = ({
                     selectedItem={value}
                     caption={placeholder}
                     onClick={onLabelClick}
-                    className={styleClassName}
                     deselectable={deselectable}
                 />
                 <div className="dropdown-menu">
@@ -130,9 +129,10 @@ const DropdownCompact = ({
                     }
                 </div>
             </div>
-            {isValidationDefined && validationMessages.length > 0 &&
-                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-            }
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </>
     );
 };
