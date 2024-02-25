@@ -1,6 +1,7 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { BaseElementProps, ElementSize, mapDataAttributes } from "@bbr";
+import { BaseElementProps, ElementSize } from "@bbr/types";
+import { mapDataAttributes } from "@bbr/utils";
 
 import { BreadCrumb } from "../types";
 

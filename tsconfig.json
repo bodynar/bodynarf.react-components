@@ -32,6 +32,9 @@
 			],
 			"@bbr/utils": [
 				"./src/utils"
+			],
+			"@bbr/types": [
+				"./src/types",
 			]
 		}
 	},

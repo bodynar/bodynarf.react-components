@@ -1,7 +1,7 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { mapDataAttributes } from "@bbr/utils";
-import { ElementSize } from "@bbr/components";
+import { ElementSize } from "@bbr/types";
 import { IconProps } from "@bbr/components/icon";
 
 import "./style.scss";

@@ -2,7 +2,7 @@ import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 import { generateGuid, getClassName, hexToRgb, isNullOrUndefined, rgbToHex, whiteHex } from "@bodynarf/utils";
 
-import { ElementSize } from "@bbr";
+import { ElementSize } from "@bbr/types";
 import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
 
 import { ColorPickerProps } from "../..";

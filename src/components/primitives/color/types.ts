@@ -2,7 +2,8 @@ import { CSSProperties } from "react";
 
 import { Color } from "@bodynarf/utils";
 
-import { BaseInputElementProps, ElementFloatPosition } from "@bbr";
+import { ElementFloatPosition } from "@bbr/types";
+import { BaseInputElementProps } from "@bbr/components";
 
 /** Color picker props type */
 export interface ColorPickerProps extends Omit<BaseInputElementProps<Color>,

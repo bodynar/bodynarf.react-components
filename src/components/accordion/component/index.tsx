@@ -2,14 +2,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import "./style.scss";
-
-import { ElementSize } from "@bbr/components";
+import { ElementSize } from "@bbr/types";
+import { mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
-import { mapDataAttributes } from "@bbr/utils";
-
 import { AccordionProps } from "@bbr/components/accordion";
+import "./style.scss";
 
 /** Accordion panel */
 const Accordion = ({

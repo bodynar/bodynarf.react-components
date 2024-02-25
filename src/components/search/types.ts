@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementSize } from "@bbr/components";
+import { BaseElementProps, ElementSize } from "@bbr/types";
 
 /** Search component props type */
 export interface SearchProps extends BaseElementProps {

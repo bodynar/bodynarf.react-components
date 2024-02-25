@@ -1,6 +1,6 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementPosition, ElementSize, HintConfiguration, ValidationState, ValidationStatus } from "@bbr";
+import { ElementPosition, ElementSize, HintConfiguration, ValidationState, ValidationStatus } from "@bbr/types";
 import Icon from "@bbr/components/icon";
 
 /** Props of `InternalHint` */

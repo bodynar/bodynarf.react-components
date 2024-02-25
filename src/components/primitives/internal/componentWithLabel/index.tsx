@@ -1,6 +1,7 @@
 import { getClassName, getValueOrDefault } from "@bodynarf/utils";
 
-import { ElementSize, InputLabel } from "@bbr/components";
+import { ElementSize } from "@bbr/types";
+import { InputLabel } from "@bbr/components";
 
 /** Form input component with label props */
 export interface ComponentWithLabelProps {

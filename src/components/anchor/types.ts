@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementIcon } from "@bbr/components";
+import { BaseElementProps, ElementIcon } from "@bbr/types";
 
 /** Anchor component props type */
 export interface AnchorProps extends Omit<SimpleAnchorProps, "className"> {

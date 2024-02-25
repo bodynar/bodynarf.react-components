@@ -3,7 +3,7 @@ import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 import Icon from "@bbr/components/icon";
 
 import { TabItem as Item } from "@bbr/components/tabs";
-import { ElementPosition } from "@bbr";
+import { ElementPosition } from "@bbr/types";
 
 /** Tabs panel single tab item component props type */
 export interface TabItemProps {

@@ -2,7 +2,7 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined, isStringEmpty } from "@bodynarf/utils";
 
-import { ElementSize } from "@bbr/components";
+import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 
 import { NumberProps } from "@bbr/components/number";

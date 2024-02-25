@@ -4,7 +4,7 @@ import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils"
 
 import "./style.scss";
 
-import { BaseElementProps, ElementPosition, ElementSize } from "@bbr/components";
+import { BaseElementProps, ElementPosition, ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
 
 import { TabItem, TabsStyle } from "@bbr/components/tabs";

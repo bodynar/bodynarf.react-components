@@ -3,7 +3,7 @@ import { ChangeEvent, useCallback, useState } from "react";
 import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
 
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
-import { ElementSize } from "@bbr/components";
+import { ElementSize } from "@bbr/types";
 import Icon from "@bbr/components/icon";
 
 import { PasswordProps } from "@bbr/components/password";

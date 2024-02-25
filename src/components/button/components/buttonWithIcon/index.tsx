@@ -1,8 +1,9 @@
 import { isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
+import { ElementPosition } from "@bbr/types";
+import { mapDataAttributes } from "@bbr/utils";
+import { ButtonWithIconProps } from "@bbr/components";
 import Icon from "@bbr/components/icon";
-
-import { ButtonWithIconProps, ElementPosition, mapDataAttributes } from "@bbr";
 
 /** Button with icon component */
 export const ButtonWithIcon = ({

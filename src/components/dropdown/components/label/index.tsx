@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementSize } from "@bbr/components";
+import { ElementSize } from "@bbr/types";
 import Icon from "@bbr/components/icon";
 
 import { SelectableItem } from "@bbr/components/dropdown";

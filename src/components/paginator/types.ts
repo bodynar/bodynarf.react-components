@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementPosition, ElementSize } from "@bbr/components";
+import { BaseElementProps, ElementPosition, ElementSize } from "@bbr/types";
 
 export interface PaginatorProps extends BaseElementProps {
     /** Amount of pages */

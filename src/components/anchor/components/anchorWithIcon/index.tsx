@@ -1,8 +1,10 @@
 import { isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
+import { ElementPosition } from "@bbr/types";
+import { mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
-import { AnchorWithIconProps, ElementPosition, mapDataAttributes } from "@bbr";
+import { AnchorWithIconProps } from "../..";
 
 /** Anchor with icon component */
 export const AnchorWithIcon = ({

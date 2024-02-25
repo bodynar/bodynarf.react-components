@@ -1,4 +1,4 @@
-import { ElementIcon } from "@bbr/components";
+import { ElementIcon } from "@bbr/types";
 
 /** Tabs component style */
 export enum TabsStyle {

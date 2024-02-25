@@ -1,6 +1,6 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { BaseElementProps } from "@bbr/components/types";
+import { BaseElementProps } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
 
 import { SortColumn, TableHeading } from "..";

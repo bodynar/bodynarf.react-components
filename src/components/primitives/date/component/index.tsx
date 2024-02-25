@@ -4,7 +4,7 @@ import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined, isStr
 
 import "../../../../common.scss";
 
-import { ElementSize } from "@bbr/components";
+import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
 

@@ -1,4 +1,4 @@
-import { ElementIcon } from "@bbr";
+import { ElementIcon } from "@bbr/types";
 
 /** Breadcrumb item */
 export interface BreadCrumb {

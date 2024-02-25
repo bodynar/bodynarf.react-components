@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementIcon, ElementSize } from "@bbr/components";
+import { BaseElementProps, ElementIcon, ElementSize } from "@bbr/types";
 
 export interface ButtonProps extends BaseElementProps {
     /** Button displaying text */

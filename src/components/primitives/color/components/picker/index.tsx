@@ -2,9 +2,11 @@ import { ChangeEvent } from "react";
 
 import { getClassName, getFontColorFromString, isNullOrUndefined } from "@bodynarf/utils";
 
-import { BaseInputElementProps, ElementPosition, mapDataAttributes } from "@bbr";
-import { ColorPickerCssProperties, ColorPickerPreviewConfig } from "../..";
+import { ElementPosition } from "@bbr/types";
+import { mapDataAttributes } from "@bbr/utils";
+import { BaseInputElementProps } from "@bbr/components";
 import InternalHint from "@bbr/components/primitives/internal/hint";
+import { ColorPickerCssProperties, ColorPickerPreviewConfig } from "../..";
 
 /** Props of `ColorPickerControl` */
 export interface ColorPickerControlProps extends Omit<

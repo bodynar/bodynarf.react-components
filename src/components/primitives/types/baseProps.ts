@@ -1,6 +1,6 @@
-import { BaseElementProps, ElementColor, ElementIcon, ElementSize } from "@bbr/components";
+import { BaseElementProps, ElementColor, ElementSize, HintConfiguration, ValidationState } from "@bbr/types";
 
-import { InputLabel, ValidationState } from ".";
+import { InputLabel } from ".";
 
 /** Base properties for input components */
 export interface BaseInputElementProps<TValue> extends BaseElementProps {
@@ -49,17 +49,4 @@ export interface BaseInputElementProps<TValue> extends BaseElementProps {
     hint?: HintConfiguration;
 }
 
-/** Hint configuration */
-export interface HintConfiguration {
-    /** Textual content */
-    content: string;
 
-    /** Is hint in italic style */
-    italic?: boolean;
-
-    /** Is hint has grey color */
-    grey?: boolean;
-
-    /** Optional icon */
-    icon?: ElementIcon;
-}

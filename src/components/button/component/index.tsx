@@ -1,6 +1,6 @@
 import { isNullOrEmpty, isNullOrUndefined, getClassName } from "@bodynarf/utils";
 
-import { ButtonProps, ElementIcon } from "@bbr/components";
+import { ButtonProps } from "@bbr/components";
 
 import "./style.scss";
 
@@ -43,7 +43,7 @@ export default function Button(props: ButtonProps): JSX.Element {
                 {...props}
                 className={className}
                 onClick={props.onClick}
-                icon={props.icon as ElementIcon}
+                icon={props.icon!}
             />
         );
     } else {
