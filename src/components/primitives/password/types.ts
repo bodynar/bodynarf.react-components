@@ -1,4 +1,4 @@
-import { BaseInputElementProps } from "@bbr/components";
+import { BaseInputElementProps } from "@bbr/types";
 
 /** Password component props type */
 export interface PasswordProps extends Omit<BaseInputElementProps<string>, "defaultValue" | "readonly"> {

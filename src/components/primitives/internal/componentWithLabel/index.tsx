@@ -1,12 +1,11 @@
 import { getClassName, getValueOrDefault } from "@bodynarf/utils";
 
-import { ElementSize } from "@bbr/types";
-import { InputLabel } from "@bbr/components";
+import { ElementSize, LabelConfiguration } from "@bbr/types";
 
 /** Form input component with label props */
 export interface ComponentWithLabelProps {
     /** Label configuration */
-    label: InputLabel;
+    label: LabelConfiguration;
 
     /** Component size */
     size: ElementSize;

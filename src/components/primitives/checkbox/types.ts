@@ -1,4 +1,4 @@
-import { BaseInputElementProps } from "@bbr/components";
+import { BaseInputElementProps } from "@bbr/types";
 
 /** Checkbox component props type */
 export interface CheckBoxProps extends Omit<BaseInputElementProps<boolean>,

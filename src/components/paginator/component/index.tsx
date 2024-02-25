@@ -2,8 +2,9 @@ import { useCallback, useMemo, MouseEvent } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import { PaginatorProps, generatePageNumbers, mapDataAttributes } from "@bbr";
+import { mapDataAttributes } from "@bbr/utils";
 import { ElementPosition } from "@bbr/types";
+import { PaginatorProps, generatePageNumbers } from "@bbr/components";
 
 /**
  * Paginator component.

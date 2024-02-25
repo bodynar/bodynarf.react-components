@@ -1,6 +1,6 @@
 import { isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementColor, ValidationState, ValidationStatus } from "@bbr";
+import { ElementColor, ValidationState, ValidationStatus } from "@bbr/types";
 
 /**
  * Get className component prop based on current validation state and style

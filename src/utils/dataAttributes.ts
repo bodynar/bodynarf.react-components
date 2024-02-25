@@ -1,6 +1,6 @@
 import { isNullOrUndefined } from "@bodynarf/utils";
 
-import { DataAttributes } from "@bbr";
+import { DataAttributes } from "@bbr/types";
 
 /**
  * Map object with key-value pairs to html data attributes format

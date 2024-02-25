@@ -1,5 +1,4 @@
-import { InputLabel } from "@bbr";
-import { BaseElementProps, HintConfiguration, ValidationState } from "@bbr/types";
+import { BaseElementProps, HintConfiguration, ValidationState, LabelConfiguration } from "@bbr/types";
 
 /** Dropdown item */
 export interface SelectableItem {
@@ -55,7 +54,7 @@ export interface DropdownProps extends BaseElementProps {
     disabled?: boolean;
 
     /** Label configuration */
-    label?: InputLabel;
+    label?: LabelConfiguration;
 
     /** Current validation state */
     validationState?: ValidationState;
