@@ -2,8 +2,7 @@ import { useCallback, useMemo, MouseEvent } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import { generatePageNumbers, PaginatorProps } from "@bbr/components/paginator";
-import { mapDataAttributes } from "@bbr/utils";
+import { ElementPosition, PaginatorProps, generatePageNumbers, mapDataAttributes } from "@bbr";
 
 /**
  * Paginator component.
@@ -11,7 +10,7 @@ import { mapDataAttributes } from "@bbr/utils";
 */
 export default function Paginator({
     count, onPageChange, currentPage,
-    position,
+    position = ElementPosition.Left,
     size,
     rounded = false, showNextButtons = false,
     nearPagesCount,
@@ -50,7 +49,7 @@ export default function Paginator({
         "bbr-paginator",
         "pagination",
         className,
-        paginationPositionToClassMap.has(position || "") ? paginationPositionToClassMap.get(position || "") : "",
+        paginationPositionToClassMap.get(position),
         rounded ? "is-rounded" : "",
         isNullOrEmpty(size) ? "" : `is-${size}`,
     ]);
@@ -141,7 +140,8 @@ export default function Paginator({
 /**
  * Position setting to css class name map
  */
-const paginationPositionToClassMap: Map<string, string> = new Map([
-    ["center", "is-centered"],
-    ["right", "is-right"]
+const paginationPositionToClassMap: Map<ElementPosition, string> = new Map([
+    [ElementPosition.Left, ""],
+    [ElementPosition.Center, "is-centered"],
+    [ElementPosition.Right, "is-right"]
 ]);
