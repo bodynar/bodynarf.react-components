@@ -5,7 +5,7 @@ import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined, isStr
 import "../../../../common.scss";
 
 import { ElementSize } from "@bbr/components";
-import { mapDataAttributes } from "@bbr/utils";
+import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
 
 import { DateProps } from "@bbr/components/date";
@@ -38,7 +38,7 @@ const DatePicker = ({
     const elClassName = getClassName([
         className,
         elSizeClassName,
-        isNullOrUndefined(style) ? "" : `is-${style}`,
+        getStyleClassName(style, validationState),
         rounded ? "is-rounded" : "",
         "input",
     ]);

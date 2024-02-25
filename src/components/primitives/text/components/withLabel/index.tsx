@@ -3,7 +3,7 @@ import { ChangeEvent, useCallback } from "react";
 import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined, } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/components";
-import { mapDataAttributes } from "@bbr/utils";
+import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 
 import { TextProps } from "@bbr/components/text";
 import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
@@ -33,7 +33,7 @@ const TextWithLabel = ({
         className,
         elSizeClassName,
         rounded ? "is-rounded" : "",
-        isNullOrUndefined(style) ? "" : `is-${style}`,
+        getStyleClassName(style, validationState),
         "input",
     ]);
 

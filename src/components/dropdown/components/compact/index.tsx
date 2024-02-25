@@ -2,7 +2,7 @@ import { useCallback, useId, useState, MouseEvent } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import { mapDataAttributes } from "@bbr/utils";
+import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
 
 import { DropdownProps } from "@bbr/components/dropdown";
@@ -93,6 +93,8 @@ const DropdownCompact = ({
         "dropdown",
     ]);
 
+    const labelComponentClassName = getStyleClassName(undefined, validationState);
+
     const dataAttributes = isNullOrUndefined(data)
         ? undefined
         : mapDataAttributes(data!);
@@ -112,6 +114,7 @@ const DropdownCompact = ({
                     caption={placeholder}
                     onClick={onLabelClick}
                     deselectable={deselectable}
+                    className={labelComponentClassName}
                 />
                 <div className="dropdown-menu">
                     {items.length > 0

@@ -2,7 +2,7 @@ import { ChangeEvent, useCallback, useState } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
 
-import { mapDataAttributes } from "@bbr/utils";
+import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import { ElementSize } from "@bbr/components";
 import Icon from "@bbr/components/icon";
 
@@ -37,7 +37,7 @@ const PasswordWithLabel = ({
         className,
         elSizeClassName,
         rounded ? "is-rounded" : "",
-        isNullOrUndefined(style) ? "" : `is-${style}`,
+        getStyleClassName(style, validationState),
         "input",
     ]);
 

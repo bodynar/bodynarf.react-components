@@ -6,7 +6,7 @@ import { BaseInputElementProps, ElementFloatPosition } from "@bbr";
 
 /** Color picker props type */
 export interface ColorPickerProps extends Omit<BaseInputElementProps<Color>,
-    "style" | "loading"
+    | "style" | "loading"
     | "readonly" | "placeholder"
 > {
     /**

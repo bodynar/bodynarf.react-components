@@ -9,11 +9,9 @@ import { DropdownProps } from "@bbr/components/dropdown";
 
 /** Dropdown component */
 const Dropdown = (props: DropdownProps): JSX.Element => {
-    if (!isNullOrUndefined(props.label)) {
-        return <DropdownWithLabel {...props} />;
-    } else {
-        return <DropdownCompact {...props} />;
-    }
+    return isNullOrUndefined(props.label)
+        ? <DropdownCompact {...props} />
+        : <DropdownWithLabel {...props} />;
 };
 
 export default Dropdown;
