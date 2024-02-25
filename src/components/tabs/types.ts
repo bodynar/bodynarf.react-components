@@ -25,20 +25,6 @@ export enum TabsStyle {
     radioButtonRounded = "is-toggle is-toggle-rounded",
 }
 
-/**
- * Tabs items position on component
- */
-export enum TabsPosition { // TODO: Use ElementPosition & map in component to get classname
-    /** On the left side. Default value */
-    "left" = "",
-
-    /** Center*/
-    "center" = "is-centered",
-
-    /** Pulled to right */
-    "right" = "is-right",
-}
-
 /** Tab item */
 export interface TabItem {
     /** Unique identifier across all tab items */
