@@ -3,6 +3,7 @@ import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 import Icon from "@bbr/components/icon";
 
 import { TabItem as Item } from "@bbr/components/tabs";
+import { ElementPosition } from "@bbr";
 
 /** Tabs panel single tab item component props type */
 export interface TabItemProps {
@@ -52,7 +53,7 @@ const TabItemWithIcon = ({
         activeItem === item.id ? "is-active" : undefined,
     ]);
 
-    if (iconConfig.position === "left") {
+    if (iconConfig.position === ElementPosition.Right) {
         return (
             <li
                 key={item.id}
@@ -60,10 +61,10 @@ const TabItemWithIcon = ({
                 data-item-id={item.id}
             >
                 <a>
-                    <Icon {...iconConfig} />
                     <span>
                         {item.caption}
                     </span>
+                    <Icon {...iconConfig} />
                 </a>
             </li>
         );
@@ -76,10 +77,10 @@ const TabItemWithIcon = ({
             data-item-id={item.id}
         >
             <a>
+                <Icon {...iconConfig} />
                 <span>
                     {item.caption}
                 </span>
-                <Icon {...iconConfig} />
             </a>
         </li>
     );

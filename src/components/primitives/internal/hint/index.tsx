@@ -1,6 +1,6 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementSize, HintConfiguration, ValidationState, ValidationStatus } from "@bbr";
+import { ElementPosition, ElementSize, HintConfiguration, ValidationState, ValidationStatus } from "@bbr";
 import Icon from "@bbr/components/icon";
 
 /** Props of `InternalHint` */
@@ -84,12 +84,12 @@ const HintWithIcon = ({
     const iconClassName: string =
         getClassName([
             icon!.className,
-            icon!.position === "right"
+            icon!.position === ElementPosition.Right
                 ? "bbr-icon--right"
                 : "bbr-icon--left"
         ]);
 
-    if (icon!.position === "right") {
+    if (icon!.position === ElementPosition.Right) {
         return (
             <p className={className}>
                 {content}

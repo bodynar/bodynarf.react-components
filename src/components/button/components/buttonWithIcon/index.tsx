@@ -2,8 +2,7 @@ import { isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
 import Icon from "@bbr/components/icon";
 
-import { ButtonWithIconProps } from "@bbr/components/button";
-import { mapDataAttributes } from "@bbr/utils";
+import { ButtonWithIconProps, ElementPosition, mapDataAttributes } from "@bbr";
 
 /** Button with icon component */
 export const ButtonWithIcon = ({
@@ -13,13 +12,11 @@ export const ButtonWithIcon = ({
 
     title, data,
 }: ButtonWithIconProps): JSX.Element => {
-    const iconPosition = icon.position || "left";
-
     const iconClassName: string | undefined = isNullOrEmpty(caption)
         ? icon.className
-        : iconPosition === "left"
-            ? `${icon.className} bbr-icon--left`
-            : `${icon.className} bbr-icon--right`;
+        : icon.position === ElementPosition.Right
+            ? `${icon.className} bbr-icon--right`
+            : `${icon.className} bbr-icon--left`;
 
     className = isNullOrEmpty(caption)
         ? `${className} bbr-button--icon-only`
@@ -29,7 +26,7 @@ export const ButtonWithIcon = ({
         ? undefined
         : mapDataAttributes(data!);
 
-    if (iconPosition === "left") {
+    if (icon.position === ElementPosition.Right) {
         return (
             <button
                 onClick={onClick}
@@ -39,8 +36,8 @@ export const ButtonWithIcon = ({
                 title={title}
                 {...dataAttributes}
             >
-                <Icon {...icon} className={iconClassName} />
                 {caption}
+                <Icon {...icon} className={iconClassName} />
             </button>
         );
     }
@@ -54,8 +51,8 @@ export const ButtonWithIcon = ({
             title={title}
             {...dataAttributes}
         >
-            {caption}
             <Icon {...icon} className={iconClassName} />
+            {caption}
         </button>
     );
 };

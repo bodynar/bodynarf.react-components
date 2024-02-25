@@ -73,18 +73,14 @@ export enum ElementPosition {
 /** Element position, but without center placement */
 export type ElementFloatPosition = ElementPosition.Left | ElementPosition.Right;
 
-/** Allowed icon position */
-export type IconPosition = // TODO: To Enum
-    | "left"
-    | "right";
-
 /** Icon for component  */
 export interface ElementIcon {
     /**
      * Icon name. Must be without `bi-`
-     * @example ["Arrow repeat", "arrow-repeat"]
-     * // Icon name to icon class name.
-     * // For class name check bootstrap icons website
+     * @see https://icons.getbootstrap.com/
+     * @example <Icon name="info-square-fill" />
+     * // Will render icon "Info square fill"
+     * // https://icons.getbootstrap.com/icons/info-square-fill/
     */
     name: string;
 
@@ -98,5 +94,5 @@ export interface ElementIcon {
      * Position
      * Works only with other content
     */
-    position?: IconPosition;
+    position?: ElementFloatPosition;
 }

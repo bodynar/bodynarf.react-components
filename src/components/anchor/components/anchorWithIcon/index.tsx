@@ -1,8 +1,8 @@
 import { isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
 import Icon from "@bbr/components/icon";
-import { AnchorWithIconProps } from "@bbr/components/anchor";
-import { mapDataAttributes } from "@bbr/utils";
+
+import { AnchorWithIconProps, ElementPosition, mapDataAttributes } from "@bbr";
 
 /** Anchor with icon component */
 export const AnchorWithIcon = ({
@@ -11,19 +11,17 @@ export const AnchorWithIcon = ({
 
     title, data,
 }: AnchorWithIconProps): JSX.Element => {
-    const iconPosition = icon.position || "left";
-
     const iconClassName: string | undefined = isNullOrEmpty(caption)
         ? icon.className
-        : iconPosition === "left"
-            ? `${icon.className} bbr-icon--left`
-            : `${icon.className} bbr-icon--right`;
+        : icon.position === ElementPosition.Right
+            ? `${icon.className} bbr-icon--right`
+            : `${icon.className} bbr-icon--left`;
 
     const dataAttributes = isNullOrUndefined(data)
         ? undefined
         : mapDataAttributes(data!);
 
-    if (iconPosition === "left") {
+    if (icon.position === ElementPosition.Right) {
         return (
             <a
                 href={href}
