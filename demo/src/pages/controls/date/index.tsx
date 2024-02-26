@@ -10,7 +10,6 @@ import DemoComponentTitleInfoMessage from "../../../shared/components/title";
 
 /** Date component demo */
 function Date() {
-
     return (
         <section>
             <DemoComponentTitleInfoMessage name="Date picker" />

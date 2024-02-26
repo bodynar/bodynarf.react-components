@@ -1,27 +1,16 @@
 import { emptyFn } from "@bodynarf/utils";
 
 import PaginatorComponent from "@bodynarf/react.components/components/paginator";
+import { ElementPosition } from "@bodynarf/react.components/types";
 
 import DemoComponentTitleInfoMessage from "../../../shared/components/title";
 import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
 import ComponentUseCase from "../../../shared/components/useCase";
-import ComponentEnumCase from "../../../shared/components/enumSelectionCase";
 import ComponentSizeCase from "../../../shared/components/sizeUse";
-
-type ElementPosition = "left" | "center" | "right";
+import ComponentPositionCase from "../../../shared/components/positionUse";
 
 /** Paginator component demo */
 function Paginator() {
-    const positionLookupValues = [
-        ["left", "Left (default)"],
-        ["center", "Center"],
-        ["right", "Right"],
-    ].map((x, i) => ({
-        id: `${i}`,
-        value: x[0],
-        displayValue: x[1],
-    }));
-
     return (
         <section>
             <DemoComponentTitleInfoMessage
@@ -49,13 +38,10 @@ function Paginator() {
                 description="Will render additional buttons for navigating 1 page forward or backward"
                 component={<PaginatorComponent showNextButtons count={10} onPageChange={emptyFn} />}
             />
-            <ComponentEnumCase
+            <ComponentPositionCase
                 caption="Positions"
-                enumNames={["left", "center", "right"]}
-                placeholder="Position"
-                lookupValues={positionLookupValues}
                 description={`Describes float point for page-buttons. Notice placement of "Next" & "Previous" buttons`}
-                codeProvider={id => `<Paginator position="${id}" />`}
+                codeProvider={id => `<Tabs position={ElementPosition.${id}} />`}
                 componentProvider={
                     (value: ElementPosition) =>
                         <PaginatorComponent position={value} showNextButtons count={10} onPageChange={emptyFn} />

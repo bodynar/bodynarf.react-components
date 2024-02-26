@@ -1,6 +1,6 @@
 import { emptyFn } from "@bodynarf/utils";
 
-import { ValidationStatus } from "@bodynarf/react.components";
+import { ElementPosition, ValidationStatus } from "@bodynarf/react.components";
 import ColorComponent from "@bodynarf/react.components/components/primitives/color";
 
 import ComponentUseCase from "../../../shared/components/useCase";
@@ -19,9 +19,9 @@ function Color() {
             />
             <ComponentUseCase
                 caption="With preview"
-                code={`<Color showPreview />`}
+                code={`<Color preview={{ position: ElementPosition.Right }} />`}
                 description="Option allows control to have tag with selected color set as background color"
-                component={<ColorComponent showPreview onValueChange={emptyFn} />}
+                component={<ColorComponent preview={{ position: ElementPosition.Right }} onValueChange={emptyFn} />}
             />
             <ComponentUseCase
                 caption="With label (no preview)"

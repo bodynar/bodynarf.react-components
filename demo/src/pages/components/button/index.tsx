@@ -1,6 +1,6 @@
 import { useMemo, } from "react";
 
-import { SelectableItem } from "@bodynarf/react.components";
+import { ElementPosition, SelectableItem } from "@bodynarf/react.components";
 import ButtonComponent, { ButtonType } from "@bodynarf/react.components/components/button";
 
 import DemoComponentTitleInfoMessage from "../../../shared/components/title";
@@ -44,9 +44,9 @@ function Button() {
             />
             <ComponentUseCase
                 caption="Icon + text as content"
-                code={`<Button icon={{ name: "broadcast", position: "right" }} caption="Book" />`}
+                code={`<Button icon={{ name: "broadcast", position: ElementPosition.Right }} caption="Book" />`}
                 description="Caption could be as string value but also icon configuration"
-                component={<ButtonComponent type="success" icon={{ name: "broadcast", position: "right" }} caption="Start" />}
+                component={<ButtonComponent type="success" icon={{ name: "broadcast", position: ElementPosition.Right }} caption="Start" />}
             />
             <CommonPropsSuppressExampleInfoMessage />
             <ComponentUseCase
