@@ -34,8 +34,8 @@ export const AnchorWithIcon = ({
                 title={title}
                 {...dataAttributes}
             >
-                <Icon {...icon} className={iconClassName} />
                 {caption}
+                <Icon {...icon} className={iconClassName} />
             </a>
         );
     }
@@ -50,8 +50,8 @@ export const AnchorWithIcon = ({
             title={title}
             {...dataAttributes}
         >
-            {caption}
             <Icon {...icon} className={iconClassName} />
+            {caption}
         </a>
     );
 };
