@@ -2,10 +2,12 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
+import { ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
 
 import "./style.scss";
 
+import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import { CheckBoxProps } from "@bbr/components/checkbox";
 
 /** Boolean input component */
@@ -44,52 +46,33 @@ const CheckBox = ({
         : mapDataAttributes(data!);
 
     if (!isNullOrUndefined(label) && isFormLabel) {
-        const labelClassName = getClassName([
-            "label",
-            label!.className
-        ]);
-
-        const labelContainerClassName = getClassName([
-            "field-label",
-            label!.horizontalContainerClassName
-        ]);
-
-        const fieldContainerClassName = getClassName([
-            "field-body",
-            label!.horizontalFieldContainerClassName
-        ]);
-
         return (
-            <div className="bbr-input field is-horizontal">
-                <div className={labelContainerClassName}>
-                    <label
-                        className={labelClassName}
-                    >
-                        {label!.caption}
-                    </label>
-                </div>
-                <div className={fieldContainerClassName}>
-                    <div className="field">
-                        <input
-                            type="checkbox"
+            <ComponentWithLabel
+                id={id}
+                label={{
+                    ...label!,
+                    horizontalContainerClassName: getClassName([label!.horizontalContainerClassName, "p-0"]),
+                }}
+                size={ElementSize.Normal}
+            >
+                <input
+                    type="checkbox"
 
-                            id={id}
-                            name={id}
-                            disabled={disabled}
-                            onChange={onChecked}
-                            className={elClassName}
-                            defaultChecked={defaultValue}
+                    id={id}
+                    name={id}
+                    disabled={disabled}
+                    onChange={onChecked}
+                    className={elClassName}
+                    defaultChecked={defaultValue}
 
-                            title={title}
-                            {...dataAttributes}
-                        />
-                        <label
-                            htmlFor={id}
-                        >
-                        </label>
-                    </div>
-                </div>
-            </div>
+                    title={title}
+                    {...dataAttributes}
+                />
+                <label
+                    htmlFor={id}
+                >
+                </label>
+            </ComponentWithLabel>
         );
     }
 
