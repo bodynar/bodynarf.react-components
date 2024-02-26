@@ -27,7 +27,7 @@ const NumberWithLabel = ({
         [onValueChange]
     );
 
-    const id = name || generateGuid();
+    const id = name ?? generateGuid();
     const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
 
     const elClassName = getClassName([

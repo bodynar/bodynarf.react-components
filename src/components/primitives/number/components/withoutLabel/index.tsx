@@ -39,7 +39,7 @@ const NumberWithoutLabel = ({
         loading ? "is-loading" : "",
     ]);
 
-    const id = name || generateGuid();
+    const id = name ?? generateGuid();
 
     const dataAttributes = isNullOrUndefined(data)
         ? undefined

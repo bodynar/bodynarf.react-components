@@ -24,7 +24,7 @@ const CheckBox = ({
         [onValueChange]
     );
 
-    const id = name || generateGuid();
+    const id = name ?? generateGuid();
 
     const elClassName = getClassName([
         "is-checkradio",

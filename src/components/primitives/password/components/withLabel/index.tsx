@@ -30,7 +30,7 @@ const PasswordWithLabel = ({
     const onIconClick = useCallback(() => setContentIsHidden(state => !state), [setContentIsHidden]);
 
     const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
-    const id = name || generateGuid();
+    const id = name ?? generateGuid();
 
     const elClassName = getClassName([
         "bbr-password",

@@ -7,6 +7,7 @@ import Button from "@bbr/components/button";
 import { SearchProps } from "@bbr/components/search";
 
 import "./style.scss";
+import { ElementSize } from "@bbr/types";
 
 /** Search component */
 export default function Search({
@@ -17,8 +18,8 @@ export default function Search({
 
     className, title, data,
 }: SearchProps): JSX.Element {
-    const [elementName] = useState<string>(name || generateGuid());
-    const [searchValue, setSearchValue] = useState<string>(defaultValue || "");
+    const [elementName] = useState<string>(name ?? generateGuid());
+    const [searchValue, setSearchValue] = useState<string>(defaultValue ?? "");
 
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +38,7 @@ export default function Search({
         "bbr-search",
         "control",
         className,
-        `is-${(size || "normal")}`,
+        `is-${(size ?? ElementSize.Normal)}`,
         isLoading ? "is-loading" : "",
         searchType === "byButton" ? "is-expanded" : "",
     ]);
@@ -45,7 +46,7 @@ export default function Search({
     const inputClassName: string = getClassName([
         "input",
         "is-unselectable",
-        `is-${(size || "normal")}`,
+        `is-${(size ?? ElementSize.Normal)}`,
         rounded ? "is-rounded" : "",
     ]);
 

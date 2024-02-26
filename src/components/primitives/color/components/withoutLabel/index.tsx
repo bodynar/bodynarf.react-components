@@ -39,7 +39,7 @@ function ColorPickerWithoutLabel({
         "input",
     ]);
 
-    const id = name || generateGuid();
+    const id = name ?? generateGuid();
 
     return (
         <div className="bbr-color-picker">

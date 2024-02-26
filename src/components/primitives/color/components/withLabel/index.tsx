@@ -7,6 +7,7 @@ import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 
 import { ColorPickerProps } from "../..";
 import ColorPickerControl from "../picker";
+import { getStyleClassName } from "@bbr/utils";
 
 /** Color picker component with form label */
 function ColorPickerWithLabel({
@@ -39,6 +40,7 @@ function ColorPickerWithLabel({
     const elClassName = getClassName([
         className,
         rounded ? "is-rounded" : "",
+        getStyleClassName(undefined, validationState),
         isNullOrUndefined(size) ? "" : `is-${size}`,
         "input",
     ]);
