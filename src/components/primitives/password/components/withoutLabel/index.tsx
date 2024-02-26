@@ -7,7 +7,7 @@ import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
 import { PasswordProps } from "@bbr/components/password";
-import InternalHint from "@bbr/components/primitives/internal/hint";
+import InternalHint from "@bbr/internalComponent/hint";
 
 const PasswordWithoutLabel = ({
     onValueChange, disabled, validationState,

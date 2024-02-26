@@ -8,7 +8,7 @@ import { useComponentOutsideClick } from "@bbr/hooks";
 import { DropdownProps } from "@bbr/components/dropdown";
 import DropdownItem from "@bbr/components/dropdown/components/item";
 import DropdownLabel from "@bbr/components/dropdown/components/label";
-import InternalHint from "@bbr/components/primitives/internal/hint";
+import InternalHint from "@bbr/internalComponent/hint";
 
 const DropdownCompact = ({
     items,

@@ -6,7 +6,7 @@ import "../../../../common.scss";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
-import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
+import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 
 import { DateProps } from "@bbr/components/date";
 import InternalHint from "@bbr/components/internal/hint";

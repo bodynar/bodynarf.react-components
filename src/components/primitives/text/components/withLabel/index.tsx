@@ -6,8 +6,8 @@ import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 
 import { TextProps } from "@bbr/components/text";
-import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
-import InternalHint from "@bbr/components/primitives/internal/hint";
+import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
+import InternalHint from "@bbr/internalComponent/hint";
 
 /** Textual input with describing label */
 const TextWithLabel = ({

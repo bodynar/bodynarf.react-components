@@ -35,6 +35,10 @@
 			],
 			"@bbr/types": [
 				"./src/types",
+			],
+			"@bbr/internalComponent/*": [
+				"./src/components/internal/*",
+				"./src/components/primitives/internal/*",
 			]
 		}
 	},

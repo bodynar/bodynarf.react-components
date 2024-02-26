@@ -7,8 +7,8 @@ import { ElementSize } from "@bbr/types";
 import Icon from "@bbr/components/icon";
 
 import { PasswordProps } from "@bbr/components/password";
-import ComponentWithLabel from "@bbr/components/primitives/internal/componentWithLabel";
-import InternalHint from "@bbr/components/primitives/internal/hint";
+import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
+import InternalHint from "@bbr/internalComponent/hint";
 
 const PasswordWithLabel = ({
     onValueChange, disabled, validationState,

@@ -6,7 +6,7 @@ import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 
 import { NumberProps } from "@bbr/components/number";
-import InternalHint from "@bbr/components/primitives/internal/hint";
+import InternalHint from "@bbr/internalComponent/hint";
 
 /** Number component without label */
 const NumberWithoutLabel = ({

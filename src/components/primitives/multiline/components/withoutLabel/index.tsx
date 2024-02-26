@@ -6,7 +6,7 @@ import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 
 import { MultilineProps } from "@bbr/components/multiline";
-import InternalHint from "@bbr/components/primitives/internal/hint";
+import InternalHint from "@bbr/internalComponent/hint";
 
 /** Multiline textual input component without describing label*/
 const MultilineWithoutLabel = ({
