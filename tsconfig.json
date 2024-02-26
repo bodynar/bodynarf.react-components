@@ -17,9 +17,6 @@
 		"noImplicitReturns": true,
 		"baseUrl": "./",
 		"paths": {
-			"@bbr": [
-				"./src"
-			],
 			"@bbr/components": [
 				"./src/components"
 			],
