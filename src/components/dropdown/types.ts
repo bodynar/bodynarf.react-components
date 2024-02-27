@@ -1,4 +1,4 @@
-import { BaseElementProps, HintConfiguration, ValidationState, LabelConfiguration } from "@bbr/types";
+import { BaseElementProps, HintConfiguration, ValidationState, LabelConfiguration, ElementIcon } from "@bbr/types";
 
 /** Dropdown item */
 export interface SelectableItem {
@@ -13,6 +13,9 @@ export interface SelectableItem {
 
     /** Element title */
     title?: string;
+
+    /** Element icon configuration */
+    icon?: ElementIcon;
 }
 
 /** Dropdown component props type */
