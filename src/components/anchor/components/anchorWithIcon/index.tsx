@@ -7,7 +7,7 @@ import Icon from "@bbr/components/icon";
 import { AnchorWithIconProps } from "../..";
 
 /** Anchor with icon component */
-export const AnchorWithIcon = ({
+const AnchorWithIcon = ({
     href, className, onClick, caption,
     target, icon,
 
@@ -55,3 +55,5 @@ export const AnchorWithIcon = ({
         </a>
     );
 };
+
+export default AnchorWithIcon;

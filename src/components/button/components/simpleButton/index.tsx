@@ -1,10 +1,11 @@
 import { isNullOrUndefined } from "@bodynarf/utils";
 
-import { SimpleButtonProps } from "@bbr/components/button";
 import { mapDataAttributes } from "@bbr/utils";
 
+import { SimpleButtonProps } from "../..";
+
 /** Simple button component, without icon */
-export const SimpleButton = ({
+const SimpleButton = ({
     className, disabled,
     onClick,
     caption,
@@ -28,3 +29,5 @@ export const SimpleButton = ({
         </button>
     );
 };
+
+export default SimpleButton;

@@ -4,11 +4,10 @@ import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
+import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 
 import "./style.scss";
-
-import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
-import { CheckBoxProps } from "@bbr/components/checkbox";
+import { CheckBoxProps } from "../..";
 
 /** Boolean input component */
 const CheckBox = ({

@@ -2,10 +2,9 @@ import { isNullOrUndefined } from "@bodynarf/utils";
 
 import "../../../../common.scss";
 
-import { TextProps } from "@bbr/components";
-
-import TextWithLabel from "@bbr/components/primitives/text/components/withLabel";
-import TextWithoutLabel from "@bbr/components/primitives/text/components/withoutLabel";
+import { TextProps } from "..";
+import TextWithLabel from "../components/withLabel";
+import TextWithoutLabel from "../components/withoutLabel";
 
 /** Textual input component */
 const Text = (props: TextProps): JSX.Element => {

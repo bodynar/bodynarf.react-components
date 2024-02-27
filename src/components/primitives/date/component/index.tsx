@@ -2,14 +2,13 @@ import { ChangeEvent, useCallback } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined, isStringEmpty } from "@bodynarf/utils";
 
-import "../../../../common.scss";
-
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
-
-import { DateProps } from "@bbr/components/date";
 import InternalHint from "@bbr/components/internal/hint";
+
+import "../../../../common.scss";
+import { DateProps } from "../..";
 
 /** Date input component */
 const DatePicker = ({

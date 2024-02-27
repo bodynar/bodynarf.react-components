@@ -5,7 +5,7 @@ import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils"
 import { ElementSize } from "@bbr/types";
 import Icon from "@bbr/components/icon";
 
-import { SelectableItem } from "@bbr/components/dropdown";
+import { SelectableItem } from "../..";
 
 export interface DropdownLabelProps {
     /** Caption when no items selected */

@@ -6,8 +6,8 @@ import { ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
-import { AccordionProps } from "@bbr/components/accordion";
 import "./style.scss";
+import { AccordionProps } from "..";
 
 /** Accordion panel */
 const Accordion = ({

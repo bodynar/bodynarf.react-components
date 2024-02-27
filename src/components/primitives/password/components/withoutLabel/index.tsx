@@ -5,9 +5,9 @@ import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
-
-import { PasswordProps } from "@bbr/components/password";
 import InternalHint from "@bbr/internalComponent/hint";
+
+import { PasswordProps } from "../..";
 
 const PasswordWithoutLabel = ({
     onValueChange, disabled, validationState,

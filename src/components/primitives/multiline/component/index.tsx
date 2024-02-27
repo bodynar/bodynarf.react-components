@@ -2,9 +2,9 @@ import { isNullOrUndefined } from "@bodynarf/utils";
 
 import "../../../../common.scss";
 
-import { MultilineProps } from "@bbr/components/multiline";
-import MultilineWithoutLabel from "@bbr/components/primitives/multiline/components/withoutLabel";
-import MultilineWithLabel from "@bbr/components/primitives/multiline/components/withLabel";
+import { MultilineProps } from "..";
+import MultilineWithoutLabel from "../components/withoutLabel";
+import MultilineWithLabel from "../components/withLabel";
 
 /** Multiline textual input component */
 const Multiline = (props: MultilineProps): JSX.Element => {

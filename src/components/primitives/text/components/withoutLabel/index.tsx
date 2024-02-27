@@ -4,9 +4,9 @@ import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
-
-import { TextProps } from "@bbr/components/text";
 import InternalHint from "@bbr/internalComponent/hint";
+
+import { TextProps } from "../..";
 
 /** Textual input without describing label */
 const TextWithoutLabel = ({

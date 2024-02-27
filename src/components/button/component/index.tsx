@@ -1,11 +1,10 @@
 import { isNullOrEmpty, isNullOrUndefined, getClassName } from "@bodynarf/utils";
 
-import { ButtonProps } from "@bbr/components";
-
 import "./style.scss";
 
-import { ButtonWithIcon } from "@bbr/components/button/components/buttonWithIcon";
-import { SimpleButton } from "@bbr/components/button/components/simpleButton";
+import { ButtonProps } from "..";
+import ButtonWithIcon from "../components/buttonWithIcon";
+import SimpleButton from "../components/simpleButton";
 
 /**
  * Button component

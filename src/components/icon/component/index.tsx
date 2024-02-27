@@ -1,10 +1,10 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { mapDataAttributes } from "@bbr/utils";
 import { ElementSize } from "@bbr/types";
-import { IconProps } from "@bbr/components/icon";
+import { mapDataAttributes } from "@bbr/utils";
 
 import "./style.scss";
+import { IconProps } from "../..";
 
 const sizeToClassMap: Map<ElementSize, string> = new Map([
     [ElementSize.Small, "bbr-icon--size-small"],

@@ -2,13 +2,13 @@ import { useCallback, useState, MouseEvent, useEffect, useRef } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import "./style.scss";
-
 import { BaseElementProps, ElementPosition, ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
 
-import { TabItem, TabsStyle } from "@bbr/components/tabs";
-import TabItemComponent from "@bbr/components/tabs/components/item";
+import "./style.scss";
+
+import { TabItem, TabsStyle } from "..";
+import TabItemComponent from "../components/item";
 
 /** Tabs component props type */
 export interface TabsProps extends BaseElementProps {

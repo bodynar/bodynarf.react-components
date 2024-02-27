@@ -3,11 +3,11 @@ import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { generateGuid, getClassName, hexToRgb, isNullOrUndefined, rgbToHex, whiteHex } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
+import { getStyleClassName } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 
 import { ColorPickerProps } from "../..";
 import ColorPickerControl from "../picker";
-import { getStyleClassName } from "@bbr/utils";
 
 /** Color picker component with form label */
 function ColorPickerWithLabel({

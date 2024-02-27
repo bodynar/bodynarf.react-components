@@ -4,10 +4,10 @@ import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined, } fro
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
-
-import { TextProps } from "@bbr/components/text";
-import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import InternalHint from "@bbr/internalComponent/hint";
+import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
+
+import { TextProps } from "../..";
 
 /** Textual input with describing label */
 const TextWithLabel = ({

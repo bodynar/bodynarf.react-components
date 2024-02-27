@@ -1,10 +1,11 @@
 import { isNullOrUndefined } from "@bodynarf/utils";
 
-import { SimpleAnchorProps } from "@bbr/components/anchor";
 import { mapDataAttributes } from "@bbr/utils";
 
+import { SimpleAnchorProps } from "../..";
+
 /** Simple anchor component, without icon */
-export const SimpleAnchor = ({
+const SimpleAnchor = ({
     href, className, onClick, caption, target,
 
     title, data,
@@ -27,3 +28,5 @@ export const SimpleAnchor = ({
         </a>
     );
 };
+
+export default SimpleAnchor;

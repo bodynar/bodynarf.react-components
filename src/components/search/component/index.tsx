@@ -2,12 +2,12 @@ import { ChangeEvent, useCallback, useState } from "react";
 
 import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
+import { ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
 import Button from "@bbr/components/button";
-import { SearchProps } from "@bbr/components/search";
 
 import "./style.scss";
-import { ElementSize } from "@bbr/types";
+import { SearchProps } from "..";
 
 /** Search component */
 export default function Search({

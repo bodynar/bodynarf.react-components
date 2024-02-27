@@ -4,9 +4,9 @@ import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
-
-import { NumberProps } from "@bbr/components/number";
 import InternalHint from "@bbr/internalComponent/hint";
+
+import { NumberProps } from "../..";
 
 /** Number component without label */
 const NumberWithoutLabel = ({

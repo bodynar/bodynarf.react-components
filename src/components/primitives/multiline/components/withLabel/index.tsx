@@ -4,10 +4,10 @@ import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
-
-import { MultilineProps } from "@bbr/components/multiline";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import InternalHint from "@bbr/internalComponent/hint";
+
+import { MultilineProps } from "../..";
 
 /** Multiline textual input component with describing label */
 const MultilineWithLabel = ({

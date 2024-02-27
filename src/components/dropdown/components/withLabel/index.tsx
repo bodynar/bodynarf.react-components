@@ -4,11 +4,11 @@ import { isNullOrUndefined, isNullOrEmpty, getClassName } from "@bodynarf/utils"
 
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
-
-import { DropdownProps } from "@bbr/components/dropdown";
-import DropdownItem from "@bbr/components/dropdown/components/item";
-import DropdownLabel from "@bbr/components/dropdown/components/label";
 import InternalHint from "@bbr/internalComponent/hint";
+
+import { DropdownProps } from "../..";
+import DropdownItem from "../../components/item";
+import DropdownLabel from "../../components/label";
 
 const DropdownWithLabel = ({
     items,

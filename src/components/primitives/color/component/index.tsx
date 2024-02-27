@@ -3,7 +3,6 @@ import { isNullOrUndefined } from "@bodynarf/utils";
 import "./style.scss";
 
 import { ColorPickerProps } from "..";
-
 import ColorPickerWithoutLabel from "../components/withoutLabel";
 import ColorPickerWithLabel from "../components/withLabel";
 

@@ -4,10 +4,10 @@ import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined, isStr
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
-
-import { NumberProps } from "@bbr/components/number";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import InternalHint from "@bbr/internalComponent/hint";
+
+import { NumberProps } from "../..";
 
 /** Number component with label */
 const NumberWithLabel = ({

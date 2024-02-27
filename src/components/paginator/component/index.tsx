@@ -4,7 +4,8 @@ import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils"
 
 import { mapDataAttributes } from "@bbr/utils";
 import { ElementPosition } from "@bbr/types";
-import { PaginatorProps, generatePageNumbers } from "@bbr/components";
+
+import { PaginatorProps, generatePageNumbers } from "../..";
 
 /**
  * Paginator component.

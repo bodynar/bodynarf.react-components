@@ -2,13 +2,13 @@ import { ChangeEvent, useCallback, useState } from "react";
 
 import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
 
-import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import { ElementSize } from "@bbr/types";
+import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
-
-import { PasswordProps } from "@bbr/components/password";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import InternalHint from "@bbr/internalComponent/hint";
+
+import { PasswordProps } from "../..";
 
 const PasswordWithLabel = ({
     onValueChange, disabled, validationState,

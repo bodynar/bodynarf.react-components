@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+
 import Icon from "@bbr/components/icon";
 
 import { SortColumn, TableHeading } from "../../types";

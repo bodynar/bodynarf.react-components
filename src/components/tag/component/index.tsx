@@ -1,8 +1,9 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { mapDataAttributes } from "@bbr/utils";
 import { ElementColor, ElementSize } from "@bbr/types";
-import { TagProps } from "@bbr/components/tag";
+import { mapDataAttributes } from "@bbr/utils";
+
+import { TagProps } from "..";
 
 import "./style.scss";
 

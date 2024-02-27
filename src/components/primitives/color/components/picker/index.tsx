@@ -5,6 +5,7 @@ import { getClassName, getFontColorFromString, isNullOrUndefined } from "@bodyna
 import { ElementPosition, BaseInputElementProps } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
 import InternalHint from "@bbr/internalComponent/hint";
+
 import { ColorPickerCssProperties, ColorPickerPreviewConfig } from "../..";
 
 /** Props of `ColorPickerControl` */
