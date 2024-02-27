@@ -1,4 +1,5 @@
 import { SelectableItem } from "@bbr/components/dropdown";
+import { getClassName } from "@bodynarf/utils";
 
 /** Dropdown item props */
 interface DropdownItemProps {
@@ -13,14 +14,23 @@ interface DropdownItemProps {
 }
 
 /** Single item in dropdown component */
-const DropdownItem = ({ item, selected, onClick }: DropdownItemProps): JSX.Element => {
+const DropdownItem = ({
+    item, selected, onClick
+}: DropdownItemProps): JSX.Element => {
+    const className = getClassName([
+        "bbr-dropdown-item",
+        "dropdown-item",
+        selected ? "is-active" : "",
+    ]);
+
     return (
         <li
             key={item.id}
-            className={`bbr-dropdown-item dropdown-item${selected ? " is-active" : ""}`}
             onClick={onClick}
+            className={className}
             data-dropdown-item-value={item.value}
-            title={item.displayValue}
+
+            title={item.title}
         >
             {item.displayValue}
         </li>
