@@ -33,6 +33,7 @@ const DropdownItem = ({
         "bbr-dropdown-item",
         "dropdown-item",
         selected ? "is-active" : "",
+        "is-flex is-align-items-center",
     ]);
 
     return (
@@ -61,6 +62,7 @@ const DropdownItemWithIcon = ({
         "bbr-dropdown-item",
         "dropdown-item",
         selected ? "is-active" : "",
+        "is-flex is-align-items-center",
     ]);
 
     const iconClassName = getClassName([
