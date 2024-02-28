@@ -42,6 +42,7 @@ const InternalHint = ({
     }
 
     const className = getClassName([
+        "bbr-hint",
         "help",
         "m-help",
         (hint!.grey ?? false) ? "has-text-grey" : undefined,
