@@ -37,6 +37,8 @@ Simple react components based on html elements.
  - **Button** - button that allows user to interact with system by clicking it _(assume everyone knows what is button)_
  - **Icon** - *see p.4 of installation*
  - **Tag** - small component stands for tag visualization
+ - **BreadCrumbs** - speaks for it self
+ - **Table** - table with sortable headers
 
 ### Complex components
 Complex components is set of components built via combining simple components or represent complex logical component

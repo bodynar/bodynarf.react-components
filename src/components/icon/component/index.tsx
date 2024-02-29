@@ -1,10 +1,10 @@
-import { getClassName } from "@bodynarf/utils";
+import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+
+import { ElementSize } from "@bbr/types";
+import { mapDataAttributes } from "@bbr/utils";
 
 import "./style.scss";
-
-import { ElementSize } from "@bbr/components";
-
-import { IconProps } from "@bbr/components/icon";
+import { IconProps } from "../..";
 
 const sizeToClassMap: Map<ElementSize, string> = new Map([
     [ElementSize.Small, "bbr-icon--size-small"],
@@ -18,17 +18,27 @@ const sizeToClassMap: Map<ElementSize, string> = new Map([
  */
 export default function Icon({
     name, size = ElementSize.Normal,
-    className,
+
+    className, title, data,
 }: IconProps): JSX.Element {
     const classNames = getClassName([
         "bbr-icon",
         "bi",
         `bi-${name}`,
+        className,
         sizeToClassMap.has(size) ? sizeToClassMap.get(size) : "",
-        className
     ]);
 
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
     return (
-        <i className={classNames}></i>
+        <i
+            className={classNames}
+
+            title={title}
+            {...dataAttributes}
+        ></i>
     );
 }

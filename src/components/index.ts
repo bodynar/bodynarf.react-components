@@ -1,5 +1,3 @@
-export * from "./types";
-
 export * from "./accordion";
 export * from "./anchor";
 export * from "./button";

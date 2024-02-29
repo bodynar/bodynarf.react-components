@@ -1,7 +1,9 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementColor, ElementSize } from "@bbr/components";
-import { TagProps } from "@bbr/components/tag";
+import { ElementColor, ElementSize } from "@bbr/types";
+import { mapDataAttributes } from "@bbr/utils";
+
+import { TagProps } from "..";
 
 import "./style.scss";
 
@@ -13,7 +15,7 @@ const Tag = ({
     rounded = false, lightColor = false, customColor,
     onClick,
 
-    className, title,
+    className, title, data,
 }: TagProps): JSX.Element => {
     if (!isNullOrUndefined(customColor)) {
         style = ElementColor.Default;
@@ -22,25 +24,33 @@ const Tag = ({
     const elClassName = getClassName([
         "bbr-tag",
         "tag",
+        className,
         style === ElementColor.Default ? "" : `is-${style}`,
         !isNullOrUndefined(customColor) ? "bbr-tag--custom" : "",
         lightColor && isNullOrUndefined(customColor) ? "is-light" : "",
         rounded ? "is-rounded" : "",
         size === ElementSize.Normal || size === ElementSize.Small ? "" : `is-${size}`,
         isNullOrUndefined(onClick) ? "" : "bbr-tag--clickable",
-        className,
     ]);
+
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
 
     return (
         <span
-            className={elClassName}
             onClick={onClick}
+            className={elClassName}
+            style={isNullOrUndefined(customColor)
+                ? undefined
+                : {
+                    color: customColor?.color,
+                    backgroundColor: customColor?.backgroundColor,
+                }
+            }
+
             title={title}
-            color={customColor?.color}
-            style={{
-                color: customColor?.color,
-                backgroundColor: customColor?.backgroundColor,
-            }}
+            {...dataAttributes}
         >
             {content}
         </span>

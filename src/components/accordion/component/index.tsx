@@ -2,14 +2,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import "./style.scss";
-
-import { ElementSize } from "@bbr/components";
+import { ElementSize } from "@bbr/types";
+import { mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
-import { mapDataAttributes } from "@bbr/utils";
-
-import { AccordionProps } from "@bbr/components/accordion";
+import "./style.scss";
+import { AccordionProps } from "..";
 
 /** Accordion panel */
 const Accordion = ({
@@ -17,7 +15,8 @@ const Accordion = ({
     style, size = ElementSize.Normal,
     defaultExpanded = false,
     onToggle,
-    className, data, title,
+
+    className, title, data,
 }: AccordionProps): JSX.Element => {
     const expandablePanelRef = useRef<HTMLDivElement>(null);
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
@@ -55,6 +54,7 @@ const Accordion = ({
         <article
             className={elClassName}
             aria-expanded={isExpanded}
+
             {...dataAttributes}
         >
             <div

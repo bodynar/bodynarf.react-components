@@ -1,2 +1,2 @@
-export * from "./formValidation";
 export * from "./dataAttributes";
+export * from "./validation";

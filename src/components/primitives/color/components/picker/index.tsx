@@ -2,100 +2,83 @@ import { ChangeEvent } from "react";
 
 import { getClassName, getFontColorFromString, isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementPosition, ElementSize } from "@bbr";
+import { ElementPosition, BaseInputElementProps } from "@bbr/types";
+import { mapDataAttributes } from "@bbr/utils";
+import InternalHint from "@bbr/internalComponent/hint";
+
 import { ColorPickerCssProperties, ColorPickerPreviewConfig } from "../..";
 
-/** Color picker control container props */
-export interface ColorPickerControlProps {
-    /** Class names of control container */
-    containerClassName: string;
-
-    /** Class names of control */
-    className: string;
-
-    /** Default value for color control */
-    defaultColor: string;
-
-    /** Handler of control value change*/
-    onValueChange: (event: ChangeEvent<HTMLInputElement>) => void;
-
-    /** Control unique identifier */
-    id: string;
-
-    /** Extra data-* attributes */
-    dataAttributes?: object;
-
-    /** Is validation should be displayed */
-    isValidationDefined: boolean;
-
-    /** Validation messages */
-    validationMessages: Array<string>;
-
-    /** Validation style class name */
-    styleClassName: string;
+/** Props of `ColorPickerControl` */
+export interface ColorPickerControlProps extends Omit<
+    BaseInputElementProps<string>,
+    | "onValueChange" | "placeholder"
+    | "rounded" | "readonly"
+    | "loading" | "className"
+> {
+    /** Preview element configuration */
+    previewConfig?: ColorPickerPreviewConfig;
 
     /** Current color value */
     value: string;
 
-    /** Should be component disabled. Selecting is not allowed */
-    disabled?: boolean;
+    /** Control unique identifier */
+    id: string;
 
-    /** Preview element configuration */
-    previewConfig?: ColorPickerPreviewConfig;
+    /** Class names of control */
+    elementClassName: string;
 
-    /** Component size */
-    size?: ElementSize;
-
-    /** Title */
-    title?: string;
+    /** Handler of control value change*/
+    onValueChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 /** Color picker container component */
 const ColorPickerControl = ({
-    containerClassName, className,
+    elementClassName,
     disabled, previewConfig, size,
-    defaultColor, onValueChange, value,
-    id, title, dataAttributes,
+    defaultValue, onValueChange, value,
+    id, title, data,
 
-    isValidationDefined, validationMessages, styleClassName,
+    hint, validationState,
 }: ColorPickerControlProps): JSX.Element => {
     if (!isNullOrUndefined(previewConfig)) {
-        return <PickerWithPreview
-            containerClassName={containerClassName}
-            className={className}
-            disabled={disabled}
-            size={size}
-            defaultColor={defaultColor}
-            onValueChange={onValueChange}
-            value={value}
-            id={id}
-            title={title}
-            dataAttributes={dataAttributes}
-            previewConfig={previewConfig}
-            isValidationDefined={isValidationDefined}
-            validationMessages={validationMessages}
-            styleClassName={styleClassName}
-        />;
+        return (
+            <PickerWithPreview
+                id={id}
+                size={size}
+                value={value}
+                disabled={disabled}
+                elementClassName={elementClassName}
+                defaultValue={defaultValue}
+                onValueChange={onValueChange}
+                previewConfig={previewConfig}
+
+                title={title}
+                data={data}
+            />
+        );
     }
 
     return (
         <>
-            <div className={containerClassName}>
+            <div className="control bbr-input">
                 <input
                     type="color"
-                    className={className}
-                    disabled={disabled}
-                    defaultValue={defaultColor}
-                    onChange={onValueChange}
-                    name={id}
+
                     id={id}
+                    name={id}
+                    disabled={disabled}
+                    className={elementClassName}
+                    onChange={onValueChange}
+                    defaultValue={defaultValue}
+
                     title={title}
-                    {...dataAttributes}
+                    {...data}
                 />
             </div>
-            {isValidationDefined && validationMessages.length > 0 &&
-                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-            }
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </>
     );
 };
@@ -104,12 +87,12 @@ export default ColorPickerControl;
 
 /** Picker sub component with preview */
 const PickerWithPreview = ({
-    containerClassName, className,
+    elementClassName,
     disabled, size,
-    defaultColor, onValueChange, value,
-    id, title, dataAttributes,
+    defaultValue, onValueChange, value,
+    id, title, data,
     previewConfig,
-    isValidationDefined, validationMessages, styleClassName,
+    hint, validationState,
 }: ColorPickerControlProps): JSX.Element => {
     const classNames = getClassName([
         "bbr-color-picker__preview",
@@ -119,9 +102,13 @@ const PickerWithPreview = ({
     ]);
 
     const color = getFontColorFromString(value);
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
 
     const controlContainerClassName = getClassName([
-        containerClassName,
+        "control",
+        "bbr-input",
         "is-flex-grow-1",
         previewConfig!.position === ElementPosition.Left ? "ml-1" : "mr-1",
     ]);
@@ -141,19 +128,22 @@ const PickerWithPreview = ({
                 <div className={controlContainerClassName}>
                     <input
                         type="color"
-                        className={className}
-                        disabled={disabled}
-                        defaultValue={defaultColor}
-                        onChange={onValueChange}
-                        name={id}
+
                         id={id}
+                        name={id}
+                        disabled={disabled}
+                        onChange={onValueChange}
+                        defaultValue={defaultValue}
+                        className={elementClassName}
+
                         title={title}
                         {...dataAttributes}
                     />
                 </div>
-                {isValidationDefined && validationMessages.length > 0 &&
-                    <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-                }
+                <InternalHint
+                    hint={hint}
+                    validationState={validationState}
+                />
             </div>
         );
     }
@@ -163,12 +153,14 @@ const PickerWithPreview = ({
             <div className={controlContainerClassName}>
                 <input
                     type="color"
-                    className={className}
-                    disabled={disabled}
-                    defaultValue={defaultColor}
-                    onChange={onValueChange}
-                    name={id}
+
                     id={id}
+                    name={id}
+                    disabled={disabled}
+                    onChange={onValueChange}
+                    defaultValue={defaultValue}
+                    className={elementClassName}
+
                     title={title}
                     {...dataAttributes}
                 />
@@ -182,9 +174,10 @@ const PickerWithPreview = ({
             >
                 {value}
             </button>
-            {isValidationDefined && validationMessages.length > 0 &&
-                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-            }
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </div>
     );
-}
+};

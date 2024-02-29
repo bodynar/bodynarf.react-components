@@ -1,6 +1,6 @@
 import { useMemo, } from "react";
 
-import { SelectableItem } from "@bodynarf/react.components";
+import { ElementPosition, SelectableItem } from "@bodynarf/react.components";
 import ButtonComponent, { ButtonType } from "@bodynarf/react.components/components/button";
 
 import DemoComponentTitleInfoMessage from "../../../shared/components/title";
@@ -44,9 +44,9 @@ function Button() {
             />
             <ComponentUseCase
                 caption="Icon + text as content"
-                code={`<Button icon={{ name: "broadcast", position: "right" }} caption="Book" />`}
+                code={`<Button icon={{ name: "broadcast", position: ElementPosition.Right }} caption="Book" />`}
                 description="Caption could be as string value but also icon configuration"
-                component={<ButtonComponent type="success" icon={{ name: "broadcast", position: "right" }} caption="Start" />}
+                component={<ButtonComponent type="success" icon={{ name: "broadcast", position: ElementPosition.Right }} caption="Start" />}
             />
             <CommonPropsSuppressExampleInfoMessage />
             <ComponentUseCase
@@ -60,7 +60,7 @@ function Button() {
                 captionIsCode
                 caption="light"
                 code={`<Button light />`}
-                description="Button style will be a little bit lighter"
+                description="Button become a little lighter"
                 component={<ButtonComponent light type="success" caption="Start" />}
             />
             <ComponentUseCase
@@ -73,7 +73,7 @@ function Button() {
             <ComponentUseCase
                 caption="Loading state mode"
                 code={`<Button isLoading />`}
-                description="Button will display loading spinner instead of caption and click isn't doing anything"
+                description="Button will show a loading indicator instead of a content, and clicking it does nothing"
                 component={<ButtonComponent isLoading type="success" caption="Start" />}
             />
             <ComponentUseCase
@@ -87,7 +87,7 @@ function Button() {
                 enumNames={types}
                 placeholder="Type"
                 lookupValues={typesAsSelectItems}
-                description="Button can have different own colors"
+                description="Button has its own set of colors"
                 codeProvider={id => `<Button type="${id}" />`}
                 componentProvider={
                     (value: ButtonType) =>
@@ -97,7 +97,7 @@ function Button() {
             <ComponentSizeCase
                 caption="Sizes"
                 codeProvider={id => `<Button size={ElementSize.${id}} />`}
-                description="Component supports all available sizes"
+                description="Button supports all available sizes"
                 componentProvider={
                     size =>
                         <ButtonComponent size={size} caption="Click me" type="success" />

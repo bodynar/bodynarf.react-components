@@ -1,20 +1,24 @@
 import { ChangeEvent, useCallback, useState } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault } from "@bodynarf/utils";
+import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementSize } from "@bbr/components";
-import { getValidationValues } from "@bbr/utils";
+import { ElementSize } from "@bbr/types";
+import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
+import InternalHint from "@bbr/internalComponent/hint";
 
-import { PasswordProps } from "@bbr/components/password";
+import { PasswordProps } from "../..";
 
 const PasswordWithoutLabel = ({
     onValueChange, disabled, validationState,
     name,
-    className, size, style,
+    size, style,
     rounded = false, loading = false,
     placeholder,
     canShowPassword = false,
+
+    className, title, data,
+    hint,
 }: PasswordProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
@@ -24,16 +28,15 @@ const PasswordWithoutLabel = ({
     const [contentIsHidden, setContentIsHidden] = useState(true);
     const onIconClick = useCallback(() => setContentIsHidden(state => !state), [setContentIsHidden]);
 
-    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(style, validationState);
     const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
-    const id = name || generateGuid();
+    const id = name ?? generateGuid();
 
     const elClassName = getClassName([
+        "bbr-password",
         className,
         elSizeClassName,
         rounded ? "is-rounded" : "",
-        styleClassName,
-        "bbr-password",
+        getStyleClassName(style, validationState),
         "input",
     ]);
 
@@ -45,17 +48,25 @@ const PasswordWithoutLabel = ({
         "bbr-password__wrapper",
     ]);
 
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
     return (
         <>
             <div className={containerClassName}>
                 <input
                     type={contentIsHidden ? "password" : "text"}
-                    className={elClassName}
-                    placeholder={placeholder}
+
+                    id={id}
+                    name={id}
                     disabled={disabled}
                     onChange={onChange}
-                    name={id}
-                    id={id}
+                    className={elClassName}
+                    placeholder={placeholder}
+
+                    title={title}
+                    {...dataAttributes}
                 />
                 {canShowPassword && !loading &&
                     <span
@@ -70,9 +81,10 @@ const PasswordWithoutLabel = ({
                     </span>
                 }
             </div>
-            {isValidationDefined && validationMessages.length > 0 &&
-                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-            }
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </>
     );
 };

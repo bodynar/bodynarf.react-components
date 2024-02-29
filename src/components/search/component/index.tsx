@@ -1,12 +1,13 @@
 import { ChangeEvent, useCallback, useState } from "react";
 
-import { generateGuid, getClassName } from "@bodynarf/utils";
+import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import "./style.scss";
-
+import { ElementSize } from "@bbr/types";
+import { mapDataAttributes } from "@bbr/utils";
 import Button from "@bbr/components/button";
 
-import { SearchProps } from "@bbr/components/search";
+import "./style.scss";
+import { SearchProps } from "..";
 
 /** Search component */
 export default function Search({
@@ -14,9 +15,11 @@ export default function Search({
     name, defaultValue,
     size,
     isLoading = false, rounded = false, disabled,
+
+    className, title, data,
 }: SearchProps): JSX.Element {
-    const [elementName] = useState<string>(name || generateGuid());
-    const [searchValue, setSearchValue] = useState<string>(defaultValue || "");
+    const [elementName] = useState<string>(name ?? generateGuid());
+    const [searchValue, setSearchValue] = useState<string>(defaultValue ?? "");
 
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => {
@@ -31,10 +34,11 @@ export default function Search({
 
     const onSearchButtonClick = useCallback(() => onSearch(searchValue), [onSearch, searchValue]);
 
-    const className: string = getClassName([
+    const elClassName: string = getClassName([
         "bbr-search",
         "control",
-        `is-${(size || "normal")}`,
+        className,
+        `is-${(size ?? ElementSize.Normal)}`,
         isLoading ? "is-loading" : "",
         searchType === "byButton" ? "is-expanded" : "",
     ]);
@@ -42,31 +46,39 @@ export default function Search({
     const inputClassName: string = getClassName([
         "input",
         "is-unselectable",
-        `is-${(size || "normal")}`,
+        `is-${(size ?? ElementSize.Normal)}`,
         rounded ? "is-rounded" : "",
     ]);
+
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
 
     if (searchType === "byButton") {
         return (
             <div className="field has-addons">
-                <div className={className}>
+                <div className={elClassName}>
                     <input
                         type="search"
                         name={elementName}
-                        defaultValue={searchValue}
-                        className={inputClassName}
                         disabled={disabled}
                         onChange={onChange}
                         placeholder={caption}
+                        defaultValue={searchValue}
+                        className={inputClassName}
+
+                        title={title}
+                        {...dataAttributes}
                     />
                 </div>
                 <div className="control">
                     <Button
-                        caption="Search"
                         type="info"
-                        onClick={onSearchButtonClick}
-                        isLoading={isLoading}
                         size={size}
+                        caption="Search"
+                        disabled={disabled}
+                        isLoading={isLoading}
+                        onClick={onSearchButtonClick}
                     />
                 </div>
             </div>
@@ -74,15 +86,18 @@ export default function Search({
     }
     else {
         return (
-            <div className={className}>
+            <div className={elClassName}>
                 <input
                     type="search"
                     name={elementName}
-                    defaultValue={searchValue}
-                    className={inputClassName}
                     disabled={disabled}
                     onChange={onChange}
                     placeholder={caption}
+                    defaultValue={searchValue}
+                    className={inputClassName}
+
+                    title={title}
+                    {...dataAttributes}
                 />
             </div>
         );

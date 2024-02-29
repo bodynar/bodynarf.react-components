@@ -1,9 +1,10 @@
-import { BaseInputElementProps } from "@bbr/components";
+import { BaseInputElementProps } from "@bbr/types";
 
 /** Checkbox component props type */
 export interface CheckBoxProps extends Omit<BaseInputElementProps<boolean>,
     "readonly" | "validationState"
     | "loading" | "placeholder"
+    | "hint"
 > {
     /** Is full colored checkbox */
     block?: boolean;

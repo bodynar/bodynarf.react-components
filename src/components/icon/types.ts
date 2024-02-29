@@ -1,7 +1,7 @@
-import { ElementSize } from "@bbr/components";
+import { BaseElementProps, ElementSize } from "@bbr/types";
 
 /** Icon component props */
-export interface IconProps {
+export interface IconProps extends BaseElementProps {
     /**
      * Icon name. Must be without `bi-`
      * @example ["Arrow repeat", "arrow-repeat"]
@@ -9,9 +9,6 @@ export interface IconProps {
      * // For class name check bootstrap icons website
     */
     name: string;
-
-    /** Additional classname */
-    className?: string;
 
     /** Icon size */
     size?: ElementSize;

@@ -1,6 +1,6 @@
-import { ElementSize } from "@bbr/components";
+import { BaseElementProps, ElementPosition, ElementSize } from "@bbr/types";
 
-export interface PaginatorProps {
+export interface PaginatorProps extends BaseElementProps {
     /** Amount of pages */
     count: number;
 
@@ -14,20 +14,13 @@ export interface PaginatorProps {
      * Page numbers position.
      * Useful with `showNextButtons = true`
     */
-    position?: // TODO: to enum (ElementPosition ?)
-    | "left" /* default */
-    | "center"
-    | "right"
-    ;
+    position?: ElementPosition;
 
     /** Buttons should have rounded borders */
     rounded?: boolean;
 
     /** Size of paginator component elements */
     size?: ElementSize;
-
-    /** Additional class names */
-    className?: string;
 
     /** Display "Previous" \ "Next" buttons */
     showNextButtons?: boolean;

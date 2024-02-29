@@ -1,4 +1,4 @@
-import { ElementColor, ElementSize, SelectableItem } from "@bodynarf/react.components";
+import { ElementColor, ElementPosition, ElementSize, SelectableItem } from "@bodynarf/react.components";
 
 /** Colors object */
 export const Colors = {
@@ -32,6 +32,25 @@ export const Sizes = {
 
     /** All values as selectable items */
     selectableItems: Object.values(ElementSize).map((x, i) => ({
+        displayValue: x,
+        id: i.toString(),
+        value: x,
+    }) as SelectableItem),
+};
+
+/** Positions object */
+export const Positions = {
+    /** All values */
+    values: Object.values(ElementPosition),
+
+    /** All names */
+    keys: Object.keys(ElementPosition),
+
+    /** All names as string, separated by comma */
+    string: Object.keys(ElementPosition).join(", "),
+
+    /** All values as selectable items */
+    selectableItems: Object.values(ElementPosition).map((x, i) => ({
         displayValue: x,
         id: i.toString(),
         value: x,

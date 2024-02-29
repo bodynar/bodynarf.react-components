@@ -1,4 +1,4 @@
-import { ElementIcon } from "@bbr/components";
+import { ElementIcon } from "@bbr/types";
 
 /** Tabs component style */
 export enum TabsStyle {
@@ -23,20 +23,6 @@ export enum TabsStyle {
      * Styled as rounded buttons
      */
     radioButtonRounded = "is-toggle is-toggle-rounded",
-}
-
-/**
- * Tabs items position on component
- */
-export enum TabsPosition { // TODO: Use ElementPosition & map in component to get classname
-    /** On the left side. Default value */
-    "left" = "",
-
-    /** Center*/
-    "center" = "is-centered",
-
-    /** Pulled to right */
-    "right" = "is-right",
 }
 
 /** Tab item */

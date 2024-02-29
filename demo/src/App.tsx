@@ -9,9 +9,7 @@ import LeftMenu from "./components/leftMenu";
 function App() {
 	const { pathname } = useLocation();
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, [pathname]);
+	useEffect(() => window.scrollTo(0, 0), [pathname]);
 
 	const menuItems = useMemo(() =>
 		routes
@@ -24,7 +22,7 @@ function App() {
 	const activeItem = menuItems.find(({ path }) => pathname.startsWith(path))?.path ?? "";
 
 	return (
-		<main>
+		<main style={{ paddingBottom: "5rem" }}>
 			<Navbar />
 			<main className="container my-4">
 				<section className="columns">

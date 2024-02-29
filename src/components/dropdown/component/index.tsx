@@ -2,18 +2,15 @@ import { isNullOrUndefined } from "@bodynarf/utils";
 
 import "./style.scss";
 
-import DropdownWithLabel from "@bbr/components/dropdown/components/withLabel";
-import DropdownCompact from "@bbr/components/dropdown/components/compact";
-
-import { DropdownProps } from "@bbr/components/dropdown";
+import { DropdownProps } from "..";
+import DropdownWithLabel from "../components/withLabel";
+import DropdownCompact from "../components/compact";
 
 /** Dropdown component */
 const Dropdown = (props: DropdownProps): JSX.Element => {
-    if (!isNullOrUndefined(props.label)) {
-        return <DropdownWithLabel {...props} />;
-    } else {
-        return <DropdownCompact {...props} />;
-    }
+    return isNullOrUndefined(props.label)
+        ? <DropdownCompact {...props} />
+        : <DropdownWithLabel {...props} />;
 };
 
 export default Dropdown;

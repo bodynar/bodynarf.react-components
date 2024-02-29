@@ -2,25 +2,27 @@ import { MouseEvent, useCallback, useId, useState } from "react";
 
 import { isNullOrUndefined, isNullOrEmpty, getClassName } from "@bodynarf/utils";
 
-import { getValidationValues } from "@bbr/utils";
+import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
+import InternalHint from "@bbr/internalComponent/hint";
 
-import { DropdownProps } from "@bbr/components/dropdown";
-import DropdownItem from "@bbr/components/dropdown/components/item";
-import DropdownLabel from "@bbr/components/dropdown/components/label";
+import { DropdownProps } from "../..";
+import DropdownItem from "../../components/item";
+import DropdownLabel from "../../components/label";
 
 const DropdownWithLabel = ({
     items,
     value, onSelect, validationState,
     deselectable = false,
-    className, hideOnOuterClick, listMaxHeight,
-
+    hideOnOuterClick, listMaxHeight,
     label, placeholder, disabled = false,
+
+    className, title, data,
+    hint,
 }: DropdownProps): JSX.Element => {
     const id = useId();
 
     const [isListVisible, setListVisible] = useState<boolean>(false);
-    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(undefined, validationState);
 
     const onItemClick = useCallback(
         (event: React.MouseEvent<HTMLLIElement>) => {
@@ -82,10 +84,10 @@ const DropdownWithLabel = ({
 
     const classNames: string = getClassName([
         "bbr-dropdown",
+        className,
         disabled ? "bbr-dropdown--disabled" : "",
         isListVisible ? "is-active" : "",
         isNullOrEmpty(listMaxHeight) ? "bbr-dropdown--height-default" : "",
-        className,
         "dropdown"
     ]);
 
@@ -93,6 +95,12 @@ const DropdownWithLabel = ({
         "label",
         label!.className
     ]);
+
+    const labelComponentClassName = getStyleClassName(undefined, validationState);
+
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
 
     if (label!.horizontal) {
         const labelContainerClassName = getClassName([
@@ -122,13 +130,16 @@ const DropdownWithLabel = ({
                             key={id}
                             className={classNames}
                             data-dropdown-id={id}
+
+                            title={title}
+                            {...dataAttributes}
                         >
                             <DropdownLabel
-                                className={styleClassName}
-                                caption={placeholder}
-                                deselectable={deselectable}
                                 selectedItem={value}
+                                caption={placeholder}
                                 onClick={onLabelClick}
+                                deselectable={deselectable}
+                                className={labelComponentClassName}
                             />
                             <div className="dropdown-menu">
                                 {items.length > 0
@@ -146,9 +157,10 @@ const DropdownWithLabel = ({
                                 }
                             </div>
                         </div>
-                        {isValidationDefined && validationMessages.length > 0 &&
-                            <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-                        }
+                        <InternalHint
+                            hint={hint}
+                            validationState={validationState}
+                        />
                     </div>
                 </div>
             </div>
@@ -167,13 +179,16 @@ const DropdownWithLabel = ({
                 key={id}
                 className={classNames}
                 data-dropdown-id={id}
+
+                title={title}
+                {...dataAttributes}
             >
                 <DropdownLabel
-                    className={styleClassName}
-                    caption={placeholder}
-                    deselectable={deselectable}
                     selectedItem={value}
+                    caption={placeholder}
                     onClick={onLabelClick}
+                    deselectable={deselectable}
+                    className={labelComponentClassName}
                 />
                 <div className="dropdown-menu">
                     {items.length > 0
@@ -191,9 +206,10 @@ const DropdownWithLabel = ({
                     }
                 </div>
             </div>
-            {isValidationDefined && validationMessages.length > 0 &&
-                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-            }
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </div>
     );
 };

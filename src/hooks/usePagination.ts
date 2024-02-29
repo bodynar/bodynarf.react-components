@@ -1,4 +1,4 @@
-import { DependencyList, useCallback, useEffect, useMemo, useState } from "react";
+import { DependencyList, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 /** Paginator hook state */
 export interface PaginationState {
@@ -49,7 +49,16 @@ export const usePagination = (
         onPageChange: onChange
     }), [currentPage, count, onChange]);
 
-    useEffect(() => setCurrentPage(1), dependencies);
+    const isInitialRender = useRef(true);
+
+    useEffect(() => {
+        if (isInitialRender.current) {
+            isInitialRender.current = false;
+        } else {
+            setCurrentPage(1);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, dependencies);
 
     return [state, paginate];
 };

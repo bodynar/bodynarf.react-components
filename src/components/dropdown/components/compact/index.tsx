@@ -2,20 +2,24 @@ import { useCallback, useId, useState, MouseEvent } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import { getValidationValues } from "@bbr/utils";
+import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
+import InternalHint from "@bbr/internalComponent/hint";
 
-import { DropdownProps } from "@bbr/components/dropdown";
-import DropdownItem from "@bbr/components/dropdown/components/item";
-import DropdownLabel from "@bbr/components/dropdown/components/label";
+import { DropdownProps } from "../..";
+import DropdownItem from "../../components/item";
+import DropdownLabel from "../../components/label";
 
 const DropdownCompact = ({
     items,
     value, onSelect,
     deselectable = false,
-    className, hideOnOuterClick, listMaxHeight,
+    hideOnOuterClick, listMaxHeight,
     placeholder, compact = false, disabled = false,
     validationState,
+
+    className, title, data,
+    hint,
 }: DropdownProps): JSX.Element => {
     const id = useId();
 
@@ -79,17 +83,21 @@ const DropdownCompact = ({
         hideOnOuterClick,
     );
 
-    const [isValidationDefined, styleClassName, validationMessages] = getValidationValues(undefined, validationState);
-
     const classNames: string = getClassName([
         "bbr-dropdown",
+        className,
         disabled ? "bbr-dropdown--disabled" : "",
         compact ? "bbr-dropdown--compact" : "",
         isListVisible ? "is-active" : "",
         isNullOrEmpty(listMaxHeight) ? "bbr-dropdown--height-default" : "",
-        className,
         "dropdown",
     ]);
+
+    const labelComponentClassName = getStyleClassName(undefined, validationState);
+
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
 
     return (
         <>
@@ -97,13 +105,16 @@ const DropdownCompact = ({
                 key={id}
                 className={classNames}
                 data-dropdown-id={id}
+
+                title={title}
+                {...dataAttributes}
             >
                 <DropdownLabel
                     selectedItem={value}
                     caption={placeholder}
                     onClick={onLabelClick}
-                    className={styleClassName}
                     deselectable={deselectable}
+                    className={labelComponentClassName}
                 />
                 <div className="dropdown-menu">
                     {items.length > 0
@@ -121,9 +132,10 @@ const DropdownCompact = ({
                     }
                 </div>
             </div>
-            {isValidationDefined && validationMessages.length > 0 &&
-                <p className={`help m-help ${styleClassName}`}>{validationMessages.join("\n")}</p>
-            }
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </>
     );
 };

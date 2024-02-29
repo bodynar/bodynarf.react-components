@@ -1,11 +1,10 @@
-import { isNullOrUndefined, isNullOrEmpty, getClassName } from "@bodynarf/utils";
+import { isNullOrUndefined, getClassName } from "@bodynarf/utils";
 
 import "./style.scss";
 
-import { AnchorProps, ElementIcon } from "@bbr/components";
-
-import { SimpleAnchor } from "@bbr/components/anchor/components/simpleAnchor";
-import { AnchorWithIcon } from "@bbr/components/anchor/components/anchorWithIcon";
+import { AnchorProps } from "..";
+import SimpleAnchor from "../components/simpleAnchor";
+import AnchorWithIcon from "../components/anchorWithIcon";
 
 /** Anchor component */
 export default function Anchor(props: AnchorProps): JSX.Element {
@@ -15,8 +14,8 @@ export default function Anchor(props: AnchorProps): JSX.Element {
 
     const className: string = getClassName([
         "bbr-anchor",
-        !isNullOrEmpty(props.className) ? ` ${props.className}` : "",
-        props.disableHovering === true ? " bbr-anchor--unhoverable" : ""
+        props.className,
+        props.disableHovering === true ? "bbr-anchor--unhoverable" : ""
     ]);
 
     if (isNullOrUndefined(props.icon)) {
@@ -32,9 +31,9 @@ export default function Anchor(props: AnchorProps): JSX.Element {
     return (
         <AnchorWithIcon
             {...props}
+            icon={props.icon!}
             className={className}
             onClick={props.onClick}
-            icon={props.icon as ElementIcon}
         />
     );
 }

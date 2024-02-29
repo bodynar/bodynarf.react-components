@@ -2,9 +2,9 @@ import { useCallback, useState } from "react";
 
 import { isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementColor, ElementSize, SelectableItem } from "@bodynarf/react.components";
+import { ElementColor, ElementPosition, ElementSize, SelectableItem } from "@bodynarf/react.components";
 
-import { Colors, Sizes } from ".";
+import { Colors, Positions, Sizes } from ".";
 
 /** Lookup parameters for selection enums */
 export interface LookupSelectionParams<T> {
@@ -32,6 +32,14 @@ export const useSizeSelection = (): LookupSelectionParams<ElementSize> => {
  */
 export const useColorSelection = (): LookupSelectionParams<ElementColor> => {
     return useGenericSelection<ElementColor>(Colors.selectableItems);
+};
+
+/**
+ * Get position lookup parameters
+ * @returns Lookup parameters to use with components
+ */
+export const usePositionSelection = (): LookupSelectionParams<ElementPosition> => {
+    return useGenericSelection<ElementPosition>(Positions.selectableItems);
 };
 
 /**

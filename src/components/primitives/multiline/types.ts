@@ -1,4 +1,4 @@
-import { BaseInputElementProps } from "@bbr/components";
+import { BaseInputElementProps } from "@bbr/types";
 
 /** Multiline textual input component props type */
 export interface MultilineProps extends Omit<BaseInputElementProps<string>, "rounded"> {

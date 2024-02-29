@@ -1,22 +1,25 @@
 import { useCallback, useMemo, MouseEvent } from "react";
 
-import { getClassName, isNullOrEmpty } from "@bodynarf/utils";
+import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import { generatePageNumbers, PaginatorProps } from "@bbr/components/paginator";
+import { mapDataAttributes } from "@bbr/utils";
+import { ElementPosition } from "@bbr/types";
+
+import { PaginatorProps, generatePageNumbers } from "../..";
 
 /**
  * Paginator component.
  * Used for visualization of paging configuration
 */
 export default function Paginator({
-    count, onPageChange, currentPage,
-    position,
-    size, className,
+    count, onPageChange, currentPage = 0,
+    position = ElementPosition.Left,
+    size,
     rounded = false, showNextButtons = false,
-    nearPagesCount
-}: PaginatorProps): JSX.Element {
-    const page = currentPage || 0;
+    nearPagesCount,
 
+    className, title, data,
+}: PaginatorProps): JSX.Element {
     const pageChange = useCallback(
         (event: MouseEvent<HTMLElement>) => {
             const target = event.target as HTMLElement;
@@ -34,10 +37,10 @@ export default function Paginator({
             }
         }, [onPageChange, currentPage, count]);
 
-    const pageNumbers = useMemo(() => generatePageNumbers(page, count, nearPagesCount), [page, count]);
+    const pageNumbers = useMemo(() => generatePageNumbers(currentPage, count, nearPagesCount), [currentPage, count, nearPagesCount]);
 
-    const canGoBack = useMemo(() => page > 1, [page]);
-    const canGoForward = useMemo(() => page < count, [page, count]);
+    const canGoBack = useMemo(() => currentPage > 1, [currentPage]);
+    const canGoForward = useMemo(() => currentPage < count, [currentPage, count]);
 
     if (pageNumbers.length <= 1) {
         return <></>;
@@ -46,26 +49,37 @@ export default function Paginator({
     const classNames = getClassName([
         "bbr-paginator",
         "pagination",
-        paginationPositionToClassMap.has(position || "") ? paginationPositionToClassMap.get(position || "") : "",
+        className,
+        paginationPositionToClassMap.get(position),
         rounded ? "is-rounded" : "",
         isNullOrEmpty(size) ? "" : `is-${size}`,
-        className
     ]);
 
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
     return (
-        <nav className={classNames} role="navigation" aria-label="pagination">
+        <nav
+            className={classNames}
+            role="navigation"
+            aria-label="pagination"
+
+            title={title}
+            {...dataAttributes}
+        >
             {showNextButtons &&
                 <>
                     <a
                         className={`pagination-previous${canGoBack ? "" : " is-disabled"}`}
-                        data-page={page - 1}
+                        data-page={currentPage - 1}
                         onClick={pageChange}
                     >
                         Previous
                     </a>
                     <a
                         className={`pagination-next${canGoForward ? "" : " is-disabled"}`}
-                        data-page={page + 1}
+                        data-page={currentPage + 1}
                         onClick={pageChange}
                     >
                         Next page
@@ -73,7 +87,7 @@ export default function Paginator({
                 </>
             }
             <ul className="pagination-list">
-                {page !== 1 && !pageNumbers.includes(1) &&
+                {currentPage !== 1 && !pageNumbers.includes(1) &&
                     <>
                         <li>
                             <a
@@ -93,7 +107,7 @@ export default function Paginator({
                 {pageNumbers.map(x =>
                     <li key={x}>
                         <a
-                            className={`pagination-link${page === x ? " is-current" : ""}`}
+                            className={`pagination-link${currentPage === x ? " is-current" : ""}`}
                             aria-label={`Goto page ${x}`}
                             data-page={x}
                             onClick={pageChange}
@@ -102,7 +116,7 @@ export default function Paginator({
                         </a>
                     </li>
                 )}
-                {page != count && !pageNumbers.includes(count) &&
+                {currentPage != count && !pageNumbers.includes(count) &&
                     <>
                         <li>
                             <span className="pagination-ellipsis">&hellip;</span>
@@ -127,7 +141,8 @@ export default function Paginator({
 /**
  * Position setting to css class name map
  */
-const paginationPositionToClassMap: Map<string, string> = new Map([
-    ["center", "is-centered"],
-    ["right", "is-right"]
+const paginationPositionToClassMap: Map<ElementPosition, string> = new Map([
+    [ElementPosition.Left, ""],
+    [ElementPosition.Center, "is-centered"],
+    [ElementPosition.Right, "is-right"]
 ]);

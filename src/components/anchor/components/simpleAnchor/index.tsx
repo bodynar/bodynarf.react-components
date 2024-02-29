@@ -1,16 +1,32 @@
-import { SimpleAnchorProps } from "@bbr/components/anchor";
+import { isNullOrUndefined } from "@bodynarf/utils";
+
+import { mapDataAttributes } from "@bbr/utils";
+
+import { SimpleAnchorProps } from "../..";
 
 /** Simple anchor component, without icon */
-export const SimpleAnchor = ({ href, className, onClick, caption, title, target }: SimpleAnchorProps): JSX.Element => {
+const SimpleAnchor = ({
+    href, className, onClick, caption, target,
+
+    title, data,
+}: SimpleAnchorProps): JSX.Element => {
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
     return (
         <a
-            className={className}
             href={href}
-            title={title}
             target={target}
             onClick={onClick}
+            className={className}
+
+            title={title}
+            {...dataAttributes}
         >
             {caption}
         </a>
     );
 };
+
+export default SimpleAnchor;

@@ -1,53 +1,62 @@
-import { isNullOrEmpty } from "@bodynarf/utils";
+import { isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
+import { ElementPosition } from "@bbr/types";
+import { mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
-import { ButtonWithIconProps } from "@bbr/components/button";
+import { ButtonWithIconProps } from "../..";
 
 /** Button with icon component */
-export const ButtonWithIcon = ({
+const ButtonWithIcon = ({
     className, disabled,
     onClick,
-    caption, title, icon,
-    data,
-}: ButtonWithIconProps): JSX.Element => {
-    const iconPosition = icon.position || "left";
+    caption, icon,
 
+    title, data,
+}: ButtonWithIconProps): JSX.Element => {
     const iconClassName: string | undefined = isNullOrEmpty(caption)
         ? icon.className
-        : iconPosition === "left"
-            ? `${icon.className} bbr-icon--left`
-            : `${icon.className} bbr-icon--right`;
+        : icon.position === ElementPosition.Right
+            ? `${icon.className} bbr-icon--right`
+            : `${icon.className} bbr-icon--left`;
 
     className = isNullOrEmpty(caption)
         ? `${className} bbr-button--icon-only`
         : className;
 
-    if (iconPosition === "left") {
+    const dataAttributes = isNullOrUndefined(data)
+        ? undefined
+        : mapDataAttributes(data!);
+
+    if (icon.position === ElementPosition.Right) {
         return (
             <button
-                className={className}
-                disabled={disabled}
                 onClick={onClick}
+                disabled={disabled}
+                className={className}
+
                 title={title}
-                {...data}
+                {...dataAttributes}
             >
-                <Icon {...icon} className={iconClassName} />
                 {caption}
+                <Icon {...icon} className={iconClassName} />
             </button>
         );
     }
 
     return (
         <button
-            className={className}
-            disabled={disabled}
             onClick={onClick}
+            disabled={disabled}
+            className={className}
+
             title={title}
-            {...data}
+            {...dataAttributes}
         >
-            {caption}
             <Icon {...icon} className={iconClassName} />
+            {caption}
         </button>
     );
 };
+
+export default ButtonWithIcon;

@@ -4,6 +4,7 @@ import Home from "./home";
 
 import { components } from "./components";
 import { controls } from "./controls";
+import { props } from "./props";
 
 /** Route menu item */
 export interface RouteItem {
@@ -31,6 +32,7 @@ export const routes: Array<RouteItem> = [
     },
     components,
     controls,
+    props,
     {
         path: "*",
         caption: "",

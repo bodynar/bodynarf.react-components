@@ -1,12 +1,14 @@
 import { emptyFn } from "@bodynarf/utils";
 
-import TabsComponent, { TabItem, TabsPosition, TabsStyle } from "@bodynarf/react.components/components/tabs";
+import { ElementPosition } from "@bodynarf/react.components/types";
+import TabsComponent, { TabItem, TabsStyle } from "@bodynarf/react.components/components/tabs";
 
 import DemoComponentTitleInfoMessage from "../../../shared/components/title";
 import ComponentUseCase from "../../../shared/components/useCase";
 import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
 import ComponentSizeCase from "../../../shared/components/sizeUse";
 import ComponentEnumCase from "../../../shared/components/enumSelectionCase";
+import ComponentPositionCase from "../../../shared/components/positionUse";
 
 /** Tabs component demo */
 function Tabs() {
@@ -20,16 +22,6 @@ function Tabs() {
         [TabsStyle.boxed, "boxed"],
         [TabsStyle.radioButton, "radioButton"],
         [TabsStyle.radioButtonRounded, "radioButtonRounded"],
-    ].map((x, i) => ({
-        id: `${i}`,
-        value: x[0],
-        displayValue: x[1],
-    }));
-
-    const positionLookupValues = [
-        [TabsPosition.left, "left"],
-        [TabsPosition.center, "center"],
-        [TabsPosition.right, "right"],
     ].map((x, i) => ({
         id: `${i}`,
         value: x[0],
@@ -88,15 +80,12 @@ const handler = useCallback((item: TabItem) => { /** handler */}, []);
                         <TabsComponent items={tabs} onActiveItemChange={emptyFn} style={style} />
                 }
             />
-            <ComponentEnumCase
+            <ComponentPositionCase
                 caption="Positions"
-                enumNames={["left", "center", "right"]}
-                placeholder="Position"
-                lookupValues={positionLookupValues}
                 description="Control supports 3 different positions"
-                codeProvider={id => `<Tabs position={TabsPosition.${id}} />`}
+                codeProvider={id => `<Tabs position={ElementPosition.${id}} />`}
                 componentProvider={
-                    (position: TabsPosition) =>
+                    (position: ElementPosition) =>
                         <TabsComponent position={position} items={tabs} onActiveItemChange={emptyFn} />
                 }
             />

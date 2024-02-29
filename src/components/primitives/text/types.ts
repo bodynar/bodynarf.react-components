@@ -1,4 +1,4 @@
-import { BaseInputElementProps } from "@bbr/components";
+import { BaseInputElementProps } from "@bbr/types";
 
 /** Text input component props type */
 export interface TextProps extends BaseInputElementProps<string> {

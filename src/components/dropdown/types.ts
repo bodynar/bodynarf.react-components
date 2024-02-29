@@ -1,4 +1,4 @@
-import { BaseElementProps, InputLabel, ValidationState } from "@bbr/components";
+import { BaseElementProps, HintConfiguration, ValidationState, LabelConfiguration, ElementIcon } from "@bbr/types";
 
 /** Dropdown item */
 export interface SelectableItem {
@@ -10,6 +10,12 @@ export interface SelectableItem {
 
     /** Displaying text */
     displayValue: string;
+
+    /** Element title */
+    title?: string;
+
+    /** Element icon configuration */
+    icon?: ElementIcon;
 }
 
 /** Dropdown component props type */
@@ -52,8 +58,16 @@ export interface DropdownProps extends BaseElementProps {
     disabled?: boolean;
 
     /** Label configuration */
-    label?: InputLabel;
+    label?: LabelConfiguration;
 
     /** Current validation state */
     validationState?: ValidationState;
+
+    /**
+     * Field hint configuration.
+     * Provides additional information to user to help fill the field
+     * 
+     * (!) Hint will be overridden by the validation state, if specified
+     */
+    hint?: HintConfiguration;
 }

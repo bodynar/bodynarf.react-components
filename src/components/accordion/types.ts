@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementColor, ElementSize } from "@bbr/components";
+import { BaseElementProps, ElementColor, ElementSize } from "@bbr/types";
 
 /** Accordion panel props type */
 export interface AccordionProps extends BaseElementProps {

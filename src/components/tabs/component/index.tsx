@@ -2,13 +2,13 @@ import { useCallback, useState, MouseEvent, useEffect, useRef } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import "./style.scss";
-
-import { BaseElementProps, ElementSize } from "@bbr/components";
+import { BaseElementProps, ElementPosition, ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
 
-import { TabItem, TabsPosition, TabsStyle } from "@bbr/components/tabs";
-import TabItemComponent from "@bbr/components/tabs/components/item";
+import "./style.scss";
+
+import { TabItem, TabsStyle } from "..";
+import TabItemComponent from "../components/item";
 
 /** Tabs component props type */
 export interface TabsProps extends BaseElementProps {
@@ -31,7 +31,7 @@ export interface TabsProps extends BaseElementProps {
     size?: ElementSize;
 
     /** Component position */
-    position?: TabsPosition;
+    position?: ElementPosition;
 
     /** Component style */
     style?: TabsStyle;
@@ -40,6 +40,13 @@ export interface TabsProps extends BaseElementProps {
     fullWidth?: boolean;
 }
 
+/** Tab position to element class name map */
+const positionToClassNameMap: Map<ElementPosition, string> = new Map([
+    [ElementPosition.Left, ""],
+    [ElementPosition.Center, "is-centered"],
+    [ElementPosition.Right, "is-right"],
+]);
+
 /**
  * Tabs panel
  * @throws Items are empty
@@ -47,7 +54,9 @@ export interface TabsProps extends BaseElementProps {
 const Tabs = ({
     items, onActiveItemChange,
     defaultActive = items[0],
-    size, position = TabsPosition.left, style = TabsStyle.default, fullWidth = false,
+    size,
+    position = ElementPosition.Left,
+    style = TabsStyle.default, fullWidth = false,
 
     className, title, data,
 }: TabsProps): JSX.Element => {
@@ -98,11 +107,11 @@ const Tabs = ({
     const elClassName = getClassName([
         "bbr-tabs",
         "tabs",
-        position,
+        className,
+        positionToClassNameMap.get(position),
         getSizeClassName(size, [ElementSize.Normal]),
         style,
         fullWidth ? "is-fullwidth" : "",
-        className,
     ]);
 
     const dataAttributes = isNullOrUndefined(data)
@@ -111,8 +120,9 @@ const Tabs = ({
 
     return (
         <nav
-            className={elClassName}
             onClick={onTabsClick}
+            className={elClassName}
+
             title={title}
             {...dataAttributes}
         >

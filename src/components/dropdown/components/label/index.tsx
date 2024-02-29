@@ -2,10 +2,10 @@ import { MouseEvent } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementSize } from "@bbr/components";
+import { ElementPosition, ElementSize } from "@bbr/types";
 import Icon from "@bbr/components/icon";
 
-import { SelectableItem } from "@bbr/components/dropdown";
+import { SelectableItem } from "../..";
 
 export interface DropdownLabelProps {
     /** Caption when no items selected */
@@ -30,19 +30,29 @@ const DropdownLabel = ({
     selectedItem, onClick,
     deselectable, className,
 }: DropdownLabelProps): JSX.Element => {
-    const itemSelected = !isNullOrUndefined(selectedItem);
+    if (isNullOrUndefined(selectedItem)) {
+        return <EmptyLabel
+            caption={caption}
+            deselectable={deselectable}
+            onClick={onClick}
+            className={className}
+        />;
+    }
 
-    const text = itemSelected
-        ? selectedItem?.displayValue
-        : caption;
-
-    const deselectVisible = deselectable && itemSelected;
+    if (!isNullOrUndefined(selectedItem!.icon)) {
+        return <SelectedItemLabelWithIcon
+            caption={caption}
+            deselectable={deselectable}
+            onClick={onClick}
+            className={className}
+            selectedItem={selectedItem}
+        />;
+    }
 
     const elClassName = getClassName([
         "dropdown-trigger",
         "bbr-dropdown__label",
         isNullOrEmpty(className) ? "" : `${className}--md`,
-        itemSelected ? "" : "bbr-dropdown__label--default",
         "button"
     ]);
 
@@ -51,14 +61,14 @@ const DropdownLabel = ({
             className={elClassName}
             onClick={onClick}
         >
-            {deselectVisible &&
+            {deselectable &&
                 <Icon name="plus-lg" size={ElementSize.Medium} />
             }
             <span
-                className={deselectVisible ? "mx-2" : "mr-2"}
-                title={itemSelected ? text : undefined}
+                className={deselectable ? "px-2" : "pr-2"}
+                title={selectedItem!.title}
             >
-                {text}
+                {selectedItem!.displayValue}
             </span>
             <Icon name="arrow-down" size={ElementSize.Medium} />
         </label>
@@ -66,3 +76,98 @@ const DropdownLabel = ({
 };
 
 export default DropdownLabel;
+
+const EmptyLabel = ({
+    caption, onClick, className,
+}: DropdownLabelProps): JSX.Element => {
+
+    const elClassName = getClassName([
+        "dropdown-trigger",
+        "bbr-dropdown__label",
+        isNullOrEmpty(className) ? "" : `${className}--md`,
+        "bbr-dropdown__label--default",
+        "button"
+    ]);
+
+    return (
+        <label
+            className={elClassName}
+            onClick={onClick}
+        >
+            <span className="mr-2">
+                {caption}
+            </span>
+            <Icon name="arrow-down" size={ElementSize.Medium} />
+        </label>
+    );
+};
+
+const SelectedItemLabelWithIcon = ({
+    selectedItem, onClick,
+    deselectable, className,
+}: DropdownLabelProps): JSX.Element => {
+    const elClassName = getClassName([
+        "dropdown-trigger",
+        "bbr-dropdown__label",
+        isNullOrEmpty(className) ? "" : `${className}--md`,
+        "button"
+    ]);
+
+    const icon = selectedItem!.icon!;
+
+    const iconClassName = getClassName([
+        icon.className,
+        icon.position === ElementPosition.Right
+            ? "bbr-icon--right"
+            : "bbr-icon--left",
+        "bbr-dropdown-item__icon"
+    ]);
+
+    if (icon.position === ElementPosition.Right) {
+        return (
+            <label
+                className={elClassName}
+                onClick={onClick}
+            >
+                {deselectable &&
+                    <Icon name="plus-lg" size={ElementSize.Medium} />
+                }
+                <span
+                    className={deselectable ? "px-2" : "pr-2"}
+                    title={selectedItem!.title}
+                >
+                    {selectedItem!.displayValue}
+                    <Icon
+                        name={icon.name}
+                        size={icon.size}
+                        className={iconClassName}
+                    />
+                </span>
+                <Icon name="arrow-down" size={ElementSize.Medium} />
+            </label>
+        );
+    }
+
+    return (
+        <label
+            className={elClassName}
+            onClick={onClick}
+        >
+            {deselectable &&
+                <Icon name="plus-lg" size={ElementSize.Medium} />
+            }
+            <span
+                className={deselectable ? "mx-2" : "mr-2"}
+                title={selectedItem!.title}
+            >
+                <Icon
+                    name={icon.name}
+                    size={icon.size}
+                    className={iconClassName}
+                />
+                {selectedItem!.displayValue}
+            </span>
+            <Icon name="arrow-down" size={ElementSize.Medium} />
+        </label>
+    );
+};

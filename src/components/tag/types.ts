@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementColor, ElementSize } from "@bbr/components";
+import { BaseElementProps, ElementColor, ElementSize } from "@bbr/types";
 
 /** Tag item prop types */
 export interface TagProps extends BaseElementProps {
