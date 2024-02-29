@@ -1,4 +1,6 @@
+import { ElementPosition } from "@bodynarf/react.components";
 import AnchorComponent from "@bodynarf/react.components/components/anchor";
+
 import ComponentUseCase from "../../../shared/components/useCase";
 import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
 import DemoComponentTitleInfoMessage from "../../../shared/components/title";
@@ -23,9 +25,9 @@ function Anchor() {
             />
             <ComponentUseCase
                 caption="With icon"
-                code={`<Anchor icon={{ name: "basket2", position: "right" }} />`}
+                code={`<Anchor icon={{ name: "basket2", position: ElementPosition.Right }} />`}
                 description="Component could held an icon in its content"
-                component={<AnchorComponent caption={`I"m the anchor`} href="#" icon={{ name: "basket2", position: "right" }} />}
+                component={<AnchorComponent caption={`I"m the anchor`} href="#" icon={{ name: "basket2", position: ElementPosition.Right }} />}
             />
         </section>
     );

@@ -7,7 +7,7 @@ const CommonPropsSuppressExampleInfoMessage = (): JSX.Element => {
         <span style={{ fontStyle: "italic" }}>
             <hr />
             <Icon name="info-circle-fill" className="mr-1" />
-            In next examples these common props configuration will not be presented to save space
+            In the following examples, common props will not be displayed to preserve white space
         </span>
     );
 };

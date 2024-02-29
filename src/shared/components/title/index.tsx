@@ -9,24 +9,30 @@ export interface DemoComponentTitleInfoMessageProps {
 
     /** Description of component purpose */
     description?: string | React.ReactNode;
+
+    /** Hide suppress common props message */
+    hidePropsNotice?: boolean;
 }
 
 /** Title info message about further demo of component use */
 const DemoComponentTitleInfoMessage = ({
     name, description,
+    hidePropsNotice = false,
 }: DemoComponentTitleInfoMessageProps): JSX.Element => {
     return (
         <div className="block">
             <h4 className="title is-4">
                 {name}
             </h4>
-            <span style={{ fontStyle: "italic", whiteSpace: "pre-line" }}>
-                <hr />
-                <Icon name="exclamation-triangle-fill" className="mr-1" />
-                Not all props listed bellow, mostly those which can be displayed.
-                {`\n`}
-                For full props list see type definition & its description
-            </span>
+            {!hidePropsNotice &&
+                <span style={{ fontStyle: "italic", whiteSpace: "pre-line" }}>
+                    <hr />
+                    <Icon name="exclamation-triangle-fill" className="mr-1" />
+                    Not all props are listed bellow, mostly those that can be displayed.
+                    {`\n`}
+                    For a complete list of props see type definition & description
+                </span>
+            }
             {!isUndefined(description)
                 &&
                 <p className="mt-4" style={{ whiteSpace: "pre-line" }}>
