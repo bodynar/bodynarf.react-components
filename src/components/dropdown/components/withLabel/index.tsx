@@ -17,7 +17,7 @@ const DropdownWithLabel = ({
     value, onSelect, validationState,
     deselectable = false,
     hideOnOuterClick, listMaxHeight,
-    label, placeholder, disabled = false,
+    label, placeholder, disabled = false, noDataText = "No items found",
 
     className, title, data,
     hint,
@@ -132,7 +132,9 @@ const DropdownWithLabel = ({
                                 />
                             )}
                         </ul>
-                        : <span className="dropdown-content dropdown-item">No items found</span>
+                        : <span className="dropdown-content dropdown-item">
+                            {noDataText}
+                        </span>
                     }
                 </div>
             </div>
