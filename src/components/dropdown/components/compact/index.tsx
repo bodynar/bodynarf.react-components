@@ -15,7 +15,7 @@ const DropdownCompact = ({
     value, onSelect,
     deselectable = false,
     hideOnOuterClick, listMaxHeight,
-    placeholder, compact = false, disabled = false,
+    placeholder, compact = false, disabled = false, noDataText = "No items found",
     validationState,
 
     className, title, data,
@@ -128,7 +128,9 @@ const DropdownCompact = ({
                                 />
                             )}
                         </ul>
-                        : <span className="dropdown-content dropdown-item">No items found</span>
+                        : <span className="dropdown-content dropdown-item">
+                            {noDataText}
+                        </span>
                     }
                 </div>
             </div>
