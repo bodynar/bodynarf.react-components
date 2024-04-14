@@ -2,9 +2,11 @@ import { MouseEvent, useCallback, useId, useState } from "react";
 
 import { isNullOrUndefined, isNullOrEmpty, getClassName } from "@bodynarf/utils";
 
+import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
 import InternalHint from "@bbr/internalComponent/hint";
+import LabelWrapper from "@bbr/internalComponent/componentWithLabel";
 
 import { DropdownProps } from "../..";
 import DropdownItem from "../../components/item";
@@ -91,90 +93,18 @@ const DropdownWithLabel = ({
         "dropdown"
     ]);
 
-    const labelClassName = getClassName([
-        "label",
-        label!.className
-    ]);
-
     const labelComponentClassName = getStyleClassName(undefined, validationState);
 
     const dataAttributes = isNullOrUndefined(data)
         ? undefined
         : mapDataAttributes(data!);
 
-    if (label!.horizontal) {
-        const labelContainerClassName = getClassName([
-            "field-label",
-            "is-normal",
-            label!.horizontalContainerClassName
-        ]);
-
-        const fieldContainerClassName = getClassName([
-            "field-body",
-            label!.horizontalFieldContainerClassName
-        ]);
-
-        return (
-            <div className="bbr-dropdown__root-container--with-label bbr-input field is-horizontal">
-                <div className={labelContainerClassName}>
-                    <label
-                        className={labelClassName}
-                        htmlFor={id}
-                    >
-                        {label!.caption}
-                    </label>
-                </div>
-                <div className={fieldContainerClassName}>
-                    <div className="field">
-                        <div
-                            key={id}
-                            className={classNames}
-                            data-dropdown-id={id}
-
-                            title={title}
-                            {...dataAttributes}
-                        >
-                            <DropdownLabel
-                                selectedItem={value}
-                                caption={placeholder}
-                                onClick={onLabelClick}
-                                deselectable={deselectable}
-                                className={labelComponentClassName}
-                            />
-                            <div className="dropdown-menu">
-                                {items.length > 0
-                                    ? <ul className="dropdown-content" style={{ maxHeight: listMaxHeight }}>
-                                        {items.map(item =>
-                                            <DropdownItem
-                                                key={item.id}
-                                                item={item}
-                                                selected={value?.value === item.value}
-                                                onClick={onItemClick}
-                                            />
-                                        )}
-                                    </ul>
-                                    : <span className="dropdown-content dropdown-item">No items found</span>
-                                }
-                            </div>
-                        </div>
-                        <InternalHint
-                            hint={hint}
-                            validationState={validationState}
-                        />
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div className="field">
-            <label
-                className={labelClassName}
-                htmlFor={id}
-            >
-                {label!.caption}
-            </label>
+        <LabelWrapper
+            id={id}
+            label={label!}
+            size={ElementSize.Normal}
+        >
             <div
                 key={id}
                 className={classNames}
@@ -210,7 +140,7 @@ const DropdownWithLabel = ({
                 hint={hint}
                 validationState={validationState}
             />
-        </div>
+        </LabelWrapper>
     );
 };
 
