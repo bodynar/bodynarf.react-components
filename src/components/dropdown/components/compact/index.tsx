@@ -117,6 +117,12 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
     ]);
 
     const labelComponentClassName = getStyleClassName(undefined, validationState);
+    const filteredItems = isNullOrEmpty(searchValue)
+        ?
+        items
+        : items.filter(({ displayValue }) =>
+            displayValue.toLocaleLowerCase().includes(searchValue!.toLocaleLowerCase()))
+        ;
 
     const dataAttributes = isNullOrUndefined(data)
         ? undefined
@@ -144,9 +150,9 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
                     className={labelComponentClassName}
                 />
                 <div className="dropdown-menu">
-                    {items.length > 0
+                    {filteredItems.length > 0
                         ? <ul className="dropdown-content" style={{ maxHeight: listMaxHeight }}>
-                            {items.map(item =>
+                            {filteredItems.map(item =>
                                 <DropdownItem
                                     key={item.id}
 
