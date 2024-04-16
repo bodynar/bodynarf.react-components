@@ -1,4 +1,4 @@
-import { useCallback, useId, useState, MouseEvent } from "react";
+import { useCallback, useId, useState, MouseEvent, FC } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
@@ -10,18 +10,29 @@ import { DropdownProps } from "../..";
 import DropdownItem from "../../components/item";
 import DropdownLabel from "../../components/label";
 
-const DropdownCompact = ({
-    items,
-    value, onSelect,
-    deselectable = false,
+/** Props type of `DropdownCompact` */
+type DropdownCompactProps = DropdownProps & {
+    /** Manual compact dropdown identifier */
+    id?: string;
+};
+
+/** Dropdown component without label */
+const DropdownCompact: FC<DropdownCompactProps> = ({
+    items, value, onSelect,
     hideOnOuterClick, listMaxHeight,
-    placeholder, compact = false, disabled = false, noDataText = "No items found",
+    placeholder, noDataText = "No items found",
+
+    compact = false, disabled = false, deselectable = false,
+
     validationState,
 
     className, title, data,
     hint,
-}: DropdownProps): JSX.Element => {
-    const id = useId();
+
+    id: propsId,
+}) => {
+    const generatedId = useId();
+    const id = propsId ?? generatedId;
 
     const [isListVisible, setListVisible] = useState<boolean>(false);
 
@@ -121,8 +132,9 @@ const DropdownCompact = ({
                         ? <ul className="dropdown-content" style={{ maxHeight: listMaxHeight }}>
                             {items.map(item =>
                                 <DropdownItem
-                                    item={item}
                                     key={item.id}
+
+                                    item={item}
                                     onClick={onItemClick}
                                     selected={value?.value === item.value}
                                 />
