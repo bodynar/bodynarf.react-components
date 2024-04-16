@@ -22,7 +22,7 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
     hideOnOuterClick, listMaxHeight,
     placeholder, noDataText = "No items found",
 
-    compact = false, disabled = false, deselectable = false,
+    compact = false, disabled = false, deselectable = false, searchable = false,
 
     validationState,
 
@@ -35,6 +35,7 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
     const id = propsId ?? generatedId;
 
     const [isListVisible, setListVisible] = useState<boolean>(false);
+    const [searchValue, setSearchValue] = useState<string | null>(null);
 
     const onItemClick = useCallback(
         (event: React.MouseEvent<HTMLLIElement>) => {
@@ -66,11 +67,12 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
             }
 
             onSelect(item);
+            setSearchValue(null);
             setListVisible(false);
         }, [setListVisible, value, items, onSelect, disabled]);
 
     const onLabelClick = useCallback(
-        (event: MouseEvent<HTMLLabelElement>): void => {
+        (event: MouseEvent<HTMLElement>): void => {
             if (disabled) {
                 return;
             }
@@ -83,10 +85,20 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
 
             if (target.classList.contains("bi-plus-lg")) {
                 onSelect(undefined);
+                setSearchValue(null);
             } else {
                 setListVisible(state => !state);
             }
         }, [onSelect, setListVisible, disabled]);
+
+    const onSearchChange = useCallback(
+        (value: string) => {
+            setSearchValue(value.length === 0 ? null : value);
+
+            onSelect(undefined);
+        },
+        [setSearchValue, onSelect]
+    );
 
     useComponentOutsideClick(
         `[data-dropdown-id="${id}"]`, isListVisible,
@@ -124,7 +136,11 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
                     selectedItem={value}
                     caption={placeholder}
                     onClick={onLabelClick}
+                    searchable={searchable}
+                    lastSearch={searchValue}
                     deselectable={deselectable}
+                    isListVisible={isListVisible}
+                    onSearchChange={onSearchChange}
                     className={labelComponentClassName}
                 />
                 <div className="dropdown-menu">

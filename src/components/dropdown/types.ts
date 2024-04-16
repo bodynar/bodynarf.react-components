@@ -73,4 +73,7 @@ export interface DropdownProps extends BaseElementProps {
 
     /** Caption for dropdown list when there's no data to display */
     noDataText?: string;
+
+    /** Is search through items enabled */
+    searchable?: boolean;
 }
