@@ -13,6 +13,12 @@ export interface ComponentWithLabelProps {
     /** Unique component identifier */
     id: string;
 
+    /**
+     * Handle component click
+     * @param event Mouse synth event
+     */
+    onClick?: (event: React.MouseEvent) => void;
+
     /** Node element with input element */
     children: React.ReactNode;
 }
@@ -20,7 +26,7 @@ export interface ComponentWithLabelProps {
 /** Form input component with describing label */
 const ComponentWithLabel = ({
     label, id,
-    size,
+    size, onClick,
     children,
 }: ComponentWithLabelProps): JSX.Element => {
     const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
@@ -44,7 +50,10 @@ const ComponentWithLabel = ({
         ]);
 
         return (
-            <div className="bbr-input field is-horizontal">
+            <div
+                onClick={onClick}
+                className="bbr-field bbr-input field is-horizontal"
+            >
                 <div className={labelContainerClassName}>
                     <label
                         className={labelClassName}
@@ -63,7 +72,10 @@ const ComponentWithLabel = ({
     }
 
     return (
-        <div className="bbr-input field">
+        <div
+            onClick={onClick}
+            className="bbr-field bbr-input field"
+        >
             <label
                 className={labelClassName}
                 htmlFor={id}
