@@ -14,8 +14,8 @@ export const useComponentOutsideClick = (
     selector: string,
     clickHandleCondition: boolean,
     clickHandleChange: () => void,
-    clickListenCondition?: boolean,
-    dependencies?: DependencyList
+    clickListenCondition = false,
+    dependencies: DependencyList = []
 ): void => {
     const onDocumentClick = useCallback(
         (event: MouseEvent): void => {
@@ -33,11 +33,10 @@ export const useComponentOutsideClick = (
                     clickHandleChange();
                 }
             }
-            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [clickHandleCondition, selector, clickHandleChange, dependencies]);
 
     useEffect(() => {
-        if (isNullOrUndefined(clickListenCondition) || clickListenCondition === true) {
+        if (clickListenCondition) {
             document.addEventListener("click", onDocumentClick);
 
             return (): void => document.removeEventListener("click", onDocumentClick);

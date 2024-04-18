@@ -1,4 +1,4 @@
-import { useCallback, useId, useState, MouseEvent } from "react";
+import { useCallback, useId, useState, MouseEvent, FC } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
@@ -10,20 +10,32 @@ import { DropdownProps } from "../..";
 import DropdownItem from "../../components/item";
 import DropdownLabel from "../../components/label";
 
-const DropdownCompact = ({
-    items,
-    value, onSelect,
-    deselectable = false,
+/** Props type of `DropdownCompact` */
+type DropdownCompactProps = DropdownProps & {
+    /** Manual compact dropdown identifier */
+    id?: string;
+};
+
+/** Dropdown component without label */
+const DropdownCompact: FC<DropdownCompactProps> = ({
+    items, value, onSelect,
     hideOnOuterClick, listMaxHeight,
-    placeholder, compact = false, disabled = false, noDataText = "No items found",
+    placeholder, noDataText = "No items found",
+
+    compact = false, disabled = false, deselectable = false, searchable = false,
+
     validationState,
 
     className, title, data,
     hint,
-}: DropdownProps): JSX.Element => {
-    const id = useId();
+
+    id: propsId,
+}) => {
+    const generatedId = useId();
+    const id = propsId ?? generatedId;
 
     const [isListVisible, setListVisible] = useState<boolean>(false);
+    const [searchValue, setSearchValue] = useState<string | null>(null);
 
     const onItemClick = useCallback(
         (event: React.MouseEvent<HTMLLIElement>) => {
@@ -55,11 +67,12 @@ const DropdownCompact = ({
             }
 
             onSelect(item);
+            setSearchValue(null);
             setListVisible(false);
         }, [setListVisible, value, items, onSelect, disabled]);
 
     const onLabelClick = useCallback(
-        (event: MouseEvent<HTMLLabelElement>): void => {
+        (event: MouseEvent<HTMLElement>): void => {
             if (disabled) {
                 return;
             }
@@ -72,10 +85,20 @@ const DropdownCompact = ({
 
             if (target.classList.contains("bi-plus-lg")) {
                 onSelect(undefined);
+                setSearchValue(null);
             } else {
                 setListVisible(state => !state);
             }
         }, [onSelect, setListVisible, disabled]);
+
+    const onSearchChange = useCallback(
+        (value: string) => {
+            setSearchValue(value.length === 0 ? null : value);
+
+            onSelect(undefined);
+        },
+        [setSearchValue, onSelect]
+    );
 
     useComponentOutsideClick(
         `[data-dropdown-id="${id}"]`, isListVisible,
@@ -94,6 +117,12 @@ const DropdownCompact = ({
     ]);
 
     const labelComponentClassName = getStyleClassName(undefined, validationState);
+    const filteredItems = isNullOrEmpty(searchValue)
+        ?
+        items
+        : items.filter(({ displayValue }) =>
+            displayValue.toLocaleLowerCase().includes(searchValue!.toLocaleLowerCase()))
+        ;
 
     const dataAttributes = isNullOrUndefined(data)
         ? undefined
@@ -113,16 +142,21 @@ const DropdownCompact = ({
                     selectedItem={value}
                     caption={placeholder}
                     onClick={onLabelClick}
+                    searchable={searchable}
+                    lastSearch={searchValue}
                     deselectable={deselectable}
+                    isListVisible={isListVisible}
+                    onSearchChange={onSearchChange}
                     className={labelComponentClassName}
                 />
                 <div className="dropdown-menu">
-                    {items.length > 0
+                    {filteredItems.length > 0
                         ? <ul className="dropdown-content" style={{ maxHeight: listMaxHeight }}>
-                            {items.map(item =>
+                            {filteredItems.map(item =>
                                 <DropdownItem
-                                    item={item}
                                     key={item.id}
+
+                                    item={item}
                                     onClick={onItemClick}
                                     selected={value?.value === item.value}
                                 />
