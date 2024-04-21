@@ -35,21 +35,19 @@ function TableHeader<TItem>(props: TableHeaderProps<TItem>): JSX.Element {
 
     return (
         <th
-            className={containerClassName}
             onClick={onHeaderClick}
+            className={containerClassName}
         >
-            <div>
-                <span>
-                    {caption}
-                </span>
-                {sortable && sortColumn?.columnName === name!
-                    &&
-                    <Icon
-                        className="ml-1"
-                        name={`sort-alpha-down${sortColumn!.ascending ? "" : "-alt"}`}
-                    />
-                }
-            </div>
+            <span>
+                {caption}
+            </span>
+            {sortable && sortColumn?.columnName === name!
+                &&
+                <Icon
+                    className="ml-1"
+                    name={`sort-alpha-down${sortColumn!.ascending ? "" : "-alt"}`}
+                />
+            }
         </th>
     );
 }
