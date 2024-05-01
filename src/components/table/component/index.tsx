@@ -1,55 +1,9 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { BaseElementProps } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
 
-import { SortColumn, TableHeading } from "..";
+import { TableProps } from "..";
 import TableHeader from "../components/heading";
-
-/** Table props type */
-export interface TableProps<TItem> extends BaseElementProps {
-    /** Header row */
-    headings: Array<TableHeading<TItem>>;
-
-    /** Table body */
-    children?: React.ReactNode;
-
-    /** Add border to all cells */
-    hasBorder?: boolean;
-
-    /** Is row hover effect active */
-    hoverable?: boolean;
-
-    /** Reduce space between cells */
-    narrow?: boolean;
-
-    /** Use all container width */
-    fullWidth?: boolean;
-
-    /** Is header sticks to page on scroll */
-    hasStickyHeader?: boolean;
-
-    /**
-     * Header has border.
-     * @description Applied only with `hasStickyHeader` sets as `true`. Adds border effect
-    */
-    headerWithBorder?: boolean;
-
-    /** Header has no borders */
-    headerBorderless?: boolean;
-
-    /**
-     * Should rows be stripped.
-     * @description Even rows will have gray background
-    */
-    zebra?: boolean;
-
-    /** Current sort column */
-    currentSortColumn?: SortColumn<TItem>;
-
-    /** Header click handler */
-    onHeaderClick?: (columnName: TableHeading<TItem>) => void;
-}
 
 /**
  * Tiny table component.
@@ -57,12 +11,16 @@ export interface TableProps<TItem> extends BaseElementProps {
  */
 function Table<TItem>({
     headings,
-    hasBorder, hoverable, narrow, fullWidth, zebra, headerBorderless,
-    hasStickyHeader, headerWithBorder,
+
+    hasBorder = false, hoverable = false, narrow = false,
+    fullWidth = false, zebra = false, headerBorderless = false,
+    hasStickyHeader = false, headerWithBorder = false,
+
     currentSortColumn, onHeaderClick,
     children,
 
     className, title, data,
+    onClick,
 }: TableProps<TItem>): JSX.Element {
     const elClassName = getClassName([
         "table",
@@ -86,6 +44,7 @@ function Table<TItem>({
             className={elClassName}
 
             title={title}
+            onClick={onClick}
             {...dataAttributes}
         >
             <thead>
