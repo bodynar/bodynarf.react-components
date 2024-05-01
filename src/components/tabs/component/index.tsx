@@ -1,44 +1,14 @@
-import { useCallback, useState, MouseEvent, useEffect, useRef } from "react";
+import { useCallback, useState, MouseEvent, useEffect, useRef, FC } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import { BaseElementProps, ElementPosition, ElementSize } from "@bbr/types";
+import { ElementPosition, ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
 
 import "./style.scss";
 
-import { TabItem, TabsStyle } from "..";
+import { TabItem, TabsProps, TabsStyle } from "..";
 import TabItemComponent from "../components/item";
-
-/** Tabs component props type */
-export interface TabsProps extends BaseElementProps {
-    /** Tabs */
-    items: Array<TabItem>;
-
-    /** Handler of changing current active item */
-    onActiveItemChange: (item: TabItem) => void;
-
-    /**
-     * Active item by default.
-     * If not set - first item will be active
-     */
-    defaultActive?: TabItem;
-
-    /**
-     * Component size.
-     * Default is `normal`
-     */
-    size?: ElementSize;
-
-    /** Component position */
-    position?: ElementPosition;
-
-    /** Component style */
-    style?: TabsStyle;
-
-    /** Is component tabs should take all width of parent */
-    fullWidth?: boolean;
-}
 
 /** Tab position to element class name map */
 const positionToClassNameMap: Map<ElementPosition, string> = new Map([
@@ -51,7 +21,7 @@ const positionToClassNameMap: Map<ElementPosition, string> = new Map([
  * Tabs panel
  * @throws Items are empty
  */
-const Tabs = ({
+const Tabs: FC<TabsProps> = ({
     items, onActiveItemChange,
     defaultActive = items[0],
     size,
@@ -59,7 +29,8 @@ const Tabs = ({
     style = TabsStyle.default, fullWidth = false,
 
     className, title, data,
-}: TabsProps): JSX.Element => {
+    onClick,
+}) => {
     if (items.length === 0) {
         throw new Error("Invalid configuration. Tab items must be defined");
     }
@@ -68,8 +39,12 @@ const Tabs = ({
     const isFirstRun = useRef(true);
 
     const onTabsClick = useCallback(
-        (container: MouseEvent<HTMLElement>) => {
-            const closestTab = (container.target as HTMLElement).closest(".bbr-tabs__tab");
+        (event: MouseEvent<HTMLElement>) => {
+            if (!isNullOrUndefined(onClick)) {
+                onClick!(event);
+            }
+
+            const closestTab = (event.target as HTMLElement).closest(".bbr-tabs__tab");
 
             if (isNullOrUndefined(closestTab)) {
                 return;
@@ -89,7 +64,7 @@ const Tabs = ({
 
             setActiveItem(item!);
         },
-        [activeItem, items]
+        [activeItem, items, onClick]
     );
 
     useEffect(
@@ -120,11 +95,11 @@ const Tabs = ({
 
     return (
         <nav
-            onClick={onTabsClick}
             className={elClassName}
 
             title={title}
             {...dataAttributes}
+            onClick={onTabsClick}
         >
             <ul>
                 {items.map(item =>

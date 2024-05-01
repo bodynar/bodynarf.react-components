@@ -12,8 +12,8 @@ const Tag = ({
     content,
     size = ElementSize.Normal, style = ElementColor.Default,
     rounded = false, lightColor = false, customColor,
-    onClick,
 
+    onClick,
     className, title, data,
 }: TagProps): JSX.Element => {
     if (!isNullOrUndefined(customColor)) {
