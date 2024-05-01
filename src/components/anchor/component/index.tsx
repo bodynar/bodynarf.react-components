@@ -22,6 +22,7 @@ export default function Anchor(props: AnchorProps): JSX.Element {
         return (
             <SimpleAnchor
                 {...props}
+
                 className={className}
                 onClick={props.onClick}
             />
@@ -32,6 +33,7 @@ export default function Anchor(props: AnchorProps): JSX.Element {
         <AnchorWithIcon
             {...props}
             icon={props.icon!}
+
             className={className}
             onClick={props.onClick}
         />

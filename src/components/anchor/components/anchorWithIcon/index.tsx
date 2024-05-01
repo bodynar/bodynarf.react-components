@@ -1,17 +1,24 @@
 import { isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementPosition } from "@bbr/types";
+import { ElementIcon, ElementPosition } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
-import { AnchorWithIconProps } from "../..";
+import { AnchorProps } from "../..";
+
+/** Props type of `AnchorWithIcon` */
+interface AnchorWithIconProps extends Omit<AnchorProps, "icon"> {
+    /** Configuration of icon */
+    icon: ElementIcon;
+}
 
 /** Anchor with icon component */
 const AnchorWithIcon = ({
-    href, className, onClick, caption,
+    href, caption,
     target, icon,
 
-    title, data,
+    className, title, data,
+    onClick,
 }: AnchorWithIconProps): JSX.Element => {
     const iconClassName: string | undefined = isNullOrEmpty(caption)
         ? icon.className
@@ -28,10 +35,10 @@ const AnchorWithIcon = ({
             <a
                 href={href}
                 target={target}
-                onClick={onClick}
                 className={className}
 
                 title={title}
+                onClick={onClick}
                 {...dataAttributes}
             >
                 {caption}
@@ -43,11 +50,11 @@ const AnchorWithIcon = ({
     return (
         <a
             href={href}
-            className={className}
             target={target}
-            onClick={onClick}
+            className={className}
 
             title={title}
+            onClick={onClick}
             {...dataAttributes}
         >
             <Icon {...icon} className={iconClassName} />
