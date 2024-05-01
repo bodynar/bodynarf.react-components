@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
@@ -14,9 +14,10 @@ const Accordion = ({
     children, caption,
     style, size = ElementSize.Normal,
     defaultExpanded = false,
-    onToggle,
+    onToggle = emptyFn,
 
     className, title, data,
+    onClick,
 }: AccordionProps): JSX.Element => {
     const expandablePanelRef = useRef<HTMLDivElement>(null);
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
@@ -35,7 +36,7 @@ const Accordion = ({
 
     useEffect(() => setIsExpanded(maxHeight !== 0), [maxHeight]);
     useEffect(() => {
-        onToggle?.call(undefined, !isExpanded);
+        onToggle.call(undefined, !isExpanded);
     }, [isExpanded, onToggle]);
 
     const elClassName = getClassName([
@@ -55,6 +56,7 @@ const Accordion = ({
             className={elClassName}
             aria-expanded={isExpanded}
 
+            onClick={onClick}
             {...dataAttributes}
         >
             <div
