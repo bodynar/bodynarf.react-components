@@ -11,12 +11,12 @@ import InternalHint from "@bbr/internalComponent/hint";
 import { PasswordProps } from "../..";
 
 const PasswordWithLabel = ({
-    onValueChange, disabled, validationState,
+    onValueChange, validationState,
     name,
     size, style,
     rounded = false, loading = false,
+    disabled = false, canShowPassword = false,
     label, placeholder,
-    canShowPassword = false,
 
     className, title, data,
     hint,

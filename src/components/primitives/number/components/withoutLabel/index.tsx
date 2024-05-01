@@ -10,9 +10,11 @@ import { NumberProps } from "../..";
 
 /** Number component without label */
 const NumberWithoutLabel = ({
-    onValueChange, readonly, disabled, defaultValue, validationState,
+    onValueChange, defaultValue, validationState,
     name,
-    size, style, rounded = false, loading = false,
+    size, style,
+    readonly = false, disabled = false,
+    rounded = false, loading = false,
     placeholder,
     onBlur,
     step = 1,

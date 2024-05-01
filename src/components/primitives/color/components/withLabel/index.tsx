@@ -13,8 +13,8 @@ import ColorPickerControl from "../picker";
 function ColorPickerWithLabel({
     preview,
     name,
-    defaultValue, validationState,
-    onValueChange,
+    defaultValue, onValueChange,
+    validationState,
     disabled = false, rounded = false, size,
     label,
 

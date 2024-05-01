@@ -12,14 +12,14 @@ import { SearchProps } from "..";
 /** Search component */
 export default function Search({
     searchType, onSearch, caption,
-    name, defaultValue,
+    name, defaultValue = "",
     size,
-    isLoading = false, rounded = false, disabled,
+    isLoading = false, rounded = false, disabled = false,
 
     className, title, data,
 }: SearchProps): JSX.Element {
     const [elementName] = useState<string>(name ?? generateGuid());
-    const [searchValue, setSearchValue] = useState<string>(defaultValue ?? "");
+    const [searchValue, setSearchValue] = useState<string>(defaultValue);
 
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => {

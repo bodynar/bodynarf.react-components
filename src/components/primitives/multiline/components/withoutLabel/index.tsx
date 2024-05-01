@@ -14,7 +14,8 @@ const MultilineWithoutLabel = ({
     name, placeholder,
     onBlur,
     size, style, loading = false,
-    fixed = false, rows,
+    fixed = false,
+    rows,
 
     className, title, data,
     hint,

@@ -10,7 +10,8 @@ import { TextProps } from "../..";
 
 /** Textual input without describing label */
 const TextWithoutLabel = ({
-    onValueChange, readonly, disabled, defaultValue, validationState,
+    onValueChange, defaultValue, validationState,
+    readonly = false, disabled = false,
     name,
     size, style,
     rounded = false, loading = false,

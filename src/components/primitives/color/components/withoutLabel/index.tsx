@@ -9,8 +9,8 @@ import ColorPickerControl from "../picker";
 function ColorPickerWithoutLabel({
     preview,
     name,
-    defaultValue, validationState,
-    onValueChange,
+    defaultValue, onValueChange,
+    validationState,
     disabled = false, rounded = false, size,
 
     className, title, data,

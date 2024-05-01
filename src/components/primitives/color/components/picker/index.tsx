@@ -33,9 +33,10 @@ export interface ColorPickerControlProps extends Omit<
 
 /** Color picker container component */
 const ColorPickerControl = ({
+    value, defaultValue, onValueChange,
     elementClassName,
-    disabled, previewConfig, size,
-    defaultValue, onValueChange, value,
+    disabled = false,
+    previewConfig, size,
     id, title, data,
 
     hint, validationState,
@@ -47,10 +48,10 @@ const ColorPickerControl = ({
                 size={size}
                 value={value}
                 disabled={disabled}
-                elementClassName={elementClassName}
                 defaultValue={defaultValue}
                 onValueChange={onValueChange}
                 previewConfig={previewConfig}
+                elementClassName={elementClassName}
 
                 title={title}
                 data={data}

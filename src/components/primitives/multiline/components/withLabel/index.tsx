@@ -11,11 +11,13 @@ import { MultilineProps } from "../..";
 
 /** Multiline textual input component with describing label */
 const MultilineWithLabel = ({
-    defaultValue, onValueChange, validationState, readonly, disabled,
+    defaultValue, onValueChange, validationState,
     name,
-    size, style, loading = false,
+    size, style,
     label, placeholder,
-    fixed = false, rows,
+    readonly = false, disabled = false,
+    loading = false, fixed = false,
+    rows,
     onBlur,
 
     className, title, data,

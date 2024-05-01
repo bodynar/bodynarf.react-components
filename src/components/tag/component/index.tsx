@@ -10,8 +10,7 @@ import "./style.scss";
 /** Single tag item */
 const Tag = ({
     content,
-    size = ElementSize.Normal,
-    style = ElementColor.Default,
+    size = ElementSize.Normal, style = ElementColor.Default,
     rounded = false, lightColor = false, customColor,
     onClick,
 

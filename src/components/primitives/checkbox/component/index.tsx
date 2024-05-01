@@ -13,9 +13,11 @@ import { CheckBoxProps } from "../..";
 const CheckBox = ({
     label,
     onValueChange, defaultValue,
-    name, disabled,
+    name,
     size, style,
-    rounded = false, block = false, withoutBorder = false, hasBackgroundColor = false, fixBackgroundColor = false,
+    disabled = false,
+    rounded = false, block = false,
+    withoutBorder = false, hasBackgroundColor = false, fixBackgroundColor = false,
     isFormLabel = false,
 
     className, title, data,

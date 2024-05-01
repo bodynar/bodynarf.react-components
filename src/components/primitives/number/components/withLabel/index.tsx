@@ -11,10 +11,11 @@ import { NumberProps } from "../..";
 
 /** Number component with label */
 const NumberWithLabel = ({
-    onValueChange, readonly, disabled, defaultValue, validationState,
+    onValueChange, defaultValue, validationState,
     name,
-    size, style, rounded = false, loading = false,
     label, placeholder,
+    size, style, rounded = false, loading = false,
+    readonly = false, disabled = false,
     onBlur,
     step = 1,
 

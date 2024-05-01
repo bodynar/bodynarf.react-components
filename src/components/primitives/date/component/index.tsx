@@ -12,9 +12,11 @@ import { DateProps } from "../..";
 
 /** Date input component */
 const DatePicker = ({
-    defaultValue, onValueChange, readonly, disabled, validationState,
+    defaultValue, onValueChange, validationState,
     name,
-    size, rounded = false, loading = false, style,
+    style, size,
+    readonly = false, disabled = false,
+    rounded = false, loading = false,
     label,
     onBlur,
 
