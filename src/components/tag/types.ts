@@ -9,7 +9,7 @@ export interface TagProps extends BaseElementProps {
      * Element size.
      * `Small` isn"t allowed
     */
-    size?: ElementSize;
+    size?: Exclude<ElementSize, ElementSize.Small>;
 
     /** Element color */
     style?: ElementColor;
@@ -19,9 +19,6 @@ export interface TagProps extends BaseElementProps {
 
     /** Is element has light color */
     lightColor?: boolean;
-
-    /** Click handler */
-    onClick?: () => void;
 
     /** Manual color scheme */
     customColor?: {

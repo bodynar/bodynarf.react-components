@@ -28,7 +28,7 @@ const Tag = ({
         !isNullOrUndefined(customColor) ? "bbr-tag--custom" : "",
         lightColor && isNullOrUndefined(customColor) ? "is-light" : "",
         rounded ? "is-rounded" : "",
-        size === ElementSize.Normal || size === ElementSize.Small ? "" : `is-${size}`,
+        size === ElementSize.Normal ? "" : `is-${size}`,
         isNullOrUndefined(onClick) ? "" : "bbr-tag--clickable",
     ]);
 
@@ -38,7 +38,6 @@ const Tag = ({
 
     return (
         <span
-            onClick={onClick}
             className={elClassName}
             style={isNullOrUndefined(customColor)
                 ? undefined
@@ -49,6 +48,7 @@ const Tag = ({
             }
 
             title={title}
+            onClick={onClick}
             {...dataAttributes}
         >
             {content}
