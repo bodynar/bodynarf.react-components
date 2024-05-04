@@ -24,8 +24,8 @@ export default function Button(props: ButtonProps): JSX.Element {
     } = props;
 
     const className: string = getClassName([
-        "button",
         "bbr-button",
+        "button",
         props.className,
         `is-${props.type}`,
         light ? "is-light" : "",

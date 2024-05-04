@@ -30,9 +30,6 @@ export interface ButtonProps extends BaseElementProps {
 
     /** Is non-interactive button */
     static?: boolean;
-
-    /** Click action handler */
-    onClick?: () => void;
 }
 
 /** Button types according to Bulma framework */
@@ -53,7 +50,7 @@ export type ButtonType = // TODO: to enum
     ;
 
 /** Simple button props type */
-export interface SimpleButtonProps extends Omit<ButtonProps, 'className'> {
+export interface SimpleButtonProps extends Omit<ButtonProps, "className"> {
     /** Button class name*/
     className: string;
 }
