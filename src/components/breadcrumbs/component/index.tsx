@@ -1,60 +1,36 @@
+import { FC } from "react";
+
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { BaseElementProps, ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
+import { ElementIcon, ElementPosition, ElementSize } from "@bbr/types";
+import Icon from "@bbr/components/icon";
 
-import { BreadCrumb } from "../types";
+import { BreadCrumb, BreadcrumbsProps } from "..";
 
-/** Breadcrumbs component props type */
-export interface BreadcrumbsProps extends BaseElementProps {
-    /** Breadcrumbs items */
-    items: Array<BreadCrumb>;
-
-    /**
-     * Function that generates each element
-     * @example
-     * <Link to={breadCrumb.path}>
-     *     {breadCrumb.icon &&
-     *         <span>
-     *             <Icon {...breadCrumb.icon} />
-     *         </span>
-     *     }
-     *     <span>
-     *         {breadCrumb.title}
-     *     </span>
-     * </Link>
-     * 
-    */
-    elementGenerator: (bc: BreadCrumb) => JSX.Element;
-
-    /** Panel size */
-    size?: ElementSize;
-
-    /** Items position */
-    position?: "centered" | "right";
-
-    /** Items separator. By default `arrow` */
-    separator?: "arrow" | "bullet" | "dot" | "succeeds";
-}
-
-/** Breadcrumbs navigation panel */
-const BreadCrumbs = ({
+/**
+ * Breadcrumbs navigation panel
+ * @description If items are not specified, an empty component will be displayed.
+*/
+const BreadCrumbs: FC<BreadcrumbsProps> = ({
     items,
-    size, position, separator = "arrow",
-    elementGenerator,
+    position = ElementPosition.Left, size = ElementSize.Normal, separator = "arrow",
+    elementGenerator = ((bc) => <BreadCrumbItem item={bc} />),
 
     className, title, data,
-}: BreadcrumbsProps): JSX.Element => {
+    onClick,
+}) => {
     if (items.length <= 1) {
         return <></>;
     }
 
     const elClassName = getClassName([
+        "bbr-breadcrumbs",
         "breadcrumb",
         className,
-        isNullOrUndefined(size) ? undefined : `is-${size}`,
+        size === ElementSize.Normal ? undefined : `is-${size}`,
         `has-${separator}-separator`,
-        isNullOrUndefined(position) ? undefined : `is-${position}`,
+        position === ElementPosition.Left ? undefined : `is-${position}`,
     ]);
 
     const dataAttributes = isNullOrUndefined(data)
@@ -67,14 +43,14 @@ const BreadCrumbs = ({
             aria-label="breadcrumbs"
 
             title={title}
+            onClick={onClick}
             {...dataAttributes}
         >
             <ul>
                 {items.map(breadCrumb =>
                     <li
-                        className={breadCrumb.active ? "is-active" : undefined}
                         key={breadCrumb.path}
-                        aria-current={breadCrumb.active ? "page" : undefined}
+                        className={breadCrumb.active ? "is-active" : undefined}
                     >
                         {elementGenerator(breadCrumb)}
                     </li>
@@ -85,3 +61,51 @@ const BreadCrumbs = ({
 };
 
 export default BreadCrumbs;
+
+/** Props of `BreadCrumbItem` */
+type BreadCrumbItemProps = {
+    /** Breadcrumb item */
+    item: BreadCrumb;
+
+    /** Bootstrap icon class name */
+    icon?: ElementIcon;
+};
+
+/** Template for single breadcrumb */
+const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
+    item, icon
+}) => {
+    if (isNullOrUndefined(icon)) {
+        return (
+            <a
+                href={item.path}
+                aria-current={item.active ? "page" : undefined}
+            >
+                {item.title}
+            </a>
+        );
+    }
+
+    if (icon?.position === ElementPosition.Right) {
+        return (
+            <a
+                href={item.path}
+                aria-current={item.active ? "page" : undefined}
+            >
+                {item.title}
+                <Icon {...icon!} />
+            </a>
+        );
+    }
+
+    return (
+        <a
+            href={item.path}
+            aria-current={item.active ? "page" : undefined}
+        >
+
+            <Icon {...icon!} />
+            {item.title}
+        </a>
+    );
+};
