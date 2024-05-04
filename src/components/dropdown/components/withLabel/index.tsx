@@ -10,14 +10,18 @@ import DropdownCompact from "../compact";
 const DropdownWithLabel: FC<DropdownProps> = (props) => {
     const id = useId();
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { onClick, ...otherProps } = props;
+
     return (
         <LabelWrapper
             id={id}
             label={props.label!}
+            onClick={props.onClick}
             size={ElementSize.Normal}
         >
             <DropdownCompact
-                {...props}
+                {...otherProps}
 
                 id={id}
             />
