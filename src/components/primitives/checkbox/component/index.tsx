@@ -11,23 +11,22 @@ import { CheckBoxProps } from "../..";
 
 /** Boolean input component */
 const CheckBox = ({
-    label,
     onValueChange, defaultValue,
-    name,
-    size, style,
+    label,
+    name = generateGuid(),
+    size = ElementSize.Normal, style,
     disabled = false,
     rounded = false, block = false,
     withoutBorder = false, hasBackgroundColor = false, fixBackgroundColor = false,
     isFormLabel = false,
 
     className, title, data,
+    onClick,
 }: CheckBoxProps): JSX.Element => {
     const onChecked = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.checked),
         [onValueChange]
     );
-
-    const id = name ?? generateGuid();
 
     const elClassName = getClassName([
         "is-checkradio",
@@ -35,7 +34,7 @@ const CheckBox = ({
         className,
         hasBackgroundColor ? "has-background-color" : "",
         fixBackgroundColor && hasBackgroundColor ? "m-has-background-color" : "",
-        isNullOrUndefined(size) ? "" : size === "normal" ? "" : `is-${size}`,
+        size === ElementSize.Normal ? "" : `is-${size}`,
         rounded ? "is-circle" : "",
         isNullOrUndefined(style) ? "" : `is-${style}`,
         block ? "is-block" : "",
@@ -49,18 +48,19 @@ const CheckBox = ({
     if (!isNullOrUndefined(label) && isFormLabel) {
         return (
             <ComponentWithLabel
-                id={id}
+                id={name}
                 label={{
                     ...label!,
                     horizontalContainerClassName: getClassName([label!.horizontalContainerClassName, "p-0"]),
                 }}
+                onClick={onClick}
                 size={ElementSize.Normal}
             >
                 <input
                     type="checkbox"
 
-                    id={id}
-                    name={id}
+                    id={name}
+                    name={name}
                     disabled={disabled}
                     onChange={onChecked}
                     className={elClassName}
@@ -70,7 +70,7 @@ const CheckBox = ({
                     {...dataAttributes}
                 />
                 <label
-                    htmlFor={id}
+                    htmlFor={name}
                 >
                 </label>
             </ComponentWithLabel>
@@ -78,12 +78,15 @@ const CheckBox = ({
     }
 
     return (
-        <div className="bbr-input field">
+        <div
+            onClick={onClick}
+            className="bbr-field bbr-input field"
+        >
             <input
                 type="checkbox"
 
-                id={id}
-                name={id}
+                id={name}
+                name={name}
                 disabled={disabled}
                 onChange={onChecked}
                 className={elClassName}
@@ -93,7 +96,7 @@ const CheckBox = ({
                 {...dataAttributes}
             />
             <label
-                htmlFor={id}
+                htmlFor={name}
             >
                 {label?.caption}
             </label>
