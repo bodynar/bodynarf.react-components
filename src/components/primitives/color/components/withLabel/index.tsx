@@ -12,14 +12,15 @@ import ColorPickerControl from "../picker";
 /** Color picker component with form label */
 function ColorPickerWithLabel({
     preview,
-    name,
+    name = generateGuid(),
     defaultValue, onValueChange,
     validationState,
-    disabled = false, rounded = false, size,
+    disabled = false, rounded = false, size = ElementSize.Normal,
     label,
 
-    className, title, data,
     hint,
+    className, title, data,
+    onClick,
 }: ColorPickerProps) {
     const defaultColor = isNullOrUndefined(defaultValue)
         ? whiteHex
@@ -41,33 +42,31 @@ function ColorPickerWithLabel({
         className,
         rounded ? "is-rounded" : "",
         getStyleClassName(undefined, validationState),
-        isNullOrUndefined(size) ? "" : `is-${size}`,
+        size === ElementSize.Normal ? "" : `is-${size}`,
         "input",
     ]);
 
-    const id = name ?? generateGuid();
-
     return (
         <ComponentWithLabel
-            id={id}
+            id={name}
+            size={size}
             label={label!}
-            size={size ?? ElementSize.Normal}
+            onClick={onClick}
         >
             <ColorPickerControl
-                id={id}
+                id={name}
                 value={value}
                 disabled={disabled}
                 previewConfig={preview}
-                elementClassName={elClassName}
                 onValueChange={onChange}
                 defaultValue={defaultColor}
+                elementClassName={elClassName}
 
                 hint={hint}
                 validationState={validationState}
 
                 data={data}
                 title={title}
-
             />
         </ComponentWithLabel>
     );
