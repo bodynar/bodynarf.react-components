@@ -13,21 +13,21 @@ export interface ComponentWithLabelProps {
     /** Unique component identifier */
     id: string;
 
+    /** Node element with input element */
+    children: React.ReactNode;
+
     /**
      * Handle component click
      * @param event Mouse synth event
      */
     onClick?: (event: React.MouseEvent) => void;
-
-    /** Node element with input element */
-    children: React.ReactNode;
 }
 
 /** Form input component with describing label */
 const ComponentWithLabel = ({
-    label, id,
-    size, onClick,
+    label, id, size,
     children,
+    onClick,
 }: ComponentWithLabelProps): JSX.Element => {
     const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
 
