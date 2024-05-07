@@ -13,8 +13,8 @@ import { DateProps } from "../..";
 /** Date input component */
 const DatePicker = ({
     defaultValue, onValueChange, validationState,
-    name,
-    style, size,
+    name = generateGuid(),
+    style, size = ElementSize.Normal,
     readonly = false, disabled = false,
     rounded = false, loading = false,
     label,
@@ -22,6 +22,7 @@ const DatePicker = ({
 
     className, title, data,
     hint,
+    onClick,
 }: DateProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) =>
@@ -33,12 +34,9 @@ const DatePicker = ({
         [onValueChange]
     );
 
-    const id = name ?? generateGuid();
-    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
-
     const elClassName = getClassName([
         className,
-        elSizeClassName,
+        size === ElementSize.Normal ? "" : `is-${size}`,
         getStyleClassName(style, validationState),
         rounded ? "is-rounded" : "",
         "input",
@@ -57,16 +55,17 @@ const DatePicker = ({
 
     return (
         <ComponentWithLabel
-            id={id}
+            id={name}
             label={label!}
+            onClick={onClick}
             size={getValueOrDefault(size, ElementSize.Normal)}
         >
             <div className={inputContainerClassName}>
                 <input
                     type="date"
 
-                    id={id}
-                    name={id}
+                    id={name}
+                    name={name}
                     onBlur={onBlur}
                     readOnly={readonly}
                     disabled={disabled}
