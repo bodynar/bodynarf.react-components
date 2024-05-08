@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
+import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -12,8 +12,8 @@ import { MultilineProps } from "../..";
 /** Multiline textual input component with describing label */
 const MultilineWithLabel = ({
     defaultValue, onValueChange, validationState,
-    name,
-    size, style,
+    name = generateGuid(),
+    size = ElementSize.Normal, style,
     label, placeholder,
     readonly = false, disabled = false,
     loading = false, fixed = false,
@@ -22,18 +22,16 @@ const MultilineWithLabel = ({
 
     className, title, data,
     hint,
+    onClick,
 }: MultilineProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLTextAreaElement>) => onValueChange(event.target.value),
         [onValueChange]
     );
 
-    const id = name ?? generateGuid();
-    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
-
     const elClassName = getClassName([
         className,
-        elSizeClassName,
+        size === ElementSize.Normal ? "" : `is-${size}`,
         getStyleClassName(style, validationState),
         "textarea",
         fixed ? "has-fixed-size" : "",
@@ -50,14 +48,15 @@ const MultilineWithLabel = ({
 
     return (
         <ComponentWithLabel
-            id={id}
+            id={name}
             label={label!}
-            size={getValueOrDefault(size, ElementSize.Normal)}
+            onClick={onClick}
+            size={size}
         >
             <div className={inputContainerClassName}>
                 <textarea
-                    id={id}
-                    name={id}
+                    id={name}
+                    name={name}
                     rows={rows}
                     onBlur={onBlur}
                     readOnly={readonly}
