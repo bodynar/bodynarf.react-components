@@ -5,6 +5,9 @@ export interface TagProps extends BaseElementProps {
     /** Tag content */
     content: string;
 
+    /** Click handler */
+    onClick?: () => void;
+
     /**
      * Element size.
      * `Small` isn"t allowed

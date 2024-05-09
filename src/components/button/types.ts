@@ -30,6 +30,9 @@ export interface ButtonProps extends BaseElementProps {
 
     /** Is non-interactive button */
     static?: boolean;
+
+    /** Click action handler */
+    onClick?: () => void;
 }
 
 /** Button types according to Bulma framework */
