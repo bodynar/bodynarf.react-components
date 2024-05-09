@@ -15,19 +15,12 @@ export interface ComponentWithLabelProps {
 
     /** Node element with input element */
     children: React.ReactNode;
-
-    /**
-     * Handle component click
-     * @param event Mouse synth event
-     */
-    onClick?: (event: React.MouseEvent) => void;
 }
 
 /** Form input component with describing label */
 const ComponentWithLabel = ({
     label, id, size,
     children,
-    onClick,
 }: ComponentWithLabelProps): JSX.Element => {
     const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
 
@@ -51,7 +44,6 @@ const ComponentWithLabel = ({
 
         return (
             <div
-                onClick={onClick}
                 className="bbr-field bbr-input field is-horizontal"
             >
                 <div className={labelContainerClassName}>
@@ -73,7 +65,6 @@ const ComponentWithLabel = ({
 
     return (
         <div
-            onClick={onClick}
             className="bbr-field bbr-input field"
         >
             <label
