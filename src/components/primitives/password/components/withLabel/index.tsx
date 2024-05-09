@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useState } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
+import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -54,9 +54,9 @@ const PasswordWithLabel = ({
     return (
         <ComponentWithLabel
             id={name}
+            size={size}
             label={label!}
             onClick={onClick}
-            size={getValueOrDefault(size, ElementSize.Normal)}
         >
             <div className={inputContainerClassName}>
                 <input

@@ -49,9 +49,9 @@ const MultilineWithLabel = ({
     return (
         <ComponentWithLabel
             id={name}
+            size={size}
             label={label!}
             onClick={onClick}
-            size={size}
         >
             <div className={inputContainerClassName}>
                 <textarea
