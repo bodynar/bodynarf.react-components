@@ -8,9 +8,9 @@ import ColorPickerControl from "../picker";
 /** Color picker component without form label */
 function ColorPickerWithoutLabel({
     preview,
-    name,
-    defaultValue, validationState,
-    onValueChange,
+    name = generateGuid(),
+    defaultValue, onValueChange,
+    validationState,
     disabled = false, rounded = false, size,
 
     className, title, data,
@@ -39,12 +39,12 @@ function ColorPickerWithoutLabel({
         "input",
     ]);
 
-    const id = name ?? generateGuid();
-
     return (
-        <div className="bbr-color-picker">
+        <div
+            className="bbr-color-picker"
+        >
             <ColorPickerControl
-                id={id}
+                id={name}
                 value={value}
                 disabled={disabled}
                 previewConfig={preview}

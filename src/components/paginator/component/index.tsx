@@ -3,9 +3,9 @@ import { useCallback, useMemo, MouseEvent } from "react";
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
 import { mapDataAttributes } from "@bbr/utils";
-import { ElementPosition } from "@bbr/types";
+import { ElementPosition, ElementSize } from "@bbr/types";
 
-import { PaginatorProps, generatePageNumbers } from "../..";
+import { PaginatorProps } from "../..";
 
 /**
  * Paginator component.
@@ -13,10 +13,9 @@ import { PaginatorProps, generatePageNumbers } from "../..";
 */
 export default function Paginator({
     count, onPageChange, currentPage = 0,
-    position = ElementPosition.Left,
-    size,
+    position = ElementPosition.Left, size = ElementSize.Normal,
     rounded = false, showNextButtons = false,
-    nearPagesCount,
+    nearPagesCount = 3,
 
     className, title, data,
 }: PaginatorProps): JSX.Element {
@@ -52,7 +51,7 @@ export default function Paginator({
         className,
         paginationPositionToClassMap.get(position),
         rounded ? "is-rounded" : "",
-        isNullOrEmpty(size) ? "" : `is-${size}`,
+        size === ElementSize.Normal ? "" : `is-${size}`,
     ]);
 
     const dataAttributes = isNullOrUndefined(data)
@@ -61,8 +60,8 @@ export default function Paginator({
 
     return (
         <nav
-            className={classNames}
             role="navigation"
+            className={classNames}
             aria-label="pagination"
 
             title={title}
@@ -146,3 +145,23 @@ const paginationPositionToClassMap: Map<ElementPosition, string> = new Map([
     [ElementPosition.Center, "is-centered"],
     [ElementPosition.Right, "is-right"]
 ]);
+
+/**
+ * Get nearest numbers from each side (left & right)
+ * @param page Number of current page
+ * @param count Amount of pages
+ * @param size Amount of pages from left & right to current page
+ * @throws Current page is greater than pages amount
+ * @returns Array of nearest numbers to current page
+ */
+const generatePageNumbers = (page: number, count: number, size: number): Array<number> => {
+    if (page < 0 || count <= 0 || page > count) {
+        return [];
+    }
+
+    return [
+        ...new Array(size).fill(page).map((_, i) => page - i - 1).filter(x => x > 0 && x < page).reverse(),
+        page,
+        ...new Array(size).fill(page).map((_, i) => page + i + 1).filter(x => x > 0 && x > page && x <= count)
+    ];
+};

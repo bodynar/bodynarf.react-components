@@ -118,8 +118,7 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
 
     const labelComponentClassName = getStyleClassName(undefined, validationState);
     const filteredItems = isNullOrEmpty(searchValue)
-        ?
-        items
+        ? items
         : items.filter(({ displayValue }) =>
             displayValue.toLocaleLowerCase().includes(searchValue!.toLocaleLowerCase()))
         ;

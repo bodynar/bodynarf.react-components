@@ -53,7 +53,7 @@ export type ButtonType = // TODO: to enum
     ;
 
 /** Simple button props type */
-export interface SimpleButtonProps extends Omit<ButtonProps, 'className'> {
+export interface SimpleButtonProps extends Omit<ButtonProps, "className"> {
     /** Button class name*/
     className: string;
 }

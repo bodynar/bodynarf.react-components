@@ -15,9 +15,6 @@ export interface ColorPickerControlProps extends Omit<
     | "rounded" | "readonly"
     | "loading" | "className"
 > {
-    /** Preview element configuration */
-    previewConfig?: ColorPickerPreviewConfig;
-
     /** Current color value */
     value: string;
 
@@ -29,13 +26,17 @@ export interface ColorPickerControlProps extends Omit<
 
     /** Handler of control value change*/
     onValueChange: (event: ChangeEvent<HTMLInputElement>) => void;
+
+    /** Preview element configuration */
+    previewConfig?: ColorPickerPreviewConfig;
 }
 
 /** Color picker container component */
 const ColorPickerControl = ({
+    value, defaultValue, onValueChange,
     elementClassName,
-    disabled, previewConfig, size,
-    defaultValue, onValueChange, value,
+    disabled = false,
+    previewConfig, size,
     id, title, data,
 
     hint, validationState,
@@ -47,13 +48,13 @@ const ColorPickerControl = ({
                 size={size}
                 value={value}
                 disabled={disabled}
-                elementClassName={elementClassName}
                 defaultValue={defaultValue}
                 onValueChange={onValueChange}
                 previewConfig={previewConfig}
+                elementClassName={elementClassName}
 
-                title={title}
                 data={data}
+                title={title}
             />
         );
     }
@@ -71,8 +72,8 @@ const ColorPickerControl = ({
                     onChange={onValueChange}
                     defaultValue={defaultValue}
 
-                    title={title}
                     {...data}
+                    title={title}
                 />
             </div>
             <InternalHint
@@ -113,18 +114,9 @@ const PickerWithPreview = ({
         previewConfig!.position === ElementPosition.Left ? "ml-1" : "mr-1",
     ]);
 
-    if (previewConfig!.position === ElementPosition.Left) {
+    if (previewConfig!.position === ElementPosition.Right) {
         return (
             <div className="is-flex is-flex-direction-row is-flex-wrap-nowrap is-justify-content-start">
-                <button
-                    className={classNames}
-                    style={{
-                        "--color-picker__background-color": value,
-                        "--color-picker__color": color,
-                    } as ColorPickerCssProperties}
-                >
-                    {value}
-                </button>
                 <div className={controlContainerClassName}>
                     <input
                         type="color"
@@ -140,6 +132,15 @@ const PickerWithPreview = ({
                         {...dataAttributes}
                     />
                 </div>
+                <button
+                    className={classNames}
+                    style={{
+                        "--color-picker__background-color": value,
+                        "--color-picker__color": color,
+                    } as ColorPickerCssProperties}
+                >
+                    {value}
+                </button>
                 <InternalHint
                     hint={hint}
                     validationState={validationState}
@@ -150,6 +151,15 @@ const PickerWithPreview = ({
 
     return (
         <div className="is-flex is-flex-direction-row is-flex-wrap-nowrap is-justify-content-start">
+            <button
+                className={classNames}
+                style={{
+                    "--color-picker__background-color": value,
+                    "--color-picker__color": color,
+                } as ColorPickerCssProperties}
+            >
+                {value}
+            </button>
             <div className={controlContainerClassName}>
                 <input
                     type="color"
@@ -165,15 +175,6 @@ const PickerWithPreview = ({
                     {...dataAttributes}
                 />
             </div>
-            <button
-                className={classNames}
-                style={{
-                    "--color-picker__background-color": value,
-                    "--color-picker__color": color,
-                } as ColorPickerCssProperties}
-            >
-                {value}
-            </button>
             <InternalHint
                 hint={hint}
                 validationState={validationState}
