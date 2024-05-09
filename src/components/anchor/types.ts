@@ -16,4 +16,7 @@ export interface AnchorProps extends BaseElementProps {
 
     /** Where to open the linked document */
     target?: "_blank" | "_top";
+
+    /** Click handler */
+    onClick?: () => void;
 }

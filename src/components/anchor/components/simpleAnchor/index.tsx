@@ -7,6 +7,7 @@ import { AnchorProps } from "../..";
 /** Simple anchor component, without icon */
 const SimpleAnchor = ({
     href, className, caption, target,
+    onClick,
 
     title, data,
 }: AnchorProps): JSX.Element => {
@@ -18,6 +19,7 @@ const SimpleAnchor = ({
         <a
             href={href}
             target={target}
+            onClick={onClick}
             className={className}
 
             title={title}

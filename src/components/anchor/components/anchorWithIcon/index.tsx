@@ -16,6 +16,7 @@ interface AnchorWithIconProps extends Omit<AnchorProps, "icon"> {
 const AnchorWithIcon = ({
     href, caption,
     target, icon,
+    onClick,
 
     className, title, data,
 }: AnchorWithIconProps): JSX.Element => {
@@ -34,6 +35,7 @@ const AnchorWithIcon = ({
             <a
                 href={href}
                 target={target}
+                onClick={onClick}
                 className={className}
 
                 title={title}
@@ -49,6 +51,7 @@ const AnchorWithIcon = ({
         <a
             href={href}
             target={target}
+            onClick={onClick}
             className={className}
 
             title={title}
