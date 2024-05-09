@@ -18,7 +18,6 @@ export default function Paginator({
     nearPagesCount = 3,
 
     className, title, data,
-    onClick,
 }: PaginatorProps): JSX.Element {
     const pageChange = useCallback(
         (event: MouseEvent<HTMLElement>) => {
@@ -66,7 +65,6 @@ export default function Paginator({
             aria-label="pagination"
 
             title={title}
-            onClick={onClick}
             {...dataAttributes}
         >
             {showNextButtons &&

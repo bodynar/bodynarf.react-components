@@ -22,7 +22,6 @@ const MultilineWithLabel = ({
 
     className, title, data,
     hint,
-    onClick,
 }: MultilineProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLTextAreaElement>) => onValueChange(event.target.value),
@@ -51,7 +50,6 @@ const MultilineWithLabel = ({
             id={name}
             size={size}
             label={label!}
-            onClick={onClick}
         >
             <div className={inputContainerClassName}>
                 <textarea

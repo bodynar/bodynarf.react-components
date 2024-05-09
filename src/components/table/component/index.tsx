@@ -22,7 +22,6 @@ function Table<TItem>({
     children,
 
     className, title, data,
-    onClick,
 }: TableProps<TItem>): JSX.Element {
     const elClassName = getClassName([
         "bbr-table",
@@ -47,7 +46,6 @@ function Table<TItem>({
             className={elClassName}
 
             title={title}
-            onClick={onClick}
             {...dataAttributes}
         >
             <thead>

@@ -22,7 +22,6 @@ const DatePicker = ({
 
     className, title, data,
     hint,
-    onClick,
 }: DateProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) =>
@@ -58,7 +57,6 @@ const DatePicker = ({
             id={name}
             size={size}
             label={label!}
-            onClick={onClick}
         >
             <div className={inputContainerClassName}>
                 <input

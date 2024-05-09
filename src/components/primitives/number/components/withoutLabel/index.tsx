@@ -21,7 +21,6 @@ const NumberWithoutLabel = ({
 
     className, title, data,
     hint,
-    onClick,
 }: NumberProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(+event.target.value),
@@ -48,7 +47,6 @@ const NumberWithoutLabel = ({
 
     return (
         <div
-            onClick={onClick}
             className="bbr-field field"
         >
             <div className={containerClassName}>

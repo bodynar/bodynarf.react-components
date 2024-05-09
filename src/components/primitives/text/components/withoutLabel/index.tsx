@@ -20,7 +20,6 @@ const TextWithoutLabel = ({
 
     className, title, data,
     hint,
-    onClick,
 }: TextProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
@@ -47,7 +46,6 @@ const TextWithoutLabel = ({
 
     return (
         <div
-            onClick={onClick}
             className="bbr-field field"
         >
             <div className={containerClassName}>

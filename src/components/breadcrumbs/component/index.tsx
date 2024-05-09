@@ -18,7 +18,6 @@ const BreadCrumbs: FC<BreadcrumbsProps> = ({
     elementGenerator = ((bc) => <BreadCrumbItem item={bc} />),
 
     className, title, data,
-    onClick,
 }) => {
     if (items.length <= 1) {
         return <></>;
@@ -43,7 +42,6 @@ const BreadCrumbs: FC<BreadcrumbsProps> = ({
             aria-label="breadcrumbs"
 
             title={title}
-            onClick={onClick}
             {...dataAttributes}
         >
             <ul>

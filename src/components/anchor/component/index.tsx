@@ -24,7 +24,6 @@ export default function Anchor(props: AnchorProps): JSX.Element {
                 {...props}
 
                 className={className}
-                onClick={props.onClick}
             />
         );
     }
@@ -35,7 +34,6 @@ export default function Anchor(props: AnchorProps): JSX.Element {
             icon={props.icon!}
 
             className={className}
-            onClick={props.onClick}
         />
     );
 }

@@ -30,7 +30,6 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
     hint,
 
     id: propsId,
-    onClick,
 }) => {
     const generatedId = useId();
     const id = propsId ?? generatedId;
@@ -129,9 +128,7 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
         : mapDataAttributes(data!);
 
     return (
-        <div
-            onClick={onClick}
-        >
+        <>
             <div
                 key={id}
                 className={classNames}
@@ -174,7 +171,7 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
                 hint={hint}
                 validationState={validationState}
             />
-        </div>
+        </>
     );
 };
 

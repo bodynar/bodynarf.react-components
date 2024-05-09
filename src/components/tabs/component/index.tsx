@@ -29,7 +29,6 @@ const Tabs: FC<TabsProps> = ({
     style = TabsStyle.default, fullWidth = false,
 
     className, title, data,
-    onClick,
 }) => {
     if (items.length === 0) {
         throw new Error("Invalid configuration. Tab items must be defined");
@@ -40,10 +39,6 @@ const Tabs: FC<TabsProps> = ({
 
     const onTabsClick = useCallback(
         (event: MouseEvent<HTMLElement>) => {
-            if (!isNullOrUndefined(onClick)) {
-                onClick!(event);
-            }
-
             const closestTab = (event.target as HTMLElement).closest(".bbr-tabs__tab");
 
             if (isNullOrUndefined(closestTab)) {
@@ -64,7 +59,7 @@ const Tabs: FC<TabsProps> = ({
 
             setActiveItem(item!);
         },
-        [activeItem, items, onClick]
+        [activeItem, items]
     );
 
     useEffect(

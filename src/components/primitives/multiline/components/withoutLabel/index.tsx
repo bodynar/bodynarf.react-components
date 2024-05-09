@@ -19,7 +19,6 @@ const MultilineWithoutLabel = ({
 
     className, title, data,
     hint,
-    onClick,
 }: MultilineProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLTextAreaElement>) => onValueChange(event.target.value),
@@ -46,7 +45,6 @@ const MultilineWithoutLabel = ({
 
     return (
         <div
-            onClick={onClick}
             className="bbr-field field"
         >
             <div className={inputContainerClassName}>

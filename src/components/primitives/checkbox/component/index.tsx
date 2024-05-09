@@ -21,7 +21,6 @@ const CheckBox = ({
     isFormLabel = false,
 
     className, title, data,
-    onClick,
 }: CheckBoxProps): JSX.Element => {
     const onChecked = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.checked),
@@ -53,7 +52,6 @@ const CheckBox = ({
                     ...label!,
                     horizontalContainerClassName: getClassName([label!.horizontalContainerClassName, "p-0"]),
                 }}
-                onClick={onClick}
                 size={ElementSize.Normal}
             >
                 <input
@@ -79,7 +77,6 @@ const CheckBox = ({
 
     return (
         <div
-            onClick={onClick}
             className="bbr-field bbr-input field"
         >
             <input

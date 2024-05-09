@@ -17,7 +17,6 @@ const Accordion = ({
     onToggle = emptyFn,
 
     className, title, data,
-    onClick,
 }: AccordionProps): JSX.Element => {
     const expandablePanelRef = useRef<HTMLDivElement>(null);
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
@@ -56,7 +55,6 @@ const Accordion = ({
             className={elClassName}
             aria-expanded={isExpanded}
 
-            onClick={onClick}
             {...dataAttributes}
         >
             <div

@@ -17,7 +17,6 @@ export default function Search({
     isLoading = false, rounded = false, disabled = false,
 
     className, title, data,
-    onClick,
 }: SearchProps): JSX.Element {
     const [elementName] = useState<string>(name ?? generateGuid());
     const [searchValue, setSearchValue] = useState<string>(defaultValue);
@@ -59,8 +58,6 @@ export default function Search({
         return (
             <div
                 className="field has-addons"
-
-                onClick={onClick}
             >
                 <div className={elClassName}>
                     <input
@@ -93,8 +90,6 @@ export default function Search({
     return (
         <div
             className={elClassName}
-
-            onClick={onClick}
         >
             <input
                 type="search"

@@ -20,7 +20,6 @@ function ColorPickerWithLabel({
 
     hint,
     className, title, data,
-    onClick,
 }: ColorPickerProps) {
     const defaultColor = isNullOrUndefined(defaultValue)
         ? whiteHex
@@ -51,7 +50,6 @@ function ColorPickerWithLabel({
             id={name}
             size={size}
             label={label!}
-            onClick={onClick}
         >
             <ColorPickerControl
                 id={name}

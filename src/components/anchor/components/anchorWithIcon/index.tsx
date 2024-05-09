@@ -18,7 +18,6 @@ const AnchorWithIcon = ({
     target, icon,
 
     className, title, data,
-    onClick,
 }: AnchorWithIconProps): JSX.Element => {
     const iconClassName: string | undefined = isNullOrEmpty(caption)
         ? icon.className
@@ -38,7 +37,6 @@ const AnchorWithIcon = ({
                 className={className}
 
                 title={title}
-                onClick={onClick}
                 {...dataAttributes}
             >
                 {caption}
@@ -54,7 +52,6 @@ const AnchorWithIcon = ({
             className={className}
 
             title={title}
-            onClick={onClick}
             {...dataAttributes}
         >
             <Icon {...icon} className={iconClassName} />

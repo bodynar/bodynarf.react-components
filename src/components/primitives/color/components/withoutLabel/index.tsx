@@ -15,7 +15,6 @@ function ColorPickerWithoutLabel({
 
     className, title, data,
     hint,
-    onClick,
 }: ColorPickerProps) {
     const defaultColor = isNullOrUndefined(defaultValue)
         ? whiteHex
@@ -43,8 +42,6 @@ function ColorPickerWithoutLabel({
     return (
         <div
             className="bbr-color-picker"
-
-            onClick={onClick}
         >
             <ColorPickerControl
                 id={name}

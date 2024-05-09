@@ -19,7 +19,6 @@ const PasswordWithoutLabel = ({
 
     className, title, data,
     hint,
-    onClick,
 }: PasswordProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
@@ -53,7 +52,6 @@ const PasswordWithoutLabel = ({
 
     return (
         <div
-            onClick={onClick}
             className="bbr-field field"
         >
             <div className={containerClassName}>

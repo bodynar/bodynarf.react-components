@@ -12,7 +12,7 @@ import { NumberProps } from "../..";
 /** Number component with label */
 const NumberWithLabel = ({
     onValueChange, defaultValue, validationState,
-    name,
+    name = generateGuid(),
     label, placeholder,
     size = ElementSize.Normal, style, rounded = false, loading = false,
     readonly = false, disabled = false,
@@ -21,15 +21,12 @@ const NumberWithLabel = ({
 
     className, title, data,
     hint,
-    onClick,
 }: NumberProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) =>
             onValueChange(isStringEmpty(event.target.value) ? undefined : +event.target.value),
         [onValueChange]
     );
-
-    const id = name ?? generateGuid();
 
     const elClassName = getClassName([
         className,
@@ -50,17 +47,16 @@ const NumberWithLabel = ({
 
     return (
         <ComponentWithLabel
-            id={id}
+            id={name}
             size={size}
             label={label!}
-            onClick={onClick}
         >
             <div className={inputContainerClassName}>
                 <input
                     type="number"
 
-                    id={id}
-                    name={id}
+                    id={name}
+                    name={name}
                     step={step}
                     onBlur={onBlur}
                     onChange={onChange}

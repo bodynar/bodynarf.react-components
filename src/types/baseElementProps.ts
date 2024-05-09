@@ -10,10 +10,4 @@ export interface BaseElementProps {
 
     /** Extra data-* attributes */
     data?: DataAttributes;
-
-    /**
-     * Handle component click
-     * @param event Mouse synth event
-     */
-    onClick?: (event: React.MouseEvent) => void;
 }

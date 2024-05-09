@@ -20,8 +20,6 @@ const TextWithLabel = ({
 
     className, title, data,
     hint,
-
-    onClick,
 }: TextProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
@@ -50,7 +48,6 @@ const TextWithLabel = ({
             id={name}
             size={size}
             label={label!}
-            onClick={onClick}
         >
             <div className={inputContainerClassName}>
                 <input
