@@ -12,14 +12,15 @@ import { PasswordProps } from "../..";
 
 const PasswordWithLabel = ({
     onValueChange, validationState,
-    name,
-    size, style,
+    name = generateGuid(),
+    size = ElementSize.Normal, style,
     rounded = false, loading = false,
     disabled = false, canShowPassword = false,
     label, placeholder,
 
     className, title, data,
     hint,
+    onClick,
 }: PasswordProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
@@ -29,9 +30,7 @@ const PasswordWithLabel = ({
     const [contentIsHidden, setContentIsHidden] = useState(true);
     const onIconClick = useCallback(() => setContentIsHidden(state => !state), [setContentIsHidden]);
 
-    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
-    const id = name ?? generateGuid();
-
+    const elSizeClassName = size === ElementSize.Normal ? "" : "is-{0}".format(size);
     const elClassName = getClassName([
         "bbr-password",
         className,
@@ -54,16 +53,17 @@ const PasswordWithLabel = ({
 
     return (
         <ComponentWithLabel
-            id={id}
+            id={name}
             label={label!}
+            onClick={onClick}
             size={getValueOrDefault(size, ElementSize.Normal)}
         >
             <div className={inputContainerClassName}>
                 <input
                     type={contentIsHidden ? "password" : "text"}
 
-                    id={id}
-                    name={id}
+                    id={name}
+                    name={name}
                     disabled={disabled}
                     onChange={onChange}
                     className={elClassName}
