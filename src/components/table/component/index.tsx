@@ -3,6 +3,8 @@ import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 import { mapDataAttributes } from "@bbr/utils";
 
 import { TableProps } from "..";
+import "./style.scss";
+
 import TableHeader from "../components/heading";
 
 /**
@@ -23,6 +25,7 @@ function Table<TItem>({
     onClick,
 }: TableProps<TItem>): JSX.Element {
     const elClassName = getClassName([
+        "bbr-table",
         "table",
         className,
         hasBorder ? "is-bordered" : "",
@@ -52,9 +55,10 @@ function Table<TItem>({
                     {headings.map((heading, i) =>
                         <TableHeader
                             key={i}
+
                             {...heading}
-                            sortColumn={currentSortColumn}
                             onClick={onHeaderClick}
+                            sortColumn={currentSortColumn}
                         />
                     )}
                 </tr>
