@@ -3,6 +3,8 @@ import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 import { BaseInputElementProps, ElementPosition, ElementSize, HintConfiguration, ValidationStatus } from "@bbr/types";
 import Icon from "@bbr/components/icon";
 
+import "./style.scss";
+
 /** Props of `InternalHint` */
 type HintProps = Pick<BaseInputElementProps<any>, "validationState" | "hint">;
 

@@ -7,7 +7,8 @@ import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import InternalHint from "@bbr/components/internal/hint";
 
-import "../../../../common.scss";
+import "./style.scss";
+
 import { DateProps } from "../..";
 
 /** Date input component */

@@ -1,7 +1,5 @@
 import { isNullOrUndefined } from "@bodynarf/utils";
 
-import "../../../../common.scss";
-
 import { TextProps } from "..";
 import TextWithLabel from "../components/withLabel";
 import TextWithoutLabel from "../components/withoutLabel";
