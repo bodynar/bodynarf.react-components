@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
+import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -12,14 +12,15 @@ import { TextProps } from "../..";
 const TextWithoutLabel = ({
     onValueChange, defaultValue, validationState,
     readonly = false, disabled = false,
-    name,
-    size, style,
+    name = generateGuid(),
+    size = ElementSize.Normal, style,
     rounded = false, loading = false,
     placeholder,
     onBlur,
 
     className, title, data,
     hint,
+    onClick,
 }: TextProps): JSX.Element => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
@@ -28,7 +29,7 @@ const TextWithoutLabel = ({
 
     const elClassName = getClassName([
         className,
-        "is-{0}".format(getValueOrDefault(size, ElementSize.Normal)),
+        size === ElementSize.Normal ? "" : `is-${size}`,
         rounded ? "is-rounded" : "",
         getStyleClassName(style, validationState),
         "input",
@@ -40,20 +41,21 @@ const TextWithoutLabel = ({
         loading ? "is-loading" : "",
     ]);
 
-    const id = name ?? generateGuid();
-
     const dataAttributes = isNullOrUndefined(data)
         ? undefined
         : mapDataAttributes(data!);
 
     return (
-        <>
+        <div
+            onClick={onClick}
+            className="bbr-field field"
+        >
             <div className={containerClassName}>
                 <input
                     type="text"
 
-                    id={id}
-                    name={id}
+                    id={name}
+                    name={name}
                     onBlur={onBlur}
                     readOnly={readonly}
                     disabled={disabled}
@@ -70,7 +72,7 @@ const TextWithoutLabel = ({
                 hint={hint}
                 validationState={validationState}
             />
-        </>
+        </div>
     );
 };
 
