@@ -2,6 +2,9 @@ import { FC } from "react";
 
 import { isNullOrUndefined } from "@bodynarf/utils";
 
+// import "../../dropdown/component/style.scss";
+import "@bodynarf/react.components/components/dropdown/component/style.scss";
+
 import { MultiselectProps } from "../types";
 import MultiselectWithoutLabel from "../components/withoutLabel";
 import MultiselectWithLabel from "../components/withLabel";
