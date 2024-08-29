@@ -1,8 +1,10 @@
 import { FC, useCallback, useId, useState, MouseEvent } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
-import { getStyleClassName, mapDataAttributes, useComponentOutsideClick } from "@bodynarf/react.components";
-import InternalHint from "@bodynarf/react.components/components/primitives/internal/hint";
+
+import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { useComponentOutsideClick } from "@bbr/hooks";
+import InternalHint from "@bbr/components/primitives/internal/hint";
 
 import { MultiselectProps, MultiselectItem as MultiselectItemModel } from "../../types";
 import MultiselectItem from "../item";
@@ -56,7 +58,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
             onChange(item, isItemSelected);
         }
         ,
-        [selectedItems]
+        [onChange, selectedItems]
     )
         ;
 
@@ -72,7 +74,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
 
             onChange(item, selected);
         },
-        [selectedItems]
+        [onChange]
     );
 
     const onLabelClick = useCallback(

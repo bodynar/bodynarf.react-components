@@ -1,9 +1,10 @@
 import { useCallback } from "react";
 
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
-import { ElementPosition } from "@bodynarf/react.components";
-import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";
-import Icon from "@bodynarf/react.components/components/icon";
+
+import { ElementPosition } from "@bbr/types";
+import Checkbox from "@bbr/components/primitives/checkbox";
+import Icon from "@bbr/components/icon";
 
 import { MultiselectItem as MultiselectItemModel } from "../../";
 
@@ -38,7 +39,7 @@ const MultiselectItem = ({
 }: MultiselectItemProps): JSX.Element => {
     const onChecked = useCallback(
         (value?: boolean) => onChange(item, value ?? false),
-        []
+        [item, onChange]
     );
 
     const onClick = useCallback(
@@ -49,7 +50,7 @@ const MultiselectItem = ({
                 event.stopPropagation();
             }
         },
-        [onItemClick]
+        [item, onItemClick]
     );
 
     if (!isNullOrUndefined(item.icon)) {
@@ -112,7 +113,7 @@ const MultiselectItemWithIcon = ({
 
     const onChecked = useCallback(
         (value?: boolean) => onChange(item, value ?? false),
-        []
+        [item, onChange]
     );
 
     const onClick = useCallback(
@@ -123,7 +124,7 @@ const MultiselectItemWithIcon = ({
                 event.stopPropagation();
             }
         },
-        [onItemClick]
+        [item, onItemClick]
     );
 
     if (icon.position === ElementPosition.Right) {

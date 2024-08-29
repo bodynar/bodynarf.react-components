@@ -1,5 +1,4 @@
-// import { DropdownProps, SelectableItem } from "../dropdown";
-import { DropdownProps, SelectableItem } from "@bodynarf/react.components";
+import { DropdownProps, SelectableItem } from "../dropdown";
 
 /** Single multiselect item that user can select */
 export type MultiselectItem = SelectableItem & {

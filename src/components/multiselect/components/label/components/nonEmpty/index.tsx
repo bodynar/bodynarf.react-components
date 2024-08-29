@@ -1,8 +1,9 @@
 import { FC } from "react";
 
 import { getClassName, isNullOrEmpty } from "@bodynarf/utils";
-import { ElementSize } from "@bodynarf/react.components";
-import Icon from "@bodynarf/react.components/components/icon";
+
+import { ElementSize } from "@bbr/types";
+import Icon from "@bbr/components/icon";
 
 import { MultiselectLabelProps } from "../../component";
 
