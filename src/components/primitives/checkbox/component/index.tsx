@@ -77,7 +77,7 @@ const CheckBox = ({
 
     return (
         <div
-            className="bbr-field bbr-input field"
+            className="bbr-field bbr-input field mr-2"
         >
             <input
                 type="checkbox"
