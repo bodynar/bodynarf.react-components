@@ -76,4 +76,9 @@ export interface DropdownProps extends BaseElementProps {
 
     /** Is search through items enabled */
     searchable?: boolean;
+
+    /**
+     * Text which would be displayed when search query applied and no items found
+     */
+    noDataByQuery?: string;
 }

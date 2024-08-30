@@ -20,7 +20,7 @@ type DropdownCompactProps = DropdownProps & {
 const DropdownCompact: FC<DropdownCompactProps> = ({
     items, value, onSelect,
     hideOnOuterClick, listMaxHeight,
-    placeholder, noDataText = "No items found",
+    placeholder, noDataText = "No items found", noDataByQuery = "No items found by specified search",
 
     compact = false, disabled = false, deselectable = false, searchable = false,
 
@@ -162,7 +162,7 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
                             )}
                         </ul>
                         : <span className="dropdown-content dropdown-item">
-                            {noDataText}
+                            {isNullOrEmpty(searchValue) ? noDataText : noDataByQuery}
                         </span>
                     }
                 </div>
