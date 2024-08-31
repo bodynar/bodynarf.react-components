@@ -68,6 +68,7 @@ const CheckBox = ({
                     {...dataAttributes}
                 />
                 <label
+                    className="is-empty"
                     htmlFor={name}
                 >
                 </label>
@@ -75,9 +76,13 @@ const CheckBox = ({
         );
     }
 
+    const labelClassName = isNullOrUndefined(label)
+        ? "is-empty"
+        : undefined;
+
     return (
         <div
-            className="bbr-field bbr-input field"
+            className="bbr-field bbr-input field mr-2"
         >
             <input
                 type="checkbox"
@@ -94,6 +99,7 @@ const CheckBox = ({
             />
             <label
                 htmlFor={name}
+                className={labelClassName}
             >
                 {label?.caption}
             </label>

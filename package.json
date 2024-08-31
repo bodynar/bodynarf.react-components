@@ -44,7 +44,7 @@
         "typescript": "^4.7.3"
     },
     "peerDependencies": {
-        "@bodynarf/utils": "^1.3.0",
+        "@bodynarf/utils": "^1.4.0",
         "bulma": "^0.9.4",
         "react": "^18.1.0",
         "react-dom": "^18.1.0"

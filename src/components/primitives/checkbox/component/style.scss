@@ -3,8 +3,27 @@
         border-color: #dbdbdb !important;
         background-color: transparent !important;
     }
-    & + label::before,
-    & + label:before {
-        top: 0.125rem;
+
+    &.is-block + label.is-empty {
+        &::before {
+            left: 0.25rem !important;
+            top: 0.25rem !important;
+        }
+
+        &::after {
+            top: 0.45rem;
+            left: 0.7rem;
+        }
+    }
+
+    &:not(.is-block) + label {
+        &::after {
+            top: 0.275rem;
+        }
+    }
+
+    & + label.is-empty {
+        padding-left: 1rem;
+        margin: 0 !important;
     }
 }
