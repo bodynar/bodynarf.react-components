@@ -78,14 +78,13 @@ const [item, setItem] = useState<SelectableItem | undefined>();
             />
             <ComponentUseCase
                 caption="noDataText"
-                code={`<Dropdown noDataText="NOTHING HERE" />`}
+                code={`<Dropdown items={[]} noDataText="NOTHING HERE" />`}
                 captionIsCode
                 description="Caption for message when no records provided. Default is 'No items found'"
                 component={<DropdownComponent
                     noDataText="NOTHING HERE"
 
-                    value={item}
-                    items={cities}
+                    items={[]}
                     hideOnOuterClick
                     onSelect={setItem}
                     placeholder="Default lookup"
@@ -93,10 +92,11 @@ const [item, setItem] = useState<SelectableItem | undefined>();
             />
             <ComponentUseCase
                 caption="noDataByQuery"
-                code={`<Dropdown noDataByQuery="no hay entradas para el filtro" />`}
+                code={`<Dropdown searchable noDataByQuery="no hay entradas para el filtro" />`}
                 captionIsCode
                 description="Caption for message when no records found by current can be customized. Default is 'No items found by specified search'. Try to search text 'some_random_not_existed'"
                 component={<DropdownComponent
+                    searchable
                     noDataByQuery="no hay entradas para el filtro"
 
                     value={item}
