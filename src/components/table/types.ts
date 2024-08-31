@@ -8,7 +8,7 @@ export interface TableHeading<TItem> {
     sortable: boolean;
 
     /** Class names */
-    className: string;
+    className?: string;
 
     /** Name of model column*/
     name?: keyof TItem; // TODO: switch to string
