@@ -1,4 +1,4 @@
-import { ElementColor } from "@bodynarf/react.components";
+import { ElementColor, ElementSize } from "@bodynarf/react.components";
 import TagComponent from "@bodynarf/react.components/components/tag";
 
 import ComponentUseCase from "../../../shared/components/useCase";
@@ -34,7 +34,7 @@ function Tag() {
                     size =>
                         <TagComponent
                             content="Tag content"
-                            size={size}
+                            size={size === ElementSize.Small ? ElementSize.Normal : size}
                             style={ElementColor.Success}
                         />
                 }
