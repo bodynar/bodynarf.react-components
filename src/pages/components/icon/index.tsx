@@ -14,7 +14,7 @@ function Icon() {
                 description={<>
                     Works via <a className="is-underlined" href="https://icons.getbootstrap.com/" target="_blank">Bootstrap-icons</a>
                     {`\n`}
-                    To use - pass name without
+                    To use - pass name without `bi` part
                 </>}
             />
             <ComponentUseCase
