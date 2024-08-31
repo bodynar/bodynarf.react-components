@@ -43,9 +43,10 @@ Simple react components based on html elements.
 ### Complex components
 Complex components is set of components built via combining simple components or represent complex logical component
  - **Accordion** - Collapsible container that can hide some content inside
- - **Dropdown** - custom dropdown component, based on html div elements & css (requires icon, see icon component description)
+ - **Dropdown** - Custom dropdown component, based on html div elements & css (requires icon, see icon component description)
+ - **Multiselect** - Dropdown with option to select several records
  - **Paginator** - Pagination elements to navigate through paged list
-  
+
 	Example:
 	```tsx
 		const [{ currentPage, pagesCount, onPageChange }, paginate] = usePagination(items.length, ITEMS_PER_PAGE);
@@ -61,8 +62,9 @@ Complex components is set of components built via combining simple components or
 	```
  - **Search** - Search bar with optional button to perform search
  - **Tabs** - Container for multi-content with option of switching displaying content without refreshing\scrolling page
- 
+
 ### Hooks
 
  - **useComponentOutsideClick** - Attach watcher for mouse clicks and emit event when click was outside of component
  - **usePagination** - Create a pagination config to easily manipulate with Paginator component
+ - **useUnmount** - Handle component unmounting event. Useful as component cleanup fn
