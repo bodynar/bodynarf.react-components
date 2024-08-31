@@ -35,6 +35,12 @@ function Checkbox() {
                 component={<CheckboxComponent onValueChange={emptyFn} block label={{ caption: "Block", horizontal: true }} />}
             />
             <ComponentUseCase
+                caption="Block and without label"
+                code={`<Checkbox block />`}
+                description="Control and label will have own gray background"
+                component={<CheckboxComponent onValueChange={emptyFn} block />}
+            />
+            <ComponentUseCase
                 caption="Without border"
                 code={`<Checkbox withoutBorder />`}
                 description="Removes border from control"
