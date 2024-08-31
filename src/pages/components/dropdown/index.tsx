@@ -51,8 +51,8 @@ const [item, setItem] = useState<SelectableItem | undefined>();
                         hideOnOuterClick
                         placeholder="Lookup"
                         value={item}
-                        items={cities}
                         onSelect={setItem}
+                        items={itemsWithIcons}
                     />}
             />
             <ComponentUseCase
@@ -135,4 +135,14 @@ const cities = [
     displayValue: `[${index}] ${name}`,
     id: name,
     title: `City with name ${name}`
-}));;
+}));
+
+const itemsWithIcons = cities.map((x, index) => ({
+    ...x,
+    displayValue: x.value,
+    icon: {
+        name: ++index === 10
+            ? "exclamation-square"
+            : `${++index % 10}-square`,
+    }
+}));
