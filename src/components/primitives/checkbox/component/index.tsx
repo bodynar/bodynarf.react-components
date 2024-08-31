@@ -68,6 +68,7 @@ const CheckBox = ({
                     {...dataAttributes}
                 />
                 <label
+                    className="is-empty"
                     htmlFor={name}
                 >
                 </label>
