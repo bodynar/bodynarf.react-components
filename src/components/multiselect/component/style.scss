@@ -1,0 +1,20 @@
+.bbr-multiselect {
+    .dropdown-content {
+        overflow: hidden;
+
+        ul {
+            max-height: 13.5rem;
+            overflow: auto;
+
+            li.bbr-dropdown-item {
+                .field:not(:last-child) {
+                    margin-bottom: 0 !important;
+                }
+
+                .bbr-icon {
+                    transition: none;
+                }
+            }
+        }
+    }
+}

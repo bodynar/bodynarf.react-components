@@ -6,7 +6,7 @@ import LabelWrapper from "@bbr/internalComponent/componentWithLabel";
 import { MultiselectProps } from "../../types";
 import MultiselectWithoutLabel from "../withoutLabel";
 
-/** Multiselect component with label*/
+/** Multiselect component with label */
 const MultiselectWithLabel: FC<MultiselectProps> = (props) => {
     const id = useId();
 
@@ -14,7 +14,7 @@ const MultiselectWithLabel: FC<MultiselectProps> = (props) => {
         <LabelWrapper
             id={id}
             label={props.label!}
-            size={ElementSize.Normal} // TODO ?
+            size={ElementSize.Normal}
         >
             <MultiselectWithoutLabel
                 {...props}

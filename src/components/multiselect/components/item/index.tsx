@@ -3,13 +3,13 @@ import { useCallback } from "react";
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementPosition } from "@bbr/types";
-import Checkbox from "@bbr/components/primitives/checkbox";
 import Icon from "@bbr/components/icon";
+import Checkbox from "@bbr/components/primitives/checkbox";
 
-import { MultiselectItem as MultiselectItemModel } from "../../";
+import { MultiselectItem as MultiselectItemModel, MultiselectProps } from "../../";
 
 /** Multiselect item props */
-interface MultiselectItemProps {
+type MultiselectItemProps = Pick<MultiselectProps, "checkboxConfig"> & {
     rootId: string;
 
     /** Item to present in multiselect */
@@ -30,12 +30,13 @@ interface MultiselectItemProps {
      * @param item Current item
      */
     onItemClick: (item: MultiselectItemModel) => void;
-}
+};
 
 /** Single item in multiselect component */
 const MultiselectItem = ({
     item, selected, rootId,
     onItemClick, onChange,
+    checkboxConfig,
 }: MultiselectItemProps): JSX.Element => {
     const onChecked = useCallback(
         (value?: boolean) => onChange(item, value ?? false),
@@ -80,6 +81,9 @@ const MultiselectItem = ({
         >
             <Checkbox
                 key={item.id + selected}
+
+                {...checkboxConfig}
+
                 defaultValue={selected}
                 onValueChange={onChecked}
             />
@@ -94,6 +98,7 @@ export default MultiselectItem;
 const MultiselectItemWithIcon = ({
     item, selected, rootId,
     onChange, onItemClick,
+    checkboxConfig,
 }: MultiselectItemProps): JSX.Element => {
     const icon = item.icon!;
 
@@ -127,6 +132,11 @@ const MultiselectItemWithIcon = ({
         [item, onItemClick]
     );
 
+    const checkboxClassName = getClassName([
+        checkboxConfig?.className,
+        "mb-1"
+    ]);
+
     if (icon.position === ElementPosition.Right) {
         return (
             <li
@@ -137,8 +147,12 @@ const MultiselectItemWithIcon = ({
             >
                 <Checkbox
                     key={item.id + selected}
+
+                    {...checkboxConfig}
+
                     defaultValue={selected}
                     onValueChange={onChecked}
+                    className={checkboxClassName}
                 />
                 {item.displayValue}
                 <Icon
@@ -160,8 +174,12 @@ const MultiselectItemWithIcon = ({
         >
             <Checkbox
                 key={item.id + selected}
+
+                {...checkboxConfig}
+
                 defaultValue={selected}
                 onValueChange={onChecked}
+                className={checkboxClassName}
             />
             <Icon
                 name={icon.name}

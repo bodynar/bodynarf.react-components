@@ -2,8 +2,10 @@ import { FC, useCallback, useId, useState, MouseEvent } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
+import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
+import Search from "@bbr/components/search";
 import InternalHint from "@bbr/components/primitives/internal/hint";
 
 import { MultiselectProps, MultiselectItem as MultiselectItemModel } from "../../types";
@@ -19,16 +21,17 @@ type MultiselectWithoutLabelProps = MultiselectProps & {
 const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
     items, onChange, onClear,
     hideOnOuterClick, listMaxHeight,
-    placeholder, noDataText = "No items found", selectionCaption = "{0} items selected",
+    placeholder,
+    noDataText = "No items found", selectionCaption = "{0} items selected", noDataByQuery = "No items found by specified search",
 
-    compact = false, disabled = false,
+    compact = false, disabled = false, searchable = true,
 
     validationState,
 
     className, title, data,
     hint,
 
-    id: propsId,
+    id: propsId, checkboxConfig,
 }) => {
     const generatedId = useId();
     const id = propsId ?? generatedId;
@@ -45,12 +48,11 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
     const onItemClick = useCallback(
         (item: MultiselectItemModel) => {
             const isItemSelected = selectedItems.includes(item.id);
-            // почему-то тут selectedItems старый
 
-            setSelectedItems(
+            setSelectedItems(x =>
                 isItemSelected
-                    ? selectedItems.filter(x => x !== item.id)
-                    : [...selectedItems, item.id]
+                    ? x.filter(x => x !== item.id)
+                    : [...x, item.id]
             );
 
             item.selected = isItemSelected;
@@ -59,8 +61,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
         }
         ,
         [onChange, selectedItems]
-    )
-        ;
+    );
 
     const onItemSelectChange = useCallback(
         (item: MultiselectItemModel, selected: boolean) => {
@@ -90,6 +91,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
             }
 
             if (target.classList.contains("bi-plus-lg")) {
+                setSelectedItems([]);
                 onClear?.();
             } else {
                 setListVisible(state => !state);
@@ -103,6 +105,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
     );
 
     const classNames: string = getClassName([
+        "bbr-multiselect",
         "bbr-dropdown",
         className,
         disabled ? "bbr-dropdown--disabled" : "",
@@ -140,24 +143,18 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
                     selectedItemsCount={selectedItemsCount}
                 />
                 <div className="dropdown-menu">
-                    {items.length > 0
-                        ? <ul className="dropdown-content" style={{ maxHeight: listMaxHeight }}>
-                            {items.map(item =>
-                                <MultiselectItem
-                                    key={item.id}
-
-                                    item={item}
-                                    rootId={id}
-                                    onItemClick={onItemClick}
-                                    onChange={onItemSelectChange}
-                                    selected={selectedItems.includes(item.id)}
-                                />
-                            )}
-                        </ul>
-                        : <span className="dropdown-content dropdown-item">
-                            {noDataText}
-                        </span>
-                    }
+                    <DropdownContent
+                        id={id}
+                        items={items}
+                        searchable={searchable}
+                        noDataText={noDataText}
+                        onItemClick={onItemClick}
+                        noDataByQuery={noDataByQuery}
+                        selectedItems={selectedItems}
+                        listMaxHeight={listMaxHeight}
+                        checkboxConfig={checkboxConfig}
+                        onItemSelectChange={onItemSelectChange}
+                    />
                 </div>
             </div>
             <InternalHint
@@ -169,3 +166,104 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
 };
 
 export default MultiselectWithoutLabel;
+
+type DropdownContentProps = Pick<MultiselectProps,
+    "items" | "noDataText" | "listMaxHeight" | "noDataByQuery" | "checkboxConfig" | "searchable"
+> & {
+    /** Component root container identifier */
+    id: string;
+
+    /** Array of selected items identifiers */
+    selectedItems: Array<string>;
+
+    /**
+     * Item click handler
+     * @param item Item, where event was raised
+     */
+    onItemClick: (item: MultiselectItemModel) => void;
+
+    /**
+     * Item selection change event handler
+     * @param item Changed item
+     * @param selected New select value
+     */
+    onItemSelectChange: (item: MultiselectItemModel, selected: boolean) => void;
+};
+
+const DropdownContent: FC<DropdownContentProps> = ({
+    noDataText, id, listMaxHeight, noDataByQuery,
+    items, selectedItems,
+
+    onItemClick, onItemSelectChange, searchable = true,
+    checkboxConfig,
+}) => {
+    const [search, setSearch] = useState("");
+
+    if (items.length === 0) {
+        return (
+            <div className="dropdown-content">
+                <span className="dropdown-item">
+                    {noDataText}
+                </span>
+            </div>
+        );
+    }
+
+    const filteredItems =
+        isNullOrEmpty(search)
+            ? items
+            : items.filter(({ displayValue }) => displayValue.toLocaleLowerCase().includes(search.toLocaleLowerCase()));
+
+    if (filteredItems.length === 0) {
+        return (
+            <div
+                className="dropdown-content"
+                style={{ maxHeight: listMaxHeight }}
+            >
+                <div className="mx-2 my-1">
+                    <Search
+                        caption="search"
+                        onSearch={setSearch}
+                        searchType="byTyping"
+                        size={ElementSize.Small}
+                    />
+                </div>
+                <span className="dropdown-item">
+                    {noDataByQuery}
+                </span>
+            </div>
+        );
+    }
+
+    return (
+        <div
+            className="dropdown-content"
+            style={{ maxHeight: listMaxHeight }}
+        >
+            {searchable &&
+                <div className="mx-2 my-1">
+                    <Search
+                        caption="search"
+                        onSearch={setSearch}
+                        searchType="byTyping"
+                        size={ElementSize.Small}
+                    />
+                </div>
+            }
+            <ul>
+                {filteredItems.map(item =>
+                    <MultiselectItem
+                        key={item.id}
+
+                        item={item}
+                        rootId={id}
+                        onItemClick={onItemClick}
+                        onChange={onItemSelectChange}
+                        checkboxConfig={checkboxConfig}
+                        selected={selectedItems.includes(item.id)}
+                    />
+                )}
+            </ul>
+        </div>
+    );
+};
