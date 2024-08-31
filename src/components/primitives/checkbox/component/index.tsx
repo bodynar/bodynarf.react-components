@@ -75,6 +75,10 @@ const CheckBox = ({
         );
     }
 
+    const labelClassName = isNullOrUndefined(label)
+        ? "is-empty"
+        : undefined;
+
     return (
         <div
             className="bbr-field bbr-input field mr-2"
@@ -94,6 +98,7 @@ const CheckBox = ({
             />
             <label
                 htmlFor={name}
+                className={labelClassName}
             >
                 {label?.caption}
             </label>

@@ -8,7 +8,7 @@
         top: 0.125rem;
     }
 
-    & + label {
+    & + label.is-empty {
         padding-left: 1rem;
         margin: 0 !important;
     }
