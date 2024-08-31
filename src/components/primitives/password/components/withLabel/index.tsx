@@ -72,10 +72,9 @@ const PasswordWithLabel = ({
                 />
                 {canShowPassword && !loading &&
                     <span
-                        className={`icon is-right ${elSizeClassName}`}
-                        onMouseEnter={onIconClick}
-                        onMouseLeave={onIconClick}
+                        onClick={onIconClick}
                         title="Show password"
+                        className={`icon is-right ${elSizeClassName}`}
                     >
                         <Icon
                             name={contentIsHidden ? "eye" : "eye-slash"}

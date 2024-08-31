@@ -79,7 +79,7 @@ function Password() {
                 captionIsCode
                 code={`<Password canShowPassword />`}
                 description="Allows user to see password after clicking on eye icon"
-                component={<PasswordComponent canShowPassword label={{ caption: "Can show passowrd", horizontal: true }} onValueChange={emptyFn} />}
+                component={<PasswordComponent canShowPassword label={{ caption: "Can show password", horizontal: true }} onValueChange={emptyFn} />}
             />
         </section>
     );
