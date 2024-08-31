@@ -31,7 +31,7 @@ const [item, setItem] = useState<SelectableItem | undefined>();
     value={item}             <--- if not set - selecting of item will not change visual placeholder of component
     placeholder="Default lookup"
 />`}</pre>}
-                description="By default component requires tab items and tab item change handler like on example"
+                description="By default component require props that are shown in example"
                 component={<DropdownComponent
                     value={item}
                     items={cities}
