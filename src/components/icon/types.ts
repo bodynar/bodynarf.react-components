@@ -12,4 +12,7 @@ export interface IconProps extends BaseElementProps {
 
     /** Icon size */
     size?: ElementSize;
+
+    /** Click handler */
+    onClick?: () => void;
 }

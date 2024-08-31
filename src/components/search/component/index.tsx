@@ -12,14 +12,14 @@ import { SearchProps } from "..";
 /** Search component */
 export default function Search({
     searchType, onSearch, caption,
-    name, defaultValue,
-    size,
-    isLoading = false, rounded = false, disabled,
+    name = generateGuid(), defaultValue = "",
+    size = ElementSize.Normal,
+    isLoading = false, rounded = false, disabled = false,
 
     className, title, data,
 }: SearchProps): JSX.Element {
-    const [elementName] = useState<string>(name ?? generateGuid());
-    const [searchValue, setSearchValue] = useState<string>(defaultValue ?? "");
+    const [elementName] = useState<string>(name);
+    const [searchValue, setSearchValue] = useState<string>(defaultValue);
 
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +38,7 @@ export default function Search({
         "bbr-search",
         "control",
         className,
-        `is-${(size ?? ElementSize.Normal)}`,
+        `is-${size}`,
         isLoading ? "is-loading" : "",
         searchType === "byButton" ? "is-expanded" : "",
     ]);
@@ -46,7 +46,7 @@ export default function Search({
     const inputClassName: string = getClassName([
         "input",
         "is-unselectable",
-        `is-${(size ?? ElementSize.Normal)}`,
+        `is-${size}`,
         rounded ? "is-rounded" : "",
     ]);
 
@@ -56,7 +56,9 @@ export default function Search({
 
     if (searchType === "byButton") {
         return (
-            <div className="field has-addons">
+            <div
+                className="field has-addons"
+            >
                 <div className={elClassName}>
                     <input
                         type="search"
@@ -84,22 +86,23 @@ export default function Search({
             </div>
         );
     }
-    else {
-        return (
-            <div className={elClassName}>
-                <input
-                    type="search"
-                    name={elementName}
-                    disabled={disabled}
-                    onChange={onChange}
-                    placeholder={caption}
-                    defaultValue={searchValue}
-                    className={inputClassName}
 
-                    title={title}
-                    {...dataAttributes}
-                />
-            </div>
-        );
-    }
+    return (
+        <div
+            className={elClassName}
+        >
+            <input
+                type="search"
+                name={elementName}
+                disabled={disabled}
+                onChange={onChange}
+                placeholder={caption}
+                defaultValue={searchValue}
+                className={inputClassName}
+
+                title={title}
+                {...dataAttributes}
+            />
+        </div>
+    );
 }

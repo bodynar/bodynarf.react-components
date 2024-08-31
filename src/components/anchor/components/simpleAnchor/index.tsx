@@ -2,14 +2,15 @@ import { isNullOrUndefined } from "@bodynarf/utils";
 
 import { mapDataAttributes } from "@bbr/utils";
 
-import { SimpleAnchorProps } from "../..";
+import { AnchorProps } from "../..";
 
 /** Simple anchor component, without icon */
 const SimpleAnchor = ({
-    href, className, onClick, caption, target,
+    href, className, caption, target,
+    onClick,
 
     title, data,
-}: SimpleAnchorProps): JSX.Element => {
+}: AnchorProps): JSX.Element => {
     const dataAttributes = isNullOrUndefined(data)
         ? undefined
         : mapDataAttributes(data!);

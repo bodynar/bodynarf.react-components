@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
@@ -16,11 +18,12 @@ const sizeToClassMap: Map<ElementSize, string> = new Map([
 /**
  * Icon component. Based on bootstrap icons
  */
-export default function Icon({
+const Icon: FC<IconProps> = ({
     name, size = ElementSize.Normal,
 
     className, title, data,
-}: IconProps): JSX.Element {
+    onClick,
+}) => {
     const classNames = getClassName([
         "bbr-icon",
         "bi",
@@ -38,7 +41,10 @@ export default function Icon({
             className={classNames}
 
             title={title}
+            onClick={onClick}
             {...dataAttributes}
-        ></i>
+        />
     );
-}
+};
+
+export default Icon;

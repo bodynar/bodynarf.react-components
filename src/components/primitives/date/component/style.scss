@@ -1,0 +1,11 @@
+.control.is-loading input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.control input[type="date"] {
+    &::-webkit-calendar-picker-indicator {
+        position: absolute;
+        right: 0.75rem;
+        cursor: pointer;
+    }
+}

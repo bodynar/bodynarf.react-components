@@ -2,32 +2,14 @@ import { useState } from "react";
 
 import { ValidationStatus } from "@bodynarf/react.components";
 import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";
+
 import DemoComponentTitleInfoMessage from "../../../shared/components/title";
 import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
 import ComponentUseCase from "../../../shared/components/useCase";
 
 /** Dropdown component demo */
 function Dropdown() {
-    const items: Array<SelectableItem> =
-        new Array(10).fill(0).map((_, x) => `${x + 1}`).map(x => ({
-            value: x,
-            displayValue: x,
-            id: x,
-            title: `${x} - title`
-        }));
-
-    const itemsWithIcons: Array<SelectableItem> = items.map(x => ({
-        ...x,
-        displayValue: "Some int value with data " + x.displayValue,
-        icon: {
-            name: +x.value === 10
-                ? "exclamation-square"
-                : `${+x.value}-square`,
-        }
-    }));
-
     const [item, setItem] = useState<SelectableItem | undefined>();
-    const [itemWithIcon, setItemWithIcon] = useState<SelectableItem | undefined>();
 
     return (
         <section>
@@ -44,15 +26,15 @@ const [item, setItem] = useState<SelectableItem | undefined>();
 
 <Dropdown
     hideOnOuterClick
-    items={items}
+    items={cities}
     onSelect={setItem}
     value={item}             <--- if not set - selecting of item will not change visual placeholder of component
     placeholder="Default lookup"
 />`}</pre>}
-                description="By default component requires tab items and tab item change handler like on example"
+                description="By default component require props that are shown in example"
                 component={<DropdownComponent
                     value={item}
-                    items={items}
+                    items={cities}
                     hideOnOuterClick
                     onSelect={setItem}
                     placeholder="Default lookup"
@@ -68,9 +50,9 @@ const [item, setItem] = useState<SelectableItem | undefined>();
                         deselectable
                         hideOnOuterClick
                         placeholder="Lookup"
-                        value={itemWithIcon}
-                        items={itemsWithIcons}
-                        onSelect={setItemWithIcon}
+                        value={item}
+                        items={cities}
+                        onSelect={setItem}
                     />}
             />
             <ComponentUseCase
@@ -78,35 +60,42 @@ const [item, setItem] = useState<SelectableItem | undefined>();
                 code="<Dropdown hideOnOuterClick={false} />"
                 captionIsCode
                 description="Clicks outside of dropdown will not force dropdown to close"
-                component={<DropdownComponent value={item} items={items} hideOnOuterClick={false} onSelect={setItem} placeholder="Lookup" />}
+                component={<DropdownComponent value={item} items={cities} hideOnOuterClick={false} onSelect={setItem} placeholder="Lookup" />}
             />
             <ComponentUseCase
                 caption="deselectable"
                 code="<Dropdown deselectable />"
                 captionIsCode
                 description="Dropdown can loose current selection via deselect button (appears only after selection)"
-                component={<DropdownComponent deselectable value={item} items={items} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
+                component={<DropdownComponent deselectable value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
+            />
+            <ComponentUseCase
+                caption="searchable"
+                code="<Dropdown searchable />"
+                captionIsCode
+                description="Dropdown with option to search through items"
+                component={<DropdownComponent searchable value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
             />
             <ComponentUseCase
                 caption="listMaxHeight"
                 code={`<Dropdown listMaxHeight="3rem" />`}
                 captionIsCode
                 description="Dropdown list height can be restricted"
-                component={<DropdownComponent listMaxHeight="3rem" value={item} items={items} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
+                component={<DropdownComponent listMaxHeight="3rem" value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
             />
             <ComponentUseCase
                 caption="compact"
                 code={`<Dropdown compact />`}
                 captionIsCode
                 description="Dropdown will take only that width that required by its content"
-                component={<DropdownComponent compact value={item} items={items} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
+                component={<DropdownComponent compact value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
             />
             <ComponentUseCase
                 caption="disabled"
                 code={`<Dropdown disabled />`}
                 captionIsCode
                 description="Dropdown will be in disabled state"
-                component={<DropdownComponent disabled value={item} items={items} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
+                component={<DropdownComponent disabled value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
             />
             <ComponentUseCase
                 caption="label"
@@ -117,17 +106,33 @@ const [item, setItem] = useState<SelectableItem | undefined>();
                     {`\n`}
                     Cannot be used with <code>compact</code> mode
                 </>}
-                component={<DropdownComponent label={{ caption: "Dropdown label", horizontal: true }} value={item} items={items} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
+                component={<DropdownComponent label={{ caption: "Dropdown label", horizontal: true }} value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
             />
             <ComponentUseCase
                 caption="validationState"
                 code={`<DropdownComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} />`}
                 captionIsCode
                 description="Dropdown supports validation states"
-                component={<DropdownComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} value={item} items={items} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
+                component={<DropdownComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
             />
         </section>
     );
 }
 
 export default Dropdown;
+
+const cities = [
+    "Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City", "Cairo", "Mumbai", "Beijing", "Dhaka", "Osaka",
+    "New York", "Karachi", "Buenos Aires", "Chongqing", "Istanbul", "Kolkata", "Manila", "Lagos", "Rio de Janeiro",
+    "Tianjin", "Kinshasa", "Guangzhou", "Los Angeles", "Moscow", "Shenzhen", "Lahore", "Bangalore", "Paris", "Bogotá",
+    "Jakarta", "Chennai", "Lima", "Bangkok", "Seoul", "Nagoya", "Hyderabad", "London", "Tehran", "Chicago", "Chengdu",
+    "Nanjing", "Wuhan", "Ho Chi Minh City", "Luanda", "Ahmedabad", "Kuala Lumpur", "Xi'an", "Hong Kong", "Dongguan",
+    "Hangzhou", "Foshan", "Shenyang", "Riyadh", "Baghdad", "Santiago", "Surat", "Madrid", "Suzhou", "Pune", "Harbin",
+    "Houston", "Dallas", "Toronto", "Dar es Salaam", "Miami", "Belo Horizonte", "Singapore", "Philadelphia", "Atlanta",
+    "Fukuoka", "Khartoum", "Barcelona", "Johannesburg", "Saint Petersburg", "Qingdao", "Dalian", "Washington, D.C.", "Yangon", "Alexandria", "Jinan", "Guadalajara"
+].map((name, index) => ({
+    value: name,
+    displayValue: `[${index}] ${name}`,
+    id: name,
+    title: `City with name ${name}`
+}));;

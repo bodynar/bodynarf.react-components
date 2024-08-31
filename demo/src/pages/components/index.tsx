@@ -10,6 +10,7 @@ import Dropdown from "./dropdown";
 import Tabs from "./tabs";
 import Search from "./search";
 import Paginator from "./paginator";
+import Multiselect from "./multiselect";
 
 export const components: RouteItem = {
     path: "/components",
@@ -46,6 +47,11 @@ export const components: RouteItem = {
             path: "/components/dropdown",
             caption: "Dropdown",
             component: <Dropdown />
+        },
+        {
+            path: "/components/multiselect",
+            caption: "Multiselect",
+            component: <Multiselect />
         },
         {
             path: "/components/tabs",

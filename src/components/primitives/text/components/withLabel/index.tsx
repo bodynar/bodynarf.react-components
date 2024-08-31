@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined, } from "@bodynarf/utils";
+import { generateGuid, getClassName, isNullOrUndefined, } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -12,8 +12,8 @@ import { TextProps } from "../..";
 /** Textual input with describing label */
 const TextWithLabel = ({
     onValueChange, readonly, disabled, defaultValue, validationState,
-    name,
-    size, style,
+    name = generateGuid(),
+    size = ElementSize.Normal, style,
     rounded = false, loading = false,
     label, placeholder,
     onBlur,
@@ -26,12 +26,9 @@ const TextWithLabel = ({
         [onValueChange]
     );
 
-    const id = name ?? generateGuid();
-    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
-
     const elClassName = getClassName([
         className,
-        elSizeClassName,
+        size === ElementSize.Normal ? "" : `is-${size}`,
         rounded ? "is-rounded" : "",
         getStyleClassName(style, validationState),
         "input",
@@ -48,16 +45,16 @@ const TextWithLabel = ({
 
     return (
         <ComponentWithLabel
-            id={id}
+            id={name}
+            size={size}
             label={label!}
-            size={getValueOrDefault(size, ElementSize.Normal)}
         >
             <div className={inputContainerClassName}>
                 <input
                     type="text"
 
-                    id={id}
-                    name={id}
+                    id={name}
+                    name={name}
                     onBlur={onBlur}
                     readOnly={readonly}
                     disabled={disabled}

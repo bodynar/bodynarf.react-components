@@ -24,8 +24,8 @@ export default function Button(props: ButtonProps): JSX.Element {
     } = props;
 
     const className: string = getClassName([
-        "button",
         "bbr-button",
+        "button",
         props.className,
         `is-${props.type}`,
         light ? "is-light" : "",
@@ -40,9 +40,8 @@ export default function Button(props: ButtonProps): JSX.Element {
         return (
             <ButtonWithIcon
                 {...props}
-                className={className}
-                onClick={props.onClick}
                 icon={props.icon!}
+                className={className}
             />
         );
     } else {
@@ -50,7 +49,6 @@ export default function Button(props: ButtonProps): JSX.Element {
             <SimpleButton
                 {...props}
                 className={className}
-                onClick={props.onClick}
             />
         );
     }

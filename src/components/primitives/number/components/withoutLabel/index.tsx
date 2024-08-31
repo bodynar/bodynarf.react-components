@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
+import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -10,9 +10,11 @@ import { NumberProps } from "../..";
 
 /** Number component without label */
 const NumberWithoutLabel = ({
-    onValueChange, readonly, disabled, defaultValue, validationState,
-    name,
-    size, style, rounded = false, loading = false,
+    onValueChange, defaultValue, validationState,
+    name = generateGuid(),
+    size, style,
+    readonly = false, disabled = false,
+    rounded = false, loading = false,
     placeholder,
     onBlur,
     step = 1,
@@ -27,7 +29,7 @@ const NumberWithoutLabel = ({
 
     const elClassName = getClassName([
         className,
-        "is-{0}".format(getValueOrDefault(size, ElementSize.Normal)),
+        size === ElementSize.Normal ? "" : `is-${size}`,
         rounded ? "is-rounded" : "",
         getStyleClassName(style, validationState),
         "input",
@@ -39,20 +41,20 @@ const NumberWithoutLabel = ({
         loading ? "is-loading" : "",
     ]);
 
-    const id = name ?? generateGuid();
-
     const dataAttributes = isNullOrUndefined(data)
         ? undefined
         : mapDataAttributes(data!);
 
     return (
-        <>
+        <div
+            className="bbr-field field"
+        >
             <div className={containerClassName}>
                 <input
                     type="number"
 
-                    id={id}
-                    name={id}
+                    id={name}
+                    name={name}
                     step={step}
                     onBlur={onBlur}
                     onChange={onChange}
@@ -70,7 +72,7 @@ const NumberWithoutLabel = ({
                 hint={hint}
                 validationState={validationState}
             />
-        </>
+        </div>
     );
 };
 

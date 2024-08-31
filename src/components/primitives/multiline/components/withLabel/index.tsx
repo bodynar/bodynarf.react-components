@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined } from "@bodynarf/utils";
+import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -11,11 +11,13 @@ import { MultilineProps } from "../..";
 
 /** Multiline textual input component with describing label */
 const MultilineWithLabel = ({
-    defaultValue, onValueChange, validationState, readonly, disabled,
-    name,
-    size, style, loading = false,
+    defaultValue, onValueChange, validationState,
+    name = generateGuid(),
+    size = ElementSize.Normal, style,
     label, placeholder,
-    fixed = false, rows,
+    readonly = false, disabled = false,
+    loading = false, fixed = false,
+    rows,
     onBlur,
 
     className, title, data,
@@ -26,12 +28,9 @@ const MultilineWithLabel = ({
         [onValueChange]
     );
 
-    const id = name ?? generateGuid();
-    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
-
     const elClassName = getClassName([
         className,
-        elSizeClassName,
+        size === ElementSize.Normal ? "" : `is-${size}`,
         getStyleClassName(style, validationState),
         "textarea",
         fixed ? "has-fixed-size" : "",
@@ -48,14 +47,14 @@ const MultilineWithLabel = ({
 
     return (
         <ComponentWithLabel
-            id={id}
+            id={name}
+            size={size}
             label={label!}
-            size={getValueOrDefault(size, ElementSize.Normal)}
         >
             <div className={inputContainerClassName}>
                 <textarea
-                    id={id}
-                    name={id}
+                    id={name}
+                    name={name}
                     rows={rows}
                     onBlur={onBlur}
                     readOnly={readonly}

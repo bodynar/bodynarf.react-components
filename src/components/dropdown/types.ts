@@ -70,4 +70,15 @@ export interface DropdownProps extends BaseElementProps {
      * (!) Hint will be overridden by the validation state, if specified
      */
     hint?: HintConfiguration;
+
+    /** Caption for dropdown list when there's no data to display */
+    noDataText?: string;
+
+    /** Is search through items enabled */
+    searchable?: boolean;
+
+    /**
+     * Text which would be displayed when search query applied and no items found
+     */
+    noDataByQuery?: string;
 }

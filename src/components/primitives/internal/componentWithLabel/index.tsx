@@ -19,8 +19,7 @@ export interface ComponentWithLabelProps {
 
 /** Form input component with describing label */
 const ComponentWithLabel = ({
-    label, id,
-    size,
+    label, id, size,
     children,
 }: ComponentWithLabelProps): JSX.Element => {
     const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
@@ -44,7 +43,9 @@ const ComponentWithLabel = ({
         ]);
 
         return (
-            <div className="bbr-input field is-horizontal">
+            <div
+                className="bbr-field bbr-input field is-horizontal"
+            >
                 <div className={labelContainerClassName}>
                     <label
                         className={labelClassName}
@@ -63,7 +64,9 @@ const ComponentWithLabel = ({
     }
 
     return (
-        <div className="bbr-input field">
+        <div
+            className="bbr-field bbr-input field"
+        >
             <label
                 className={labelClassName}
                 htmlFor={id}

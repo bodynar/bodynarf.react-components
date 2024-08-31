@@ -1,0 +1,29 @@
+.bbr-dropdown__search {
+    input {
+        border-left: 0;
+        border-right: 0;
+        border-radius: 0;
+        box-shadow: none !important;
+
+        background: transparent;
+
+        &::-webkit-input-placeholder {
+            color: gray;
+            font-style: italic;
+        }
+
+        &:focus, &:hover, &:active {
+            border-color: inherit !important;
+        }
+    }
+
+    &:hover {
+        input {
+            border-color: inherit !important;
+        }
+    }
+}
+
+.bbr-dropdown.is-active .bbr-dropdown__search {
+    background: rgba(0, 0, 0, 0.05);
+}

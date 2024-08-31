@@ -11,11 +11,13 @@ import { CheckBoxProps } from "../..";
 
 /** Boolean input component */
 const CheckBox = ({
-    label,
     onValueChange, defaultValue,
-    name, disabled,
-    size, style,
-    rounded = false, block = false, withoutBorder = false, hasBackgroundColor = false, fixBackgroundColor = false,
+    label,
+    name = generateGuid(),
+    size = ElementSize.Normal, style,
+    disabled = false,
+    rounded = false, block = false,
+    withoutBorder = false, hasBackgroundColor = false, fixBackgroundColor = false,
     isFormLabel = false,
 
     className, title, data,
@@ -25,15 +27,13 @@ const CheckBox = ({
         [onValueChange]
     );
 
-    const id = name ?? generateGuid();
-
     const elClassName = getClassName([
         "is-checkradio",
         "m-check-radio",
         className,
         hasBackgroundColor ? "has-background-color" : "",
         fixBackgroundColor && hasBackgroundColor ? "m-has-background-color" : "",
-        isNullOrUndefined(size) ? "" : size === "normal" ? "" : `is-${size}`,
+        size === ElementSize.Normal ? "" : `is-${size}`,
         rounded ? "is-circle" : "",
         isNullOrUndefined(style) ? "" : `is-${style}`,
         block ? "is-block" : "",
@@ -47,7 +47,7 @@ const CheckBox = ({
     if (!isNullOrUndefined(label) && isFormLabel) {
         return (
             <ComponentWithLabel
-                id={id}
+                id={name}
                 label={{
                     ...label!,
                     horizontalContainerClassName: getClassName([label!.horizontalContainerClassName, "p-0"]),
@@ -57,8 +57,8 @@ const CheckBox = ({
                 <input
                     type="checkbox"
 
-                    id={id}
-                    name={id}
+                    id={name}
+                    name={name}
                     disabled={disabled}
                     onChange={onChecked}
                     className={elClassName}
@@ -68,20 +68,27 @@ const CheckBox = ({
                     {...dataAttributes}
                 />
                 <label
-                    htmlFor={id}
+                    className="is-empty"
+                    htmlFor={name}
                 >
                 </label>
             </ComponentWithLabel>
         );
     }
 
+    const labelClassName = isNullOrUndefined(label)
+        ? "is-empty"
+        : undefined;
+
     return (
-        <div className="bbr-input field">
+        <div
+            className="bbr-field bbr-input field mr-2"
+        >
             <input
                 type="checkbox"
 
-                id={id}
-                name={id}
+                id={name}
+                name={name}
                 disabled={disabled}
                 onChange={onChecked}
                 className={elClassName}
@@ -91,7 +98,8 @@ const CheckBox = ({
                 {...dataAttributes}
             />
             <label
-                htmlFor={id}
+                htmlFor={name}
+                className={labelClassName}
             >
                 {label?.caption}
             </label>

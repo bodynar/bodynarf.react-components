@@ -1,16 +1,12 @@
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { ElementPosition, ElementSize, HintConfiguration, ValidationState, ValidationStatus } from "@bbr/types";
+import { BaseInputElementProps, ElementPosition, ElementSize, HintConfiguration, ValidationStatus } from "@bbr/types";
 import Icon from "@bbr/components/icon";
 
-/** Props of `InternalHint` */
-interface HintProps {
-    /** @inheritdoc BaseInputElementProps.validationState */
-    validationState?: ValidationState;
+import "./style.scss";
 
-    /** @inheritdoc BaseInputElementProps.hint */
-    hint?: HintConfiguration;
-}
+/** Props of `InternalHint` */
+type HintProps = Pick<BaseInputElementProps<any>, "validationState" | "hint">;
 
 /** Hint component for internal use (as form input elements hints) */
 const InternalHint = ({

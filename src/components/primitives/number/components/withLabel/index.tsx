@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, getValueOrDefault, isNullOrUndefined, isStringEmpty } from "@bodynarf/utils";
+import { generateGuid, getClassName, isNullOrUndefined, isStringEmpty } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -11,10 +11,11 @@ import { NumberProps } from "../..";
 
 /** Number component with label */
 const NumberWithLabel = ({
-    onValueChange, readonly, disabled, defaultValue, validationState,
-    name,
-    size, style, rounded = false, loading = false,
+    onValueChange, defaultValue, validationState,
+    name = generateGuid(),
     label, placeholder,
+    size = ElementSize.Normal, style, rounded = false, loading = false,
+    readonly = false, disabled = false,
     onBlur,
     step = 1,
 
@@ -27,12 +28,9 @@ const NumberWithLabel = ({
         [onValueChange]
     );
 
-    const id = name ?? generateGuid();
-    const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
-
     const elClassName = getClassName([
         className,
-        elSizeClassName,
+        size === ElementSize.Normal ? "" : `is-${size}`,
         rounded ? "is-rounded" : "",
         getStyleClassName(style, validationState),
         "input",
@@ -49,16 +47,16 @@ const NumberWithLabel = ({
 
     return (
         <ComponentWithLabel
-            id={id}
+            id={name}
+            size={size}
             label={label!}
-            size={getValueOrDefault(size, ElementSize.Normal)}
         >
             <div className={inputContainerClassName}>
                 <input
                     type="number"
 
-                    id={id}
-                    name={id}
+                    id={name}
+                    name={name}
                     step={step}
                     onBlur={onBlur}
                     onChange={onChange}

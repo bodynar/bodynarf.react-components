@@ -1,7 +1,5 @@
 import { isNullOrUndefined } from "@bodynarf/utils";
 
-import "../../../../common.scss";
-
 import { MultilineProps } from "..";
 import MultilineWithoutLabel from "../components/withoutLabel";
 import MultilineWithLabel from "../components/withLabel";
