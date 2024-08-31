@@ -77,6 +77,36 @@ const [item, setItem] = useState<SelectableItem | undefined>();
                 component={<DropdownComponent searchable value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
             />
             <ComponentUseCase
+                caption="noDataText"
+                code={`<Dropdown noDataText="NOTHING HERE" />`}
+                captionIsCode
+                description="Caption for message when no records provided. Default is 'No items found'"
+                component={<DropdownComponent
+                    noDataText="NOTHING HERE"
+
+                    value={item}
+                    items={cities}
+                    hideOnOuterClick
+                    onSelect={setItem}
+                    placeholder="Default lookup"
+                />}
+            />
+            <ComponentUseCase
+                caption="noDataByQuery"
+                code={`<Dropdown noDataByQuery="no hay entradas para el filtro" />`}
+                captionIsCode
+                description="Caption for message when no records found by current can be customized. Default is 'No items found by specified search'. Try to search text 'some_random_not_existed'"
+                component={<DropdownComponent
+                    noDataByQuery="no hay entradas para el filtro"
+
+                    value={item}
+                    items={cities}
+                    hideOnOuterClick
+                    onSelect={setItem}
+                    placeholder="Default lookup"
+                />}
+            />
+            <ComponentUseCase
                 caption="listMaxHeight"
                 code={`<Dropdown listMaxHeight="3rem" />`}
                 captionIsCode
