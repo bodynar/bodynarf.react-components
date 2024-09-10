@@ -1,9 +1,12 @@
-import { getClassName, getValueOrDefault } from "@bodynarf/utils";
+import { FC } from "react";
+
+import { getClassName, getValueOrDefault, isNullish } from "@bodynarf/utils";
 
 import { ElementSize, LabelConfiguration } from "@bbr/types";
+import { mapDataAttributes } from "@bbr/utils";
 
 /** Form input component with label props */
-export interface ComponentWithLabelProps {
+export type ComponentWithLabelProps = {
     /** Label configuration */
     label: LabelConfiguration;
 
@@ -15,31 +18,35 @@ export interface ComponentWithLabelProps {
 
     /** Node element with input element */
     children: React.ReactNode;
-}
+};
 
 /** Form input component with describing label */
-const ComponentWithLabel = ({
+const ComponentWithLabel: FC<ComponentWithLabelProps> = ({
     label, id, size,
     children,
-}: ComponentWithLabelProps): JSX.Element => {
+}) => {
     const elSizeClassName = "is-{0}".format(getValueOrDefault(size, ElementSize.Normal));
 
     const labelClassName = getClassName([
         "label",
         !label.horizontal ? elSizeClassName : "",
-        label.className
+        label.className,
     ]);
+
+    const dataAttributes = isNullish(label.data)
+        ? undefined
+        : mapDataAttributes(label.data);
 
     if (label.horizontal) {
         const labelContainerClassName = getClassName([
             "field-label",
             elSizeClassName,
-            label!.horizontalContainerClassName
+            label.horizontalContainerClassName
         ]);
 
         const fieldContainerClassName = getClassName([
             "field-body",
-            label!.horizontalFieldContainerClassName
+            label.horizontalFieldContainerClassName
         ]);
 
         return (
@@ -48,10 +55,13 @@ const ComponentWithLabel = ({
             >
                 <div className={labelContainerClassName}>
                     <label
-                        className={labelClassName}
                         htmlFor={id}
+                        className={labelClassName}
+
+                        title={label.title}
+                        {...dataAttributes}
                     >
-                        {label!.caption}
+                        {label.caption}
                     </label>
                 </div>
                 <div className={fieldContainerClassName}>
@@ -68,10 +78,13 @@ const ComponentWithLabel = ({
             className="bbr-field bbr-input field"
         >
             <label
-                className={labelClassName}
                 htmlFor={id}
+                className={labelClassName}
+
+                title={label.title}
+                {...dataAttributes}
             >
-                {label!.caption}
+                {label.caption}
             </label>
 
             {children}
