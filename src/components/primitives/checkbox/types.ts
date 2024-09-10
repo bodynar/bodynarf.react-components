@@ -2,9 +2,9 @@ import { BaseInputElementProps } from "@bbr/types";
 
 /** Checkbox component props type */
 export interface CheckBoxProps extends Omit<BaseInputElementProps<boolean>,
-    "readonly" | "validationState"
+    | "readonly" | "validationState"
     | "loading" | "placeholder"
-    | "hint"
+    | "hint" | "title"
 > {
     /** Is full colored checkbox */
     block?: boolean;
@@ -12,7 +12,7 @@ export interface CheckBoxProps extends Omit<BaseInputElementProps<boolean>,
     /** Remove the checkbox border */
     withoutBorder?: boolean;
 
-    /** 
+    /**
      * Checkbox has background color.
      * Only works if style is set
     */

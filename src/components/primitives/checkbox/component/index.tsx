@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { generateGuid, getClassName, isNullish, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
@@ -20,7 +20,7 @@ const CheckBox = ({
     withoutBorder = false, hasBackgroundColor = false, fixBackgroundColor = false,
     isFormLabel = false,
 
-    className, title, data,
+    className, data,
 }: CheckBoxProps): JSX.Element => {
     const onChecked = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.checked),
@@ -40,17 +40,17 @@ const CheckBox = ({
         withoutBorder ? "has-no-border" : "",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
-    if (!isNullOrUndefined(label) && isFormLabel) {
+    if (!isNullish(label) && isFormLabel) {
         return (
             <ComponentWithLabel
                 id={name}
                 label={{
-                    ...label!,
-                    horizontalContainerClassName: getClassName([label!.horizontalContainerClassName, "p-0"]),
+                    ...label,
+                    horizontalContainerClassName: getClassName([label.horizontalContainerClassName, "p-0"]),
                 }}
                 size={ElementSize.Normal}
             >
@@ -64,7 +64,6 @@ const CheckBox = ({
                     className={elClassName}
                     defaultChecked={defaultValue}
 
-                    title={title}
                     {...dataAttributes}
                 />
                 <label
@@ -80,6 +79,10 @@ const CheckBox = ({
         ? "is-empty"
         : undefined;
 
+    const labelDataAttributes = isNullish(label?.data)
+        ? undefined
+        : mapDataAttributes(label?.data);
+
     return (
         <div
             className="bbr-field bbr-input field mr-2"
@@ -94,12 +97,14 @@ const CheckBox = ({
                 className={elClassName}
                 defaultChecked={defaultValue}
 
-                title={title}
                 {...dataAttributes}
             />
             <label
                 htmlFor={name}
                 className={labelClassName}
+
+                title={label?.title}
+                {...labelDataAttributes}
             >
                 {label?.caption}
             </label>
