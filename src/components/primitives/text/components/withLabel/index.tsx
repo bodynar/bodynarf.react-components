@@ -14,7 +14,7 @@ const TextWithLabel = ({
     onValueChange, readonly, disabled, defaultValue, validationState,
     name = generateGuid(),
     size = ElementSize.Normal, style,
-    rounded = false, loading = false,
+    rounded = false, loading = false, autoFocus = false,
     label, placeholder,
     onBlur,
 
@@ -62,6 +62,7 @@ const TextWithLabel = ({
                     className={elClassName}
                     placeholder={placeholder}
                     defaultValue={defaultValue}
+                    autoFocus={autoFocus}
 
                     title={title}
                     {...dataAttributes}

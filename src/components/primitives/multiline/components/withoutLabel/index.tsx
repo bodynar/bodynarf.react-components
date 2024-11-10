@@ -14,7 +14,7 @@ const MultilineWithoutLabel = ({
     name = generateGuid(), placeholder,
     onBlur,
     size = ElementSize.Normal, style, loading = false,
-    fixed = false,
+    fixed = false, autoFocus = false,
     rows,
 
     className, title, data,
@@ -54,6 +54,7 @@ const MultilineWithoutLabel = ({
                     rows={rows}
                     onBlur={onBlur}
                     onChange={onChange}
+                    autoFocus={autoFocus}
                     className={elClassName}
                     placeholder={placeholder}
                     defaultValue={defaultValue}

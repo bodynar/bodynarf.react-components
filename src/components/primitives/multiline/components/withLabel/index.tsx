@@ -16,7 +16,7 @@ const MultilineWithLabel = ({
     size = ElementSize.Normal, style,
     label, placeholder,
     readonly = false, disabled = false,
-    loading = false, fixed = false,
+    loading = false, fixed = false, autoFocus = false,
     rows,
     onBlur,
 
@@ -60,6 +60,7 @@ const MultilineWithLabel = ({
                     readOnly={readonly}
                     disabled={disabled}
                     onChange={onChange}
+                    autoFocus={autoFocus}
                     className={elClassName}
                     placeholder={placeholder}
                     defaultValue={defaultValue}

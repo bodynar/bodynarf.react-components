@@ -13,7 +13,7 @@ const NumberWithoutLabel = ({
     onValueChange, defaultValue, validationState,
     name = generateGuid(),
     size, style,
-    readonly = false, disabled = false,
+    readonly = false, disabled = false, autoFocus = false,
     rounded = false, loading = false,
     placeholder,
     onBlur,
@@ -60,6 +60,7 @@ const NumberWithoutLabel = ({
                     onChange={onChange}
                     readOnly={readonly}
                     disabled={disabled}
+                    autoFocus={autoFocus}
                     className={elClassName}
                     placeholder={placeholder}
                     defaultValue={defaultValue}

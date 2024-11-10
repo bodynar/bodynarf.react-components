@@ -41,10 +41,17 @@ export interface BaseInputElementProps<TValue> extends BaseElementProps {
     /**
      * Field hint configuration.
      * Provides additional information to user to help fill the field
-     * 
+     *
      * (!) Hint will be overridden by the validation state, if specified
      */
     hint?: HintConfiguration;
+
+    /**
+     * Focus on component after render.
+     *
+     * !NOTE! Only 1 element on page can have autofocus flag
+     */
+    autoFocus?: boolean;
 }
 
 

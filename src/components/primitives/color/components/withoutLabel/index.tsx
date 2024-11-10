@@ -12,6 +12,7 @@ function ColorPickerWithoutLabel({
     defaultValue, onValueChange,
     validationState,
     disabled = false, rounded = false, size,
+    autoFocus = false,
 
     className, title, data,
     hint,
@@ -47,6 +48,7 @@ function ColorPickerWithoutLabel({
                 id={name}
                 value={value}
                 disabled={disabled}
+                autoFocus={autoFocus}
                 previewConfig={preview}
                 onValueChange={onChange}
                 defaultValue={defaultColor}

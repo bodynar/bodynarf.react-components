@@ -81,7 +81,7 @@ const CheckBox = ({
 
     const labelDataAttributes = isNullish(label?.data)
         ? undefined
-        : mapDataAttributes(label?.data);
+        : mapDataAttributes(label!.data);
 
     return (
         <div

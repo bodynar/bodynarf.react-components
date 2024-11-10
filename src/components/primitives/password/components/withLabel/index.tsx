@@ -14,7 +14,7 @@ const PasswordWithLabel = ({
     onValueChange, validationState,
     name = generateGuid(),
     size = ElementSize.Normal, style,
-    rounded = false, loading = false,
+    rounded = false, loading = false, autoFocus = false,
     disabled = false, canShowPassword = false,
     label, placeholder,
 
@@ -66,6 +66,7 @@ const PasswordWithLabel = ({
                     onChange={onChange}
                     className={elClassName}
                     placeholder={placeholder}
+                    autoFocus={autoFocus}
 
                     title={title}
                     {...dataAttributes}

@@ -5,6 +5,7 @@ export interface CheckBoxProps extends Omit<BaseInputElementProps<boolean>,
     | "readonly" | "validationState"
     | "loading" | "placeholder"
     | "hint" | "title"
+    | "autofocus"
 > {
     /** Is full colored checkbox */
     block?: boolean;

@@ -15,6 +15,7 @@ export default function Search({
     name = generateGuid(), defaultValue = "",
     size = ElementSize.Normal,
     isLoading = false, rounded = false, disabled = false,
+    autoFocus = false,
 
     className, title, data,
 }: SearchProps): JSX.Element {
@@ -66,6 +67,7 @@ export default function Search({
                         disabled={disabled}
                         onChange={onChange}
                         placeholder={caption}
+                        autoFocus={autoFocus}
                         defaultValue={searchValue}
                         className={inputClassName}
 
@@ -97,6 +99,7 @@ export default function Search({
                 disabled={disabled}
                 onChange={onChange}
                 placeholder={caption}
+                autoFocus={autoFocus}
                 defaultValue={searchValue}
                 className={inputClassName}
 

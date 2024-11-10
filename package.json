@@ -28,7 +28,8 @@
         "build_transfer": "npm run build && npm run transfer",
         "prepublish": "npm run build_transfer && cd dist && npm pack",
         "publish_pkg": "npm run build_transfer && cd dist && npm publish --access=public",
-        "lint": "npx eslint src/**/*.ts src/**/*.tsx"
+        "lint": "npx eslint src/**/*.ts src/**/*.tsx",
+        "prep_dev": "copyfiles src/**/*.* demo/src/components"
     },
     "devDependencies": {
         "@types/react": "^18.0.11",
