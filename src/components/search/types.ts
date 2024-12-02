@@ -18,9 +18,6 @@ export interface SearchProps extends BaseElementProps {
     /** Initial search value */
     defaultValue?: string;
 
-    /** Control name. If empty - will be replaced by random guid */
-    name?: string; // TODO: remove
-
     /** Size of search bar */
     size?: ElementSize;
 
