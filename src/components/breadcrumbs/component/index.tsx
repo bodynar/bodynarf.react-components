@@ -79,7 +79,7 @@ const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
                 href={item.path}
                 aria-current={item.active ? "page" : undefined}
             >
-                {item.title}
+                {item.caption}
             </a>
         );
     }
@@ -90,7 +90,7 @@ const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
                 href={item.path}
                 aria-current={item.active ? "page" : undefined}
             >
-                {item.title}
+                {item.caption}
                 <Icon {...icon!} />
             </a>
         );
@@ -103,7 +103,7 @@ const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
         >
 
             <Icon {...icon!} />
-            {item.title}
+            {item.caption}
         </a>
     );
 };

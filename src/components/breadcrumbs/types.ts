@@ -2,8 +2,14 @@ import { BaseElementProps, ElementIcon, ElementPosition, ElementSize } from "@bb
 
 /** Breadcrumb item */
 export interface BreadCrumb {
-    /** Displayed text */
-    title: string; // TODO: rename to caption|text & use title as html title
+    /**
+     * Displayed text
+     * @deprecated Use `caption` instead
+     */
+    title?: string;
+
+    /** Displayable caption */
+    caption: string;
 
     /** Page address */
     path: string;
@@ -27,7 +33,7 @@ export interface BreadcrumbsProps extends BaseElementProps {
     /**
      * Function that generates each element
      * @example
-     * elementGenerator={breadCrumb => 
+     * elementGenerator={breadCrumb =>
      *  <div>
      *     {breadCrumb.icon &&
      *         <span>
