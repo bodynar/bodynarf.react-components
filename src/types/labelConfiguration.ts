@@ -1,5 +1,7 @@
+import { BaseElementProps } from ".";
+
 /** Element label configuration */
-export interface LabelConfiguration {
+export type LabelConfiguration = Pick<BaseElementProps, "title" | "data"> & {
     /** Label textual content to describe input requirements */
     caption: string;
 
@@ -14,4 +16,4 @@ export interface LabelConfiguration {
 
     /** Class name for input parent container in horizontal mode */
     horizontalFieldContainerClassName?: string;
-}
+};

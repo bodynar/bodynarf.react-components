@@ -51,8 +51,8 @@ const [item, setItem] = useState<SelectableItem | undefined>();
                         hideOnOuterClick
                         placeholder="Lookup"
                         value={item}
-                        items={cities}
                         onSelect={setItem}
+                        items={itemsWithIcons}
                     />}
             />
             <ComponentUseCase
@@ -75,6 +75,36 @@ const [item, setItem] = useState<SelectableItem | undefined>();
                 captionIsCode
                 description="Dropdown with option to search through items"
                 component={<DropdownComponent searchable value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
+            />
+            <ComponentUseCase
+                caption="noDataText"
+                code={`<Dropdown items={[]} noDataText="NOTHING HERE" />`}
+                captionIsCode
+                description="Caption for message when no records provided. Default is 'No items found'"
+                component={<DropdownComponent
+                    noDataText="NOTHING HERE"
+
+                    items={[]}
+                    hideOnOuterClick
+                    onSelect={setItem}
+                    placeholder="Default lookup"
+                />}
+            />
+            <ComponentUseCase
+                caption="noDataByQuery"
+                code={`<Dropdown searchable noDataByQuery="no hay entradas para el filtro" />`}
+                captionIsCode
+                description="Caption for message when no records found by current can be customized. Default is 'No items found by specified search'. Try to search text 'some_random_not_existed'"
+                component={<DropdownComponent
+                    searchable
+                    noDataByQuery="no hay entradas para el filtro"
+
+                    value={item}
+                    items={cities}
+                    hideOnOuterClick
+                    onSelect={setItem}
+                    placeholder="Default lookup"
+                />}
             />
             <ComponentUseCase
                 caption="listMaxHeight"
@@ -135,4 +165,14 @@ const cities = [
     displayValue: `[${index}] ${name}`,
     id: name,
     title: `City with name ${name}`
-}));;
+}));
+
+const itemsWithIcons = cities.map((x, index) => ({
+    ...x,
+    displayValue: x.value,
+    icon: {
+        name: ++index === 10
+            ? "exclamation-square"
+            : `${++index % 10}-square`,
+    }
+}));

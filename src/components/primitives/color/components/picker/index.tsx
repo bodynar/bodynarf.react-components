@@ -35,7 +35,7 @@ export interface ColorPickerControlProps extends Omit<
 const ColorPickerControl = ({
     value, defaultValue, onValueChange,
     elementClassName,
-    disabled = false,
+    disabled = false, autoFocus = false,
     previewConfig, size,
     id, title, data,
 
@@ -68,9 +68,10 @@ const ColorPickerControl = ({
                     id={id}
                     name={id}
                     disabled={disabled}
-                    className={elementClassName}
+                    autoFocus={autoFocus}
                     onChange={onValueChange}
                     defaultValue={defaultValue}
+                    className={elementClassName}
 
                     {...data}
                     title={title}
@@ -90,7 +91,7 @@ export default ColorPickerControl;
 const PickerWithPreview = ({
     elementClassName,
     disabled, size,
-    defaultValue, onValueChange, value,
+    defaultValue, onValueChange, value, autoFocus = false,
     id, title, data,
     previewConfig,
     hint, validationState,
@@ -124,6 +125,7 @@ const PickerWithPreview = ({
                         id={id}
                         name={id}
                         disabled={disabled}
+                        autoFocus={autoFocus}
                         onChange={onValueChange}
                         defaultValue={defaultValue}
                         className={elementClassName}
@@ -167,6 +169,7 @@ const PickerWithPreview = ({
                     id={id}
                     name={id}
                     disabled={disabled}
+                    autoFocus={autoFocus}
                     onChange={onValueChange}
                     defaultValue={defaultValue}
                     className={elementClassName}

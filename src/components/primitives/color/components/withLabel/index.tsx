@@ -16,6 +16,7 @@ function ColorPickerWithLabel({
     defaultValue, onValueChange,
     validationState,
     disabled = false, rounded = false, size = ElementSize.Normal,
+    autoFocus = false,
     label,
 
     hint,
@@ -55,6 +56,7 @@ function ColorPickerWithLabel({
                 id={name}
                 value={value}
                 disabled={disabled}
+                autoFocus={autoFocus}
                 previewConfig={preview}
                 onValueChange={onChange}
                 defaultValue={defaultColor}

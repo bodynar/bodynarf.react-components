@@ -1,0 +1,107 @@
+.bbr-fileUpload {
+    &.has-name {
+        .file-clear {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2;
+
+            &:hover {
+                color: #0d6efd;
+            }
+        }
+
+        &:not(.is-right) {
+            &.is-small {
+                .file-name {
+                    padding-right: 1.5rem;
+                }
+
+                .file-clear {
+                    margin-left: -1.25rem;
+                }
+            }
+
+            &.is-medium {
+                .file-name {
+                    padding-right: 2rem;
+                }
+
+                .file-clear {
+                    margin-left: -1.75rem;
+                }
+            }
+
+            &.is-large {
+                .file-name {
+                    padding-right: 2.75rem;
+                }
+
+                .file-clear {
+                    margin-left: -2.5rem;
+                }
+            }
+
+            &:not(.is-small):not(.is-medium):not(.is-large) {
+                .file-name {
+                    padding-right: 1.75rem;
+                    max-width: 17rem;
+                }
+
+                .file-clear {
+                    margin-left: -1.5rem;
+                }
+            }
+        }
+
+        &.is-right {
+            &.is-small {
+                .file-name {
+                    padding-left: 1.5rem;
+                }
+
+                .file-clear {
+                    margin-right: -1.25rem;
+                }
+            }
+
+            &.is-medium {
+                .file-name {
+                    padding-left: 2rem;
+                }
+
+                .file-clear {
+                    margin-right: -1.75rem;
+                }
+            }
+
+            &.is-large {
+                .file-name {
+                    padding-left: 2.75rem;
+                }
+
+                .file-clear {
+                    margin-right: -2.5rem;
+                }
+            }
+
+            &:not(.is-small):not(.is-medium):not(.is-large) {
+                .file-name {
+                    padding-left: 1.75rem;
+                    max-width: 17rem;
+                }
+
+                .file-clear {
+                    margin-right: -1.5rem;
+                }
+            }
+        }
+
+        &.is-boxed {
+            .file-clear {
+                align-items: end;
+                padding-bottom: 0.75rem;
+            }
+        }
+    }
+}

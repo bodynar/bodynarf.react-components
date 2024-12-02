@@ -13,7 +13,7 @@ const PasswordWithoutLabel = ({
     onValueChange, disabled, validationState,
     name = generateGuid(),
     size = ElementSize.Normal, style,
-    rounded = false, loading = false,
+    rounded = false, loading = false, autoFocus = false,
     placeholder,
     canShowPassword = false,
 
@@ -64,6 +64,7 @@ const PasswordWithoutLabel = ({
                     onChange={onChange}
                     className={elClassName}
                     placeholder={placeholder}
+                    autoFocus={autoFocus}
 
                     title={title}
                     {...dataAttributes}

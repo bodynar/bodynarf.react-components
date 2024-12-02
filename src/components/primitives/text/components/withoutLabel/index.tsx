@@ -14,7 +14,7 @@ const TextWithoutLabel = ({
     readonly = false, disabled = false,
     name = generateGuid(),
     size = ElementSize.Normal, style,
-    rounded = false, loading = false,
+    rounded = false, loading = false, autoFocus = false,
     placeholder,
     onBlur,
 
@@ -61,6 +61,7 @@ const TextWithoutLabel = ({
                     className={elClassName}
                     placeholder={placeholder}
                     defaultValue={defaultValue}
+                    autoFocus={autoFocus}
 
                     title={title}
                     {...dataAttributes}

@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useState } from "react";
 
-import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
@@ -12,13 +12,13 @@ import { SearchProps } from "..";
 /** Search component */
 export default function Search({
     searchType, onSearch, caption,
-    name = generateGuid(), defaultValue = "",
+    defaultValue = "",
     size = ElementSize.Normal,
     isLoading = false, rounded = false, disabled = false,
+    autoFocus = false,
 
     className, title, data,
 }: SearchProps): JSX.Element {
-    const [elementName] = useState<string>(name);
     const [searchValue, setSearchValue] = useState<string>(defaultValue);
 
     const onChange = useCallback(
@@ -62,10 +62,10 @@ export default function Search({
                 <div className={elClassName}>
                     <input
                         type="search"
-                        name={elementName}
                         disabled={disabled}
                         onChange={onChange}
                         placeholder={caption}
+                        autoFocus={autoFocus}
                         defaultValue={searchValue}
                         className={inputClassName}
 
@@ -93,10 +93,10 @@ export default function Search({
         >
             <input
                 type="search"
-                name={elementName}
                 disabled={disabled}
                 onChange={onChange}
                 placeholder={caption}
+                autoFocus={autoFocus}
                 defaultValue={searchValue}
                 className={inputClassName}
 

@@ -15,7 +15,7 @@ const NumberWithLabel = ({
     name = generateGuid(),
     label, placeholder,
     size = ElementSize.Normal, style, rounded = false, loading = false,
-    readonly = false, disabled = false,
+    readonly = false, disabled = false, autoFocus = false,
     onBlur,
     step = 1,
 
@@ -62,6 +62,7 @@ const NumberWithLabel = ({
                     onChange={onChange}
                     readOnly={readonly}
                     disabled={disabled}
+                    autoFocus={autoFocus}
                     className={elClassName}
                     placeholder={placeholder}
                     defaultValue={defaultValue}

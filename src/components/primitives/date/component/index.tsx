@@ -17,7 +17,7 @@ const DatePicker = ({
     name = generateGuid(),
     style, size = ElementSize.Normal,
     readonly = false, disabled = false,
-    rounded = false, loading = false,
+    rounded = false, loading = false, autoFocus = false,
     label,
     onBlur,
 
@@ -71,6 +71,7 @@ const DatePicker = ({
                     onChange={onChange}
                     className={elClassName}
                     defaultValue={stringifiedDefValue}
+                    autoFocus={autoFocus}
 
                     title={title}
                     {...dataAttributes}

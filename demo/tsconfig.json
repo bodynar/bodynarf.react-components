@@ -17,7 +17,30 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./src",
+    "paths": {
+			"@bbr/components": [
+				"./components/src/components"
+			],
+			"@bbr/components/*": [
+				"./components/src/components/*",
+				"./components/src/components/primitives/*"
+			],
+			"@bbr/hooks": [
+				"./components/src/hooks"
+			],
+			"@bbr/utils": [
+				"./components/src/utils"
+			],
+			"@bbr/types": [
+				"./components/src/types",
+			],
+			"@bbr/internalComponent/*": [
+				"./components/src/components/internal/*",
+				"./components/src/components/primitives/internal/*",
+			]
+		}
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

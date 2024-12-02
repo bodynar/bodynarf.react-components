@@ -2,7 +2,7 @@ import { BaseElementProps, ElementSize } from "@bbr/types";
 
 /** Search component props type */
 export interface SearchProps extends BaseElementProps {
-    /** 
+    /**
      * Search type: by typing, starts from minimum characters to search
      * or by clicking on button next to search bar.
      * Default `is byTyping`
@@ -18,9 +18,6 @@ export interface SearchProps extends BaseElementProps {
     /** Initial search value */
     defaultValue?: string;
 
-    /** Control name. If empty - will be replaced by random guid */
-    name?: string; // TODO: remove
-
     /** Size of search bar */
     size?: ElementSize;
 
@@ -32,4 +29,11 @@ export interface SearchProps extends BaseElementProps {
 
     /** Should loading icon be displayed in search bar */
     isLoading?: boolean;
+
+    /**
+     * Set focus on search field after render
+     *
+     * !NOTE! Only 1 element at page can have this flag
+     */
+    autoFocus?: boolean;
 }
