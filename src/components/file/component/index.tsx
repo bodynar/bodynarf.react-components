@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useRef, useState } from "react";
 
 import { generateGuid, getClassName, isNullish, isNullOrUndefined, Optional } from "@bodynarf/utils";
 
@@ -28,6 +28,7 @@ const FileUpload = ({
     }
 
     const [selectedFileName, setSelectedFileName] = useState<Optional<string>>(undefined);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +45,8 @@ const FileUpload = ({
     );
 
     const onClearClick = useCallback(() => {
+        inputRef.current!.value = "";
+
         onValueChange(undefined);
         setSelectedFileName(undefined);
     }, [onValueChange]);
@@ -91,6 +94,8 @@ const FileUpload = ({
 
                     title={title}
                     {...dataAttributes}
+
+                    ref={inputRef}
                 />
                 <span className="file-cta">
                     <span className="file-icon">
