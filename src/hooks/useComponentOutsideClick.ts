@@ -1,6 +1,6 @@
 import { DependencyList, useCallback, useEffect } from "react";
 
-import { isNullOrUndefined, isNull } from "@bodynarf/utils";
+import { isNullOrUndefined, isNull, ActionFn } from "@bodynarf/utils";
 
 /**
  * Subscribe to component outside click
@@ -13,7 +13,7 @@ import { isNullOrUndefined, isNull } from "@bodynarf/utils";
 export const useComponentOutsideClick = (
     selector: string,
     clickHandleCondition: boolean,
-    clickHandleChange: () => void,
+    clickHandleChange: ActionFn,
     clickListenCondition = false,
     dependencies: DependencyList = []
 ): void => {

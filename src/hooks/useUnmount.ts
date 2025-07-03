@@ -1,11 +1,16 @@
 import { DependencyList, useEffect, useRef } from "react";
 
+import { ActionFn } from "@bodynarf/utils";
+
 /**
  * Run cleanup function only on component unmount
  * @param cleanFn Cleanup function
  * @param dependencies Hook dependencies
  */
-export const useUnmount = (cleanFn: () => void, dependencies: DependencyList) => {
+export const useUnmount = (
+    cleanFn: ActionFn,
+    dependencies: DependencyList = []
+) => {
     const isUnmountRef = useRef(false);
 
     useEffect(() => {

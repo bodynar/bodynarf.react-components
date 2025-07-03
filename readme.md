@@ -68,3 +68,5 @@ Complex components is set of components built via combining simple components or
  - **useComponentOutsideClick** - Attach watcher for mouse clicks and emit event when click was outside of component
  - **usePagination** - Create a pagination config to easily manipulate with Paginator component
  - **useUnmount** - Handle component unmounting event. Useful as component cleanup fn
+ - **useMount** - Handle component initial mount event
+ - **useDebounceHandler** - Create a cooldown event handler
