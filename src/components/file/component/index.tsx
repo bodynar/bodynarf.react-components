@@ -20,6 +20,7 @@ const FileUpload = ({
     displayFileName = true, boxed = false,
     alignment = ElementPosition.Left,
     clearSelectionTitle = "Remove file selection",
+    accept,
 
     className, title, data,
 }: FileUploadProps): JSX.Element => {
@@ -85,6 +86,8 @@ const FileUpload = ({
                 <input
                     type="file"
                     className="file-input"
+
+                    accept={accept}
 
                     id={name}
                     name={name}
