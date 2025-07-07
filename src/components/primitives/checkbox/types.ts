@@ -3,9 +3,8 @@ import { BaseInputElementProps } from "@bbr/types";
 /** Checkbox component props type */
 export interface CheckBoxProps extends Omit<BaseInputElementProps<boolean>,
     | "readonly" | "validationState"
-    | "loading" | "placeholder"
-    | "hint" | "title"
-    | "autofocus"
+    | "loading"  | "placeholder"
+    | "hint"     | "autofocus"
 > {
     /** Is full colored checkbox */
     block?: boolean;

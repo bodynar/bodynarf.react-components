@@ -7,6 +7,7 @@ import { mapDataAttributes } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 
 import "./style.scss";
+
 import { CheckBoxProps } from "../..";
 
 /** Boolean input component */
@@ -20,7 +21,7 @@ const CheckBox = ({
     withoutBorder = false, hasBackgroundColor = false, fixBackgroundColor = false,
     isFormLabel = false,
 
-    className, data,
+    className, data, title
 }: CheckBoxProps): JSX.Element => {
     const onChecked = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.checked),
@@ -67,15 +68,18 @@ const CheckBox = ({
                     {...dataAttributes}
                 />
                 <label
-                    className="is-empty"
+                    title={title}
                     htmlFor={name}
+                    className="is-empty"
                 >
                 </label>
             </ComponentWithLabel>
         );
     }
 
-    const labelClassName = isNullOrUndefined(label)
+    const isEmptyLabel = isNullOrUndefined(label);
+
+    const labelClassName = isEmptyLabel
         ? "is-empty"
         : undefined;
 
@@ -103,7 +107,7 @@ const CheckBox = ({
                 htmlFor={name}
                 className={labelClassName}
 
-                title={label?.title}
+                title={isEmptyLabel ? title : label?.title}
                 {...labelDataAttributes}
             >
                 {label?.caption}
