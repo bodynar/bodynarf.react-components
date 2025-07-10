@@ -36,4 +36,17 @@ export interface SearchProps extends BaseElementProps {
      * !NOTE! Only 1 element at page can have this flag
      */
     autoFocus?: boolean;
+
+    /**
+     * Caption for search button.
+     * Visible only in `searchType = "byButton"`
+     * @default "Search"
+     */
+    searchButtonCaption?: string;
+
+    /**
+     * Title for search button.
+     * Visible only in `searchType = "byButton"`
+     */
+    searchButtonTitle?: string;
 }

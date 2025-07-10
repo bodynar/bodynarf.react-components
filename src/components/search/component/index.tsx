@@ -16,6 +16,7 @@ export default function Search({
     size = ElementSize.Normal,
     isLoading = false, rounded = false, disabled = false,
     autoFocus = false,
+    searchButtonCaption = "Search", searchButtonTitle,
 
     className, title, data,
 }: SearchProps): JSX.Element {
@@ -77,9 +78,10 @@ export default function Search({
                     <Button
                         type="info"
                         size={size}
-                        caption="Search"
                         disabled={disabled}
                         isLoading={isLoading}
+                        title={searchButtonTitle}
+                        caption={searchButtonCaption}
                         onClick={onSearchButtonClick}
                     />
                 </div>

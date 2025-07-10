@@ -15,7 +15,7 @@ export default function Paginator({
     count, onPageChange, currentPage = 0,
     position = ElementPosition.Left, size = ElementSize.Normal,
     rounded = false, showNextButtons = false,
-    nearPagesCount = 3,
+    nearPagesCount = 3, resources,
 
     className, title, data,
 }: PaginatorProps): JSX.Element {
@@ -70,18 +70,20 @@ export default function Paginator({
             {showNextButtons &&
                 <>
                     <a
-                        className={`pagination-previous${canGoBack ? "" : " is-disabled"}`}
-                        data-page={currentPage - 1}
                         onClick={pageChange}
+                        data-page={currentPage - 1}
+                        title={resources?.previousPageTitle}
+                        className={`pagination-previous${canGoBack ? "" : " is-disabled"}`}
                     >
-                        Previous
+                        {resources?.previousPageCaption ?? "Previous"}
                     </a>
                     <a
-                        className={`pagination-next${canGoForward ? "" : " is-disabled"}`}
-                        data-page={currentPage + 1}
                         onClick={pageChange}
+                        data-page={currentPage + 1}
+                        title={resources?.nextPageTitle}
+                        className={`pagination-next${canGoForward ? "" : " is-disabled"}`}
                     >
-                        Next page
+                        {resources?.nextPageCaption ?? "Next page"}
                     </a>
                 </>
             }
@@ -90,26 +92,30 @@ export default function Paginator({
                     <>
                         <li>
                             <a
-                                className="pagination-link"
-                                aria-label="Goto page 1"
                                 data-page={1}
                                 onClick={pageChange}
+                                className="pagination-link"
+                                title={resources?.openConcretePageTitleTemplate?.format(1)}
+                                aria-label={resources?.openConcretePageTitleTemplate?.format(1)}
                             >
                                 1
                             </a>
                         </li>
                         <li>
-                            <span className="pagination-ellipsis">&hellip;</span>
+                            <span className="pagination-ellipsis">
+                                &hellip;
+                            </span>
                         </li>
                     </>
                 }
                 {pageNumbers.map(x =>
                     <li key={x}>
                         <a
-                            className={`pagination-link${currentPage === x ? " is-current" : ""}`}
-                            aria-label={`Goto page ${x}`}
                             data-page={x}
                             onClick={pageChange}
+                            title={resources?.openConcretePageTitleTemplate?.format(x)}
+                            aria-label={resources?.openConcretePageTitleTemplate?.format(x)}
+                            className={`pagination-link${currentPage === x ? " is-current" : ""}`}
                         >
                             {x}
                         </a>
@@ -118,14 +124,17 @@ export default function Paginator({
                 {currentPage != count && !pageNumbers.includes(count) &&
                     <>
                         <li>
-                            <span className="pagination-ellipsis">&hellip;</span>
+                            <span className="pagination-ellipsis">
+                                &hellip;
+                            </span>
                         </li>
                         <li>
                             <a
-                                className="pagination-link"
-                                aria-label={`Goto page ${count}`}
                                 data-page={count}
                                 onClick={pageChange}
+                                className="pagination-link"
+                                aria-label={resources?.openConcretePageTitleTemplate?.format(count)}
+                                title={resources?.openConcretePageTitleTemplate?.format(count)}
                             >
                                 {count}
                             </a>

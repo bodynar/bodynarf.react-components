@@ -16,7 +16,7 @@ const PasswordWithLabel = ({
     size = ElementSize.Normal, style,
     rounded = false, loading = false, autoFocus = false,
     disabled = false, canShowPassword = false,
-    label, placeholder,
+    label, placeholder, showPasswordIconTitle = "Show password",
 
     className, title, data,
     hint,
@@ -74,7 +74,7 @@ const PasswordWithLabel = ({
                 {canShowPassword && !loading &&
                     <span
                         onClick={onIconClick}
-                        title="Show password"
+                        title={showPasswordIconTitle}
                         className={`icon is-right ${elSizeClassName}`}
                     >
                         <Icon

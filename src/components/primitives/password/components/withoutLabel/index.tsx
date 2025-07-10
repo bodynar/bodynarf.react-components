@@ -15,7 +15,7 @@ const PasswordWithoutLabel = ({
     size = ElementSize.Normal, style,
     rounded = false, loading = false, autoFocus = false,
     placeholder,
-    canShowPassword = false,
+    canShowPassword = false, showPasswordIconTitle = "Show password",
 
     className, title, data,
     hint,
@@ -72,7 +72,7 @@ const PasswordWithoutLabel = ({
                 {canShowPassword && !loading &&
                     <span
                         onClick={onIconClick}
-                        title="Show password"
+                        title={showPasswordIconTitle}
                         className={`icon is-right ${elSizeClassName}`}
                     >
                         <Icon

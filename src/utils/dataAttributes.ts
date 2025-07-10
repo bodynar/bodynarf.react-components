@@ -16,7 +16,9 @@ export const mapDataAttributes = (dataAttributes: DataAttributes): object => {
                     return result;
                 }
 
-                const newKey = key.startsWith("data-") ? key : `data-${key}`;
+                const newKey = key.toLocaleLowerCase().startsWith("data-")
+                    ? key.toLocaleLowerCase()
+                    : `data-${key}`;
 
                 result[newKey] = value;
                 return result;

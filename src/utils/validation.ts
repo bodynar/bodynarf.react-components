@@ -4,7 +4,7 @@ import { ElementColor, ValidationState, ValidationStatus } from "@bbr/types";
 
 /**
  * Get className component prop based on current validation state and style
- * 
+ *
  * (!) Validation className has priority
  * @param style Element style
  * @param validationState Current validation state

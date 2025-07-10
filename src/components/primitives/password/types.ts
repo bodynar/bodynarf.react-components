@@ -7,4 +7,10 @@ export interface PasswordProps extends Omit<BaseInputElementProps<string>, "defa
      * Will show password on click
     */
     canShowPassword?: boolean;
+
+    /**
+     * Title for slow password icon
+     * @default "Show password"
+     */
+    showPasswordIconTitle?: string;
 }
