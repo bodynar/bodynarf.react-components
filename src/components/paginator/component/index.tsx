@@ -1,4 +1,4 @@
-import { useCallback, useMemo, MouseEvent } from "react";
+import { useCallback, useMemo, MouseEvent, FC } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
@@ -11,14 +11,14 @@ import { PaginatorProps } from "../..";
  * Paginator component.
  * Used for visualization of paging configuration
 */
-export default function Paginator({
+const Paginator: FC<PaginatorProps> = ({
     count, onPageChange, currentPage = 0,
     position = ElementPosition.Left, size = ElementSize.Normal,
     rounded = false, showNextButtons = false,
     nearPagesCount = 3, resources,
 
     className, title, data,
-}: PaginatorProps): JSX.Element {
+}) => {
     const pageChange = useCallback(
         (event: MouseEvent<HTMLElement>) => {
             const target = event.target as HTMLElement;
@@ -72,7 +72,7 @@ export default function Paginator({
                     <a
                         onClick={pageChange}
                         data-page={currentPage - 1}
-                        title={resources?.previousPageTitle}
+                        title={canGoBack ? resources?.previousPageTitle : undefined}
                         className={`pagination-previous${canGoBack ? "" : " is-disabled"}`}
                     >
                         {resources?.previousPageCaption ?? "Previous"}
@@ -80,7 +80,7 @@ export default function Paginator({
                     <a
                         onClick={pageChange}
                         data-page={currentPage + 1}
-                        title={resources?.nextPageTitle}
+                        title={canGoForward ? resources?.nextPageTitle : undefined}
                         className={`pagination-next${canGoForward ? "" : " is-disabled"}`}
                     >
                         {resources?.nextPageCaption ?? "Next page"}
@@ -113,9 +113,9 @@ export default function Paginator({
                         <a
                             data-page={x}
                             onClick={pageChange}
-                            title={resources?.openConcretePageTitleTemplate?.format(x)}
                             aria-label={resources?.openConcretePageTitleTemplate?.format(x)}
                             className={`pagination-link${currentPage === x ? " is-current" : ""}`}
+                            title={currentPage === x ? undefined : resources?.openConcretePageTitleTemplate?.format(x)}
                         >
                             {x}
                         </a>
@@ -133,8 +133,8 @@ export default function Paginator({
                                 data-page={count}
                                 onClick={pageChange}
                                 className="pagination-link"
-                                aria-label={resources?.openConcretePageTitleTemplate?.format(count)}
                                 title={resources?.openConcretePageTitleTemplate?.format(count)}
+                                aria-label={resources?.openConcretePageTitleTemplate?.format(count)}
                             >
                                 {count}
                             </a>
@@ -145,6 +145,8 @@ export default function Paginator({
         </nav>
     );
 }
+
+export default Paginator;
 
 /**
  * Position setting to css class name map
