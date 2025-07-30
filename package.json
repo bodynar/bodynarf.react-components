@@ -1,6 +1,6 @@
 {
     "name": "@bodynarf/react.components",
-    "version": "1.12.3",
+    "version": "1.12.4",
     "author": {
         "name": "Artem",
         "email": "bodynar@gmail.com"
@@ -45,9 +45,9 @@
         "typescript": "^4.7.3"
     },
     "peerDependencies": {
-        "@bodynarf/utils": "^1.5.0",
-        "bulma": "^0.9.4",
-        "react": "^18.1.0",
-        "react-dom": "^18.1.0"
+        "@bodynarf/utils": ">=1.5.0",
+        "bulma": ">=0.9.4",
+        "react": ">=18.1.0",
+        "react-dom": ">=18.1.0"
     }
 }
