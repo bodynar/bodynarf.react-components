@@ -10,6 +10,7 @@ import InternalHint from "@bbr/internalComponent/hint";
 import { PasswordProps } from "../..";
 
 const PasswordWithoutLabel = ({
+    defaultValue,
     onValueChange, disabled, validationState,
     name = generateGuid(),
     size = ElementSize.Normal, style,
@@ -62,9 +63,10 @@ const PasswordWithoutLabel = ({
                     name={name}
                     disabled={disabled}
                     onChange={onChange}
+                    autoFocus={autoFocus}
                     className={elClassName}
                     placeholder={placeholder}
-                    autoFocus={autoFocus}
+                    defaultValue={defaultValue}
 
                     title={title}
                     {...dataAttributes}

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullish, isNullOrUndefined } from "@bodynarf/utils";
 
 import Icon from "@bbr/components/icon";
 
@@ -36,7 +36,7 @@ function TableHeader<TItem>(props: TableHeaderProps<TItem>): JSX.Element {
     return (
         <th
             onClick={onHeaderClick}
-            className={containerClassName}
+            className={isNullish(containerClassName) ? undefined : containerClassName}
         >
             <span>
                 {caption}

@@ -11,6 +11,7 @@ import InternalHint from "@bbr/internalComponent/hint";
 import { PasswordProps } from "../..";
 
 const PasswordWithLabel = ({
+    defaultValue,
     onValueChange, validationState,
     name = generateGuid(),
     size = ElementSize.Normal, style,
@@ -64,9 +65,10 @@ const PasswordWithLabel = ({
                     name={name}
                     disabled={disabled}
                     onChange={onChange}
+                    autoFocus={autoFocus}
                     className={elClassName}
                     placeholder={placeholder}
-                    autoFocus={autoFocus}
+                    defaultValue={defaultValue}
 
                     title={title}
                     {...dataAttributes}

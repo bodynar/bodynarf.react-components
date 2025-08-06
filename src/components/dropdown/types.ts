@@ -66,7 +66,7 @@ export interface DropdownProps extends BaseElementProps {
     /**
      * Field hint configuration.
      * Provides additional information to user to help fill the field
-     * 
+     *
      * (!) Hint will be overridden by the validation state, if specified
      */
     hint?: HintConfiguration;

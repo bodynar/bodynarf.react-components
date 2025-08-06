@@ -1,4 +1,4 @@
-import { isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementPosition } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
@@ -16,12 +16,15 @@ const ButtonWithIcon = ({
 }: ButtonWithIconProps): JSX.Element => {
     const iconClassName: string | undefined = isNullOrEmpty(caption)
         ? icon.className
-        : icon.position === ElementPosition.Right
-            ? `${icon.className} bbr-icon--right`
-            : `${icon.className} bbr-icon--left`;
+        : getClassName([
+            icon.className,
+            icon.position === ElementPosition.Right
+                ? "bbr-icon--right"
+                : "bbr-icon--left"
+        ]);
 
     className = isNullOrEmpty(caption)
-        ? `${className} bbr-button--icon-only`
+        ? getClassName([className, "bbr-button--icon-only"])
         : className;
 
     const dataAttributes = isNullOrUndefined(data)
