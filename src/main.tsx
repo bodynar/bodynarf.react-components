@@ -1,21 +1,21 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 
-import { HashRouter } from "react-router-dom";
+import { HashRouter } from "react-router";
 
 import App from "./App.tsx";
 
 import "./style.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bulma/bulma.sass";
-import "bulma-checkradio/dist/css/bulma-checkradio.sass";
+import "bulma-checkradio/dist/css/bulma-checkradio.min.css";
 
-ReactDOM.createRoot(
+createRoot(
 	document.getElementById("root") as HTMLElement
 ).render(
-	<React.StrictMode>
+	<StrictMode>
 		<HashRouter>
 			<App />
 		</HashRouter>
-	</React.StrictMode>,
+	</StrictMode>
 );

@@ -1,0 +1,70 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": false,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    "noImplicitAny": true, /* Raise error on expressions and declarations with an implied 'any' type. */
+	  "noImplicitThis": true, /* Raise error on 'this' expressions with an implied 'any' type. */
+
+    "baseUrl": "./", /* Base directory to resolve non-absolute module names. */
+	  "paths": {
+      "@app/core/*": [
+        "src/core/*"
+      ],
+      "@app/models/*": [
+        "src/models/*"
+      ],
+      "@app/utils": [
+        "src/shared/utils"
+      ],
+      "@app/modules/*": [
+        "src/modules/*"
+      ],
+      "@app/assets/*": [
+        "src/shared/assets/*"
+      ],
+      "@app/styles/*": [
+        "src/shared/styles/*"
+      ],
+      "@app/sharedComponents/*": [
+        "src/shared/components/*"
+      ],
+      "@app/shared/values": [
+        "src/shared/values"
+      ],
+      "@app/store/*": [
+				"src/store/*"
+			],
+			"@app/store": [
+				"src/store"
+			],
+      "@app/auth/*": [
+				"src/auth/*"
+			],
+      "@app/auth": [
+				"src/auth"
+			],
+    },
+  },
+  "include": ["src"]
+}

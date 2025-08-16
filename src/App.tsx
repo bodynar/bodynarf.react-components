@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { JSX, useEffect, useMemo } from "react";
+import { Route, Routes, useLocation } from "react-router";
 
 import { RouteItem, routes } from "./pages/routing";
 import Navbar from "./components/navbar";
