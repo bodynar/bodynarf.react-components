@@ -1,10 +1,10 @@
 import AccordionComponent from "@bodynarf/react.components/components/accordion";
 
-import ComponentUseCase from "../../../shared/components/useCase";
-import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
-import ComponentSizeCase from "../../../shared/components/sizeUse";
-import ComponentColorCase from "../../../shared/components/colorUse";
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
+import ComponentUseCase from "@app/sharedComponents/useCase";
+import CommonPropsSuppressExampleInfoMessage from "@app/sharedComponents/commonPropsSuppress";
+import ComponentSizeCase from "@app/sharedComponents/sizeUse";
+import ComponentColorCase from "@app/sharedComponents/colorUse";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 
 /** Accordion component demo */
 function Accordion() {

@@ -3,11 +3,11 @@ import { useMemo, } from "react";
 import { ElementPosition, SelectableItem } from "@bodynarf/react.components";
 import ButtonComponent, { ButtonType } from "@bodynarf/react.components/components/button";
 
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
-import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
-import ComponentUseCase from "../../../shared/components/useCase";
-import ComponentEnumCase from "../../../shared/components/enumSelectionCase";
-import ComponentSizeCase from "../../../shared/components/sizeUse";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
+import CommonPropsSuppressExampleInfoMessage from "@app/sharedComponents/commonPropsSuppress";
+import ComponentUseCase from "@app/sharedComponents/useCase";
+import ComponentEnumCase from "@app/sharedComponents/enumSelectionCase";
+import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 
 /** Button component demo */
 function Button() {

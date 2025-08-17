@@ -3,8 +3,8 @@ import { emptyFn } from "@bodynarf/utils";
 import { ElementPosition, ValidationStatus } from "@bodynarf/react.components";
 import ColorComponent from "@bodynarf/react.components/components/primitives/color";
 
-import ComponentUseCase from "../../../shared/components/useCase";
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
+import ComponentUseCase from "@app/sharedComponents/useCase";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 
 /** Color component demo */
 function Color() {

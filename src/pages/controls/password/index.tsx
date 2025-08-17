@@ -2,11 +2,11 @@ import { emptyFn } from "@bodynarf/utils";
 import { ValidationStatus } from "@bodynarf/react.components";
 import PasswordComponent from "@bodynarf/react.components/components/primitives/password";
 
-import ComponentUseCase from "../../../shared/components/useCase";
-import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
-import ComponentSizeCase from "../../../shared/components/sizeUse";
-import ComponentColorCase from "../../../shared/components/colorUse";
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
+import ComponentUseCase from "@app/sharedComponents/useCase";
+import CommonPropsSuppressExampleInfoMessage from "@app/sharedComponents/commonPropsSuppress";
+import ComponentSizeCase from "@app/sharedComponents/sizeUse";
+import ComponentColorCase from "@app/sharedComponents/colorUse";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 
 /** Password component demo */
 function Password() {

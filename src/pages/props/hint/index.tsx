@@ -2,8 +2,8 @@ import { emptyFn } from "@bodynarf/utils";
 
 import TextComponent from "@bodynarf/react.components/components/primitives/text";
 
-import ComponentUseCase from "../../../shared/components/useCase";
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
+import ComponentUseCase from "@app/sharedComponents/useCase";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 
 /** Hint input prop demo */
 function HintProp() {

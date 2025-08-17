@@ -1,10 +1,10 @@
 import SearchComponent from "@bodynarf/react.components/components/search";
 
 import { emptyFn } from "@bodynarf/utils";
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
-import ComponentUseCase from "../../../shared/components/useCase";
-import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
-import ComponentSizeCase from "../../../shared/components/sizeUse";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
+import ComponentUseCase from "@app/sharedComponents/useCase";
+import CommonPropsSuppressExampleInfoMessage from "@app/sharedComponents/commonPropsSuppress";
+import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 
 /** Search component demo */
 function Search() {

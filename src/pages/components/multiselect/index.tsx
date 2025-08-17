@@ -1,9 +1,9 @@
 import { ElementColor, ValidationStatus } from "@bodynarf/react.components";
 import MultiselectComponent from "@bodynarf/react.components/components/multiselect";
 
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
-import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
-import ComponentUseCase from "../../../shared/components/useCase";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
+import CommonPropsSuppressExampleInfoMessage from "@app/sharedComponents/commonPropsSuppress";
+import ComponentUseCase from "@app/sharedComponents/useCase";
 import { emptyFn } from "@bodynarf/utils";
 
 /** Multiselect component demo */

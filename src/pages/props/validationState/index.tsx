@@ -3,8 +3,8 @@ import { emptyFn } from "@bodynarf/utils";
 import { ValidationStatus } from "@bodynarf/react.components";
 import TextComponent from "@bodynarf/react.components/components/primitives/text";
 
-import ComponentUseCase from "../../../shared/components/useCase";
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
+import ComponentUseCase from "@app/sharedComponents/useCase";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 
 /** ValidationState input prop demo */
 function ValidationStateProp() {

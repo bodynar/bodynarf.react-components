@@ -3,12 +3,12 @@ import { emptyFn } from "@bodynarf/utils";
 import { ElementPosition } from "@bodynarf/react.components/types";
 import TabsComponent, { TabItem, TabsStyle } from "@bodynarf/react.components/components/tabs";
 
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
-import ComponentUseCase from "../../../shared/components/useCase";
-import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
-import ComponentSizeCase from "../../../shared/components/sizeUse";
-import ComponentEnumCase from "../../../shared/components/enumSelectionCase";
-import ComponentPositionCase from "../../../shared/components/positionUse";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
+import ComponentUseCase from "@app/sharedComponents/useCase";
+import CommonPropsSuppressExampleInfoMessage from "@app/sharedComponents/commonPropsSuppress";
+import ComponentSizeCase from "@app/sharedComponents/sizeUse";
+import ComponentEnumCase from "@app/sharedComponents/enumSelectionCase";
+import ComponentPositionCase from "@app/sharedComponents/positionUse";
 
 /** Tabs component demo */
 function Tabs() {

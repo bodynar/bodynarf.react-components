@@ -3,9 +3,9 @@ import { useState } from "react";
 import { ValidationStatus } from "@bodynarf/react.components";
 import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";
 
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
-import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
-import ComponentUseCase from "../../../shared/components/useCase";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
+import CommonPropsSuppressExampleInfoMessage from "@app/sharedComponents/commonPropsSuppress";
+import ComponentUseCase from "@app/sharedComponents/useCase";
 
 /** Dropdown component demo */
 function Dropdown() {

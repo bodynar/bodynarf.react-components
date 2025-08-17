@@ -3,11 +3,11 @@ import { emptyFn } from "@bodynarf/utils";
 import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";
 import { ElementColor } from "@bodynarf/react.components";
 
-import ComponentUseCase from "../../../shared/components/useCase";
-import ComponentSizeCase from "../../../shared/components/sizeUse";
-import ComponentColorCase from "../../../shared/components/colorUse";
-import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
+import ComponentUseCase from "@app/sharedComponents/useCase";
+import ComponentSizeCase from "@app/sharedComponents/sizeUse";
+import ComponentColorCase from "@app/sharedComponents/colorUse";
+import CommonPropsSuppressExampleInfoMessage from "@app/sharedComponents/commonPropsSuppress";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 
 /** Checkbox component demo */
 function Checkbox() {

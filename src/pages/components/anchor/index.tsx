@@ -1,9 +1,9 @@
 import { ElementPosition } from "@bodynarf/react.components";
 import AnchorComponent from "@bodynarf/react.components/components/anchor";
 
-import ComponentUseCase from "../../../shared/components/useCase";
-import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
+import ComponentUseCase from "@app/sharedComponents/useCase";
+import CommonPropsSuppressExampleInfoMessage from "@app/sharedComponents/commonPropsSuppress";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 
 /** Anchor component demo */
 function Anchor() {

@@ -3,11 +3,11 @@ import { emptyFn } from "@bodynarf/utils";
 import PaginatorComponent from "@bodynarf/react.components/components/paginator";
 import { ElementPosition } from "@bodynarf/react.components/types";
 
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
-import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
-import ComponentUseCase from "../../../shared/components/useCase";
-import ComponentSizeCase from "../../../shared/components/sizeUse";
-import ComponentPositionCase from "../../../shared/components/positionUse";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
+import CommonPropsSuppressExampleInfoMessage from "@app/sharedComponents/commonPropsSuppress";
+import ComponentUseCase from "@app/sharedComponents/useCase";
+import ComponentSizeCase from "@app/sharedComponents/sizeUse";
+import ComponentPositionCase from "@app/sharedComponents/positionUse";
 
 /** Paginator component demo */
 function Paginator() {

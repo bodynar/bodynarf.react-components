@@ -28,42 +28,12 @@
 
     "baseUrl": "./", /* Base directory to resolve non-absolute module names. */
 	  "paths": {
-      "@app/core/*": [
-        "src/core/*"
-      ],
-      "@app/models/*": [
-        "src/models/*"
-      ],
-      "@app/utils": [
-        "src/shared/utils"
-      ],
-      "@app/modules/*": [
-        "src/modules/*"
-      ],
-      "@app/assets/*": [
-        "src/shared/assets/*"
-      ],
-      "@app/styles/*": [
-        "src/shared/styles/*"
-      ],
       "@app/sharedComponents/*": [
         "src/shared/components/*"
       ],
-      "@app/shared/values": [
-        "src/shared/values"
-      ],
-      "@app/store/*": [
-				"src/store/*"
-			],
-			"@app/store": [
-				"src/store"
-			],
-      "@app/auth/*": [
-				"src/auth/*"
-			],
-      "@app/auth": [
-				"src/auth"
-			],
+      "@app/pages/*": [
+        "src/pages/*"
+      ]
     },
   },
   "include": ["src"]
