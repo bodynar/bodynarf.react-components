@@ -1,84 +1,58 @@
-import { Link } from "react-router";
+import { FC, useMemo } from "react";
+import { Link, useLocation } from "react-router";
 
-import { isNullOrEmpty } from "@bodynarf/utils";
+import { displayName } from "package.json";
 
-import { RouteItem, routes } from "../../pages/routing";
+import routeList, { isRootMenuItem, RouteMenuItem } from "@app/pages/routing";
 
-/** Menu item model */
-interface MenuItemProps {
-    /** Unique name */
-    caption: string;
-
-    /** Target route link */
-    path: string;
-
-    /** Child routes */
-    children?: Array<RouteItem>;
-
-    /** Should be item be presented */
-    display?: boolean;
-
-    /** Current active item */
-    activeItem: string;
-}
+import "./styles.scss";
 
 /** Main site menu */
-const LeftMenu = ({ activeItem }: { activeItem: string }): JSX.Element => {
-    return (
-        <>
-            {routes.map(x =>
-                <LinkGroup
-                    key={x.path}
-                    {...x}
-                    activeItem={activeItem}
-                />
-            )}
-        </>
+const LeftMenu: FC = () => {
+    const { pathname } = useLocation();
+
+    const activeItem = useMemo(
+        () => routeList
+            .flatMap(x => isRootMenuItem(x) ? x.children : [x])
+            .filter(({ path }) => path.startsWith(pathname))
+            .pop(),
+        []
     );
-};
-
-/** Menu links group heading */
-const LinkGroup = (x: MenuItemProps): JSX.Element => {
-    const { caption, children, activeItem } = x;
-
-    if (!children || children.length === 0) {
-        if (!isNullOrEmpty(caption)) {
-            return (
-                <ul className="menu-list">
-                    <LinkComponent {...x} />
-                </ul>
-            );
-        }
-
-        return (<></>);
-    }
 
     return (
-        <>
-            <p className="menu-label">
-                {caption}
-            </p>
-            <ul className="menu-list">
-                {children.map(x =>
-                    <LinkComponent
-                        key={x.path}
-                        {...x}
-                        activeItem={activeItem}
-                    />
+        <div className="left-menu py-4 px-2">
+            <div role="header">
+                {displayName}
+            </div>
+            <div role="menu">
+                {routeList.map(routeItem =>
+                    isRootMenuItem(routeItem)
+                        ? <MenuItemGroup key={routeItem.name} />
+                        : <MenuItem key={routeItem.path} {...routeItem} activeItem={activeItem} />
                 )}
-            </ul>
+            </div>
+            <div role="links">
+
+            </div>
+        </div>
+    );
+};
+
+const MenuItemGroup: FC = () => {
+    return (
+        <>
         </>
     );
 };
 
-/** Menu item with link */
-const LinkComponent = ({ path, caption, activeItem }: MenuItemProps): JSX.Element => {
+const MenuItem: FC<RouteMenuItem & { activeItem?: RouteMenuItem; }> = ({
+    path, caption, activeItem,
+}) => {
     return (
         <li>
             <Link
-                key={path}
                 to={path}
-                className={activeItem === path ? "is-active" : undefined}
+                className={activeItem?.path === path ? "is-active" : undefined}
             >
                 {caption}
             </Link>

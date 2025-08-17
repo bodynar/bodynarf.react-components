@@ -1,0 +1,14 @@
+.left-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    [role="header"] {
+    }
+
+    [role="menu"] {
+    }
+
+    [role="links"] {
+    }
+}

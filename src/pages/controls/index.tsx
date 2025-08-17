@@ -8,41 +8,35 @@ import Multiline from "./multiline";
 import Number from "./number";
 
 const controls: MenuItem = {
-    name: "",
+    name: "control-group",
     caption: "Controls",
     children: [
         {
-            name: "",
             path: "/controls/color",
             caption: "Color picker",
             component: <ColorPicker />
         },
         {
-            name: "",
             path: "/controls/checkbox",
             caption: "Check box",
             component: <Checkbox />
         },
         {
-            name: "",
             path: "/controls/date",
             caption: "Date picker",
             component: <Date />
         },
         {
-            name: "",
             path: "/controls/text",
             caption: "Text",
             component: <Text />
         },
         {
-            name: "",
             path: "/controls/multiline",
             caption: "Multiline",
             component: <Multiline />
         },
         {
-            name: "",
             path: "/controls/number",
             caption: "Number",
             component: <Number />

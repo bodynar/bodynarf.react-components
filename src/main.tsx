@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import { HashRouter } from "react-router";
+import { BrowserRouter } from "react-router";
 
-import App from "./App.tsx";
+import App from "./component";
 
 import "./style.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -14,8 +14,8 @@ createRoot(
 	document.getElementById("root") as HTMLElement
 ).render(
 	<StrictMode>
-		<HashRouter>
+		<BrowserRouter>
 			<App />
-		</HashRouter>
+		</BrowserRouter>
 	</StrictMode>
 );

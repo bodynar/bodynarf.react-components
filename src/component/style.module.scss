@@ -1,0 +1,17 @@
+.root {
+    height: 100%;
+
+    gap: 1rem;
+
+    .left-menu {
+        width: 15%;
+        flex: none;
+
+        overflow: hidden;
+    }
+
+    .content {
+        height: 100%;
+        overflow-y: auto;
+    }
+}

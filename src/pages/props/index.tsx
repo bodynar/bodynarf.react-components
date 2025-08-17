@@ -4,17 +4,15 @@ import ValidationStateProp from "./validationState";
 import HintProp from "./hint";
 
 const props: MenuItem = {
-    name: "",
+    name: "prop-group",
     caption: "Common props",
     children: [
         {
-            name: "",
             path: "/props/validation",
             caption: "Validation state",
             component: <ValidationStateProp />
         },
         {
-            name: "",
             path: "/props/hint",
             caption: "Hint",
             component: <HintProp />
