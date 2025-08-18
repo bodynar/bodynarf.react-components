@@ -23,7 +23,7 @@ function App() {
             <aside className={`column ${styles["left-menu"]}`}>
                 <LeftMenu />
             </aside>
-            <main className={`column box ${styles.content}`}>
+            <main className={`column box ${styles.content} p-5`}>
                 <Routes>
                     <Route path="*" element={<Navigate to="/home" replace />} />
                     {routes.map(({ path, component }) =>
