@@ -1,5 +1,7 @@
-import { FC, useMemo } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router";
+
+import { getClassName } from "@bodynarf/utils";
 
 import { displayName, dependencies, devDependencies } from "package.json";
 
@@ -9,6 +11,7 @@ import bulmaLogo from "@app/assets/logos/Bulma Icon.svg";
 import reactLogo from "@app/assets/logos/React-icon.svg";
 
 import styles from "./styles.module.scss";
+import Icon from "@bodynarf/react.components/components/icon";
 
 /** component lib version */
 const packageVersion = dependencies["@bodynarf/react.components"];
@@ -85,25 +88,50 @@ const LeftMenu: FC = () => {
     );
 };
 
+/** Menu item with sub items */
 const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
     caption, children, activeItem
 }) => {
+    const [collapsed, setIsCollapsed] = useState(false);
+
+    const onCollapseToggle = useCallback(() => setIsCollapsed(x => !x), [setIsCollapsed]);
+
+    const className = getClassName([
+        "is-block",
+        "pb-2",
+        "is-clickable",
+        "has-text-weight-medium",
+        collapsed ? styles["is-collapsed"] : undefined,
+    ]);
+
     return (
         <li role="group">
-            <span>{caption}</span>
-            <ul>
-                {children.map(routeItem =>
-                    <MenuItem
-                        key={routeItem.path}
-                        {...routeItem}
-                        activeItem={activeItem}
-                    />
-                )}
-            </ul>
+            <span
+                className={className}
+                onClick={onCollapseToggle}
+            >
+                {caption}
+                <Icon
+                    name="chevron-right"
+                    className="is-pulled-right"
+                />
+            </span>
+            {!collapsed &&
+                <ul>
+                    {children.map(routeItem =>
+                        <MenuItem
+                            key={routeItem.path}
+                            {...routeItem}
+                            activeItem={activeItem}
+                        />
+                    )}
+                </ul>
+            }
         </li>
     );
 };
 
+/** Menu item with link */
 const MenuItem: FC<RouteMenuItem & { activeItem?: RouteMenuItem; }> = ({
     path, caption, activeItem,
 }) => {

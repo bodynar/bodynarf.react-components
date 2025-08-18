@@ -29,6 +29,11 @@ $border-bottom: 1px solid rgba(gray, 0.25);
     }
 
     .menu {
+        height: 100%;
+        overflow-y: auto;
+        padding-right: 0.75rem;
+        scrollbar-gutter: stable;
+
         & > li,
         li[role="group"] {
             margin-bottom: 1rem;
@@ -38,12 +43,26 @@ $border-bottom: 1px solid rgba(gray, 0.25);
                 border-bottom: $border-bottom;
             }
         }
-        li {
-        }
 
-        height: 100%;
-        overflow-y: auto;
-        padding-right: 0.75rem;
+        li[role="group"] {
+            span {
+                i {
+                    color: rgba(gray, 0.5);
+                    transition-property: transform;
+                }
+                &:hover {
+                    i {
+                        color: gray;
+                    }
+                }
+
+                &.is-collapsed {
+                    i {
+                        transform: rotateZ(90deg);
+                    }
+                }
+            }
+        }
     }
 
     .links {
