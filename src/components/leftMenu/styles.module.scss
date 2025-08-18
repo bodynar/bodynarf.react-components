@@ -66,5 +66,23 @@ $border-bottom: 1px solid rgba(gray, 0.25);
     }
 
     .links {
+        border-top: $border-bottom;
+        img {
+            height: 1.75rem;
+            width: 1.75rem;
+
+            filter: grayscale(1);
+            transition: 0.125s ease-in;
+            opacity: 0.75;
+
+            transition-property: filter, opacity;
+        }
+
+        a:hover {
+            img {
+                filter: grayscale(0);
+                opacity: 1;
+            }
+        }
     }
 }

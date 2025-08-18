@@ -9,6 +9,8 @@ import routeList, { isRootMenuItem, RouteMenuItem, MenuItem as MenuItemModel } f
 
 import bulmaLogo from "@app/assets/logos/Bulma Icon.svg";
 import reactLogo from "@app/assets/logos/React-icon.svg";
+import githubLogo from "@app/assets/logos/github Icon.svg";
+import npmLogo from "@app/assets/logos/npm Icon.svg";
 
 import styles from "./styles.module.scss";
 import Icon from "@bodynarf/react.components/components/icon";
@@ -44,6 +46,7 @@ const LeftMenu: FC = () => {
                     >
                         <img
                             src={bulmaLogo}
+                            alt="Bulma logo"
                             title="Open Bulma website"
                         />
                     </a>
@@ -54,6 +57,7 @@ const LeftMenu: FC = () => {
                     >
                         <img
                             src={reactLogo}
+                            alt="React logo"
                             title="Open React website"
                         />
                     </a>
@@ -81,8 +85,31 @@ const LeftMenu: FC = () => {
                         : <MenuItem key={routeItem.path} {...routeItem} activeItem={activeItem} />
                 )}
             </ul>
-            <div className={styles.links}>
-
+            <div className={`${styles.links} pt-4 is-flex mt-4 pr-6 is-justify-content-space-around is-align-items-center`}>
+                <a
+                    target="_blank"
+                    title="Open github repository"
+                    className="is-flex is-flex-direction-column"
+                    href="https://github.com/bodynar/bodynarf.react-components"
+                >
+                    <img
+                        src={githubLogo}
+                        alt="Github logo"
+                    />
+                    Github
+                </a>
+                <a
+                    target="_blank"
+                    title="Open package in npm page"
+                    className="is-flex is-flex-direction-column"
+                    href="https://www.npmjs.com/package/@bodynarf/react.components"
+                >
+                    <img
+                        src={npmLogo}
+                        alt="Npm logo"
+                    />
+                    npm
+                </a>
             </div>
         </div>
     );
