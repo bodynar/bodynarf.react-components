@@ -89,7 +89,7 @@ const LeftMenu: FC = () => {
                 <a
                     target="_blank"
                     title="Open github repository"
-                    className="is-flex is-flex-direction-column"
+                    className="is-flex is-flex-direction-column is-align-items-center"
                     href="https://github.com/bodynar/bodynarf.react-components"
                 >
                     <img
@@ -101,7 +101,7 @@ const LeftMenu: FC = () => {
                 <a
                     target="_blank"
                     title="Open package in npm page"
-                    className="is-flex is-flex-direction-column"
+                    className="is-flex is-flex-direction-column is-align-items-center"
                     href="https://www.npmjs.com/package/@bodynarf/react.components"
                 >
                     <img
@@ -127,7 +127,7 @@ const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
         "is-block",
         "pb-2",
         "is-clickable",
-        "has-text-weight-medium",
+        "has-text-weight-semibold",
         collapsed ? styles["is-collapsed"] : undefined,
     ]);
 
@@ -166,7 +166,7 @@ const MenuItem: FC<RouteMenuItem & { activeItem?: RouteMenuItem; }> = ({
         <li>
             <Link
                 to={path}
-                className={activeItem?.path === path ? "is-active" : undefined}
+                className={activeItem?.path === path ? styles["is-active"] : undefined}
             >
                 {caption}
             </Link>
