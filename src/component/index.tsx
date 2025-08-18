@@ -19,8 +19,8 @@ function App() {
     );
 
     return (
-        <main className={`${styles.root} columns my-0`}>
-            <aside className={`column box ${styles["left-menu"]}`}>
+        <main className={`${styles.root} columns my-0 ml-6`}>
+            <aside className={`column ${styles["left-menu"]}`}>
                 <LeftMenu />
             </aside>
             <main className={`column box ${styles.content}`}>

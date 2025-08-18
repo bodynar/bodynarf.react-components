@@ -33,6 +33,9 @@
       ],
       "@app/pages/*": [
         "src/pages/*"
+      ],
+      "@app/assets/*": [
+        "src/assets/*"
       ]
     },
   },
