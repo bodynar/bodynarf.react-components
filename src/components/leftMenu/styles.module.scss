@@ -1,6 +1,7 @@
 @use "sass:color";
+@use "/src/shared/styles/variables" as vars;
 
-$border-bottom: 1px solid rgba(gray, 0.25);
+$border-bottom: 1px solid vars.$color-gray-lighten;
 
 .left-menu {
     display: flex;
@@ -49,7 +50,7 @@ $border-bottom: 1px solid rgba(gray, 0.25);
         li[role="group"] {
             span {
                 i {
-                    color: rgba(gray, 0.5);
+                    color: vars.$color-gray-light;
                     transition-property: transform;
                 }
                 &:hover {
@@ -69,14 +70,14 @@ $border-bottom: 1px solid rgba(gray, 0.25);
         li:not([role="group"]) {
             a {
                 color: rgba(0, 0, 0, 0.5);
-                transition: 0.125s ease-in color;
+                transition: vars.$transition color;
 
                 &.is-active {
-                    color: #485fc7;
+                    color: vars.$color-link;
                 }
 
                 &:hover:not(.is-active) {
-                    color: rgba(#485fc7, 0.9);
+                    color: rgba(vars.$color-link, 0.9);
                 }
             }
         }
@@ -89,7 +90,7 @@ $border-bottom: 1px solid rgba(gray, 0.25);
             width: 1.75rem;
 
             filter: grayscale(1);
-            transition: 0.125s ease-in;
+            transition: vars.$transition;
             opacity: 0.75;
 
             transition-property: filter, opacity;

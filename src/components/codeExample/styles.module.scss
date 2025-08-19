@@ -1,0 +1,43 @@
+@use "/src/shared/styles/variables" as vars;
+
+.code-example {
+    position: relative;
+    width: max-content;
+
+    .copy-btn {
+        opacity: 0;
+
+        transition: vars.$transition;
+        transition-property: background-color, border-color, opacity;
+        top: 0.65rem;
+
+        border-color: vars.$color-gray-lighten !important;
+    }
+
+    .lang-name {
+        top: 0.125rem;
+        transition: vars.$transition opacity;
+    }
+
+    .copy-btn,
+    .lang-name {
+        position: absolute;
+        right: 0.625rem;
+    }
+
+    &:hover {
+        .copy-btn {
+            opacity: 1;
+        }
+
+        .lang-name {
+            opacity: 0;
+        }
+    }
+
+    .code-container {
+        > * {
+            padding-right: 3.75rem;
+        }
+    }
+}
