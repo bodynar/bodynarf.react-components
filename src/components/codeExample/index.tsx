@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 
 import { BundledLanguage, codeToHtml } from "shiki";
 
@@ -28,6 +28,17 @@ const CodeExample: FC<CodeExampleProps> = ({
     language = "tsx", hideLanguage = false,
 }) => {
     const [codeInHtml, setCodeInHtml] = useState("");
+    const [isCopied, setIsCopied] = useState(false);
+    const [, setTimerId] = useState<NodeJS.Timeout | undefined>();
+
+    const onCopyBtnClick = useCallback(
+        () => {
+            window.navigator.clipboard
+                .writeText(code)
+                .then(() => setIsCopied(true));
+        },
+        []
+    );
 
     useEffect(() => {
         if (!isNullOrEmpty(code)) {
@@ -38,21 +49,54 @@ const CodeExample: FC<CodeExampleProps> = ({
         }
     }, [code]);
 
+    useEffect(
+        () => {
+            if (isCopied) {
+                const timerId = setTimeout(
+                    () => {
+                        setIsCopied(false);
+
+                        setTimerId(x => {
+                            clearTimeout(x);
+                            return undefined;
+                        });
+                    },
+                    3 * 1000
+                );
+
+                setTimerId(timerId);
+            }
+        },
+        [isCopied]
+    );
+
     return (
         <div className={styles["code-example"]}>
-            {!!!hideLanguage &&
+            {!!!hideLanguage && !isCopied &&
                 <span
                     className={`is-size-7 is-italic ${styles["lang-name"]}`}
                 >
                     {language}
                 </span>
             }
-            <Button
-                type="text"
-                icon={{ name: "copy" }}
-                className={styles["copy-btn"]}
-                title={`Copy to clipboard ${language} code`}
-            />
+            {!isCopied &&
+                <Button
+                    type="text"
+                    icon={{ name: "clipboard" }}
+                    onClick={onCopyBtnClick}
+                    className={styles["copy-btn"]}
+                    title={`Copy to clipboard ${language} code`}
+                />
+            }
+            {isCopied &&
+                <div className={styles["copied-block"]}>
+                    <span className="is-size-7">Copied!</span>
+                    <Button
+                        type="text"
+                        icon={{ name: "clipboard-check" }}
+                    />
+                </div>
+            }
             <div
                 className={styles["code-container"]}
                 dangerouslySetInnerHTML={{
