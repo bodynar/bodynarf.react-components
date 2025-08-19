@@ -1,21 +1,17 @@
-import { useCallback } from "react";
 import CodeExample from "@app/sharedComponents/codeExample";
+import TitleWithLink from "@app/sharedComponents/titleWithLink";
 
 /** Default page */
 function Home() {
-    const onLinkClick = useCallback(
-        (ref = "") => navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${ref}`),
-        []
-    );
-
     return (
         <>
             <div className="block" id="about">
-                <a onClick={() => onLinkClick("about")}>
-                    <h1 className="title is-1">
-                        About
-                    </h1>
-                </a>
+                <TitleWithLink
+                    size="is-1"
+                    style="title"
+                    caption="About"
+                    identifier="about"
+                />
                 <p>
                     <code>@bodynarf/react.components</code> (also referred to as <code>BBR.Components</code>) is a library of ready-to-use React components styled with the Bulma CSS framework.
                     <br />
@@ -31,11 +27,12 @@ function Home() {
             </div>
 
             <div className="block" id="install">
-                <a onClick={() => onLinkClick("install")}>
-                    <h2 className="subtitle is-2">
-                        Installation & usage
-                    </h2>
-                </a>
+                <TitleWithLink
+                    size="is-2"
+                    style="subtitle"
+                    identifier="install"
+                    caption="Installation & usage"
+                />
                 <span>
                     Before installing, make sure the following dependencies are already present:
                 </span>
@@ -82,11 +79,12 @@ function Home() {
 
             <div className="block">
                 <div className="block" id="contents">
-                    <a onClick={() => onLinkClick("contents")}>
-                        <h2 className="subtitle is-2">
-                            Contents
-                        </h2>
-                    </a>
+                    <TitleWithLink
+                        size="is-2"
+                        style="subtitle"
+                        identifier="contents"
+                        caption="Contents"
+                    />
                 </div>
 
                 <div className="block">
