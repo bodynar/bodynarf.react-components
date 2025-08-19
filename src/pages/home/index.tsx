@@ -1,17 +1,13 @@
 import CodeExample from "@app/sharedComponents/codeExample";
-import TitleWithLink from "@app/sharedComponents/titleWithLink";
 
 /** Default page */
 function Home() {
     return (
         <>
-            <div className="block" id="about">
-                <TitleWithLink
-                    size="is-1"
-                    style="title"
-                    caption="About"
-                    identifier="about"
-                />
+            <div className="block">
+                <h1 className="title is-1">
+                    About
+                </h1>
                 <p>
                     <code>@bodynarf/react.components</code> (also referred to as <code>BBR.Components</code>) is a library of ready-to-use React components styled with the Bulma CSS framework.
                     <br />
@@ -26,13 +22,10 @@ function Home() {
                 </p>
             </div>
 
-            <div className="block" id="install">
-                <TitleWithLink
-                    size="is-2"
-                    style="subtitle"
-                    identifier="install"
-                    caption="Installation & usage"
-                />
+            <div className="block">
+                <h2 className="subtitle is-2">
+                    Installation & usage
+                </h2>
                 <span>
                     Before installing, make sure the following dependencies are already present:
                 </span>
@@ -78,13 +71,10 @@ function Home() {
             </div>
 
             <div className="block">
-                <div className="block" id="contents">
-                    <TitleWithLink
-                        size="is-2"
-                        style="subtitle"
-                        identifier="contents"
-                        caption="Contents"
-                    />
+                <div className="block">
+                    <h2 className="subtitle is-2">
+                        Contents
+                    </h2>
                 </div>
 
                 <div className="block">
