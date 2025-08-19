@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 
 import routeList, { isRootMenuItem } from "@app/pages/routing";
@@ -11,7 +11,8 @@ import LeftMenu from "../components/leftMenu";
 function App() {
     const { pathname } = useLocation();
 
-    useEffect(() => window.scrollTo(0, 0), [pathname]);
+    const contentRef = useRef<HTMLElement>(null);
+    useEffect(() => contentRef.current?.scrollTo(0, 0), [pathname]);
 
     const routes = useMemo(
         () => routeList.flatMap(x => isRootMenuItem(x) ? x.children : [x]),
@@ -23,7 +24,10 @@ function App() {
             <aside className={`column ${styles["left-menu"]}`}>
                 <LeftMenu />
             </aside>
-            <main className={`column box ${styles.content} py-5 pl-5`}>
+            <main
+                ref={contentRef}
+                className={`column box ${styles.content} py-5 pl-5`}
+            >
                 <Routes>
                     <Route path="*" element={<Navigate to="/home" replace />} />
                     {routes.map(({ path, component }) =>
