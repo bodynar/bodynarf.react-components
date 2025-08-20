@@ -1,9 +1,11 @@
+import { FC } from "react";
+
 import { isUndefined } from "@bodynarf/utils";
 
 import Icon from "@bodynarf/react.components/components/icon";
 
 /** Title demo component props type */
-export interface DemoComponentTitleInfoMessageProps {
+type DemoComponentTitleInfoMessageProps = {
     /** Component name */
     name: string;
 
@@ -12,13 +14,13 @@ export interface DemoComponentTitleInfoMessageProps {
 
     /** Hide suppress common props message */
     hidePropsNotice?: boolean;
-}
+};
 
 /** Title info message about further demo of component use */
-const DemoComponentTitleInfoMessage = ({
+const DemoComponentTitleInfoMessage: FC<DemoComponentTitleInfoMessageProps> = ({
     name, description,
     hidePropsNotice = false,
-}: DemoComponentTitleInfoMessageProps): JSX.Element => {
+}) => {
     return (
         <div className="block">
             <h4 className="title is-4">

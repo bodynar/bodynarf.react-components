@@ -12,7 +12,10 @@ type CodeExampleProps = {
     /** Code to highlight */
     code: string;
 
-    /** Highlight language */
+    /**
+     * Highlight language
+     * @default tsx
+     */
     language?: BundledLanguage;
 
     /**

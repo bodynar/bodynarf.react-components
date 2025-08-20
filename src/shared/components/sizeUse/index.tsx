@@ -1,10 +1,12 @@
+import { FC, ReactNode } from "react";
+
 import { ElementSize } from "@bodynarf/react.components";
 import Dropdown from "@bodynarf/react.components/components/dropdown";
 
 import { Sizes, useSizeSelection } from "../..";
 
 /** Component size use case props type */
-interface ComponentSizeCaseProps {
+type ComponentSizeCaseProps = {
     /** Caption */
     caption: string;
 
@@ -18,15 +20,15 @@ interface ComponentSizeCaseProps {
     componentProvider: (size: ElementSize) => React.ReactNode;
 
     /** Code to represent current size */
-    codeProvider: (id: string) => string;
-}
+    codeProvider: (id: string) => ReactNode;
+};
 
 /** Component size variants case */
-const ComponentSizeCase = ({
+const ComponentSizeCase: FC<ComponentSizeCaseProps> = ({
     caption, captionIsCode = false,
     description,
     codeProvider, componentProvider,
-}: ComponentSizeCaseProps): JSX.Element => {
+}) => {
     const sizeHookValues = useSizeSelection();
 
     return (
@@ -42,9 +44,14 @@ const ComponentSizeCase = ({
                 <p style={{ whiteSpace: "pre-line" }}>
                     {description}
                 </p>
+
                 <br />
-                <div className="columns">
-                    <div className="column is-2">
+
+                <div className="columns mt-0">
+                    <div className="column is-6">
+                        <span className="mb-2 is-block is-italic has-text-grey">
+                            Component:
+                        </span>
                         <Dropdown
                             hideOnOuterClick
                             items={Sizes.selectableItems}
@@ -53,15 +60,17 @@ const ComponentSizeCase = ({
                             placeholder="Size"
                             deselectable={false}
                         />
+                        <div className="block mt-2">
+                            {componentProvider(sizeHookValues.value)}
+                        </div>
                     </div>
-                    <div className="column">
-                        <pre>
-                            {codeProvider(Sizes.keys[+sizeHookValues.selectedValue!.id])}
-                        </pre>
+                    <div className="column is-6">
+                        <span className="mb-2 is-block is-italic has-text-grey">
+                            Code:
+                        </span>
+                        {codeProvider(Sizes.keys[+sizeHookValues.selectedValue!.id])}
                     </div>
                 </div>
-
-                {componentProvider(sizeHookValues.value)}
             </div>
         </>
     );

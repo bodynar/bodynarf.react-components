@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import { isNullOrUndefined } from "@bodynarf/utils";
+import { isNullish } from "@bodynarf/utils";
 
 import { ElementColor, ElementPosition, ElementSize, SelectableItem } from "@bodynarf/react.components";
 
@@ -52,11 +52,10 @@ export const useGenericSelection = <TValue>(lookupValues: Array<SelectableItem>)
 
     const onItemSelect = useCallback(
         (item?: SelectableItem) => {
-            if (isNullOrUndefined(item)) {
+            if (isNullish(item)) {
                 return;
             }
 
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             setItem(item!);
         }, []);
 

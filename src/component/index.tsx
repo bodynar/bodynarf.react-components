@@ -26,7 +26,7 @@ function App() {
             </aside>
             <main
                 ref={contentRef}
-                className={`column box ${styles.content} py-5 pl-5`}
+                className={`column box ${styles.content} pt-5 pl-5`}
             >
                 <Routes>
                     <Route path="*" element={<Navigate to="/home" replace />} />
