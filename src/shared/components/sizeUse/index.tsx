@@ -50,7 +50,13 @@ const ComponentSizeCase: FC<ComponentSizeCaseProps> = ({
                 <div className="columns mt-0">
                     <div className="column is-6">
                         <span className="mb-2 is-block is-italic has-text-grey">
-                            Component:
+                            Code:
+                        </span>
+                        {codeProvider(Sizes.keys[+sizeHookValues.selectedValue!.id])}
+                    </div>
+                    <div className="column is-6">
+                        <span className="mb-2 is-block is-italic has-text-grey">
+                            Result:
                         </span>
                         <Dropdown
                             hideOnOuterClick
@@ -63,12 +69,6 @@ const ComponentSizeCase: FC<ComponentSizeCaseProps> = ({
                         <div className="block mt-2">
                             {componentProvider(sizeHookValues.value)}
                         </div>
-                    </div>
-                    <div className="column is-6">
-                        <span className="mb-2 is-block is-italic has-text-grey">
-                            Code:
-                        </span>
-                        {codeProvider(Sizes.keys[+sizeHookValues.selectedValue!.id])}
                     </div>
                 </div>
             </div>

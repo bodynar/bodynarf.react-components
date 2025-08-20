@@ -49,7 +49,13 @@ const ComponentColorCase: FC<ComponentColorCaseProps> = ({
                 <div className="columns mt-0">
                     <div className="column is-6">
                         <span className="mb-2 is-block is-italic has-text-grey">
-                            Component:
+                            Code:
+                        </span>
+                        {codeProvider(Colors.keys[+colorHookValues.selectedValue!.id])}
+                    </div>
+                    <div className="column is-6">
+                        <span className="mb-2 is-block is-italic has-text-grey">
+                            Result:
                         </span>
                         <Dropdown
                             hideOnOuterClick
@@ -62,12 +68,6 @@ const ComponentColorCase: FC<ComponentColorCaseProps> = ({
                         <div className="block mt-2">
                             {componentProvider(colorHookValues.value)}
                         </div>
-                    </div>
-                    <div className="column is-6">
-                        <span className="mb-2 is-block is-italic has-text-grey">
-                            Code:
-                        </span>
-                        {codeProvider(Colors.keys[+colorHookValues.selectedValue!.id])}
                     </div>
                 </div>
             </div>

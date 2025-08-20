@@ -44,15 +44,15 @@ const ComponentUseCase: FC<ComponentUseCaseProps> = ({
                 <div className="columns mt-0">
                     <div className="column is-6">
                         <span className="mb-2 is-block is-italic has-text-grey">
-                            Component:
-                        </span>
-                        {children}
-                    </div>
-                    <div className="column is-6">
-                        <span className="mb-2 is-block is-italic has-text-grey">
                             Code:
                         </span>
                         {code}
+                    </div>
+                    <div className="column is-6">
+                        <span className="mb-2 is-block is-italic has-text-grey">
+                            Result:
+                        </span>
+                        {children}
                     </div>
                 </div>
             </div>
