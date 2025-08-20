@@ -6,6 +6,7 @@ import AnchorComponent from "@bodynarf/react.components/components/anchor";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
+import ObsoleteWarning from "@app/sharedComponents/obsoleteWarning";
 
 /** Anchor component demo */
 function Anchor() {
@@ -23,6 +24,11 @@ function Anchor() {
     return (
         <section>
             <DemoComponentTitleInfoMessage name="Anchor" hidePropsNotice />
+
+            <ObsoleteWarning
+                version="1.12.7"
+                recommendation={<>It is recommended to replace it with a standard <code>&lt;a /&gt;</code> element.</>}
+            />
 
             <ComponentUseCase
                 caption="Minimal use"
