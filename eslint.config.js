@@ -40,7 +40,6 @@ export default tseslint.config([
 		},
 		rules: {
 			"react/react-in-jsx-scope": 0,
-			"react/react-in-jsx-scope": 0,
 			"no-unused-vars": 0,
 			"react/jsx-indent": 0,
 			"react/jsx-no-literals": 0,
@@ -58,6 +57,8 @@ export default tseslint.config([
 			"react/jsx-props-no-multi-spaces": 0,
 			"react/hook-use-state": 0,
 			"react/jsx-indent-props": 0,
+			"react/jsx-no-bind": 0,
+			"react/no-unstable-nested-components": 0,
 			"react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
 			"react/jsx-filename-extension": [
 				"warn",

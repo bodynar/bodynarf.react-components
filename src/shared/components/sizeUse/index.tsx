@@ -37,8 +37,11 @@ const ComponentSizeCase: FC<ComponentSizeCaseProps> = ({
             <div className="block">
                 <h5 className="subtitle is-5">
                     {captionIsCode
-                        ? <code>{caption}</code>
-                        : <>{caption}</>
+                        ?
+                        <code>
+                            {caption}
+                        </code>
+                        : caption
                     }
                 </h5>
                 <p style={{ whiteSpace: "pre-line" }}>
@@ -61,7 +64,7 @@ const ComponentSizeCase: FC<ComponentSizeCaseProps> = ({
                         <Dropdown
                             hideOnOuterClick
                             items={Sizes.selectableItems}
-                            onSelect={sizeHookValues.onValueSelect}
+                            onSelect={sizeHookValues.handleOnSelect}
                             value={sizeHookValues.selectedValue}
                             placeholder="Size"
                             deselectable={false}

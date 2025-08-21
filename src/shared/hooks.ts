@@ -15,7 +15,7 @@ export interface LookupSelectionParams<T> {
     value: T;
 
     /** Handler of value selection */
-    onValueSelect: (lookupValue?: SelectableItem) => void;
+    handleOnSelect: (lookupValue?: SelectableItem) => void;
 }
 
 /**
@@ -64,6 +64,6 @@ export const useGenericSelection = <TValue>(lookupValues: Array<SelectableItem>)
     return {
         selectedValue: item,
         value,
-        onValueSelect: onItemSelect
+        handleOnSelect: onItemSelect
     };
 };

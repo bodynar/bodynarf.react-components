@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { FC, useCallback, useState } from "react";
 
 import AccordionComponent from "@bodynarf/react.components/components/accordion";
 
@@ -9,7 +9,7 @@ import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
 
 /** Accordion component demo */
-function Accordion() {
+const Accordion: FC = () => {
     const [text, setText] = useState("");
     const appendText = useCallback(
         (collapsed: boolean) => setText(
@@ -23,22 +23,29 @@ function Accordion() {
 
     return (
         <section>
-            <DemoComponentTitleInfoMessage name="Accordion" hidePropsNotice />
+            <DemoComponentTitleInfoMessage
+                name="Accordion"
+                hidePropsNotice
+                description="Accordion is a collapsible container component that helps organize content into sections. Each accordion has a header (caption) that can be clicked to expand or collapse its content.
+It supports different sizes, colors, and can be controlled programmatically through props"
+            />
 
             <ComponentUseCase
                 caption="Minimal use"
                 description="Minimal configuration requires only caption"
-                code={<CodeExample
-                    code={[
-                        `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
-                        "",
-                        "/* ... */",
-                        "",
-                        `<AccordionComponent caption="Header">`,
-                        "    Content",
-                        "</AccordionComponent>"
-                    ].join("\n")}
-                />}
+                code={
+                    <CodeExample
+                        code={[
+                            `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<AccordionComponent caption="Header">`,
+                            "    Content",
+                            "</AccordionComponent>"
+                        ].join("\n")}
+                    />
+                }
             >
                 <AccordionComponent
                     caption="Header"
@@ -51,17 +58,19 @@ function Accordion() {
                 captionIsCode
                 caption="defaultExpanded"
                 description="The accordion will be rendered expanded by default"
-                code={<CodeExample
-                    code={[
-                        `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
-                        "",
-                        "/* ... */",
-                        "",
-                        `<AccordionComponent caption="Header" defaultExpanded>`,
-                        "    Content",
-                        "</AccordionComponent>"
-                    ].join("\n")}
-                />}
+                code={
+                    <CodeExample
+                        code={[
+                            `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<AccordionComponent caption="Header" defaultExpanded>`,
+                            "    Content",
+                            "</AccordionComponent>"
+                        ].join("\n")}
+                    />
+                }
             >
                 <AccordionComponent
                     defaultExpanded
@@ -133,19 +142,21 @@ function Accordion() {
                 captionIsCode
                 caption="onToggle"
                 description="Handle accordion expand/collapse state changes"
-                code={<CodeExample
-                    code={[
-                        `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
-                        "",
-                        "/* ... */",
-                        "const TOGGLE_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
-                        "",
-                        "",
-                        `<AccordionComponent caption="onToggle handler" onToggle={TOGGLE_HANDLE_FN}>`,
-                        "    Content",
-                        "</AccordionComponent>"
-                    ].join("\n")}
-                />}
+                code={
+                    <CodeExample
+                        code={[
+                            `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
+                            "",
+                            "/* ... */",
+                            "const TOGGLE_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
+                            "",
+                            "",
+                            `<AccordionComponent caption="onToggle handler" onToggle={TOGGLE_HANDLE_FN}>`,
+                            "    Content",
+                            "</AccordionComponent>"
+                        ].join("\n")}
+                    />
+                }
             >
                 <AccordionComponent
                     caption="onToggle handler"
@@ -159,6 +170,6 @@ function Accordion() {
             </ComponentUseCase>
         </section>
     );
-}
+};
 
 export default Accordion;

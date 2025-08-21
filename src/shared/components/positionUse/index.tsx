@@ -1,10 +1,12 @@
+import { FC, ReactNode } from "react";
+
 import { ElementPosition } from "@bodynarf/react.components";
 import Dropdown from "@bodynarf/react.components/components/dropdown";
 
 import { Positions, usePositionSelection } from "../..";
 
 /** Component size use case props type */
-interface ComponentSizeCaseProps {
+type ComponentSizeCaseProps = {
     /** Caption */
     caption: string;
 
@@ -12,21 +14,21 @@ interface ComponentSizeCaseProps {
     captionIsCode?: boolean;
 
     /** Description */
-    description: string | React.ReactNode;
+    description: string | ReactNode;
 
     /** Example of component with current size */
-    componentProvider: (size: ElementPosition) => React.ReactNode;
+    componentProvider: (size: ElementPosition) => ReactNode;
 
     /** Code to represent current size */
-    codeProvider: (id: string) => string;
-}
+    codeProvider: (id: string) => ReactNode;
+};
 
 /** Component position variants case */
-const ComponentPositionCase = ({
+const ComponentPositionCase: FC<ComponentSizeCaseProps> = ({
     caption, captionIsCode = false,
     description,
     codeProvider, componentProvider,
-}: ComponentSizeCaseProps): JSX.Element => {
+}) => {
     const hookValues = usePositionSelection();
 
     return (
@@ -35,33 +37,42 @@ const ComponentPositionCase = ({
             <div className="block">
                 <h5 className="subtitle is-5">
                     {captionIsCode
-                        ? <code>{caption}</code>
-                        : <>{caption}</>
+                        ?
+                        <code>
+                            {caption}
+                        </code>
+                        : caption
                     }
                 </h5>
                 <p style={{ whiteSpace: "pre-line" }}>
                     {description}
                 </p>
                 <br />
-                <div className="columns">
-                    <div className="column is-2">
+
+                <div className="columns mt-0">
+                    <div className="column is-6">
+                        <span className="mb-2 is-block is-italic has-text-grey">
+                            Code:
+                        </span>
+                        {codeProvider(Positions.keys[+hookValues.selectedValue!.id])}
+                    </div>
+                    <div className="column is-6">
+                        <span className="mb-2 is-block is-italic has-text-grey">
+                            Result:
+                        </span>
                         <Dropdown
                             hideOnOuterClick
                             items={Positions.selectableItems}
-                            onSelect={hookValues.onValueSelect}
+                            onSelect={hookValues.handleOnSelect}
                             value={hookValues.selectedValue}
                             placeholder="Size"
                             deselectable={false}
                         />
-                    </div>
-                    <div className="column">
-                        <pre>
-                            {codeProvider(Positions.keys[+hookValues.selectedValue!.id])}
-                        </pre>
+                        <div className="block mt-2">
+                            {componentProvider(hookValues.value)}
+                        </div>
                     </div>
                 </div>
-
-                {componentProvider(hookValues.value)}
             </div>
         </>
     );

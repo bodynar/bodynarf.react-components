@@ -60,7 +60,7 @@ const ComponentColorCase: FC<ComponentColorCaseProps> = ({
                         <Dropdown
                             hideOnOuterClick
                             items={Colors.selectableItems}
-                            onSelect={colorHookValues.onValueSelect}
+                            onSelect={colorHookValues.handleOnSelect}
                             value={colorHookValues.selectedValue}
                             placeholder="Color"
                             deselectable={false}
