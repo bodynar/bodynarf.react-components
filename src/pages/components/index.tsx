@@ -10,6 +10,7 @@ import Tabs from "./tabs";
 import Search from "./search";
 import Paginator from "./paginator";
 import Multiselect from "./multiselect";
+import Breadcrumbs from "./breadcrumbs";
 
 const components: MenuItem = {
     name: "component-group",
@@ -64,6 +65,11 @@ const components: MenuItem = {
             path: "/components/paginator",
             caption: "Paginator",
             component: <Paginator />
+        },
+        {
+            path: "/components/breadcrumbs",
+            caption: "Breadcrumbs",
+            component: <Breadcrumbs />
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };
