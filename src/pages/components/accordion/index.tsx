@@ -145,6 +145,7 @@ It supports different sizes, colors, and can be controlled programmatically thro
                 code={
                     <CodeExample
                         code={[
+                            `import { useCallback } from "react"`,
                             `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
                             "",
                             "/* ... */",

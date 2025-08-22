@@ -9,9 +9,6 @@ type ComponentEnumCaseProps = {
     /** Caption */
     caption: string;
 
-    /** Lookup placeholder */
-    placeholder: string;
-
     /** Is caption must be highlighted as code */
     captionIsCode?: boolean;
 
@@ -36,7 +33,7 @@ const ComponentEnumCase: FC<ComponentEnumCaseProps> = ({
     caption, captionIsCode = false,
     description,
     codeProvider, componentProvider,
-    lookupValues, enumNames, placeholder,
+    lookupValues, enumNames,
 }) => {
     const hookValues = useGenericSelection<never>(lookupValues);
 
@@ -71,10 +68,10 @@ const ComponentEnumCase: FC<ComponentEnumCaseProps> = ({
                             Result:
                         </span>
                         <Dropdown
+                            placeholder=""
                             hideOnOuterClick
                             deselectable={false}
                             items={lookupValues}
-                            placeholder={placeholder}
                             value={hookValues.selectedValue}
                             onSelect={hookValues.handleOnSelect}
                         />

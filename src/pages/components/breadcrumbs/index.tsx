@@ -128,7 +128,6 @@ const Breadcrumbs: FC = () => {
                 captionIsCode
                 caption="separator"
                 enumNames={separators}
-                placeholder="Separator type"
                 lookupValues={separatorsAsSelectItems}
                 description="Item separators can have different styles"
                 codeProvider={id =>
