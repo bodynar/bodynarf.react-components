@@ -29,7 +29,10 @@ const DemoComponentTitleInfoMessage: FC<DemoComponentTitleInfoMessageProps> = ({
             {!hidePropsNotice &&
                 <span style={{ fontStyle: "italic", whiteSpace: "pre-line" }}>
                     <hr />
-                    <Icon name="exclamation-triangle-fill" className="mr-1" />
+                    <Icon
+                        name="exclamation-triangle-fill"
+                        className="mr-1"
+                    />
                     Not all props are listed bellow, mostly those that can be displayed.
                     {`\n`}
                     For a complete list of props see type definition & description
@@ -37,7 +40,10 @@ const DemoComponentTitleInfoMessage: FC<DemoComponentTitleInfoMessageProps> = ({
             }
             {!isUndefined(description)
                 &&
-                <p className="mt-4" style={{ whiteSpace: "pre-line" }}>
+                <p
+                    className="mt-4"
+                    style={{ whiteSpace: "pre-line" }}
+                >
                     {description}
                 </p>
             }

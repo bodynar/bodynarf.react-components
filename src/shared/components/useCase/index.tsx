@@ -30,8 +30,11 @@ const ComponentUseCase: FC<ComponentUseCaseProps> = ({
             <div className="block">
                 <h5 className="subtitle is-5">
                     {captionIsCode
-                        ? <code>{caption}</code>
-                        : <>{caption}</>
+                        ?
+                        <code>
+                            {caption}
+                        </code>
+                        : caption
                     }
                 </h5>
                 {typeof description === "string"
