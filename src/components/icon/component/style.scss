@@ -2,13 +2,13 @@
     transition: 0.15s ease-in-out color;
     font-size: 1rem;
 
-    &--size-small {
+    &.is-small {
         font-size: 0.85rem;
     }
-    &--size-medium {
+    &.is-medium {
         font-size: 1.25rem;
     }
-    &--size-large {
+    &.is-large {
         font-size: 2rem;
     }
 

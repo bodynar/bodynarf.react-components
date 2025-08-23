@@ -1,19 +1,13 @@
 import { FC } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullish, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, mapDataAttributes } from "@bbr/utils";
 
 import "./style.scss";
-import { IconProps } from "../..";
 
-const sizeToClassMap: Map<ElementSize, string> = new Map([
-    [ElementSize.Small, "bbr-icon--size-small"],
-    [ElementSize.Normal, ""],
-    [ElementSize.Medium, "bbr-icon--size-medium"],
-    [ElementSize.Large, "bbr-icon--size-large"]
-]);
+import { IconProps } from "../..";
 
 /**
  * Icon component. Based on bootstrap icons
@@ -29,7 +23,8 @@ const Icon: FC<IconProps> = ({
         "bi",
         `bi-${name}`,
         className,
-        sizeToClassMap.has(size) ? sizeToClassMap.get(size) : "",
+        getSizeClassName(size), // TODO: test
+        isNullish(onClick) ? undefined : "is-clickable"
     ]);
 
     const dataAttributes = isNullOrUndefined(data)
