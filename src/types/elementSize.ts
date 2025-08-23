@@ -1,4 +1,4 @@
-/** Input component size variety */
+/** Component size variety */
 export enum ElementSize {
     /** Font size is 0.75rem */
     Small = "small",
