@@ -93,7 +93,7 @@ const Button: FC = () => {
             </ComponentUseCase>
 
             <ComponentUseCase
-                caption="Minimal use"
+                caption="Icon and caption"
                 description="An icon and a caption can be combined together"
                 code={
                     <CodeExample
