@@ -1,6 +1,6 @@
 import { BaseElementProps, ElementIcon, ElementSize } from "@bbr/types";
 
-export interface ButtonProps extends BaseElementProps {
+export type ButtonProps = BaseElementProps & {
     /** Button displaying text */
     caption?: string;
 
@@ -33,7 +33,7 @@ export interface ButtonProps extends BaseElementProps {
 
     /** Click action handler */
     onClick?: () => void;
-}
+};
 
 /** Button types according to Bulma framework */
 export type ButtonType = // TODO: to enum
@@ -53,12 +53,12 @@ export type ButtonType = // TODO: to enum
     ;
 
 /** Simple button props type */
-export interface SimpleButtonProps extends Omit<ButtonProps, "className"> {
+export type SimpleButtonProps = Omit<ButtonProps, "className"> & {
     /** Button class name*/
     className: string;
-}
+};
 
-export interface ButtonWithIconProps extends SimpleButtonProps {
+export type ButtonWithIconProps = SimpleButtonProps & {
     /** Icon configuration */
     icon: ElementIcon;
-}
+};

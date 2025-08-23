@@ -1,4 +1,9 @@
+/* eslint-disable react/destructuring-assignment */
+import { FC } from "react";
+
 import { isNullOrEmpty, isNullOrUndefined, getClassName } from "@bodynarf/utils";
+
+import { getSizeClassName } from "@bbr/utils";
 
 import "./style.scss";
 
@@ -10,7 +15,7 @@ import SimpleButton from "../components/simpleButton";
  * Button component
  * @throws Caption is not defined and icon configuration is not defined at the same time
  */
-export default function Button(props: ButtonProps): JSX.Element {
+const Button: FC<ButtonProps> = (props: ButtonProps) => {
     if (isNullOrEmpty(props.caption) && isNullOrUndefined(props.icon)) {
         throw new Error("No button content provided.");
     }
@@ -29,7 +34,7 @@ export default function Button(props: ButtonProps): JSX.Element {
         props.className,
         `is-${props.type}`,
         light ? "is-light" : "",
-        !isNullOrUndefined(props.size) ? `is-${props.size}` : "",
+        getSizeClassName(props.size),
         outlined ? "is-outlined" : "",
         rounded ? "is-rounded" : "",
         isLoading ? "is-loading" : "",
@@ -52,4 +57,6 @@ export default function Button(props: ButtonProps): JSX.Element {
             />
         );
     }
-}
+};
+
+export default Button;
