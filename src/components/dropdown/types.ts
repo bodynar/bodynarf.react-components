@@ -1,3 +1,5 @@
+import { Optional } from "@bodynarf/utils";
+
 import { BaseElementProps, HintConfiguration, ValidationState, LabelConfiguration, ElementIcon } from "@bbr/types";
 
 /** Dropdown item */
@@ -23,22 +25,22 @@ export interface DropdownProps extends BaseElementProps {
     /** Items which can be selected */
     items: Array<SelectableItem>;
 
-    /** Input element placeholder */
-    placeholder: string;
-
     /**
      * Action to update selected value, which stored outside
     */
     onSelect: (item?: SelectableItem) => void;
 
+    /** Input element placeholder */
+    placeholder?: string;
+
     /**
      * Selected value.
      * Must be stored outside
     */
-    value?: SelectableItem;
+    value: Optional<SelectableItem>;
 
     /** Hide dropdown list when its opened and user click outside */
-    hideOnOuterClick: boolean;
+    hideOnOuterClick?: boolean;
 
     /** Can user deselect */
     deselectable?: boolean;

@@ -31,10 +31,10 @@ const DropdownLabelWithSearch: FC<DropdownLabelWithSearchProps> = ({
     onClick, selectedItem,
 }) => {
     const elClassName = getClassName([
+        "button",
         "dropdown-trigger",
         "bbr-dropdown__label",
         isNullOrEmpty(className) ? "" : `${className}--md`, // "success--md" OR "danger--md", check dropdown/styles.scss
-        "button",
         "bbr-dropdown__search"
     ]);
 
@@ -68,9 +68,12 @@ const DropdownLabelWithSearch: FC<DropdownLabelWithSearchProps> = ({
             className={elClassName}
             onClick={containerOnClick}
         >
-            {deselectable && !isNullOrUndefined(selectedItem)
+            {!!deselectable && !isNullOrUndefined(selectedItem)
                 &&
-                <Icon name="plus-lg" size={ElementSize.Medium} />
+                <Icon
+                    name="plus-lg"
+                    size={ElementSize.Medium}
+                />
             }
             <input
                 type="text"
@@ -79,7 +82,10 @@ const DropdownLabelWithSearch: FC<DropdownLabelWithSearchProps> = ({
                 className={inputClassName}
                 value={selectedItem?.displayValue ?? lastSearch ?? ""}
             />
-            <Icon name="arrow-down" size={ElementSize.Medium} />
+            <Icon
+                name="arrow-down"
+                size={ElementSize.Medium}
+            />
         </div>
     );
 };

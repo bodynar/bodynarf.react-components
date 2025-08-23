@@ -19,8 +19,8 @@ type DropdownCompactProps = DropdownProps & {
 /** Dropdown component without label */
 const DropdownCompact: FC<DropdownCompactProps> = ({
     items, value, onSelect,
-    hideOnOuterClick, listMaxHeight,
-    placeholder, noDataText = "No items found", noDataByQuery = "No items found by specified search",
+    hideOnOuterClick = false, listMaxHeight,
+    placeholder = "", noDataText = "No items found", noDataByQuery = "No items found by specified search",
 
     compact = false, disabled = false, deselectable = false, searchable = false,
 
@@ -150,7 +150,11 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
                 />
                 <div className="dropdown-menu">
                     {filteredItems.length > 0
-                        ? <ul className="dropdown-content" style={{ maxHeight: listMaxHeight }}>
+                        ?
+                        <ul
+                            className="dropdown-content"
+                            style={{ maxHeight: listMaxHeight }}
+                        >
                             {filteredItems.map(item =>
                                 <DropdownItem
                                     key={item.id}
@@ -161,7 +165,8 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
                                 />
                             )}
                         </ul>
-                        : <span className="dropdown-content dropdown-item">
+                        :
+                        <span className="dropdown-content dropdown-item is-italic has-text-grey">
                             {isNullOrEmpty(searchValue) ? noDataText : noDataByQuery}
                         </span>
                     }

@@ -22,11 +22,13 @@ const DropdownItem = ({
     item, selected, onClick
 }: DropdownItemProps): JSX.Element => {
     if (!isNullOrUndefined(item.icon)) {
-        return <DropdownItemWithIcon
-            item={item}
-            selected={selected}
-            onClick={onClick}
-        />;
+        return (
+            <DropdownItemWithIcon
+                item={item}
+                selected={selected}
+                onClick={onClick}
+            />
+        );
     }
 
     const className = getClassName([
@@ -53,6 +55,7 @@ const DropdownItem = ({
 export default DropdownItem;
 
 /** Single item in dropdown component with icon */
+// eslint-disable-next-line react/no-multi-comp
 const DropdownItemWithIcon = ({
     item, selected, onClick
 }: DropdownItemProps): JSX.Element => {

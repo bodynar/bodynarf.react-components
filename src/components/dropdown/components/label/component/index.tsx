@@ -47,32 +47,38 @@ const DropdownLabel: FC<DropdownLabelProps> = ({
     searchable, onSearchChange, lastSearch, isListVisible,
 }): JSX.Element => {
     if (searchable) {
-        return <DropdownLabelWithSearch
-            caption={caption}
-            onClick={onClick}
-            className={className}
-            onSearchChange={onSearchChange!}
-            deselectable={deselectable}
-            selectedItem={selectedItem}
-            lastSearch={lastSearch!}
-            isListVisible={isListVisible}
-        />;
+        return (
+            <DropdownLabelWithSearch
+                caption={caption}
+                onClick={onClick}
+                className={className}
+                onSearchChange={onSearchChange!}
+                deselectable={deselectable}
+                selectedItem={selectedItem}
+                lastSearch={lastSearch!}
+                isListVisible={isListVisible}
+            />
+        );
     }
 
     if (isNullOrUndefined(selectedItem)) {
-        return <EmptyLabel
-            caption={caption}
-            onClick={onClick}
-            className={className}
-        />;
+        return (
+            <EmptyLabel
+                caption={caption}
+                onClick={onClick}
+                className={className}
+            />
+        );
     }
 
-    return <SelectedItemLabel
-        deselectable={deselectable}
-        className={className}
-        onClick={onClick}
-        selectedItem={selectedItem}
-    />;
+    return (
+        <SelectedItemLabel
+            deselectable={deselectable}
+            className={className}
+            onClick={onClick}
+            selectedItem={selectedItem}
+        />
+    );
 };
 
 export default DropdownLabel;
