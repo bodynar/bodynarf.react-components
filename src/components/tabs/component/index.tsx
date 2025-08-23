@@ -3,19 +3,12 @@ import { useCallback, useState, MouseEvent, useEffect, useRef, FC } from "react"
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementPosition, ElementSize } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getPositionClassName, mapDataAttributes } from "@bbr/utils";
 
 import "./style.scss";
 
 import { TabItem, TabsProps, TabsStyle } from "..";
 import TabItemComponent from "../components/item";
-
-/** Tab position to element class name map */
-const positionToClassNameMap: Map<ElementPosition, string> = new Map([
-    [ElementPosition.Left, ""],
-    [ElementPosition.Center, "is-centered"],
-    [ElementPosition.Right, "is-right"],
-]);
 
 /**
  * Tabs panel
@@ -78,7 +71,7 @@ const Tabs: FC<TabsProps> = ({
         "bbr-tabs",
         "tabs",
         className,
-        positionToClassNameMap.get(position),
+        getPositionClassName(position),
         getSizeClassName(size, [ElementSize.Normal]),
         style,
         fullWidth ? "is-fullwidth" : "",
