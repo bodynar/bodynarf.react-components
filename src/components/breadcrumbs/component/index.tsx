@@ -1,12 +1,15 @@
-import { FC } from "react";
+/* eslint-disable react/no-multi-comp */
+import { FC, ReactNode } from "react";
 
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { mapDataAttributes } from "@bbr/utils";
+import { getPositionClassName, mapDataAttributes } from "@bbr/utils";
 import { ElementIcon, ElementPosition, ElementSize } from "@bbr/types";
 import Icon from "@bbr/components/icon";
 
 import { BreadCrumb, BreadcrumbsProps } from "..";
+
+const defaultElementGenerator: (bc: BreadCrumb) => ReactNode = ((bc) => <BreadCrumbItem item={bc} />);
 
 /**
  * Breadcrumbs navigation panel
@@ -15,12 +18,12 @@ import { BreadCrumb, BreadcrumbsProps } from "..";
 const BreadCrumbs: FC<BreadcrumbsProps> = ({
     items,
     position = ElementPosition.Left, size = ElementSize.Normal, separator = "arrow",
-    elementGenerator = ((bc) => <BreadCrumbItem item={bc} />),
+    elementGenerator = defaultElementGenerator,
 
     className, title, data,
 }) => {
     if (items.length <= 1) {
-        return <></>;
+        return null;
     }
 
     const elClassName = getClassName([
@@ -29,7 +32,7 @@ const BreadCrumbs: FC<BreadcrumbsProps> = ({
         className,
         size === ElementSize.Normal ? undefined : `is-${size}`,
         `has-${separator}-separator`,
-        position === ElementPosition.Left ? undefined : `is-${position}`,
+        getPositionClassName(position),
     ]);
 
     const dataAttributes = isNullOrUndefined(data)
@@ -45,10 +48,10 @@ const BreadCrumbs: FC<BreadcrumbsProps> = ({
             {...dataAttributes}
         >
             <ul>
-                {items.map(breadCrumb =>
+                {items.map((breadCrumb, i, a) =>
                     <li
-                        key={breadCrumb.path}
-                        className={breadCrumb.active ? "is-active" : undefined}
+                        key={breadCrumb.href ?? breadCrumb.path}
+                        className={i === a.length - 1 ? "is-active" : undefined}
                     >
                         {elementGenerator(breadCrumb)}
                     </li>
@@ -76,8 +79,7 @@ const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
     if (isNullOrUndefined(icon)) {
         return (
             <a
-                href={item.path}
-                aria-current={item.active ? "page" : undefined}
+                href={item.href ?? item.path}
             >
                 {item.caption}
             </a>
@@ -87,8 +89,7 @@ const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
     if (icon?.position === ElementPosition.Right) {
         return (
             <a
-                href={item.path}
-                aria-current={item.active ? "page" : undefined}
+                href={item.href ?? item.path}
             >
                 {item.caption}
                 <Icon {...icon!} />
@@ -98,8 +99,7 @@ const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
 
     return (
         <a
-            href={item.path}
-            aria-current={item.active ? "page" : undefined}
+            href={item.href ?? item.path}
         >
 
             <Icon {...icon!} />

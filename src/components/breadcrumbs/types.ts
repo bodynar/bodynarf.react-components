@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 import { BaseElementProps, ElementIcon, ElementPosition, ElementSize } from "@bbr/types";
 
 /** Breadcrumb item */
@@ -11,14 +13,19 @@ export interface BreadCrumb {
     /** Displayable caption */
     caption: string;
 
-    /** Page address */
+    /**
+     * Page address
+     * @deprecated Since v1.2.0 Use `href`
+     */
     path: string;
 
-    // TODO: use href
-    // /** Link address */
-    // href: string;
+    /** Link address */
+    href: string;
 
-    /** Is current page. Will be not clickable */
+    /**
+     * Is current page. Will be not clickable
+     * @deprecated Since v1.2.0 Not used anymore
+     */
     active: boolean;
 
     /** Bootstrap icon class name */
@@ -26,7 +33,7 @@ export interface BreadCrumb {
 }
 
 /** Breadcrumbs component props type */
-export interface BreadcrumbsProps extends BaseElementProps {
+export type BreadcrumbsProps = BaseElementProps & {
     /** Breadcrumbs items */
     items: Array<BreadCrumb>;
 
@@ -41,12 +48,12 @@ export interface BreadcrumbsProps extends BaseElementProps {
      *         </span>
      *     }
      *     <span>
-     *         {breadCrumb.title}
+     *         {breadCrumb.caption}
      *     </span>
      *  </div>
      * }
     */
-    elementGenerator?: (bc: BreadCrumb) => JSX.Element;
+    elementGenerator?: (bc: BreadCrumb) => ReactNode;
 
     /** Panel size */
     size?: ElementSize;
@@ -56,4 +63,4 @@ export interface BreadcrumbsProps extends BaseElementProps {
 
     /** Items separator. By default `arrow` */
     separator?: "arrow" | "bullet" | "dot" | "succeeds";
-}
+};
