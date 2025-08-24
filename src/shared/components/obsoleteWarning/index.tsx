@@ -24,8 +24,14 @@ const ObsoleteWarning: FC<ObsoleteWarningProps> = ({
     return (
         <article className={`message is-${state}`}>
             <div className="message-body">
-                <Icon name="exclamation-triangle-fill" /> Warning!
-                This component has been marked as obsolete since version <code>{version}</code>
+                <Icon name="exclamation-triangle-fill" />
+                {` `}
+                Warning!
+                This component has been marked as obsolete since version
+                {` `}
+                <code>
+                    {version}
+                </code>
                 <br />
                 {recommendation}
             </div>
