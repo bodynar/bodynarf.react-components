@@ -12,7 +12,6 @@ export type MultiselectProps = Omit<
     DropdownProps,
     | "items" | "onSelect"
     | "value" | "deselectable"
-    | "searchable"
 > & {
     /** Items which can be selected */
     items: Array<MultiselectItem>;
@@ -37,16 +36,6 @@ export type MultiselectProps = Omit<
      * @description Supports only 1 string parameter for number of selected items. Default is `{0} items selected`
      */
     selectionCaption?: string;
-
-    /**
-     * Text which would be displayed when search query applied and no items found
-     */
-    noDataByQuery?: string;
-
-    /**
-     * Is search through items enabled. Default is `true`
-     */
-    searchable?: boolean;
 
     /** Customization for checkbox */
     checkboxConfig?: Pick<
