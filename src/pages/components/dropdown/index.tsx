@@ -239,6 +239,7 @@ const Dropdown: FC = () => {
                     items={cities}
                     onSelect={setItem}
                     listMaxHeight="5rem"
+
                     hideOnOuterClick
                     placeholder="Some placeholder text"
                 />
@@ -283,6 +284,7 @@ const Dropdown: FC = () => {
                     value={item}
                     items={cities}
                     onSelect={setItem}
+
                     hideOnOuterClick
                     placeholder="Some placeholder text"
                 />
@@ -291,7 +293,7 @@ const Dropdown: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="disabled"
-                description="Option to disable the component functionality and render it in a disabled state. Disabled by default"
+                description="Option to disable the component functionality and render it in a disabled state. Option disabled by default"
                 code={
                     <CodeExample
                         code={[
@@ -327,6 +329,7 @@ const Dropdown: FC = () => {
                     value={item}
                     items={cities}
                     onSelect={setItem}
+
                     hideOnOuterClick
                     placeholder="Some placeholder text"
                 />
@@ -371,6 +374,7 @@ const Dropdown: FC = () => {
                     items={cities}
                     onSelect={setItem}
                     label={{ caption: "Label caption", horizontal: true }}
+
                     hideOnOuterClick
                     placeholder="Some placeholder text"
                 />
@@ -415,6 +419,7 @@ const Dropdown: FC = () => {
                     value={undefined}
                     onSelect={() => { }}
                     noDataText="NOTHING HERE"
+
                     hideOnOuterClick
                     placeholder="Some placeholder text"
                 />
@@ -459,6 +464,7 @@ const Dropdown: FC = () => {
                     value={item}
                     items={cities}
                     onSelect={setItem}
+
                     hideOnOuterClick
                     placeholder="Some placeholder text"
                 />
@@ -493,7 +499,7 @@ const Dropdown: FC = () => {
                             '    value={item}',
                             '    items={cities}',
                             '    onSelect={setItem}',
-                            '    noDataByQuery="No items found"',
+                            '    noDataByQuery="No ItEmS fOuNd"',
                             '/>',
                         ].join("\n")}
                     />
@@ -504,7 +510,8 @@ const Dropdown: FC = () => {
                     value={item}
                     items={cities}
                     onSelect={setItem}
-                    noDataByQuery="No items found"
+                    noDataByQuery="No ItEmS fOuNd"
+
                     hideOnOuterClick
                     placeholder="Some placeholder text"
                 />
@@ -552,6 +559,7 @@ const Dropdown: FC = () => {
                     value={item}
                     onSelect={setItem}
                     items={itemsWithIcons}
+
                     hideOnOuterClick
                     placeholder="Some placeholder text"
                 />

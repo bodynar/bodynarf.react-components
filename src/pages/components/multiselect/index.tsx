@@ -1,245 +1,720 @@
-import { ElementColor, ValidationStatus } from "@bodynarf/react.components";
-import MultiselectComponent from "@bodynarf/react.components/components/multiselect";
+import { FC, useCallback, useState } from "react";
+
+import { emptyFn } from "@bodynarf/utils";
+import { ElementColor } from "@bodynarf/react.components";
+import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
-import CommonPropsSuppressExampleInfoMessage from "@app/sharedComponents/commonPropsSuppress";
 import ComponentUseCase from "@app/sharedComponents/useCase";
-import { emptyFn } from "@bodynarf/utils";
+import CodeExample from "@app/sharedComponents/codeExample";
 
 /** Multiselect component demo */
-function Multiselect() {
+const Multiselect: FC = () => {
+    const [onChangeResult, setOnChangeResult] = useState("");
+    const appendOnChangeResult = useCallback(
+        (item: MultiselectItem, selected: boolean) => setOnChangeResult(
+            t => t
+                + "\n"
+                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
+                + " => " + `item ${item.displayValue}: ${selected ? "selected" : "not selected"}`
+        ),
+        []
+    );
+
+    const [clearResult, setClearResult] = useState("");
+    const appendClearResult = useCallback(
+        () => setClearResult(
+            t => t
+                + "\n"
+                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
+                + " => " + "clear event"
+        ),
+        []
+    );
+
     return (
         <section>
             <DemoComponentTitleInfoMessage
+                hidePropsNotice
                 name="Multiselect"
-                description={<>
-                    In this demo all Multiselects share <b>same</b> items source and data binding to value
-                    <br />
-                    Selection state stored inside, in component. After each item select change event will be raised
-                </>}
+                description={
+                    <>
+                        On this page, instances of the component use
+                        {' '}
+                        <b>
+                            the same
+                        </b>
+                        {' '}
+                        set of items and binding to the selected value
+                        <br />
+                        Information about the selected items is stored inside the component. After the list of selected items is updated, the
+                        {' '}
+                        <code>
+                            onChange
+                        </code>
+                        {' '}
+                        event is triggered
+                    </>}
             />
+
             <ComponentUseCase
-                caption="Default"
-                code={<pre>{`const items: Array<MultiselectItem> = [ /* ... */ ];
-const onItemSelect = useCallback(() => { /* handler code */}, []);
-
-/* ... */
-
-<Multiselect
-    items={items}
-    hideOnOuterClick
-    onChange={emptyFn}
-    placeholder="Default multiselect"
-/>`}</pre>}
-                description="By default component require props that are shown in example"
-                component={<MultiselectComponent
+                caption="Minimal use"
+                description="Minimal set of props — a list of items to display and a handler function for the selection change event"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }) as MultiselectItem);",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
                     items={cities}
-                    hideOnOuterClick
                     onChange={emptyFn}
+
+                    hideOnOuterClick
                     placeholder="Default multiselect"
-                />}
-            />
-            <CommonPropsSuppressExampleInfoMessage />
-            <ComponentUseCase
-                caption="Items with pre-select state"
-                code={`MultiselectItem.selected`}
-                description="Items can be pre-selected"
-                component={
-                    <MultiselectComponent
-                        items={preSelectedItems}
-
-                        hideOnOuterClick
-                        onChange={emptyFn}
-                        placeholder="Default multiselect"
-                    />}
-            />
+                />
+            </ComponentUseCase>
 
             <ComponentUseCase
-                caption="Items with icon"
-                code={`MultiselectItem.icon`}
-                description="Items can have own icons"
-                component={
-                    <MultiselectComponent
-                        items={itemsWithIcons}
+                captionIsCode
+                caption="onChange"
+                description="Handling changes to an item’s selection state by subscribing to the onChange event"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useCallback } from "react"`,
+                            ``,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }));",
+                            "const CLICK_HANDLE_FN = useCallback((item: MultiselectItem, selected: boolean) => { /* handler fn */}, []);",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={CLICK_HANDLE_FN}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    items={cities}
+                    onChange={appendOnChangeResult}
 
-                        hideOnOuterClick
-                        onChange={emptyFn}
-                        placeholder="Default multiselect"
-                    />}
-            />
+                    hideOnOuterClick
+                    placeholder="Default multiselect"
+                />
+                <p style={{ whiteSpace: "pre-line" }}>
+                    {onChangeResult}
+                </p>
+            </ComponentUseCase>
+
             <ComponentUseCase
+                captionIsCode
+                caption="placeholder"
+                description="Option for setting placeholder text for the label when no value is selected"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }) as MultiselectItem);",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    placeholder="Multiselect with placeholder"',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    items={cities}
+                    onChange={emptyFn}
+                    placeholder="Multiselect with placeholder"
+
+                    hideOnOuterClick
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
                 caption="hideOnOuterClick"
-                code="<Multiselect hideOnOuterClick={false} />"
-                captionIsCode
-                description="Clicks outside of Multiselect will not force Multiselect to close"
-                component={<MultiselectComponent
+                description="Option to automatically hide the list when clicking outside the dropdown area. Enabled by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }) as MultiselectItem);",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    hideOnOuterClick={false}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    items={cities}
+                    onChange={emptyFn}
                     hideOnOuterClick={false}
 
-                    items={cities}
-                    onChange={emptyFn}
-                    placeholder="Default multiselect"
-                />}
-            />
-            <ComponentUseCase
-                caption="Clear all selection"
-                code="<Multiselect onClear={onClearClickHandler} />"
-                description="Multiselect allows to clear all selected items"
-                component={<MultiselectComponent
-                    onClear={emptyFn}
+                    placeholder="placeholder"
+                />
+            </ComponentUseCase>
 
-                    items={cities}
-                    onChange={emptyFn}
-                    hideOnOuterClick={false}
-                    placeholder="Default multiselect"
-                />}
-            />
             <ComponentUseCase
-                caption="searchable"
-                code="<Multiselect searchable={false} />"
                 captionIsCode
-                description="Multiselect with option to search through items. Search is on by default"
-                component={<MultiselectComponent
-                    searchable={false}
-
-                    items={cities}
-                    hideOnOuterClick
-                    onChange={emptyFn}
-                    placeholder="Default multiselect"
-                />}
-            />
-            <ComponentUseCase
                 caption="listMaxHeight"
-                code={`<Multiselect listMaxHeight="5rem" />`}
-                captionIsCode
-                description="Multiselect list height can be restricted"
-                component={<MultiselectComponent
+                description="Option to limit the maximum height of the dropdown list"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }) as MultiselectItem);",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    listMaxHeight="5rem"',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    items={cities}
+                    onChange={emptyFn}
                     listMaxHeight="5rem"
 
-                    items={cities}
+                    placeholder="placeholder"
                     hideOnOuterClick
-                    onChange={emptyFn}
-                    placeholder="Default multiselect"
-                />}
-            />
-            <ComponentUseCase
-                caption="selectionCaption"
-                code={`<Multiselect selectionCaption="registros seleccionados: {0}" />`}
-                captionIsCode
-                description="Caption for selected state could be customized, with 1 position argument. Default is '{0} items selected'"
-                component={<MultiselectComponent
-                    selectionCaption="registros seleccionados: {0}"
+                />
+            </ComponentUseCase>
 
-                    items={cities}
-                    hideOnOuterClick
-                    onChange={emptyFn}
-                    placeholder="Default multiselect"
-                />}
-            />
             <ComponentUseCase
-                caption="noDataText"
-                code={`<Multiselect noDataText="NOTHING HERE" />`}
                 captionIsCode
-                description="Caption for message when no records provided. Default is 'No items found'"
-                component={<MultiselectComponent
+                caption="compact"
+                description="Option for using a compact version of the component, which visually occupies only the width it needs. Disabled by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }) as MultiselectItem);",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    compact',
+                            '    items={cities}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    compact
+                    items={cities}
+                    onChange={emptyFn}
+
+                    placeholder="placeholder"
+                    hideOnOuterClick
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="disabled"
+                description="Option to disable the component functionality and render it in a disabled state. Option disabled by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }) as MultiselectItem);",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    disabled',
+                            '    items={cities}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    disabled
+                    items={cities}
+                    onChange={emptyFn}
+
+                    placeholder="placeholder"
+                    hideOnOuterClick
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="label"
+                description="Option to configure the label. Not set by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }) as MultiselectItem);",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    label={{ caption: "Label caption", horizontal: true }}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    items={cities}
+                    onChange={emptyFn}
+                    label={{ caption: "Label caption", horizontal: true }}
+
+                    placeholder="placeholder"
+                    hideOnOuterClick
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="noDataText"
+                description="Option to specify the text displayed when the item list is empty"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }) as MultiselectItem);",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={[]}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    noDataText="NOTHING HERE"',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    onChange={emptyFn}
+                    items={[]}
                     noDataText="NOTHING HERE"
 
-                    items={[]}
+                    placeholder="placeholder"
                     hideOnOuterClick
-                    onChange={emptyFn}
-                    placeholder="Default multiselect"
-                />}
-            />
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
+                captionIsCode
+                caption="searchable"
+                description="Option to enable case-insensitive search. Enabled by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }) as MultiselectItem);",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    searchable={false}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    items={cities}
+                    searchable={false}
+                    onChange={emptyFn}
+
+                    placeholder="placeholder"
+                    hideOnOuterClick
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
                 caption="noDataByQuery"
-                code={`<Multiselect noDataByQuery="no hay entradas para el filtro" />`}
-                captionIsCode
-                description="Caption for message when no records found by current can be customized. Default is 'No items found by specified search'. Try to search text 'some_random_not_existed'"
-                component={<MultiselectComponent
-                    noDataByQuery="no hay entradas para el filtro"
-
+                description="Option to specify the text displayed when no items match the search. Search must be enabled. Not set by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }) as MultiselectItem);",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    searchable',
+                            '    items={cities}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    noDataByQuery="No ItEmS fOuNd"',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    searchable
                     items={cities}
-                    hideOnOuterClick
                     onChange={emptyFn}
-                    placeholder="Default multiselect"
-                />}
-            />
+                    noDataByQuery="No ItEmS fOuNd"
+
+                    placeholder="placeholder"
+                    hideOnOuterClick
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
+                captionIsCode
+                caption="onClear"
+                description="Option to clear selected values. Not set by default. When subscribed to the event, a cross icon appears for clearing"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useCallback } from "react"`,
+                            ``,
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }));",
+                            "const CLEAR_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onClear={CLEAR_HANDLE_FN}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    items={cities}
+                    onChange={emptyFn}
+                    onClear={appendClearResult}
+
+                    hideOnOuterClick
+                    placeholder="Default multiselect"
+                />
+                <p style={{ whiteSpace: "pre-line" }}>
+                    {clearResult}
+                </p>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                caption="Item Icon"
+                description="It is also possible to configure a list of items with an icon"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "        icon: {",
+                            "            name: ++index % 2 === 0",
+                            '                ? "exclamation-square"',
+                            "                : `${++index % 2}-square`,",
+                            "        }",
+                            "    }));",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    onChange={emptyFn}
+                    items={itemsWithIcons}
+
+                    hideOnOuterClick
+                    placeholder="Default multiselect"
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                caption="Item pre selected state"
+                description="It is also possible to configure a list of items with an selected state"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: ++index % 4 === 0,",
+                            "    }));",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    onChange={emptyFn}
+                    items={preSelectedItems}
+
+                    hideOnOuterClick
+                    placeholder="Default multiselect"
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="selectionCaption"
+                description="The option allows you to specify a string template to display information about the number of selected items"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }));",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    selectionCaption="registros seleccionados: {0}"',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    items={cities}
+                    onChange={emptyFn}
+                    selectionCaption="registros seleccionados: {0}"
+
+                    hideOnOuterClick
+                    placeholder="Default multiselect"
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
                 caption="checkboxConfig"
-                code={`<Multiselect checkboxConfig={{ style: ElementColor.Warning, hasBackgroundColor: true, fixBackgroundColor: true }} />`}
-                captionIsCode
-                description="Checkbox for items can be customized globally"
-                component={<MultiselectComponent
-                    checkboxConfig={{ style: ElementColor.Warning, hasBackgroundColor: true, fixBackgroundColor: true }}
-
+                description=""
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        selected: false,",
+                            "    }));",
+                            "/* ... */",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    checkboxConfig={{',
+                            '        style: ElementColor.Success,',
+                            '        rounded: true,',
+                            '        hasBackgroundColor: true,',
+                            '        fixBackgroundColor: true,',
+                            '    }}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
                     items={cities}
-                    hideOnOuterClick
                     onChange={emptyFn}
-                    placeholder="Default multiselect"
-                />}
-            />
-            <ComponentUseCase
-                caption="compact"
-                code={`<Multiselect compact />`}
-                captionIsCode
-                description="Multiselect will take only that width that required by its content"
-                component={<MultiselectComponent
-                    compact
+                    checkboxConfig={{
+                        style: ElementColor.Success,
+                        rounded: true,
+                        hasBackgroundColor: true,
+                        fixBackgroundColor: true,
+                    }}
 
-                    items={cities}
                     hideOnOuterClick
-                    onChange={emptyFn}
                     placeholder="Default multiselect"
-                />}
-            />
-            <ComponentUseCase
-                caption="disabled"
-                code={`<Multiselect disabled />`}
-                captionIsCode
-                description="Multiselect will be in disabled state"
-                component={<MultiselectComponent
-                    disabled
-
-                    items={cities}
-                    hideOnOuterClick
-                    onChange={emptyFn}
-                    placeholder="Default multiselect"
-                />}
-            />
-            <ComponentUseCase
-                caption="label"
-                code={`<Multiselect label={{ caption: "Multiselect label", horizontal: true }} />`}
-                captionIsCode
-                description={<>
-                    Multiselect can have describing label. But due component structure it cannot be focused with label click
-                    {`\n`}
-                    Cannot be used with <code>compact</code> mode
-                </>}
-                component={<MultiselectComponent
-                    label={{ caption: "Multiselect label", horizontal: true }}
-
-                    items={cities}
-                    hideOnOuterClick
-                    onChange={emptyFn}
-                    placeholder="Default multiselect"
-                />}
-            />
-            <ComponentUseCase
-                caption="validationState"
-                code={`<MultiselectComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} />`}
-                captionIsCode
-                description="Multiselect supports validation states"
-                component={<MultiselectComponent
-                    validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }}
-
-                    items={cities}
-                    hideOnOuterClick
-                    onChange={emptyFn}
-                    placeholder="Default multiselect"
-                />}
-            />
+                />
+            </ComponentUseCase>
         </section>
     );
-}
+};
 
 export default Multiselect;
 
@@ -264,13 +739,13 @@ const itemsWithIcons = cities.map((x, index) => ({
     ...x,
     displayValue: x.value,
     icon: {
-        name: ++index === 10
+        name: ++index === 2
             ? "exclamation-square"
-            : `${++index % 10}-square`,
+            : `${++index % 2}-square`,
     }
 }));
 
 const preSelectedItems = cities.map((x, index) => ({
     ...x,
-    selected: index % 5 === 0,
+    selected: index % 4 === 0,
 }));
