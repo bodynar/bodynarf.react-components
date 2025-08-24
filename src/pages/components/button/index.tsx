@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useState, } from "react";
+import { FC, useCallback, useState, } from "react";
 
 import { ElementPosition, SelectableItem } from "@bodynarf/react.components";
 import ButtonComponent, { ButtonType } from "@bodynarf/react.components/components/button";
@@ -15,16 +15,14 @@ const types: Array<ButtonType> = [
     "light", "dark", "black", "text", "ghost"
 ];
 
+const typesAsSelectItems = types.map((x, i) => ({
+    displayValue: x,
+    id: i.toString(),
+    value: x,
+}) as SelectableItem);
+
 /** Button component demo */
 const Button: FC = () => {
-    const typesAsSelectItems = useMemo(
-        () => types.map((x, i) => ({
-            displayValue: x,
-            id: i.toString(),
-            value: x,
-        }) as SelectableItem),
-        []
-    );
 
     const [text, setText] = useState("");
     const appendText = useCallback(

@@ -1,4 +1,4 @@
-import { FC, ReactNode, useMemo } from "react";
+import { FC, ReactNode } from "react";
 
 import { ElementPosition, SelectableItem } from "@bodynarf/react.components";
 import BreadcrumbsComponent, { BreadCrumb } from "@bodynarf/react.components/components/breadcrumbs";
@@ -14,6 +14,12 @@ const separators: Array<"arrow" | "bullet" | "dot" | "succeeds"> = [
     "arrow", "bullet", "dot", "succeeds"
 ];
 
+const separatorsAsSelectItems = separators.map((x, i) => ({
+    displayValue: x,
+    id: i.toString(),
+    value: x,
+}) as SelectableItem);
+
 /** Breadcrumbs component demo */
 const Breadcrumbs: FC = () => {
     const items = [
@@ -22,15 +28,6 @@ const Breadcrumbs: FC = () => {
         { active: false, caption: "Target", path: "#/target", },
         { active: false, caption: "Current", path: "#/current", },
     ];
-
-    const separatorsAsSelectItems = useMemo(
-        () => separators.map((x, i) => ({
-            displayValue: x,
-            id: i.toString(),
-            value: x,
-        }) as SelectableItem),
-        []
-    );
 
     return (
         <section>
