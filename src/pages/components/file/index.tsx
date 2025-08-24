@@ -322,10 +322,10 @@ const File: FC = () => {
             </ComponentUseCase>
 
             <ComponentEnumCase
-                caption="Types"
+                caption="Alignment"
                 enumNames={floatPositions}
                 lookupValues={floatPositionsAsSelectItems}
-                description="The component has its own set of styles, defined by its type"
+                description="The component can have different alignment options"
                 codeProvider={value =>
                     <CodeExample
                         code={[
@@ -335,9 +335,9 @@ const File: FC = () => {
                             "/* ... */",
                             "",
                             '<FileComponent',
-                            `    alignment={ElementPosition.${value}}`,
                             '    placeholder="File"',
                             '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
+                            `    alignment={ElementPosition.${value}}`,
                             '/>',
                         ].join("\n")}
                     />
