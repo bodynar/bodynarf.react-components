@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementPosition } from "@bbr/types";
@@ -6,7 +8,7 @@ import Icon from "@bbr/components/icon/component";
 import { SelectableItem } from "../..";
 
 /** Dropdown item props */
-interface DropdownItemProps {
+type DropdownItemProps = {
     /** Item to present in dropdown */
     item: SelectableItem;
 
@@ -15,12 +17,12 @@ interface DropdownItemProps {
 
     /** Item click handler */
     onClick: (event: React.MouseEvent<HTMLLIElement>) => void;
-}
+};
 
 /** Single item in dropdown component */
-const DropdownItem = ({
+const DropdownItem: FC<DropdownItemProps> = ({
     item, selected, onClick
-}: DropdownItemProps): JSX.Element => {
+}) => {
     if (!isNullOrUndefined(item.icon)) {
         return (
             <DropdownItemWithIcon
@@ -56,9 +58,9 @@ export default DropdownItem;
 
 /** Single item in dropdown component with icon */
 // eslint-disable-next-line react/no-multi-comp
-const DropdownItemWithIcon = ({
+const DropdownItemWithIcon: FC<DropdownItemProps> = ({
     item, selected, onClick
-}: DropdownItemProps): JSX.Element => {
+}) => {
     const icon = item.icon!;
 
     const className = getClassName([

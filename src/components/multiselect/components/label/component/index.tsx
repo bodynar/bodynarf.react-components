@@ -4,7 +4,7 @@ import SelectedItemLabel from "../components/nonEmpty";
 import EmptyLabel from "../components/empty";
 
 /** Props type of `MultiselectLabel` */
-export interface MultiselectLabelProps {
+export type MultiselectLabelProps = {
     /** Caption when no items selected */
     caption: string;
 
@@ -22,30 +22,34 @@ export interface MultiselectLabelProps {
 
     /** Click handler*/
     onClick: (event: MouseEvent<HTMLElement>) => void;
-}
+};
 
 /** Label component */
 const MultiselectLabel: FC<MultiselectLabelProps> = ({
     caption, selectionCaption, selectedItemsCount,
     onClick,
     deselectable, className,
-}): JSX.Element => {
+}) => {
     if (selectedItemsCount === 0) {
-        return <EmptyLabel
-            caption={caption}
-            onClick={onClick}
-            className={className}
-        />;
+        return (
+            <EmptyLabel
+                caption={caption}
+                onClick={onClick}
+                className={className}
+            />
+        );
     }
 
-    const captionWhenItemsSelected = selectionCaption.format(`${selectedItemsCount}`);
+    const captionWhenItemsSelected = selectionCaption.format(selectedItemsCount);
 
-    return <SelectedItemLabel
-        onClick={onClick}
-        className={className}
-        deselectable={deselectable}
-        caption={captionWhenItemsSelected}
-    />;
+    return (
+        <SelectedItemLabel
+            onClick={onClick}
+            className={className}
+            deselectable={deselectable}
+            caption={captionWhenItemsSelected}
+        />
+    );
 };
 
 export default MultiselectLabel;

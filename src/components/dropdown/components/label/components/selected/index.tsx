@@ -19,7 +19,7 @@ type SelectedItemLabelProps = Pick<
 const SelectedItemLabel: FC<SelectedItemLabelProps> = ({
     selectedItem, onClick,
     deselectable, className,
-}): JSX.Element => {
+}) => {
     if (!isNullOrUndefined(selectedItem!.icon)) {
         return (
             <SelectedItemLabelWithIcon

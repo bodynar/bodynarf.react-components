@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 
 import { emptyFn, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
@@ -10,14 +10,14 @@ import "./style.scss";
 import { AccordionProps } from "..";
 
 /** Accordion panel */
-const Accordion = ({
+const Accordion: FC<AccordionProps> = ({
     children, caption,
     style, size = ElementSize.Normal,
     defaultExpanded = false,
     onToggle = emptyFn,
 
     className, title, data,
-}: AccordionProps): JSX.Element => {
+}) => {
     const expandablePanelRef = useRef<HTMLDivElement>(null);
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
     const [maxHeight, setMaxHeight] = useState<number | undefined>(defaultExpanded ? undefined : 0);

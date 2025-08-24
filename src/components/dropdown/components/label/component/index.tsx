@@ -9,7 +9,7 @@ import EmptyLabel from "../components/empty";
 import DropdownLabelWithSearch from "../components/withSearch";
 
 /** Props type of `DropdownLabel` */
-export interface DropdownLabelProps {
+export type DropdownLabelProps = {
     /** Caption when no items selected */
     caption: string;
 
@@ -36,7 +36,7 @@ export interface DropdownLabelProps {
 
     /** Handler of search value change by user */
     onSearchChange: (value: string) => void;
-}
+};
 
 /** Label component */
 const DropdownLabel: FC<DropdownLabelProps> = ({
@@ -45,7 +45,7 @@ const DropdownLabel: FC<DropdownLabelProps> = ({
     deselectable, className,
 
     searchable, onSearchChange, lastSearch, isListVisible,
-}): JSX.Element => {
+}) => {
     if (searchable) {
         return (
             <DropdownLabelWithSearch

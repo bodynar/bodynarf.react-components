@@ -15,7 +15,7 @@ import SimpleButton from "../components/simpleButton";
  * Button component
  * @throws Caption is not defined and icon configuration is not defined at the same time
  */
-const Button: FC<ButtonProps> = (props: ButtonProps) => {
+const Button: FC<ButtonProps> = (props) => {
     if (isNullOrEmpty(props.caption) && isNullOrUndefined(props.icon)) {
         throw new Error("No button content provided.");
     }

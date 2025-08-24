@@ -13,13 +13,13 @@ type EmptyLabelProps = Pick<MultiselectLabelProps, "caption" | "onClick" | "clas
 /** Empty multiselect label component (no item selected) */
 const EmptyLabel: FC<EmptyLabelProps> = ({
     caption, onClick, className,
-}): JSX.Element => {
+}) => {
     const elClassName = getClassName([
+        "button",
         "dropdown-trigger",
         "bbr-dropdown__label",
         isNullOrEmpty(className) ? "" : `${className}--md`,
         "bbr-dropdown__label--default",
-        "button"
     ]);
 
     return (
@@ -30,7 +30,10 @@ const EmptyLabel: FC<EmptyLabelProps> = ({
             <span className="mr-2">
                 {caption}
             </span>
-            <Icon name="arrow-down" size={ElementSize.Medium} />
+            <Icon
+                name="arrow-down"
+                size={ElementSize.Medium}
+            />
         </label>
     );
 };

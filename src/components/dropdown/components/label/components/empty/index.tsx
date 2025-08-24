@@ -13,7 +13,7 @@ type EmptyLabelProps = Pick<DropdownLabelProps, "caption" | "onClick" | "classNa
 /** Empty dropdown label component (no item selected) */
 const EmptyLabel: FC<EmptyLabelProps> = ({
     caption, onClick, className,
-}): JSX.Element => {
+}) => {
     const elClassName = getClassName([
         "button",
         "dropdown-trigger",

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { FC, useCallback } from "react";
 
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
@@ -33,11 +33,11 @@ type MultiselectItemProps = Pick<MultiselectProps, "checkboxConfig"> & {
 };
 
 /** Single item in multiselect component */
-const MultiselectItem = ({
+const MultiselectItem: FC<MultiselectItemProps> = ({
     item, selected, rootId,
     onItemClick, onChange,
     checkboxConfig,
-}: MultiselectItemProps): JSX.Element => {
+}) => {
     const onChecked = useCallback(
         (value?: boolean) => onChange(item, value ?? false),
         [item, onChange]
@@ -55,13 +55,15 @@ const MultiselectItem = ({
     );
 
     if (!isNullOrUndefined(item.icon)) {
-        return <MultiselectItemWithIcon
-            item={item}
-            rootId={rootId}
-            onChange={onChange}
-            selected={selected}
-            onItemClick={onItemClick}
-        />;
+        return (
+            <MultiselectItemWithIcon
+                item={item}
+                rootId={rootId}
+                onChange={onChange}
+                selected={selected}
+                onItemClick={onItemClick}
+            />
+        );
     }
 
     const className = getClassName([
@@ -95,11 +97,12 @@ const MultiselectItem = ({
 export default MultiselectItem;
 
 /** Single item in multiselect component with icon */
-const MultiselectItemWithIcon = ({
+// eslint-disable-next-line react/no-multi-comp
+const MultiselectItemWithIcon: FC<MultiselectItemProps> = ({
     item, selected, rootId,
     onChange, onItemClick,
     checkboxConfig,
-}: MultiselectItemProps): JSX.Element => {
+}): JSX.Element => {
     const icon = item.icon!;
 
     const className = getClassName([

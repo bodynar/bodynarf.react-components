@@ -18,7 +18,7 @@ type SelectedItemLabelWithIconProps = Pick<
 const SelectedItemLabelWithIcon: FC<SelectedItemLabelWithIconProps> = ({
     selectedItem, onClick,
     deselectable, className,
-}): JSX.Element => {
+}) => {
     const elClassName = getClassName([
         "button",
         "dropdown-trigger",

@@ -18,12 +18,12 @@ type NonEmptyMultiselectLabelProps = Pick<
 const NonEmptyMultiselectLabel: FC<NonEmptyMultiselectLabelProps> = ({
     onClick,
     deselectable, className, caption
-}): JSX.Element => {
+}) => {
     const elClassName = getClassName([
+        "button",
         "dropdown-trigger",
         "bbr-dropdown__label",
         isNullOrEmpty(className) ? "" : `${className}--md`,
-        "button"
     ]);
 
     return (
@@ -31,15 +31,21 @@ const NonEmptyMultiselectLabel: FC<NonEmptyMultiselectLabelProps> = ({
             className={elClassName}
             onClick={onClick}
         >
-            {deselectable &&
-                <Icon name="plus-lg" size={ElementSize.Medium} />
+            {!!deselectable &&
+                <Icon
+                    name="plus-lg"
+                    size={ElementSize.Medium}
+                />
             }
             <span
                 className={deselectable ? "px-2" : "pr-2"}
             >
                 {caption}
             </span>
-            <Icon name="arrow-down" size={ElementSize.Medium} />
+            <Icon
+                name="arrow-down"
+                size={ElementSize.Medium}
+            />
         </label>
     );
 };
