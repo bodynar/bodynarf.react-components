@@ -20,15 +20,15 @@ const separatorsAsSelectItems = separators.map((x, i) => ({
     value: x,
 }) as SelectableItem);
 
+const items = [
+    { active: false, caption: "Source", path: "#/source", },
+    { active: false, caption: "Subfolder", path: "#/subfolder", },
+    { active: false, caption: "Target", path: "#/target", },
+    { active: false, caption: "Current", path: "#/current", },
+];
+
 /** Breadcrumbs component demo */
 const Breadcrumbs: FC = () => {
-    const items = [
-        { active: false, caption: "Source", path: "#/source", },
-        { active: false, caption: "Subfolder", path: "#/subfolder", },
-        { active: false, caption: "Target", path: "#/target", },
-        { active: false, caption: "Current", path: "#/current", },
-    ];
-
     return (
         <section>
             <DemoComponentTitleInfoMessage
