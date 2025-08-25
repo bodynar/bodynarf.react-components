@@ -25,4 +25,5 @@ All changes will be published here in reverse chronological order
     - Пропсы `placeholder` и `hideOnOuterClick` сделаны необязательными.
 - Paginator:
     - Добавлен выброс ошибки при условии `currentPage > count` (см. пропсы);
-    -
+    - Пропс `currentPage` сделан обязательным, т.к. используется для внутреннего визуализирования.
+-

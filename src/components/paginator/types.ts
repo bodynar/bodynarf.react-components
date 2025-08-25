@@ -8,7 +8,7 @@ export type PaginatorProps = BaseElementProps & {
     onPageChange: (page: number) => void;
 
     /** Current page */
-    currentPage?: number;
+    currentPage: number;
 
     /**
      * Page numbers position.
