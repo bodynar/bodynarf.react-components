@@ -1,7 +1,7 @@
 import { BaseElementProps, ElementSize } from "@bbr/types";
 
 /** Search component props type */
-export interface SearchProps extends BaseElementProps {
+export type SearchProps = BaseElementProps & {
     /**
      * Search type: by typing, starts from minimum characters to search
      * or by clicking on button next to search bar.
@@ -49,4 +49,4 @@ export interface SearchProps extends BaseElementProps {
      * Visible only in `searchType = "byButton"`
      */
     searchButtonTitle?: string;
-}
+};

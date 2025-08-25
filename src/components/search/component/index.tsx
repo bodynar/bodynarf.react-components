@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, FC, useCallback, useState } from "react";
 
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
@@ -10,7 +10,7 @@ import "./style.scss";
 import { SearchProps } from "..";
 
 /** Search component */
-export default function Search({
+const Search: FC<SearchProps> = ({
     searchType, onSearch, caption,
     defaultValue = "",
     size = ElementSize.Normal,
@@ -19,7 +19,7 @@ export default function Search({
     searchButtonCaption = "Search", searchButtonTitle,
 
     className, title, data,
-}: SearchProps): JSX.Element {
+}) => {
     const [searchValue, setSearchValue] = useState<string>(defaultValue);
 
     const onChange = useCallback(
@@ -83,6 +83,7 @@ export default function Search({
                         title={searchButtonTitle}
                         caption={searchButtonCaption}
                         onClick={onSearchButtonClick}
+                        className={rounded ? "is-rounded" : undefined}
                     />
                 </div>
             </div>
@@ -107,4 +108,6 @@ export default function Search({
             />
         </div>
     );
-}
+};
+
+export default Search;

@@ -26,4 +26,5 @@ All changes will be published here in reverse chronological order
 - Paginator:
     - Добавлен выброс ошибки при условии `currentPage > count` (см. пропсы);
     - Пропс `currentPage` сделан обязательным, т.к. используется для внутреннего визуализирования.
--
+- Search:
+    - Исправлена ошибка отсутствия закругления у кнопки.
