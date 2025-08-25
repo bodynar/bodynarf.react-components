@@ -284,13 +284,13 @@ const Paginator: FC = () => {
                             `import PaginatorComponent from "@bodynarf/react.components/components/paginator";`,
                             "",
                             "/* ... */",
-                            "const CLICK_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
+                            "const ON_PAGE_CHANGE_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
                             "/* ... */",
                             "",
                             '<PaginatorComponent',
                             '    count={10}',
                             '    nearPagesCount={1}',
-                            '    onPageChange={CLICK_HANDLE_FN}',
+                            '    onPageChange={ON_PAGE_CHANGE_HANDLE_FN}',
                             '/>',
                         ].join("\n")}
                     />

@@ -151,12 +151,12 @@ const Icon: FC = () => {
                             `import IconComponent from "@bodynarf/react.components/components/icon";`,
                             "",
                             "/* ... */",
-                            "const CLICK_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
+                            "const ON_CLICK_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
                             "",
                             "",
                             '<IconComponent',
                             '    name="alarm"',
-                            '    onClick={CLICK_HANDLE_FN}',
+                            '    onClick={ON_CLICK_HANDLE_FN}',
                             '/>',
                         ].join("\n")}
                     />

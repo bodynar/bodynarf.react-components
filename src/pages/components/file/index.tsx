@@ -363,12 +363,12 @@ const File: FC = () => {
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
                             "/* ... */",
-                            "const CLICK_HANDLE_FN = useCallback((value?: File) => { /* handler fn */}, []);",
+                            "const ON_VALUE_CHANGE_HANDLE_FN = useCallback((value?: File) => { /* handler fn */}, []);",
                             "",
                             "",
                             '<FileComponent',
                             `    placeholder="File"`,
-                            '    onValueChange={CLICK_HANDLE_FN}',
+                            '    onValueChange={ON_VALUE_CHANGE_HANDLE_FN}',
                             '/>',
                         ].join("\n")}
                     />

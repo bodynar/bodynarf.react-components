@@ -114,12 +114,12 @@ const Multiselect: FC = () => {
                             "        title: `City with name ${name}`",
                             "        selected: false,",
                             "    }));",
-                            "const CLICK_HANDLE_FN = useCallback((item: MultiselectItem, selected: boolean) => { /* handler fn */}, []);",
+                            "const ON_CHANGE_HANDLE_FN = useCallback((item: MultiselectItem, selected: boolean) => { /* handler fn */}, []);",
                             "/* ... */",
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
-                            '    onChange={CLICK_HANDLE_FN}',
+                            '    onChange={ON_CHANGE_HANDLE_FN}',
                             '/>',
                         ].join("\n")}
                     />
@@ -518,13 +518,13 @@ const Multiselect: FC = () => {
                             "        title: `City with name ${name}`",
                             "        selected: false,",
                             "    }));",
-                            "const CLEAR_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
+                            "const ON_CLEAR_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
                             "/* ... */",
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
                             '    onChange={emptyFn} // TODO: Replace with your own handler function',
-                            '    onClear={CLEAR_HANDLE_FN}',
+                            '    onClear={ON_CLEAR_HANDLE_FN}',
                             '/>',
                         ].join("\n")}
                     />
