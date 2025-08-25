@@ -21,4 +21,5 @@ All changes will be published here in reverse chronological order
 - Icon:
     - При указании пропса `onClick` автоматически добавляется класс `is-clickable` чтобы сделать элемент интерактивным (см. описание класса в Bulma);
     - Обновлены названия css-классов размеров кнопки.
--
+- Multiselect:
+    - Пропсы `placeholder` и `hideOnOuterClick` сделаны необязательными.
