@@ -104,4 +104,17 @@
             }
         }
     }
+
+    &.is-disabled .file-label {
+        background-color: hsl(0, 0%, 96%);
+        border-color: hsl(0, 0%, 86%);
+        color: hsl(0, 0%, 48%);
+        box-shadow: none;
+        cursor: not-allowed;
+
+        .file-cta {
+            background-color: inherit;
+            color: inherit;
+        }
+    }
 }
