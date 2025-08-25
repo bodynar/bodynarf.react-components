@@ -19,6 +19,10 @@ const Paginator: FC<PaginatorProps> = ({
 
     className, title, data,
 }) => {
+    if (currentPage > count) {
+        throw new Error(`Current page "${currentPage}" must be less than amount of pages "${count}"`);
+    }
+
     const pageChange = useCallback(
         (event: MouseEvent<HTMLElement>) => {
             const target = event.target as HTMLElement;
@@ -42,7 +46,7 @@ const Paginator: FC<PaginatorProps> = ({
     const canGoForward = useMemo(() => currentPage < count, [currentPage, count]);
 
     if (pageNumbers.length <= 1) {
-        return <></>;
+        return null;
     }
 
     const classNames = getClassName([
@@ -67,7 +71,7 @@ const Paginator: FC<PaginatorProps> = ({
             title={title}
             {...dataAttributes}
         >
-            {showNextButtons &&
+            {!!showNextButtons &&
                 <>
                     <a
                         onClick={pageChange}
@@ -144,7 +148,7 @@ const Paginator: FC<PaginatorProps> = ({
             </ul>
         </nav>
     );
-}
+};
 
 export default Paginator;
 

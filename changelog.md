@@ -23,3 +23,6 @@ All changes will be published here in reverse chronological order
     - Обновлены названия css-классов размеров кнопки.
 - Multiselect:
     - Пропсы `placeholder` и `hideOnOuterClick` сделаны необязательными.
+- Paginator:
+    - Добавлен выброс ошибки при условии `currentPage > count` (см. пропсы);
+    -
