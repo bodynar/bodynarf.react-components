@@ -1,7 +1,7 @@
 import { BaseElementProps, ElementColor, ElementSize } from "@bbr/types";
 
 /** Tag item prop types */
-export interface TagProps extends BaseElementProps {
+export type TagProps = BaseElementProps & {
     /** Tag content */
     content: string;
 
@@ -31,4 +31,4 @@ export interface TagProps extends BaseElementProps {
         /** Background color */
         backgroundColor: string;
     };
-}
+};

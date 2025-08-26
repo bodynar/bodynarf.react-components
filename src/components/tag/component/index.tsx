@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementColor, ElementSize } from "@bbr/types";
@@ -8,14 +10,14 @@ import { TagProps } from "..";
 import "./style.scss";
 
 /** Single tag item */
-const Tag = ({
+const Tag: FC<TagProps> = ({
     content,
     size = ElementSize.Normal, style = ElementColor.Default,
     rounded = false, lightColor = false, customColor,
 
     onClick,
     className, title, data,
-}: TagProps): JSX.Element => {
+}) => {
     if (!isNullOrUndefined(customColor)) {
         style = ElementColor.Default;
     }
@@ -49,6 +51,7 @@ const Tag = ({
 
             title={title}
             onClick={onClick}
+
             {...dataAttributes}
         >
             {content}
