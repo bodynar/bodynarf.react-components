@@ -47,7 +47,6 @@ const ComponentPositionCase: FC<ComponentSizeCaseProps> = ({
                 <p style={{ whiteSpace: "pre-line" }}>
                     {description}
                 </p>
-                <br />
 
                 <div className="columns mt-0">
                     <div className="column is-6">
