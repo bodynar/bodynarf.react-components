@@ -146,11 +146,12 @@ It supports different sizes, colors, and can be controlled programmatically thro
                     <CodeExample
                         code={[
                             `import { useCallback } from "react"`,
+                            "",
                             `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
                             "",
                             "/* ... */",
                             "const TOGGLE_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
-                            "",
+                            "/* ... */",
                             "",
                             `<AccordionComponent caption="onToggle handler" onToggle={TOGGLE_HANDLE_FN}>`,
                             "    Content",

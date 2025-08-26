@@ -345,11 +345,12 @@ const Button: FC = () => {
                     <CodeExample
                         code={[
                             `import { useCallback } from "react"`,
+                            "",
                             `import ButtonComponent from "@bodynarf/react.components/components/button";`,
                             "",
                             "/* ... */",
                             "const CLICK_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
-                            "",
+                            "/* ... */",
                             "",
                             '<ButtonComponent',
                             '    type="primary"',

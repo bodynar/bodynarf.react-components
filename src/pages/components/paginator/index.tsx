@@ -281,6 +281,8 @@ const Paginator: FC = () => {
                 code={
                     <CodeExample
                         code={[
+                            `import { useCallback } from "react";`,
+                            "",
                             `import PaginatorComponent from "@bodynarf/react.components/components/paginator";`,
                             "",
                             "/* ... */",
