@@ -12,6 +12,7 @@ import Paginator from "./paginator";
 import Multiselect from "./multiselect";
 import Breadcrumbs from "./breadcrumbs";
 import File from "./file";
+import Table from "./table";
 
 const components: MenuItem = {
     name: "component-group",
@@ -76,6 +77,11 @@ const components: MenuItem = {
             path: "/components/file",
             caption: "File",
             component: <File />
+        },
+        {
+            path: "/components/table",
+            caption: "Table",
+            component: <Table />
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };
