@@ -1,6 +1,8 @@
+import { ReactNode } from "react";
+
 import { BaseElementProps } from "@bbr/types";
 
-export interface TableHeading<TItem> {
+export interface TableHeading {
     /** Caption to display */
     caption: string;
 
@@ -11,25 +13,25 @@ export interface TableHeading<TItem> {
     className?: string;
 
     /** Name of model column*/
-    name?: keyof TItem; // TODO: switch to string
+    name?: string;
 }
 
 /** Generic sort column model */
-export interface SortColumn<TModel> {
+export interface SortColumn {
     /** Column name */
-    columnName: keyof TModel;
+    columnName: string;
 
     /** Is column sorted ascending */
     ascending: boolean;
 }
 
 /** Table props type */
-export interface TableProps<TItem> extends BaseElementProps {
+export type TableProps = BaseElementProps & {
     /** Header row */
-    headings: Array<TableHeading<TItem>>;
+    headings: Array<TableHeading>;
 
     /** Table body */
-    children?: React.ReactNode;
+    children: ReactNode;
 
     /** Add border to all cells */
     hasBorder?: boolean;
@@ -62,8 +64,8 @@ export interface TableProps<TItem> extends BaseElementProps {
     zebra?: boolean;
 
     /** Current sort column */
-    currentSortColumn?: SortColumn<TItem>;
+    currentSortColumn?: SortColumn;
 
     /** Header click handler */
-    onHeaderClick?: (columnName: TableHeading<TItem>) => void;
-}
+    onHeaderClick?: (columnName: TableHeading) => void;
+};

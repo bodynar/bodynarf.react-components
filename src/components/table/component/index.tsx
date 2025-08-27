@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { mapDataAttributes } from "@bbr/utils";
@@ -8,10 +10,9 @@ import "./style.scss";
 import TableHeader from "../components/heading";
 
 /**
- * Tiny table component.
- * If no sorting is use - use `any` as generic param
+ * Tiny table component
  */
-function Table<TItem>({
+const Table: FC<TableProps> = ({
     headings,
 
     hasBorder = false, hoverable = false, narrow = false,
@@ -22,7 +23,7 @@ function Table<TItem>({
     children,
 
     className, title, data,
-}: TableProps<TItem>): JSX.Element {
+}) => {
     const elClassName = getClassName([
         "bbr-table",
         "table",
@@ -52,9 +53,9 @@ function Table<TItem>({
                 <tr>
                     {headings.map((heading, i) =>
                         <TableHeader
-                            key={i}
+                            key={heading.name ?? i}
 
-                            {...heading}
+                            item={heading}
                             onClick={onHeaderClick}
                             sortColumn={currentSortColumn}
                         />
@@ -66,6 +67,6 @@ function Table<TItem>({
             </tbody>
         </table>
     );
-}
+};
 
 export default Table;
