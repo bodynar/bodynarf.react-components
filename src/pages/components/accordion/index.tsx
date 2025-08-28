@@ -25,7 +25,7 @@ const Accordion: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Accordion"
-                hidePropsNotice
+                baseTypeName="BaseElementProps"
                 description="Accordion is a collapsible container component that helps organize content into sections. Each accordion has a header (caption) that can be clicked to expand or collapse its content.
 It supports different sizes, colors, and can be controlled programmatically through props"
             />

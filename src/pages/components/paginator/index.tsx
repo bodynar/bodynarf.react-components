@@ -31,7 +31,7 @@ const Paginator: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Paginator"
-                hidePropsNotice
+                baseTypeName="BaseElementProps"
                 description="A component to simplify navigation between pages (pages must be defined externally)"
             />
 

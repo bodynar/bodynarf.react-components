@@ -11,7 +11,6 @@ function ValidationStateProp() {
     return (
         <section>
             <DemoComponentTitleInfoMessage
-                hidePropsNotice
                 name="Validation message"
             />
             <ComponentUseCase

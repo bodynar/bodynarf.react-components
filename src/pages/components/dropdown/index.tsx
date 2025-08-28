@@ -15,7 +15,7 @@ const Dropdown: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Dropdown"
-                hidePropsNotice
+                baseTypeName="BaseElementProps"
                 description={
                     <>
                         On this page, many instances of the component use

@@ -11,7 +11,6 @@ function HintProp() {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Hint"
-                hidePropsNotice
             />
             <ComponentUseCase
                 description={<></>}

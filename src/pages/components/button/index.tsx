@@ -39,7 +39,7 @@ const Button: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Button"
-                hidePropsNotice
+                baseTypeName="BaseElementProps"
             />
 
             <ComponentUseCase

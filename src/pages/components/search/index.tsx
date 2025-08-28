@@ -48,7 +48,7 @@ const Search: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Search"
-                hidePropsNotice
+                baseTypeName="BaseElementProps"
                 description="Block for performing search. Represents a search bar and a button in button mode"
             />
 

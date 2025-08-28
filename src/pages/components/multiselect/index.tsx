@@ -35,8 +35,8 @@ const Multiselect: FC = () => {
     return (
         <section>
             <DemoComponentTitleInfoMessage
-                hidePropsNotice
                 name="Multiselect"
+                baseTypeName="BaseElementProps"
                 description={
                     <>
                         On this page, instances of the component use

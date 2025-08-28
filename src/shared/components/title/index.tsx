@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { isUndefined } from "@bodynarf/utils";
+import { isNullOrEmpty, isUndefined } from "@bodynarf/utils";
 
 import Icon from "@bodynarf/react.components/components/icon";
 
@@ -12,30 +12,36 @@ type DemoComponentTitleInfoMessageProps = {
     /** Description of component purpose */
     description?: string | React.ReactNode;
 
-    /** Hide suppress common props message */
-    hidePropsNotice?: boolean;
+    /** Name of base type to show props display warning */
+    baseTypeName?: string;
 };
 
 /** Title info message about further demo of component use */
 const DemoComponentTitleInfoMessage: FC<DemoComponentTitleInfoMessageProps> = ({
     name, description,
-    hidePropsNotice = false,
+    baseTypeName
 }) => {
     return (
         <div className="block">
             <h4 className="title is-4">
                 {name}
             </h4>
-            {!hidePropsNotice &&
+            {!isNullOrEmpty(baseTypeName) &&
                 <span style={{ fontStyle: "italic", whiteSpace: "pre-line" }}>
                     <hr />
                     <Icon
                         name="exclamation-triangle-fill"
                         className="mr-1"
                     />
-                    Not all props are listed bellow, mostly those that can be displayed.
+                    This page shows the props of a specific component
                     {`\n`}
-                    For a complete list of props see type definition & description
+                    Props inherited from the base type
+                    {` `}
+                    <code>
+                        {baseTypeName}
+                    </code>
+                    {` `}
+                    are described on a separate page
                 </span>
             }
             {!isUndefined(description)

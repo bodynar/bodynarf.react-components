@@ -13,7 +13,6 @@ const BaseElementProps: FC = () => {
     return (
         <section>
             <DemoComponentTitleInfoMessage
-                hidePropsNotice
                 name="BaseElementProps"
                 description="All props of the components implemented in this library inherit from the BaseElementProps type, which contains optional parameters for element markup"
             />

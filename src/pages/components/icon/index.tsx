@@ -24,7 +24,7 @@ const Icon: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Icon"
-                hidePropsNotice
+                baseTypeName="BaseElementProps"
                 description={
                     <>
                         The component uses icons from

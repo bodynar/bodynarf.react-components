@@ -40,7 +40,7 @@ const File: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="File"
-                hidePropsNotice
+                baseTypeName="BaseElementProps"
                 description="A component for selecting a file for further processing"
             />
 

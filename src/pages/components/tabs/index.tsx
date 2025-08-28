@@ -50,7 +50,7 @@ const Tabs: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Tabs"
-                hidePropsNotice
+                baseTypeName="BaseElementProps"
                 description="An interface element that allows displaying multiple blocks of content within a single container with the ability to switch between them"
             />
 

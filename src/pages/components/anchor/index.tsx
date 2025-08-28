@@ -23,7 +23,7 @@ function Anchor() {
 
     return (
         <section>
-            <DemoComponentTitleInfoMessage name="Anchor" hidePropsNotice />
+            <DemoComponentTitleInfoMessage name="Anchor" baseTypeName="BaseElementProps" />
 
             <ObsoleteWarning
                 version="1.12.7"
