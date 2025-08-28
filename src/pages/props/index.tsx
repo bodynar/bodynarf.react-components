@@ -2,11 +2,17 @@ import { MenuItem } from "../routing";
 
 import ValidationStateProp from "./validationState";
 import HintProp from "./hint";
+import BaseElementProps from "./baseElementProps";
 
 const props: MenuItem = {
     name: "prop-group",
     caption: "Common props",
     children: [
+        {
+            path: "/props/base",
+            caption: "Base element props",
+            component: <BaseElementProps />
+        },
         {
             path: "/props/validation",
             caption: "Validation state",
