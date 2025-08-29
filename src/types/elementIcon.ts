@@ -1,7 +1,7 @@
 import { ElementFloatPosition, ElementSize } from "@bbr/types";
 
 /** Icon for component  */
-export interface ElementIcon {
+export type ElementIcon = {
     /**
      * Icon name. Must be without `bi-`
      * @see https://icons.getbootstrap.com/
@@ -22,4 +22,4 @@ export interface ElementIcon {
      * Works only with other content
     */
     position?: ElementFloatPosition;
-}
+};

@@ -1,9 +1,9 @@
 import { BaseElementProps, ElementColor, ElementSize, HintConfiguration, ValidationState, LabelConfiguration } from "@bbr/types";
 
 /** Base properties for input components */
-export interface BaseInputElementProps<TValue> extends BaseElementProps {
+export type BaseInputElementProps<TValue> = BaseElementProps & {
     /** Value change handler. Changed value must be stored outside of component */
-    onValueChange: (value?: TValue) => void;
+    onValueChange?: (value?: TValue) => void;
 
     /** Default value of input component*/
     defaultValue?: TValue;

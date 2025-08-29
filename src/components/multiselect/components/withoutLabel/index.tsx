@@ -92,7 +92,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
 
             if (target.classList.contains("bi-plus-lg")) {
                 setSelectedItems([]);
-                onClear?.(); // TODO: почему-то срабатывает медленно
+                onClear?.();
             } else {
                 setListVisible(state => !state);
             }

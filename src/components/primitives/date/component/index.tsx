@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, isNullOrUndefined, isStringEmpty } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNullOrUndefined, isStringEmpty } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -13,7 +13,7 @@ import { DateProps } from "../..";
 
 /** Date input component */
 const DatePicker = ({
-    defaultValue, onValueChange, validationState,
+    defaultValue, onValueChange = emptyFn, validationState,
     name = generateGuid(),
     style, size = ElementSize.Normal,
     readonly = false, disabled = false,

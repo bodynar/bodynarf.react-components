@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback, useRef, useState } from "react";
 
-import { generateGuid, getClassName, isNullish, isNullOrUndefined, Optional } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNullish, isNullOrUndefined, Optional } from "@bodynarf/utils";
 
 import { ElementSize, ElementPosition } from "@bbr/types";
 import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -12,7 +12,7 @@ import { FileUploadProps } from "..";
 
 /** Component for selecting files */
 const FileUpload: FC<FileUploadProps> = ({
-    onValueChange,
+    onValueChange = emptyFn,
     placeholder,
     name = generateGuid(),
     disabled = false,

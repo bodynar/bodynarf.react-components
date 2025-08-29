@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useState } from "react";
 
-import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -12,7 +12,7 @@ import { PasswordProps } from "../..";
 
 const PasswordWithLabel = ({
     defaultValue,
-    onValueChange, validationState,
+    onValueChange = emptyFn, validationState,
     name = generateGuid(),
     size = ElementSize.Normal, style,
     rounded = false, loading = false, autoFocus = false,

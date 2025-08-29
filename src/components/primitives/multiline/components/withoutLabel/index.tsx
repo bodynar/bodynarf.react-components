@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -10,7 +10,7 @@ import { MultilineProps } from "../..";
 
 /** Multiline textual input component without describing label*/
 const MultilineWithoutLabel = ({
-    onValueChange, defaultValue, validationState,
+    onValueChange = emptyFn, defaultValue, validationState,
     name = generateGuid(), placeholder,
     onBlur,
     size = ElementSize.Normal, style, loading = false,

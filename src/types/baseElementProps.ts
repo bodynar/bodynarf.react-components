@@ -1,7 +1,7 @@
 import { DataAttributes } from "@bbr/types";
 
 /** Base interface for component props */
-export interface BaseElementProps {
+export type BaseElementProps = {
     /** Additional class names */
     className?: string;
 
@@ -10,4 +10,4 @@ export interface BaseElementProps {
 
     /** Extra data-* attributes */
     data?: DataAttributes;
-}
+};

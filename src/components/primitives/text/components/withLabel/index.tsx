@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, isNullOrUndefined, } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNullOrUndefined, } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -11,7 +11,7 @@ import { TextProps } from "../..";
 
 /** Textual input with describing label */
 const TextWithLabel = ({
-    onValueChange, readonly, disabled, defaultValue, validationState,
+    onValueChange = emptyFn, readonly, disabled, defaultValue, validationState,
     name = generateGuid(),
     size = ElementSize.Normal, style,
     rounded = false, loading = false, autoFocus = false,
