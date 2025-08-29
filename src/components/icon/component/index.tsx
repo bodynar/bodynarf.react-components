@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { getClassName, isNullish, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullish } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getSizeClassName, mapDataAttributes } from "@bbr/utils";
@@ -23,11 +23,11 @@ const Icon: FC<IconProps> = ({
         "bi",
         `bi-${name}`,
         className,
-        getSizeClassName(size), // TODO: test
+        getSizeClassName(size),
         isNullish(onClick) ? undefined : "is-clickable"
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
         : mapDataAttributes(data!);
 
