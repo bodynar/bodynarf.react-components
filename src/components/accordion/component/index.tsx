@@ -7,6 +7,7 @@ import { mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
 import "./style.scss";
+
 import { AccordionProps } from "..";
 
 /** Accordion panel */
@@ -31,12 +32,10 @@ const Accordion: FC<AccordionProps> = ({
         if (defaultExpanded && !isNullOrUndefined(expandablePanelRef.current)) {
             setMaxHeight(expandablePanelRef.current!.scrollHeight);
         }
-    }, [defaultExpanded]);
+    }, [defaultExpanded, size]);
 
     useEffect(() => setIsExpanded(maxHeight !== 0), [maxHeight]);
-    useEffect(() => {
-        onToggle.call(undefined, !isExpanded);
-    }, [isExpanded, onToggle]);
+    useEffect(() => onToggle.call(undefined, !isExpanded), [isExpanded, onToggle]);
 
     const elClassName = getClassName([
         "bbr-accordion",
