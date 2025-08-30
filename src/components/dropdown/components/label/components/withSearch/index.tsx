@@ -15,7 +15,7 @@ type DropdownLabelWithSearchProps = Pick<
     "caption" | "className" | "onClick" | "selectedItem" | "deselectable"
 > & {
     /** Last user search */
-    lastSearch: string | null;
+    lastSearch: string;
 
     /** Is items list visible */
     isListVisible: boolean;
@@ -80,7 +80,7 @@ const DropdownLabelWithSearch: FC<DropdownLabelWithSearchProps> = ({
                 onChange={onChange}
                 placeholder={caption}
                 className={inputClassName}
-                value={selectedItem?.displayValue ?? lastSearch ?? ""}
+                value={selectedItem?.displayValue ?? lastSearch}
             />
             <Icon
                 name="arrow-down"

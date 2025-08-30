@@ -29,7 +29,7 @@ export type DropdownLabelProps = {
     onClick: (event: MouseEvent<HTMLElement>) => void;
 
     /** Last user search */
-    lastSearch: string | null;
+    lastSearch: string;
 
     /** Is items list visible */
     isListVisible: boolean;
