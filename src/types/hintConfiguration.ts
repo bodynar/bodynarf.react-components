@@ -1,7 +1,7 @@
 import { ElementIcon } from "@bbr/types";
 
 /** Hint configuration */
-export interface HintConfiguration {
+export type HintConfiguration = {
     /** Textual content */
     content: string;
 
@@ -13,4 +13,4 @@ export interface HintConfiguration {
 
     /** Optional icon */
     icon?: ElementIcon;
-}
+};

@@ -2,7 +2,7 @@ import { useCallback, useMemo, MouseEvent, FC } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import { mapDataAttributes } from "@bbr/utils";
+import { getPositionClassName, mapDataAttributes } from "@bbr/utils";
 import { ElementPosition, ElementSize } from "@bbr/types";
 
 import { PaginatorProps } from "../..";
@@ -19,6 +19,10 @@ const Paginator: FC<PaginatorProps> = ({
 
     className, title, data,
 }) => {
+    if (currentPage > count) {
+        throw new Error(`Current page "${currentPage}" must be less than amount of pages "${count}"`);
+    }
+
     const pageChange = useCallback(
         (event: MouseEvent<HTMLElement>) => {
             const target = event.target as HTMLElement;
@@ -42,14 +46,14 @@ const Paginator: FC<PaginatorProps> = ({
     const canGoForward = useMemo(() => currentPage < count, [currentPage, count]);
 
     if (pageNumbers.length <= 1) {
-        return <></>;
+        return null;
     }
 
     const classNames = getClassName([
         "bbr-paginator",
         "pagination",
         className,
-        paginationPositionToClassMap.get(position),
+        getPositionClassName(position),
         rounded ? "is-rounded" : "",
         size === ElementSize.Normal ? "" : `is-${size}`,
     ]);
@@ -67,7 +71,7 @@ const Paginator: FC<PaginatorProps> = ({
             title={title}
             {...dataAttributes}
         >
-            {showNextButtons &&
+            {!!showNextButtons &&
                 <>
                     <a
                         onClick={pageChange}
@@ -144,18 +148,9 @@ const Paginator: FC<PaginatorProps> = ({
             </ul>
         </nav>
     );
-}
+};
 
 export default Paginator;
-
-/**
- * Position setting to css class name map
- */
-const paginationPositionToClassMap: Map<ElementPosition, string> = new Map([
-    [ElementPosition.Left, ""],
-    [ElementPosition.Center, "is-centered"],
-    [ElementPosition.Right, "is-right"]
-]);
 
 /**
  * Get nearest numbers from each side (left & right)

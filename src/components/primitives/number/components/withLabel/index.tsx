@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, isNullOrUndefined, isStringEmpty } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNullOrUndefined, isStringEmpty } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -11,7 +11,7 @@ import { NumberProps } from "../..";
 
 /** Number component with label */
 const NumberWithLabel = ({
-    onValueChange, defaultValue, validationState,
+    onValueChange = emptyFn, defaultValue, validationState,
     name = generateGuid(),
     label, placeholder,
     size = ElementSize.Normal, style, rounded = false, loading = false,

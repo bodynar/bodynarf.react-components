@@ -19,21 +19,23 @@ type SelectedItemLabelProps = Pick<
 const SelectedItemLabel: FC<SelectedItemLabelProps> = ({
     selectedItem, onClick,
     deselectable, className,
-}): JSX.Element => {
+}) => {
     if (!isNullOrUndefined(selectedItem!.icon)) {
-        return <SelectedItemLabelWithIcon
-            deselectable={deselectable}
-            onClick={onClick}
-            className={className}
-            selectedItem={selectedItem}
-        />;
+        return (
+            <SelectedItemLabelWithIcon
+                deselectable={deselectable}
+                onClick={onClick}
+                className={className}
+                selectedItem={selectedItem}
+            />
+        );
     }
 
     const elClassName = getClassName([
+        "button",
         "dropdown-trigger",
         "bbr-dropdown__label",
         isNullOrEmpty(className) ? "" : `${className}--md`,
-        "button"
     ]);
 
     return (
@@ -41,8 +43,11 @@ const SelectedItemLabel: FC<SelectedItemLabelProps> = ({
             className={elClassName}
             onClick={onClick}
         >
-            {deselectable &&
-                <Icon name="plus-lg" size={ElementSize.Medium} />
+            {!!deselectable &&
+                <Icon
+                    name="plus-lg"
+                    size={ElementSize.Medium}
+                />
             }
             <span
                 className={deselectable ? "px-2" : "pr-2"}
@@ -50,7 +55,10 @@ const SelectedItemLabel: FC<SelectedItemLabelProps> = ({
             >
                 {selectedItem!.displayValue}
             </span>
-            <Icon name="arrow-down" size={ElementSize.Medium} />
+            <Icon
+                name="arrow-down"
+                size={ElementSize.Medium}
+            />
         </label>
     );
 };

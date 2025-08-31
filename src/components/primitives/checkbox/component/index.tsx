@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, isNullish, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNullish, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
@@ -9,10 +9,10 @@ import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import "./style.scss";
 
 import { CheckBoxProps } from "../..";
-
+// todo: https://justboil.github.io/bulma-checkbox/
 /** Boolean input component */
 const CheckBox = ({
-    onValueChange, defaultValue,
+    onValueChange = emptyFn, defaultValue,
     label,
     name = generateGuid(),
     size = ElementSize.Normal, style,
@@ -49,11 +49,12 @@ const CheckBox = ({
         return (
             <ComponentWithLabel
                 id={name}
+                size={size}
                 label={{
                     ...label,
+                    horizontal: label.horizontal ?? false,
                     horizontalContainerClassName: getClassName([label.horizontalContainerClassName, "p-0"]),
                 }}
-                size={ElementSize.Normal}
             >
                 <input
                     type="checkbox"
@@ -71,8 +72,7 @@ const CheckBox = ({
                     title={title}
                     htmlFor={name}
                     className="is-empty"
-                >
-                </label>
+                />
             </ComponentWithLabel>
         );
     }

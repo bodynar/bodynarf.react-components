@@ -1,8 +1,8 @@
-import { BaseElementProps, BaseInputElementProps, ElementFloatPosition } from "@bbr/types";
+import { BaseElementProps, BaseNullableInputElementProps, ElementFloatPosition } from "@bbr/types";
 
 /** File upload component props type */
 export type FileUploadProps = BaseElementProps & Pick<
-    BaseInputElementProps<File>,
+    BaseNullableInputElementProps<File>,
     | "onValueChange" | "disabled"
     | "size" | "style"
     | "name"

@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementPosition } from "@bbr/types";
@@ -7,13 +9,13 @@ import Icon from "@bbr/components/icon";
 import { ButtonWithIconProps } from "../..";
 
 /** Button with icon component */
-const ButtonWithIcon = ({
+const ButtonWithIcon: FC<ButtonWithIconProps> = ({
     className, disabled,
     onClick,
     caption, icon,
 
     title, data,
-}: ButtonWithIconProps): JSX.Element => {
+}) => {
     const iconClassName: string | undefined = isNullOrEmpty(caption)
         ? icon.className
         : getClassName([
@@ -34,6 +36,7 @@ const ButtonWithIcon = ({
     if (icon.position === ElementPosition.Right) {
         return (
             <button
+                type="button"
                 onClick={onClick}
                 disabled={disabled}
                 className={className}
@@ -42,13 +45,18 @@ const ButtonWithIcon = ({
                 {...dataAttributes}
             >
                 {caption}
-                <Icon {...icon} className={iconClassName} />
+
+                <Icon
+                    {...icon}
+                    className={iconClassName}
+                />
             </button>
         );
     }
 
     return (
         <button
+            type="button"
             onClick={onClick}
             disabled={disabled}
             className={className}
@@ -56,7 +64,11 @@ const ButtonWithIcon = ({
             title={title}
             {...dataAttributes}
         >
-            <Icon {...icon} className={iconClassName} />
+            <Icon
+                {...icon}
+                className={iconClassName}
+            />
+
             {caption}
         </button>
     );

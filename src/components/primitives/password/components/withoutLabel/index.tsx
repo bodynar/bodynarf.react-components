@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useState } from "react";
 
-import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -11,7 +11,7 @@ import { PasswordProps } from "../..";
 
 const PasswordWithoutLabel = ({
     defaultValue,
-    onValueChange, disabled, validationState,
+    onValueChange = emptyFn, disabled, validationState,
     name = generateGuid(),
     size = ElementSize.Normal, style,
     rounded = false, loading = false, autoFocus = false,
@@ -71,15 +71,15 @@ const PasswordWithoutLabel = ({
                     title={title}
                     {...dataAttributes}
                 />
-                {canShowPassword && !loading &&
+                {!!canShowPassword && !loading &&
                     <span
                         onClick={onIconClick}
                         title={showPasswordIconTitle}
                         className={`icon is-right ${elSizeClassName}`}
                     >
                         <Icon
+                            size={size}
                             name={contentIsHidden ? "eye" : "eye-slash"}
-                            size={ElementSize.Medium}
                         />
                     </span>
                 }

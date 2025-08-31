@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { FC, useCallback } from "react";
 
 import { getClassName, isNullish, isNullOrUndefined } from "@bodynarf/utils";
 
@@ -7,25 +7,31 @@ import Icon from "@bbr/components/icon";
 import { SortColumn, TableHeading } from "../../types";
 
 /** Table heading cell component props */
-export interface TableHeaderProps<TItem> extends TableHeading<TItem> {
+export type TableHeaderProps = {
+    /** Table heading item */
+    item: TableHeading;
+
     /** Current sort column */
-    sortColumn?: SortColumn<TItem>;
+    sortColumn?: SortColumn;
 
     /** Cell click handler */
-    onClick?: (column: TableHeading<TItem>) => void;
-}
+    onClick?: (column: TableHeading) => void;
+};
 
 /** Table heading cell */
-function TableHeader<TItem>(props: TableHeaderProps<TItem>): JSX.Element {
-    const { className, caption, name, sortable, sortColumn, onClick } = props;
+const TableHeader: FC<TableHeaderProps> = ({
+    item, sortColumn, onClick
+}) => {
+
+    const { className, caption, name, sortable } = item;
 
     const onHeaderClick = useCallback(
         () => {
             if (sortable && !isNullOrUndefined(onClick)) {
-                onClick!(props);
+                onClick!(item);
             }
         },
-        [onClick, props, sortable]
+        [onClick, item, sortable]
     );
 
     const containerClassName = getClassName([
@@ -41,7 +47,7 @@ function TableHeader<TItem>(props: TableHeaderProps<TItem>): JSX.Element {
             <span>
                 {caption}
             </span>
-            {sortable && sortColumn?.columnName === name!
+            {!!sortable && sortColumn?.columnName === name!
                 &&
                 <Icon
                     className="ml-1"
@@ -50,6 +56,6 @@ function TableHeader<TItem>(props: TableHeaderProps<TItem>): JSX.Element {
             }
         </th>
     );
-}
+};
 
 export default TableHeader;

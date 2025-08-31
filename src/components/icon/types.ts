@@ -1,18 +1,18 @@
-import { BaseElementProps, ElementSize } from "@bbr/types";
+import { BaseElementProps, ClickableElement, ElementSize } from "@bbr/types";
 
 /** Icon component props */
-export interface IconProps extends BaseElementProps {
-    /**
-     * Icon name. Must be without `bi-`
-     * @example ["Arrow repeat", "arrow-repeat"]
-     * // Icon name to icon class name.
-     * // For class name check bootstrap icons website
-    */
-    name: string;
+export type IconProps =
+    & BaseElementProps
+    & ClickableElement
+    & {
+        /**
+         * Icon name. Must be without `bi-`
+         * @example ["Arrow repeat", "arrow-repeat"]
+         * // Icon name to icon class name.
+         * // For class name check bootstrap icons website
+        */
+        name: string;
 
-    /** Icon size */
-    size?: ElementSize;
-
-    /** Click handler */
-    onClick?: () => void;
-}
+        /** Icon size */
+        size?: ElementSize;
+    };

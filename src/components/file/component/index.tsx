@@ -1,18 +1,18 @@
-import { ChangeEvent, useCallback, useRef, useState } from "react";
+import { ChangeEvent, FC, useCallback, useRef, useState } from "react";
 
-import { generateGuid, getClassName, isNullish, isNullOrUndefined, Optional } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNullish, isNullOrUndefined, Optional } from "@bodynarf/utils";
 
 import { ElementSize, ElementPosition } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
 import "./styles.scss";
 
 import { FileUploadProps } from "..";
 
-/** FileUpload textual input component */
-const FileUpload = ({
-    onValueChange,
+/** Component for selecting files */
+const FileUpload: FC<FileUploadProps> = ({
+    onValueChange = emptyFn,
     placeholder,
     name = generateGuid(),
     disabled = false,
@@ -23,7 +23,7 @@ const FileUpload = ({
     accept,
 
     className, title, data,
-}: FileUploadProps): JSX.Element => {
+}) => {
     if (boxed && alignment === ElementPosition.Right) {
         throw new Error("Boxed style cannot be used with Right alignment");
     }
@@ -58,8 +58,9 @@ const FileUpload = ({
         displayFileName ? "has-name" : "",
         alignment === ElementPosition.Right ? "is-right" : "",
         boxed ? "is-boxed" : "",
-        isNullish(style) ? "" : `is-${style}`,
-        size === ElementSize.Normal ? "" : `is-${size}`,
+        getStyleClassName(style),
+        getSizeClassName(size),
+        disabled ? "is-disabled" : "",
         className,
     ]);
 
@@ -71,7 +72,7 @@ const FileUpload = ({
 
     return (
         <div className={containerClassName}>
-            {shouldDisplayFileName && alignment === ElementPosition.Right
+            {!!shouldDisplayFileName && alignment === ElementPosition.Right
                 &&
                 <Icon
                     name="x-lg"
@@ -111,7 +112,7 @@ const FileUpload = ({
                         {placeholder}
                     </span>
                 </span>
-                {shouldDisplayFileName
+                {!!shouldDisplayFileName
                     &&
                     <span
                         className="file-name"
@@ -121,7 +122,7 @@ const FileUpload = ({
                     </span>
                 }
             </label>
-            {shouldDisplayFileName && alignment === ElementPosition.Left
+            {!!shouldDisplayFileName && alignment === ElementPosition.Left
                 &&
                 <Icon
                     name="x-lg"

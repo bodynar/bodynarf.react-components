@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 
 import { emptyFn, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
@@ -7,17 +7,18 @@ import { mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
 import "./style.scss";
+
 import { AccordionProps } from "..";
 
 /** Accordion panel */
-const Accordion = ({
+const Accordion: FC<AccordionProps> = ({
     children, caption,
     style, size = ElementSize.Normal,
     defaultExpanded = false,
     onToggle = emptyFn,
 
     className, title, data,
-}: AccordionProps): JSX.Element => {
+}) => {
     const expandablePanelRef = useRef<HTMLDivElement>(null);
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
     const [maxHeight, setMaxHeight] = useState<number | undefined>(defaultExpanded ? undefined : 0);
@@ -31,12 +32,10 @@ const Accordion = ({
         if (defaultExpanded && !isNullOrUndefined(expandablePanelRef.current)) {
             setMaxHeight(expandablePanelRef.current!.scrollHeight);
         }
-    }, [defaultExpanded]);
+    }, [defaultExpanded, size]);
 
     useEffect(() => setIsExpanded(maxHeight !== 0), [maxHeight]);
-    useEffect(() => {
-        onToggle.call(undefined, !isExpanded);
-    }, [isExpanded, onToggle]);
+    useEffect(() => onToggle.call(undefined, !isExpanded), [isExpanded, onToggle]);
 
     const elClassName = getClassName([
         "bbr-accordion",

@@ -1,6 +1,6 @@
-import { useCallback, useId, useState, MouseEvent, FC } from "react";
+import { useCallback, useId, useState, MouseEvent, FC, useMemo } from "react";
 
-import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullOrEmpty, isNullish } from "@bodynarf/utils";
 
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
@@ -19,8 +19,8 @@ type DropdownCompactProps = DropdownProps & {
 /** Dropdown component without label */
 const DropdownCompact: FC<DropdownCompactProps> = ({
     items, value, onSelect,
-    hideOnOuterClick, listMaxHeight,
-    placeholder, noDataText = "No items found", noDataByQuery = "No items found by specified search",
+    hideOnOuterClick = false, listMaxHeight,
+    placeholder = "", noDataText = "No items found", noDataByQuery = "No items found by specified search",
 
     compact = false, disabled = false, deselectable = false, searchable = false,
 
@@ -35,7 +35,7 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
     const id = propsId ?? generatedId;
 
     const [isListVisible, setListVisible] = useState<boolean>(false);
-    const [searchValue, setSearchValue] = useState<string | null>(null);
+    const [searchValue, setSearchValue] = useState<string>("");
 
     const onItemClick = useCallback(
         (event: React.MouseEvent<HTMLLIElement>) => {
@@ -45,19 +45,19 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
 
             const target = event.target as HTMLLIElement;
 
-            if (isNullOrUndefined(target)) {
+            if (isNullish(target)) {
                 return;
             }
 
             const dataValue = target.dataset["dropdownItemValue"];
 
-            if (isNullOrUndefined(dataValue)) {
+            if (isNullish(dataValue)) {
                 return;
             }
 
             const item = items.find(x => x.value === dataValue);
 
-            if (isNullOrUndefined(item)) {
+            if (isNullish(item)) {
                 return;
             }
 
@@ -67,7 +67,7 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
             }
 
             onSelect(item);
-            setSearchValue(null);
+            setSearchValue("");
             setListVisible(false);
         }, [setListVisible, value, items, onSelect, disabled]);
 
@@ -79,13 +79,13 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
 
             const target = event.target as HTMLElement;
 
-            if (isNullOrUndefined(target)) {
+            if (isNullish(target)) {
                 return;
             }
 
             if (target.classList.contains("bi-plus-lg")) {
                 onSelect(undefined);
-                setSearchValue(null);
+                setSearchValue("");
             } else {
                 setListVisible(state => !state);
             }
@@ -93,7 +93,7 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
 
     const onSearchChange = useCallback(
         (value: string) => {
-            setSearchValue(value.length === 0 ? null : value);
+            setSearchValue(value);
 
             onSelect(undefined);
         },
@@ -117,13 +117,14 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
     ]);
 
     const labelComponentClassName = getStyleClassName(undefined, validationState);
-    const filteredItems = isNullOrEmpty(searchValue)
-        ? items
-        : items.filter(({ displayValue }) =>
-            displayValue.toLocaleLowerCase().includes(searchValue!.toLocaleLowerCase()))
-        ;
+    const filteredItems = useMemo(
+        () =>
+            items.filter(({ displayValue }) =>
+                displayValue.toLocaleLowerCase().includes(searchValue!.toLocaleLowerCase())),
+        [items, searchValue]
+    );
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
         : mapDataAttributes(data!);
 
@@ -150,7 +151,11 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
                 />
                 <div className="dropdown-menu">
                     {filteredItems.length > 0
-                        ? <ul className="dropdown-content" style={{ maxHeight: listMaxHeight }}>
+                        ?
+                        <ul
+                            className="dropdown-content"
+                            style={{ maxHeight: listMaxHeight }}
+                        >
                             {filteredItems.map(item =>
                                 <DropdownItem
                                     key={item.id}
@@ -161,7 +166,8 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
                                 />
                             )}
                         </ul>
-                        : <span className="dropdown-content dropdown-item">
+                        :
+                        <span className="dropdown-content dropdown-item is-italic has-text-grey">
                             {isNullOrEmpty(searchValue) ? noDataText : noDataByQuery}
                         </span>
                     }

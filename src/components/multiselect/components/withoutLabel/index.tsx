@@ -21,7 +21,7 @@ type MultiselectWithoutLabelProps = MultiselectProps & {
 const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
     items, onChange, onClear,
     hideOnOuterClick, listMaxHeight,
-    placeholder,
+    placeholder = "",
     noDataText = "No items found", selectionCaption = "{0} items selected", noDataByQuery = "No items found by specified search",
 
     compact = false, disabled = false, searchable = true,
@@ -190,6 +190,7 @@ type DropdownContentProps = Pick<MultiselectProps,
     onItemSelectChange: (item: MultiselectItemModel, selected: boolean) => void;
 };
 
+// eslint-disable-next-line react/no-multi-comp
 const DropdownContent: FC<DropdownContentProps> = ({
     noDataText, id, listMaxHeight, noDataByQuery,
     items, selectedItems,
@@ -240,7 +241,7 @@ const DropdownContent: FC<DropdownContentProps> = ({
             className="dropdown-content"
             style={{ maxHeight: listMaxHeight }}
         >
-            {searchable &&
+            {!!searchable &&
                 <div className="mx-2 my-1">
                     <Search
                         caption="search"

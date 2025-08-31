@@ -22,6 +22,7 @@ export const mapDataAttributes = (dataAttributes: DataAttributes): object => {
 
                 result[newKey] = value;
                 return result;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             }, {} as any);
 
     return mappedAttributes;

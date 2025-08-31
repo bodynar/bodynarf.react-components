@@ -1,13 +1,7 @@
-import { BaseInputElementProps, LabelConfiguration } from "@bbr/types";
+import { BaseInputElementProps, BaseNullableInputElementProps, BlurableElement } from "@bbr/types";
 
 /** Date input component props type */
-export interface DateProps extends Omit<
-    BaseInputElementProps<Date | undefined>,
+export type DateProps = Omit<
+    BaseNullableInputElementProps<Date>,
     "placeholder" | "label"
-> {
-    /** Label configuration */
-    label: LabelConfiguration;
-
-    /** Focus out event handler */
-    onBlur?: () => void;
-}
+> & BlurableElement & Required<Pick<BaseInputElementProps<unknown>, "label">>;

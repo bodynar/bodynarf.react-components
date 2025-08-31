@@ -1,6 +1,6 @@
 import { BaseElementProps, ElementPosition, ElementSize } from "@bbr/types";
 
-export interface PaginatorProps extends BaseElementProps {
+export type PaginatorProps = BaseElementProps & {
     /** Amount of pages */
     count: number;
 
@@ -8,7 +8,7 @@ export interface PaginatorProps extends BaseElementProps {
     onPageChange: (page: number) => void;
 
     /** Current page */
-    currentPage?: number;
+    currentPage: number;
 
     /**
      * Page numbers position.
@@ -43,7 +43,7 @@ export interface PaginatorProps extends BaseElementProps {
          * Previous page button title.
          * Visible only if set
          */
-        previousPageTitle?: string
+        previousPageTitle?: string;
 
         /**
          * Next page button caption
@@ -55,7 +55,7 @@ export interface PaginatorProps extends BaseElementProps {
          * Next page button title.
          * Visible only if set
          */
-        nextPageTitle?: string
+        nextPageTitle?: string;
 
         /**
          * Title for button for opening concrete page by its number.
@@ -64,4 +64,4 @@ export interface PaginatorProps extends BaseElementProps {
          */
         openConcretePageTitleTemplate?: string;
     };
-}
+};

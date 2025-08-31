@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -10,7 +10,7 @@ import { NumberProps } from "../..";
 
 /** Number component without label */
 const NumberWithoutLabel = ({
-    onValueChange, defaultValue, validationState,
+    onValueChange = emptyFn, defaultValue, validationState,
     name = generateGuid(),
     size, style,
     readonly = false, disabled = false, autoFocus = false,

@@ -1,43 +1,52 @@
-import { BaseElementProps, ElementIcon, ElementSize } from "@bbr/types";
+import { BaseElementProps, ClickableElement, ElementIcon, ElementSize } from "@bbr/types";
 
-export interface ButtonProps extends BaseElementProps {
-    /** Button displaying text */
-    caption?: string;
+export type ButtonProps =
+    & BaseElementProps
+    & ClickableElement
+    & {
+        /** Button displaying text */
+        caption?: string;
 
-    /** Type of button (color)  */
-    type: ButtonType;
+        /**
+         * Type of button (color)
+         * @deprecated Use `style` prop instead
+         */
+        type?: ButtonType;
 
-    /** Configuration of inner icon */
-    icon?: ElementIcon;
+        /** Style */
+        style: ButtonStyle;
 
-    /** Button size  */
-    size?: ElementSize;
+        /** Configuration of inner icon */
+        icon?: ElementIcon;
 
-    /** Is button uses light version of color  */
-    light?: boolean;
+        /** Button size  */
+        size?: ElementSize;
 
-    /** Is button outlined */
-    outlined?: boolean;
+        /** Is button uses light version of color  */
+        light?: boolean;
 
-    /** Should button corners be rounded  */
-    rounded?: boolean;
+        /** Is button outlined */
+        outlined?: boolean;
 
-    /** Display loading icon */
-    isLoading?: boolean;
+        /** Should button corners be rounded  */
+        rounded?: boolean;
 
-    /** Is button disabled */
-    disabled?: boolean;
+        /** Display loading icon */
+        isLoading?: boolean;
 
-    /** Is non-interactive button */
-    static?: boolean;
+        /** Is button disabled */
+        disabled?: boolean;
 
-    /** Click action handler */
-    onClick?: () => void;
-}
+        /** Is non-interactive button */
+        static?: boolean;
+    };
 
-/** Button types according to Bulma framework */
-export type ButtonType = // TODO: to enum
-    "default" /** color: transparent */
+/**
+ * Button types according to Bulma framework
+ * @deprecated Use `ButtonStyle` enum
+ */
+export type ButtonType =
+    | "default" /** color: transparent */
     | "primary" /** color: sea-wave green */
     | "link" /** color: blue-violet */
     | "info" /** color: sky-blue */
@@ -53,12 +62,54 @@ export type ButtonType = // TODO: to enum
     ;
 
 /** Simple button props type */
-export interface SimpleButtonProps extends Omit<ButtonProps, "className"> {
+export type SimpleButtonProps = Omit<ButtonProps, "className"> & {
     /** Button class name*/
     className: string;
-}
+};
 
-export interface ButtonWithIconProps extends SimpleButtonProps {
+export type ButtonWithIconProps = SimpleButtonProps & {
     /** Icon configuration */
     icon: ElementIcon;
+};
+
+/** Button style type */
+export enum ButtonStyle {
+    /** color: transparent */
+    Default = "default",
+
+    /** color: sea-wave green */
+    Primary = "primary",
+
+    /** color: blue-violet */
+    Link = "link",
+
+    /** color: sky-blue */
+    Info = "info",
+
+    /** color: green */
+    Success = "success",
+
+    /** color: yellow */
+    Warning = "warning",
+
+    /** color: red */
+    Danger = "danger",
+
+    /** color: white */
+    White = "white",
+
+    /** color: light-gray */
+    Light = "light",
+
+    /** color: dark-gray */
+    Dark = "dark",
+
+    /** color: black */
+    Black = "black",
+
+    /** Underline text with color: gray */
+    Text = "text",
+
+    /** Blue underline text with color: transparent */
+    Ghost = "ghost",
 }

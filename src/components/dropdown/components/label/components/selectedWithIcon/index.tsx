@@ -18,12 +18,12 @@ type SelectedItemLabelWithIconProps = Pick<
 const SelectedItemLabelWithIcon: FC<SelectedItemLabelWithIconProps> = ({
     selectedItem, onClick,
     deselectable, className,
-}): JSX.Element => {
+}) => {
     const elClassName = getClassName([
+        "button",
         "dropdown-trigger",
         "bbr-dropdown__label",
         isNullOrEmpty(className) ? "" : `${className}--md`,
-        "button"
     ]);
 
     const icon = selectedItem!.icon!;
@@ -42,8 +42,11 @@ const SelectedItemLabelWithIcon: FC<SelectedItemLabelWithIconProps> = ({
                 className={elClassName}
                 onClick={onClick}
             >
-                {deselectable &&
-                    <Icon name="plus-lg" size={ElementSize.Medium} />
+                {!!deselectable &&
+                    <Icon
+                        name="plus-lg"
+                        size={ElementSize.Medium}
+                    />
                 }
                 <span
                     className={deselectable ? "px-2" : "pr-2"}
@@ -56,7 +59,10 @@ const SelectedItemLabelWithIcon: FC<SelectedItemLabelWithIconProps> = ({
                         className={iconClassName}
                     />
                 </span>
-                <Icon name="arrow-down" size={ElementSize.Medium} />
+                <Icon
+                    name="arrow-down"
+                    size={ElementSize.Medium}
+                />
             </label>
         );
     }
@@ -66,8 +72,11 @@ const SelectedItemLabelWithIcon: FC<SelectedItemLabelWithIconProps> = ({
             className={elClassName}
             onClick={onClick}
         >
-            {deselectable &&
-                <Icon name="plus-lg" size={ElementSize.Medium} />
+            {!!deselectable &&
+                <Icon
+                    name="plus-lg"
+                    size={ElementSize.Medium}
+                />
             }
             <span
                 className={deselectable ? "mx-2" : "mr-2"}
@@ -80,7 +89,10 @@ const SelectedItemLabelWithIcon: FC<SelectedItemLabelWithIconProps> = ({
                 />
                 {selectedItem!.displayValue}
             </span>
-            <Icon name="arrow-down" size={ElementSize.Medium} />
+            <Icon
+                name="arrow-down"
+                size={ElementSize.Medium}
+            />
         </label>
     );
 };
