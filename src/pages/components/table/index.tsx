@@ -6,7 +6,7 @@ import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import CodeExample from "@app/sharedComponents/codeExample";
 
-const tableHeadings: Array<TableHeading<any>> = [
+const tableHeadings: Array<TableHeading<any>> = [ // todo: remove after lib update
     { caption: "Name", sortable: false, name: "Name" },
     { caption: "Age", sortable: false, name: "Age" },
     { caption: "Department", sortable: false, name: "Department" },

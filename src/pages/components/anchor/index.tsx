@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { FC, useCallback, useState } from "react";
 
 import { ElementPosition, ElementSize } from "@bodynarf/react.components";
 import AnchorComponent from "@bodynarf/react.components/components/anchor";
@@ -9,7 +9,7 @@ import CodeExample from "@app/sharedComponents/codeExample";
 import ObsoleteWarning from "@app/sharedComponents/obsoleteWarning";
 
 /** Anchor component demo */
-function Anchor() {
+const Anchor: FC = () => {
     const [text, setText] = useState("");
     const appendText = useCallback(
         () => setText(
@@ -182,6 +182,6 @@ function Anchor() {
             </ComponentUseCase>
         </section>
     );
-}
+};
 
 export default Anchor;

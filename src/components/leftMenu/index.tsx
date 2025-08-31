@@ -41,6 +41,7 @@ const LeftMenu: FC = () => {
                 <div className={`${styles.header__brand} is-flex is-align-items-center is-justify-content-flex-start is-flex-direction-row`}>
                     <a
                         target="_blank"
+                        rel="noreferrer"
                         href="https://bulma.io/"
                         className="is-flex is-align-items-center"
                     >
@@ -52,6 +53,7 @@ const LeftMenu: FC = () => {
                     </a>
                     <a
                         target="_blank"
+                        rel="noreferrer"
                         href="https://react.dev/"
                         className="is-flex is-align-items-center"
                     >
@@ -69,25 +71,41 @@ const LeftMenu: FC = () => {
                     title="Version of BBR.Components package"
                     className="is-block is-italic has-text-grey is-size-7"
                 >
-                    Package ver.: {packageVersion}
+                    Package ver.:
+                    {` `}
+                    {packageVersion}
                 </span>
                 <span
                     title="Version of Bulma package"
                     className="is-block is-italic has-text-grey is-size-7"
                 >
-                    Bulma ver.: {bulmaVersion}
+                    Bulma ver.:
+                    {` `}
+                    {bulmaVersion}
                 </span>
             </div>
             <ul className={`${styles.menu} mt-4`}>
                 {routeList.map(routeItem =>
                     isRootMenuItem(routeItem)
-                        ? <MenuItemGroup key={routeItem.name} {...routeItem} activeItem={activeItem} />
-                        : <MenuItem key={routeItem.path} {...routeItem} activeItem={activeItem} />
+                        ?
+                        <MenuItemGroup
+                            key={routeItem.name}
+
+                            {...routeItem}
+                            activeItem={activeItem}
+                        />
+                        :
+                        <MenuItem
+                            key={routeItem.path}
+                            {...routeItem}
+                            activeItem={activeItem}
+                        />
                 )}
             </ul>
             <div className={`${styles.links} pt-4 is-flex mt-4 pr-6 is-justify-content-space-around is-align-items-center`}>
                 <a
                     target="_blank"
+                    rel="noreferrer"
                     title="Open github repository"
                     className="is-flex is-flex-direction-column is-align-items-center"
                     href="https://github.com/bodynar/bodynarf.react-components"
@@ -96,10 +114,12 @@ const LeftMenu: FC = () => {
                         src={githubLogo}
                         alt="Github logo"
                     />
+                    {` `}
                     Github
                 </a>
                 <a
                     target="_blank"
+                    rel="noreferrer"
                     title="Open package in npm page"
                     className="is-flex is-flex-direction-column is-align-items-center"
                     href="https://www.npmjs.com/package/@bodynarf/react.components"
@@ -108,6 +128,7 @@ const LeftMenu: FC = () => {
                         src={npmLogo}
                         alt="Npm logo"
                     />
+                    {` `}
                     npm
                 </a>
             </div>
@@ -116,6 +137,7 @@ const LeftMenu: FC = () => {
 };
 
 /** Menu item with sub items */
+// eslint-disable-next-line react/no-multi-comp
 const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
     caption, children, activeItem
 }) => {
@@ -159,6 +181,7 @@ const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
 };
 
 /** Menu item with link */
+// eslint-disable-next-line react/no-multi-comp
 const MenuItem: FC<RouteMenuItem & { activeItem?: RouteMenuItem; }> = ({
     path, caption, activeItem,
 }) => {

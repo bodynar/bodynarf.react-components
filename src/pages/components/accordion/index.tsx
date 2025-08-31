@@ -65,7 +65,10 @@ It supports different sizes, colors, and can be controlled programmatically thro
                             "",
                             "/* ... */",
                             "",
-                            `<AccordionComponent caption="Header" defaultExpanded>`,
+                            `<AccordionComponent`,
+                            `    defaultExpanded`,
+                            `    caption="Header"`,
+                            `>`,
                             "    Content",
                             "</AccordionComponent>"
                         ].join("\n")}
@@ -91,9 +94,13 @@ It supports different sizes, colors, and can be controlled programmatically thro
                             "",
                             "/* ... */",
                             "",
-                            `<AccordionComponent defaultExpanded caption="Size" size={ElementSize.${id}}>`,
+                            `<AccordionComponent`,
+                            `    defaultExpanded`,
+                            `    caption="Size"`,
+                            `    size={ElementSize.${id}}`,
+                            `>`,
                             "    Content",
-                            "</AccordionComponent>"
+                            "</AccordionComponent>",
                         ].join("\n")}
                     />
                 }
@@ -120,9 +127,13 @@ It supports different sizes, colors, and can be controlled programmatically thro
                             "",
                             "/* ... */",
                             "",
-                            `<AccordionComponent defaultExpanded caption="Color" style={ElementColor.${id}}>`,
+                            `<AccordionComponent`,
+                            `    defaultExpanded`,
+                            `    caption="Color"`,
+                            `    style={ElementColor.${id}}`,
+                            `>`,
                             "    Content",
-                            "</AccordionComponent>"
+                            "</AccordionComponent>",
                         ].join("\n")}
                     />
                 }
@@ -150,10 +161,13 @@ It supports different sizes, colors, and can be controlled programmatically thro
                             `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
                             "",
                             "/* ... */",
-                            "const TOGGLE_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
+                            "const ON_TOGGLE_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
                             "/* ... */",
                             "",
-                            `<AccordionComponent caption="onToggle handler" onToggle={TOGGLE_HANDLE_FN}>`,
+                            `<AccordionComponent`,
+                            `    caption="onToggle handler"`,
+                            `    onToggle={ON_TOGGLE_HANDLE_FN}>`,
+                            `>`,
                             "    Content",
                             "</AccordionComponent>"
                         ].join("\n")}
@@ -161,8 +175,8 @@ It supports different sizes, colors, and can be controlled programmatically thro
                 }
             >
                 <AccordionComponent
-                    caption="onToggle handler"
                     onToggle={appendText}
+                    caption="onToggle handler"
                 >
                     Content
                 </AccordionComponent>
