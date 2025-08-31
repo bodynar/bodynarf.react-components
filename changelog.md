@@ -44,7 +44,7 @@ All changes will be published here in reverse chronological order
   - Made the `children` prop required since it represents the main content of the table.
 
 - **All input controls**
-  - Updated the `onValueChange` callback signature to support `nullable` values, depending on the component.
+  - Updated the `onValueChange` callback signature to support `nullable` values, depending on the component;
   - Updated the `ValidationState`: `messages` property has been made optional.
 
 - **Checkbox**

@@ -29,7 +29,7 @@ const InternalHint: FC<HintProps> = ({
             : "is-danger";
 
         return (
-            <p className={`help m-help ${validationClassName}`}>
+            <p className={`help m-help bbr-hint ${validationClassName}`}>
                 {(validationState!.messages ?? []).join("\n")}
             </p>
         );
