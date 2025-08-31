@@ -459,7 +459,7 @@ const Checkbox: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="name"
-                description="Option to specify the component name. Used as the form element attribute"
+                description="Option to specify the component name. Used as a form element attribute."
                 code={
                     <CodeExample
                         code={[
