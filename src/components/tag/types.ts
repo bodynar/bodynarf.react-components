@@ -1,34 +1,34 @@
-import { BaseElementProps, ElementColor, ElementSize } from "@bbr/types";
+import { BaseElementProps, ClickableElement, ElementColor, ElementSize } from "@bbr/types";
 
 /** Tag item prop types */
-export type TagProps = BaseElementProps & {
-    /** Tag content */
-    content: string;
+export type TagProps =
+    & BaseElementProps
+    & ClickableElement
+    & {
+        /** Tag content */
+        content: string;
 
-    /** Click handler */
-    onClick?: () => void;
+        /**
+         * Element size.
+         * `Small` isn"t allowed
+        */
+        size?: Exclude<ElementSize, ElementSize.Small>;
 
-    /**
-     * Element size.
-     * `Small` isn"t allowed
-    */
-    size?: Exclude<ElementSize, ElementSize.Small>;
+        /** Element color */
+        style?: ElementColor;
 
-    /** Element color */
-    style?: ElementColor;
+        /** Is element with rounded border */
+        rounded?: boolean;
 
-    /** Is element with rounded border */
-    rounded?: boolean;
+        /** Is element has light color */
+        lightColor?: boolean;
 
-    /** Is element has light color */
-    lightColor?: boolean;
+        /** Manual color scheme */
+        customColor?: {
+            /** Text color */
+            color: string;
 
-    /** Manual color scheme */
-    customColor?: {
-        /** Text color */
-        color: string;
-
-        /** Background color */
-        backgroundColor: string;
+            /** Background color */
+            backgroundColor: string;
+        };
     };
-};
