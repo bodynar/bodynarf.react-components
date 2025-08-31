@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
 
 import { generateGuid, getClassName, hexToRgb, isNullOrUndefined, rgbToHex, whiteHex } from "@bodynarf/utils";
 
@@ -10,7 +10,7 @@ import { ColorPickerProps } from "../..";
 import ColorPickerControl from "../picker";
 
 /** Color picker component with form label */
-function ColorPickerWithLabel({
+const ColorPickerWithLabel: FC<ColorPickerProps> = ({
     preview,
     name = generateGuid(),
     defaultValue, onValueChange,
@@ -21,7 +21,7 @@ function ColorPickerWithLabel({
 
     hint,
     className, title, data,
-}: ColorPickerProps) {
+}) => {
     const defaultColor = isNullOrUndefined(defaultValue)
         ? whiteHex
         : rgbToHex(defaultValue!);
@@ -34,7 +34,7 @@ function ColorPickerWithLabel({
     );
 
     useEffect(
-        () => onValueChange(hexToRgb(value)!),
+        () => onValueChange?.(hexToRgb(value)!),
         [onValueChange, value]
     );
 
@@ -70,6 +70,6 @@ function ColorPickerWithLabel({
             />
         </ComponentWithLabel>
     );
-}
+};
 
 export default ColorPickerWithLabel;
