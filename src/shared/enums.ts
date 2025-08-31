@@ -17,7 +17,7 @@ export const Colors = {
         id: i.toString(),
         value: x,
     }) as SelectableItem),
-};
+} as const;
 
 /** Sizes object */
 export const Sizes = {
@@ -36,7 +36,7 @@ export const Sizes = {
         id: i.toString(),
         value: x,
     }) as SelectableItem),
-};
+} as const;
 
 /** Positions object */
 export const Positions = {
@@ -55,4 +55,4 @@ export const Positions = {
         id: i.toString(),
         value: x,
     }) as SelectableItem),
-};
+} as const;

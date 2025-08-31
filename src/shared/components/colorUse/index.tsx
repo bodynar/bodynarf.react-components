@@ -37,8 +37,11 @@ const ComponentColorCase: FC<ComponentColorCaseProps> = ({
             <div className="block">
                 <h5 className="subtitle is-5">
                     {captionIsCode
-                        ? <code>{caption}</code>
-                        : <>{caption}</>
+                        ?
+                        <code>
+                            {caption}
+                        </code>
+                        : caption
                     }
                 </h5>
                 <p style={{ whiteSpace: "pre-line" }}>
