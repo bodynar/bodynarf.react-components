@@ -41,6 +41,18 @@ const Number: FC = () => {
                 description="Компонент для ввода числового значения"
             />
 
+            <div className="block">
+                <p>
+                    For better readability in examples the
+                    {` `}
+                    <code>
+                        label
+                    </code>
+                    {` `}
+                    prop is included. However, it is not required.
+                </p>
+            </div>
+
             <ComponentUseCase
                 caption="Minimal use"
                 description="Minimal configuration is absent, the component can be used 'empty'"
@@ -459,7 +471,7 @@ const Number: FC = () => {
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "/* ... */",
-                            "const ON_VALUE_CHANGE_HANDLE_FN = useCallback((value: string) => { /* handler fn */}, []);",
+                            "const ON_VALUE_CHANGE_HANDLE_FN = useCallback((value: number) => { /* handler fn */}, []);",
                             "/* ... */",
                             "",
                             `<NumberComponent`,

@@ -84,6 +84,18 @@ const Checkbox: FC = () => {
                 </div>
             </div>
 
+            <div className="block">
+                <p>
+                    For better readability in examples the
+                    {` `}
+                    <code>
+                        label
+                    </code>
+                    {` `}
+                    prop is included. However, it is not required.
+                </p>
+            </div>
+
             <ComponentUseCase
                 caption="Minimal use"
                 description="Minimal configuration: onValueChange event handler"
@@ -140,17 +152,7 @@ const Checkbox: FC = () => {
                 </h4>
             </div>
 
-            <div className="block">
-                <p>
-                    For better readability in examples the
-                    {` `}
-                    <code>
-                        label
-                    </code>
-                    {` `}
-                    prop is included. However, it is not required.
-                </p>
-            </div>
+
 
             <ComponentUseCase
                 captionIsCode

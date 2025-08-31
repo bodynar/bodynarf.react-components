@@ -41,6 +41,18 @@ const Multiline: FC = () => {
                 description="Control for entering multiline text"
             />
 
+            <div className="block">
+                <p>
+                    For better readability in examples the
+                    {` `}
+                    <code>
+                        label
+                    </code>
+                    {` `}
+                    prop is included. However, it is not required.
+                </p>
+            </div>
+
             <ComponentUseCase
                 caption="Minimal use"
                 description="Minimal configuration is absent, the component can be used 'empty'"
