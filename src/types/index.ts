@@ -7,5 +7,6 @@ export * from "./elementPosition";
 export * from "./elementSize";
 export * from "./hintConfiguration";
 export * from "./labelConfiguration";
+export * from "./blurableElement";
 
 export * from "./validation";

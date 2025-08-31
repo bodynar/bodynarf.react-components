@@ -1,7 +1,4 @@
-import { BaseNotNullableInputElementProps } from "@bbr/types";
+import { BaseNotNullableInputElementProps, BlurableElement } from "@bbr/types";
 
 /** Text input component props type */
-export interface TextProps extends BaseNotNullableInputElementProps<string> {
-    /** Focus out event handler */
-    onBlur?: () => void; // TODO: to type BaseBlurableInputElement
-}
+export type TextProps = BaseNotNullableInputElementProps<string> & BlurableElement;
