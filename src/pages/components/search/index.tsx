@@ -277,7 +277,7 @@ const Search: FC = () => {
                         />
                         {` `}
                         <span>
-                            Only 1 element at page can have this flag
+                            Only 1 element on the page can have this flag
                         </span>
                         <br />
                         <span className="is-italic">
