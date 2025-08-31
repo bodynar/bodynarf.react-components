@@ -1,97 +1,485 @@
+import { FC, useCallback, useState } from "react";
+
 import { emptyFn } from "@bodynarf/utils";
-import { ValidationStatus } from "@bodynarf/react.components";
 import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
-import CommonPropsSuppressExampleInfoMessage from "@app/sharedComponents/commonPropsSuppress";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
+import CodeExample from "@app/sharedComponents/codeExample";
+import Icon from "@bodynarf/react.components/components/icon";
 
 /** Multiline component demo */
-function Multiline() {
+const Multiline: FC = () => {
+    const [onValueChangeLog, setOnValueChangeLog] = useState("");
+    const appendOnValueChangeLog = useCallback(
+        (value?: string) => setOnValueChangeLog(
+            t => t
+                + "\n"
+                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
+                + " => " + `new value: ${value}`
+        ),
+        []
+    );
+
+    const [onBlurLog, setOnBlurLog] = useState("");
+    const appendOnBlurLog = useCallback(
+        () => setOnBlurLog(
+            t => t
+                + "\n"
+                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
+                + " => " + "component lost focus"
+        ),
+        []
+    );
+
     return (
         <section>
-            <DemoComponentTitleInfoMessage name="Multiline" description="Multiline text input" />
-            <ComponentUseCase
-                caption="Default"
-                code={`<Multiline onValueChange={onValueChangeHandler} label={{ caption: "Multiline label", horizontal: true }} />`}
-                description="Control must have label and value change handler as base configuration"
-                component={<MultilineComponent label={{ caption: "Multiline label", horizontal: true }} onValueChange={emptyFn} />}
+            <DemoComponentTitleInfoMessage
+                name="Multiline"
+                description="Control for entering multiline text"
             />
-            <CommonPropsSuppressExampleInfoMessage />
+
+            <ComponentUseCase
+                caption="Minimal use"
+                description="Minimal configuration is absent, the component can be used 'empty'"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<MultilineComponent />`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultilineComponent
+                    onValueChange={emptyFn} // todo: remove this after lib update
+                />
+            </ComponentUseCase>
+
+            <hr />
+
+            <div className="block">
+                <h4 className="subtitle is-4">
+                    Custom component props
+                </h4>
+            </div>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="fixed"
+                description="Option to prevent resizing of the component. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<MultilineComponent`,
+                            "    fixed",
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultilineComponent
+                    fixed
+                    onValueChange={emptyFn}
+                    label={{ caption: "Multiline demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="rows"
+                description="Initial number of rows for the component. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<MultilineComponent`,
+                            "    rows={10}",
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultilineComponent
+                    rows={10}
+                    onValueChange={emptyFn}
+                    label={{ caption: "Multiline demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="onBlur"
+                description="Handler for the component blur event. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useCallback } from "react"`,
+                            "",
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "const ON_BLUR_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
+                            "/* ... */",
+                            "",
+                            `<MultilineComponent`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            "    onBlur={ON_BLUR_HANDLE_FN}",
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultilineComponent
+                    onValueChange={emptyFn}
+                    onBlur={appendOnBlurLog}
+                    label={{ caption: "Multiline demo", horizontal: true }}
+                />
+                <p style={{ whiteSpace: "pre-line" }}>
+                    {onBlurLog}
+                </p>
+            </ComponentUseCase>
+
+            <hr />
+
+            <div className="block">
+                <h4 className="subtitle is-4">
+                    Base props implementation
+                    {` `}
+                    <code>
+                        BaseInputElementProps
+                    </code>
+                </h4>
+            </div>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="defaultValue"
+                description="Option to set the initial value of the component. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<MultilineComponent`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
+                            '    defaultValue={`first line \\nsecond line\\n\\tfin`}',
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultilineComponent
+                    onValueChange={emptyFn}
+                    label={{ caption: "Multiline demo", horizontal: true }}
+                    defaultValue={`first line \nsecond line\n\tfin`}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="placeholder"
+                description="Option to specify the component's placeholder. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<MultilineComponent`,
+                            '    placeholder="Multiline demo control"',
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultilineComponent
+                    placeholder="Multiline demo control"
+                    onValueChange={emptyFn}
+                    label={{ caption: "Multiline demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="disabled"
+                description="Option to render the component as disabled. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<MultilineComponent`,
+                            `    disabled`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultilineComponent
+                    disabled
+                    onValueChange={emptyFn}
+                    label={{ caption: "Multiline demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="readonly"
+                description="Option to render the component in readonly state. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<MultilineComponent`,
+                            `    readonly`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultilineComponent
+                    readonly
+                    onValueChange={emptyFn}
+                    label={{ caption: "Multiline demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
             <ComponentSizeCase
                 caption="Sizes"
-                codeProvider={id => `<Multiline size={ElementSize.${id}} />`}
-                description="Control supports all available sizes"
+                description="The component supports all sizes defined in the ElementSize type"
+                codeProvider={id =>
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<MultilineComponent`,
+                            `    size={ElementSize.${id}}`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
                 componentProvider={
                     size =>
                         <MultilineComponent
-                            onValueChange={emptyFn}
                             size={size}
-                            label={{ caption: "Sized multiline", horizontal: true }}
+                            onValueChange={emptyFn}
+                            label={{ caption: "Multiline demo", horizontal: true }}
                         />
                 }
             />
+
+            <ComponentUseCase
+                captionIsCode
+                caption="loading"
+                description="Option to render the component in a loading state. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<MultilineComponent`,
+                            `    loading`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultilineComponent
+                    loading
+                    onValueChange={emptyFn}
+                    label={{ caption: "Multiline demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
             <ComponentColorCase
                 caption="Colors"
-                codeProvider={id => `<Multiline style={ElementColor.${id}} />`}
-                description="Control supports all available colors"
+                description="Component supports all available colors"
+                codeProvider={id =>
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<MultilineComponent`,
+                            `    style={ElementColor.${id}}`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Multiline demo", horizontal: false }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
                 componentProvider={
                     style =>
                         <MultilineComponent
-                            onValueChange={emptyFn}
                             style={style}
-                            label={{ caption: "Colored multiline", horizontal: true }}
+                            onValueChange={emptyFn}
+                            label={{ caption: "Multiline demo", horizontal: false }}
                         />
                 }
             />
+
             <ComponentUseCase
-                caption="loading"
                 captionIsCode
-                code={`<Multiline loading />`}
-                description="Control will have loading state with loading spinner on the end of the control"
-                component={<MultilineComponent loading label={{ caption: "Loading", horizontal: true }} onValueChange={emptyFn} />}
-            />
+                caption="name"
+                description="Option to specify the component name. Used as a form element attribute."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            '<MultilineComponent',
+                            '    name="birthDate"',
+                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    label={{ caption: "Multiline demo", horizontal: false }}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultilineComponent
+                    name="birthDate"
+                    onValueChange={emptyFn}
+                    label={{ caption: "Multiline demo", horizontal: false }}
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
-                caption="readonly"
                 captionIsCode
-                code={`<Multiline readonly />`}
-                description="Control will be in readonly state. Looks like usual input, but without ability to input any text"
-                component={<MultilineComponent readonly label={{ caption: "Readonly", horizontal: true }} onValueChange={emptyFn} />}
-            />
+                caption="autoFocus"
+                description={
+                    <>
+                        Option to set focus on the component input field on initial render
+                        <br />
+                        <Icon
+                            name="exclamation-triangle-fill"
+                            className="has-text-warning"
+                        />
+                        {` `}
+                        <span>
+                            Only 1 element on the page can have this flag
+                        </span>
+                        <br />
+                        <span className="is-italic">
+                            Refresh the page and check which component (from the presented examples) received automatic focus
+                        </span>
+                    </>
+                }
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            '<MultilineComponent',
+                            '    autoFocus',
+                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    label={{ caption: "Multiline demo", horizontal: false }}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultilineComponent
+                    autoFocus
+                    onValueChange={emptyFn}
+                    label={{ caption: "Multiline demo", horizontal: false }}
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
-                caption="disabled"
                 captionIsCode
-                code={`<Multiline disabled />`}
-                description="Control will be in disabled state. Control will be colored in gray and mouse will indicate that control cannot take any value"
-                component={<MultilineComponent disabled label={{ caption: "Disabled", horizontal: true }} onValueChange={emptyFn} />}
-            />
-            <ComponentUseCase
-                caption="validationState"
-                captionIsCode
-                code={`<Multiline validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} />`}
-                description="As usual control multiline could be configured with validation state"
-                component={<MultilineComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} label={{ caption: "Validation state", horizontal: true }} onValueChange={emptyFn} />}
-            />
-            <ComponentUseCase
-                caption="Initial rows count"
-                code={`<Multiline rows={10} />`}
-                description="Initial rows count (height) could be configured"
-                component={<MultilineComponent rows={10} label={{ caption: "Rows", horizontal: true }} onValueChange={emptyFn} />}
-            />
-            <ComponentUseCase
-                caption="Fixed size"
-                code={`<Multiline fixed />`}
-                description={<>
-                    Control can be made fixed, what means that control is'nt resizable
-                    <br />
-                    Works even better with <code>rows</code> prop
-                </>}
-                component={<MultilineComponent fixed label={{ caption: "Fixed", horizontal: true }} onValueChange={emptyFn} />}
-            />
+                caption="onValueChange"
+                description="Option for handling the onValueChange event. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useCallback } from "react"`,
+                            "",
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            "/* ... */",
+                            "const ON_VALUE_CHANGE_HANDLE_FN = useCallback((value: string) => { /* handler fn */}, []);",
+                            "/* ... */",
+                            "",
+                            `<MultilineComponent`,
+                            "    onValueChange={ON_VALUE_CHANGE_HANDLE_FN}",
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultilineComponent
+                    onValueChange={appendOnValueChangeLog}
+                    label={{ caption: "Multiline demo", horizontal: true }}
+                />
+                <p style={{ whiteSpace: "pre-line" }}>
+                    {onValueChangeLog}
+                </p>
+            </ComponentUseCase>
         </section>
-    )
-}
+    );
+};
 
 export default Multiline;
