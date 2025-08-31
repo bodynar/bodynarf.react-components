@@ -1,46 +1,126 @@
-import { emptyFn } from "@bodynarf/utils";
+import { FC } from "react";
 
+import { ElementPosition } from "@bodynarf/react.components";
 import TextComponent from "@bodynarf/react.components/components/primitives/text";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
+import CodeExample from "@app/sharedComponents/codeExample";
 
 /** Hint input prop demo */
-function HintProp() {
+const HintProp: FC = () => {
     return (
         <section>
             <DemoComponentTitleInfoMessage
                 name="Hint"
+                description={
+                    <>
+                        A hint displayed below an input field.
+                        <br />
+                        The hint can be used with any component whose props type inherits from
+                        {` `}
+                        <code>
+                            BaseInputElementProps
+                        </code>
+                        {` `}
+                        .
+                    </>
+                }
             />
+
             <ComponentUseCase
-                description={<></>}
-                caption="Default"
-                code={`<Text hint={{ content: "Describing hint" }} />`}
-                component={<TextComponent hint={{ content: "Describing hint" }} label={{ caption: "Hint", horizontal: true }} onValueChange={emptyFn} />}
-            />
+                caption="Minimal use"
+                description="To use a hint, you only need to provide its content."
+                code={
+                    <CodeExample
+                        code={[
+                            `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<TextComponent`,
+                            '    hint={{ content: "Describing hint" }}',
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TextComponent
+                    hint={{ content: "Describing hint" }}
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
                 captionIsCode
-                description={<></>}
-                caption="grey"
-                code={`<Text hint={{ content: "Describing hint", grey: true }} />`}
-                component={<TextComponent hint={{ content: "Describing hint", grey: true }} label={{ caption: "Hint", horizontal: true }} onValueChange={emptyFn} />}
-            />
-            <ComponentUseCase
-                captionIsCode
-                description={<></>}
                 caption="italic"
-                code={`<Text hint={{ content: "Describing hint", italic: true }} />`}
-                component={<TextComponent hint={{ content: "Describing hint", italic: true }} label={{ caption: "Hint", horizontal: true }} onValueChange={emptyFn} />}
-            />
+                description="Option to display the hint text in italic. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<TextComponent`,
+                            '    hint={{ content: "Example: Agosto", italic: true }}',
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TextComponent
+                    hint={{ content: "Example: Agosto", italic: true }}
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
                 captionIsCode
-                description="Hint could be configured with icon"
+                caption="grey"
+                description="Option to display the hint text in grey. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<TextComponent`,
+                            '    hint={{ content: "Personal Identification Number", grey: true }}',
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TextComponent
+                    hint={{ content: "Personal Identification Number", grey: true }}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
                 caption="icon"
-                code={`<Text hint={{ content: "Describing hint", icon: { name: "question-square" } }} />`}
-                component={<TextComponent hint={{ content: "Describing hint", icon: { name: "question-square" } }} label={{ caption: "Hint", horizontal: true }} onValueChange={emptyFn} />}
-            />
+                description="Option to display an icon inside the hint. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { ElementPosition } from "@bodynarf/react.components";`,
+                            `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<TextComponent`,
+                            '    hint={{ content: "Think outside the box", icon: { name: "box", position: ElementPosition.Right } }}',
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TextComponent
+                    hint={{ content: "Think outside the box", icon: { name: "box", position: ElementPosition.Right } }}
+                />
+            </ComponentUseCase>
         </section>
     );
-}
+};
 
 export default HintProp;
