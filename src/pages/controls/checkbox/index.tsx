@@ -1,114 +1,521 @@
+import { FC, useCallback, useState } from "react";
+
 import { emptyFn } from "@bodynarf/utils";
 
-import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";
 import { ElementColor } from "@bodynarf/react.components";
+import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";
+import Icon from "@bodynarf/react.components/components/icon";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
-import CommonPropsSuppressExampleInfoMessage from "@app/sharedComponents/commonPropsSuppress";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
+import CodeExample from "@app/sharedComponents/codeExample";
 
 /** Checkbox component demo */
-function Checkbox() {
+const Checkbox: FC = () => {
+    const [onValueChangeLog, setOnValueChangeLog] = useState("");
+    const appendOnValueChangeLog = useCallback(
+        (value?: boolean) => setOnValueChangeLog(
+            t => t
+                + "\n"
+                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
+                + " => " + `new value: ${value}`
+        ),
+        []
+    );
+
     return (
         <section>
-            <DemoComponentTitleInfoMessage name="Checkbox" />
-            <ComponentUseCase
-                caption="Default"
-                code={`<Checkbox onValueChange={onValueChangeHandler} label={{ caption: "Default checkbox", horizontal: true }} />`}
-                description="Control works fine even without label. But for more convenience its recommended to have label.caption as on example bellow:"
-                component={<CheckboxComponent onValueChange={emptyFn} label={{ caption: "Default checkbox", horizontal: true }} />}
+            <DemoComponentTitleInfoMessage
+                name="Checkbox"
+                baseTypeName="BaseInputElementProps"
+                description={
+                    <>
+                        Checkbox - an input component for type
+                        {` `}
+                        <code>
+                            boolean
+                        </code>
+                        { }
+                        , i.e. a flag value.
+                        <br />
+                        To use the component, you need to install the dependency
+                        {` `}
+                        <a
+                            target="_blank"
+                            rel="noreferrer"
+                            href="https://www.npmjs.com/package/bulma-checkradio"
+                        >
+                            bulma-checkradio
+                        </a>
+                        <br />
+                        <Icon name="exclamation-triangle-fill" />
+                        {` `}
+                        This package is marked as
+                        {` `}
+                        <code>
+                            deprecated
+                        </code>
+                        {` `}
+                        It will be replaced in future releases
+                    </>
+                }
             />
-            <CommonPropsSuppressExampleInfoMessage />
+
+            <div className="block">
+                <div className="columns">
+                    <div className="column">
+                        <h5>
+                            How to install bulma-checkradio dependency
+                        </h5>
+                    </div>
+                </div>
+
+                <div className="columns">
+                    <div className="column">
+                        <CodeExample
+                            code={[
+                                '/* Project root, main.tsx file */',
+                                `import "bulma-checkradio/dist/css/bulma-checkradio.min.css";`,
+                            ].join("\n")}
+                        />
+                    </div>
+                </div>
+            </div>
+
             <ComponentUseCase
-                caption="Without label"
-                code={`<Checkbox />`}
-                description="Control could be used without any description label. In case you want to implement some custom logic"
-                component={<CheckboxComponent onValueChange={emptyFn} />}
-            />
+                caption="Minimal use"
+                description="Minimal configuration: onValueChange event handler"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<CheckboxComponent`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <CheckboxComponent
+                    onValueChange={emptyFn}
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
-                caption="block"
+                caption="Minimal use with label"
+                description="Minimal configuration: onValueChange event handler and optional label"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<CheckboxComponent`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Checkbox demo" }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <CheckboxComponent
+                    onValueChange={emptyFn}
+                    label={{ caption: "Checkbox demo", horizontal: false }}
+                />
+            </ComponentUseCase>
+
+            <div className="block">
+                <h4 className="subtitle is-4">
+                    Custom component props
+                </h4>
+            </div>
+
+            <div className="block">
+                <p>
+                    For better readability in examples the
+                    {` `}
+                    <code>
+                        label
+                    </code>
+                    { }
+                    prop is included. However, it is not required.
+                </p>
+            </div>
+
+            <ComponentUseCase
                 captionIsCode
-                code={`<Checkbox block />`}
-                description="Control and label will have own gray background"
-                component={<CheckboxComponent onValueChange={emptyFn} block label={{ caption: "Block", horizontal: true }} />}
-            />
+                caption="block"
+                description="Option to stretch the component container. Disabled by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<CheckboxComponent`,
+                            `    block`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Checkbox demo" }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <CheckboxComponent
+                    block
+                    onValueChange={emptyFn}
+                    label={{ caption: "Checkbox demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
-                caption="Block and without label"
-                code={`<Checkbox block />`}
-                description="Control and label will have own gray background"
-                component={<CheckboxComponent onValueChange={emptyFn} block />}
-            />
+                captionIsCode
+                caption="withoutBorder"
+                description="Option to render the component without a border. Disabled by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<CheckboxComponent`,
+                            `    withoutBorder`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Checkbox demo" }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <CheckboxComponent
+                    withoutBorder
+                    onValueChange={emptyFn}
+                    label={{ caption: "Checkbox demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
-                caption="Without border"
-                code={`<Checkbox withoutBorder />`}
-                description="Removes border from control"
-                component={<CheckboxComponent onValueChange={emptyFn} withoutBorder label={{ caption: "Without border", horizontal: true }} />}
-            />
+                captionIsCode
+                caption="hasBackgroundColor"
+                description="Option to render the component with background fill. Disabled by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<CheckboxComponent`,
+                            `    hasBackgroundColor`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    style={ElementColor.Primary}`,
+                            `    label={{ caption: "Checkbox demo" }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <CheckboxComponent
+                    hasBackgroundColor
+                    onValueChange={emptyFn}
+                    style={ElementColor.Primary}
+                    label={{ caption: "Checkbox demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="fixBackgroundColor"
+                description="Option to apply background fill only when checked. Disabled by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<CheckboxComponent`,
+                            `    fixBackgroundColor`,
+                            `    hasBackgroundColor`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    style={ElementColor.Primary}`,
+                            `    label={{ caption: "Checkbox demo" }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <CheckboxComponent
+                    fixBackgroundColor
+                    hasBackgroundColor
+                    onValueChange={emptyFn}
+                    style={ElementColor.Primary}
+                    label={{ caption: "Checkbox demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="isFormLabel"
+                description="Option to render label in a form element style. Disabled by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<CheckboxComponent`,
+                            `    isFormLabel`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            '    label={{ caption: "is Form Label", horizontal: false, }}',
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <CheckboxComponent
+                    isFormLabel
+                    onValueChange={emptyFn}
+                    label={{ caption: "is Form Label", horizontal: false, }}
+                />
+            </ComponentUseCase>
+
+            <hr />
+
+            <div className="block">
+                <h4 className="subtitle is-4">
+                    Base props implementation
+                    {` `}
+                    <code>
+                        BaseInputElementProps
+                    </code>
+                </h4>
+            </div>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="defaultValue"
+                description="Option to set the initial value of the component. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<CheckboxComponent`,
+                            `    defaultValue={true}`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Checkbox demo" }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <CheckboxComponent
+                    defaultValue
+                    onValueChange={emptyFn}
+                    label={{ caption: "Checkbox demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="rounded"
+                description="Option to apply border-radius to the component. Disabled by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<CheckboxComponent`,
+                            `    rounded`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Checkbox demo" }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <CheckboxComponent
+                    rounded
+                    onValueChange={emptyFn}
+                    label={{ caption: "Checkbox demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="disabled"
+                description="Option to render a disabled component. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<CheckboxComponent`,
+                            `    disabled`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Checkbox demo" }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <CheckboxComponent
+                    disabled
+                    onValueChange={emptyFn}
+                    label={{ caption: "Checkbox demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
             <ComponentSizeCase
                 caption="Sizes"
-                codeProvider={id => `<Checkbox size={ElementSize.${id}} />`}
-                description="Control supports all available sizes"
+                description="The component supports all sizes defined in the ElementSize type"
+                codeProvider={id =>
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<CheckboxComponent`,
+                            `    size={ElementSize.${id}}`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Checkbox demo" }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
                 componentProvider={
                     size =>
                         <CheckboxComponent
-                            onValueChange={emptyFn}
                             size={size}
-                            label={{ caption: "Sized checkbox", horizontal: true }}
+                            onValueChange={emptyFn}
+                            label={{ caption: "Checkbox demo", horizontal: true }}
                         />
                 }
             />
+
             <ComponentColorCase
                 caption="Colors"
-                codeProvider={id => `<Checkbox style={ElementColor.${id}} />`}
-                description="Control supports all available colors"
+                description="Component supports all available colors"
+                codeProvider={id =>
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<CheckboxComponent`,
+                            `    style={ElementColor.${id}}`,
+                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    label={{ caption: "Checkbox demo" }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
                 componentProvider={
                     style =>
                         <CheckboxComponent
-                            onValueChange={emptyFn}
                             style={style}
-                            label={{ caption: "Colored checkbox", horizontal: true }}
+                            onValueChange={emptyFn}
+                            label={{ caption: "Checkbox demo", horizontal: true }}
                         />
                 }
             />
+
             <ComponentUseCase
-                caption="hasBackgroundColor"
                 captionIsCode
-                code={`<Checkbox hasBackgroundColor />`}
-                description={<>Add background to control according to current <code>style</code></>}
-                component={<CheckboxComponent hasBackgroundColor onValueChange={emptyFn} style={ElementColor.Danger} label={{ caption: "Colored checkbox with background", horizontal: true }} />}
-            />
+                caption="name"
+                description="Option to specify the component name. Used as the form element attribute"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            '<CheckboxComponent',
+                            '    name="agreement"',
+                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
+                            `    label={{ caption: "Checkbox demo" }}`,
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <CheckboxComponent
+                    name="agreement"
+                    onValueChange={emptyFn}
+                    label={{ caption: "Checkbox demo", horizontal: true }}
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
-                caption="fixBackgroundColor"
                 captionIsCode
-                code={`<Checkbox hasBackgroundColor fixBackgroundColor />`}
-                description={<>Can be used only with <code>hasBackgroundColor</code>. Removes background from control when unchecked</>}
-                component={<CheckboxComponent hasBackgroundColor fixBackgroundColor onValueChange={emptyFn} style={ElementColor.Danger} label={{ caption: "Colored checkbox with background", horizontal: true }} />}
-            />
-            <ComponentUseCase
-                caption="isFormLabel"
-                captionIsCode
-                code={`<Checkbox isFormLabel />`}
-                description="Organizes markup to make label looks like in forms"
-                component={<CheckboxComponent isFormLabel onValueChange={emptyFn} style={ElementColor.Success} label={{ caption: "Form label", horizontal: true }} />}
-            />
-            <ComponentUseCase
-                caption="rounded"
-                captionIsCode
-                code={`<Checkbox rounded />`}
-                description="Control will have rounded corners after setting this prop"
-                component={<CheckboxComponent rounded onValueChange={emptyFn} style={ElementColor.Success} label={{ caption: "Rounded", horizontal: true }} />}
-            />
-            <ComponentUseCase
-                caption="disabled"
-                captionIsCode
-                code={`<Checkbox disabled />`}
-                description="Control will be disabled"
-                component={<CheckboxComponent disabled label={{ caption: "Disabled", horizontal: true }} onValueChange={emptyFn} />}
-            />
+                caption="onValueChange"
+                description="Option for handling the onValueChange event. Not set by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useCallback } from "react"`,
+                            "",
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            "/* ... */",
+                            "const ON_VALUE_CHANGE_HANDLE_FN = useCallback((value?: boolean) => { /* handler fn */}, []);",
+                            "/* ... */",
+                            "",
+                            `<CheckboxComponent`,
+                            `    label={{ caption: "Checkbox demo" }}`,
+                            "    onValueChange={ON_VALUE_CHANGE_HANDLE_FN}",
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <CheckboxComponent
+                    onValueChange={appendOnValueChangeLog}
+                    label={{ caption: "Checkbox demo", horizontal: false }}
+                />
+                <p style={{ whiteSpace: "pre-line" }}>
+                    {onValueChangeLog}
+                </p>
+            </ComponentUseCase>
         </section>
     );
-}
+};
 
 export default Checkbox;

@@ -35,7 +35,7 @@ const DemoComponentTitleInfoMessage: FC<DemoComponentTitleInfoMessageProps> = ({
                     />
                     This page shows the props of a specific component
                     {`\n`}
-                    Props inherited from the base type
+                    Some props inherited from the base type
                     {` `}
                     <code>
                         {baseTypeName}
