@@ -6,6 +6,7 @@ import Date from "./date";
 import Text from "./text";
 import Multiline from "./multiline";
 import Number from "./number";
+import Password from "./password";
 
 const controls: MenuItem = {
     name: "control-group",
@@ -40,6 +41,11 @@ const controls: MenuItem = {
             path: "/controls/number",
             caption: "Number",
             component: <Number />
+        },
+        {
+            path: "/controls/password",
+            caption: "Password",
+            component: <Password />
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };

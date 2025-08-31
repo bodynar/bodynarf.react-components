@@ -86,7 +86,7 @@ const Checkbox: FC = () => {
 
             <div className="block">
                 <p>
-                    For better readability in examples the
+                    For better readability in examples, the
                     {` `}
                     <code>
                         label
