@@ -136,6 +136,7 @@ const PickerWithPreview = ({
                     />
                 </div>
                 <button
+                    type="button"
                     className={classNames}
                     style={{
                         "--color-picker__background-color": value,
@@ -155,6 +156,7 @@ const PickerWithPreview = ({
     return (
         <div className="is-flex is-flex-direction-row is-flex-wrap-nowrap is-justify-content-start">
             <button
+                type="button"
                 className={classNames}
                 style={{
                     "--color-picker__background-color": value,
