@@ -1,11 +1,15 @@
-import { BaseInputElementProps } from "@bbr/types";
+import { BaseInputElementProps, LabelConfiguration } from "@bbr/types";
 
 /** Checkbox component props type */
-export interface CheckBoxProps extends Omit<BaseInputElementProps<boolean>,
+export type CheckBoxProps = Omit<BaseInputElementProps<boolean>,
     | "readonly" | "validationState"
-    | "loading"  | "placeholder"
-    | "hint"     | "autofocus"
-> {
+    | "loading" | "placeholder"
+    | "hint" | "autofocus"
+    | "label"
+> & {
+    /** Label configuration */
+    label?: Omit<LabelConfiguration, "horizontal"> & Partial<Pick<LabelConfiguration, "horizontal">>;
+
     /** Is full colored checkbox */
     block?: boolean;
 
@@ -30,4 +34,4 @@ export interface CheckBoxProps extends Omit<BaseInputElementProps<boolean>,
      * Label will be placed at left
      */
     isFormLabel?: boolean;
-}
+};

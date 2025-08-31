@@ -51,6 +51,7 @@ const CheckBox = ({
                 id={name}
                 label={{
                     ...label,
+                    horizontal: label.horizontal ?? false,
                     horizontalContainerClassName: getClassName([label.horizontalContainerClassName, "p-0"]),
                 }}
                 size={ElementSize.Normal}
