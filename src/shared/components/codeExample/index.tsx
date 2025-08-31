@@ -40,7 +40,7 @@ const CodeExample: FC<CodeExampleProps> = ({
                 .writeText(code)
                 .then(() => setIsCopied(true));
         },
-        []
+        [code]
     );
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const CodeExample: FC<CodeExampleProps> = ({
                 theme: "one-light"
             }).then(setCodeInHtml);
         }
-    }, [code]);
+    }, [code, language]);
 
     useEffect(
         () => {
@@ -75,7 +75,7 @@ const CodeExample: FC<CodeExampleProps> = ({
 
     return (
         <div className={styles["code-example"]}>
-            {!!!hideLanguage && !isCopied &&
+            {!hideLanguage && !isCopied &&
                 <span
                     className={`is-size-7 is-italic ${styles["lang-name"]}`}
                 >
@@ -91,9 +91,11 @@ const CodeExample: FC<CodeExampleProps> = ({
                     title={`Copy to clipboard ${language} code`}
                 />
             }
-            {isCopied &&
+            {!!isCopied &&
                 <div className={styles["copied-block"]}>
-                    <span className="is-size-7">Copied!</span>
+                    <span className="is-size-7">
+                        Copied!
+                    </span>
                     <Button
                         type="text"
                         icon={{ name: "clipboard-check" }}
@@ -102,9 +104,11 @@ const CodeExample: FC<CodeExampleProps> = ({
             }
             <div
                 className={styles["code-container"]}
+                // eslint-disable-next-line react/no-danger
                 dangerouslySetInnerHTML={{
                     __html: codeInHtml
-                }} />
+                }}
+            />
         </div>
     );
 };
