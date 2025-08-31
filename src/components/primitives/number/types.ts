@@ -1,7 +1,7 @@
-import { BaseInputElementProps } from "@bbr/types";
+import { BaseNotNullableInputElementProps } from "@bbr/types";
 
 /** Number component props type */
-export interface NumberProps extends BaseInputElementProps<number> {
+export interface NumberProps extends BaseNotNullableInputElementProps<number> {
     /** Focus out event handler */
     onBlur?: () => void;
 

@@ -11,7 +11,7 @@ import { ColorPickerCssProperties, ColorPickerPreviewConfig } from "../..";
 /** Props of `ColorPickerControl` */
 export interface ColorPickerControlProps extends Omit<
     BaseInputElementProps<string>,
-    | "onValueChange" | "placeholder"
+    | "placeholder"
     | "rounded" | "readonly"
     | "loading" | "className"
 > {
@@ -88,6 +88,7 @@ const ColorPickerControl = ({
 export default ColorPickerControl;
 
 /** Picker sub component with preview */
+// eslint-disable-next-line react/no-multi-comp
 const PickerWithPreview = ({
     elementClassName,
     disabled, size,

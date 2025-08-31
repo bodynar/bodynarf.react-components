@@ -1,8 +1,8 @@
-import { BaseInputElementProps, LabelConfiguration } from "@bbr/types";
+import { BaseNullableInputElementProps, LabelConfiguration } from "@bbr/types";
 
 /** Date input component props type */
 export interface DateProps extends Omit<
-    BaseInputElementProps<Date | undefined>,
+    BaseNullableInputElementProps<Date>,
     "placeholder" | "label"
 > {
     /** Label configuration */

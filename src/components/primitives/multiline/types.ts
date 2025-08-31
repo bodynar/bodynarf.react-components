@@ -1,7 +1,7 @@
-import { BaseInputElementProps } from "@bbr/types";
+import { BaseNotNullableInputElementProps } from "@bbr/types";
 
 /** Multiline textual input component props type */
-export interface MultilineProps extends Omit<BaseInputElementProps<string>, "rounded"> {
+export interface MultilineProps extends Omit<BaseNotNullableInputElementProps<string>, "rounded"> {
     /** Is input should be resizable */
     fixed?: boolean;
 

@@ -1,7 +1,7 @@
-import { BaseInputElementProps } from "@bbr/types";
+import { BaseNotNullableInputElementProps } from "@bbr/types";
 
 /** Password component props type */
-export interface PasswordProps extends Omit<BaseInputElementProps<string>, "readonly"> {
+export interface PasswordProps extends Omit<BaseNotNullableInputElementProps<string>, "readonly"> {
     /**
      * Is clickable icon "Show password" visible.
      * Will show password on click

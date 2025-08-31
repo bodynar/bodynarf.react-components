@@ -2,9 +2,6 @@ import { BaseElementProps, ElementColor, ElementSize, HintConfiguration, Validat
 
 /** Base properties for input components */
 export type BaseInputElementProps<TValue> = BaseElementProps & {
-    /** Value change handler. Changed value must be stored outside of component */
-    onValueChange?: (value?: TValue) => void;
-
     /** Default value of input component*/
     defaultValue?: TValue;
 
@@ -54,4 +51,14 @@ export type BaseInputElementProps<TValue> = BaseElementProps & {
     autoFocus?: boolean;
 }
 
+/** Base properties for input components with nullable value */
+export type BaseNullableInputElementProps<TValue> = BaseInputElementProps<TValue> & {
+    /** Value change handler. Changed value must be stored outside of component */
+    onValueChange?: (value?: TValue) => void;
+}
 
+/** Base properties for input components with not nullable value */
+export type BaseNotNullableInputElementProps<TValue> = BaseInputElementProps<TValue> & {
+    /** Value change handler. Changed value must be stored outside of component */
+    onValueChange?: (value: TValue) => void;
+}

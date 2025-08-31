@@ -1,7 +1,7 @@
-import { BaseInputElementProps, LabelConfiguration } from "@bbr/types";
+import { BaseNotNullableInputElementProps, LabelConfiguration } from "@bbr/types";
 
 /** Checkbox component props type */
-export type CheckBoxProps = Omit<BaseInputElementProps<boolean>,
+export type CheckBoxProps = Omit<BaseNotNullableInputElementProps<boolean>,
     | "readonly" | "validationState"
     | "loading" | "placeholder"
     | "hint" | "autofocus"

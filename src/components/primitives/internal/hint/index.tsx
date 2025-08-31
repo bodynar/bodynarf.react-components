@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { BaseInputElementProps, ElementPosition, ElementSize, HintConfiguration, ValidationStatus } from "@bbr/types";
@@ -6,14 +8,14 @@ import Icon from "@bbr/components/icon";
 import "./style.scss";
 
 /** Props of `InternalHint` */
-type HintProps = Pick<BaseInputElementProps<any>, "validationState" | "hint">;
+type HintProps = Pick<BaseInputElementProps<unknown>, "validationState" | "hint">;
 
 /** Hint component for internal use (as form input elements hints) */
-const InternalHint = ({
+const InternalHint: FC<HintProps> = ({
     validationState, hint,
-}: HintProps): JSX.Element => {
+}) => {
     if (isNullOrUndefined(validationState) && isNullOrUndefined(hint)) {
-        return <></>;
+        return null;
     }
 
     const validationStateDefined =
@@ -34,7 +36,7 @@ const InternalHint = ({
     }
 
     if (isNullOrUndefined(hint)) {
-        return (<></>);
+        return null;
     }
 
     const className = getClassName([
@@ -74,6 +76,7 @@ interface HintWithIconProps extends Pick<
 }
 
 /** Hint element with icon */
+// eslint-disable-next-line react/no-multi-comp
 const HintWithIcon = ({
     className,
     content, icon,
