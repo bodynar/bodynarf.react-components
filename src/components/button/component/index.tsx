@@ -8,6 +8,7 @@ import { getSizeClassName } from "@bbr/utils";
 import "./style.scss";
 
 import { ButtonProps } from "..";
+
 import ButtonWithIcon from "../components/buttonWithIcon";
 import SimpleButton from "../components/simpleButton";
 
@@ -32,7 +33,7 @@ const Button: FC<ButtonProps> = (props) => {
         "bbr-button",
         "button",
         props.className,
-        `is-${props.type}`,
+        `is-${props.style}`,
         light ? "is-light" : "",
         getSizeClassName(props.size),
         outlined ? "is-outlined" : "",
