@@ -75,41 +75,41 @@ export type ButtonWithIconProps = SimpleButtonProps & {
 /** Button style type */
 export enum ButtonStyle {
     /** color: transparent */
-    default = "default",
+    Default = "default",
 
     /** color: sea-wave green */
-    primary = "primary",
+    Primary = "primary",
 
     /** color: blue-violet */
-    link = "link",
+    Link = "link",
 
     /** color: sky-blue */
-    info = "info",
+    Info = "info",
 
     /** color: green */
-    success = "success",
+    Success = "success",
 
     /** color: yellow */
-    warning = "warning",
+    Warning = "warning",
 
     /** color: red */
-    danger = "danger",
+    Danger = "danger",
 
     /** color: white */
-    white = "white",
+    White = "white",
 
     /** color: light-gray */
-    light = "light",
+    Light = "light",
 
     /** color: dark-gray */
-    dark = "dark",
+    Dark = "dark",
 
     /** color: black */
-    black = "black",
+    Black = "black",
 
     /** Underline text with color: gray */
-    text = "text",
+    Text = "text",
 
     /** Blue underline text with color: transparent */
-    ghost = "ghost",
+    Ghost = "ghost",
 }

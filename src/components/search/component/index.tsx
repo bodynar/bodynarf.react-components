@@ -4,7 +4,7 @@ import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
-import Button from "@bbr/components/button";
+import Button, { ButtonStyle } from "@bbr/components/button";
 
 import "./style.scss";
 import { SearchProps } from "..";
@@ -76,10 +76,10 @@ const Search: FC<SearchProps> = ({
                 </div>
                 <div className="control">
                     <Button
-                        type="info"
                         size={size}
                         disabled={disabled}
                         isLoading={isLoading}
+                        style={ButtonStyle.Info}
                         title={searchButtonTitle}
                         caption={searchButtonCaption}
                         onClick={onSearchButtonClick}
