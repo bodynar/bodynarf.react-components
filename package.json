@@ -23,7 +23,7 @@
     "scripts": {
         "build": "npx tsc && tsc-alias -p tsconfig.json",
         "copy_styles": "copyfiles -u 1 src/**/*.scss dist",
-        "copy_main": "copyfiles package.json readme.md dist",
+        "copy_main": "copyfiles package.json *.md .npmignore dist",
         "transfer": "npm run copy_styles && npm run copy_main",
         "build_transfer": "npm run build && npm run transfer",
         "prepublish": "npm run build_transfer && cd dist && npm pack",
