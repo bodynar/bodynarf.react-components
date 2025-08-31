@@ -208,8 +208,8 @@ const Color: FC = () => {
 
             <ComponentUseCase
                 captionIsCode
-                caption="name"
-                description="Option to specify the component name. Used as a form element attribute."
+                caption="label"
+                description="Option to specify the component label. Not set by default."
                 code={
                     <CodeExample
                         code={[
