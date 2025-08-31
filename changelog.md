@@ -3,7 +3,7 @@ All changes will be published here in reverse chronological order
 
 ## Changes
 
-### v1.2.0 (30.08.2025)
+### v1.2.0 (.2025)
 - Accordion:
     - Исправлена ошибка изменения высоты при изменения пропса размера компонента;
     - Исправлена ошибка вызова функции `onToggle` при первичном рендере.
@@ -11,6 +11,8 @@ All changes will be published here in reverse chronological order
 - Breadcrumbs:
     - Исправлена ошибка применения пропса позиционирования;
     - Обновление модели крошки (см. нотацию типа).
+- Button:
+    - Добавлен пропс `style` для замены пропса `type` с корректировкой типизации на `enum ButtonStyle`.
 - Dropdown:
     - Пропсы `placeholder` и `hideOnOuterClick` сделаны необязательными;
     - Пропс `value` сделан обязательным, но допускающим `undefined`;
@@ -36,3 +38,5 @@ All changes will be published here in reverse chronological order
 - Checkbox:
     - Скорректирована обязательность членов пропса `label`;
     - Исправлено несоответствие размера компонента и лейбла формы.
+- Password:
+    - При изменении размера контрола будет изменяться также размер иконки показа\скрытия пароля.

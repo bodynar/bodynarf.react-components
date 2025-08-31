@@ -73,15 +73,15 @@ const PasswordWithLabel = ({
                     title={title}
                     {...dataAttributes}
                 />
-                {canShowPassword && !loading &&
+                {!!canShowPassword && !loading &&
                     <span
                         onClick={onIconClick}
                         title={showPasswordIconTitle}
                         className={`icon is-right ${elSizeClassName}`}
                     >
                         <Icon
+                            size={size}
                             name={contentIsHidden ? "eye" : "eye-slash"}
-                            size={ElementSize.Medium}
                         />
                     </span>
                 }

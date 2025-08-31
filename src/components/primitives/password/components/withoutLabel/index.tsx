@@ -78,8 +78,8 @@ const PasswordWithoutLabel = ({
                         className={`icon is-right ${elSizeClassName}`}
                     >
                         <Icon
+                            size={size}
                             name={contentIsHidden ? "eye" : "eye-slash"}
-                            size={ElementSize.Medium}
                         />
                     </span>
                 }
