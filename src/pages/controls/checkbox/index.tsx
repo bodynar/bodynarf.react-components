@@ -132,6 +132,8 @@ const Checkbox: FC = () => {
                 />
             </ComponentUseCase>
 
+            <hr />
+
             <div className="block">
                 <h4 className="subtitle is-4">
                     Custom component props
@@ -145,7 +147,7 @@ const Checkbox: FC = () => {
                     <code>
                         label
                     </code>
-                    { }
+                    {` `}
                     prop is included. However, it is not required.
                 </p>
             </div>
