@@ -386,7 +386,7 @@ const Multiline: FC = () => {
                             "/* ... */",
                             "",
                             '<MultilineComponent',
-                            '    name="birthDate"',
+                            '    name="symptoms"',
                             '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '    label={{ caption: "Multiline demo", horizontal: false }}',
                             '/>',
@@ -395,7 +395,7 @@ const Multiline: FC = () => {
                 }
             >
                 <MultilineComponent
-                    name="birthDate"
+                    name="symptoms"
                     onValueChange={emptyFn}
                     label={{ caption: "Multiline demo", horizontal: false }}
                 />
