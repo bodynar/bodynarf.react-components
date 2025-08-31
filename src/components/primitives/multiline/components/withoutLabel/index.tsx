@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback } from "react";
+import { ChangeEvent, FC, useCallback } from "react";
 
 import { emptyFn, generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
@@ -9,7 +9,7 @@ import InternalHint from "@bbr/internalComponent/hint";
 import { MultilineProps } from "../..";
 
 /** Multiline textual input component without describing label*/
-const MultilineWithoutLabel = ({
+const MultilineWithoutLabel: FC<MultilineProps> = ({
     onValueChange = emptyFn, defaultValue, validationState,
     name = generateGuid(), placeholder,
     onBlur,
@@ -19,7 +19,7 @@ const MultilineWithoutLabel = ({
 
     className, title, data,
     hint,
-}: MultilineProps): JSX.Element => {
+}) => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLTextAreaElement>) => onValueChange(event.target.value),
         [onValueChange]

@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, FC } from "react";
 
 import { getClassName, getFontColorFromString, isNullOrUndefined } from "@bodynarf/utils";
 
@@ -9,12 +9,12 @@ import InternalHint from "@bbr/internalComponent/hint";
 import { ColorPickerCssProperties, ColorPickerPreviewConfig } from "../..";
 
 /** Props of `ColorPickerControl` */
-export interface ColorPickerControlProps extends Omit<
+export type ColorPickerControlProps = Omit<
     BaseInputElementProps<string>,
     | "placeholder"
     | "rounded" | "readonly"
     | "loading" | "className"
-> {
+> & {
     /** Current color value */
     value: string;
 
@@ -29,10 +29,10 @@ export interface ColorPickerControlProps extends Omit<
 
     /** Preview element configuration */
     previewConfig?: ColorPickerPreviewConfig;
-}
+};
 
 /** Color picker container component */
-const ColorPickerControl = ({
+const ColorPickerControl: FC<ColorPickerControlProps> = ({
     value, defaultValue, onValueChange,
     elementClassName,
     disabled = false, autoFocus = false,
@@ -40,7 +40,7 @@ const ColorPickerControl = ({
     id, title, data,
 
     hint, validationState,
-}: ColorPickerControlProps): JSX.Element => {
+}) => {
     if (!isNullOrUndefined(previewConfig)) {
         return (
             <PickerWithPreview
@@ -89,14 +89,14 @@ export default ColorPickerControl;
 
 /** Picker sub component with preview */
 // eslint-disable-next-line react/no-multi-comp
-const PickerWithPreview = ({
+const PickerWithPreview: FC<ColorPickerControlProps> = ({
     elementClassName,
     disabled, size,
     defaultValue, onValueChange, value, autoFocus = false,
     id, title, data,
     previewConfig,
     hint, validationState,
-}: ColorPickerControlProps): JSX.Element => {
+}) => {
     const classNames = getClassName([
         "bbr-color-picker__preview",
         "button",

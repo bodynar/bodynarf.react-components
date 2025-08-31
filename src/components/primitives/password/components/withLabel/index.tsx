@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, FC, useCallback, useState } from "react";
 
 import { emptyFn, generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
@@ -10,7 +10,7 @@ import InternalHint from "@bbr/internalComponent/hint";
 
 import { PasswordProps } from "../..";
 
-const PasswordWithLabel = ({
+const PasswordWithLabel: FC<PasswordProps> = ({
     defaultValue,
     onValueChange = emptyFn, validationState,
     name = generateGuid(),
@@ -21,7 +21,7 @@ const PasswordWithLabel = ({
 
     className, title, data,
     hint,
-}: PasswordProps): JSX.Element => {
+}) => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
         [onValueChange]

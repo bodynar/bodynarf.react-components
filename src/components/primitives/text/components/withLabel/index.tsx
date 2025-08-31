@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback } from "react";
+import { ChangeEvent, FC, useCallback } from "react";
 
 import { emptyFn, generateGuid, getClassName, isNullOrUndefined, } from "@bodynarf/utils";
 
@@ -10,7 +10,7 @@ import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import { TextProps } from "../..";
 
 /** Textual input with describing label */
-const TextWithLabel = ({
+const TextWithLabel: FC<TextProps> = ({
     onValueChange = emptyFn, readonly, disabled, defaultValue, validationState,
     name = generateGuid(),
     size = ElementSize.Normal, style,
@@ -20,7 +20,7 @@ const TextWithLabel = ({
 
     className, title, data,
     hint,
-}: TextProps): JSX.Element => {
+}) => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
         [onValueChange]

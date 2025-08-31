@@ -21,7 +21,7 @@ const InternalHint: FC<HintProps> = ({
     const validationStateDefined =
         !isNullOrUndefined(validationState)
         && validationState!.status !== ValidationStatus.None
-        && validationState!.messages.length > 0;
+        && (validationState!.messages ?? []).length > 0;
 
     if (validationStateDefined) {
         const validationClassName = validationState!.status === ValidationStatus.Valid
@@ -30,7 +30,7 @@ const InternalHint: FC<HintProps> = ({
 
         return (
             <p className={`help m-help ${validationClassName}`}>
-                {validationState!.messages.join("\n")}
+                {(validationState!.messages ?? []).join("\n")}
             </p>
         );
     }
@@ -66,21 +66,21 @@ const InternalHint: FC<HintProps> = ({
 export default InternalHint;
 
 /** Props of `HintWithIcon` */
-interface HintWithIconProps extends Pick<
+type HintWithIconProps = Pick<
     HintConfiguration,
     | "content"
     | "icon"
-> {
+> & {
     /** Built element class name */
     className: string;
-}
+};
 
 /** Hint element with icon */
 // eslint-disable-next-line react/no-multi-comp
-const HintWithIcon = ({
+const HintWithIcon: FC<HintWithIconProps> = ({
     className,
     content, icon,
-}: HintWithIconProps): JSX.Element => {
+}) => {
     const iconClassName: string =
         getClassName([
             icon!.className,

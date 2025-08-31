@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback } from "react";
+import { ChangeEvent, FC, useCallback } from "react";
 
 import { emptyFn, generateGuid, getClassName, isNullOrUndefined, isStringEmpty } from "@bodynarf/utils";
 
@@ -10,7 +10,7 @@ import InternalHint from "@bbr/internalComponent/hint";
 import { NumberProps } from "../..";
 
 /** Number component with label */
-const NumberWithLabel = ({
+const NumberWithLabel: FC<NumberProps> = ({
     onValueChange = emptyFn, defaultValue, validationState,
     name = generateGuid(),
     label, placeholder,
@@ -21,7 +21,7 @@ const NumberWithLabel = ({
 
     className, title, data,
     hint,
-}: NumberProps): JSX.Element => {
+}) => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) =>
             onValueChange(isStringEmpty(event.target.value) ? undefined : +event.target.value),

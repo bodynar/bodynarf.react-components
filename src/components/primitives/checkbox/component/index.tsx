@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback } from "react";
+import { ChangeEvent, FC, useCallback } from "react";
 
 import { emptyFn, generateGuid, getClassName, isNullish, isNullOrUndefined } from "@bodynarf/utils";
 
@@ -11,7 +11,7 @@ import "./style.scss";
 import { CheckBoxProps } from "../..";
 // todo: https://justboil.github.io/bulma-checkbox/
 /** Boolean input component */
-const CheckBox = ({
+const CheckBox: FC<CheckBoxProps> = ({
     onValueChange = emptyFn, defaultValue,
     label,
     name = generateGuid(),
@@ -22,7 +22,7 @@ const CheckBox = ({
     isFormLabel = false,
 
     className, data, title
-}: CheckBoxProps): JSX.Element => {
+}) => {
     const onChecked = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.checked),
         [onValueChange]

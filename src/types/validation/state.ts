@@ -6,5 +6,5 @@ export interface ValidationState {
     status: ValidationStatus;
 
     /** Current status messages */
-    messages: Array<string>;
+    messages?: Array<string>;
 }

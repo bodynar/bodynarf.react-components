@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback } from "react";
+import { ChangeEvent, FC, useCallback } from "react";
 
 import { emptyFn, generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
@@ -9,7 +9,7 @@ import InternalHint from "@bbr/internalComponent/hint";
 import { TextProps } from "../..";
 
 /** Textual input without describing label */
-const TextWithoutLabel = ({
+const TextWithoutLabel: FC<TextProps> = ({
     onValueChange = emptyFn, defaultValue, validationState,
     readonly = false, disabled = false,
     name = generateGuid(),
@@ -20,7 +20,7 @@ const TextWithoutLabel = ({
 
     className, title, data,
     hint,
-}: TextProps): JSX.Element => {
+}) => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
         [onValueChange]

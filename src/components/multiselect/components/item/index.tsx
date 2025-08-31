@@ -102,7 +102,7 @@ const MultiselectItemWithIcon: FC<MultiselectItemProps> = ({
     item, selected, rootId,
     onChange, onItemClick,
     checkboxConfig,
-}): JSX.Element => {
+}) => {
     const icon = item.icon!;
 
     const className = getClassName([

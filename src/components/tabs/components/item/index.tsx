@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementPosition } from "@bbr/types";
@@ -6,20 +8,25 @@ import Icon from "@bbr/components/icon";
 import { TabItem as Item } from "../..";
 
 /** Tabs panel single tab item component props type */
-export interface TabItemProps {
+export type TabItemProps = {
     /** Tab item */
     item: Item;
 
     /** Active item identifier */
     activeItem: string;
-}
+};
 
 /** Tabs panel single tab item component */
-const TabItem = ({
+const TabItem: FC<TabItemProps> = ({
     item, activeItem
-}: TabItemProps): JSX.Element => {
+}) => {
     if (!isNullOrUndefined(item.icon)) {
-        return <TabItemWithIcon item={item} activeItem={activeItem} />;
+        return (
+            <TabItemWithIcon
+                item={item}
+                activeItem={activeItem}
+            />
+        );
     }
 
     const className = getClassName([
@@ -43,9 +50,10 @@ const TabItem = ({
 export default TabItem;
 
 /** Tabs panel single tab item with icon component */
-const TabItemWithIcon = ({
+// eslint-disable-next-line react/no-multi-comp
+const TabItemWithIcon: FC<TabItemProps> = ({
     item, activeItem
-}: TabItemProps): JSX.Element => {
+}) => {
     const iconConfig = item.icon!;
 
     const className = getClassName([
