@@ -49,12 +49,12 @@ const CheckBox = ({
         return (
             <ComponentWithLabel
                 id={name}
+                size={size}
                 label={{
                     ...label,
                     horizontal: label.horizontal ?? false,
                     horizontalContainerClassName: getClassName([label.horizontalContainerClassName, "p-0"]),
                 }}
-                size={ElementSize.Normal}
             >
                 <input
                     type="checkbox"
