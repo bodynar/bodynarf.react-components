@@ -13,9 +13,10 @@ import "bulma-checkradio/dist/css/bulma-checkradio.min.css";
 createRoot(
 	document.getElementById("root") as HTMLElement
 ).render(
-	// <StrictMode>
+	<StrictMode>
 		<BrowserRouter>
 			<App />
 		</BrowserRouter>
-	// </StrictMode>
+	</StrictMode>
 );
+
