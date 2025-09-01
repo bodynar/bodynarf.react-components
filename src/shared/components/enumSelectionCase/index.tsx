@@ -1,20 +1,19 @@
+import { FC, ReactNode } from "react";
+
 import Dropdown, { SelectableItem } from "@bodynarf/react.components/components/dropdown";
 
 import { useGenericSelection } from "../..";
 
 /** Component enum use case props type */
-interface ComponentEnumCaseProps<TEnum> {
+type ComponentEnumCaseProps = {
     /** Caption */
     caption: string;
-
-    /** Lookup placeholder */
-    placeholder: string;
 
     /** Is caption must be highlighted as code */
     captionIsCode?: boolean;
 
     /** Description */
-    description: string | React.ReactNode;
+    description: string | ReactNode;
 
     /** Available items to select */
     lookupValues: Array<SelectableItem>;
@@ -23,20 +22,20 @@ interface ComponentEnumCaseProps<TEnum> {
     enumNames: Array<string>;
 
     /** Example of component with current enum */
-    componentProvider: (color: TEnum) => React.ReactNode;
+    componentProvider: (color: never) => ReactNode;
 
     /** Code to represent selected enum */
-    codeProvider: (id: string) => string;
-}
+    codeProvider: (id: string) => ReactNode;
+};
 
 /** Component enum variants case */
-function ComponentEnumCase<TEnum>({
+const ComponentEnumCase: FC<ComponentEnumCaseProps> = ({
     caption, captionIsCode = false,
     description,
     codeProvider, componentProvider,
-    lookupValues, enumNames, placeholder,
-}: ComponentEnumCaseProps<TEnum>): JSX.Element {
-    const hookValues = useGenericSelection<TEnum>(lookupValues);
+    lookupValues, enumNames,
+}) => {
+    const hookValues = useGenericSelection<never>(lookupValues);
 
     return (
         <>
@@ -44,36 +43,44 @@ function ComponentEnumCase<TEnum>({
             <div className="block">
                 <h5 className="subtitle is-5">
                     {captionIsCode
-                        ? <code>{caption}</code>
-                        : <>{caption}</>
+                        ?
+                        <code>
+                            {caption}
+                        </code>
+                        : caption
                     }
                 </h5>
                 <p style={{ whiteSpace: "pre-line" }}>
                     {description}
                 </p>
-                <br />
-                <div className="columns">
-                    <div className="column is-2">
-                        <Dropdown
-                            hideOnOuterClick
-                            items={lookupValues}
-                            onSelect={hookValues.onValueSelect}
-                            value={hookValues.selectedValue}
-                            placeholder={placeholder}
-                            deselectable={false}
-                        />
+
+                <div className="columns mt-0">
+                    <div className="column is-6">
+                        <span className="mb-2 is-block is-italic has-text-grey">
+                            Code:
+                        </span>
+                        {codeProvider(enumNames[+hookValues.selectedValue!.id])}
                     </div>
-                    <div className="column">
-                        <pre>
-                            {codeProvider(enumNames[+hookValues.selectedValue!.id])}
-                        </pre>
+                    <div className="column is-6">
+                        <span className="mb-2 is-block is-italic has-text-grey">
+                            Result:
+                        </span>
+                        <Dropdown
+                            placeholder=""
+                            hideOnOuterClick
+                            deselectable={false}
+                            items={lookupValues}
+                            value={hookValues.selectedValue}
+                            onSelect={hookValues.handleOnSelect}
+                        />
+                        <div className="block mt-2">
+                            {componentProvider(hookValues.value)}
+                        </div>
                     </div>
                 </div>
-
-                {componentProvider(hookValues.value)}
             </div>
         </>
     );
-}
+};
 
 export default ComponentEnumCase;

@@ -1,0 +1,106 @@
+@use "sass:color";
+@use "/src/shared/styles/variables" as vars;
+
+$border-bottom: 1px solid vars.$color-gray-lighten;
+
+.left-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    overflow: hidden;
+
+    .header {
+        position: sticky;
+        top: 0;
+        background-color: inherit;
+
+        border-bottom: $border-bottom;
+
+        &__brand {
+            gap: 0.25rem;
+
+            img {
+                height: 1.25rem;
+                width: 1.25rem;
+            }
+        }
+
+        span[title] {
+            cursor: help;
+        }
+    }
+
+    .menu {
+        height: 100%;
+        overflow-y: auto;
+        padding-right: 0.75rem;
+        scrollbar-gutter: stable;
+
+        & > li,
+        li[role="group"] {
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+
+            &:not(:last-of-type) {
+                border-bottom: $border-bottom;
+            }
+        }
+
+        li[role="group"] {
+            span {
+                i {
+                    color: vars.$color-gray-light;
+                    transition-property: transform;
+                }
+                &:hover {
+                    i {
+                        color: gray;
+                    }
+                }
+
+                &.is-collapsed {
+                    i {
+                        transform: rotateZ(90deg);
+                    }
+                }
+            }
+        }
+
+        li:not([role="group"]) {
+            a {
+                color: rgba(0, 0, 0, 0.5);
+                transition: vars.$transition color;
+
+                &.is-active {
+                    color: vars.$color-link;
+                }
+
+                &:hover:not(.is-active) {
+                    color: rgba(vars.$color-link, 0.9);
+                }
+            }
+        }
+    }
+
+    .links {
+        border-top: $border-bottom;
+        img {
+            height: 1.75rem;
+            width: 1.75rem;
+
+            filter: grayscale(1);
+            transition: vars.$transition;
+            opacity: 0.75;
+
+            transition-property: filter, opacity;
+        }
+
+        a:hover {
+            img {
+                filter: grayscale(0);
+                opacity: 1;
+            }
+        }
+    }
+}

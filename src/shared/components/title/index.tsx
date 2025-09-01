@@ -1,41 +1,55 @@
-import { isUndefined } from "@bodynarf/utils";
+import { FC } from "react";
+
+import { isNullOrEmpty, isUndefined } from "@bodynarf/utils";
 
 import Icon from "@bodynarf/react.components/components/icon";
 
 /** Title demo component props type */
-export interface DemoComponentTitleInfoMessageProps {
+type DemoComponentTitleInfoMessageProps = {
     /** Component name */
     name: string;
 
     /** Description of component purpose */
     description?: string | React.ReactNode;
 
-    /** Hide suppress common props message */
-    hidePropsNotice?: boolean;
-}
+    /** Name of base type to show props display warning */
+    baseTypeName?: string;
+};
 
 /** Title info message about further demo of component use */
-const DemoComponentTitleInfoMessage = ({
+const DemoComponentTitleInfoMessage: FC<DemoComponentTitleInfoMessageProps> = ({
     name, description,
-    hidePropsNotice = false,
-}: DemoComponentTitleInfoMessageProps): JSX.Element => {
+    baseTypeName
+}) => {
     return (
         <div className="block">
             <h4 className="title is-4">
                 {name}
             </h4>
-            {!hidePropsNotice &&
+            {!isNullOrEmpty(baseTypeName) &&
                 <span style={{ fontStyle: "italic", whiteSpace: "pre-line" }}>
                     <hr />
-                    <Icon name="exclamation-triangle-fill" className="mr-1" />
-                    Not all props are listed bellow, mostly those that can be displayed.
+                    <Icon
+                        name="exclamation-triangle-fill"
+                        className="mr-1"
+                    />
+                    This page shows the props of a specific component
                     {`\n`}
-                    For a complete list of props see type definition & description
+                    Some props inherited from the base type
+                    {` `}
+                    <code>
+                        {baseTypeName}
+                    </code>
+                    {` `}
+                    are described on a separate page
                 </span>
             }
             {!isUndefined(description)
                 &&
-                <p className="mt-4" style={{ whiteSpace: "pre-line" }}>
+                <p
+                    className="mt-4"
+                    style={{ whiteSpace: "pre-line" }}
+                >
                     {description}
                 </p>
             }

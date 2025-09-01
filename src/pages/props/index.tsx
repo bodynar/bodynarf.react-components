@@ -1,16 +1,18 @@
-import { Outlet } from "react-router-dom";
-
-import { RouteItem } from "../routing";
+import { MenuItem } from "../routing";
 
 import ValidationStateProp from "./validationState";
 import HintProp from "./hint";
+import BaseElementProps from "./baseElementProps";
 
-export const props: RouteItem = {
-    path: "/props",
+const props: MenuItem = {
+    name: "prop-group",
     caption: "Common props",
-    component: <Outlet />,
-    display: false,
     children: [
+        {
+            path: "/props/base",
+            caption: "Base element props",
+            component: <BaseElementProps />
+        },
         {
             path: "/props/validation",
             caption: "Validation state",
@@ -23,3 +25,5 @@ export const props: RouteItem = {
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };
+
+export default props;

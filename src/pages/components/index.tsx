@@ -1,6 +1,5 @@
-import { Outlet } from "react-router-dom";
+import { MenuItem } from "../routing";
 
-import { RouteItem } from "../routing";
 import Icon from "./icon";
 import Accordion from "./accordion";
 import Anchor from "./anchor";
@@ -11,12 +10,13 @@ import Tabs from "./tabs";
 import Search from "./search";
 import Paginator from "./paginator";
 import Multiselect from "./multiselect";
+import Breadcrumbs from "./breadcrumbs";
+import File from "./file";
+import Table from "./table";
 
-export const components: RouteItem = {
-    path: "/components",
+const components: MenuItem = {
+    name: "component-group",
     caption: "Components",
-    component: <Outlet />,
-    display: false,
     children: [
         {
             path: "/components/icon",
@@ -68,5 +68,22 @@ export const components: RouteItem = {
             caption: "Paginator",
             component: <Paginator />
         },
+        {
+            path: "/components/breadcrumbs",
+            caption: "Breadcrumbs",
+            component: <Breadcrumbs />
+        },
+        {
+            path: "/components/file",
+            caption: "File",
+            component: <File />
+        },
+        {
+            path: "/components/table",
+            caption: "Table",
+            component: <Table />
+        },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };
+
+export default components;

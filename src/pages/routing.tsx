@@ -1,42 +1,50 @@
-import { Navigate } from "react-router-dom";
+import { ReactNode } from "react";
 
 import Home from "./home";
 
-import { components } from "./components";
-import { controls } from "./controls";
-import { props } from "./props";
+import componentsRoutes from "./components";
+import controlsRoutes from "./controls";
+import propsRoutes from "./props";
 
-/** Route menu item */
-export interface RouteItem {
-    /** Unique name */
+/** Menu single item */
+export type MenuItem = {
+    /** Text which will be displayed in menu */
     caption: string;
 
-    /** Target route link */
+    /** Unique name */
+    name: string;
+
+    /** Child item as routes to pages */
+    children: Array<RouteMenuItem>;
+};
+
+/** Routing menu item */
+export type RouteMenuItem = Omit<MenuItem, "children" | "name"> & {
+    /** Unique path */
     path: string;
 
-    /** Which component should be rendered as module */
-    component: JSX.Element;
+    /** Component responsible for UI */
+    component: ReactNode;
+};
 
-    /** Child routes */
-    children?: Array<RouteItem>;
-
-    /** Should be item be presented */
-    display?: boolean;
-}
-
-export const routes: Array<RouteItem> = [
+const routeList: Array<RouteMenuItem | MenuItem> = [
     {
-        path: "/home",
         caption: "Home",
+        path: "/home",
         component: <Home />,
-    },
-    components,
-    controls,
-    props,
-    {
-        path: "*",
-        caption: "",
-        component: <Navigate to="/home" replace />,
-        display: false,
-    },
+    } as RouteMenuItem & Partial<Pick<MenuItem, "children">>,
+    { ...componentsRoutes },
+    { ...controlsRoutes },
+    { ...propsRoutes },
 ];
+
+export default routeList;
+
+/**
+ * Type guard for menu items
+ * @param item Menu item
+ * @returns Is item member of `MenuItem` type
+ */
+export const isRootMenuItem = (item: MenuItem | RouteMenuItem): item is MenuItem => {
+    return "children" in item;
+};

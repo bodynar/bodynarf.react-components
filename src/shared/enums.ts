@@ -13,11 +13,11 @@ export const Colors = {
 
     /** All values as selectable items */
     selectableItems: Object.values(ElementColor).map((x, i) => ({
-        displayValue: x,
+        displayValue: x.capitalize(),
         id: i.toString(),
         value: x,
     }) as SelectableItem),
-};
+} as const;
 
 /** Sizes object */
 export const Sizes = {
@@ -32,11 +32,11 @@ export const Sizes = {
 
     /** All values as selectable items */
     selectableItems: Object.values(ElementSize).map((x, i) => ({
-        displayValue: x,
+        displayValue: x.capitalize(),
         id: i.toString(),
         value: x,
     }) as SelectableItem),
-};
+} as const;
 
 /** Positions object */
 export const Positions = {
@@ -51,8 +51,8 @@ export const Positions = {
 
     /** All values as selectable items */
     selectableItems: Object.values(ElementPosition).map((x, i) => ({
-        displayValue: x,
+        displayValue: x.capitalize(),
         id: i.toString(),
         value: x,
     }) as SelectableItem),
-};
+} as const;

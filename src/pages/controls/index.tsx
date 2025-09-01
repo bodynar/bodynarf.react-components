@@ -1,6 +1,4 @@
-import { Outlet } from "react-router-dom";
-
-import { RouteItem } from "../routing";
+import { MenuItem } from "../routing";
 
 import ColorPicker from "./colorPicker";
 import Checkbox from "./checkbox";
@@ -8,12 +6,11 @@ import Date from "./date";
 import Text from "./text";
 import Multiline from "./multiline";
 import Number from "./number";
+import Password from "./password";
 
-export const controls: RouteItem = {
-    path: "/controls",
+const controls: MenuItem = {
+    name: "control-group",
     caption: "Controls",
-    component: <Outlet />,
-    display: false,
     children: [
         {
             path: "/controls/color",
@@ -45,5 +42,12 @@ export const controls: RouteItem = {
             caption: "Number",
             component: <Number />
         },
+        {
+            path: "/controls/password",
+            caption: "Password",
+            component: <Password />
+        },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };
+
+export default controls;

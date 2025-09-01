@@ -1,153 +1,572 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 
-import { ValidationStatus } from "@bodynarf/react.components";
+import { Optional } from "@bodynarf/utils";
 import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";
 
-import DemoComponentTitleInfoMessage from "../../../shared/components/title";
-import CommonPropsSuppressExampleInfoMessage from "../../../shared/components/commonPropsSuppress";
-import ComponentUseCase from "../../../shared/components/useCase";
+import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
+import ComponentUseCase from "@app/sharedComponents/useCase";
+import CodeExample from "@app/sharedComponents/codeExample";
 
 /** Dropdown component demo */
-function Dropdown() {
-    const [item, setItem] = useState<SelectableItem | undefined>();
+const Dropdown: FC = () => {
+    const [item, setItem] = useState<Optional<SelectableItem>>();
 
     return (
         <section>
             <DemoComponentTitleInfoMessage
                 name="Dropdown"
-                description={<>In this demo all dropdowns share <b>same</b> items source and data binding to value</>}
+                baseTypeName="BaseElementProps"
+                description={
+                    <>
+                        On this page, many instances of the component use
+                        {' '}
+                        <b>
+                            the same
+                        </b>
+                        {' '}
+                        set of items and binding to the selected value
+                    </>
+                }
             />
+
             <ComponentUseCase
-                caption="Default"
-                code={<pre>{`const items: Array<SelectableItem> = [...];
-const [item, setItem] = useState<SelectableItem | undefined>();
-
-/* ... */
-
-<Dropdown
-    hideOnOuterClick
-    items={cities}
-    onSelect={setItem}
-    value={item}             <--- if not set - selecting of item will not change visual placeholder of component
-    placeholder="Default lookup"
-/>`}</pre>}
-                description="By default component require props that are shown in example"
-                component={<DropdownComponent
+                caption="Minimal use"
+                description="The minimal set of props includes a list of selectable items, the currently selected item, and a function to handle value selection"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useState } from "react";`,
+                            ``,
+                            `import { Optional } from "@bodynarf/utils";`,
+                            `import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "    }));",
+                            "/* ... */",
+                            "const [item, setItem] = useState<Optional<SelectableItem>>();",
+                            "/* ... */",
+                            "",
+                            '<DropdownComponent',
+                            '    value={item}',
+                            '    items={cities}',
+                            '    onSelect={setItem}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <DropdownComponent
                     value={item}
                     items={cities}
                     hideOnOuterClick
                     onSelect={setItem}
-                    placeholder="Default lookup"
-                />}
-            />
-            <CommonPropsSuppressExampleInfoMessage />
+                    placeholder="Minimal use"
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
-                caption="Items with icon"
-                code={`SelectableItem.icon`}
-                description="Items can have own icons"
-                component={
-                    <DropdownComponent
-                        deselectable
-                        hideOnOuterClick
-                        placeholder="Lookup"
-                        value={item}
-                        onSelect={setItem}
-                        items={itemsWithIcons}
-                    />}
-            />
+                captionIsCode
+                caption="placeholder"
+                description="Option for setting placeholder text for the label when no value is selected. The current value is intentionally set to undefined to see the placeholder"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useState } from "react";`,
+                            ``,
+                            `import { Optional } from "@bodynarf/utils";`,
+                            `import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "    }));",
+                            "/* ... */",
+                            "const [item, setItem] = useState<Optional<SelectableItem>>();",
+                            "/* ... */",
+                            "",
+                            '<DropdownComponent',
+                            '    items={cities}',
+                            '    value={undefined}',
+                            '    onSelect={setItem}',
+                            '    placeholder="Some placeholder text"',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <DropdownComponent
+                    items={cities}
+                    value={undefined}
+                    hideOnOuterClick
+                    onSelect={setItem}
+                    placeholder="Some placeholder text"
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
+                captionIsCode
                 caption="hideOnOuterClick"
-                code="<Dropdown hideOnOuterClick={false} />"
-                captionIsCode
-                description="Clicks outside of dropdown will not force dropdown to close"
-                component={<DropdownComponent value={item} items={cities} hideOnOuterClick={false} onSelect={setItem} placeholder="Lookup" />}
-            />
+                description="Option to automatically hide the list when clicking outside the dropdown area. Enabled by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useState } from "react";`,
+                            ``,
+                            `import { Optional } from "@bodynarf/utils";`,
+                            `import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "    }));",
+                            "/* ... */",
+                            "const [item, setItem] = useState<Optional<SelectableItem>>();",
+                            "/* ... */",
+                            "",
+                            '<DropdownComponent',
+                            '    value={item}',
+                            '    items={cities}',
+                            '    onSelect={setItem}',
+                            '    hideOnOuterClick={false}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <DropdownComponent
+                    value={item}
+                    items={cities}
+                    onSelect={setItem}
+                    hideOnOuterClick={false}
+                    placeholder="Some placeholder text"
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
+                captionIsCode
                 caption="deselectable"
-                code="<Dropdown deselectable />"
-                captionIsCode
-                description="Dropdown can loose current selection via deselect button (appears only after selection)"
-                component={<DropdownComponent deselectable value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
-            />
+                description="Option to allow clearing the selected value. Disabled by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useState } from "react";`,
+                            ``,
+                            `import { Optional } from "@bodynarf/utils";`,
+                            `import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "    }));",
+                            "/* ... */",
+                            "const [item, setItem] = useState<Optional<SelectableItem>>();",
+                            "/* ... */",
+                            "",
+                            '<DropdownComponent',
+                            '    value={item}',
+                            '    deselectable',
+                            '    items={cities}',
+                            '    onSelect={setItem}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <DropdownComponent
+                    value={item}
+                    deselectable
+                    items={cities}
+                    onSelect={setItem}
+                    hideOnOuterClick
+                    placeholder="Some placeholder text"
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
-                caption="searchable"
-                code="<Dropdown searchable />"
                 captionIsCode
-                description="Dropdown with option to search through items"
-                component={<DropdownComponent searchable value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
-            />
+                caption="listMaxHeight"
+                description="Option to limit the maximum height of the dropdown list"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useState } from "react";`,
+                            ``,
+                            `import { Optional } from "@bodynarf/utils";`,
+                            `import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "    }));",
+                            "/* ... */",
+                            "const [item, setItem] = useState<Optional<SelectableItem>>();",
+                            "/* ... */",
+                            "",
+                            '<DropdownComponent',
+                            '    value={item}',
+                            '    items={cities}',
+                            '    onSelect={setItem}',
+                            '    listMaxHeight="5rem"',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <DropdownComponent
+                    value={item}
+                    items={cities}
+                    onSelect={setItem}
+                    listMaxHeight="5rem"
+
+                    hideOnOuterClick
+                    placeholder="Some placeholder text"
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
+                captionIsCode
+                caption="compact"
+                description="Option for using a compact version of the component, which visually occupies only the width it needs. Disabled by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useState } from "react";`,
+                            ``,
+                            `import { Optional } from "@bodynarf/utils";`,
+                            `import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "    }));",
+                            "/* ... */",
+                            "const [item, setItem] = useState<Optional<SelectableItem>>();",
+                            "/* ... */",
+                            "",
+                            '<DropdownComponent',
+                            '    compact',
+                            '    value={item}',
+                            '    items={cities}',
+                            '    onSelect={setItem}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <DropdownComponent
+                    compact
+                    value={item}
+                    items={cities}
+                    onSelect={setItem}
+
+                    hideOnOuterClick
+                    placeholder="Some placeholder text"
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="disabled"
+                description="Option to disable the component functionality and render it in a disabled state. Option disabled by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useState } from "react";`,
+                            ``,
+                            `import { Optional } from "@bodynarf/utils";`,
+                            `import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "    }));",
+                            "/* ... */",
+                            "const [item, setItem] = useState<Optional<SelectableItem>>();",
+                            "/* ... */",
+                            "",
+                            '<DropdownComponent',
+                            '    disabled',
+                            '    value={item}',
+                            '    items={cities}',
+                            '    onSelect={setItem}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <DropdownComponent
+                    disabled
+                    value={item}
+                    items={cities}
+                    onSelect={setItem}
+
+                    hideOnOuterClick
+                    placeholder="Some placeholder text"
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="label"
+                description="Option to configure the label. Not set by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useState } from "react";`,
+                            ``,
+                            `import { Optional } from "@bodynarf/utils";`,
+                            `import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "    }));",
+                            "/* ... */",
+                            "const [item, setItem] = useState<Optional<SelectableItem>>();",
+                            "/* ... */",
+                            "",
+                            '<DropdownComponent',
+                            '    value={item}',
+                            '    items={cities}',
+                            '    onSelect={setItem}',
+                            '    label={{ caption: "Label caption", horizontal: true }}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <DropdownComponent
+                    value={item}
+                    items={cities}
+                    onSelect={setItem}
+                    label={{ caption: "Label caption", horizontal: true }}
+
+                    hideOnOuterClick
+                    placeholder="Some placeholder text"
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
                 caption="noDataText"
-                code={`<Dropdown items={[]} noDataText="NOTHING HERE" />`}
-                captionIsCode
-                description="Caption for message when no records provided. Default is 'No items found'"
-                component={<DropdownComponent
+                description="Option to specify the text displayed when the item list is empty"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useState } from "react";`,
+                            ``,
+                            `import { Optional } from "@bodynarf/utils";`,
+                            `import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "    }));",
+                            "/* ... */",
+                            "const [item, setItem] = useState<Optional<SelectableItem>>();",
+                            "/* ... */",
+                            "",
+                            '<DropdownComponent',
+                            '    items={[]}',
+                            '    value={undefined}',
+                            '    onSelect={() => {}}',
+                            '    noDataText="NOTHING HERE"',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <DropdownComponent
+                    items={[]}
+                    value={undefined}
+                    onSelect={() => { }}
                     noDataText="NOTHING HERE"
 
-                    items={[]}
                     hideOnOuterClick
-                    onSelect={setItem}
-                    placeholder="Default lookup"
-                />}
-            />
-            <ComponentUseCase
-                caption="noDataByQuery"
-                code={`<Dropdown searchable noDataByQuery="no hay entradas para el filtro" />`}
-                captionIsCode
-                description="Caption for message when no records found by current can be customized. Default is 'No items found by specified search'. Try to search text 'some_random_not_existed'"
-                component={<DropdownComponent
-                    searchable
-                    noDataByQuery="no hay entradas para el filtro"
+                    placeholder="Some placeholder text"
+                />
+            </ComponentUseCase>
 
+            <ComponentUseCase
+                captionIsCode
+                caption="searchable"
+                description="Option to enable case-insensitive search"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useState } from "react";`,
+                            ``,
+                            `import { Optional } from "@bodynarf/utils";`,
+                            `import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "    }));",
+                            "/* ... */",
+                            "const [item, setItem] = useState<Optional<SelectableItem>>();",
+                            "/* ... */",
+                            "",
+                            '<DropdownComponent',
+                            '    searchable',
+                            '    value={item}',
+                            '    items={cities}',
+                            '    onSelect={setItem}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <DropdownComponent
+                    searchable
                     value={item}
                     items={cities}
-                    hideOnOuterClick
                     onSelect={setItem}
-                    placeholder="Default lookup"
-                />}
-            />
+
+                    hideOnOuterClick
+                    placeholder="Some placeholder text"
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
-                caption="listMaxHeight"
-                code={`<Dropdown listMaxHeight="3rem" />`}
                 captionIsCode
-                description="Dropdown list height can be restricted"
-                component={<DropdownComponent listMaxHeight="3rem" value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
-            />
+                caption="noDataByQuery"
+                description="Option to specify the text displayed when no items match the search. Search must be enabled. Not set by default"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useState } from "react";`,
+                            ``,
+                            `import { Optional } from "@bodynarf/utils";`,
+                            `import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "    }));",
+                            "/* ... */",
+                            "const [item, setItem] = useState<Optional<SelectableItem>>();",
+                            "/* ... */",
+                            "",
+                            '<DropdownComponent',
+                            '    searchable',
+                            '    value={item}',
+                            '    items={cities}',
+                            '    onSelect={setItem}',
+                            '    noDataByQuery="No ItEmS fOuNd"',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <DropdownComponent
+                    searchable
+                    value={item}
+                    items={cities}
+                    onSelect={setItem}
+                    noDataByQuery="No ItEmS fOuNd"
+
+                    hideOnOuterClick
+                    placeholder="Some placeholder text"
+                />
+            </ComponentUseCase>
+
             <ComponentUseCase
-                caption="compact"
-                code={`<Dropdown compact />`}
-                captionIsCode
-                description="Dropdown will take only that width that required by its content"
-                component={<DropdownComponent compact value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
-            />
-            <ComponentUseCase
-                caption="disabled"
-                code={`<Dropdown disabled />`}
-                captionIsCode
-                description="Dropdown will be in disabled state"
-                component={<DropdownComponent disabled value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
-            />
-            <ComponentUseCase
-                caption="label"
-                code={`<Dropdown label={{ caption: "Dropdown label", horizontal: true }} />`}
-                captionIsCode
-                description={<>
-                    Dropdown can have describing label. But due component structure it cannot be focused with label click
-                    {`\n`}
-                    Cannot be used with <code>compact</code> mode
-                </>}
-                component={<DropdownComponent label={{ caption: "Dropdown label", horizontal: true }} value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
-            />
-            <ComponentUseCase
-                caption="validationState"
-                code={`<DropdownComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} />`}
-                captionIsCode
-                description="Dropdown supports validation states"
-                component={<DropdownComponent validationState={{ messages: ["Message 1", "Message 2"], status: ValidationStatus.Invalid, }} value={item} items={cities} hideOnOuterClick onSelect={setItem} placeholder="Lookup" />}
-            />
+                caption="Item Icon"
+                description="It is also possible to configure a list of items with an icon"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useState } from "react";`,
+                            ``,
+                            `import { Optional } from "@bodynarf/utils";`,
+                            `import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";`,
+                            "",
+                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
+                            "    .map((name, index) => ({",
+                            "        value: name,",
+                            "        displayValue: `[${index}] ${name}`,",
+                            "        id: name,",
+                            "        title: `City with name ${name}`",
+                            "        icon: {",
+                            "            name: ++index % 2 === 0",
+                            '                ? "exclamation-square"',
+                            "                : `${++index % 2}-square`,",
+                            "        }",
+                            "    }));",
+                            "/* ... */",
+                            "const [item, setItem] = useState<Optional<SelectableItem>>();",
+                            "/* ... */",
+                            "",
+                            '<DropdownComponent',
+                            '    searchable',
+                            '    value={item}',
+                            '    items={cities}',
+                            '    onSelect={setItem}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <DropdownComponent
+                    value={item}
+                    onSelect={setItem}
+                    items={itemsWithIcons}
+
+                    hideOnOuterClick
+                    placeholder="Some placeholder text"
+                />
+            </ComponentUseCase>
         </section>
     );
-}
+};
 
 export default Dropdown;
 
@@ -171,8 +590,8 @@ const itemsWithIcons = cities.map((x, index) => ({
     ...x,
     displayValue: x.value,
     icon: {
-        name: ++index === 10
+        name: ++index % 2 === 0
             ? "exclamation-square"
-            : `${++index % 10}-square`,
+            : `${++index % 2}-square`,
     }
 }));

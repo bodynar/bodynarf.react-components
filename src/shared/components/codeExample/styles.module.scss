@@ -1,0 +1,76 @@
+@use "/src/shared/styles/variables" as vars;
+
+.code-example {
+    position: relative;
+    width: max-content;
+    max-width: 100%;
+
+    .copy-btn {
+        opacity: 0;
+
+        transition: vars.$transition;
+        transition-property: background-color, border-color, opacity;
+        top: 0.65rem;
+
+        border-color: vars.$color-gray-lighten !important;
+        height: 2.625rem !important;
+
+        &:hover {
+            background-color: white !important;
+        }
+    }
+
+    .lang-name {
+        top: 0.125rem;
+        transition: vars.$transition opacity;
+    }
+
+    .copy-btn,
+    .lang-name,
+    .copied-block {
+        position: absolute;
+        right: 0.625rem;
+    }
+
+    .copied-block {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        top: 0.65rem;
+
+        background-color: white;
+
+        border: 1px solid vars.$color-gray-lighten;
+        border-radius: 4px;
+
+        span {
+            padding: 0 calc(0.55rem / 2);
+        }
+
+        button {
+            background-color: white !important;
+
+            border-left: 1px solid vars.$color-gray-lighten;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-right: 0;
+        }
+    }
+
+    &:hover {
+        .copy-btn {
+            opacity: 1;
+        }
+
+        .lang-name {
+            opacity: 0;
+        }
+    }
+
+    .code-container {
+        > * {
+            padding-right: 3.75rem;
+        }
+    }
+}
