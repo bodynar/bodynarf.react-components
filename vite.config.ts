@@ -11,4 +11,5 @@ export default defineConfig({
 	build: {
 		sourcemap: true,
 	},
+	base: "/bodynarf.react-components/",
 });
