@@ -1,6 +1,5 @@
 import { FC, useCallback, useState } from "react";
 
-import { emptyFn } from "@bodynarf/utils";
 import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -59,7 +58,6 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             "/* ... */",
@@ -69,9 +67,7 @@ const Multiline: FC = () => {
                     />
                 }
             >
-                <MultilineComponent
-                    onValueChange={emptyFn} // todo: remove this after lib update
-                />
+                <MultilineComponent />
             </ComponentUseCase>
 
             <hr />
@@ -89,14 +85,12 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             "/* ... */",
                             "",
                             `<MultilineComponent`,
                             "    fixed",
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -105,7 +99,6 @@ const Multiline: FC = () => {
             >
                 <MultilineComponent
                     fixed
-                    onValueChange={emptyFn}
                     label={{ caption: "Multiline demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -117,14 +110,12 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             "/* ... */",
                             "",
                             `<MultilineComponent`,
                             "    rows={10}",
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -133,7 +124,6 @@ const Multiline: FC = () => {
             >
                 <MultilineComponent
                     rows={10}
-                    onValueChange={emptyFn}
                     label={{ caption: "Multiline demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -147,7 +137,6 @@ const Multiline: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             "",
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             "/* ... */",
@@ -155,7 +144,6 @@ const Multiline: FC = () => {
                             "/* ... */",
                             "",
                             `<MultilineComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             "    onBlur={ON_BLUR_HANDLE_FN}",
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             "/>",
@@ -164,7 +152,6 @@ const Multiline: FC = () => {
                 }
             >
                 <MultilineComponent
-                    onValueChange={emptyFn}
                     onBlur={appendOnBlurLog}
                     label={{ caption: "Multiline demo", horizontal: true }}
                 />
@@ -192,13 +179,11 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             "/* ... */",
                             "",
                             `<MultilineComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             '    defaultValue={`first line \\nsecond line\\n\\tfin`}',
                             "/>",
@@ -207,7 +192,6 @@ const Multiline: FC = () => {
                 }
             >
                 <MultilineComponent
-                    onValueChange={emptyFn}
                     label={{ caption: "Multiline demo", horizontal: true }}
                     defaultValue={`first line \nsecond line\n\tfin`}
                 />
@@ -220,14 +204,12 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             "/* ... */",
                             "",
                             `<MultilineComponent`,
                             '    placeholder="Multiline demo control"',
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -236,7 +218,6 @@ const Multiline: FC = () => {
             >
                 <MultilineComponent
                     placeholder="Multiline demo control"
-                    onValueChange={emptyFn}
                     label={{ caption: "Multiline demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -248,14 +229,12 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             "/* ... */",
                             "",
                             `<MultilineComponent`,
                             `    disabled`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -264,7 +243,6 @@ const Multiline: FC = () => {
             >
                 <MultilineComponent
                     disabled
-                    onValueChange={emptyFn}
                     label={{ caption: "Multiline demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -276,14 +254,12 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             "/* ... */",
                             "",
                             `<MultilineComponent`,
                             `    readonly`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -292,7 +268,6 @@ const Multiline: FC = () => {
             >
                 <MultilineComponent
                     readonly
-                    onValueChange={emptyFn}
                     label={{ caption: "Multiline demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -303,7 +278,6 @@ const Multiline: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
@@ -311,7 +285,6 @@ const Multiline: FC = () => {
                             "",
                             `<MultilineComponent`,
                             `    size={ElementSize.${id}}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -321,7 +294,6 @@ const Multiline: FC = () => {
                     size =>
                         <MultilineComponent
                             size={size}
-                            onValueChange={emptyFn}
                             label={{ caption: "Multiline demo", horizontal: true }}
                         />
                 }
@@ -334,14 +306,12 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             "/* ... */",
                             "",
                             `<MultilineComponent`,
                             `    loading`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -350,7 +320,6 @@ const Multiline: FC = () => {
             >
                 <MultilineComponent
                     loading
-                    onValueChange={emptyFn}
                     label={{ caption: "Multiline demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -361,7 +330,6 @@ const Multiline: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
@@ -369,7 +337,6 @@ const Multiline: FC = () => {
                             "",
                             `<MultilineComponent`,
                             `    style={ElementColor.${id}}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Multiline demo", horizontal: false }}`,
                             "/>",
                         ].join("\n")}
@@ -379,7 +346,6 @@ const Multiline: FC = () => {
                     style =>
                         <MultilineComponent
                             style={style}
-                            onValueChange={emptyFn}
                             label={{ caption: "Multiline demo", horizontal: false }}
                         />
                 }
@@ -392,14 +358,12 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             "/* ... */",
                             "",
                             '<MultilineComponent',
                             '    name="symptoms"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '    label={{ caption: "Multiline demo", horizontal: false }}',
                             '/>',
                         ].join("\n")}
@@ -408,7 +372,6 @@ const Multiline: FC = () => {
             >
                 <MultilineComponent
                     name="symptoms"
-                    onValueChange={emptyFn}
                     label={{ caption: "Multiline demo", horizontal: false }}
                 />
             </ComponentUseCase>
@@ -437,14 +400,12 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             "/* ... */",
                             "",
                             '<MultilineComponent',
                             '    autoFocus',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '    label={{ caption: "Multiline demo", horizontal: false }}',
                             '/>',
                         ].join("\n")}
@@ -453,7 +414,6 @@ const Multiline: FC = () => {
             >
                 <MultilineComponent
                     autoFocus
-                    onValueChange={emptyFn}
                     label={{ caption: "Multiline demo", horizontal: false }}
                 />
             </ComponentUseCase>
@@ -467,7 +427,6 @@ const Multiline: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             "",
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             "/* ... */",

@@ -6,7 +6,7 @@ import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import CodeExample from "@app/sharedComponents/codeExample";
 
-const tableHeadings: Array<TableHeading<any>> = [ // todo: remove after lib update
+const tableHeadings: Array<TableHeading> = [
     { caption: "Name", sortable: false, name: "Name" },
     { caption: "Age", sortable: false, name: "Age" },
     { caption: "Department", sortable: false, name: "Department" },
@@ -18,7 +18,7 @@ const numbers = new Array(10).fill({}).map((_, i) => i + 1);
 const Table: FC = () => {
     const [onHeaderClickLog, setOnHeaderClickLog] = useState("");
     const appendOnHeaderClick = useCallback(
-        (item: TableHeading<Window>) => setOnHeaderClickLog(
+        (item: TableHeading) => setOnHeaderClickLog(
             t => t
                 + "\n"
                 + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
@@ -574,7 +574,7 @@ const Table: FC = () => {
                 }
             >
                 <TableComponent
-                    headings={tableHeadings.map(x => ({ ...x, sortable: true }) as TableHeading<any>)}
+                    headings={tableHeadings.map(x => ({ ...x, sortable: true }))}
                     currentSortColumn={{ ascending: true, columnName: "Age" }}
                 >
                     {numbers.map(x =>
@@ -630,7 +630,7 @@ const Table: FC = () => {
             >
                 <TableComponent
                     onHeaderClick={appendOnHeaderClick}
-                    headings={tableHeadings.map(x => ({ ...x, sortable: true }) as TableHeading<any>)}
+                    headings={tableHeadings.map(x => ({ ...x, sortable: true }))}
                 >
                     {numbers.map(x =>
                         <tr key={`item-${x}`}>

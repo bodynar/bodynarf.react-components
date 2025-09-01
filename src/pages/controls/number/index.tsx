@@ -1,6 +1,5 @@
 import { FC, useCallback, useState } from "react";
 
-import { emptyFn } from "@bodynarf/utils";
 import Icon from "@bodynarf/react.components/components/icon";
 import NumberComponent from "@bodynarf/react.components/components/primitives/number";
 
@@ -59,7 +58,6 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "/* ... */",
@@ -69,9 +67,7 @@ const Number: FC = () => {
                     />
                 }
             >
-                <NumberComponent
-                    onValueChange={emptyFn} // todo: remove this after lib update
-                />
+                <NumberComponent />
             </ComponentUseCase>
 
             <hr />
@@ -89,14 +85,12 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "/* ... */",
                             "",
                             `<NumberComponent`,
                             "    step={5}",
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Number demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -105,7 +99,6 @@ const Number: FC = () => {
             >
                 <NumberComponent
                     step={5}
-                    onValueChange={emptyFn}
                     label={{ caption: "Number demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -119,7 +112,6 @@ const Number: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             "",
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "/* ... */",
@@ -127,7 +119,6 @@ const Number: FC = () => {
                             "/* ... */",
                             "",
                             `<NumberComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             "    onBlur={ON_BLUR_HANDLE_FN}",
                             `    label={{ caption: "Number demo", horizontal: true }}`,
                             "/>",
@@ -136,7 +127,6 @@ const Number: FC = () => {
                 }
             >
                 <NumberComponent
-                    onValueChange={emptyFn}
                     onBlur={appendOnBlurLog}
                     label={{ caption: "Number demo", horizontal: true }}
                 />
@@ -164,14 +154,12 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "/* ... */",
                             "",
                             `<NumberComponent`,
                             '    defaultValue={8910}',
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Number demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -180,7 +168,6 @@ const Number: FC = () => {
             >
                 <NumberComponent
                     defaultValue={8910}
-                    onValueChange={emptyFn}
                     label={{ caption: "Number demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -192,14 +179,12 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "/* ... */",
                             "",
                             `<NumberComponent`,
                             '    placeholder="Number demo control"',
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Number demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -208,7 +193,6 @@ const Number: FC = () => {
             >
                 <NumberComponent
                     placeholder="Number demo control"
-                    onValueChange={emptyFn}
                     label={{ caption: "Number demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -220,14 +204,12 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "/* ... */",
                             "",
                             `<NumberComponent`,
                             `    rounded`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Number demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -236,7 +218,6 @@ const Number: FC = () => {
             >
                 <NumberComponent
                     rounded
-                    onValueChange={emptyFn}
                     label={{ caption: "Number demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -248,14 +229,12 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "/* ... */",
                             "",
                             `<NumberComponent`,
                             `    disabled`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Number demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -264,7 +243,6 @@ const Number: FC = () => {
             >
                 <NumberComponent
                     disabled
-                    onValueChange={emptyFn}
                     label={{ caption: "Number demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -276,14 +254,12 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "/* ... */",
                             "",
                             `<NumberComponent`,
                             `    readonly`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Number demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -292,7 +268,6 @@ const Number: FC = () => {
             >
                 <NumberComponent
                     readonly
-                    onValueChange={emptyFn}
                     label={{ caption: "Number demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -303,7 +278,6 @@ const Number: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
@@ -311,7 +285,6 @@ const Number: FC = () => {
                             "",
                             `<NumberComponent`,
                             `    size={ElementSize.${id}}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Number demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -321,7 +294,6 @@ const Number: FC = () => {
                     size =>
                         <NumberComponent
                             size={size}
-                            onValueChange={emptyFn}
                             label={{ caption: "Number demo", horizontal: true }}
                         />
                 }
@@ -334,14 +306,12 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "/* ... */",
                             "",
                             `<NumberComponent`,
                             `    loading`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Number demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -350,7 +320,6 @@ const Number: FC = () => {
             >
                 <NumberComponent
                     loading
-                    onValueChange={emptyFn}
                     label={{ caption: "Number demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -361,7 +330,6 @@ const Number: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
@@ -369,7 +337,6 @@ const Number: FC = () => {
                             "",
                             `<NumberComponent`,
                             `    style={ElementColor.${id}}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Number demo", horizontal: false }}`,
                             "/>",
                         ].join("\n")}
@@ -379,7 +346,6 @@ const Number: FC = () => {
                     style =>
                         <NumberComponent
                             style={style}
-                            onValueChange={emptyFn}
                             label={{ caption: "Number demo", horizontal: false }}
                         />
                 }
@@ -392,14 +358,12 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "/* ... */",
                             "",
                             '<NumberComponent',
                             '    name="amount"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '    label={{ caption: "Number demo", horizontal: false }}',
                             '/>',
                         ].join("\n")}
@@ -408,7 +372,6 @@ const Number: FC = () => {
             >
                 <NumberComponent
                     name="amount"
-                    onValueChange={emptyFn}
                     label={{ caption: "Number demo", horizontal: false }}
                 />
             </ComponentUseCase>
@@ -437,14 +400,12 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "/* ... */",
                             "",
                             '<NumberComponent',
                             '    autoFocus',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '    label={{ caption: "Number demo", horizontal: false }}',
                             '/>',
                         ].join("\n")}
@@ -453,7 +414,6 @@ const Number: FC = () => {
             >
                 <NumberComponent
                     autoFocus
-                    onValueChange={emptyFn}
                     label={{ caption: "Number demo", horizontal: false }}
                 />
             </ComponentUseCase>
@@ -467,7 +427,6 @@ const Number: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             "",
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "/* ... */",

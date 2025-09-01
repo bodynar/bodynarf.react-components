@@ -3,7 +3,7 @@ import { FC, useCallback, useEffect, useState } from "react";
 import { BundledLanguage, codeToHtml } from "shiki";
 
 import { isNullOrEmpty } from "@bodynarf/utils";
-import Button from "@bodynarf/react.components/components/button";
+import Button, { ButtonStyle } from "@bodynarf/react.components/components/button";
 
 import styles from "./styles.module.scss";
 
@@ -84,7 +84,7 @@ const CodeExample: FC<CodeExampleProps> = ({
             }
             {!isCopied &&
                 <Button
-                    type="text"
+                    style={ButtonStyle.Text}
                     icon={{ name: "clipboard" }}
                     onClick={onCopyBtnClick}
                     className={styles["copy-btn"]}
@@ -97,7 +97,7 @@ const CodeExample: FC<CodeExampleProps> = ({
                         Copied!
                     </span>
                     <Button
-                        type="text"
+                        style={ButtonStyle.Text}
                         icon={{ name: "clipboard-check" }}
                     />
                 </div>

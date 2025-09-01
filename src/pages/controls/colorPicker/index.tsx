@@ -1,6 +1,6 @@
 import { FC, useCallback, useState } from "react";
 
-import { emptyFn, Color } from "@bodynarf/utils";
+import { Color } from "@bodynarf/utils";
 
 import { ElementPosition } from "@bodynarf/react.components";
 import ColorComponent from "@bodynarf/react.components/components/primitives/color";
@@ -32,25 +32,20 @@ const Color: FC = () => {
 
             <ComponentUseCase
                 caption="Minimal use"
-                description="Minimal configuration: onValueChange event handler"
+                description="Minimal configuration is absent, the component can be used 'empty'"
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             "/* ... */",
                             "",
-                            `<ColorComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
-                            "/>",
+                            "<ColorComponent />",
                         ].join("\n")}
                     />
                 }
             >
-                <ColorComponent
-                    onValueChange={emptyFn}
-                />
+                <ColorComponent />
             </ComponentUseCase>
 
             <hr />
@@ -68,14 +63,12 @@ const Color: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementPosition } from "@bodynarf/react.components";`,
                             `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             "/* ... */",
                             "",
                             `<ColorComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             "    preview={{ position: ElementPosition.Right }}",
                             "/>",
                         ].join("\n")}
@@ -83,7 +76,6 @@ const Color: FC = () => {
                 }
             >
                 <ColorComponent
-                    onValueChange={emptyFn}
                     preview={{ position: ElementPosition.Right }}
                 />
             </ComponentUseCase>
@@ -107,13 +99,11 @@ const Color: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             "/* ... */",
                             "",
                             `<ColorComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    defaultValue={{ blue: 155, green: 100, red: 75 }}`,
                             "/>",
                         ].join("\n")}
@@ -121,7 +111,6 @@ const Color: FC = () => {
                 }
             >
                 <ColorComponent
-                    onValueChange={emptyFn}
                     defaultValue={{ blue: 155, green: 100, red: 75 }}
                 />
             </ComponentUseCase>
@@ -133,14 +122,12 @@ const Color: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             "/* ... */",
                             "",
                             `<ColorComponent`,
                             `    rounded`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             "/>",
                         ].join("\n")}
                     />
@@ -148,7 +135,6 @@ const Color: FC = () => {
             >
                 <ColorComponent
                     rounded
-                    onValueChange={emptyFn}
                 />
             </ComponentUseCase>
 
@@ -159,14 +145,12 @@ const Color: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             "/* ... */",
                             "",
                             `<ColorComponent`,
                             `    disabled`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             "/>",
                         ].join("\n")}
                     />
@@ -174,7 +158,6 @@ const Color: FC = () => {
             >
                 <ColorComponent
                     disabled
-                    onValueChange={emptyFn}
                 />
             </ComponentUseCase>
 
@@ -184,7 +167,6 @@ const Color: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
                             "",
@@ -192,7 +174,6 @@ const Color: FC = () => {
                             "",
                             `<ColorComponent`,
                             `    size={ElementSize.${id}}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             "/>",
                         ].join("\n")}
                     />
@@ -201,7 +182,6 @@ const Color: FC = () => {
                     size =>
                         <ColorComponent
                             size={size}
-                            onValueChange={emptyFn}
                         />
                 }
             />
@@ -213,13 +193,11 @@ const Color: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             "/* ... */",
                             "",
                             '<ColorComponent',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '    label={{ caption: "Color picker", horizontal: false }}',
                             '/>',
                         ].join("\n")}
@@ -227,7 +205,6 @@ const Color: FC = () => {
                 }
             >
                 <ColorComponent
-                    onValueChange={emptyFn}
                     label={{ caption: "Color picker", horizontal: false }}
                 />
             </ComponentUseCase>
@@ -239,14 +216,12 @@ const Color: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             "/* ... */",
                             "",
                             '<ColorComponent',
                             '    name="personalColor"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '/>',
                         ].join("\n")}
                     />
@@ -254,7 +229,6 @@ const Color: FC = () => {
             >
                 <ColorComponent
                     name="personalColor"
-                    onValueChange={emptyFn}
                 />
             </ComponentUseCase>
 
@@ -267,7 +241,6 @@ const Color: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             "",
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             "/* ... */",

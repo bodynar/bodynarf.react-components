@@ -1,6 +1,5 @@
 import { FC, useCallback, useState } from "react";
 
-import { emptyFn } from "@bodynarf/utils";
 import DateComponent from "@bodynarf/react.components/components/primitives/date";
 import Icon from "@bodynarf/react.components/components/icon";
 
@@ -47,13 +46,11 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             "/* ... */",
                             "",
                             `<DateComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Date demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -61,7 +58,6 @@ const DateDemo: FC = () => {
                 }
             >
                 <DateComponent
-                    onValueChange={emptyFn}
                     label={{ caption: "Date demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -83,7 +79,6 @@ const DateDemo: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             "",
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             "/* ... */",
@@ -91,7 +86,6 @@ const DateDemo: FC = () => {
                             "/* ... */",
                             "",
                             `<DateComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             "    onBlur={ON_BLUR_HANDLE_FN}",
                             `    label={{ caption: "Date demo", horizontal: true }}`,
                             "/>",
@@ -100,7 +94,6 @@ const DateDemo: FC = () => {
                 }
             >
                 <DateComponent
-                    onValueChange={emptyFn}
                     onBlur={appendOnBlurLog}
                     label={{ caption: "Date demo", horizontal: true }}
                 />
@@ -128,24 +121,21 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             "/* ... */",
                             "",
                             `<DateComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
-                            `    label={{ caption: "Date demo", horizontal: true }}`,
                             `    defaultValue={new Date(2000, 10, 10)}`,
+                            `    label={{ caption: "Date demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
                     />
                 }
             >
                 <DateComponent
-                    onValueChange={emptyFn}
-                    label={{ caption: "Date demo", horizontal: true }}
                     defaultValue={new Date(2000, 10, 10)}
+                    label={{ caption: "Date demo", horizontal: true }}
                 />
             </ComponentUseCase>
 
@@ -156,14 +146,12 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             "/* ... */",
                             "",
                             `<DateComponent`,
                             `    rounded`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Date demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -172,7 +160,6 @@ const DateDemo: FC = () => {
             >
                 <DateComponent
                     rounded
-                    onValueChange={emptyFn}
                     label={{ caption: "Date demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -184,14 +171,12 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             "/* ... */",
                             "",
                             `<DateComponent`,
                             `    disabled`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Date demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -200,7 +185,6 @@ const DateDemo: FC = () => {
             >
                 <DateComponent
                     disabled
-                    onValueChange={emptyFn}
                     label={{ caption: "Date demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -212,14 +196,12 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             "/* ... */",
                             "",
                             `<DateComponent`,
                             `    readonly`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Date demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -228,7 +210,6 @@ const DateDemo: FC = () => {
             >
                 <DateComponent
                     readonly
-                    onValueChange={emptyFn}
                     label={{ caption: "Date demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -239,7 +220,6 @@ const DateDemo: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
                             "",
@@ -247,7 +227,6 @@ const DateDemo: FC = () => {
                             "",
                             `<DateComponent`,
                             `    size={ElementSize.${id}}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Date demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -257,7 +236,6 @@ const DateDemo: FC = () => {
                     size =>
                         <DateComponent
                             size={size}
-                            onValueChange={emptyFn}
                             label={{ caption: "Date demo", horizontal: true }}
                         />
                 }
@@ -270,14 +248,12 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             "/* ... */",
                             "",
                             `<DateComponent`,
                             `    loading`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Date demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -286,7 +262,6 @@ const DateDemo: FC = () => {
             >
                 <DateComponent
                     loading
-                    onValueChange={emptyFn}
                     label={{ caption: "Date demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -297,7 +272,6 @@ const DateDemo: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
                             "",
@@ -305,7 +279,6 @@ const DateDemo: FC = () => {
                             "",
                             `<DateComponent`,
                             `    style={ElementColor.${id}}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Date demo", horizontal: false }}`,
                             "/>",
                         ].join("\n")}
@@ -315,7 +288,6 @@ const DateDemo: FC = () => {
                     style =>
                         <DateComponent
                             style={style}
-                            onValueChange={emptyFn}
                             label={{ caption: "Date demo", horizontal: false }}
                         />
                 }
@@ -328,14 +300,12 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             "/* ... */",
                             "",
                             '<DateComponent',
                             '    name="birthDate"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '    label={{ caption: "Date demo", horizontal: false }}',
                             '/>',
                         ].join("\n")}
@@ -344,7 +314,6 @@ const DateDemo: FC = () => {
             >
                 <DateComponent
                     name="birthDate"
-                    onValueChange={emptyFn}
                     label={{ caption: "Date demo", horizontal: false }}
                 />
             </ComponentUseCase>
@@ -373,14 +342,12 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             "/* ... */",
                             "",
                             '<DateComponent',
                             '    autoFocus',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '    label={{ caption: "Date demo", horizontal: false }}',
                             '/>',
                         ].join("\n")}
@@ -389,7 +356,6 @@ const DateDemo: FC = () => {
             >
                 <DateComponent
                     autoFocus
-                    onValueChange={emptyFn}
                     label={{ caption: "Date demo", horizontal: false }}
                 />
             </ComponentUseCase>
@@ -403,7 +369,6 @@ const DateDemo: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             "",
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             "/* ... */",

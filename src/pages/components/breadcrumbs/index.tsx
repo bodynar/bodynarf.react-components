@@ -21,10 +21,10 @@ const separatorsAsSelectItems = separators.map((x, i) => ({
 }) as SelectableItem);
 
 const items = [
-    { active: false, caption: "Source", path: "#/source", },
-    { active: false, caption: "Subfolder", path: "#/subfolder", },
-    { active: false, caption: "Target", path: "#/target", },
-    { active: false, caption: "Current", path: "#/current", },
+    { caption: "Source", href: "#/source", },
+    { caption: "Subfolder", href: "#/subfolder", },
+    { caption: "Target", href: "#/target", },
+    { caption: "Current", href: "#/current", },
 ];
 
 /** Breadcrumbs component demo */
@@ -78,15 +78,18 @@ const Breadcrumbs: FC = () => {
                             '    { caption: "Current", href: "#/current", },',
                             "/* ... */",
                             "",
-                            `<BreadcrumbsComponent items={items} size={ElementSize.${id}} />`,
+                            `<BreadcrumbsComponent`,
+                            `    items={items}`,
+                            `    size={ElementSize.${id}}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
                 componentProvider={
                     size =>
                         <BreadcrumbsComponent
-                            items={items}
                             size={size}
+                            items={items}
                         />
                 }
             />
@@ -140,7 +143,10 @@ const Breadcrumbs: FC = () => {
                             '    { caption: "Current", href: "#/current", },',
                             "/* ... */",
                             "",
-                            `<BreadcrumbsComponent items={items} separator="${id}" />`,
+                            `<BreadcrumbsComponent`,
+                            `    items={items}`,
+                            `    separator="${id}"`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }

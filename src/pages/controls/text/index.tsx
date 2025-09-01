@@ -68,9 +68,7 @@ const Text: FC = () => {
                     />
                 }
             >
-                <TextComponent
-                    onValueChange={emptyFn} // todo: remove this after lib update
-                />
+                <TextComponent />
             </ComponentUseCase>
 
             <hr />
@@ -98,7 +96,6 @@ const Text: FC = () => {
                             "/* ... */",
                             "",
                             `<TextComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             "    onBlur={ON_BLUR_HANDLE_FN}",
                             `    label={{ caption: "Text demo", horizontal: true }}`,
                             "/>",
@@ -107,7 +104,6 @@ const Text: FC = () => {
                 }
             >
                 <TextComponent
-                    onValueChange={emptyFn}
                     onBlur={appendOnBlurLog}
                     label={{ caption: "Text demo", horizontal: true }}
                 />
@@ -135,13 +131,11 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             "/* ... */",
                             "",
                             `<TextComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             '    defaultValue="bodynarf bulma react"',
                             `    label={{ caption: "Text demo", horizontal: true }}`,
                             "/>",
@@ -150,7 +144,6 @@ const Text: FC = () => {
                 }
             >
                 <TextComponent
-                    onValueChange={emptyFn}
                     defaultValue="bodynarf bulma react"
                     label={{ caption: "Text demo", horizontal: true }}
                 />
@@ -163,14 +156,12 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             "/* ... */",
                             "",
                             `<TextComponent`,
                             '    placeholder="Text demo control"',
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Text demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -191,14 +182,12 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             "/* ... */",
                             "",
                             `<TextComponent`,
                             `    rounded`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Text demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -207,7 +196,6 @@ const Text: FC = () => {
             >
                 <TextComponent
                     rounded
-                    onValueChange={emptyFn}
                     label={{ caption: "Text demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -219,14 +207,12 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             "/* ... */",
                             "",
                             `<TextComponent`,
                             `    disabled`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Text demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -235,7 +221,6 @@ const Text: FC = () => {
             >
                 <TextComponent
                     disabled
-                    onValueChange={emptyFn}
                     label={{ caption: "Text demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -247,14 +232,12 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             "/* ... */",
                             "",
                             `<TextComponent`,
                             `    readonly`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Text demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -263,7 +246,6 @@ const Text: FC = () => {
             >
                 <TextComponent
                     readonly
-                    onValueChange={emptyFn}
                     label={{ caption: "Text demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -274,7 +256,6 @@ const Text: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
@@ -282,7 +263,6 @@ const Text: FC = () => {
                             "",
                             `<TextComponent`,
                             `    size={ElementSize.${id}}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Text demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -292,7 +272,6 @@ const Text: FC = () => {
                     size =>
                         <TextComponent
                             size={size}
-                            onValueChange={emptyFn}
                             label={{ caption: "Text demo", horizontal: true }}
                         />
                 }
@@ -305,13 +284,11 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             "/* ... */",
                             "",
                             `<TextComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Text demo", horizontal: false }}`,
                             "/>",
                         ].join("\n")}
@@ -320,7 +297,6 @@ const Text: FC = () => {
             >
                 <TextComponent
                     loading
-                    onValueChange={emptyFn}
                     label={{ caption: "Text demo", horizontal: false }}
                 />
             </ComponentUseCase>
@@ -332,14 +308,12 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             "/* ... */",
                             "",
                             `<TextComponent`,
                             `    loading`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Text demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -348,7 +322,6 @@ const Text: FC = () => {
             >
                 <TextComponent
                     loading
-                    onValueChange={emptyFn}
                     label={{ caption: "Text demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -359,7 +332,6 @@ const Text: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
@@ -367,7 +339,6 @@ const Text: FC = () => {
                             "",
                             `<TextComponent`,
                             `    style={ElementColor.${id}}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Text demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -377,7 +348,6 @@ const Text: FC = () => {
                     style =>
                         <TextComponent
                             style={style}
-                            onValueChange={emptyFn}
                             label={{ caption: "Text demo", horizontal: true }}
                         />
                 }
@@ -390,14 +360,12 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             "/* ... */",
                             "",
                             '<TextComponent',
                             '    name="firstName"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '    label={{ caption: "Text demo", horizontal: true }}',
                             '/>',
                         ].join("\n")}
@@ -406,7 +374,6 @@ const Text: FC = () => {
             >
                 <TextComponent
                     name="firstName"
-                    onValueChange={emptyFn}
                     label={{ caption: "Text demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -435,14 +402,12 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             "/* ... */",
                             "",
                             '<TextComponent',
                             '    autoFocus',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '    label={{ caption: "Text demo", horizontal: true }}',
                             '/>',
                         ].join("\n")}
@@ -451,7 +416,6 @@ const Text: FC = () => {
             >
                 <TextComponent
                     autoFocus
-                    onValueChange={emptyFn}
                     label={{ caption: "Text demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -465,7 +429,6 @@ const Text: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             "",
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             "/* ... */",

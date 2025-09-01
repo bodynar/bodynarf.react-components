@@ -1,6 +1,5 @@
 import { FC, useCallback, useState } from "react";
 
-import { emptyFn } from "@bodynarf/utils";
 import Icon from "@bodynarf/react.components/components/icon";
 import PasswordComponent from "@bodynarf/react.components/components/primitives/password";
 
@@ -48,7 +47,6 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             "/* ... */",
@@ -58,9 +56,7 @@ const Password: FC = () => {
                     />
                 }
             >
-                <PasswordComponent
-                    onValueChange={emptyFn} // todo: remove this after lib update
-                />
+                <PasswordComponent />
             </ComponentUseCase>
 
             <hr />
@@ -78,14 +74,12 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             "/* ... */",
                             "",
                             `<PasswordComponent`,
                             "    canShowPassword",
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Password demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -94,7 +88,6 @@ const Password: FC = () => {
             >
                 <PasswordComponent
                     canShowPassword
-                    onValueChange={emptyFn}
                     label={{ caption: "Password demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -106,7 +99,6 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             "/* ... */",
@@ -114,7 +106,6 @@ const Password: FC = () => {
                             `<PasswordComponent`,
                             "    canShowPassword",
                             '    showPasswordIconTitle="sHoW pAsSwOrD"',
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Password demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -124,7 +115,6 @@ const Password: FC = () => {
                 <PasswordComponent
                     canShowPassword
                     showPasswordIconTitle="sHoW pAsSwOrD"
-                    onValueChange={emptyFn}
                     label={{ caption: "Password demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -148,14 +138,12 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             "/* ... */",
                             "",
                             `<PasswordComponent`,
                             '    defaultValue="pwd"',
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Password demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -164,7 +152,6 @@ const Password: FC = () => {
             >
                 <PasswordComponent
                     defaultValue="pwd"
-                    onValueChange={emptyFn}
                     label={{ caption: "Password demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -176,14 +163,12 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             "/* ... */",
                             "",
                             `<PasswordComponent`,
                             '    placeholder="Password demo control"',
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Password demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -192,7 +177,6 @@ const Password: FC = () => {
             >
                 <PasswordComponent
                     placeholder="Password demo control"
-                    onValueChange={emptyFn}
                     label={{ caption: "Password demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -204,14 +188,12 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             "/* ... */",
                             "",
                             `<PasswordComponent`,
                             `    rounded`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Password demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -220,7 +202,6 @@ const Password: FC = () => {
             >
                 <PasswordComponent
                     rounded
-                    onValueChange={emptyFn}
                     label={{ caption: "Password demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -232,14 +213,12 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             "/* ... */",
                             "",
                             `<PasswordComponent`,
                             `    disabled`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Password demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -248,7 +227,6 @@ const Password: FC = () => {
             >
                 <PasswordComponent
                     disabled
-                    onValueChange={emptyFn}
                     label={{ caption: "Password demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -259,7 +237,6 @@ const Password: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
@@ -267,7 +244,6 @@ const Password: FC = () => {
                             "",
                             `<PasswordComponent`,
                             `    size={ElementSize.${id}}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Password demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -277,7 +253,6 @@ const Password: FC = () => {
                     size =>
                         <PasswordComponent
                             size={size}
-                            onValueChange={emptyFn}
                             label={{ caption: "Password demo", horizontal: true }}
                         />
                 }
@@ -290,13 +265,11 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             "/* ... */",
                             "",
                             `<PasswordComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Password demo", horizontal: false }}`,
                             "/>",
                         ].join("\n")}
@@ -304,8 +277,6 @@ const Password: FC = () => {
                 }
             >
                 <PasswordComponent
-                    loading
-                    onValueChange={emptyFn}
                     label={{ caption: "Password demo", horizontal: false }}
                 />
             </ComponentUseCase>
@@ -317,14 +288,12 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             "/* ... */",
                             "",
                             `<PasswordComponent`,
                             `    loading`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Password demo", horizontal: true }}`,
                             "/>",
                         ].join("\n")}
@@ -333,7 +302,6 @@ const Password: FC = () => {
             >
                 <PasswordComponent
                     loading
-                    onValueChange={emptyFn}
                     label={{ caption: "Password demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -344,7 +312,6 @@ const Password: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
@@ -352,7 +319,6 @@ const Password: FC = () => {
                             "",
                             `<PasswordComponent`,
                             `    style={ElementColor.${id}}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Password demo", horizontal: false }}`,
                             "/>",
                         ].join("\n")}
@@ -362,7 +328,6 @@ const Password: FC = () => {
                     style =>
                         <PasswordComponent
                             style={style}
-                            onValueChange={emptyFn}
                             label={{ caption: "Password demo", horizontal: false }}
                         />
                 }
@@ -375,14 +340,12 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             "/* ... */",
                             "",
                             '<PasswordComponent',
                             '    name="key"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '    label={{ caption: "Password demo", horizontal: false }}',
                             '/>',
                         ].join("\n")}
@@ -391,7 +354,6 @@ const Password: FC = () => {
             >
                 <PasswordComponent
                     name="key"
-                    onValueChange={emptyFn}
                     label={{ caption: "Password demo", horizontal: false }}
                 />
             </ComponentUseCase>
@@ -420,14 +382,12 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             "/* ... */",
                             "",
                             '<PasswordComponent',
                             '    autoFocus',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '    label={{ caption: "Password demo", horizontal: false }}',
                             '/>',
                         ].join("\n")}
@@ -436,7 +396,6 @@ const Password: FC = () => {
             >
                 <PasswordComponent
                     autoFocus
-                    onValueChange={emptyFn}
                     label={{ caption: "Password demo", horizontal: false }}
                 />
             </ComponentUseCase>
@@ -450,7 +409,6 @@ const Password: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             "",
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             "/* ... */",

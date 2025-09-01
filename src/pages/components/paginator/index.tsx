@@ -253,8 +253,16 @@ const Paginator: FC = () => {
                             "",
                             '<PaginatorComponent',
                             '    count={10}',
+                            '    showNextButtons',
                             '    nearPagesCount={1}',
                             '    onPageChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    resources={{',
+                            '        previousPageCaption: "previousPageCaption",',
+                            '        previousPageTitle: "previousPageTitle",',
+                            '        nextPageCaption: "nextPageCaption",',
+                            '        nextPageTitle: "nextPageTitle",',
+                            '        openConcretePageTitleTemplate: "openConcretePageTitleTemplate {0}",',
+                            '   }}',
                             '/>',
                         ].join("\n")}
                     />
@@ -262,6 +270,7 @@ const Paginator: FC = () => {
             >
                 <PaginatorComponent
                     count={10}
+                    showNextButtons
                     currentPage={page}
                     onPageChange={setPage}
                     resources={{

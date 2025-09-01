@@ -1,7 +1,5 @@
 import { FC, useCallback, useState } from "react";
 
-import { emptyFn } from "@bodynarf/utils";
-
 import { ElementColor } from "@bodynarf/react.components";
 import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";
 import Icon from "@bodynarf/react.components/components/icon";
@@ -98,25 +96,20 @@ const Checkbox: FC = () => {
 
             <ComponentUseCase
                 caption="Minimal use"
-                description="Minimal configuration: onValueChange event handler"
+                description="Minimal configuration is absent, the component can be used 'empty'"
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             "/* ... */",
                             "",
-                            `<CheckboxComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
-                            "/>",
+                            "<CheckboxComponent />",
                         ].join("\n")}
                     />
                 }
             >
-                <CheckboxComponent
-                    onValueChange={emptyFn}
-                />
+                <CheckboxComponent />
             </ComponentUseCase>
 
             <ComponentUseCase
@@ -125,13 +118,11 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             "/* ... */",
                             "",
                             `<CheckboxComponent`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Checkbox demo" }}`,
                             "/>",
                         ].join("\n")}
@@ -139,7 +130,6 @@ const Checkbox: FC = () => {
                 }
             >
                 <CheckboxComponent
-                    onValueChange={emptyFn}
                     label={{ caption: "Checkbox demo", horizontal: false }}
                 />
             </ComponentUseCase>
@@ -152,8 +142,6 @@ const Checkbox: FC = () => {
                 </h4>
             </div>
 
-
-
             <ComponentUseCase
                 captionIsCode
                 caption="block"
@@ -161,14 +149,12 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             "/* ... */",
                             "",
                             `<CheckboxComponent`,
                             `    block`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Checkbox demo" }}`,
                             "/>",
                         ].join("\n")}
@@ -177,7 +163,6 @@ const Checkbox: FC = () => {
             >
                 <CheckboxComponent
                     block
-                    onValueChange={emptyFn}
                     label={{ caption: "Checkbox demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -189,14 +174,12 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             "/* ... */",
                             "",
                             `<CheckboxComponent`,
                             `    withoutBorder`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Checkbox demo" }}`,
                             "/>",
                         ].join("\n")}
@@ -205,7 +188,6 @@ const Checkbox: FC = () => {
             >
                 <CheckboxComponent
                     withoutBorder
-                    onValueChange={emptyFn}
                     label={{ caption: "Checkbox demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -217,7 +199,6 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
@@ -225,7 +206,6 @@ const Checkbox: FC = () => {
                             "",
                             `<CheckboxComponent`,
                             `    hasBackgroundColor`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    style={ElementColor.Primary}`,
                             `    label={{ caption: "Checkbox demo" }}`,
                             "/>",
@@ -235,7 +215,6 @@ const Checkbox: FC = () => {
             >
                 <CheckboxComponent
                     hasBackgroundColor
-                    onValueChange={emptyFn}
                     style={ElementColor.Primary}
                     label={{ caption: "Checkbox demo", horizontal: true }}
                 />
@@ -248,7 +227,6 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
@@ -257,7 +235,6 @@ const Checkbox: FC = () => {
                             `<CheckboxComponent`,
                             `    fixBackgroundColor`,
                             `    hasBackgroundColor`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    style={ElementColor.Primary}`,
                             `    label={{ caption: "Checkbox demo" }}`,
                             "/>",
@@ -268,7 +245,6 @@ const Checkbox: FC = () => {
                 <CheckboxComponent
                     fixBackgroundColor
                     hasBackgroundColor
-                    onValueChange={emptyFn}
                     style={ElementColor.Primary}
                     label={{ caption: "Checkbox demo", horizontal: true }}
                 />
@@ -281,14 +257,12 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             "/* ... */",
                             "",
                             `<CheckboxComponent`,
                             `    isFormLabel`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             '    label={{ caption: "is Form Label", horizontal: false, }}',
                             "/>",
                         ].join("\n")}
@@ -297,7 +271,6 @@ const Checkbox: FC = () => {
             >
                 <CheckboxComponent
                     isFormLabel
-                    onValueChange={emptyFn}
                     label={{ caption: "is Form Label", horizontal: false, }}
                 />
             </ComponentUseCase>
@@ -321,14 +294,12 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             "/* ... */",
                             "",
                             `<CheckboxComponent`,
-                            `    defaultValue={true}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
+                            `    defaultValue`,
                             `    label={{ caption: "Checkbox demo" }}`,
                             "/>",
                         ].join("\n")}
@@ -337,7 +308,6 @@ const Checkbox: FC = () => {
             >
                 <CheckboxComponent
                     defaultValue
-                    onValueChange={emptyFn}
                     label={{ caption: "Checkbox demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -349,14 +319,12 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             "/* ... */",
                             "",
                             `<CheckboxComponent`,
                             `    rounded`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Checkbox demo" }}`,
                             "/>",
                         ].join("\n")}
@@ -365,7 +333,6 @@ const Checkbox: FC = () => {
             >
                 <CheckboxComponent
                     rounded
-                    onValueChange={emptyFn}
                     label={{ caption: "Checkbox demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -377,14 +344,12 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             "/* ... */",
                             "",
                             `<CheckboxComponent`,
                             `    disabled`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Checkbox demo" }}`,
                             "/>",
                         ].join("\n")}
@@ -393,7 +358,6 @@ const Checkbox: FC = () => {
             >
                 <CheckboxComponent
                     disabled
-                    onValueChange={emptyFn}
                     label={{ caption: "Checkbox demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -404,7 +368,6 @@ const Checkbox: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
@@ -412,7 +375,6 @@ const Checkbox: FC = () => {
                             "",
                             `<CheckboxComponent`,
                             `    size={ElementSize.${id}}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Checkbox demo" }}`,
                             "/>",
                         ].join("\n")}
@@ -422,7 +384,6 @@ const Checkbox: FC = () => {
                     size =>
                         <CheckboxComponent
                             size={size}
-                            onValueChange={emptyFn}
                             label={{ caption: "Checkbox demo", horizontal: true }}
                         />
                 }
@@ -434,7 +395,6 @@ const Checkbox: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
@@ -442,7 +402,6 @@ const Checkbox: FC = () => {
                             "",
                             `<CheckboxComponent`,
                             `    style={ElementColor.${id}}`,
-                            "    onValueChange={emptyFn} // TODO: Replace with your own handler function",
                             `    label={{ caption: "Checkbox demo" }}`,
                             "/>",
                         ].join("\n")}
@@ -452,7 +411,6 @@ const Checkbox: FC = () => {
                     style =>
                         <CheckboxComponent
                             style={style}
-                            onValueChange={emptyFn}
                             label={{ caption: "Checkbox demo", horizontal: true }}
                         />
                 }
@@ -465,14 +423,12 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             "/* ... */",
                             "",
                             '<CheckboxComponent',
                             '    name="agreement"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             `    label={{ caption: "Checkbox demo" }}`,
                             '/>',
                         ].join("\n")}
@@ -481,7 +437,6 @@ const Checkbox: FC = () => {
             >
                 <CheckboxComponent
                     name="agreement"
-                    onValueChange={emptyFn}
                     label={{ caption: "Checkbox demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -495,7 +450,6 @@ const Checkbox: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             "",
-                            `import { emptyFn } from "@bodynarf/utils";`,
                             `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             "/* ... */",

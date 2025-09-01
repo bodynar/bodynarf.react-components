@@ -1,7 +1,7 @@
 import { FC, useCallback, useState, } from "react";
 
 import { ElementPosition, SelectableItem } from "@bodynarf/react.components";
-import ButtonComponent, { ButtonType } from "@bodynarf/react.components/components/button";
+import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -9,17 +9,21 @@ import ComponentEnumCase from "@app/sharedComponents/enumSelectionCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import CodeExample from "@app/sharedComponents/codeExample";
 
-const types: Array<ButtonType> = [
-    "primary", "link", "info",
-    "success", "warning", "danger", "white",
-    "light", "dark", "black", "text", "ghost"
-];
+const types: Array<string> = [
+    ButtonStyle.Default, ButtonStyle.Primary, ButtonStyle.Link,
+    ButtonStyle.Info, ButtonStyle.Success, ButtonStyle.Warning,
+    ButtonStyle.Danger, ButtonStyle.White, ButtonStyle.Light,
+    ButtonStyle.Dark, ButtonStyle.Black, ButtonStyle.Text,
+    ButtonStyle.Ghost,
+].map(x => x.capitalize());
 
-const typesAsSelectItems = types.map((x, i) => ({
-    displayValue: x,
-    id: i.toString(),
-    value: x,
-}) as SelectableItem);
+const typesAsSelectItems = Object
+    .values(ButtonStyle)
+    .map((x, i) => ({
+        displayValue: x.capitalize(),
+        id: i.toString(),
+        value: x,
+    }) as SelectableItem);
 
 /** Button component demo */
 const Button: FC = () => {
@@ -48,21 +52,21 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent from "@bodynarf/react.components/components/button";`,
+                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
                             "",
                             "/* ... */",
                             "",
                             '<ButtonComponent',
-                            '    type="primary"',
                             '    caption="Minimal use"',
+                            '    style={ButtonStyle.Primary}',
                             '/>',
                         ].join("\n")}
                     />
                 }
             >
                 <ButtonComponent
-                    type="primary"
                     caption="Minimal use"
+                    style={ButtonStyle.Primary}
                 />
             </ComponentUseCase>
 
@@ -72,12 +76,12 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent from "@bodynarf/react.components/components/button";`,
+                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
                             "",
                             "/* ... */",
                             "",
                             '<ButtonComponent',
-                            '    type="primary"',
+                            '    style={ButtonStyle.Primary}',
                             '    icon={{ name: "broadcast" }}',
                             '/>',
                         ].join("\n")}
@@ -85,7 +89,7 @@ const Button: FC = () => {
                 }
             >
                 <ButtonComponent
-                    type="primary"
+                    style={ButtonStyle.Primary}
                     icon={{ name: "broadcast" }}
                 />
             </ComponentUseCase>
@@ -97,12 +101,12 @@ const Button: FC = () => {
                     <CodeExample
                         code={[
                             `import { ElementPosition } from "@bodynarf/react.components";`,
-                            `import ButtonComponent from "@bodynarf/react.components/components/button";`,
+                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
                             "",
                             "/* ... */",
                             "",
                             '<ButtonComponent',
-                            '    type="primary"',
+                            '    style={ButtonStyle.Primary}',
                             '    caption="Icon with caption"',
                             '    icon={{ name: "broadcast", position: ElementPosition.Right }}',
                             '/>',
@@ -111,7 +115,7 @@ const Button: FC = () => {
                 }
             >
                 <ButtonComponent
-                    type="primary"
+                    style={ButtonStyle.Primary}
                     caption="Icon with caption"
                     icon={{ name: "broadcast", position: ElementPosition.Right }}
                 />
@@ -125,21 +129,21 @@ const Button: FC = () => {
                 codeProvider={type =>
                     <CodeExample
                         code={[
-                            `import ButtonComponent from "@bodynarf/react.components/components/button";`,
+                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
                             "",
                             "/* ... */",
                             "",
                             '<ButtonComponent',
-                            `    type="${type}"`,
+                            `    style={ButtonStyle.${type}}`,
                             '    caption="Different types"',
                             '/>',
                         ].join("\n")}
                     />
                 }
                 componentProvider={
-                    (value: ButtonType) =>
+                    (value: ButtonStyle) =>
                         <ButtonComponent
-                            type={value}
+                            style={value}
                             caption="Different types"
                         />
                 }
@@ -153,14 +157,14 @@ const Button: FC = () => {
                     <CodeExample
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import ButtonComponent from "@bodynarf/react.components/components/button";`,
+                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
                             "",
                             "/* ... */",
                             "",
                             '<ButtonComponent',
-                            '    type="primary"',
                             `    size={ElementSize.${size}}`,
                             '    caption="Different sizes"',
+                            '    style={ButtonStyle.Primary}',
                             '/>',
                         ].join("\n")}
                     />
@@ -169,7 +173,7 @@ const Button: FC = () => {
                     size =>
                         <ButtonComponent
                             size={size}
-                            type="primary"
+                            style={ButtonStyle.Primary}
                             caption="Different sizes"
                         />
                 }
@@ -182,14 +186,14 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent from "@bodynarf/react.components/components/button";`,
+                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
                             "",
                             "/* ... */",
                             "",
                             '<ButtonComponent',
                             '    light',
-                            '    type="primary"',
                             '    caption="Light button"',
+                            '    style={ButtonStyle.Primary}',
                             '/>',
                         ].join("\n")}
                     />
@@ -197,8 +201,8 @@ const Button: FC = () => {
             >
                 <ButtonComponent
                     light
-                    type="primary"
                     caption="Light button"
+                    style={ButtonStyle.Primary}
                 />
             </ComponentUseCase>
 
@@ -209,14 +213,14 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent from "@bodynarf/react.components/components/button";`,
+                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
                             "",
                             "/* ... */",
                             "",
                             '<ButtonComponent',
                             '    outlined',
-                            '    type="primary"',
                             '    caption="Outlined button"',
+                            '    style={ButtonStyle.Primary}',
                             '/>',
                         ].join("\n")}
                     />
@@ -224,8 +228,8 @@ const Button: FC = () => {
             >
                 <ButtonComponent
                     outlined
-                    type="primary"
                     caption="Outlined button"
+                    style={ButtonStyle.Primary}
                 />
             </ComponentUseCase>
 
@@ -236,14 +240,14 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent from "@bodynarf/react.components/components/button";`,
+                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
                             "",
                             "/* ... */",
                             "",
                             '<ButtonComponent',
                             '    rounded',
-                            '    type="primary"',
                             '    caption="Rounded button"',
+                            '    style={ButtonStyle.Primary}',
                             '/>',
                         ].join("\n")}
                     />
@@ -251,8 +255,8 @@ const Button: FC = () => {
             >
                 <ButtonComponent
                     rounded
-                    type="primary"
                     caption="Rounded button"
+                    style={ButtonStyle.Primary}
                 />
             </ComponentUseCase>
 
@@ -263,14 +267,14 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent from "@bodynarf/react.components/components/button";`,
+                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
                             "",
                             "/* ... */",
                             "",
                             '<ButtonComponent',
                             '    isLoading',
-                            '    type="primary"',
                             '    caption="Loading button"',
+                            '    style={ButtonStyle.Primary}',
                             '/>',
                         ].join("\n")}
                     />
@@ -278,8 +282,8 @@ const Button: FC = () => {
             >
                 <ButtonComponent
                     isLoading
-                    type="primary"
                     caption="Loading button"
+                    style={ButtonStyle.Primary}
                 />
             </ComponentUseCase>
 
@@ -290,14 +294,14 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent from "@bodynarf/react.components/components/button";`,
+                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
                             "",
                             "/* ... */",
                             "",
                             '<ButtonComponent',
                             '    disabled',
-                            '    type="primary"',
                             '    caption="Disabled button"',
+                            '    style={ButtonStyle.Primary}',
                             '/>',
                         ].join("\n")}
                     />
@@ -305,8 +309,8 @@ const Button: FC = () => {
             >
                 <ButtonComponent
                     disabled
-                    type="primary"
                     caption="Disabled button"
+                    style={ButtonStyle.Primary}
                 />
             </ComponentUseCase>
 
@@ -317,14 +321,14 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent from "@bodynarf/react.components/components/button";`,
+                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
                             "",
                             "/* ... */",
                             "",
                             '<ButtonComponent',
                             '    static',
-                            '    type="primary"',
                             '    caption="Static button"',
+                            '    style={ButtonStyle.Primary}',
                             '/>',
                         ].join("\n")}
                     />
@@ -332,8 +336,8 @@ const Button: FC = () => {
             >
                 <ButtonComponent
                     static
-                    type="primary"
                     caption="Static button"
+                    style={ButtonStyle.Primary}
                 />
             </ComponentUseCase>
 
@@ -346,25 +350,25 @@ const Button: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             "",
-                            `import ButtonComponent from "@bodynarf/react.components/components/button";`,
+                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
                             "",
                             "/* ... */",
                             "const CLICK_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
                             "/* ... */",
                             "",
                             '<ButtonComponent',
-                            '    type="primary"',
                             '    caption="Click me!"',
                             '    onClick={CLICK_HANDLE_FN}',
+                            '    style={ButtonStyle.Primary}',
                             '/>',
                         ].join("\n")}
                     />
                 }
             >
                 <ButtonComponent
-                    type="primary"
                     caption="Click me!"
                     onClick={appendText}
+                    style={ButtonStyle.Primary}
                 />
                 <p style={{ whiteSpace: "pre-line" }}>
                     {text}
