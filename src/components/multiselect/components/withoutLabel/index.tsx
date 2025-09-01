@@ -55,9 +55,9 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
                     : [...x, item.id]
             );
 
-            item.selected = isItemSelected;
+            item.selected = !isItemSelected;
 
-            onChange(item, isItemSelected);
+            onChange(item, !isItemSelected);
         }
         ,
         [onChange, selectedItems]

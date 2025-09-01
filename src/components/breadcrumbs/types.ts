@@ -17,7 +17,7 @@ export interface BreadCrumb {
      * Page address
      * @deprecated Since v1.2.0 Use `href`
      */
-    path: string;
+    path?: string;
 
     /** Link address */
     href: string;
@@ -26,7 +26,7 @@ export interface BreadCrumb {
      * Is current page. Will be not clickable
      * @deprecated Since v1.2.0 Not used anymore
      */
-    active: boolean;
+    active?: boolean;
 
     /** Bootstrap icon class name */
     icon?: ElementIcon;
