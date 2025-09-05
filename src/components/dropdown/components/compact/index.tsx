@@ -19,7 +19,7 @@ type DropdownCompactProps = DropdownProps & {
 /** Dropdown component without label */
 const DropdownCompact: FC<DropdownCompactProps> = ({
     items, value, onSelect,
-    hideOnOuterClick = false, listMaxHeight,
+    hideOnOuterClick = true, listMaxHeight,
     placeholder = "", noDataText = "No items found", noDataByQuery = "No items found by specified search",
 
     compact = false, disabled = false, deselectable = false, searchable = false,
