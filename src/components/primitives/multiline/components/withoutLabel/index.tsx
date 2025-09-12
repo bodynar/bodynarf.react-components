@@ -10,12 +10,14 @@ import { MultilineProps } from "../..";
 
 /** Multiline textual input component without describing label*/
 const MultilineWithoutLabel: FC<MultilineProps> = ({
-    onValueChange = emptyFn, defaultValue, validationState,
-    name = generateGuid(), placeholder,
-    onBlur,
-    size = ElementSize.Normal, style, loading = false,
-    fixed = false, autoFocus = false,
+    defaultValue, onValueChange = emptyFn, validationState,
+    name = generateGuid(),
+    size = ElementSize.Normal, style,
+    placeholder,
+    readonly = false, disabled = false,
+    loading = false, fixed = false, autoFocus = false,
     rows,
+    onBlur,
 
     className, title, data,
     hint,
@@ -53,6 +55,8 @@ const MultilineWithoutLabel: FC<MultilineProps> = ({
                     name={name}
                     rows={rows}
                     onBlur={onBlur}
+                    readOnly={readonly}
+                    disabled={disabled}
                     onChange={onChange}
                     autoFocus={autoFocus}
                     className={elClassName}
