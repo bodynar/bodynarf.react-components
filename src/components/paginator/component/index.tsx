@@ -2,7 +2,7 @@ import { useCallback, useMemo, MouseEvent, FC } from "react";
 
 import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
 
-import { getPositionClassName, mapDataAttributes } from "@bbr/utils";
+import { getPositionClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import { ElementPosition, ElementSize } from "@bbr/types";
 
 import { PaginatorProps } from "../..";
@@ -55,7 +55,7 @@ const Paginator: FC<PaginatorProps> = ({
         className,
         getPositionClassName(position),
         rounded ? "is-rounded" : "",
-        size === ElementSize.Normal ? "" : `is-${size}`,
+        getSizeClassName(size),
     ]);
 
     const dataAttributes = isNullOrUndefined(data)

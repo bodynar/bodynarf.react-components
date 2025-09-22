@@ -3,7 +3,7 @@ import { ChangeEvent, FC } from "react";
 import { getClassName, getFontColorFromString, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementPosition, BaseInputElementProps } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import InternalHint from "@bbr/internalComponent/hint";
 
 import { ColorPickerCssProperties, ColorPickerPreviewConfig } from "../..";
@@ -101,7 +101,7 @@ const PickerWithPreview: FC<ColorPickerControlProps> = ({
         "bbr-color-picker__preview",
         "button",
         "is-outlined",
-        isNullOrUndefined(size) ? "" : `is-${size}`
+        getSizeClassName(size)
     ]);
 
     const color = getFontColorFromString(value);

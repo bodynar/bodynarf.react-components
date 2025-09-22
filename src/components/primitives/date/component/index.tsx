@@ -3,7 +3,7 @@ import { ChangeEvent, FC, useCallback } from "react";
 import { emptyFn, generateGuid, getClassName, isNullOrUndefined, isStringEmpty } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import InternalHint from "@bbr/components/internal/hint";
 
@@ -36,7 +36,7 @@ const DatePicker: FC<DateProps> = ({
 
     const elClassName = getClassName([
         className,
-        size === ElementSize.Normal ? "" : `is-${size}`,
+        getSizeClassName(size, ElementSize.Normal),
         getStyleClassName(style, validationState),
         rounded ? "is-rounded" : "",
         "input",

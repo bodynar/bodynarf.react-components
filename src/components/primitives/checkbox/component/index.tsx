@@ -3,7 +3,7 @@ import { ChangeEvent, FC, useCallback } from "react";
 import { emptyFn, generateGuid, getClassName, isNullish, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 
 import "./style.scss";
@@ -34,9 +34,9 @@ const CheckBox: FC<CheckBoxProps> = ({
         className,
         hasBackgroundColor ? "has-background-color" : "",
         fixBackgroundColor && hasBackgroundColor ? "m-has-background-color" : "",
-        size === ElementSize.Normal ? "" : `is-${size}`,
+        getSizeClassName(size, ElementSize.Normal),
         rounded ? "is-circle" : "",
-        isNullOrUndefined(style) ? "" : `is-${style}`,
+        getElementColorClassName(style),
         block ? "is-block" : "",
         withoutBorder ? "has-no-border" : "",
     ]);

@@ -3,7 +3,7 @@ import { ChangeEvent, FC, useCallback, useState } from "react";
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import Button, { ButtonStyle } from "@bbr/components/button";
 
 import "./style.scss";
@@ -39,7 +39,7 @@ const Search: FC<SearchProps> = ({
         "bbr-search",
         "control",
         className,
-        `is-${size}`,
+        getSizeClassName(size),
         isLoading ? "is-loading" : "",
         searchType === "byButton" ? "is-expanded" : "",
     ]);
@@ -47,7 +47,7 @@ const Search: FC<SearchProps> = ({
     const inputClassName: string = getClassName([
         "input",
         "is-unselectable",
-        `is-${size}`,
+        getSizeClassName(size),
         rounded ? "is-rounded" : "",
     ]);
 

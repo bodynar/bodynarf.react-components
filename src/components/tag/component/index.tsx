@@ -3,7 +3,7 @@ import { FC } from "react";
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementColor, ElementSize } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 
 import { TagProps } from "..";
 
@@ -26,11 +26,11 @@ const Tag: FC<TagProps> = ({
         "bbr-tag",
         "tag",
         className,
-        style === ElementColor.Default ? "" : `is-${style}`,
+        getElementColorClassName(style),
         !isNullOrUndefined(customColor) ? "bbr-tag--custom" : "",
         lightColor && isNullOrUndefined(customColor) ? "is-light" : "",
         rounded ? "is-rounded" : "",
-        size === ElementSize.Normal ? "" : `is-${size}`,
+        getSizeClassName(size, ElementSize.Normal),
         isNullOrUndefined(onClick) ? "" : "bbr-tag--clickable",
     ]);
 

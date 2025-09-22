@@ -2,6 +2,8 @@ import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
 
 import { generateGuid, getClassName, hexToRgb, isNullOrUndefined, rgbToHex, whiteHex } from "@bodynarf/utils";
 
+import { getSizeClassName } from "@bbr/utils";
+
 import { ColorPickerProps } from "../..";
 import ColorPickerControl from "../picker";
 
@@ -36,7 +38,7 @@ const ColorPickerWithoutLabel: FC<ColorPickerProps> = ({
     const elClassName = getClassName([
         className,
         rounded ? "is-rounded" : "",
-        isNullOrUndefined(size) ? "" : `is-${size}`,
+        getSizeClassName(size),
         "input",
     ]);
 

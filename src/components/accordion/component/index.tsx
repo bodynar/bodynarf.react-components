@@ -3,7 +3,7 @@ import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { emptyFn, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
 import "./style.scss";
@@ -40,8 +40,8 @@ const Accordion: FC<AccordionProps> = ({
     const elClassName = getClassName([
         "bbr-accordion",
         "message",
-        isNullOrUndefined(style) ? "" : `is-${style}`,
-        isNullOrUndefined(size) ? "" : `is-${size}`,
+        getElementColorClassName(style),
+        getSizeClassName(size),
         className,
     ]);
 

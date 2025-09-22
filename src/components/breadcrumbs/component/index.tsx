@@ -3,7 +3,7 @@ import { FC, ReactNode } from "react";
 
 import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
-import { getPositionClassName, mapDataAttributes } from "@bbr/utils";
+import { getPositionClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import { ElementIcon, ElementPosition, ElementSize } from "@bbr/types";
 import Icon from "@bbr/components/icon";
 
@@ -30,7 +30,7 @@ const BreadCrumbs: FC<BreadcrumbsProps> = ({
         "bbr-breadcrumbs",
         "breadcrumb",
         className,
-        size === ElementSize.Normal ? undefined : `is-${size}`,
+        getSizeClassName(size),
         `has-${separator}-separator`,
         getPositionClassName(position),
     ]);

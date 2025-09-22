@@ -3,7 +3,7 @@ import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
 import { generateGuid, getClassName, hexToRgb, isNullOrUndefined, rgbToHex, whiteHex } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { getStyleClassName } from "@bbr/utils";
+import { getSizeClassName, getStyleClassName } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 
 import { ColorPickerProps } from "../..";
@@ -42,7 +42,7 @@ const ColorPickerWithLabel: FC<ColorPickerProps> = ({
         className,
         rounded ? "is-rounded" : "",
         getStyleClassName(undefined, validationState),
-        size === ElementSize.Normal ? "" : `is-${size}`,
+        getSizeClassName(size),
         "input",
     ]);
 

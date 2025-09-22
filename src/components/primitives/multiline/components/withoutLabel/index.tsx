@@ -3,7 +3,7 @@ import { ChangeEvent, FC, useCallback } from "react";
 import { emptyFn, generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import InternalHint from "@bbr/internalComponent/hint";
 
 import { MultilineProps } from "../..";
@@ -29,7 +29,7 @@ const MultilineWithoutLabel: FC<MultilineProps> = ({
 
     const elClassName = getClassName([
         className,
-        size === ElementSize.Normal ? "" : `is-${size}`,
+        getSizeClassName(size, ElementSize.Normal),
         getStyleClassName(style, validationState),
         "textarea",
         fixed ? "has-fixed-size" : "",
