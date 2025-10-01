@@ -8,12 +8,15 @@ import tseslint from "typescript-eslint";
 import pluginImport from "eslint-plugin-import";
 import pluginReact from "eslint-plugin-react";
 
+import customRules from "./eslint-rules/index.js";
+
 export default tseslint.config([
 	globalIgnores(["dist"]),
 	{
 		files: ["**/*.{ts,tsx}"],
 		plugins: {
 			react: pluginReact,
+			custom: customRules,
 		},
 		extends: [
 			js.configs.recommended,
@@ -70,7 +73,18 @@ export default tseslint.config([
 			"react-hooks/rules-of-hooks": "error",
 			"react-hooks/exhaustive-deps": "error",
 			"eol-last": "warn",
-			"semi": "error"
+			"semi": "error",
+			"custom/jsx-props-per-line": ["error", {
+				"ignoreDataAttributes": false,
+				"ignoreAriaAttributes": false
+			}],
+			"custom/optional-props-last": "warn",
+			"custom/hooks-order": "warn",
+			"custom/functional-component-definition": "error",
+			"custom/no-duplicate-imports": "error",
+			"custom/no-snake-case": "error",
+			"custom/component-pascal-case": "error",
+			"custom/props-camel-case": "error",
 		},
 		settings: {
 			react: {
