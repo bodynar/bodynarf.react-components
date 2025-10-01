@@ -54,19 +54,17 @@ const ColorPickerWithLabel: FC<ColorPickerProps> = ({
         >
             <ColorPickerControl
                 id={name}
+                hint={hint}
+                data={data}
                 value={value}
+                title={title}
                 disabled={disabled}
                 autoFocus={autoFocus}
                 previewConfig={preview}
                 onValueChange={onChange}
                 defaultValue={defaultColor}
                 elementClassName={elClassName}
-
-                hint={hint}
                 validationState={validationState}
-
-                data={data}
-                title={title}
             />
         </ComponentWithLabel>
     );

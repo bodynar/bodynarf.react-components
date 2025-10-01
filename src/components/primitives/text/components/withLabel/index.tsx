@@ -17,6 +17,8 @@ const TextWithLabel: FC<TextProps> = ({
     rounded = false, loading = false, autoFocus = false,
     label, placeholder,
     onBlur,
+    onKeyDown,
+    onKeyUp,
 
     className, title, data,
     hint,
@@ -51,21 +53,21 @@ const TextWithLabel: FC<TextProps> = ({
         >
             <div className={inputContainerClassName}>
                 <input
-                    type="text"
-
                     id={name}
+                    type="text"
                     name={name}
+                    title={title}
                     onBlur={onBlur}
+                    onKeyUp={onKeyUp}
                     readOnly={readonly}
                     disabled={disabled}
                     onChange={onChange}
+                    {...dataAttributes}
+                    onKeyDown={onKeyDown}
+                    autoFocus={autoFocus}
                     className={elClassName}
                     placeholder={placeholder}
                     defaultValue={defaultValue}
-                    autoFocus={autoFocus}
-
-                    title={title}
-                    {...dataAttributes}
                 />
             </div>
             <InternalHint

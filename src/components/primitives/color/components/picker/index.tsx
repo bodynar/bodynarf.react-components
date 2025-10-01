@@ -14,6 +14,7 @@ export type ColorPickerControlProps = Omit<
     | "placeholder"
     | "rounded" | "readonly"
     | "loading" | "className"
+    | "onKeyDown" | "onKeyUp"
 > & {
     /** Current color value */
     value: string;
@@ -24,11 +25,11 @@ export type ColorPickerControlProps = Omit<
     /** Class names of control */
     elementClassName: string;
 
-    /** Handler of control value change*/
-    onValueChange: (event: ChangeEvent<HTMLInputElement>) => void;
-
     /** Preview element configuration */
     previewConfig?: ColorPickerPreviewConfig;
+
+    /** Handler of control value change*/
+    onValueChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 /** Color picker container component */
@@ -46,15 +47,14 @@ const ColorPickerControl: FC<ColorPickerControlProps> = ({
             <PickerWithPreview
                 id={id}
                 size={size}
+                data={data}
                 value={value}
+                title={title}
                 disabled={disabled}
                 defaultValue={defaultValue}
                 onValueChange={onValueChange}
                 previewConfig={previewConfig}
                 elementClassName={elementClassName}
-
-                data={data}
-                title={title}
             />
         );
     }
@@ -63,18 +63,16 @@ const ColorPickerControl: FC<ColorPickerControlProps> = ({
         <>
             <div className="control bbr-input">
                 <input
-                    type="color"
-
                     id={id}
                     name={id}
+                    {...data}
+                    type="color"
+                    title={title}
                     disabled={disabled}
                     autoFocus={autoFocus}
                     onChange={onValueChange}
                     defaultValue={defaultValue}
                     className={elementClassName}
-
-                    {...data}
-                    title={title}
                 />
             </div>
             <InternalHint
@@ -121,18 +119,16 @@ const PickerWithPreview: FC<ColorPickerControlProps> = ({
             <div className="is-flex is-flex-direction-row is-flex-wrap-nowrap is-justify-content-start">
                 <div className={controlContainerClassName}>
                     <input
-                        type="color"
-
                         id={id}
                         name={id}
+                        type="color"
+                        title={title}
                         disabled={disabled}
+                        {...dataAttributes}
                         autoFocus={autoFocus}
                         onChange={onValueChange}
                         defaultValue={defaultValue}
                         className={elementClassName}
-
-                        title={title}
-                        {...dataAttributes}
                     />
                 </div>
                 <button
@@ -167,18 +163,16 @@ const PickerWithPreview: FC<ColorPickerControlProps> = ({
             </button>
             <div className={controlContainerClassName}>
                 <input
-                    type="color"
-
                     id={id}
                     name={id}
+                    type="color"
+                    title={title}
                     disabled={disabled}
+                    {...dataAttributes}
                     autoFocus={autoFocus}
                     onChange={onValueChange}
                     defaultValue={defaultValue}
                     className={elementClassName}
-
-                    title={title}
-                    {...dataAttributes}
                 />
             </div>
             <InternalHint

@@ -18,16 +18,19 @@ const PasswordWithLabel: FC<PasswordProps> = ({
     rounded = false, loading = false, autoFocus = false,
     disabled = false, canShowPassword = false,
     label, placeholder, showPasswordIconTitle = "Show password",
+    onKeyDown,
+    onKeyUp,
 
     className, title, data,
     hint,
 }) => {
+    const [contentIsHidden, setContentIsHidden] = useState(true);
+
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
         [onValueChange]
     );
 
-    const [contentIsHidden, setContentIsHidden] = useState(true);
     const onIconClick = useCallback(() => setContentIsHidden(state => !state), [setContentIsHidden]);
 
     const elSizeClassName = size === ElementSize.Normal ? "" : "is-{0}".format(size);
@@ -59,19 +62,19 @@ const PasswordWithLabel: FC<PasswordProps> = ({
         >
             <div className={inputContainerClassName}>
                 <input
-                    type={contentIsHidden ? "password" : "text"}
-
                     id={name}
                     name={name}
+                    title={title}
+                    onKeyUp={onKeyUp}
                     disabled={disabled}
                     onChange={onChange}
+                    {...dataAttributes}
+                    onKeyDown={onKeyDown}
                     autoFocus={autoFocus}
                     className={elClassName}
                     placeholder={placeholder}
                     defaultValue={defaultValue}
-
-                    title={title}
-                    {...dataAttributes}
+                    type={contentIsHidden ? "password" : "text"}
                 />
                 {!!canShowPassword && !loading &&
                     <span

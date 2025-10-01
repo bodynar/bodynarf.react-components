@@ -57,16 +57,14 @@ const CheckBox: FC<CheckBoxProps> = ({
                 }}
             >
                 <input
-                    type="checkbox"
-
                     id={name}
                     name={name}
+                    type="checkbox"
                     disabled={disabled}
+                    {...dataAttributes}
                     onChange={onChecked}
                     className={elClassName}
                     defaultChecked={defaultValue}
-
-                    {...dataAttributes}
                 />
                 <label
                     title={title}
@@ -92,23 +90,20 @@ const CheckBox: FC<CheckBoxProps> = ({
             className="bbr-field bbr-input field mr-2"
         >
             <input
-                type="checkbox"
-
                 id={name}
                 name={name}
+                type="checkbox"
                 disabled={disabled}
+                {...dataAttributes}
                 onChange={onChecked}
                 className={elClassName}
                 defaultChecked={defaultValue}
-
-                {...dataAttributes}
             />
             <label
                 htmlFor={name}
-                className={labelClassName}
-
-                title={isEmptyLabel ? title : label?.title}
                 {...labelDataAttributes}
+                className={labelClassName}
+                title={isEmptyLabel ? title : label?.title}
             >
                 {label?.caption}
             </label>

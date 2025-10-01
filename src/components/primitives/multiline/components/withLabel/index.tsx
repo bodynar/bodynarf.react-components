@@ -19,6 +19,8 @@ const MultilineWithLabel: FC<MultilineProps> = ({
     loading = false, fixed = false, autoFocus = false,
     rows,
     onBlur,
+    onKeyDown,
+    onKeyUp,
 
     className, title, data,
     hint,
@@ -56,17 +58,18 @@ const MultilineWithLabel: FC<MultilineProps> = ({
                     id={name}
                     name={name}
                     rows={rows}
+                    title={title}
                     onBlur={onBlur}
-                    readOnly={readonly}
+                    onKeyUp={onKeyUp}
                     disabled={disabled}
                     onChange={onChange}
+                    readOnly={readonly}
+                    {...dataAttributes}
                     autoFocus={autoFocus}
+                    onKeyDown={onKeyDown}
                     className={elClassName}
                     placeholder={placeholder}
                     defaultValue={defaultValue}
-
-                    title={title}
-                    {...dataAttributes}
                 />
             </div>
             <InternalHint

@@ -1,64 +1,68 @@
 import { BaseElementProps, ElementColor, ElementSize, HintConfiguration, ValidationState, LabelConfiguration } from "@bbr/types";
+import { KeyboardElement } from "./keyboardElement";
 
 /** Base properties for input components */
-export type BaseInputElementProps<TValue> = BaseElementProps & {
-    /** Default value of input component*/
-    defaultValue?: TValue;
+export type BaseInputElementProps<TValue> =
+    & BaseElementProps
+    & KeyboardElement
+    & {
+        /** Default value of input component*/
+        defaultValue?: TValue;
 
-    /** Input element placeholder */
-    placeholder?: string;
+        /** Input element placeholder */
+        placeholder?: string;
 
-    /** Is component borders are rounded */
-    rounded?: boolean;
+        /** Is component borders are rounded */
+        rounded?: boolean;
 
-    /** Should be component disabled. Selecting is not allowed */
-    disabled?: boolean;
+        /** Should be component disabled. Selecting is not allowed */
+        disabled?: boolean;
 
-    /** Should be component int read only mode. Selecting is allowed */
-    readonly?: boolean;
+        /** Should be component int read only mode. Selecting is allowed */
+        readonly?: boolean;
 
-    /** Component size */
-    size?: ElementSize;
+        /** Component size */
+        size?: ElementSize;
 
-    /** Label configuration */
-    label?: LabelConfiguration;
+        /** Label configuration */
+        label?: LabelConfiguration;
 
-    /** Displaying loading state of component as spinner in right end of component */
-    loading?: boolean;
+        /** Displaying loading state of component as spinner in right end of component */
+        loading?: boolean;
 
-    /** Style. Colors the border */
-    style?: ElementColor;
+        /** Style. Colors the border */
+        style?: ElementColor;
 
-    /** Name of element. Required for form elements */
-    name?: string;
+        /** Name of element. Required for form elements */
+        name?: string;
 
-    /** Current validation state */
-    validationState?: ValidationState;
+        /** Current validation state */
+        validationState?: ValidationState;
 
-    /**
-     * Field hint configuration.
-     * Provides additional information to user to help fill the field
-     *
-     * (!) Hint will be overridden by the validation state, if specified
-     */
-    hint?: HintConfiguration;
+        /**
+         * Field hint configuration.
+         * Provides additional information to user to help fill the field
+         *
+         * (!) Hint will be overridden by the validation state, if specified
+         */
+        hint?: HintConfiguration;
 
-    /**
-     * Focus on component after render.
-     *
-     * !NOTE! Only 1 element on page can have autofocus flag
-     */
-    autoFocus?: boolean;
-}
+        /**
+         * Focus on component after render.
+         *
+         * !NOTE! Only 1 element on page can have autofocus flag
+         */
+        autoFocus?: boolean;
+    };
 
 /** Base properties for input components with nullable value */
 export type BaseNullableInputElementProps<TValue> = BaseInputElementProps<TValue> & {
     /** Value change handler. Changed value must be stored outside of component */
     onValueChange?: (value?: TValue) => void;
-}
+};
 
 /** Base properties for input components with not nullable value */
 export type BaseNotNullableInputElementProps<TValue> = BaseInputElementProps<TValue> & {
     /** Value change handler. Changed value must be stored outside of component */
     onValueChange?: (value: TValue) => void;
-}
+};
