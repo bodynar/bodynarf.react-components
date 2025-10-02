@@ -2,7 +2,7 @@
     border: 1px solid transparent;
     transition: border-color 0.15s ease-in-out;
 
-    &--clickable {
+    &.is-clickable {
         cursor: pointer;
 
         &.is-light {

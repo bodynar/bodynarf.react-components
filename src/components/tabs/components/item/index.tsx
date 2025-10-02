@@ -37,6 +37,7 @@ const TabItem: FC<TabItemProps> = ({
     return (
         <li
             key={item.id}
+
             className={className}
             data-item-id={item.id}
         >
@@ -65,6 +66,7 @@ const TabItemWithIcon: FC<TabItemProps> = ({
         return (
             <li
                 key={item.id}
+
                 className={className}
                 data-item-id={item.id}
             >
@@ -72,6 +74,7 @@ const TabItemWithIcon: FC<TabItemProps> = ({
                     <span>
                         {item.caption}
                     </span>
+
                     <Icon {...iconConfig} />
                 </a>
             </li>
@@ -81,11 +84,13 @@ const TabItemWithIcon: FC<TabItemProps> = ({
     return (
         <li
             key={item.id}
+
             className={className}
             data-item-id={item.id}
         >
             <a>
                 <Icon {...iconConfig} />
+
                 <span>
                     {item.caption}
                 </span>

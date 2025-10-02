@@ -37,12 +37,11 @@ const ButtonWithIcon: FC<ButtonWithIconProps> = ({
         return (
             <button
                 type="button"
+                title={title}
                 onClick={onClick}
                 disabled={disabled}
-                className={className}
-
-                title={title}
                 {...dataAttributes}
+                className={className}
             >
                 {caption}
 
@@ -57,12 +56,11 @@ const ButtonWithIcon: FC<ButtonWithIconProps> = ({
     return (
         <button
             type="button"
+            title={title}
             onClick={onClick}
             disabled={disabled}
-            className={className}
-
-            title={title}
             {...dataAttributes}
+            className={className}
         >
             <Icon
                 {...icon}

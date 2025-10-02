@@ -6,7 +6,6 @@ export type CheckBoxProps = Omit<BaseNotNullableInputElementProps<boolean>,
     | "loading" | "placeholder"
     | "hint" | "autofocus"
     | "label"
-    | "onKeyDown" | "onKeyUp"
 > & {
     /** Label configuration */
     label?: Omit<LabelConfiguration, "horizontal"> & Partial<Pick<LabelConfiguration, "horizontal">>;

@@ -63,27 +63,26 @@ const Search: FC<SearchProps> = ({
                 <div className={elClassName}>
                     <input
                         type="search"
+                        title={title}
                         disabled={disabled}
                         onChange={onChange}
+                        {...dataAttributes}
                         placeholder={caption}
                         autoFocus={autoFocus}
                         defaultValue={searchValue}
                         className={inputClassName}
-
-                        title={title}
-                        {...dataAttributes}
                     />
                 </div>
                 <div className="control">
                     <Button
                         size={size}
+                        rounded={rounded}
                         disabled={disabled}
                         isLoading={isLoading}
                         style={ButtonStyle.Info}
                         title={searchButtonTitle}
                         caption={searchButtonCaption}
                         onClick={onSearchButtonClick}
-                        className={rounded ? "is-rounded" : undefined}
                     />
                 </div>
             </div>
@@ -96,15 +95,14 @@ const Search: FC<SearchProps> = ({
         >
             <input
                 type="search"
+                title={title}
                 disabled={disabled}
                 onChange={onChange}
+                {...dataAttributes}
                 placeholder={caption}
                 autoFocus={autoFocus}
                 defaultValue={searchValue}
                 className={inputClassName}
-
-                title={title}
-                {...dataAttributes}
             />
         </div>
     );

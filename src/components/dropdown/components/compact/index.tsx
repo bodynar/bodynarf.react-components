@@ -39,6 +39,14 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
     const [searchValue, setSearchValue] = useState<string>("");
     const [isOpenUp, setIsOpenUp] = useState<boolean>(false);
 
+
+    const filteredItems = useMemo(
+        () =>
+            items.filter(({ displayValue }) =>
+                displayValue.toLocaleLowerCase().includes(searchValue!.toLocaleLowerCase())),
+        [items, searchValue]
+    );
+
     const onItemClick = useCallback(
         (event: React.MouseEvent<HTMLLIElement>) => {
             if (disabled) {
@@ -78,7 +86,6 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
         const spaceBelow = window.innerHeight - rect.bottom;
         const spaceAbove = rect.top;
 
-        // Default dropdown height estimation (can be adjusted)
         const estimatedHeight =
             Math.min(items.length, 8) * 33 // 33 = 21px item height + 12px padding, 8 - max items in list
             + 20; // 16px - padding top-bottom + 4px margin-top
@@ -126,6 +133,7 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
         hideOnOuterClick,
     );
 
+
     const classNames: string = getClassName([
         "bbr-dropdown",
         className,
@@ -138,12 +146,6 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
     ]);
 
     const labelComponentClassName = getStyleClassName(undefined, validationState);
-    const filteredItems = useMemo(
-        () =>
-            items.filter(({ displayValue }) =>
-                displayValue.toLocaleLowerCase().includes(searchValue!.toLocaleLowerCase())),
-        [items, searchValue]
-    );
 
     const dataAttributes = isNullish(data)
         ? undefined
@@ -152,13 +154,13 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
     return (
         <>
             <div
-                ref={containerRef}
                 key={id}
-                className={classNames}
-                data-dropdown-id={id}
 
                 title={title}
+                ref={containerRef}
                 {...dataAttributes}
+                data-dropdown-id={id}
+                className={classNames}
             >
                 <DropdownLabel
                     selectedItem={value}
@@ -173,28 +175,31 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
                 />
                 <div className="dropdown-menu">
                     {filteredItems.length > 0
-                        ?
-                        <ul
-                            className="dropdown-content"
-                            style={{ maxHeight: listMaxHeight }}
-                        >
-                            {filteredItems.map(item =>
-                                <DropdownItem
-                                    key={item.id}
+                        ? (
+                            <ul
+                                className="dropdown-content"
+                                style={{ maxHeight: listMaxHeight }}
+                            >
+                                {filteredItems.map(item =>
+                                    <DropdownItem
+                                        key={item.id}
 
-                                    item={item}
-                                    onClick={onItemClick}
-                                    selected={value?.value === item.value}
-                                />
-                            )}
-                        </ul>
-                        :
-                        <span className="dropdown-content dropdown-item is-italic has-text-grey">
-                            {isNullOrEmpty(searchValue) ? noDataText : noDataByQuery}
-                        </span>
+                                        item={item}
+                                        onClick={onItemClick}
+                                        selected={value?.value === item.value}
+                                    />
+                                )}
+                            </ul>
+                        )
+                        : (
+                            <span className="dropdown-content dropdown-item is-italic has-text-grey">
+                                {isNullOrEmpty(searchValue) ? noDataText : noDataByQuery}
+                            </span>
+                        )
                     }
                 </div>
             </div>
+
             <InternalHint
                 hint={hint}
                 validationState={validationState}

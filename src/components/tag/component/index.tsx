@@ -31,7 +31,7 @@ const Tag: FC<TagProps> = ({
         lightColor && isNullOrUndefined(customColor) ? "is-light" : "",
         rounded ? "is-rounded" : "",
         getSizeClassName(size, ElementSize.Normal),
-        isNullOrUndefined(onClick) ? "" : "bbr-tag--clickable",
+        isNullOrUndefined(onClick) ? "" : "is-clickable",
     ]);
 
     const dataAttributes = isNullOrUndefined(data)
@@ -40,7 +40,11 @@ const Tag: FC<TagProps> = ({
 
     return (
         <span
+            title={title}
+            onClick={onClick}
+            {...dataAttributes}
             className={elClassName}
+
             style={isNullOrUndefined(customColor)
                 ? undefined
                 : {
@@ -48,11 +52,6 @@ const Tag: FC<TagProps> = ({
                     backgroundColor: customColor?.backgroundColor,
                 }
             }
-
-            title={title}
-            onClick={onClick}
-
-            {...dataAttributes}
         >
             {content}
         </span>

@@ -44,10 +44,9 @@ const Table: FC<TableProps> = ({
 
     return (
         <table
-            className={elClassName}
-
             title={title}
             {...dataAttributes}
+            className={elClassName}
         >
             <thead>
                 <tr>
@@ -62,6 +61,7 @@ const Table: FC<TableProps> = ({
                     )}
                 </tr>
             </thead>
+
             <tbody>
                 {children}
             </tbody>

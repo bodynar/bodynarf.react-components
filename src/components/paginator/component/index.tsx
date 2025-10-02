@@ -23,6 +23,11 @@ const Paginator: FC<PaginatorProps> = ({
         throw new Error(`Current page "${currentPage}" must be less than amount of pages "${count}"`);
     }
 
+    const pageNumbers = useMemo(() => generatePageNumbers(currentPage, count, nearPagesCount), [currentPage, count, nearPagesCount]);
+
+    const canGoBack = useMemo(() => currentPage > 1, [currentPage]);
+    const canGoForward = useMemo(() => currentPage < count, [currentPage, count]);
+
     const pageChange = useCallback(
         (event: MouseEvent<HTMLElement>) => {
             const target = event.target as HTMLElement;
@@ -39,11 +44,6 @@ const Paginator: FC<PaginatorProps> = ({
                 onPageChange(page);
             }
         }, [onPageChange, currentPage, count]);
-
-    const pageNumbers = useMemo(() => generatePageNumbers(currentPage, count, nearPagesCount), [currentPage, count, nearPagesCount]);
-
-    const canGoBack = useMemo(() => currentPage > 1, [currentPage]);
-    const canGoForward = useMemo(() => currentPage < count, [currentPage, count]);
 
     if (pageNumbers.length <= 1) {
         return null;
@@ -64,12 +64,11 @@ const Paginator: FC<PaginatorProps> = ({
 
     return (
         <nav
+            title={title}
             role="navigation"
+            {...dataAttributes}
             className={classNames}
             aria-label="pagination"
-
-            title={title}
-            {...dataAttributes}
         >
             {!!showNextButtons &&
                 <>

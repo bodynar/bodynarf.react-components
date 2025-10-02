@@ -1,7 +1,7 @@
 import { BaseElementProps, ElementColor, ElementSize } from "@bbr/types";
 
 /** Accordion panel props type */
-export interface AccordionProps extends BaseElementProps {
+export type AccordionProps = BaseElementProps & {
     /** Content that should be collapsed inside */
     children: React.ReactNode;
 
@@ -19,4 +19,4 @@ export interface AccordionProps extends BaseElementProps {
 
     /** Extra handler for toggling visibility. Doesn't affect component logic */
     onToggle?: (collapsed: boolean) => void;
-}
+};

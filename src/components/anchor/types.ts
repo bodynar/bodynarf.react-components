@@ -2,7 +2,7 @@ import { BaseElementProps, ElementIcon } from "@bbr/types";
 
 /**
  * Anchor component props type
- * @deprecated Since v1.2.0. Use html element with custom formatting
+ * @deprecated Since v1.12.0. Use html element with custom formatting
  */
 export interface AnchorProps extends BaseElementProps {
     /** Configuration od inner icon */

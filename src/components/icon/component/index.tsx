@@ -33,11 +33,10 @@ const Icon: FC<IconProps> = ({
 
     return (
         <i
-            className={classNames}
-
             title={title}
             onClick={onClick}
             {...dataAttributes}
+            className={classNames}
         />
     );
 };

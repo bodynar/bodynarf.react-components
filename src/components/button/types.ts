@@ -4,6 +4,9 @@ export type ButtonProps =
     & BaseElementProps
     & ClickableElement
     & {
+        /** Style */
+        style: ButtonStyle;
+
         /** Button displaying text */
         caption?: string;
 
@@ -12,9 +15,6 @@ export type ButtonProps =
          * @deprecated Use `style` prop instead
          */
         type?: ButtonType;
-
-        /** Style */
-        style: ButtonStyle;
 
         /** Configuration of inner icon */
         icon?: ElementIcon;

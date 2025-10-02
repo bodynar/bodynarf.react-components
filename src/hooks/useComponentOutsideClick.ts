@@ -33,6 +33,7 @@ export const useComponentOutsideClick = (
                     clickHandleChange();
                 }
             }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [clickHandleCondition, selector, clickHandleChange, dependencies]);
 
     useEffect(() => {

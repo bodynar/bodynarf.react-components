@@ -51,23 +51,23 @@ const Accordion: FC<AccordionProps> = ({
 
     return (
         <article
+            {...dataAttributes}
             className={elClassName}
             aria-expanded={isExpanded}
-
-            {...dataAttributes}
         >
             <div
-                className="message-header is-unselectable"
                 onClick={toggleCollapse}
+                className="message-header is-unselectable"
             >
                 <span title={title}>
                     {caption}
                 </span>
                 <Icon
-                    name="arrow-down"
                     size={size}
+                    name="arrow-down"
                 />
             </div>
+
             <div
                 className="message-body"
                 ref={expandablePanelRef}

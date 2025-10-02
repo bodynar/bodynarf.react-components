@@ -21,12 +21,11 @@ const SimpleButton: FC<SimpleButtonProps> = ({
     return (
         <button
             type="button"
+            title={title}
             onClick={onClick}
             disabled={disabled}
-            className={className}
-
-            title={title}
             {...dataAttributes}
+            className={className}
         >
             {caption}
         </button>

@@ -39,9 +39,9 @@ const Progress: FC<ProgressProps> = ({
         return (
             <div>
                 <div
-                    className={elClassName}
                     title={title}
                     {...dataAttributes}
+                    className={elClassName}
                 />
                 {!!showValue && (
                     <div className="bbr-progress-value">
@@ -73,6 +73,11 @@ const Progress: FC<ProgressProps> = ({
         <div>
             {animated ? (
                 <div
+                    title={title}
+                    data-min={min}
+                    data-max={max}
+                    {...dataAttributes}
+                    data-value={progressValue}
                     className={getClassName([
                         "bbr-progress",
                         "bbr-progress--custom",
@@ -81,11 +86,6 @@ const Progress: FC<ProgressProps> = ({
                         getElementColorClassName(color),
                         getSizeClassName(size),
                     ])}
-                    title={title}
-                    {...dataAttributes}
-                    data-min={min}
-                    data-max={max}
-                    data-value={progressValue}
                 >
                     <div
                         className="bbr-progress-fill"
@@ -96,12 +96,12 @@ const Progress: FC<ProgressProps> = ({
                 </div>
             ) : (
                 <progress
-                    className={elClassName}
-                    value={progressValue}
                     max={max}
                     title={title}
-                    {...dataAttributes}
                     data-min={min}
+                    {...dataAttributes}
+                    value={progressValue}
+                    className={elClassName}
                 />
             )}
             {!!showValue && (

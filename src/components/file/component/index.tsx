@@ -76,36 +76,31 @@ const FileUpload: FC<FileUploadProps> = ({
                 &&
                 <Icon
                     name="x-lg"
-                    className="file-clear"
-
                     size={size}
+                    className="file-clear"
                     onClick={onClearClick}
                     title={clearSelectionTitle}
                 />
             }
             <label className="file-label">
                 <input
-                    type="file"
-                    className="file-input"
-
-                    accept={accept}
-
                     id={name}
+                    type="file"
                     name={name}
+                    title={title}
+                    ref={inputRef}
+                    accept={accept}
                     disabled={disabled}
                     onChange={onChange}
-                    placeholder={placeholder}
-
-                    title={title}
                     {...dataAttributes}
-
-                    ref={inputRef}
+                    className="file-input"
+                    placeholder={placeholder}
                 />
                 <span className="file-cta">
                     <span className="file-icon">
                         <Icon
-                            name="upload"
                             size={size}
+                            name="upload"
                         />
                     </span>
                     <span className="file-label">
@@ -126,9 +121,8 @@ const FileUpload: FC<FileUploadProps> = ({
                 &&
                 <Icon
                     name="x-lg"
-                    className="file-clear"
-
                     size={size}
+                    className="file-clear"
                     onClick={onClearClick}
                     title={clearSelectionTitle}
                 />

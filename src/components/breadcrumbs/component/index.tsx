@@ -9,7 +9,7 @@ import Icon from "@bbr/components/icon";
 
 import { BreadCrumb, BreadcrumbsProps } from "..";
 
-const defaultElementGenerator: (bc: BreadCrumb) => ReactNode = ((bc) => <BreadCrumbItem item={bc} />);
+const DefaultElementGenerator: (bc: BreadCrumb) => ReactNode = ((bc) => <BreadCrumbItem item={bc} />);
 
 /**
  * Breadcrumbs navigation panel
@@ -18,7 +18,7 @@ const defaultElementGenerator: (bc: BreadCrumb) => ReactNode = ((bc) => <BreadCr
 const BreadCrumbs: FC<BreadcrumbsProps> = ({
     items,
     position = ElementPosition.Left, size = ElementSize.Normal, separator = "arrow",
-    elementGenerator = defaultElementGenerator,
+    elementGenerator = DefaultElementGenerator,
 
     className, title, data,
 }) => {
@@ -41,16 +41,16 @@ const BreadCrumbs: FC<BreadcrumbsProps> = ({
 
     return (
         <nav
-            className={elClassName}
-            aria-label="breadcrumbs"
-
             title={title}
             {...dataAttributes}
+            className={elClassName}
+            aria-label="breadcrumbs"
         >
             <ul>
                 {items.map((breadCrumb, i, a) =>
                     <li
                         key={breadCrumb.href ?? breadCrumb.path}
+
                         className={i === a.length - 1 ? "is-active" : undefined}
                     >
                         {elementGenerator(breadCrumb)}

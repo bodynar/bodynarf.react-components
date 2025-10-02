@@ -42,9 +42,6 @@ export interface TabsProps extends BaseElementProps {
     /** Tabs */
     items: Array<TabItem>;
 
-    /** Handler of changing current active item */
-    onActiveItemChange: (item: TabItem) => void;
-
     /**
      * Active item by default.
      * If not set - first item will be active
@@ -65,4 +62,7 @@ export interface TabsProps extends BaseElementProps {
 
     /** Is component tabs should take all width of parent */
     fullWidth?: boolean;
+
+    /** Handler of changing current active item */
+    onActiveItemChange: (item: TabItem) => void;
 }
