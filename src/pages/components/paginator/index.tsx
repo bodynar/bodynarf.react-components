@@ -1,7 +1,6 @@
 import { FC, useCallback, useState } from "react";
 
-import { ElementPosition } from "@bodynarf/react.components";
-import PaginatorComponent from "@bodynarf/react.components/components/paginator";
+import { ElementPosition, Paginator as PaginatorComponent } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";

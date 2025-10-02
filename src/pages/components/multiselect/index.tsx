@@ -1,8 +1,7 @@
 import { FC, useCallback, useState } from "react";
 
 import { emptyFn } from "@bodynarf/utils";
-import { ElementColor } from "@bodynarf/react.components";
-import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";
+import { ElementColor, Multiselect as MultiselectComponent, MultiselectItem } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";

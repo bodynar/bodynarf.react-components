@@ -1,7 +1,6 @@
 import { FC, ReactNode } from "react";
 
-import { ElementPosition } from "@bodynarf/react.components";
-import Dropdown from "@bodynarf/react.components/components/dropdown";
+import { Dropdown, ElementPosition } from "@bodynarf/react.components";
 
 import { Positions, usePositionSelection } from "../..";
 

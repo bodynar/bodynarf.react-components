@@ -1,8 +1,7 @@
 import { FC, useCallback, useState } from "react";
 
 import { emptyFn, isNullish } from "@bodynarf/utils";
-import { ElementFloatPosition, ElementPosition, SelectableItem } from "@bodynarf/react.components";
-import FileComponent from "@bodynarf/react.components/components/file";
+import { ElementFloatPosition, ElementPosition, SelectableItem, File as FileComponent, Icon } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -10,7 +9,6 @@ import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import CodeExample from "@app/sharedComponents/codeExample";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
 import ComponentEnumCase from "@app/sharedComponents/enumSelectionCase";
-import Icon from "@bodynarf/react.components/components/icon";
 
 const floatPositions: Array<ElementFloatPosition> = [
     ElementPosition.Left,
@@ -46,7 +44,7 @@ const File: FC = () => {
 
             <ComponentUseCase
                 caption="Minimal use"
-                description="To use the component, it is required to specify the placeholder prop and a handler for the file selection event"
+                description="To use the component, you need to specify the placeholder prop and a handler for the file selection event"
                 code={
                     <CodeExample
                         code={[

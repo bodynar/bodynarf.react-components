@@ -1,7 +1,6 @@
 import { FC, ReactNode } from "react";
 
-import { ElementPosition, SelectableItem } from "@bodynarf/react.components";
-import BreadcrumbsComponent, { BreadCrumb } from "@bodynarf/react.components/components/breadcrumbs";
+import { ElementPosition, SelectableItem, Breadcrumbs as BreadcrumbsComponent, BreadCrumb } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -46,11 +45,12 @@ const Breadcrumbs: FC = () => {
                             `import BreadcrumbsComponent from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
                             "/* ... */",
-                            "const items = [];",
+                            "const items = [",
                             '    { caption: "Source", href: "#/source", },',
                             '    { caption: "Subfolder", href: "#/subfolder", },',
                             '    { caption: "Target", href: "#/target", },',
                             '    { caption: "Current", href: "#/current", },',
+                            "];",
                             "/* ... */",
                             "",
                             '<BreadcrumbsComponent items={items} />',

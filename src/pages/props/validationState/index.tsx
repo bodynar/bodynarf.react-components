@@ -1,5 +1,4 @@
-import { SelectableItem, ValidationStatus } from "@bodynarf/react.components";
-import TextComponent from "@bodynarf/react.components/components/primitives/text";
+import { SelectableItem, ValidationStatus, Text as TextComponent } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";

@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import { isNullOrEmpty, isUndefined } from "@bodynarf/utils";
 
-import Icon from "@bodynarf/react.components/components/icon";
+import { Icon } from "@bodynarf/react.components";
 
 /** Title demo component props type */
 type DemoComponentTitleInfoMessageProps = {

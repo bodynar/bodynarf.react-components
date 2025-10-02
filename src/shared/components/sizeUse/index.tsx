@@ -1,7 +1,6 @@
 import { FC, ReactNode } from "react";
 
-import { ElementSize } from "@bodynarf/react.components";
-import Dropdown from "@bodynarf/react.components/components/dropdown";
+import { ElementSize, Dropdown } from "@bodynarf/react.components";
 
 import { Sizes, useSizeSelection } from "../..";
 

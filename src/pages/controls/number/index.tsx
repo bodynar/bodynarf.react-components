@@ -1,7 +1,6 @@
 import { FC, useCallback, useState } from "react";
 
-import Icon from "@bodynarf/react.components/components/icon";
-import NumberComponent from "@bodynarf/react.components/components/primitives/number";
+import { Icon, NumberInput as NumberComponent } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -37,7 +36,7 @@ const Number: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Number"
-                description="Компонент для ввода числового значения"
+                description="Component for entering numeric values"
             />
 
             <div className="block">

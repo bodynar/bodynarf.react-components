@@ -56,10 +56,10 @@ export const useGenericSelection = <TValue>(lookupValues: Array<SelectableItem>)
                 return;
             }
 
-            setItem(item!);
+            setItem(item);
         }, []);
 
-    const value = item!.value as TValue;
+    const value = item.value as TValue;
 
     return {
         selectedValue: item,

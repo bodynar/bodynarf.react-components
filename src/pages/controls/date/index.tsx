@@ -1,7 +1,6 @@
 import { FC, useCallback, useState } from "react";
 
-import DateComponent from "@bodynarf/react.components/components/primitives/date";
-import Icon from "@bodynarf/react.components/components/icon";
+import { Icon, Date as DateComponent } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";

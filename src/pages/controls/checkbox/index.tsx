@@ -1,8 +1,6 @@
 import { FC, useCallback, useState } from "react";
 
-import { ElementColor } from "@bodynarf/react.components";
-import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";
-import Icon from "@bodynarf/react.components/components/icon";
+import { Icon, ElementColor, Checkbox as CheckboxComponent } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";

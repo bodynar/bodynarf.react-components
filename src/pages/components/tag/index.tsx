@@ -1,7 +1,6 @@
 import { FC, useCallback, useState } from "react";
 
-import { ElementColor, ElementSize, SelectableItem } from "@bodynarf/react.components";
-import TagComponent from "@bodynarf/react.components/components/tag";
+import { ElementColor, ElementSize, SelectableItem, Tag as TagComponent } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
@@ -42,7 +41,7 @@ const Tag: FC = () => {
             <DemoComponentTitleInfoMessage
                 name="Tag"
                 baseTypeName="BaseElementProps"
-                description="A component for displaying information about a category \ tag"
+                description="A component for displaying information about a category or tag"
             />
 
             <ComponentUseCase

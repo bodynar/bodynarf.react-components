@@ -1,7 +1,7 @@
 import { FC, useCallback, useState } from "react";
+
 import { emptyFn } from "@bodynarf/utils";
-import TextComponent from "@bodynarf/react.components/components/primitives/text";
-import Icon from "@bodynarf/react.components/components/icon";
+import { Text as TextComponent, Icon } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -36,8 +36,8 @@ const Text: FC = () => {
     return (
         <section>
             <DemoComponentTitleInfoMessage
-                name="Number"
-                description="Component for entering numeric values"
+                name="Text"
+                description="Component for entering single line text values"
             />
 
             <div className="block">

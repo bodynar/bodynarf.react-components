@@ -1,7 +1,6 @@
 import { FC, useCallback, useState, } from "react";
 
-import { ElementPosition, SelectableItem } from "@bodynarf/react.components";
-import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";
+import { ElementPosition, SelectableItem, Button as ButtonComponent, ButtonStyle } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -317,7 +316,7 @@ const Button: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="static"
-                description="The button can be made static (inactive with cleared type color)"
+                description="The button can be made static (inactive with cleared colors)"
                 code={
                     <CodeExample
                         code={[

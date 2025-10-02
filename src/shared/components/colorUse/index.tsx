@@ -1,7 +1,6 @@
 import { FC, ReactNode } from "react";
 
-import { ElementColor } from "@bodynarf/react.components";
-import Dropdown from "@bodynarf/react.components/components/dropdown";
+import { Dropdown, ElementColor } from "@bodynarf/react.components";
 
 import { Colors, useColorSelection } from "../..";
 

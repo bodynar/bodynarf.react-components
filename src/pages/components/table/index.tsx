@@ -1,6 +1,6 @@
 import { FC, useCallback, useState } from "react";
 
-import TableComponent, { TableHeading } from "@bodynarf/react.components/components/table";
+import { Table as TableComponent, TableHeading } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";

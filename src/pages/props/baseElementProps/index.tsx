@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import IconComponent from "@bodynarf/react.components/components/icon";
+import { Icon as IconComponent } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import CodeExample from "@app/sharedComponents/codeExample";

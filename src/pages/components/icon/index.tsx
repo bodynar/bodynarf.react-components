@@ -1,6 +1,6 @@
 import { FC, useCallback, useState } from "react";
 
-import IconComponent from "@bodynarf/react.components/components/icon";
+import { Icon as IconComponent } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";

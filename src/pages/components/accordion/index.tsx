@@ -1,6 +1,6 @@
 import { FC, useCallback, useState } from "react";
 
-import AccordionComponent from "@bodynarf/react.components/components/accordion";
+import { Accordion as AccordionComponent } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -26,8 +26,7 @@ const Accordion: FC = () => {
             <DemoComponentTitleInfoMessage
                 name="Accordion"
                 baseTypeName="BaseElementProps"
-                description="Accordion is a collapsible container component that helps organize content into sections. Each accordion has a header (caption) that can be clicked to expand or collapse its content.
-It supports different sizes, colors, and can be controlled programmatically through props"
+                description="Accordion is a collapsible container component that helps organize content into sections. Each accordion has a header (caption) that can be clicked to expand or collapse its content. It supports different sizes, colors, and can be controlled programmatically through props"
             />
 
             <ComponentUseCase

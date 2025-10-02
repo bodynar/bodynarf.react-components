@@ -1,6 +1,6 @@
 import { FC, useCallback, useState } from "react";
 
-import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";
+import { Multiline as MultilineComponent } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";

@@ -2,8 +2,7 @@ import { FC, useCallback, useState } from "react";
 
 import { Color } from "@bodynarf/utils";
 
-import { ElementPosition } from "@bodynarf/react.components";
-import ColorComponent from "@bodynarf/react.components/components/primitives/color";
+import { ElementPosition, Color as ColorComponent } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";

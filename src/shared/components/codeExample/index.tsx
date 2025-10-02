@@ -3,7 +3,7 @@ import { FC, useCallback, useEffect, useState } from "react";
 import { BundledLanguage, codeToHtml } from "shiki";
 
 import { isNullOrEmpty } from "@bodynarf/utils";
-import Button, { ButtonStyle } from "@bodynarf/react.components/components/button";
+import { Button, ButtonStyle } from "@bodynarf/react.components";
 
 import styles from "./styles.module.scss";
 

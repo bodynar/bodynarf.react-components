@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 
-import Dropdown, { SelectableItem } from "@bodynarf/react.components/components/dropdown";
+import { Dropdown, SelectableItem } from "@bodynarf/react.components";
 
 import { useGenericSelection } from "../..";
 

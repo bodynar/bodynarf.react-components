@@ -2,8 +2,7 @@ import { FC, useCallback, useState } from "react";
 
 import { emptyFn, isStringEmpty } from "@bodynarf/utils";
 
-import { SelectableItem } from "@bodynarf/react.components";
-import TabsComponent, { TabItem, TabsStyle } from "@bodynarf/react.components/components/tabs";
+import { SelectableItem, Tabs as TabsComponent, TabItem, TabsStyle } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";

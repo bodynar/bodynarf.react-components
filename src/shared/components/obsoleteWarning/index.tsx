@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 
-import Icon from "@bodynarf/react.components/components/icon";
+import { Icon } from "@bodynarf/react.components";
 
 /* Props type of `ObsoleteWarning` */
 type ObsoleteWarningProps = {

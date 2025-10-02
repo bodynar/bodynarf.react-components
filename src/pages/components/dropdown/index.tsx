@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 
 import { Optional } from "@bodynarf/utils";
-import DropdownComponent, { SelectableItem } from "@bodynarf/react.components/components/dropdown";
+import { Dropdown as DropdownComponent, SelectableItem } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -293,7 +293,7 @@ const Dropdown: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="disabled"
-                description="Option to disable the component functionality and render it in a disabled state. Option disabled by default"
+                description="Option to disable the component functionality and render it in a disabled state. Disabled by default"
                 code={
                     <CodeExample
                         code={[
