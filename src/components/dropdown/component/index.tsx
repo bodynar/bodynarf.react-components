@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { isNullOrUndefined } from "@bodynarf/utils";
+import { isNullish } from "@bodynarf/utils";
 
 import "./style.scss";
 
@@ -10,9 +10,15 @@ import DropdownCompact from "../components/compact";
 
 /** Dropdown component */
 const Dropdown: FC<DropdownProps> = (props) => {
-    return isNullOrUndefined(props.label)
+    // eslint-disable-next-line react/destructuring-assignment
+    return isNullish(props.label)
         ? <DropdownCompact {...props} />
-        : <DropdownWithLabel {...props} />;
+        : (
+            <DropdownWithLabel
+                {...props}
+                // eslint-disable-next-line react/destructuring-assignment
+                label={props.label}
+            />);
 };
 
 export default Dropdown;

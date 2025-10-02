@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName } from "@bodynarf/utils";
 
 import { mapDataAttributes } from "@bbr/utils";
 
@@ -38,16 +38,13 @@ const Table: FC<TableProps> = ({
         headerBorderless ? "has-borderless-header" : "",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
-        ? undefined
-        : mapDataAttributes(data!);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <table
-            className={elClassName}
-
             title={title}
             {...dataAttributes}
+            className={elClassName}
         >
             <thead>
                 <tr>
@@ -62,6 +59,7 @@ const Table: FC<TableProps> = ({
                     )}
                 </tr>
             </thead>
+
             <tbody>
                 {children}
             </tbody>

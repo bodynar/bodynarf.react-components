@@ -17,20 +17,6 @@ export type MultiselectProps = Omit<
     items: Array<MultiselectItem>;
 
     /**
-     * Handler of changing select state of item
-     * @description `item.selected` will be set by component
-     * @param item Item that triggered event
-     * @param selected New select flag value
-     */
-    onChange: (item: MultiselectItem, selected: boolean) => void;
-
-    /**
-     * Handler of clear selection event.
-     * When no handler specified - clear selection cannot be performed
-     */
-    onClear?: () => void;
-
-    /**
      * Caption for label when some items are selected
      * @example selectionCaption: "selected: {0}"
      * @description Supports only 1 string parameter for number of selected items. Default is `{0} items selected`
@@ -45,4 +31,18 @@ export type MultiselectProps = Omit<
         | "style" | "withoutBorder"
         | "rounded"
     >;
+
+    /**
+     * Handler of changing select state of item
+     * @description `item.selected` will be set by component
+     * @param item Item that triggered event
+     * @param selected New select flag value
+     */
+    onChange: (item: MultiselectItem, selected: boolean) => void;
+
+    /**
+     * Handler of clear selection event.
+     * When no handler specified - clear selection cannot be performed
+     */
+    onClear?: () => void;
 };

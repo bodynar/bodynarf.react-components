@@ -1,6 +1,6 @@
 import { FC, MouseEvent } from "react";
 
-import { isNullOrUndefined } from "@bodynarf/utils";
+import { isNullish } from "@bodynarf/utils";
 
 import { SelectableItem } from "@bbr/components";
 
@@ -19,6 +19,12 @@ export type DropdownLabelProps = {
     /** Is search through items enabled */
     searchable: boolean;
 
+    /** Last user search */
+    lastSearch: string;
+
+    /** Is items list visible */
+    isListVisible: boolean;
+
     /** Selected item */
     selectedItem?: SelectableItem;
 
@@ -27,12 +33,6 @@ export type DropdownLabelProps = {
 
     /** Click handler*/
     onClick: (event: MouseEvent<HTMLElement>) => void;
-
-    /** Last user search */
-    lastSearch: string;
-
-    /** Is items list visible */
-    isListVisible: boolean;
 
     /** Handler of search value change by user */
     onSearchChange: (value: string) => void;
@@ -52,16 +52,16 @@ const DropdownLabel: FC<DropdownLabelProps> = ({
                 caption={caption}
                 onClick={onClick}
                 className={className}
-                onSearchChange={onSearchChange!}
+                lastSearch={lastSearch}
                 deselectable={deselectable}
                 selectedItem={selectedItem}
-                lastSearch={lastSearch!}
                 isListVisible={isListVisible}
+                onSearchChange={onSearchChange}
             />
         );
     }
 
-    if (isNullOrUndefined(selectedItem)) {
+    if (isNullish(selectedItem)) {
         return (
             <EmptyLabel
                 caption={caption}
@@ -73,9 +73,9 @@ const DropdownLabel: FC<DropdownLabelProps> = ({
 
     return (
         <SelectedItemLabel
-            deselectable={deselectable}
-            className={className}
             onClick={onClick}
+            className={className}
+            deselectable={deselectable}
             selectedItem={selectedItem}
         />
     );

@@ -1,9 +1,9 @@
 import { ChangeEvent, FC, useCallback, useState } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import Button, { ButtonStyle } from "@bbr/components/button";
 
 import "./style.scss";
@@ -39,7 +39,7 @@ const Search: FC<SearchProps> = ({
         "bbr-search",
         "control",
         className,
-        `is-${size}`,
+        getSizeClassName(size),
         isLoading ? "is-loading" : "",
         searchType === "byButton" ? "is-expanded" : "",
     ]);
@@ -47,13 +47,11 @@ const Search: FC<SearchProps> = ({
     const inputClassName: string = getClassName([
         "input",
         "is-unselectable",
-        `is-${size}`,
+        getSizeClassName(size),
         rounded ? "is-rounded" : "",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
-        ? undefined
-        : mapDataAttributes(data!);
+    const dataAttributes = mapDataAttributes(data);
 
     if (searchType === "byButton") {
         return (
@@ -63,27 +61,26 @@ const Search: FC<SearchProps> = ({
                 <div className={elClassName}>
                     <input
                         type="search"
+                        title={title}
                         disabled={disabled}
                         onChange={onChange}
+                        {...dataAttributes}
                         placeholder={caption}
                         autoFocus={autoFocus}
                         defaultValue={searchValue}
                         className={inputClassName}
-
-                        title={title}
-                        {...dataAttributes}
                     />
                 </div>
                 <div className="control">
                     <Button
                         size={size}
+                        rounded={rounded}
                         disabled={disabled}
                         isLoading={isLoading}
                         style={ButtonStyle.Info}
                         title={searchButtonTitle}
                         caption={searchButtonCaption}
                         onClick={onSearchButtonClick}
-                        className={rounded ? "is-rounded" : undefined}
                     />
                 </div>
             </div>
@@ -96,15 +93,14 @@ const Search: FC<SearchProps> = ({
         >
             <input
                 type="search"
+                title={title}
                 disabled={disabled}
                 onChange={onChange}
+                {...dataAttributes}
                 placeholder={caption}
                 autoFocus={autoFocus}
                 defaultValue={searchValue}
                 className={inputClassName}
-
-                title={title}
-                {...dataAttributes}
             />
         </div>
     );

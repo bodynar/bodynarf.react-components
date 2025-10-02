@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback, useRef, useState } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullish, isNullOrUndefined, Optional } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNotNullish, Optional } from "@bodynarf/utils";
 
 import { ElementSize, ElementPosition } from "@bbr/types";
 import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -36,7 +36,7 @@ const FileUpload: FC<FileUploadProps> = ({
             const firstFile = event.target.files?.[0];
             onValueChange(firstFile);
 
-            if (displayFileName && !isNullish(firstFile)) {
+            if (displayFileName && isNotNullish(firstFile)) {
                 const fileName = firstFile.name;
 
                 setSelectedFileName(fileName);
@@ -64,11 +64,9 @@ const FileUpload: FC<FileUploadProps> = ({
         className,
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
-        ? undefined
-        : mapDataAttributes(data!);
+    const dataAttributes = mapDataAttributes(data);
 
-    const shouldDisplayFileName = displayFileName && !isNullish(selectedFileName);
+    const shouldDisplayFileName = displayFileName && isNotNullish(selectedFileName);
 
     return (
         <div className={containerClassName}>
@@ -76,36 +74,31 @@ const FileUpload: FC<FileUploadProps> = ({
                 &&
                 <Icon
                     name="x-lg"
-                    className="file-clear"
-
                     size={size}
+                    className="file-clear"
                     onClick={onClearClick}
                     title={clearSelectionTitle}
                 />
             }
             <label className="file-label">
                 <input
-                    type="file"
-                    className="file-input"
-
-                    accept={accept}
-
                     id={name}
+                    type="file"
                     name={name}
+                    title={title}
+                    ref={inputRef}
+                    accept={accept}
                     disabled={disabled}
                     onChange={onChange}
-                    placeholder={placeholder}
-
-                    title={title}
                     {...dataAttributes}
-
-                    ref={inputRef}
+                    className="file-input"
+                    placeholder={placeholder}
                 />
                 <span className="file-cta">
                     <span className="file-icon">
                         <Icon
-                            name="upload"
                             size={size}
+                            name="upload"
                         />
                     </span>
                     <span className="file-label">
@@ -126,9 +119,8 @@ const FileUpload: FC<FileUploadProps> = ({
                 &&
                 <Icon
                     name="x-lg"
-                    className="file-clear"
-
                     size={size}
+                    className="file-clear"
                     onClick={onClearClick}
                     title={clearSelectionTitle}
                 />

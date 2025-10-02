@@ -12,9 +12,6 @@ export type SearchProps = BaseElementProps & {
     /** Search caption */
     caption: string;
 
-    /** Search handler */
-    onSearch: (searchPattern: string) => void;
-
     /** Initial search value */
     defaultValue?: string;
 
@@ -49,4 +46,7 @@ export type SearchProps = BaseElementProps & {
      * Visible only in `searchType = "byButton"`
      */
     searchButtonTitle?: string;
+
+    /** Search handler */
+    onSearch: (searchPattern: string) => void;
 };

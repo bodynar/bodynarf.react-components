@@ -4,9 +4,6 @@ export type PaginatorProps = BaseElementProps & {
     /** Amount of pages */
     count: number;
 
-    /** Page change handler */
-    onPageChange: (page: number) => void;
-
     /** Current page */
     currentPage: number;
 
@@ -64,4 +61,7 @@ export type PaginatorProps = BaseElementProps & {
          */
         openConcretePageTitleTemplate?: string;
     };
+
+    /** Page change handler */
+    onPageChange: (page: number) => void;
 };

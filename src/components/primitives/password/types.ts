@@ -1,16 +1,21 @@
-import { BaseNotNullableInputElementProps } from "@bbr/types";
+import { BaseNotNullableInputElementProps, KeyboardElement } from "@bbr/types";
 
 /** Password component props type */
-export interface PasswordProps extends Omit<BaseNotNullableInputElementProps<string>, "readonly"> {
-    /**
-     * Is clickable icon "Show password" visible.
-     * Will show password on click
-    */
-    canShowPassword?: boolean;
+export type PasswordProps = Omit<
+    & BaseNotNullableInputElementProps<string>,
+    | "readonly"
+>
+    & KeyboardElement
+    & {
+        /**
+         * Is clickable icon "Show password" visible.
+         * Will show password on click
+        */
+        canShowPassword?: boolean;
 
-    /**
-     * Title for slow password icon
-     * @default "Show password"
-     */
-    showPasswordIconTitle?: string;
-}
+        /**
+         * Title for slow password icon
+         * @default "Show password"
+         */
+        showPasswordIconTitle?: string;
+    };

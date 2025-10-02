@@ -1,8 +1,8 @@
 import { useCallback, useMemo, MouseEvent, FC } from "react";
 
-import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullOrEmpty, isNullish } from "@bodynarf/utils";
 
-import { getPositionClassName, mapDataAttributes } from "@bbr/utils";
+import { getPositionClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import { ElementPosition, ElementSize } from "@bbr/types";
 
 import { PaginatorProps } from "../..";
@@ -23,27 +23,27 @@ const Paginator: FC<PaginatorProps> = ({
         throw new Error(`Current page "${currentPage}" must be less than amount of pages "${count}"`);
     }
 
+    const pageNumbers = useMemo(() => generatePageNumbers(currentPage, count, nearPagesCount), [currentPage, count, nearPagesCount]);
+
+    const canGoBack = useMemo(() => currentPage > 1, [currentPage]);
+    const canGoForward = useMemo(() => currentPage < count, [currentPage, count]);
+
     const pageChange = useCallback(
         (event: MouseEvent<HTMLElement>) => {
             const target = event.target as HTMLElement;
 
             const pageRaw = target.dataset["page"];
 
-            if (isNullOrEmpty(pageRaw)) {
+            if (isNullish(pageRaw) || isNullOrEmpty(pageRaw)) {
                 return;
             }
 
-            const page = +pageRaw!;
+            const page = +(pageRaw);
 
             if (page !== currentPage && page > 0 && page <= count) {
                 onPageChange(page);
             }
         }, [onPageChange, currentPage, count]);
-
-    const pageNumbers = useMemo(() => generatePageNumbers(currentPage, count, nearPagesCount), [currentPage, count, nearPagesCount]);
-
-    const canGoBack = useMemo(() => currentPage > 1, [currentPage]);
-    const canGoForward = useMemo(() => currentPage < count, [currentPage, count]);
 
     if (pageNumbers.length <= 1) {
         return null;
@@ -55,21 +55,18 @@ const Paginator: FC<PaginatorProps> = ({
         className,
         getPositionClassName(position),
         rounded ? "is-rounded" : "",
-        size === ElementSize.Normal ? "" : `is-${size}`,
+        getSizeClassName(size),
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
-        ? undefined
-        : mapDataAttributes(data!);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <nav
+            title={title}
             role="navigation"
+            {...dataAttributes}
             className={classNames}
             aria-label="pagination"
-
-            title={title}
-            {...dataAttributes}
         >
             {!!showNextButtons &&
                 <>

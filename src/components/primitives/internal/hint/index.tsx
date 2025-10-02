@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
 
 import { BaseInputElementProps, ElementPosition, ElementSize, HintConfiguration, ValidationStatus } from "@bbr/types";
 import Icon from "@bbr/components/icon";
@@ -14,28 +14,28 @@ type HintProps = Pick<BaseInputElementProps<unknown>, "validationState" | "hint"
 const InternalHint: FC<HintProps> = ({
     validationState, hint,
 }) => {
-    if (isNullOrUndefined(validationState) && isNullOrUndefined(hint)) {
+    if (isNullish(validationState) && isNullish(hint)) {
         return null;
     }
 
     const validationStateDefined =
-        !isNullOrUndefined(validationState)
-        && validationState!.status !== ValidationStatus.None
-        && (validationState!.messages ?? []).length > 0;
+        isNotNullish(validationState)
+        && validationState.status !== ValidationStatus.None
+        && (validationState.messages ?? []).length > 0;
 
     if (validationStateDefined) {
-        const validationClassName = validationState!.status === ValidationStatus.Valid
+        const validationClassName = validationState.status === ValidationStatus.Valid
             ? "is-success"
             : "is-danger";
 
         return (
             <p className={`help m-help bbr-hint ${validationClassName}`}>
-                {(validationState!.messages ?? []).join("\n")}
+                {(validationState.messages ?? []).join("\n")}
             </p>
         );
     }
 
-    if (isNullOrUndefined(hint)) {
+    if (isNullish(hint)) {
         return null;
     }
 
@@ -43,22 +43,23 @@ const InternalHint: FC<HintProps> = ({
         "bbr-hint",
         "help",
         "m-help",
-        (hint!.grey ?? false) ? "has-text-grey" : undefined,
-        (hint!.italic ?? false) ? "is-italic" : undefined,
+        (hint.grey ?? false) ? "has-text-grey" : undefined,
+        (hint.italic ?? false) ? "is-italic" : undefined,
     ]);
 
-    if (!isNullOrUndefined(hint!.icon)) {
+    if (isNotNullish(hint.icon)) {
         return (
             <HintWithIcon
-                {...hint!}
+                icon={hint.icon}
                 className={className}
+                content={hint.content}
             />
         );
     }
 
     return (
         <p className={className}>
-            {hint!.content}
+            {hint.content}
         </p>
     );
 };
@@ -66,10 +67,11 @@ const InternalHint: FC<HintProps> = ({
 export default InternalHint;
 
 /** Props of `HintWithIcon` */
-type HintWithIconProps = Pick<
-    HintConfiguration,
-    | "content"
-    | "icon"
+type HintWithIconProps = Required<
+    Pick<
+        HintConfiguration,
+        | "content" | "icon"
+    >
 > & {
     /** Built element class name */
     className: string;
@@ -83,20 +85,20 @@ const HintWithIcon: FC<HintWithIconProps> = ({
 }) => {
     const iconClassName: string =
         getClassName([
-            icon!.className,
-            icon!.position === ElementPosition.Right
+            icon.className,
+            icon.position === ElementPosition.Right
                 ? "bbr-icon--right"
                 : "bbr-icon--left"
         ]);
 
-    if (icon!.position === ElementPosition.Right) {
+    if (icon.position === ElementPosition.Right) {
         return (
             <p className={className}>
                 {content}
                 <Icon
-                    name={icon!.name}
+                    name={icon.name}
                     className={iconClassName}
-                    size={icon!.size ?? ElementSize.Small}
+                    size={icon.size ?? ElementSize.Small}
                 />
             </p>
         );
@@ -105,9 +107,9 @@ const HintWithIcon: FC<HintWithIconProps> = ({
     return (
         <p className={className}>
             <Icon
-                name={icon!.name}
+                name={icon.name}
                 className={iconClassName}
-                size={icon!.size ?? ElementSize.Small}
+                size={icon.size ?? ElementSize.Small}
             />
             {content}
         </p>

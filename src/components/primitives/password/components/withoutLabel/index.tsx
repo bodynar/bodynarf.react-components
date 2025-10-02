@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback, useState } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -17,16 +17,19 @@ const PasswordWithoutLabel: FC<PasswordProps> = ({
     rounded = false, loading = false, autoFocus = false,
     placeholder,
     canShowPassword = false, showPasswordIconTitle = "Show password",
+    onKeyDown,
+    onKeyUp,
 
     className, title, data,
     hint,
 }) => {
+    const [contentIsHidden, setContentIsHidden] = useState(true);
+
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
         [onValueChange]
     );
 
-    const [contentIsHidden, setContentIsHidden] = useState(true);
     const onIconClick = useCallback(() => setContentIsHidden(state => !state), [setContentIsHidden]);
 
     const elSizeClassName = size === ElementSize.Normal ? "" : "is-{0}".format(size);
@@ -47,9 +50,7 @@ const PasswordWithoutLabel: FC<PasswordProps> = ({
         "bbr-password__wrapper",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
-        ? undefined
-        : mapDataAttributes(data!);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <div
@@ -57,19 +58,19 @@ const PasswordWithoutLabel: FC<PasswordProps> = ({
         >
             <div className={containerClassName}>
                 <input
-                    type={contentIsHidden ? "password" : "text"}
-
                     id={name}
                     name={name}
+                    title={title}
+                    onKeyUp={onKeyUp}
                     disabled={disabled}
                     onChange={onChange}
+                    {...dataAttributes}
+                    onKeyDown={onKeyDown}
                     autoFocus={autoFocus}
                     className={elClassName}
                     placeholder={placeholder}
                     defaultValue={defaultValue}
-
-                    title={title}
-                    {...dataAttributes}
+                    type={contentIsHidden ? "password" : "text"}
                 />
                 {!!canShowPassword && !loading &&
                     <span

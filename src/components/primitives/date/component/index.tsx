@@ -1,9 +1,9 @@
 import { ChangeEvent, FC, useCallback } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullOrUndefined, isStringEmpty } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNullish, isStringEmpty } from "@bodynarf/utils";
 
-import { ElementSize } from "@bbr/types";
-import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { ElementSize, LabeledElement } from "@bbr/types";
+import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import InternalHint from "@bbr/components/internal/hint";
 
@@ -12,7 +12,9 @@ import "./style.scss";
 import { DateProps } from "../..";
 
 /** Date input component */
-const DatePicker: FC<DateProps> = ({
+const DatePicker: FC<
+    Omit<DateProps, "label"> & LabeledElement
+> = ({
     defaultValue, onValueChange = emptyFn, validationState,
     name = generateGuid(),
     style, size = ElementSize.Normal,
@@ -20,69 +22,71 @@ const DatePicker: FC<DateProps> = ({
     rounded = false, loading = false, autoFocus = false,
     label,
     onBlur,
+    onKeyDown,
+    onKeyUp,
 
     className, title, data,
     hint,
 }) => {
-    const onChange = useCallback(
-        (event: ChangeEvent<HTMLInputElement>) =>
-            onValueChange(
-                isStringEmpty(event.target.value)
-                    ? undefined
-                    : new Date(event.target.value)
-            ),
-        [onValueChange]
-    );
+        const onChange = useCallback(
+            (event: ChangeEvent<HTMLInputElement>) =>
+                onValueChange(
+                    isStringEmpty(event.target.value)
+                        ? undefined
+                        : new Date(event.target.value)
+                ),
+            [onValueChange]
+        );
 
-    const elClassName = getClassName([
-        className,
-        size === ElementSize.Normal ? "" : `is-${size}`,
-        getStyleClassName(style, validationState),
-        rounded ? "is-rounded" : "",
-        "input",
-    ]);
+        const elClassName = getClassName([
+            className,
+            getSizeClassName(size, ElementSize.Normal),
+            getStyleClassName(style, validationState),
+            rounded ? "is-rounded" : "",
+            "input",
+        ]);
 
-    const inputContainerClassName = getClassName([
-        "control",
-        loading ? "is-loading" : "",
-    ]);
+        const inputContainerClassName = getClassName([
+            "control",
+            loading ? "is-loading" : "",
+        ]);
 
-    const stringifiedDefValue = defaultValue?.toISOString().split("T")[0];
+        const stringifiedDefValue = defaultValue?.toISOString().split("T")[0];
 
-    const dataAttributes = isNullOrUndefined(data)
-        ? undefined
-        : mapDataAttributes(data!);
+        const dataAttributes = isNullish(data)
+            ? undefined
+            : mapDataAttributes(data);
 
-    return (
-        <ComponentWithLabel
-            id={name}
-            size={size}
-            label={label!}
-        >
-            <div className={inputContainerClassName}>
-                <input
-                    type="date"
-
-                    id={name}
-                    name={name}
-                    onBlur={onBlur}
-                    readOnly={readonly}
-                    disabled={disabled}
-                    onChange={onChange}
-                    className={elClassName}
-                    defaultValue={stringifiedDefValue}
-                    autoFocus={autoFocus}
-
-                    title={title}
-                    {...dataAttributes}
+        return (
+            <ComponentWithLabel
+                id={name}
+                size={size}
+                label={label}
+            >
+                <div className={inputContainerClassName}>
+                    <input
+                        id={name}
+                        type="date"
+                        name={name}
+                        title={title}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                        readOnly={readonly}
+                        disabled={disabled}
+                        onChange={onChange}
+                        {...dataAttributes}
+                        onKeyDown={onKeyDown}
+                        autoFocus={autoFocus}
+                        className={elClassName}
+                        defaultValue={stringifiedDefValue}
+                    />
+                </div>
+                <InternalHint
+                    hint={hint}
+                    validationState={validationState}
                 />
-            </div>
-            <InternalHint
-                hint={hint}
-                validationState={validationState}
-            />
-        </ComponentWithLabel>
-    );
-};
+            </ComponentWithLabel>
+        );
+    };
 
 export default DatePicker;

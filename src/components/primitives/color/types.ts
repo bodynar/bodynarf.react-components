@@ -8,6 +8,7 @@ import { ElementFloatPosition, BaseNotNullableInputElementProps } from "@bbr/typ
 export interface ColorPickerProps extends Omit<BaseNotNullableInputElementProps<Color>,
     | "style" | "loading"
     | "readonly" | "placeholder"
+    | "onKeyDown" | "onKeyUp"
 > {
     /**
      * Preview text configuration.

@@ -1,0 +1,211 @@
+// Bulma variables
+$black: #0a0a0a !default;
+$white: #fff !default;
+$light: #f5f5f5 !default;
+$dark: #363636 !default;
+$primary: #485fc7 !default;
+$link: #485fc7 !default;
+$info: #3e8ed0 !default;
+$success: #48c78e !default;
+$warning: #ffe08a !default;
+$danger: #f14668 !default;
+$text: #4a4a4a !default;
+$background: #f5f5f5 !default;
+$radius: 4px !default;
+$speed: 0.25s !default;
+
+$size-small: 0.75rem !default;
+$size-normal: 1rem !default;
+$size-medium: 1.25rem !default;
+$size-large: 1.5rem !default;
+
+// Size map
+$sizes: (
+	"small": $size-small,
+	"normal": $size-normal,
+	"medium": $size-medium,
+	"large": $size-large
+);
+
+// Color map
+$colors: (
+	"primary": $primary,
+	"link": $link,
+	"info": $info,
+	"success": $success,
+	"warning": $warning,
+	"danger": $danger
+);
+
+// Mixins for common styles
+@mixin progress-colors($color) {
+	&::-webkit-progress-value {
+		background-color: $color;
+	}
+
+	&::-moz-progress-bar {
+		background-color: $color;
+	}
+}
+
+@mixin indeterminate-colors($color) {
+	&::after {
+		background-color: $color;
+	}
+}
+
+@mixin custom-progress-colors($color) {
+	.bbr-progress-fill {
+		background-color: $color;
+	}
+}
+
+.bbr-progress {
+	width: 100%;
+	appearance: none;
+	height: $size-normal;
+	border: none;
+	border-radius: $radius;
+	background-color: $background;
+	overflow: hidden;
+
+	// Custom progress bar for animation
+	&.bbr-progress--animated {
+		position: relative;
+		background-color: $background;
+
+		.bbr-progress-fill {
+			height: 100%;
+			background-color: $primary;
+			border-radius: $radius;
+			transition: width $speed;
+			animation: bbr-progress-animated 1s linear infinite;
+			background-image: linear-gradient(
+				45deg,
+				rgba(255, 255, 255, 0.2) 25%,
+				transparent 25%,
+				transparent 50%,
+				rgba(255, 255, 255, 0.2) 50%,
+				rgba(255, 255, 255, 0.2) 75%,
+				transparent 75%,
+				transparent
+			);
+			background-size: 1rem 1rem;
+		}
+
+		// Colors for custom progress bar
+		@each $name, $color in $colors {
+			&.is-#{$name} {
+				@include custom-progress-colors($color);
+			}
+		}
+	}
+
+	&::-webkit-progress-bar {
+		background-color: $background;
+		border-radius: $radius;
+	}
+
+	&::-webkit-progress-value {
+		background-color: $primary;
+		border-radius: $radius;
+		transition: width $speed;
+	}
+
+	&::-moz-progress-bar {
+		background-color: $primary;
+		border-radius: $radius;
+	}
+
+	&-value {
+		margin-top: 0.25rem;
+		font-size: $size-small;
+		color: $text;
+		text-align: center;
+	}
+
+	@each $name, $size in $sizes {
+		&.is-#{$name} {
+			height: $size;
+		}
+	}
+
+	@each $name, $color in $colors {
+		&.is-#{$name} {
+			@include progress-colors($color);
+		}
+	}
+
+	&--animated {
+		&::-webkit-progress-value {
+			animation: bbr-progress-animated 2s linear infinite;
+			background-image: linear-gradient(
+				45deg,
+				rgba(255, 255, 255, 0.2) 25%,
+				transparent 25%,
+				transparent 50%,
+				rgba(255, 255, 255, 0.2) 50%,
+				rgba(255, 255, 255, 0.2) 75%,
+				transparent 75%,
+				transparent
+			);
+			background-size: 1rem 1rem;
+		}
+
+		&::-moz-progress-bar {
+			animation: bbr-progress-animated 2s linear infinite;
+			background-image: linear-gradient(
+				45deg,
+				rgba(255, 255, 255, 0.2) 25%,
+				transparent 25%,
+				transparent 50%,
+				rgba(255, 255, 255, 0.2) 50%,
+				rgba(255, 255, 255, 0.2) 75%,
+				transparent 75%,
+				transparent
+			);
+			background-size: 1rem 1rem;
+		}
+	}
+
+	&--indeterminate {
+		position: relative;
+		background-color: $background;
+
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			width: 50%;
+			background-color: $primary;
+			border-radius: $radius;
+			animation: bbr-progress-indeterminate 1.5s ease-in-out infinite;
+		}
+
+		@each $name, $color in $colors {
+			&.is-#{$name} {
+				@include indeterminate-colors($color);
+			}
+		}
+	}
+}
+
+@keyframes bbr-progress-animated {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 1rem 0;
+	}
+}
+
+@keyframes bbr-progress-indeterminate {
+	0% {
+		left: -50%;
+	}
+	100% {
+		left: 100%;
+	}
+}

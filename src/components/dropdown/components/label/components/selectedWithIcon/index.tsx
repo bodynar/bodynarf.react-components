@@ -8,11 +8,13 @@ import Icon from "@bbr/components/icon";
 import { DropdownLabelProps } from "../../component";
 
 /** Props type of `SelectedItemLabelWithIcon` */
-type SelectedItemLabelWithIconProps = Pick<
-    DropdownLabelProps,
-    | "selectedItem" | "onClick"
-    | "deselectable" | "className"
->;
+type SelectedItemLabelWithIconProps =
+    & Pick<
+        DropdownLabelProps,
+        | "onClick"
+        | "deselectable" | "className"
+    >
+    & Required<Pick<DropdownLabelProps, "selectedItem">>;
 
 /** Dropdown label when item is selected and it's have icon */
 const SelectedItemLabelWithIcon: FC<SelectedItemLabelWithIconProps> = ({
@@ -26,7 +28,7 @@ const SelectedItemLabelWithIcon: FC<SelectedItemLabelWithIconProps> = ({
         isNullOrEmpty(className) ? "" : `${className}--md`,
     ]);
 
-    const icon = selectedItem!.icon!;
+    const icon = selectedItem.icon!;
 
     const iconClassName = getClassName([
         icon.className,
@@ -39,8 +41,8 @@ const SelectedItemLabelWithIcon: FC<SelectedItemLabelWithIconProps> = ({
     if (icon.position === ElementPosition.Right) {
         return (
             <label
-                className={elClassName}
                 onClick={onClick}
+                className={elClassName}
             >
                 {!!deselectable &&
                     <Icon
@@ -49,10 +51,10 @@ const SelectedItemLabelWithIcon: FC<SelectedItemLabelWithIconProps> = ({
                     />
                 }
                 <span
+                    title={selectedItem.title}
                     className={deselectable ? "px-2" : "pr-2"}
-                    title={selectedItem!.title}
                 >
-                    {selectedItem!.displayValue}
+                    {selectedItem.displayValue}
                     <Icon
                         name={icon.name}
                         size={icon.size}
@@ -69,8 +71,8 @@ const SelectedItemLabelWithIcon: FC<SelectedItemLabelWithIconProps> = ({
 
     return (
         <label
-            className={elClassName}
             onClick={onClick}
+            className={elClassName}
         >
             {!!deselectable &&
                 <Icon
@@ -79,15 +81,15 @@ const SelectedItemLabelWithIcon: FC<SelectedItemLabelWithIconProps> = ({
                 />
             }
             <span
+                title={selectedItem.title}
                 className={deselectable ? "mx-2" : "mr-2"}
-                title={selectedItem!.title}
             >
                 <Icon
                     name={icon.name}
                     size={icon.size}
                     className={iconClassName}
                 />
-                {selectedItem!.displayValue}
+                {selectedItem.displayValue}
             </span>
             <Icon
                 name="arrow-down"

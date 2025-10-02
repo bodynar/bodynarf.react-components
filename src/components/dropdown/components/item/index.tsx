@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { ElementPosition } from "@bbr/types";
 import Icon from "@bbr/components/icon/component";
@@ -23,12 +23,12 @@ type DropdownItemProps = {
 const DropdownItem: FC<DropdownItemProps> = ({
     item, selected, onClick
 }) => {
-    if (!isNullOrUndefined(item.icon)) {
+    if (isNotNullish(item.icon)) {
         return (
             <DropdownItemWithIcon
                 item={item}
-                selected={selected}
                 onClick={onClick}
+                selected={selected}
             />
         );
     }
@@ -43,11 +43,11 @@ const DropdownItem: FC<DropdownItemProps> = ({
     return (
         <li
             key={item.id}
+
             onClick={onClick}
+            title={item.title}
             className={className}
             data-dropdown-item-value={item.value}
-
-            title={item.title}
         >
             {item.displayValue}
         </li>
@@ -81,11 +81,11 @@ const DropdownItemWithIcon: FC<DropdownItemProps> = ({
         return (
             <li
                 key={item.id}
+
                 onClick={onClick}
+                title={item.title}
                 className={className}
                 data-dropdown-item-value={item.value}
-
-                title={item.title}
             >
                 {item.displayValue}
                 <Icon
@@ -100,11 +100,11 @@ const DropdownItemWithIcon: FC<DropdownItemProps> = ({
     return (
         <li
             key={item.id}
+
             onClick={onClick}
+            title={item.title}
             className={className}
             data-dropdown-item-value={item.value}
-
-            title={item.title}
         >
             <Icon
                 name={icon.name}

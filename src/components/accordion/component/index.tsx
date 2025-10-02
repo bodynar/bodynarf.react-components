@@ -1,9 +1,9 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 
-import { emptyFn, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
 import "./style.scss";
@@ -29,8 +29,8 @@ const Accordion: FC<AccordionProps> = ({
     );
 
     useEffect(() => {
-        if (defaultExpanded && !isNullOrUndefined(expandablePanelRef.current)) {
-            setMaxHeight(expandablePanelRef.current!.scrollHeight);
+        if (defaultExpanded && isNotNullish(expandablePanelRef.current)) {
+            setMaxHeight(expandablePanelRef.current.scrollHeight);
         }
     }, [defaultExpanded, size]);
 
@@ -40,34 +40,32 @@ const Accordion: FC<AccordionProps> = ({
     const elClassName = getClassName([
         "bbr-accordion",
         "message",
-        isNullOrUndefined(style) ? "" : `is-${style}`,
-        isNullOrUndefined(size) ? "" : `is-${size}`,
+        getElementColorClassName(style),
+        getSizeClassName(size),
         className,
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
-        ? undefined
-        : mapDataAttributes(data!);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <article
+            {...dataAttributes}
             className={elClassName}
             aria-expanded={isExpanded}
-
-            {...dataAttributes}
         >
             <div
-                className="message-header is-unselectable"
                 onClick={toggleCollapse}
+                className="message-header is-unselectable"
             >
                 <span title={title}>
                     {caption}
                 </span>
                 <Icon
-                    name="arrow-down"
                     size={size}
+                    name="arrow-down"
                 />
             </div>
+
             <div
                 className="message-body"
                 ref={expandablePanelRef}

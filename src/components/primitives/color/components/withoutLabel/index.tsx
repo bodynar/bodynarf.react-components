@@ -1,6 +1,8 @@
 import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
 
-import { generateGuid, getClassName, hexToRgb, isNullOrUndefined, rgbToHex, whiteHex } from "@bodynarf/utils";
+import { generateGuid, getClassName, hexToRgb, isNullish, rgbToHex, whiteHex } from "@bodynarf/utils";
+
+import { getSizeClassName } from "@bbr/utils";
 
 import { ColorPickerProps } from "../..";
 import ColorPickerControl from "../picker";
@@ -17,9 +19,9 @@ const ColorPickerWithoutLabel: FC<ColorPickerProps> = ({
     className, title, data,
     hint,
 }) => {
-    const defaultColor = isNullOrUndefined(defaultValue)
+    const defaultColor = isNullish(defaultValue)
         ? whiteHex
-        : rgbToHex(defaultValue!);
+        : rgbToHex(defaultValue);
 
     const [value, setValue] = useState(defaultColor);
 
@@ -36,7 +38,7 @@ const ColorPickerWithoutLabel: FC<ColorPickerProps> = ({
     const elClassName = getClassName([
         className,
         rounded ? "is-rounded" : "",
-        isNullOrUndefined(size) ? "" : `is-${size}`,
+        getSizeClassName(size),
         "input",
     ]);
 
@@ -46,18 +48,16 @@ const ColorPickerWithoutLabel: FC<ColorPickerProps> = ({
         >
             <ColorPickerControl
                 id={name}
+                data={data}
+                hint={hint}
                 value={value}
+                title={title}
                 disabled={disabled}
                 autoFocus={autoFocus}
                 previewConfig={preview}
                 onValueChange={onChange}
                 defaultValue={defaultColor}
                 elementClassName={elClassName}
-
-                data={data}
-                title={title}
-
-                hint={hint}
                 validationState={validationState}
             />
         </div>

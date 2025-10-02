@@ -1,7 +1,5 @@
 import { FC } from "react";
 
-import { isNullOrUndefined } from "@bodynarf/utils";
-
 import { mapDataAttributes } from "@bbr/utils";
 
 import { SimpleButtonProps } from "../..";
@@ -14,19 +12,16 @@ const SimpleButton: FC<SimpleButtonProps> = ({
 
     title, data
 }) => {
-    const dataAttributes = isNullOrUndefined(data)
-        ? undefined
-        : mapDataAttributes(data!);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <button
             type="button"
+            title={title}
             onClick={onClick}
             disabled={disabled}
-            className={className}
-
-            title={title}
             {...dataAttributes}
+            className={className}
         >
             {caption}
         </button>

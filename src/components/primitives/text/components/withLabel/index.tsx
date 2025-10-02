@@ -1,22 +1,28 @@
 import { ChangeEvent, FC, useCallback } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullOrUndefined, } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import InternalHint from "@bbr/internalComponent/hint";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 
 import { TextProps } from "../..";
 
+type TextWithLabelProps =
+    & Omit<TextProps, "label">
+    & Required<Pick<TextProps, "label">>;
+
 /** Textual input with describing label */
-const TextWithLabel: FC<TextProps> = ({
+const TextWithLabel: FC<TextWithLabelProps> = ({
     onValueChange = emptyFn, readonly, disabled, defaultValue, validationState,
     name = generateGuid(),
     size = ElementSize.Normal, style,
     rounded = false, loading = false, autoFocus = false,
     label, placeholder,
     onBlur,
+    onKeyDown,
+    onKeyUp,
 
     className, title, data,
     hint,
@@ -28,7 +34,7 @@ const TextWithLabel: FC<TextProps> = ({
 
     const elClassName = getClassName([
         className,
-        size === ElementSize.Normal ? "" : `is-${size}`,
+        getSizeClassName(size, ElementSize.Normal),
         rounded ? "is-rounded" : "",
         getStyleClassName(style, validationState),
         "input",
@@ -39,33 +45,31 @@ const TextWithLabel: FC<TextProps> = ({
         loading ? "is-loading" : "",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
-        ? undefined
-        : mapDataAttributes(data!);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <ComponentWithLabel
             id={name}
             size={size}
-            label={label!}
+            label={label}
         >
             <div className={inputContainerClassName}>
                 <input
-                    type="text"
-
                     id={name}
+                    type="text"
                     name={name}
+                    title={title}
                     onBlur={onBlur}
+                    onKeyUp={onKeyUp}
                     readOnly={readonly}
                     disabled={disabled}
                     onChange={onChange}
+                    {...dataAttributes}
+                    onKeyDown={onKeyDown}
+                    autoFocus={autoFocus}
                     className={elClassName}
                     placeholder={placeholder}
                     defaultValue={defaultValue}
-                    autoFocus={autoFocus}
-
-                    title={title}
-                    {...dataAttributes}
                 />
             </div>
             <InternalHint

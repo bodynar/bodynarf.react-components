@@ -28,8 +28,8 @@ const NonEmptyMultiselectLabel: FC<NonEmptyMultiselectLabelProps> = ({
 
     return (
         <label
-            className={elClassName}
             onClick={onClick}
+            className={elClassName}
         >
             {!!deselectable &&
                 <Icon

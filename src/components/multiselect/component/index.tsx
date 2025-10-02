@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { isNullOrUndefined } from "@bodynarf/utils";
+import { isNullish } from "@bodynarf/utils";
 
 import "../../dropdown/component/style.scss";
 import "./style.scss";
@@ -11,10 +11,17 @@ import MultiselectWithLabel from "../components/withLabel";
 
 /** Multiselect component */
 const Multiselect: FC<MultiselectProps> = (props) => {
-    return isNullOrUndefined(props.label)
+    // eslint-disable-next-line react/destructuring-assignment
+    return isNullish(props.label)
         ? <MultiselectWithoutLabel {...props} />
-        : <MultiselectWithLabel {...props} />
-    ;
+        : (
+            <MultiselectWithLabel
+                {...props}
+                // eslint-disable-next-line react/destructuring-assignment
+                label={props.label}
+            />
+        )
+        ;
 };
 
 export default Multiselect;

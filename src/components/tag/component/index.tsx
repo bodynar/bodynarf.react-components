@@ -1,9 +1,9 @@
 import { FC } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
 
 import { ElementColor, ElementSize } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 
 import { TagProps } from "..";
 
@@ -18,7 +18,7 @@ const Tag: FC<TagProps> = ({
     onClick,
     className, title, data,
 }) => {
-    if (!isNullOrUndefined(customColor)) {
+    if (isNotNullish(customColor)) {
         style = ElementColor.Default;
     }
 
@@ -26,33 +26,30 @@ const Tag: FC<TagProps> = ({
         "bbr-tag",
         "tag",
         className,
-        style === ElementColor.Default ? "" : `is-${style}`,
-        !isNullOrUndefined(customColor) ? "bbr-tag--custom" : "",
-        lightColor && isNullOrUndefined(customColor) ? "is-light" : "",
+        getElementColorClassName(style),
+        isNotNullish(customColor) ? "bbr-tag--custom" : "",
+        lightColor && isNullish(customColor) ? "is-light" : "",
         rounded ? "is-rounded" : "",
-        size === ElementSize.Normal ? "" : `is-${size}`,
-        isNullOrUndefined(onClick) ? "" : "bbr-tag--clickable",
+        getSizeClassName(size, ElementSize.Normal),
+        isNullish(onClick) ? "" : "is-clickable",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
-        ? undefined
-        : mapDataAttributes(data!);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <span
+            title={title}
+            onClick={onClick}
+            {...dataAttributes}
             className={elClassName}
-            style={isNullOrUndefined(customColor)
+
+            style={isNullish(customColor)
                 ? undefined
                 : {
                     color: customColor?.color,
                     backgroundColor: customColor?.backgroundColor,
                 }
             }
-
-            title={title}
-            onClick={onClick}
-
-            {...dataAttributes}
         >
             {content}
         </span>

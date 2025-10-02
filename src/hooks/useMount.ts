@@ -8,7 +8,7 @@ import { ActionFn, SimpleFn } from "@bodynarf/utils";
  * @param fn Function to be called only on the initial render of the component
  */
 export const useMount = (fn: ActionFn) => {
-    useEffect(fn, []);
+    useEffect(() => fn(), []);
 };
 
 /**

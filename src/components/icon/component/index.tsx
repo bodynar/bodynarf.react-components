@@ -27,17 +27,14 @@ const Icon: FC<IconProps> = ({
         isNullish(onClick) ? undefined : "is-clickable"
     ]);
 
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data!);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <i
-            className={classNames}
-
             title={title}
             onClick={onClick}
             {...dataAttributes}
+            className={classNames}
         />
     );
 };

@@ -93,6 +93,19 @@
         }
     }
 
+    &.is-up {
+        .dropdown-menu {
+            top: auto;
+            bottom: 100%;
+        }
+
+        &.is-active {
+            .bbr-dropdown__label .bbr-icon.bi-arrow-down::before {
+                transform: rotate(360deg);
+            }
+        }
+    }
+
     &--height-default {
         .dropdown-menu .dropdown-content {
             max-height: 15vw;

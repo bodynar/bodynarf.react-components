@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNotNullish, isNullOrEmpty } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import Icon from "@bbr/components/icon";
@@ -9,23 +9,25 @@ import SelectedItemLabelWithIcon from "../selectedWithIcon";
 import { DropdownLabelProps } from "../../component";
 
 /** Props type of `SelectedItemLabel` */
-type SelectedItemLabelProps = Pick<
-    DropdownLabelProps,
-    | "selectedItem" | "onClick"
-    | "deselectable" | "className"
->;
+type SelectedItemLabelProps =
+    & Pick<
+        DropdownLabelProps,
+        | "onClick"
+        | "deselectable" | "className"
+    >
+    & Required<Pick<DropdownLabelProps, "selectedItem">>;
 
 /** Dropdown label when item is selected */
 const SelectedItemLabel: FC<SelectedItemLabelProps> = ({
     selectedItem, onClick,
     deselectable, className,
 }) => {
-    if (!isNullOrUndefined(selectedItem!.icon)) {
+    if (isNotNullish(selectedItem.icon)) {
         return (
             <SelectedItemLabelWithIcon
-                deselectable={deselectable}
                 onClick={onClick}
                 className={className}
+                deselectable={deselectable}
                 selectedItem={selectedItem}
             />
         );
@@ -40,8 +42,8 @@ const SelectedItemLabel: FC<SelectedItemLabelProps> = ({
 
     return (
         <label
-            className={elClassName}
             onClick={onClick}
+            className={elClassName}
         >
             {!!deselectable &&
                 <Icon
@@ -50,10 +52,10 @@ const SelectedItemLabel: FC<SelectedItemLabelProps> = ({
                 />
             }
             <span
+                title={selectedItem.title}
                 className={deselectable ? "px-2" : "pr-2"}
-                title={selectedItem!.title}
             >
-                {selectedItem!.displayValue}
+                {selectedItem.displayValue}
             </span>
             <Icon
                 name="arrow-down"

@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { isNullOrUndefined } from "@bodynarf/utils";
+import { isNullish } from "@bodynarf/utils";
 
 import { TextProps } from "..";
 import TextWithLabel from "../components/withLabel";
@@ -8,9 +8,16 @@ import TextWithoutLabel from "../components/withoutLabel";
 
 /** Textual input component */
 const Text: FC<TextProps> = (props) => {
-    return isNullOrUndefined(props.label)
+    // eslint-disable-next-line react/destructuring-assignment
+    return isNullish(props.label)
         ? <TextWithoutLabel {...props} />
-        : <TextWithLabel {...props} />;
+        : (
+            <TextWithLabel
+                {...props}
+                // eslint-disable-next-line react/destructuring-assignment
+                label={props.label}
+            />
+        );
 };
 
 export default Text;

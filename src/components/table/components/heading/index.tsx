@@ -1,6 +1,6 @@
 import { FC, useCallback } from "react";
 
-import { getClassName, isNullish, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNotNullish, isNullOrEmpty } from "@bodynarf/utils";
 
 import Icon from "@bbr/components/icon";
 
@@ -27,8 +27,8 @@ const TableHeader: FC<TableHeaderProps> = ({
 
     const onHeaderClick = useCallback(
         () => {
-            if (sortable && !isNullOrUndefined(onClick)) {
-                onClick!(item);
+            if (sortable && isNotNullish(onClick)) {
+                onClick(item);
             }
         },
         [onClick, item, sortable]
@@ -36,13 +36,13 @@ const TableHeader: FC<TableHeaderProps> = ({
 
     const containerClassName = getClassName([
         className,
-        sortable ? "is-clickable" : "",
+        sortable ? "is-clickable" : undefined,
     ]);
 
     return (
         <th
             onClick={onHeaderClick}
-            className={isNullish(containerClassName) ? undefined : containerClassName}
+            className={isNullOrEmpty(containerClassName) ? undefined : containerClassName}
         >
             <span>
                 {caption}

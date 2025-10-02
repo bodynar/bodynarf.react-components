@@ -1,9 +1,9 @@
 import { ChangeEvent, FC, useCallback } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullish, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 
 import "./style.scss";
@@ -34,18 +34,16 @@ const CheckBox: FC<CheckBoxProps> = ({
         className,
         hasBackgroundColor ? "has-background-color" : "",
         fixBackgroundColor && hasBackgroundColor ? "m-has-background-color" : "",
-        size === ElementSize.Normal ? "" : `is-${size}`,
+        getSizeClassName(size, ElementSize.Normal),
         rounded ? "is-circle" : "",
-        isNullOrUndefined(style) ? "" : `is-${style}`,
+        getElementColorClassName(style),
         block ? "is-block" : "",
         withoutBorder ? "has-no-border" : "",
     ]);
 
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data);
+    const dataAttributes = mapDataAttributes(data);
 
-    if (!isNullish(label) && isFormLabel) {
+    if (isNotNullish(label) && isFormLabel) {
         return (
             <ComponentWithLabel
                 id={name}
@@ -57,16 +55,14 @@ const CheckBox: FC<CheckBoxProps> = ({
                 }}
             >
                 <input
-                    type="checkbox"
-
                     id={name}
                     name={name}
+                    type="checkbox"
                     disabled={disabled}
+                    {...dataAttributes}
                     onChange={onChecked}
                     className={elClassName}
                     defaultChecked={defaultValue}
-
-                    {...dataAttributes}
                 />
                 <label
                     title={title}
@@ -77,7 +73,7 @@ const CheckBox: FC<CheckBoxProps> = ({
         );
     }
 
-    const isEmptyLabel = isNullOrUndefined(label);
+    const isEmptyLabel = isNullish(label);
 
     const labelClassName = isEmptyLabel
         ? "is-empty"
@@ -85,30 +81,27 @@ const CheckBox: FC<CheckBoxProps> = ({
 
     const labelDataAttributes = isNullish(label?.data)
         ? undefined
-        : mapDataAttributes(label!.data);
+        : mapDataAttributes(label.data);
 
     return (
         <div
             className="bbr-field bbr-input field mr-2"
         >
             <input
-                type="checkbox"
-
                 id={name}
                 name={name}
+                type="checkbox"
                 disabled={disabled}
+                {...dataAttributes}
                 onChange={onChecked}
                 className={elClassName}
                 defaultChecked={defaultValue}
-
-                {...dataAttributes}
             />
             <label
                 htmlFor={name}
-                className={labelClassName}
-
-                title={isEmptyLabel ? title : label?.title}
                 {...labelDataAttributes}
+                className={labelClassName}
+                title={isEmptyLabel ? title : label?.title}
             >
                 {label?.caption}
             </label>

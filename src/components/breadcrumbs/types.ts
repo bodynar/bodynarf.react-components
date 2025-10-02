@@ -4,20 +4,8 @@ import { BaseElementProps, ElementIcon, ElementPosition, ElementSize } from "@bb
 
 /** Breadcrumb item */
 export interface BreadCrumb {
-    /**
-     * Displayed text
-     * @deprecated Use `caption` instead
-     */
-    title?: string;
-
     /** Displayable caption */
     caption: string;
-
-    /**
-     * Page address
-     * @deprecated Since v1.2.0 Use `href`
-     */
-    path?: string;
 
     /** Link address */
     href: string;
@@ -30,12 +18,33 @@ export interface BreadCrumb {
 
     /** Bootstrap icon class name */
     icon?: ElementIcon;
+
+    /**
+     * Displayed text
+     * @deprecated Use `caption` instead
+     */
+    title?: string;
+
+    /**
+     * Page address
+     * @deprecated Since v1.2.0 Use `href`
+     */
+    path?: string;
 }
 
 /** Breadcrumbs component props type */
 export type BreadcrumbsProps = BaseElementProps & {
     /** Breadcrumbs items */
     items: Array<BreadCrumb>;
+
+    /** Panel size */
+    size?: ElementSize;
+
+    /** Items position */
+    position?: ElementPosition;
+
+    /** Items separator. By default `arrow` */
+    separator?: "arrow" | "bullet" | "dot" | "succeeds";
 
     /**
      * Function that generates each element
@@ -54,13 +63,4 @@ export type BreadcrumbsProps = BaseElementProps & {
      * }
     */
     elementGenerator?: (bc: BreadCrumb) => ReactNode;
-
-    /** Panel size */
-    size?: ElementSize;
-
-    /** Items position */
-    position?: ElementPosition;
-
-    /** Items separator. By default `arrow` */
-    separator?: "arrow" | "bullet" | "dot" | "succeeds";
 };

@@ -28,13 +28,13 @@ export const usePagination = (
     size: number = defaultPageSize,
     initPage: number = 1,
     dependencies: DependencyList = []
-): [PaginationState, (data: Array<any>) => Array<any>] => {
+): [PaginationState, (data: Array<unknown>) => Array<unknown>] => {
     const [currentPage, setCurrentPage] = useState(initPage);
     const count = useMemo(() => Math.ceil(length / size), [size, length]);
     const onChange = useCallback((page: number) => setCurrentPage(page), [setCurrentPage]);
 
     const paginate = useCallback(
-        (data: Array<any>): Array<any> => {
+        (data: Array<unknown>): Array<unknown> => {
             const limit = size;
             const offset = (currentPage - 1) * size;
 

@@ -1,9 +1,9 @@
 import { ChangeEvent, FC, useCallback } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import InternalHint from "@bbr/internalComponent/hint";
 
 import { NumberProps } from "../..";
@@ -17,6 +17,8 @@ const NumberWithoutLabel: FC<NumberProps> = ({
     rounded = false, loading = false,
     placeholder,
     onBlur,
+    onKeyDown,
+    onKeyUp,
     step = 1,
 
     className, title, data,
@@ -29,7 +31,7 @@ const NumberWithoutLabel: FC<NumberProps> = ({
 
     const elClassName = getClassName([
         className,
-        size === ElementSize.Normal ? "" : `is-${size}`,
+        getSizeClassName(size, ElementSize.Normal),
         rounded ? "is-rounded" : "",
         getStyleClassName(style, validationState),
         "input",
@@ -41,9 +43,7 @@ const NumberWithoutLabel: FC<NumberProps> = ({
         loading ? "is-loading" : "",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
-        ? undefined
-        : mapDataAttributes(data!);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <div
@@ -51,22 +51,22 @@ const NumberWithoutLabel: FC<NumberProps> = ({
         >
             <div className={containerClassName}>
                 <input
-                    type="number"
-
                     id={name}
                     name={name}
                     step={step}
+                    type="number"
+                    title={title}
                     onBlur={onBlur}
+                    onKeyUp={onKeyUp}
                     onChange={onChange}
                     readOnly={readonly}
                     disabled={disabled}
+                    {...dataAttributes}
+                    onKeyDown={onKeyDown}
                     autoFocus={autoFocus}
                     className={elClassName}
                     placeholder={placeholder}
                     defaultValue={defaultValue}
-
-                    title={title}
-                    {...dataAttributes}
                 />
             </div>
             <InternalHint

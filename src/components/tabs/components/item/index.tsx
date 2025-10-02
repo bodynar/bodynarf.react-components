@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { ElementPosition } from "@bbr/types";
 import Icon from "@bbr/components/icon";
@@ -20,7 +20,7 @@ export type TabItemProps = {
 const TabItem: FC<TabItemProps> = ({
     item, activeItem
 }) => {
-    if (!isNullOrUndefined(item.icon)) {
+    if (isNotNullish(item.icon)) {
         return (
             <TabItemWithIcon
                 item={item}
@@ -37,6 +37,7 @@ const TabItem: FC<TabItemProps> = ({
     return (
         <li
             key={item.id}
+
             className={className}
             data-item-id={item.id}
         >
@@ -65,6 +66,7 @@ const TabItemWithIcon: FC<TabItemProps> = ({
         return (
             <li
                 key={item.id}
+
                 className={className}
                 data-item-id={item.id}
             >
@@ -72,6 +74,7 @@ const TabItemWithIcon: FC<TabItemProps> = ({
                     <span>
                         {item.caption}
                     </span>
+
                     <Icon {...iconConfig} />
                 </a>
             </li>
@@ -81,11 +84,13 @@ const TabItemWithIcon: FC<TabItemProps> = ({
     return (
         <li
             key={item.id}
+
             className={className}
             data-item-id={item.id}
         >
             <a>
                 <Icon {...iconConfig} />
+
                 <span>
                     {item.caption}
                 </span>

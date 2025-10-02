@@ -1,4 +1,4 @@
-import { useCallback, useId, useState, MouseEvent, FC, useMemo } from "react";
+import { useCallback, useId, useState, MouseEvent, FC, useMemo, useRef } from "react";
 
 import { getClassName, isNullOrEmpty, isNullish } from "@bodynarf/utils";
 
@@ -33,9 +33,19 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
 }) => {
     const generatedId = useId();
     const id = propsId ?? generatedId;
+    const containerRef = useRef<HTMLDivElement>(null);
 
     const [isListVisible, setListVisible] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>("");
+    const [isOpenUp, setIsOpenUp] = useState<boolean>(false);
+
+
+    const filteredItems = useMemo(
+        () =>
+            items.filter(({ displayValue }) =>
+                displayValue.toLocaleLowerCase().includes(searchValue!.toLocaleLowerCase())),
+        [items, searchValue]
+    );
 
     const onItemClick = useCallback(
         (event: React.MouseEvent<HTMLLIElement>) => {
@@ -71,6 +81,18 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
             setListVisible(false);
         }, [setListVisible, value, items, onSelect, disabled]);
 
+    const shouldOpenUpward = useCallback((element: HTMLDivElement): boolean => {
+        const rect = element.getBoundingClientRect();
+        const spaceBelow = window.innerHeight - rect.bottom;
+        const spaceAbove = rect.top;
+
+        const estimatedHeight =
+            Math.min(items.length, 8) * 33 // 33 = 21px item height + 12px padding, 8 - max items in list
+            + 20; // 16px - padding top-bottom + 4px margin-top
+
+        return spaceBelow < estimatedHeight && spaceAbove > spaceBelow;
+    }, [items.length]);
+
     const onLabelClick = useCallback(
         (event: MouseEvent<HTMLElement>): void => {
             if (disabled) {
@@ -87,9 +109,14 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
                 onSelect(undefined);
                 setSearchValue("");
             } else {
+                if (containerRef.current) {
+                    const openUp = shouldOpenUpward(containerRef.current);
+                    setIsOpenUp(openUp);
+                }
+
                 setListVisible(state => !state);
             }
-        }, [onSelect, setListVisible, disabled]);
+        }, [onSelect, setListVisible, disabled, shouldOpenUpward]);
 
     const onSearchChange = useCallback(
         (value: string) => {
@@ -106,6 +133,7 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
         hideOnOuterClick,
     );
 
+
     const classNames: string = getClassName([
         "bbr-dropdown",
         className,
@@ -113,30 +141,24 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
         compact ? "bbr-dropdown--compact" : "",
         isListVisible ? "is-active" : "",
         isNullOrEmpty(listMaxHeight) ? "bbr-dropdown--height-default" : "",
+        isOpenUp ? "is-up" : "",
         "dropdown",
     ]);
 
     const labelComponentClassName = getStyleClassName(undefined, validationState);
-    const filteredItems = useMemo(
-        () =>
-            items.filter(({ displayValue }) =>
-                displayValue.toLocaleLowerCase().includes(searchValue!.toLocaleLowerCase())),
-        [items, searchValue]
-    );
 
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data!);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <>
             <div
                 key={id}
-                className={classNames}
-                data-dropdown-id={id}
 
                 title={title}
+                ref={containerRef}
                 {...dataAttributes}
+                data-dropdown-id={id}
+                className={classNames}
             >
                 <DropdownLabel
                     selectedItem={value}
@@ -151,28 +173,31 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
                 />
                 <div className="dropdown-menu">
                     {filteredItems.length > 0
-                        ?
-                        <ul
-                            className="dropdown-content"
-                            style={{ maxHeight: listMaxHeight }}
-                        >
-                            {filteredItems.map(item =>
-                                <DropdownItem
-                                    key={item.id}
+                        ? (
+                            <ul
+                                className="dropdown-content"
+                                style={{ maxHeight: listMaxHeight }}
+                            >
+                                {filteredItems.map(item =>
+                                    <DropdownItem
+                                        key={item.id}
 
-                                    item={item}
-                                    onClick={onItemClick}
-                                    selected={value?.value === item.value}
-                                />
-                            )}
-                        </ul>
-                        :
-                        <span className="dropdown-content dropdown-item is-italic has-text-grey">
-                            {isNullOrEmpty(searchValue) ? noDataText : noDataByQuery}
-                        </span>
+                                        item={item}
+                                        onClick={onItemClick}
+                                        selected={value?.value === item.value}
+                                    />
+                                )}
+                            </ul>
+                        )
+                        : (
+                            <span className="dropdown-content dropdown-item is-italic has-text-grey">
+                                {isNullOrEmpty(searchValue) ? noDataText : noDataByQuery}
+                            </span>
+                        )
                     }
                 </div>
             </div>
+
             <InternalHint
                 hint={hint}
                 validationState={validationState}

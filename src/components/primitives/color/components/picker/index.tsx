@@ -1,9 +1,10 @@
+/* eslint-disable react/no-multi-comp */
 import { ChangeEvent, FC } from "react";
 
-import { getClassName, getFontColorFromString, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, getFontColorFromString, isNotNullish, isNullish } from "@bodynarf/utils";
 
 import { ElementPosition, BaseInputElementProps } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import InternalHint from "@bbr/internalComponent/hint";
 
 import { ColorPickerCssProperties, ColorPickerPreviewConfig } from "../..";
@@ -14,6 +15,7 @@ export type ColorPickerControlProps = Omit<
     | "placeholder"
     | "rounded" | "readonly"
     | "loading" | "className"
+    | "onKeyDown" | "onKeyUp"
 > & {
     /** Current color value */
     value: string;
@@ -24,11 +26,11 @@ export type ColorPickerControlProps = Omit<
     /** Class names of control */
     elementClassName: string;
 
-    /** Handler of control value change*/
-    onValueChange: (event: ChangeEvent<HTMLInputElement>) => void;
-
     /** Preview element configuration */
     previewConfig?: ColorPickerPreviewConfig;
+
+    /** Handler of control value change*/
+    onValueChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 /** Color picker container component */
@@ -41,20 +43,19 @@ const ColorPickerControl: FC<ColorPickerControlProps> = ({
 
     hint, validationState,
 }) => {
-    if (!isNullOrUndefined(previewConfig)) {
+    if (isNotNullish(previewConfig)) {
         return (
             <PickerWithPreview
                 id={id}
                 size={size}
+                data={data}
                 value={value}
+                title={title}
                 disabled={disabled}
                 defaultValue={defaultValue}
                 onValueChange={onValueChange}
                 previewConfig={previewConfig}
                 elementClassName={elementClassName}
-
-                data={data}
-                title={title}
             />
         );
     }
@@ -63,18 +64,16 @@ const ColorPickerControl: FC<ColorPickerControlProps> = ({
         <>
             <div className="control bbr-input">
                 <input
-                    type="color"
-
                     id={id}
                     name={id}
+                    {...data}
+                    type="color"
+                    title={title}
                     disabled={disabled}
                     autoFocus={autoFocus}
                     onChange={onValueChange}
                     defaultValue={defaultValue}
                     className={elementClassName}
-
-                    {...data}
-                    title={title}
                 />
             </div>
             <InternalHint
@@ -88,8 +87,10 @@ const ColorPickerControl: FC<ColorPickerControlProps> = ({
 export default ColorPickerControl;
 
 /** Picker sub component with preview */
-// eslint-disable-next-line react/no-multi-comp
-const PickerWithPreview: FC<ColorPickerControlProps> = ({
+const PickerWithPreview: FC<
+    & Omit<ColorPickerControlProps, "previewConfig">
+    & Required<Pick<ColorPickerControlProps, "previewConfig">>
+> = ({
     elementClassName,
     disabled, size,
     defaultValue, onValueChange, value, autoFocus = false,
@@ -97,44 +98,62 @@ const PickerWithPreview: FC<ColorPickerControlProps> = ({
     previewConfig,
     hint, validationState,
 }) => {
-    const classNames = getClassName([
-        "bbr-color-picker__preview",
-        "button",
-        "is-outlined",
-        isNullOrUndefined(size) ? "" : `is-${size}`
-    ]);
+        const classNames = getClassName([
+            "bbr-color-picker__preview",
+            "button",
+            "is-outlined",
+            getSizeClassName(size)
+        ]);
 
-    const color = getFontColorFromString(value);
-    const dataAttributes = isNullOrUndefined(data)
-        ? undefined
-        : mapDataAttributes(data!);
+        const color = getFontColorFromString(value);
+        const dataAttributes = isNullish(data)
+            ? undefined
+            : mapDataAttributes(data);
 
-    const controlContainerClassName = getClassName([
-        "control",
-        "bbr-input",
-        "is-flex-grow-1",
-        previewConfig!.position === ElementPosition.Left ? "ml-1" : "mr-1",
-    ]);
+        const controlContainerClassName = getClassName([
+            "control",
+            "bbr-input",
+            "is-flex-grow-1",
+            previewConfig.position === ElementPosition.Left ? "ml-1" : "mr-1",
+        ]);
 
-    if (previewConfig!.position === ElementPosition.Right) {
-        return (
-            <div className="is-flex is-flex-direction-row is-flex-wrap-nowrap is-justify-content-start">
-                <div className={controlContainerClassName}>
-                    <input
-                        type="color"
-
-                        id={id}
-                        name={id}
-                        disabled={disabled}
-                        autoFocus={autoFocus}
-                        onChange={onValueChange}
-                        defaultValue={defaultValue}
-                        className={elementClassName}
-
-                        title={title}
-                        {...dataAttributes}
+        if (previewConfig.position === ElementPosition.Right) {
+            return (
+                <div className="is-flex is-flex-direction-row is-flex-wrap-nowrap is-justify-content-start">
+                    <div className={controlContainerClassName}>
+                        <input
+                            id={id}
+                            name={id}
+                            type="color"
+                            title={title}
+                            disabled={disabled}
+                            {...dataAttributes}
+                            autoFocus={autoFocus}
+                            onChange={onValueChange}
+                            defaultValue={defaultValue}
+                            className={elementClassName}
+                        />
+                    </div>
+                    <button
+                        type="button"
+                        className={classNames}
+                        style={{
+                            "--color-picker__background-color": value,
+                            "--color-picker__color": color,
+                        } as ColorPickerCssProperties}
+                    >
+                        {value}
+                    </button>
+                    <InternalHint
+                        hint={hint}
+                        validationState={validationState}
                     />
                 </div>
+            );
+        }
+
+        return (
+            <div className="is-flex is-flex-direction-row is-flex-wrap-nowrap is-justify-content-start">
                 <button
                     type="button"
                     className={classNames}
@@ -145,46 +164,24 @@ const PickerWithPreview: FC<ColorPickerControlProps> = ({
                 >
                     {value}
                 </button>
+                <div className={controlContainerClassName}>
+                    <input
+                        id={id}
+                        name={id}
+                        type="color"
+                        title={title}
+                        disabled={disabled}
+                        {...dataAttributes}
+                        autoFocus={autoFocus}
+                        onChange={onValueChange}
+                        defaultValue={defaultValue}
+                        className={elementClassName}
+                    />
+                </div>
                 <InternalHint
                     hint={hint}
                     validationState={validationState}
                 />
             </div>
         );
-    }
-
-    return (
-        <div className="is-flex is-flex-direction-row is-flex-wrap-nowrap is-justify-content-start">
-            <button
-                type="button"
-                className={classNames}
-                style={{
-                    "--color-picker__background-color": value,
-                    "--color-picker__color": color,
-                } as ColorPickerCssProperties}
-            >
-                {value}
-            </button>
-            <div className={controlContainerClassName}>
-                <input
-                    type="color"
-
-                    id={id}
-                    name={id}
-                    disabled={disabled}
-                    autoFocus={autoFocus}
-                    onChange={onValueChange}
-                    defaultValue={defaultValue}
-                    className={elementClassName}
-
-                    title={title}
-                    {...dataAttributes}
-                />
-            </div>
-            <InternalHint
-                hint={hint}
-                validationState={validationState}
-            />
-        </div>
-    );
-};
+    };

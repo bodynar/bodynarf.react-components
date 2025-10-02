@@ -1,9 +1,9 @@
 import { ChangeEvent, FC, useCallback } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import InternalHint from "@bbr/internalComponent/hint";
 
 import { MultilineProps } from "../..";
@@ -18,6 +18,8 @@ const MultilineWithoutLabel: FC<MultilineProps> = ({
     loading = false, fixed = false, autoFocus = false,
     rows,
     onBlur,
+    onKeyDown,
+    onKeyUp,
 
     className, title, data,
     hint,
@@ -29,7 +31,7 @@ const MultilineWithoutLabel: FC<MultilineProps> = ({
 
     const elClassName = getClassName([
         className,
-        size === ElementSize.Normal ? "" : `is-${size}`,
+        getSizeClassName(size, ElementSize.Normal),
         getStyleClassName(style, validationState),
         "textarea",
         fixed ? "has-fixed-size" : "",
@@ -41,9 +43,7 @@ const MultilineWithoutLabel: FC<MultilineProps> = ({
         loading ? "is-loading" : "",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
-        ? undefined
-        : mapDataAttributes(data!);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <div
@@ -54,17 +54,18 @@ const MultilineWithoutLabel: FC<MultilineProps> = ({
                     id={name}
                     name={name}
                     rows={rows}
+                    title={title}
                     onBlur={onBlur}
-                    readOnly={readonly}
+                    onKeyUp={onKeyUp}
                     disabled={disabled}
                     onChange={onChange}
+                    readOnly={readonly}
+                    {...dataAttributes}
                     autoFocus={autoFocus}
+                    onKeyDown={onKeyDown}
                     className={elClassName}
                     placeholder={placeholder}
                     defaultValue={defaultValue}
-
-                    title={title}
-                    {...dataAttributes}
                 />
             </div>
             <InternalHint
