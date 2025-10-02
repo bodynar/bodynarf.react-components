@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 
-import { emptyFn, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
@@ -29,8 +29,8 @@ const Accordion: FC<AccordionProps> = ({
     );
 
     useEffect(() => {
-        if (defaultExpanded && !isNullOrUndefined(expandablePanelRef.current)) {
-            setMaxHeight(expandablePanelRef.current!.scrollHeight);
+        if (defaultExpanded && isNotNullish(expandablePanelRef.current)) {
+            setMaxHeight(expandablePanelRef.current.scrollHeight);
         }
     }, [defaultExpanded, size]);
 
@@ -45,9 +45,9 @@ const Accordion: FC<AccordionProps> = ({
         className,
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
     return (
         <article

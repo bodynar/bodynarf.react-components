@@ -24,9 +24,12 @@ export const useEventListener = <K extends keyof WindowEventMap>(
 
     useEffect(() => {
         const eventListener = (e: WindowEventMap[K]) => savedHandler.current(e);
+
         if (element) {
             element.addEventListener(event, eventListener as EventListener);
             return () => element.removeEventListener(event, eventListener as EventListener);
         }
+
+        return undefined;
     }, [event, element]);
 };

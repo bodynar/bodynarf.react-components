@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullish } from "@bodynarf/utils";
 
 import { mapDataAttributes } from "@bbr/utils";
 
@@ -38,9 +38,9 @@ const Table: FC<TableProps> = ({
         headerBorderless ? "has-borderless-header" : "",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
     return (
         <table

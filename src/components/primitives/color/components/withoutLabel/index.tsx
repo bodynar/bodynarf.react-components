@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
 
-import { generateGuid, getClassName, hexToRgb, isNullOrUndefined, rgbToHex, whiteHex } from "@bodynarf/utils";
+import { generateGuid, getClassName, hexToRgb, isNullish, rgbToHex, whiteHex } from "@bodynarf/utils";
 
 import { getSizeClassName } from "@bbr/utils";
 
@@ -19,9 +19,9 @@ const ColorPickerWithoutLabel: FC<ColorPickerProps> = ({
     className, title, data,
     hint,
 }) => {
-    const defaultColor = isNullOrUndefined(defaultValue)
+    const defaultColor = isNullish(defaultValue)
         ? whiteHex
-        : rgbToHex(defaultValue!);
+        : rgbToHex(defaultValue);
 
     const [value, setValue] = useState(defaultColor);
 

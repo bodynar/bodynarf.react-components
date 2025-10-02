@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullOrEmpty, isNullish } from "@bodynarf/utils";
 
 import { ElementPosition } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
@@ -29,9 +29,9 @@ const ButtonWithIcon: FC<ButtonWithIconProps> = ({
         ? getClassName([className, "bbr-button--icon-only"])
         : className;
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
     if (icon.position === ElementPosition.Right) {
         return (

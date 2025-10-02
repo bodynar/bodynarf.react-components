@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback, useState } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullish } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getSizeClassName, mapDataAttributes } from "@bbr/utils";
@@ -51,9 +51,9 @@ const Search: FC<SearchProps> = ({
         rounded ? "is-rounded" : "",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
     if (searchType === "byButton") {
         return (

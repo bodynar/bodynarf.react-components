@@ -1,8 +1,8 @@
 import { ChangeEvent, FC, useCallback, useState } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNullish } from "@bodynarf/utils";
 
-import { ElementSize } from "@bbr/types";
+import { BaseInputWithLabel, ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
@@ -10,7 +10,7 @@ import InternalHint from "@bbr/internalComponent/hint";
 
 import { PasswordProps } from "../..";
 
-const PasswordWithLabel: FC<PasswordProps> = ({
+const PasswordWithLabel: FC<BaseInputWithLabel<PasswordProps>> = ({
     defaultValue,
     onValueChange = emptyFn, validationState,
     name = generateGuid(),
@@ -50,15 +50,15 @@ const PasswordWithLabel: FC<PasswordProps> = ({
         "bbr-password__wrapper",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
     return (
         <ComponentWithLabel
             id={name}
             size={size}
-            label={label!}
+            label={label}
         >
             <div className={inputContainerClassName}>
                 <input

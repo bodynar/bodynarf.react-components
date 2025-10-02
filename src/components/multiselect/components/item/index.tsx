@@ -1,6 +1,6 @@
 import { FC, useCallback } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { ElementPosition } from "@bbr/types";
 import Icon from "@bbr/components/icon";
@@ -54,7 +54,7 @@ const MultiselectItem: FC<MultiselectItemProps> = ({
         [item, onItemClick]
     );
 
-    if (!isNullOrUndefined(item.icon)) {
+    if (isNotNullish(item.icon)) {
         return (
             <MultiselectItemWithIcon
                 item={item}
@@ -75,10 +75,9 @@ const MultiselectItem: FC<MultiselectItemProps> = ({
 
     return (
         <li
-            className={className}
             onClick={onClick}
-
             title={item.title}
+            className={className}
             data-dropdown-id={rootId}
         >
             <Checkbox
@@ -144,9 +143,8 @@ const MultiselectItemWithIcon: FC<MultiselectItemProps> = ({
         return (
             <li
                 onClick={onClick}
-                className={className}
-
                 title={item.title}
+                className={className}
             >
                 <Checkbox
                     key={item.id + selected}
@@ -170,9 +168,8 @@ const MultiselectItemWithIcon: FC<MultiselectItemProps> = ({
     return (
         <li
             onClick={onClick}
-            className={className}
-
             title={item.title}
+            className={className}
             data-dropdown-id={rootId}
         >
             <Checkbox

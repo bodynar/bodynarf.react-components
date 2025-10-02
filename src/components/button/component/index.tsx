@@ -1,7 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import { FC } from "react";
 
-import { isNullOrEmpty, isNullOrUndefined, getClassName } from "@bodynarf/utils";
+import { isNullOrEmpty, isNotNullish, isNullish, getClassName } from "@bodynarf/utils";
 
 import { getSizeClassName } from "@bbr/utils";
 
@@ -17,7 +17,7 @@ import SimpleButton from "../components/simpleButton";
  * @throws Caption is not defined and icon configuration is not defined at the same time
  */
 const Button: FC<ButtonProps> = (props) => {
-    if (isNullOrEmpty(props.caption) && isNullOrUndefined(props.icon)) {
+    if (isNullOrEmpty(props.caption) && isNullish(props.icon)) {
         throw new Error("No button content provided.");
     }
 
@@ -42,11 +42,11 @@ const Button: FC<ButtonProps> = (props) => {
         isStatic ? "is-static" : "",
     ]);
 
-    if (!isNullOrUndefined(props.icon)) {
+    if (isNotNullish(props.icon)) {
         return (
             <ButtonWithIcon
                 {...props}
-                icon={props.icon!}
+                icon={props.icon}
                 className={className}
             />
         );

@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullish, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
@@ -45,7 +45,7 @@ const CheckBox: FC<CheckBoxProps> = ({
         ? undefined
         : mapDataAttributes(data);
 
-    if (!isNullish(label) && isFormLabel) {
+    if (isNotNullish(label) && isFormLabel) {
         return (
             <ComponentWithLabel
                 id={name}
@@ -75,7 +75,7 @@ const CheckBox: FC<CheckBoxProps> = ({
         );
     }
 
-    const isEmptyLabel = isNullOrUndefined(label);
+    const isEmptyLabel = isNullish(label);
 
     const labelClassName = isEmptyLabel
         ? "is-empty"
@@ -83,7 +83,7 @@ const CheckBox: FC<CheckBoxProps> = ({
 
     const labelDataAttributes = isNullish(label?.data)
         ? undefined
-        : mapDataAttributes(label!.data);
+        : mapDataAttributes(label.data);
 
     return (
         <div

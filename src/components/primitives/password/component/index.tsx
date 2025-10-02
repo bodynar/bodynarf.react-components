@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { isNullOrUndefined } from "@bodynarf/utils";
+import { isNullish } from "@bodynarf/utils";
 
 import "./style.scss";
 
@@ -10,9 +10,16 @@ import PasswordWithoutLabel from "../components/withoutLabel";
 
 /** Password input component */
 const Password: FC<PasswordProps> = (props) => {
-    return isNullOrUndefined(props.label)
+    // eslint-disable-next-line react/destructuring-assignment
+    return isNullish(props.label)
         ? <PasswordWithoutLabel {...props} />
-        : <PasswordWithLabel {...props} />;
+        : (
+            <PasswordWithLabel
+                {...props}
+                // eslint-disable-next-line react/destructuring-assignment
+                label={props.label}
+            />
+        );
 };
 
 export default Password;

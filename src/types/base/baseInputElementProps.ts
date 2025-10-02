@@ -1,8 +1,10 @@
-import { BaseElementProps, ElementColor, ElementSize, HintConfiguration, ValidationState, LabelConfiguration } from "@bbr/types";
+import { BaseElementProps, ElementColor, ElementSize, HintConfiguration, ValidationState } from "@bbr/types";
+import { LabeledElement } from "./labeledElement";
 
 /** Base properties for input components */
 export type BaseInputElementProps<TValue> =
     & BaseElementProps
+    & Partial<LabeledElement>
     & {
         /** Default value of input component*/
         defaultValue?: TValue;
@@ -21,9 +23,6 @@ export type BaseInputElementProps<TValue> =
 
         /** Component size */
         size?: ElementSize;
-
-        /** Label configuration */
-        label?: LabelConfiguration;
 
         /** Displaying loading state of component as spinner in right end of component */
         loading?: boolean;
@@ -64,3 +63,8 @@ export type BaseNotNullableInputElementProps<TValue> = BaseInputElementProps<TVa
     /** Value change handler. Changed value must be stored outside of component */
     onValueChange?: (value: TValue) => void;
 };
+
+/** Base type for component props type with defined label */
+export type BaseInputWithLabel<TElement extends BaseInputElementProps<unknown>> =
+    & Omit<TElement, "label">
+    & LabeledElement;

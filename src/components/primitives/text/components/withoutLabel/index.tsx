@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNullish } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -42,9 +42,9 @@ const TextWithoutLabel: FC<TextProps> = ({
         loading ? "is-loading" : "",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
     return (
         <div

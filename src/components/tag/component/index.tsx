@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
 
 import { ElementColor, ElementSize } from "@bbr/types";
 import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
@@ -18,7 +18,7 @@ const Tag: FC<TagProps> = ({
     onClick,
     className, title, data,
 }) => {
-    if (!isNullOrUndefined(customColor)) {
+    if (isNotNullish(customColor)) {
         style = ElementColor.Default;
     }
 
@@ -27,16 +27,16 @@ const Tag: FC<TagProps> = ({
         "tag",
         className,
         getElementColorClassName(style),
-        !isNullOrUndefined(customColor) ? "bbr-tag--custom" : "",
-        lightColor && isNullOrUndefined(customColor) ? "is-light" : "",
+        isNotNullish(customColor) ? "bbr-tag--custom" : "",
+        lightColor && isNullish(customColor) ? "is-light" : "",
         rounded ? "is-rounded" : "",
         getSizeClassName(size, ElementSize.Normal),
-        isNullOrUndefined(onClick) ? "" : "is-clickable",
+        isNullish(onClick) ? "" : "is-clickable",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
     return (
         <span
@@ -45,7 +45,7 @@ const Tag: FC<TagProps> = ({
             {...dataAttributes}
             className={elClassName}
 
-            style={isNullOrUndefined(customColor)
+            style={isNullish(customColor)
                 ? undefined
                 : {
                     color: customColor?.color,

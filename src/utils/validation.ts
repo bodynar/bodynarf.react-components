@@ -1,4 +1,4 @@
-import { isNullOrUndefined } from "@bodynarf/utils";
+import { isNullish } from "@bodynarf/utils";
 
 import { ElementColor, ValidationState, ValidationStatus } from "@bbr/types";
 
@@ -14,13 +14,13 @@ export const getStyleClassName = (
     style?: ElementColor,
     validationState?: ValidationState
 ): string => {
-    if (isNullOrUndefined(validationState) || validationState!.status === ValidationStatus.None) {
-        return isNullOrUndefined(style)
+    if (isNullish(validationState) || validationState.status === ValidationStatus.None) {
+        return isNullish(style)
             ? ""
             : `is-${style}`;
     }
 
-    return validationState!.status === ValidationStatus.Invalid
+    return validationState.status === ValidationStatus.Invalid
         ? "is-danger"
         : "is-success";
 };

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 import { FC, ReactNode } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullish } from "@bodynarf/utils";
 
 import { getPositionClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import { ElementIcon, ElementPosition, ElementSize } from "@bbr/types";
@@ -35,9 +35,9 @@ const BreadCrumbs: FC<BreadcrumbsProps> = ({
         getPositionClassName(position),
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
     return (
         <nav
@@ -76,7 +76,7 @@ type BreadCrumbItemProps = {
 const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
     item, icon
 }) => {
-    if (isNullOrUndefined(icon)) {
+    if (isNullish(icon)) {
         return (
             <a
                 href={item.href ?? item.path}
@@ -86,13 +86,13 @@ const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
         );
     }
 
-    if (icon?.position === ElementPosition.Right) {
+    if (icon.position === ElementPosition.Right) {
         return (
             <a
                 href={item.href ?? item.path}
             >
                 {item.caption}
-                <Icon {...icon!} />
+                <Icon {...icon} />
             </a>
         );
     }
@@ -102,7 +102,7 @@ const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
             href={item.href ?? item.path}
         >
 
-            <Icon {...icon!} />
+            <Icon {...icon} />
             {item.caption}
         </a>
     );

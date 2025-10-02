@@ -149,7 +149,7 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
 
     const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
     return (
         <>

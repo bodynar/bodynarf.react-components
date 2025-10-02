@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback, useRef, useState } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullish, isNullOrUndefined, Optional } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNotNullish, isNullish, Optional } from "@bodynarf/utils";
 
 import { ElementSize, ElementPosition } from "@bbr/types";
 import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -36,7 +36,7 @@ const FileUpload: FC<FileUploadProps> = ({
             const firstFile = event.target.files?.[0];
             onValueChange(firstFile);
 
-            if (displayFileName && !isNullish(firstFile)) {
+            if (displayFileName && isNotNullish(firstFile)) {
                 const fileName = firstFile.name;
 
                 setSelectedFileName(fileName);
@@ -64,11 +64,11 @@ const FileUpload: FC<FileUploadProps> = ({
         className,
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
-    const shouldDisplayFileName = displayFileName && !isNullish(selectedFileName);
+    const shouldDisplayFileName = displayFileName && isNotNullish(selectedFileName);
 
     return (
         <div className={containerClassName}>

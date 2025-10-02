@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { isNullOrUndefined } from "@bodynarf/utils";
+import { isNullish } from "@bodynarf/utils";
 
 import "./style.scss";
 
@@ -10,9 +10,16 @@ import ColorPickerWithLabel from "../components/withLabel";
 
 /** Color picker component */
 const ColorPicker: FC<ColorPickerProps> = (props) =>
-    isNullOrUndefined(props.label)
+    // eslint-disable-next-line react/destructuring-assignment
+    isNullish(props.label)
         ? <ColorPickerWithoutLabel {...props} />
-        : <ColorPickerWithLabel {...props} />
+        : (
+            <ColorPickerWithLabel
+                {...props}
+                // eslint-disable-next-line react/destructuring-assignment
+                label={props.label}
+            />
+        )
     ;
 
 export default ColorPicker;

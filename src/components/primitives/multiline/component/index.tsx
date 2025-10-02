@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { isNullOrUndefined } from "@bodynarf/utils";
+import { isNullish } from "@bodynarf/utils";
 
 import { MultilineProps } from "..";
 import MultilineWithoutLabel from "../components/withoutLabel";
@@ -8,9 +8,16 @@ import MultilineWithLabel from "../components/withLabel";
 
 /** Multiline textual input component */
 const Multiline: FC<MultilineProps> = (props) => {
-    return isNullOrUndefined(props.label)
+    // eslint-disable-next-line react/destructuring-assignment
+    return isNullish(props.label)
         ? <MultilineWithoutLabel {...props} />
-        : <MultilineWithLabel {...props} />;
+        : (
+            <MultilineWithLabel
+                {...props}
+                // eslint-disable-next-line react/destructuring-assignment
+                label={props.label}
+            />
+        );
 
 };
 

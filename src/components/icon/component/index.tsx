@@ -29,7 +29,7 @@ const Icon: FC<IconProps> = ({
 
     const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
     return (
         <i

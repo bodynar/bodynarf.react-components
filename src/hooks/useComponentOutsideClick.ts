@@ -1,6 +1,6 @@
 import { DependencyList, useCallback, useEffect } from "react";
 
-import { isNullOrUndefined, isNull, ActionFn } from "@bodynarf/utils";
+import { isNullish, isNull, ActionFn } from "@bodynarf/utils";
 
 /**
  * Subscribe to component outside click
@@ -22,7 +22,7 @@ export const useComponentOutsideClick = (
             if (clickHandleCondition) {
                 const target: HTMLElement = event.target as HTMLElement;
 
-                if (isNullOrUndefined(target)) {
+                if (isNullish(target)) {
                     return;
                 }
 

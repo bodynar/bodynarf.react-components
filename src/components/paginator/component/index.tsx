@@ -1,6 +1,6 @@
 import { useCallback, useMemo, MouseEvent, FC } from "react";
 
-import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullOrEmpty, isNullish } from "@bodynarf/utils";
 
 import { getPositionClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import { ElementPosition, ElementSize } from "@bbr/types";
@@ -34,11 +34,11 @@ const Paginator: FC<PaginatorProps> = ({
 
             const pageRaw = target.dataset["page"];
 
-            if (isNullOrEmpty(pageRaw)) {
+            if (isNullish(pageRaw) || isNullOrEmpty(pageRaw)) {
                 return;
             }
 
-            const page = +pageRaw!;
+            const page = +(pageRaw);
 
             if (page !== currentPage && page > 0 && page <= count) {
                 onPageChange(page);
@@ -58,9 +58,9 @@ const Paginator: FC<PaginatorProps> = ({
         getSizeClassName(size),
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
     return (
         <nav

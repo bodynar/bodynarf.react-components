@@ -1,6 +1,6 @@
 import { useCallback, useState, MouseEvent, FC } from "react";
 
-import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNullOrEmpty, isNullish } from "@bodynarf/utils";
 
 import { ElementPosition, ElementSize } from "@bbr/types";
 import { getPositionClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
@@ -34,11 +34,11 @@ const Tabs: FC<TabsProps> = ({
         (event: MouseEvent<HTMLElement>) => {
             const closestTab = (event.target as HTMLElement).closest(".bbr-tabs__tab");
 
-            if (isNullOrUndefined(closestTab)) {
+            if (isNullish(closestTab)) {
                 return;
             }
 
-            const itemId = closestTab!.attributes.getNamedItem("data-item-id")?.value ?? "";
+            const itemId = closestTab.attributes.getNamedItem("data-item-id")?.value ?? "";
 
             if (isNullOrEmpty(itemId)) {
                 return;
@@ -46,11 +46,11 @@ const Tabs: FC<TabsProps> = ({
 
             const item = items.find(({ id }) => id === itemId);
 
-            if (isNullOrUndefined(item) || item === activeItem) {
+            if (isNullish(item) || item === activeItem) {
                 return;
             }
 
-            setActiveItem(item!);
+            setActiveItem(item);
         },
         [activeItem, items]
     );
@@ -67,9 +67,9 @@ const Tabs: FC<TabsProps> = ({
         fullWidth ? "is-fullwidth" : "",
     ]);
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
     return (
         <nav

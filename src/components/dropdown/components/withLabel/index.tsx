@@ -1,25 +1,25 @@
 import { FC, useId } from "react";
 
-import { ElementSize } from "@bbr/types";
+import { BaseInputWithLabel, ElementSize } from "@bbr/types";
 import LabelWrapper from "@bbr/internalComponent/componentWithLabel";
 
 import { DropdownProps } from "../..";
 import DropdownCompact from "../compact";
 
 /** Dropdown component with label */
-const DropdownWithLabel: FC<DropdownProps> = (props) => {
+const DropdownWithLabel: FC<BaseInputWithLabel<DropdownProps>> = (props) => {
     const id = useId();
 
     return (
         <LabelWrapper
             id={id}
-            label={props.label!}
+            // eslint-disable-next-line react/destructuring-assignment
+            label={props.label}
             size={ElementSize.Normal}
         >
             <DropdownCompact
-                {...props}
-
                 id={id}
+                {...props}
             />
         </LabelWrapper>
     );

@@ -3,3 +3,4 @@ export * from "./baseInputElementProps";
 export * from "./blurableElement";
 export * from "./clickableElement";
 export * from "./keyboardElement";
+export * from "./labeledElement";

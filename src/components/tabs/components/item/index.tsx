@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { getClassName, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { ElementPosition } from "@bbr/types";
 import Icon from "@bbr/components/icon";
@@ -20,7 +20,7 @@ export type TabItemProps = {
 const TabItem: FC<TabItemProps> = ({
     item, activeItem
 }) => {
-    if (!isNullOrUndefined(item.icon)) {
+    if (isNotNullish(item.icon)) {
         return (
             <TabItemWithIcon
                 item={item}

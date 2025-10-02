@@ -1,8 +1,8 @@
 import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
 
-import { generateGuid, getClassName, hexToRgb, isNullOrUndefined, rgbToHex, whiteHex } from "@bodynarf/utils";
+import { generateGuid, getClassName, hexToRgb, isNullish, rgbToHex, whiteHex } from "@bodynarf/utils";
 
-import { ElementSize } from "@bbr/types";
+import { BaseInputWithLabel, ElementSize } from "@bbr/types";
 import { getSizeClassName, getStyleClassName } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 
@@ -10,7 +10,7 @@ import { ColorPickerProps } from "../..";
 import ColorPickerControl from "../picker";
 
 /** Color picker component with form label */
-const ColorPickerWithLabel: FC<ColorPickerProps> = ({
+const ColorPickerWithLabel: FC<BaseInputWithLabel<ColorPickerProps>> = ({
     preview,
     name = generateGuid(),
     defaultValue, onValueChange,
@@ -22,9 +22,9 @@ const ColorPickerWithLabel: FC<ColorPickerProps> = ({
     hint,
     className, title, data,
 }) => {
-    const defaultColor = isNullOrUndefined(defaultValue)
+    const defaultColor = isNullish(defaultValue)
         ? whiteHex
-        : rgbToHex(defaultValue!);
+        : rgbToHex(defaultValue);
 
     const [value, setValue] = useState(defaultColor);
 
@@ -50,7 +50,7 @@ const ColorPickerWithLabel: FC<ColorPickerProps> = ({
         <ComponentWithLabel
             id={name}
             size={size}
-            label={label!}
+            label={label}
         >
             <ColorPickerControl
                 id={name}

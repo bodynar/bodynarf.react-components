@@ -1,4 +1,4 @@
-import { isNullOrUndefined } from "@bodynarf/utils";
+import { isNullish } from "@bodynarf/utils";
 
 import { DataAttributes } from "@bbr/types";
 
@@ -12,7 +12,7 @@ export const mapDataAttributes = (dataAttributes: DataAttributes): object => {
         Object
             .entries(dataAttributes)
             .reduce((result, [key, value]) => {
-                if (isNullOrUndefined(value)) {
+                if (isNullish(value)) {
                     return result;
                 }
 

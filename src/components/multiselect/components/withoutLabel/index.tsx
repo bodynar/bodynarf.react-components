@@ -1,6 +1,6 @@
 import { FC, useCallback, useId, useState, MouseEvent, useRef } from "react";
 
-import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNotNullish, isNullOrEmpty, isNullish } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -100,7 +100,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
 
             const target = event.target as HTMLElement;
 
-            if (isNullOrUndefined(target)) {
+            if (isNullish(target)) {
                 return;
             }
 
@@ -139,11 +139,11 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
     const labelComponentClassName = getStyleClassName(undefined, validationState);
     const selectedItemsCount = selectedItems.length;
 
-    const dataAttributes = isNullOrUndefined(data)
+    const dataAttributes = isNullish(data)
         ? undefined
-        : mapDataAttributes(data!);
+        : mapDataAttributes(data);
 
-    const deselectable = !isNullOrUndefined(onClear);
+    const deselectable = isNotNullish(onClear);
 
     return (
         <>

@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback, MouseEvent } from "react";
 
-import { getClassName, isNullOrEmpty, isNullOrUndefined } from "@bodynarf/utils";
+import { getClassName, isNotNullish, isNullOrEmpty } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import Icon from "@bbr/components/icon";
@@ -45,7 +45,7 @@ const DropdownLabelWithSearch: FC<DropdownLabelWithSearchProps> = ({
 
     const inputClassName = getClassName([
         "input",
-        deselectable && !isNullOrUndefined(selectedItem) ? "px-2" : "pl-0"
+        deselectable && isNotNullish(selectedItem) ? "px-2" : "pl-0"
     ]);
 
     const containerOnClick = useCallback(
@@ -68,7 +68,7 @@ const DropdownLabelWithSearch: FC<DropdownLabelWithSearchProps> = ({
             className={elClassName}
             onClick={containerOnClick}
         >
-            {!!deselectable && !isNullOrUndefined(selectedItem)
+            {!!deselectable && isNotNullish(selectedItem)
                 &&
                 <Icon
                     name="plus-lg"
