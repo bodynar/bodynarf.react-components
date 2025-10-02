@@ -1,10 +1,8 @@
 import { BaseElementProps, ElementColor, ElementSize, HintConfiguration, ValidationState, LabelConfiguration } from "@bbr/types";
-import { KeyboardElement } from "./keyboardElement";
 
 /** Base properties for input components */
 export type BaseInputElementProps<TValue> =
     & BaseElementProps
-    & KeyboardElement
     & {
         /** Default value of input component*/
         defaultValue?: TValue;
