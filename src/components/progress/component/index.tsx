@@ -65,9 +65,7 @@ const Progress: FC<ProgressProps> = ({
         animated ? "bbr-progress--animated" : "",
     ]);
 
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <div>

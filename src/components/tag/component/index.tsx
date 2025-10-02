@@ -34,9 +34,7 @@ const Tag: FC<TagProps> = ({
         isNullish(onClick) ? "" : "is-clickable",
     ]);
 
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <span

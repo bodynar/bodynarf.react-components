@@ -41,9 +41,7 @@ const CheckBox: FC<CheckBoxProps> = ({
         withoutBorder ? "has-no-border" : "",
     ]);
 
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data);
+    const dataAttributes = mapDataAttributes(data);
 
     if (isNotNullish(label) && isFormLabel) {
         return (

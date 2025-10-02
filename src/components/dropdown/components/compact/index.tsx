@@ -147,9 +147,7 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
 
     const labelComponentClassName = getStyleClassName(undefined, validationState);
 
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <>

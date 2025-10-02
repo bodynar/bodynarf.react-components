@@ -1,4 +1,4 @@
-import { isNullish } from "@bodynarf/utils";
+import { isNullish, Optional } from "@bodynarf/utils";
 
 import { DataAttributes } from "@bbr/types";
 
@@ -7,7 +7,11 @@ import { DataAttributes } from "@bbr/types";
  * @param dataAttributes Object with data attribute values
  * @returns Object that could be injected into react html element as data-* attribute values
  */
-export const mapDataAttributes = (dataAttributes: DataAttributes): object => {
+export const mapDataAttributes = (dataAttributes: Optional<DataAttributes>): object => {
+    if (isNullish(dataAttributes)) {
+        return {};
+    }
+
     const mappedAttributes =
         Object
             .entries(dataAttributes)
@@ -22,7 +26,7 @@ export const mapDataAttributes = (dataAttributes: DataAttributes): object => {
 
                 result[newKey] = value;
                 return result;
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
             }, {} as any);
 
     return mappedAttributes;

@@ -139,9 +139,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
     const labelComponentClassName = getStyleClassName(undefined, validationState);
     const selectedItemsCount = selectedItems.length;
 
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data);
+    const dataAttributes = mapDataAttributes(data);
 
     const deselectable = isNotNullish(onClear);
 

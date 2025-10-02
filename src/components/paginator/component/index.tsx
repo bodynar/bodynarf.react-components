@@ -58,9 +58,7 @@ const Paginator: FC<PaginatorProps> = ({
         getSizeClassName(size),
     ]);
 
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <nav

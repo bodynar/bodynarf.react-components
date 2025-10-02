@@ -67,9 +67,7 @@ const Tabs: FC<TabsProps> = ({
         fullWidth ? "is-fullwidth" : "",
     ]);
 
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <nav

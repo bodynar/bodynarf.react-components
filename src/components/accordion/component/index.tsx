@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 
-import { emptyFn, getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
+import { emptyFn, getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
@@ -45,9 +45,7 @@ const Accordion: FC<AccordionProps> = ({
         className,
     ]);
 
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <article

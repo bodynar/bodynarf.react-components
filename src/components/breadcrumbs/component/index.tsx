@@ -35,9 +35,7 @@ const BreadCrumbs: FC<BreadcrumbsProps> = ({
         getPositionClassName(position),
     ]);
 
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <nav

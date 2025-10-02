@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback, useState } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullish } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName } from "@bodynarf/utils";
 
 import { BaseInputWithLabel, ElementSize } from "@bbr/types";
 import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -50,9 +50,7 @@ const PasswordWithLabel: FC<BaseInputWithLabel<PasswordProps>> = ({
         "bbr-password__wrapper",
     ]);
 
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <ComponentWithLabel

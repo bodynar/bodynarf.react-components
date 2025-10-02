@@ -1,7 +1,5 @@
 import { FC } from "react";
 
-import { isNullish } from "@bodynarf/utils";
-
 import { mapDataAttributes } from "@bbr/utils";
 
 import { SimpleButtonProps } from "../..";
@@ -14,9 +12,7 @@ const SimpleButton: FC<SimpleButtonProps> = ({
 
     title, data
 }) => {
-    const dataAttributes = isNullish(data)
-        ? undefined
-        : mapDataAttributes(data);
+    const dataAttributes = mapDataAttributes(data);
 
     return (
         <button
