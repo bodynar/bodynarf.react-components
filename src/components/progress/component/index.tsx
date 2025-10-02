@@ -32,9 +32,7 @@ const Progress: FC<ProgressProps> = ({
             getSizeClassName(size),
         ]);
 
-        const dataAttributes = isNullish(data)
-            ? undefined
-            : mapDataAttributes(data);
+        const dataAttributes = mapDataAttributes(data);
 
         return (
             <div>
@@ -59,10 +57,10 @@ const Progress: FC<ProgressProps> = ({
 
     const elClassName = getClassName([
         "bbr-progress",
-        className,
+        animated ? "bbr-progress--animated" : "",
         getElementColorClassName(color),
         getSizeClassName(size),
-        animated ? "bbr-progress--animated" : "",
+        className,
     ]);
 
     const dataAttributes = mapDataAttributes(data);
@@ -75,15 +73,8 @@ const Progress: FC<ProgressProps> = ({
                     data-min={min}
                     data-max={max}
                     {...dataAttributes}
+                    className={elClassName}
                     data-value={progressValue}
-                    className={getClassName([
-                        "bbr-progress",
-                        "bbr-progress--custom",
-                        "bbr-progress--animated",
-                        className,
-                        getElementColorClassName(color),
-                        getSizeClassName(size),
-                    ])}
                 >
                     <div
                         className="bbr-progress-fill"
