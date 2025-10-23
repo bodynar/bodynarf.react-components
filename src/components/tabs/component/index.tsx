@@ -3,13 +3,13 @@ import { useCallback, useState, MouseEvent, FC } from "react";
 import { getClassName, isNullOrEmpty, isNullish } from "@bodynarf/utils";
 
 import { ElementPosition, ElementSize } from "@bbr/types";
+import { useUpdateEffect } from "@bbr/hooks";
 import { getPositionClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 
 import "./style.scss";
 
 import { TabItem, TabsProps, TabsStyle } from "..";
 import TabItemComponent from "../components/item";
-import { useMount } from "@bbr/hooks";
 
 /**
  * Tabs panel
@@ -55,7 +55,7 @@ const Tabs: FC<TabsProps> = ({
         [activeItem, items]
     );
 
-    useMount(() => onActiveItemChange(activeItem));
+    useUpdateEffect(() => onActiveItemChange(activeItem));
 
     const elClassName = getClassName([
         "bbr-tabs",

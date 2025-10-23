@@ -1,6 +1,6 @@
 {
     "name": "@bodynarf/react.components",
-    "version": "1.13.6",
+    "version": "1.13.7",
     "author": {
         "name": "Artem",
         "email": "bodynar@gmail.com"
@@ -28,8 +28,7 @@
         "build_transfer": "npm run build && npm run transfer",
         "prepublish": "npm run build_transfer && cd dist && npm pack",
         "publish_pkg": "npm run build_transfer && cd dist && npm publish --access=public",
-        "lint": "npx eslint src/**/*.ts src/**/*.tsx",
-        "prep_dev": "copyfiles src/**/*.* demo/src/components"
+        "lint": "npx eslint src/**/*.ts src/**/*.tsx"
     },
     "devDependencies": {
         "@eslint/js": "^9.30.1",
