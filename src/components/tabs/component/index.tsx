@@ -55,7 +55,7 @@ const Tabs: FC<TabsProps> = ({
         [activeItem, items]
     );
 
-    useUpdateEffect(() => onActiveItemChange(activeItem));
+    useUpdateEffect(() => onActiveItemChange(activeItem), [activeItem]);
 
     const elClassName = getClassName([
         "bbr-tabs",
