@@ -1,6 +1,10 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.3.0
+- **Number**
+  - Added the `resetToDefaultOnBlur` prop: when enabled, resets the value to `defaultValue` (or `0` if not specified) on focus out if the field is empty.
+
 ## v1.2.0
 - **Accordion**
   - Fixed an issue where the height changed incorrectly when the component’s `size` prop was updated.

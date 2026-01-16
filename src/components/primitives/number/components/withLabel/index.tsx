@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useCallback } from "react";
+import { ChangeEvent, FC, FocusEvent, useCallback } from "react";
 
 import { emptyFn, generateGuid, getClassName, isNullish, isStringEmpty } from "@bodynarf/utils";
 
@@ -22,6 +22,7 @@ const NumberWithLabel: FC<
     onKeyDown,
     onKeyUp,
     step = 1,
+    resetToDefaultOnBlur = false,
 
     className, title, data,
     hint,
@@ -30,6 +31,18 @@ const NumberWithLabel: FC<
             (event: ChangeEvent<HTMLInputElement>) =>
                 onValueChange(isStringEmpty(event.target.value) ? undefined : +event.target.value),
             [onValueChange]
+        );
+
+        const onInputBlur = useCallback(
+            (event: FocusEvent<HTMLInputElement>) => {
+                if (resetToDefaultOnBlur && isStringEmpty(event.target.value)) {
+                    const resetValue = defaultValue ?? 0;
+                    event.target.value = resetValue.toString();
+                    onValueChange(resetValue);
+                }
+                onBlur?.();
+            },
+            [resetToDefaultOnBlur, defaultValue, onValueChange, onBlur]
         );
 
         const elClassName = getClassName([
@@ -58,16 +71,16 @@ const NumberWithLabel: FC<
                 <div className={inputContainerClassName}>
                     <input
                         id={name}
-                        name={name}
                         step={step}
-                        type="number"
+                        name={name}
                         title={title}
-                        onBlur={onBlur}
+                        type="number"
                         onKeyUp={onKeyUp}
                         onChange={onChange}
                         readOnly={readonly}
                         disabled={disabled}
                         {...dataAttributes}
+                        onBlur={onInputBlur}
                         onKeyDown={onKeyDown}
                         autoFocus={autoFocus}
                         className={elClassName}

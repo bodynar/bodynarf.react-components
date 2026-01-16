@@ -1,6 +1,6 @@
-import { ChangeEvent, FC, useCallback } from "react";
+import { ChangeEvent, FC, FocusEvent, useCallback } from "react";
 
-import { emptyFn, generateGuid, getClassName } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isStringEmpty } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
@@ -20,13 +20,27 @@ const NumberWithoutLabel: FC<NumberProps> = ({
     onKeyDown,
     onKeyUp,
     step = 1,
+    resetToDefaultOnBlur = false,
 
     className, title, data,
     hint,
 }) => {
     const onChange = useCallback(
-        (event: ChangeEvent<HTMLInputElement>) => onValueChange(+event.target.value),
+        (event: ChangeEvent<HTMLInputElement>) =>
+            onValueChange(isStringEmpty(event.target.value) ? undefined : +event.target.value),
         [onValueChange]
+    );
+
+    const onInputBlur = useCallback(
+        (event: FocusEvent<HTMLInputElement>) => {
+            if (resetToDefaultOnBlur && isStringEmpty(event.target.value)) {
+                const resetValue = defaultValue ?? 0;
+                event.target.value = resetValue.toString();
+                onValueChange(resetValue);
+            }
+            onBlur?.();
+        },
+        [resetToDefaultOnBlur, defaultValue, onValueChange, onBlur]
     );
 
     const elClassName = getClassName([
@@ -52,16 +66,16 @@ const NumberWithoutLabel: FC<NumberProps> = ({
             <div className={containerClassName}>
                 <input
                     id={name}
-                    name={name}
                     step={step}
-                    type="number"
+                    name={name}
                     title={title}
-                    onBlur={onBlur}
+                    type="number"
                     onKeyUp={onKeyUp}
                     onChange={onChange}
                     readOnly={readonly}
                     disabled={disabled}
                     {...dataAttributes}
+                    onBlur={onInputBlur}
                     onKeyDown={onKeyDown}
                     autoFocus={autoFocus}
                     className={elClassName}
