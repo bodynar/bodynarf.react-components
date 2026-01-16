@@ -5,6 +5,7 @@ import { getClassName } from "@bodynarf/utils";
 import { ElementSize } from "@bbr/types";
 import { getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import Button, { ButtonStyle } from "@bbr/components/button";
+import Icon from "@bbr/components/icon";
 
 import "./style.scss";
 import { SearchProps } from "..";
@@ -17,6 +18,7 @@ const Search: FC<SearchProps> = ({
     isLoading = false, rounded = false, disabled = false,
     autoFocus = false,
     searchButtonCaption = "Search", searchButtonTitle,
+    showIcon = false,
 
     className, title, data,
 }) => {
@@ -42,6 +44,7 @@ const Search: FC<SearchProps> = ({
         getSizeClassName(size),
         isLoading ? "is-loading" : "",
         searchType === "byButton" ? "is-expanded" : "",
+        showIcon ? "has-icons-left" : "",
     ]);
 
     const inputClassName: string = getClassName([
@@ -70,6 +73,17 @@ const Search: FC<SearchProps> = ({
                         defaultValue={searchValue}
                         className={inputClassName}
                     />
+                    {showIcon
+                        ? (
+                            <span className={`icon is-left ${getSizeClassName(size)}`}>
+                                <Icon
+                                    size={size}
+                                    name="search"
+                                />
+                            </span>
+                        )
+                        : null
+                    }
                 </div>
                 <div className="control">
                     <Button
@@ -102,6 +116,17 @@ const Search: FC<SearchProps> = ({
                 defaultValue={searchValue}
                 className={inputClassName}
             />
+            {showIcon
+                ? (
+                    <span className={`icon is-left ${getSizeClassName(size)}`}>
+                        <Icon
+                            size={size}
+                            name="search"
+                        />
+                    </span>
+                )
+                : null
+            }
         </div>
     );
 };

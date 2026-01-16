@@ -5,6 +5,9 @@ All changes will be published here in reverse chronological order
 - **Number**
   - Added the `resetToDefaultOnBlur` prop: when enabled, resets the value to `defaultValue` (or `0` if not specified) on focus out if the field is empty.
 
+- **Search**
+  - Added optional search icon (magnifying glass) via `showIcon` prop. Icon size matches the input field size.
+
 ## v1.2.0
 - **Accordion**
   - Fixed an issue where the height changed incorrectly when the component’s `size` prop was updated.
