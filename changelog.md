@@ -8,6 +8,12 @@ All changes will be published here in reverse chronological order
 - **Search**
   - Added optional search icon (magnifying glass) via `showIcon` prop. Icon size matches the input field size.
 
+- **Switch** *(new)*
+  - Added new toggle/switch component with Bulma styling.
+  - Supports `size`, `style` (color), `label`, `name`, `onValueChange`, `defaultValue`, `className` props.
+  - Additional style options: `rounded` (pill shape), `outlined`, `thin`, `rtl` (right-to-left mode).
+  - Supports form label mode via `isFormLabel` prop.
+
 ## v1.2.0
 - **Accordion**
   - Fixed an issue where the height changed incorrectly when the component’s `size` prop was updated.

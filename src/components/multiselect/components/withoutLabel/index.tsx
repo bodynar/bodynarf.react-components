@@ -222,11 +222,9 @@ const DropdownContent: FC<DropdownContentProps> = ({
 
     if (items.length === 0) {
         return (
-            <div className="dropdown-content">
-                <span className="dropdown-item">
-                    {noDataText}
-                </span>
-            </div>
+            <span className="dropdown-content dropdown-item is-italic has-text-grey">
+                {noDataText}
+            </span>
         );
     }
 
@@ -249,7 +247,7 @@ const DropdownContent: FC<DropdownContentProps> = ({
                         size={ElementSize.Small}
                     />
                 </div>
-                <span className="dropdown-item">
+                <span className="dropdown-item is-italic has-text-grey">
                     {noDataByQuery}
                 </span>
             </div>
