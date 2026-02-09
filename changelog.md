@@ -14,6 +14,13 @@ All changes will be published here in reverse chronological order
   - Additional style options: `rounded` (pill shape), `outlined`, `thin`, `rtl` (right-to-left mode).
   - Supports form label mode via `isFormLabel` prop.
 
+- **Slider** *(new)*
+  - Added new range/slider component with Bulma styling.
+  - Supports `min`, `max`, `step`, `size`, `style` (color), `defaultValue`, `onValueChange`, `className` props.
+  - Additional options: `showValue` (tooltip with current value), `showMinMax` (min/max labels), `showProgress` (filled track).
+  - Supports vertical mode via `vertical` prop with configurable height.
+  - Circle style thumb available via `circle` prop.
+
 ## v1.2.0
 - **Accordion**
   - Fixed an issue where the height changed incorrectly when the component’s `size` prop was updated.
