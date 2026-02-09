@@ -21,6 +21,12 @@ All changes will be published here in reverse chronological order
   - Supports vertical mode via `vertical` prop with configurable height.
   - Circle style thumb available via `circle` prop.
 
+- **RadioGroup** *(new)*
+  - Added new radio group component for single selection from multiple options.
+  - Supports `items`, `value`, `onValueChange`, `size`, `style` (color), `name`, `className` props.
+  - Additional style options: `horizontal` (row layout), `block` (filled background), `circle`, `withoutBorder`, `hasBackgroundColor`.
+  - Each item can be individually disabled.
+
 ## v1.2.0
 - **Accordion**
   - Fixed an issue where the height changed incorrectly when the component’s `size` prop was updated.
