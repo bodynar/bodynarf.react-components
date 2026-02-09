@@ -27,6 +27,21 @@ All changes will be published here in reverse chronological order
   - Additional style options: `horizontal` (row layout), `block` (filled background), `circle`, `withoutBorder`, `hasBackgroundColor`.
   - Each item can be individually disabled.
 
+- **Stepper** *(new)*
+  - Added new stepper/progress indicator component for multi-step workflows.
+  - Supports `steps`, `currentStep`, `size`, `color`, `className` props.
+  - Additional options: `vertical` (vertical layout), `showNumbers` (step numbers vs checkmarks), `showConnectors` (lines between steps), `animated` (connector animations).
+  - Clickable steps support via `clickable` and `onStepClick` props for navigating to completed steps.
+  - Each step can have a title, description, and optional custom icon.
+
+- **Timeline** *(new)*
+  - Added new timeline component for displaying chronological events.
+  - Supports `items`, `size`, `color`, `className` props.
+  - Layout options: `leftAligned` (default, markers on left) or centered mode with alternating content.
+  - Additional options: `showConnectors`, `animated` (fade-in animation), `hollow` (outlined markers).
+  - Supports `showTimestampsSeparate` for displaying timestamps on opposite side in centered mode.
+  - Each item can have title, content, timestamp, icon, marker, and individual color override.
+
 ## v1.2.0
 - **Accordion**
   - Fixed an issue where the height changed incorrectly when the component’s `size` prop was updated.
