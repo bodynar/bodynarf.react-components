@@ -8,3 +8,4 @@ export * from "./radioGroup";
 export * from "./slider";
 export * from "./switch";
 export * from "./text";
+export * from "./timePicker";

@@ -77,3 +77,6 @@ export * from "./primitives/switch";
 
 export { default as Text } from "./primitives/text";
 export * from "./primitives/text";
+
+export { default as TimePicker } from "./primitives/timePicker";
+export * from "./primitives/timePicker";

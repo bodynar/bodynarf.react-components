@@ -42,6 +42,13 @@ All changes will be published here in reverse chronological order
   - Supports `showTimestampsSeparate` for displaying timestamps on opposite side in centered mode.
   - Each item can have title, content, timestamp, icon, marker, and individual color override.
 
+- **TimePicker** *(new)*
+  - Added new time input component for hours/minutes/seconds selection.
+  - Supports `defaultValue`, `onValueChange`, `size`, `style`, `name`, `className` props.
+  - Time value represented as object with `hours`, `minutes`, and optional `seconds` fields.
+  - Additional options: `showSeconds` (enable seconds input), `step` (value increment in seconds), `min`, `max` (time range limits).
+  - Supports all standard input features: `rounded`, `loading`, `disabled`, `readonly`, validation states, labels, and hints.
+
 ## v1.2.0
 - **Accordion**
   - Fixed an issue where the height changed incorrectly when the component’s `size` prop was updated.

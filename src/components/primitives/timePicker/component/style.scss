@@ -1,0 +1,26 @@
+.control.is-loading input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.control input[type="time"] {
+    // Extra padding for AM/PM text to not overlap with clock icon
+    padding-right: 2.5rem;
+
+    &::-webkit-calendar-picker-indicator {
+        position: absolute;
+        right: 0.75rem;
+        cursor: pointer;
+    }
+
+    &.is-small {
+        padding-right: 2rem;
+    }
+
+    &.is-medium {
+        padding-right: 3rem;
+    }
+
+    &.is-large {
+        padding-right: 3.5rem;
+    }
+}
