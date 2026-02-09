@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 import Home from "./home";
+import HooksPage from "./hooks";
 
 import componentsRoutes from "./components";
 import controlsRoutes from "./controls";
@@ -36,6 +37,11 @@ const routeList: Array<RouteMenuItem | MenuItem> = [
     { ...componentsRoutes },
     { ...controlsRoutes },
     { ...propsRoutes },
+    {
+        caption: "Hooks",
+        path: "/hooks",
+        component: <HooksPage />,
+    } as RouteMenuItem & Partial<Pick<MenuItem, "children">>,
 ];
 
 export default routeList;
