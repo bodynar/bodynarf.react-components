@@ -47,6 +47,12 @@ export type SearchProps = BaseElementProps & {
      */
     searchButtonTitle?: string;
 
+    /**
+     * Should search icon (magnifying glass) be displayed
+     * @default false
+     */
+    showIcon?: boolean;
+
     /** Search handler */
     onSearch: (searchPattern: string) => void;
 };

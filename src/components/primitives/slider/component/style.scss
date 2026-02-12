@@ -1,0 +1,319 @@
+$slider-radius: $radius !default;
+$slider-track-background: $grey-lighter !default;
+$slider-track-radius: $radius !default;
+$slider-track-border: 0px solid $grey !default;
+$slider-track-shadow: 0px 0px 0px $grey !default;
+$slider-thumb-background: $white !default;
+$slider-thumb-radius: $radius !default;
+$slider-thumb-border: 1px solid $grey-light !default;
+$slider-thumb-shadow: none !default;
+$slider-thumb-to-track-ratio: 2 !default;
+$slider-output-width: 3rem !default;
+$slider-output-background: $primary !default;
+$slider-output-radius: $radius !default;
+
+@mixin slider-size($size) {
+    $track-height: calc($size / $slider-thumb-to-track-ratio);
+    $thumb-size: $size;
+
+    &::-webkit-slider-runnable-track {
+        height: $track-height;
+    }
+
+    &::-moz-range-track {
+        height: $track-height;
+    }
+
+    &::-ms-track {
+        height: $track-height;
+    }
+
+    &::-webkit-slider-thumb {
+        height: $thumb-size;
+        width: $thumb-size;
+        margin-top: calc(($track-height - $thumb-size) / 2);
+    }
+
+    &::-moz-range-thumb {
+        height: $thumb-size;
+        width: $thumb-size;
+    }
+
+    &::-ms-thumb {
+        height: $thumb-size;
+        width: $thumb-size;
+        margin-top: 0;
+    }
+}
+
+.bbr-slider-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 0.5rem;
+
+    &.is-vertical {
+        flex-direction: row;
+        width: auto;
+        height: 200px;
+        padding-top: 0;
+        padding-left: 0.5rem;
+    }
+}
+
+.bbr-slider-output {
+    position: absolute;
+    top: -1.5rem;
+    display: inline-block;
+    width: $slider-output-width;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    text-align: center;
+    color: $white;
+    background-color: $slider-output-background;
+    border-radius: $slider-output-radius;
+    pointer-events: none;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: $slider-output-background transparent transparent transparent;
+    }
+}
+
+.bbr-slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: $grey;
+}
+
+input[type="range"].slider.bbr-slider {
+    --progress-percent: 0%;
+
+    appearance: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+
+    // Track styles
+    &::-webkit-slider-runnable-track {
+        box-sizing: border-box;
+        width: 100%;
+        height: 0.5rem;
+        background: linear-gradient(
+            to right,
+            $primary var(--progress-percent),
+            $slider-track-background var(--progress-percent)
+        );
+        border: $slider-track-border;
+        border-radius: $slider-track-radius;
+        box-shadow: $slider-track-shadow;
+    }
+
+    &::-moz-range-track {
+        box-sizing: border-box;
+        width: 100%;
+        height: 0.5rem;
+        background: $slider-track-background;
+        border: $slider-track-border;
+        border-radius: $slider-track-radius;
+        box-shadow: $slider-track-shadow;
+    }
+
+    &::-moz-range-progress {
+        height: 0.5rem;
+        background: $primary;
+        border-radius: $slider-track-radius;
+    }
+
+    &::-ms-track {
+        box-sizing: border-box;
+        width: 100%;
+        height: 0.5rem;
+        background: transparent;
+        border-color: transparent;
+        color: transparent;
+    }
+
+    &::-ms-fill-lower {
+        background: $primary;
+        border-radius: $slider-track-radius;
+    }
+
+    &::-ms-fill-upper {
+        background: $slider-track-background;
+        border-radius: $slider-track-radius;
+    }
+
+    // Thumb styles
+    &::-webkit-slider-thumb {
+        appearance: none;
+        width: 1rem;
+        height: 1rem;
+        margin-top: -0.25rem;
+        background: $slider-thumb-background;
+        border: $slider-thumb-border;
+        border-radius: $slider-thumb-radius;
+        box-shadow: $slider-thumb-shadow;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &::-moz-range-thumb {
+        width: 1rem;
+        height: 1rem;
+        background: $slider-thumb-background;
+        border: $slider-thumb-border;
+        border-radius: $slider-thumb-radius;
+        box-shadow: $slider-thumb-shadow;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &::-ms-thumb {
+        width: 1rem;
+        height: 1rem;
+        background: $slider-thumb-background;
+        border: $slider-thumb-border;
+        border-radius: $slider-thumb-radius;
+        box-shadow: $slider-thumb-shadow;
+    }
+
+    // Focus state
+    &:focus {
+        outline: none;
+
+        &::-webkit-slider-thumb {
+            border-color: $primary;
+            box-shadow: 0 0 0 0.125em rgba($primary, 0.25);
+        }
+
+        &::-moz-range-thumb {
+            border-color: $primary;
+            box-shadow: 0 0 0 0.125em rgba($primary, 0.25);
+        }
+    }
+
+    // Disabled state
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    // Circle style
+    &.is-circle {
+        &::-webkit-slider-thumb {
+            border-radius: 50%;
+        }
+
+        &::-moz-range-thumb {
+            border-radius: 50%;
+        }
+
+        &::-ms-thumb {
+            border-radius: 50%;
+        }
+    }
+
+    // Size variations
+    &.is-small {
+        @include slider-size($size-small);
+    }
+
+    &.is-medium {
+        @include slider-size($size-medium);
+    }
+
+    &.is-large {
+        @include slider-size($size-large);
+    }
+
+    // Color variations
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+
+        &.is-#{$name} {
+            &::-webkit-slider-runnable-track {
+                background: linear-gradient(
+                    to right,
+                    $color var(--progress-percent),
+                    $slider-track-background var(--progress-percent)
+                );
+            }
+
+            &::-moz-range-progress {
+                background: $color;
+            }
+
+            &::-ms-fill-lower {
+                background: $color;
+            }
+
+            &:focus {
+                &::-webkit-slider-thumb {
+                    border-color: $color;
+                    box-shadow: 0 0 0 0.125em rgba($color, 0.25);
+                }
+
+                &::-moz-range-thumb {
+                    border-color: $color;
+                    box-shadow: 0 0 0 0.125em rgba($color, 0.25);
+                }
+            }
+        }
+    }
+
+    // Vertical mode
+    &.is-vertical {
+        writing-mode: vertical-lr;
+        direction: rtl;
+        width: 0.5rem;
+        height: 100%;
+        min-height: 100px;
+
+        &::-webkit-slider-runnable-track {
+            width: 0.5rem;
+            height: 100%;
+            background: linear-gradient(
+                to top,
+                $primary var(--progress-percent),
+                $slider-track-background var(--progress-percent)
+            );
+        }
+
+        &::-webkit-slider-thumb {
+            margin-top: 0;
+            margin-left: -0.25rem;
+        }
+
+        @each $name, $pair in $colors {
+            $color: nth($pair, 1);
+
+            &.is-#{$name} {
+                &::-webkit-slider-runnable-track {
+                    background: linear-gradient(
+                        to top,
+                        $color var(--progress-percent),
+                        $slider-track-background var(--progress-percent)
+                    );
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,42 @@
+.bbr-modal {
+    &.modal {
+        z-index: 1000;
+
+        .modal-card {
+            max-height: calc(100vh - 40px);
+            width: auto;
+            min-width: 300px;
+            max-width: calc(100vw - 40px);
+        }
+
+        .modal-card-head {
+            border-bottom: 1px solid #dbdbdb;
+        }
+
+        .modal-card-foot {
+            border-top: 1px solid #dbdbdb;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+
+        .modal-card-body {
+            overflow-y: auto;
+        }
+
+        // Size modifiers
+        &.is-small .modal-card {
+            min-width: 250px;
+            max-width: 400px;
+        }
+
+        &.is-medium .modal-card {
+            min-width: 400px;
+            max-width: 640px;
+        }
+
+        &.is-large .modal-card {
+            min-width: 600px;
+            max-width: 960px;
+        }
+    }
+}

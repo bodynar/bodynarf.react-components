@@ -1,0 +1,430 @@
+$stepper-marker-size: 2.5rem !default;
+$stepper-marker-size-small: 2rem !default;
+$stepper-marker-size-medium: 3rem !default;
+$stepper-marker-size-large: 3.5rem !default;
+
+$stepper-connector-thickness: 2px !default;
+$stepper-connector-color: $grey-lighter !default;
+$stepper-connector-completed-color: $primary !default;
+
+$stepper-marker-bg: $white !default;
+$stepper-marker-border: 2px solid $grey-lighter !default;
+$stepper-marker-color: $grey !default;
+
+$stepper-marker-completed-bg: $primary !default;
+$stepper-marker-completed-border: 2px solid $primary !default;
+$stepper-marker-completed-color: $white !default;
+
+$stepper-marker-current-bg: $white !default;
+$stepper-marker-current-border: 2px solid $primary !default;
+$stepper-marker-current-color: $primary !default;
+
+$stepper-title-color: $grey-dark !default;
+$stepper-title-completed-color: $grey-dark !default;
+$stepper-title-current-color: $grey-darker !default;
+$stepper-title-upcoming-color: $grey !default;
+
+$stepper-description-color: $grey !default;
+
+// Animation
+@keyframes stepper-connector-fill {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.bbr-stepper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+
+    // Vertical mode
+    &.is-vertical {
+        flex-direction: column;
+
+        .bbr-stepper-step {
+            flex-direction: row;
+            align-items: flex-start;
+            width: 100%;
+            padding-bottom: 1.5rem;
+
+            &:last-child {
+                padding-bottom: 0;
+            }
+        }
+
+        .bbr-stepper-content {
+            margin-top: 0;
+            margin-left: 1rem;
+            text-align: left;
+        }
+
+        .bbr-stepper-connector {
+            position: absolute;
+            left: calc($stepper-marker-size / 2 - $stepper-connector-thickness / 2);
+            top: $stepper-marker-size;
+            width: $stepper-connector-thickness;
+            height: calc(100% - $stepper-marker-size + 0.5rem);
+            right: auto;
+
+            &.has-arrow {
+                height: calc(100% - $stepper-marker-size);
+
+                &::after {
+                    right: auto;
+                    left: 50%;
+                    top: auto;
+                    bottom: -6px;
+                    transform: translateX(-50%);
+                    border-top: 6px solid $stepper-connector-color;
+                    border-bottom: none;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                }
+
+                &.is-completed::after {
+                    border-top-color: $stepper-connector-completed-color;
+                    border-left-color: transparent;
+                }
+            }
+        }
+
+        &.is-small .bbr-stepper-connector {
+            left: calc($stepper-marker-size-small / 2 - $stepper-connector-thickness / 2);
+            top: $stepper-marker-size-small;
+            height: calc(100% - $stepper-marker-size-small + 0.5rem);
+        }
+
+        &.is-medium .bbr-stepper-connector {
+            left: calc($stepper-marker-size-medium / 2 - $stepper-connector-thickness / 2);
+            top: $stepper-marker-size-medium;
+            height: calc(100% - $stepper-marker-size-medium + 0.5rem);
+        }
+
+        &.is-large .bbr-stepper-connector {
+            left: calc($stepper-marker-size-large / 2 - $stepper-connector-thickness / 2);
+            top: $stepper-marker-size-large;
+            height: calc(100% - $stepper-marker-size-large + 0.5rem);
+        }
+    }
+
+    // Step item
+    .bbr-stepper-step {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        padding: 0 0.5rem;
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &:last-child {
+            padding-right: 0;
+        }
+
+        // Clickable step
+        &.is-clickable {
+            cursor: pointer;
+
+            .bbr-stepper-marker {
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            &:hover .bbr-stepper-marker {
+                transform: scale(1.1);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        // Completed step
+        &.is-completed {
+            .bbr-stepper-marker {
+                background: $stepper-marker-completed-bg;
+                border: $stepper-marker-completed-border;
+                color: $stepper-marker-completed-color;
+            }
+
+            .bbr-stepper-title {
+                color: $stepper-title-completed-color;
+                font-weight: 500;
+            }
+        }
+
+        // Current step
+        &.is-current {
+            .bbr-stepper-marker {
+                background: $stepper-marker-current-bg;
+                border: $stepper-marker-current-border;
+                color: $stepper-marker-current-color;
+                box-shadow: 0 0 0 4px rgba($primary, 0.2);
+            }
+
+            .bbr-stepper-title {
+                color: $stepper-title-current-color;
+                font-weight: 600;
+            }
+        }
+
+        // Upcoming step
+        &.is-upcoming {
+            .bbr-stepper-marker {
+                background: $stepper-marker-bg;
+                border: $stepper-marker-border;
+                color: $stepper-marker-color;
+            }
+
+            .bbr-stepper-title {
+                color: $stepper-title-upcoming-color;
+            }
+        }
+    }
+
+    // Marker (circle with number or icon)
+    .bbr-stepper-marker {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: $stepper-marker-size;
+        height: $stepper-marker-size;
+        border-radius: 50%;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        z-index: 1;
+        flex-shrink: 0;
+    }
+
+    .bbr-stepper-number,
+    .bbr-stepper-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    // Content (title + description)
+    .bbr-stepper-content {
+        margin-top: 0.75rem;
+        text-align: center;
+    }
+
+    .bbr-stepper-title {
+        font-size: 0.875rem;
+        line-height: 1.25;
+        transition: color 0.2s ease;
+    }
+
+    .bbr-stepper-description {
+        margin-top: 0.25rem;
+        font-size: 0.75rem;
+        color: $stepper-description-color;
+        line-height: 1.25;
+    }
+
+    // Connector line
+    .bbr-stepper-connector {
+        position: absolute;
+        top: calc($stepper-marker-size / 2 - $stepper-connector-thickness / 2);
+        left: calc(50% + $stepper-marker-size / 2 + 0.25rem);
+        right: calc(-50% + $stepper-marker-size / 2 + 0.25rem);
+        height: $stepper-connector-thickness;
+        background: $stepper-connector-color;
+        z-index: 0;
+
+        &.is-completed {
+            background: $stepper-connector-completed-color;
+        }
+
+        &.is-hidden {
+            display: none;
+        }
+
+        // Arrow connector (line with arrowhead via ::before)
+        &.has-arrow::before {
+            content: "";
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 6px solid $stepper-connector-color;
+            z-index: 2;
+        }
+
+        &.has-arrow.is-completed::before {
+            border-left-color: $stepper-connector-completed-color;
+        }
+    }
+
+    // Vertical mode arrow
+    &.is-vertical .bbr-stepper-connector.has-arrow::before {
+        right: auto;
+        top: auto;
+        left: 50%;
+        bottom: -6px;
+        transform: translateX(-50%);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 6px solid $stepper-connector-color;
+        border-bottom: none;
+    }
+
+    &.is-vertical .bbr-stepper-connector.has-arrow.is-completed::before {
+        border-top-color: $stepper-connector-completed-color;
+        border-left-color: transparent;
+    }
+
+    // Animated connectors
+    &.is-animated {
+        .bbr-stepper-connector.is-completed {
+            position: relative;
+            background: $stepper-connector-color;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                background: $stepper-connector-completed-color;
+                animation: stepper-connector-fill 0.5s ease forwards;
+            }
+        }
+
+        &.is-vertical .bbr-stepper-connector.is-completed::after {
+            width: 100%;
+            height: 0;
+            animation: none;
+
+            @keyframes stepper-connector-fill-vertical {
+                from {
+                    height: 0;
+                }
+                to {
+                    height: 100%;
+                }
+            }
+
+            animation: stepper-connector-fill-vertical 0.5s ease forwards;
+        }
+    }
+
+    // Size variations
+    &.is-small {
+        .bbr-stepper-marker {
+            width: $stepper-marker-size-small;
+            height: $stepper-marker-size-small;
+            font-size: 0.875rem;
+        }
+
+        .bbr-stepper-title {
+            font-size: 0.75rem;
+        }
+
+        .bbr-stepper-description {
+            font-size: 0.625rem;
+        }
+
+        .bbr-stepper-connector {
+            top: calc($stepper-marker-size-small / 2 - $stepper-connector-thickness / 2);
+            left: calc(50% + $stepper-marker-size-small / 2 + 0.25rem);
+            right: calc(-50% + $stepper-marker-size-small / 2 + 0.25rem);
+        }
+    }
+
+    &.is-medium {
+        .bbr-stepper-marker {
+            width: $stepper-marker-size-medium;
+            height: $stepper-marker-size-medium;
+            font-size: 1.25rem;
+        }
+
+        .bbr-stepper-title {
+            font-size: 1rem;
+        }
+
+        .bbr-stepper-description {
+            font-size: 0.875rem;
+        }
+
+        .bbr-stepper-connector {
+            top: calc($stepper-marker-size-medium / 2 - $stepper-connector-thickness / 2);
+            left: calc(50% + $stepper-marker-size-medium / 2 + 0.25rem);
+            right: calc(-50% + $stepper-marker-size-medium / 2 + 0.25rem);
+        }
+    }
+
+    &.is-large {
+        .bbr-stepper-marker {
+            width: $stepper-marker-size-large;
+            height: $stepper-marker-size-large;
+            font-size: 1.5rem;
+        }
+
+        .bbr-stepper-title {
+            font-size: 1.125rem;
+        }
+
+        .bbr-stepper-description {
+            font-size: 1rem;
+        }
+
+        .bbr-stepper-connector {
+            top: calc($stepper-marker-size-large / 2 - $stepper-connector-thickness / 2);
+            left: calc(50% + $stepper-marker-size-large / 2 + 0.25rem);
+            right: calc(-50% + $stepper-marker-size-large / 2 + 0.25rem);
+        }
+    }
+
+    // Color variations
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        $color-invert: nth($pair, 2);
+
+        &.is-#{$name} {
+            .bbr-stepper-step.is-completed {
+                .bbr-stepper-marker {
+                    background: $color;
+                    border-color: $color;
+                    color: $color-invert;
+                }
+            }
+
+            .bbr-stepper-step.is-current {
+                .bbr-stepper-marker {
+                    border-color: $color;
+                    color: $color;
+                    box-shadow: 0 0 0 4px rgba($color, 0.2);
+                }
+            }
+
+            .bbr-stepper-connector.is-completed {
+                background: $color;
+            }
+
+            // Arrow color for horizontal
+            .bbr-stepper-connector.has-arrow.is-completed::before {
+                border-left-color: $color;
+            }
+
+            &.is-animated .bbr-stepper-connector.is-completed::after {
+                background: $color;
+            }
+
+            // Arrow color for vertical
+            &.is-vertical .bbr-stepper-connector.has-arrow.is-completed::before {
+                border-top-color: $color;
+                border-left-color: transparent;
+            }
+        }
+    }
+}

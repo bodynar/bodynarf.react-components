@@ -1,0 +1,395 @@
+$timeline-marker-size: 1.5rem !default;
+$timeline-marker-size-small: 1.25rem !default;
+$timeline-marker-size-medium: 1.75rem !default;
+$timeline-marker-size-large: 2rem !default;
+
+$timeline-connector-width: 2px !default;
+$timeline-connector-color: $grey-lighter !default;
+
+$timeline-marker-bg: $primary !default;
+$timeline-marker-border: 2px solid $primary !default;
+$timeline-marker-color: $white !default;
+
+$timeline-marker-hollow-bg: $white !default;
+
+$timeline-content-bg: $white !default;
+$timeline-content-border: 1px solid $grey-lighter !default;
+$timeline-content-shadow: 0 2px 4px rgba($black, 0.05) !default;
+
+$timeline-title-color: $grey-darker !default;
+$timeline-text-color: $grey !default;
+$timeline-timestamp-color: $grey-light !default;
+
+$timeline-item-spacing: 2rem !default;
+
+// Animations
+@keyframes timeline-fade-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes timeline-fade-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.bbr-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    // Timeline item
+    .bbr-timeline-item {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        padding-bottom: $timeline-item-spacing;
+
+        &:last-child {
+            padding-bottom: 0;
+
+            .bbr-timeline-connector {
+                display: none;
+            }
+        }
+    }
+
+    // Marker (circle with optional icon/content)
+    .bbr-timeline-marker {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: $timeline-marker-size;
+        height: $timeline-marker-size;
+        min-width: $timeline-marker-size;
+        border-radius: 50%;
+        background: $timeline-marker-bg;
+        border: $timeline-marker-border;
+        color: $timeline-marker-color;
+        font-size: 0.75rem;
+        font-weight: 600;
+        z-index: 1;
+        flex-shrink: 0;
+    }
+
+    .bbr-timeline-icon,
+    .bbr-timeline-marker-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.65rem;
+    }
+
+    // Content box
+    .bbr-timeline-content {
+        flex: 1;
+        background: $timeline-content-bg;
+        border: $timeline-content-border;
+        border-radius: 4px;
+        padding: 1rem;
+        margin-left: 1rem;
+        box-shadow: $timeline-content-shadow;
+    }
+
+    .bbr-timeline-title {
+        font-weight: 600;
+        font-size: 1rem;
+        color: $timeline-title-color;
+        line-height: 1.25;
+    }
+
+    .bbr-timeline-text {
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: $timeline-text-color;
+        line-height: 1.5;
+    }
+
+    .bbr-timeline-timestamp {
+        font-size: 0.75rem;
+        color: $timeline-timestamp-color;
+        margin-bottom: 0.25rem;
+    }
+
+    // Connector line
+    .bbr-timeline-connector {
+        position: absolute;
+        left: calc($timeline-marker-size / 2 - $timeline-connector-width / 2);
+        top: $timeline-marker-size;
+        width: $timeline-connector-width;
+        height: calc(100% - $timeline-marker-size);
+        background: $timeline-connector-color;
+        z-index: 0;
+    }
+
+    // Left aligned mode (default)
+    &.is-left-aligned {
+        .bbr-timeline-item {
+            padding-left: 0;
+        }
+    }
+
+    // Centered mode (alternating left/right)
+    &.is-centered {
+        .bbr-timeline-item {
+            width: 50%;
+            margin-left: 50%;
+
+            &:nth-child(odd) {
+                margin-left: 0;
+                flex-direction: row-reverse;
+                text-align: right;
+
+                .bbr-timeline-content {
+                    margin-left: 0;
+                    margin-right: 1rem;
+                }
+
+                .bbr-timeline-connector {
+                    left: auto;
+                    right: calc($timeline-marker-size / 2 - $timeline-connector-width / 2);
+                }
+            }
+        }
+
+        .bbr-timeline-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .bbr-timeline-item:nth-child(odd) .bbr-timeline-marker {
+            left: auto;
+            right: 0;
+            transform: translateX(50%);
+        }
+
+        .bbr-timeline-item:nth-child(even) .bbr-timeline-marker {
+            left: 0;
+            transform: translateX(-50%);
+        }
+
+        .bbr-timeline-connector {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .bbr-timeline-item:nth-child(odd) .bbr-timeline-connector {
+            left: auto;
+            right: 0;
+            transform: translateX(50%);
+        }
+
+        .bbr-timeline-item:nth-child(even) .bbr-timeline-connector {
+            left: 0;
+            transform: translateX(-50%);
+        }
+
+        // Separate timestamps
+        &.has-separate-timestamps {
+            .bbr-timeline-timestamp {
+                position: absolute;
+                width: 100%;
+                margin-bottom: 0;
+
+                &.is-left {
+                    right: calc(50% + $timeline-marker-size / 2 + 1rem);
+                    left: auto;
+                    text-align: right;
+                }
+
+                &.is-right {
+                    left: calc(50% + $timeline-marker-size / 2 + 1rem);
+                    right: auto;
+                    text-align: left;
+                }
+            }
+
+            .bbr-timeline-item:nth-child(odd) {
+                .bbr-timeline-timestamp.is-left {
+                    display: none;
+                }
+            }
+
+            .bbr-timeline-item:nth-child(even) {
+                .bbr-timeline-timestamp.is-right {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    // Hollow markers
+    &.is-hollow {
+        .bbr-timeline-marker {
+            background: $timeline-marker-hollow-bg;
+        }
+
+        @each $name, $pair in $colors {
+            $color: nth($pair, 1);
+
+            .bbr-timeline-item.is-#{$name} .bbr-timeline-marker {
+                background: $timeline-marker-hollow-bg;
+                border-color: $color;
+                color: $color;
+            }
+        }
+    }
+
+    // Animation
+    &.is-animated {
+        .bbr-timeline-item {
+            opacity: 0;
+
+            &.is-animated-left {
+                animation: timeline-fade-in-left 0.5s ease forwards;
+            }
+
+            &.is-animated-right {
+                animation: timeline-fade-in-right 0.5s ease forwards;
+            }
+
+            @for $i from 1 through 20 {
+                &:nth-child(#{$i}) {
+                    animation-delay: #{($i - 1) * 0.15}s;
+                }
+            }
+        }
+    }
+
+    // Size variations
+    &.is-small {
+        .bbr-timeline-marker {
+            width: $timeline-marker-size-small;
+            height: $timeline-marker-size-small;
+            min-width: $timeline-marker-size-small;
+            font-size: 0.625rem;
+        }
+
+        .bbr-timeline-icon,
+        .bbr-timeline-marker-content {
+            font-size: 0.55rem;
+        }
+
+        .bbr-timeline-title {
+            font-size: 0.875rem;
+        }
+
+        .bbr-timeline-text {
+            font-size: 0.75rem;
+        }
+
+        .bbr-timeline-timestamp {
+            font-size: 0.625rem;
+        }
+
+        .bbr-timeline-content {
+            padding: 0.75rem;
+        }
+
+        .bbr-timeline-connector {
+            left: calc($timeline-marker-size-small / 2 - $timeline-connector-width / 2);
+            top: $timeline-marker-size-small;
+            height: calc(100% - $timeline-marker-size-small);
+        }
+    }
+
+    &.is-medium {
+        .bbr-timeline-marker {
+            width: $timeline-marker-size-medium;
+            height: $timeline-marker-size-medium;
+            min-width: $timeline-marker-size-medium;
+            font-size: 0.875rem;
+        }
+
+        .bbr-timeline-icon,
+        .bbr-timeline-marker-content {
+            font-size: 0.75rem;
+        }
+
+        .bbr-timeline-title {
+            font-size: 1.125rem;
+        }
+
+        .bbr-timeline-text {
+            font-size: 1rem;
+        }
+
+        .bbr-timeline-connector {
+            left: calc($timeline-marker-size-medium / 2 - $timeline-connector-width / 2);
+            top: $timeline-marker-size-medium;
+            height: calc(100% - $timeline-marker-size-medium);
+        }
+    }
+
+    &.is-large {
+        .bbr-timeline-marker {
+            width: $timeline-marker-size-large;
+            height: $timeline-marker-size-large;
+            min-width: $timeline-marker-size-large;
+            font-size: 1rem;
+        }
+
+        .bbr-timeline-icon,
+        .bbr-timeline-marker-content {
+            font-size: 0.875rem;
+        }
+
+        .bbr-timeline-title {
+            font-size: 1.25rem;
+        }
+
+        .bbr-timeline-text {
+            font-size: 1.125rem;
+        }
+
+        .bbr-timeline-content {
+            padding: 1.25rem;
+        }
+
+        .bbr-timeline-connector {
+            left: calc($timeline-marker-size-large / 2 - $timeline-connector-width / 2);
+            top: $timeline-marker-size-large;
+            height: calc(100% - $timeline-marker-size-large);
+        }
+    }
+
+    // Color variations
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        $color-invert: nth($pair, 2);
+
+        &.is-#{$name} {
+            .bbr-timeline-marker {
+                background: $color;
+                border-color: $color;
+                color: $color-invert;
+            }
+
+            .bbr-timeline-connector {
+                background: rgba($color, 0.3);
+            }
+        }
+
+        .bbr-timeline-item.is-#{$name} {
+            .bbr-timeline-marker {
+                background: $color;
+                border-color: $color;
+                color: $color-invert;
+            }
+        }
+    }
+}

@@ -19,6 +19,9 @@ export * from "./file";
 export { default as Icon } from "./icon";
 export * from "./icon";
 
+export { default as ModalWrapper } from "./modal";
+export * from "./modal";
+
 export { default as Multiselect } from "./multiselect";
 export * from "./multiselect";
 
@@ -28,6 +31,9 @@ export * from "./paginator";
 export { default as Search } from "./search";
 export * from "./search";
 
+export { default as Stepper } from "./stepper";
+export * from "./stepper";
+
 export { default as Table } from "./table";
 export * from "./table";
 
@@ -36,6 +42,9 @@ export * from "./tabs";
 
 export { default as Tag } from "./tag";
 export * from "./tag";
+
+export { default as Timeline } from "./timeline";
+export * from "./timeline";
 
 // Progress/Loader component
 export { default as Progress } from "./progress";
@@ -60,5 +69,17 @@ export * from "./primitives/number";
 export { default as Password } from "./primitives/password";
 export * from "./primitives/password";
 
+export { default as RadioGroup } from "./primitives/radioGroup";
+export * from "./primitives/radioGroup";
+
+export { default as Slider } from "./primitives/slider";
+export * from "./primitives/slider";
+
+export { default as Switch } from "./primitives/switch";
+export * from "./primitives/switch";
+
 export { default as Text } from "./primitives/text";
 export * from "./primitives/text";
+
+export { default as TimePicker } from "./primitives/timePicker";
+export * from "./primitives/timePicker";

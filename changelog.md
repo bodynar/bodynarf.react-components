@@ -1,6 +1,61 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.3.0
+- **ModalWrapper** *(new)*
+  - Added new modal window wrapper component based on Bulma modal.
+  - Supports `title`, `size`, `className`, `data` props.
+  - Action buttons in footer via `actions` prop (array of ButtonProps).
+  - Close behavior options: `showCloseButton`, `closeOnBackgroundClick`, `closeOnEscape`.
+  - Keyboard support: close on Escape, optional `onEnterPress` handler.
+
+- **Number**
+  - Added the `resetToDefaultOnBlur` prop: when enabled, resets the value to `defaultValue` (or `0` if not specified) on focus out if the field is empty.
+
+- **Search**
+  - Added optional search icon (magnifying glass) via `showIcon` prop. Icon size matches the input field size.
+
+- **Switch** *(new)*
+  - Added new toggle/switch component with Bulma styling.
+  - Supports `size`, `style` (color), `label`, `name`, `onValueChange`, `defaultValue`, `className` props.
+  - Additional style options: `rounded` (pill shape), `outlined`, `thin`, `rtl` (right-to-left mode).
+  - Supports form label mode via `isFormLabel` prop.
+
+- **Slider** *(new)*
+  - Added new range/slider component with Bulma styling.
+  - Supports `min`, `max`, `step`, `size`, `style` (color), `defaultValue`, `onValueChange`, `className` props.
+  - Additional options: `showValue` (tooltip with current value), `showMinMax` (min/max labels), `showProgress` (filled track).
+  - Supports vertical mode via `vertical` prop with configurable height.
+  - Circle style thumb available via `circle` prop.
+
+- **RadioGroup** *(new)*
+  - Added new radio group component for single selection from multiple options.
+  - Supports `items`, `value`, `onValueChange`, `size`, `style` (color), `name`, `className` props.
+  - Additional style options: `horizontal` (row layout), `block` (filled background), `circle`, `withoutBorder`, `hasBackgroundColor`.
+  - Each item can be individually disabled.
+
+- **Stepper** *(new)*
+  - Added new stepper/progress indicator component for multi-step workflows.
+  - Supports `steps`, `currentStep`, `size`, `color`, `className` props.
+  - Additional options: `vertical` (vertical layout), `showNumbers` (step numbers vs checkmarks), `showConnectors` (lines between steps), `animated` (connector animations).
+  - Clickable steps support via `clickable` and `onStepClick` props for navigating to completed steps.
+  - Each step can have a title, description, and optional custom icon.
+
+- **Timeline** *(new)*
+  - Added new timeline component for displaying chronological events.
+  - Supports `items`, `size`, `color`, `className` props.
+  - Layout options: `leftAligned` (default, markers on left) or centered mode with alternating content.
+  - Additional options: `showConnectors`, `animated` (fade-in animation), `hollow` (outlined markers).
+  - Supports `showTimestampsSeparate` for displaying timestamps on opposite side in centered mode.
+  - Each item can have title, content, timestamp, icon, marker, and individual color override.
+
+- **TimePicker** *(new)*
+  - Added new time input component for hours/minutes/seconds selection.
+  - Supports `defaultValue`, `onValueChange`, `size`, `style`, `name`, `className` props.
+  - Time value represented as object with `hours`, `minutes`, and optional `seconds` fields.
+  - Additional options: `showSeconds` (enable seconds input), `step` (value increment in seconds), `min`, `max` (time range limits).
+  - Supports all standard input features: `rounded`, `loading`, `disabled`, `readonly`, validation states, labels, and hints.
+
 ## v1.2.0
 - **Accordion**
   - Fixed an issue where the height changed incorrectly when the component’s `size` prop was updated.
