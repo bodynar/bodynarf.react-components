@@ -30,12 +30,18 @@ Simple react components based on html elements.
  - **Multiline** - multiline text input
  - **Number** - number input with step
  - **Password** - single line password input (requires icon, see icon component description)
- - **Text** - single line text input;
+ - **RadioGroup** - group of radio buttons with vertical/horizontal layout and customizable styles
+ - **Slider** - range input component with optional value display and progress track
+ - **Switch** - toggle switch component with multiple style variants (rounded, outlined, thin)
+ - **Text** - single line text input
+ - **TimePicker** - time input component with hours, minutes and optional seconds
 
 #### Components
  - **Anchor** - simple anchor (link) component
  - **Button** - button that allows user to interact with system by clicking it _(assume everyone knows what is button)_
+ - **File** - file upload component with customizable placeholder, file type filtering and boxed style option
  - **Icon** - *see p.4 of installation*
+ - **Progress** - progress bar component with percentage display, indeterminate state and animation
  - **Tag** - small component stands for tag visualization
  - **BreadCrumbs** - speaks for it self
  - **Table** - table with sortable headers
@@ -44,6 +50,7 @@ Simple react components based on html elements.
 Complex components is set of components built via combining simple components or represent complex logical component
  - **Accordion** - Collapsible container that can hide some content inside
  - **Dropdown** - Custom dropdown component, based on html div elements & css (requires icon, see icon component description)
+ - **ModalWrapper** - Modal window component with customizable header, body and action buttons
  - **Multiselect** - Dropdown with option to select several records
  - **Paginator** - Pagination elements to navigate through paged list
 
@@ -61,12 +68,20 @@ Complex components is set of components built via combining simple components or
 		/>
 	```
  - **Search** - Search bar with optional button to perform search
+ - **Stepper** - Step indicator component for multi-step processes with vertical/horizontal layout
  - **Tabs** - Container for multi-content with option of switching displaying content without refreshing\scrolling page
+ - **Timeline** - Vertical timeline component for displaying chronological events
 
 ### Hooks
 
  - **useComponentOutsideClick** - Attach watcher for mouse clicks and emit event when click was outside of component
- - **usePagination** - Create a pagination config to easily manipulate with Paginator component
- - **useUnmount** - Handle component unmounting event. Useful as component cleanup fn
- - **useMount** - Handle component initial mount event
  - **useDebounceHandler** - Create a cooldown event handler
+ - **useEventListener** - Attach an event listener to window/document/element with automatic cleanup
+ - **useInterval** - Execute a callback repeatedly with a fixed time delay
+ - **useLocalStorage** - Store state in localStorage and keep it in sync
+ - **useMount** - Handle component initial mount event
+ - **usePagination** - Create a pagination config to easily manipulate with Paginator component
+ - **usePrevious** - Get the previous value of a state or prop
+ - **useTimeout** - Execute a callback after a specified delay
+ - **useUnmount** - Handle component unmounting event. Useful as component cleanup fn
+ - **useUpdateEffect** - Like useEffect, but skips execution on the initial render

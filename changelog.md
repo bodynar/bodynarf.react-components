@@ -2,6 +2,13 @@
 All changes will be published here in reverse chronological order
 
 ## v1.3.0
+- **ModalWrapper** *(new)*
+  - Added new modal window wrapper component based on Bulma modal.
+  - Supports `title`, `size`, `className`, `data` props.
+  - Action buttons in footer via `actions` prop (array of ButtonProps).
+  - Close behavior options: `showCloseButton`, `closeOnBackgroundClick`, `closeOnEscape`.
+  - Keyboard support: close on Escape, optional `onEnterPress` handler.
+
 - **Number**
   - Added the `resetToDefaultOnBlur` prop: when enabled, resets the value to `defaultValue` (or `0` if not specified) on focus out if the field is empty.
 

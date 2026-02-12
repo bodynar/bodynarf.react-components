@@ -19,6 +19,9 @@ export * from "./file";
 export { default as Icon } from "./icon";
 export * from "./icon";
 
+export { default as ModalWrapper } from "./modal";
+export * from "./modal";
+
 export { default as Multiselect } from "./multiselect";
 export * from "./multiselect";
 
