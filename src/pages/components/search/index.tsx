@@ -139,6 +139,66 @@ const Search: FC = () => {
                 />
             </ComponentUseCase>
 
+            <ComponentUseCase
+                captionIsCode
+                caption="showIcon"
+                description="Option to display a search icon (magnifying glass) inside the input field. The icon size matches the input field size."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import SearchComponent from "@bodynarf/react.components/components/search";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            '<SearchComponent',
+                            '    showIcon',
+                            '    onSearch={emptyFn} // TODO: Replace with your own handler function',
+                            '    searchType="byButton"',
+                            '    caption="Search with icon"',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SearchComponent
+                    showIcon
+                    onSearch={emptyFn}
+                    searchType="byButton"
+                    caption="Search with icon"
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="showIcon with byTyping"
+                description="The search icon also works with the byTyping search mode"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import SearchComponent from "@bodynarf/react.components/components/search";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            '<SearchComponent',
+                            '    showIcon',
+                            '    onSearch={emptyFn} // TODO: Replace with your own handler function',
+                            '    searchType="byTyping"',
+                            '    caption="Search by typing with icon"',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SearchComponent
+                    showIcon
+                    onSearch={emptyFn}
+                    searchType="byTyping"
+                    caption="Search by typing with icon"
+                />
+            </ComponentUseCase>
+
             <ComponentSizeCase
                 captionIsCode
                 caption="size"

@@ -134,6 +134,58 @@ const Number: FC = () => {
                 </p>
             </ComponentUseCase>
 
+            <ComponentUseCase
+                captionIsCode
+                caption="resetToDefaultOnBlur"
+                description="When enabled, resets the value to defaultValue (or 0 if not specified) on focus out if the field is empty. Disabled by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<NumberComponent`,
+                            "    resetToDefaultOnBlur",
+                            "    defaultValue={100}",
+                            `    label={{ caption: "Clear and blur to reset to 100", horizontal: true }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <NumberComponent
+                    resetToDefaultOnBlur
+                    defaultValue={100}
+                    label={{ caption: "Clear and blur to reset to 100", horizontal: true }}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="resetToDefaultOnBlur (without defaultValue)"
+                description="When resetToDefaultOnBlur is enabled without defaultValue, the field resets to 0 on blur if empty."
+                code={
+                    <CodeExample
+                        code={[
+                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<NumberComponent`,
+                            "    resetToDefaultOnBlur",
+                            `    label={{ caption: "Clear and blur to reset to 0", horizontal: true }}`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <NumberComponent
+                    resetToDefaultOnBlur
+                    label={{ caption: "Clear and blur to reset to 0", horizontal: true }}
+                />
+            </ComponentUseCase>
+
             <hr />
 
             <div className="block">

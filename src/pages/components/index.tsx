@@ -2,7 +2,6 @@ import { MenuItem } from "../routing";
 
 import Icon from "./icon";
 import Accordion from "./accordion";
-import Anchor from "./anchor";
 import Button from "./button";
 import Tag from "./tag";
 import Dropdown from "./dropdown";
@@ -13,6 +12,9 @@ import Multiselect from "./multiselect";
 import Breadcrumbs from "./breadcrumbs";
 import File from "./file";
 import Table from "./table";
+import ModalWrapper from "./modalWrapper";
+import Stepper from "./stepper";
+import Timeline from "./timeline";
 
 const components: MenuItem = {
     name: "component-group",
@@ -27,11 +29,6 @@ const components: MenuItem = {
             path: "/components/accordion",
             caption: "Accordion",
             component: <Accordion />,
-        },
-        {
-            path: "/components/anchor",
-            caption: "Anchor",
-            component: <Anchor />,
         },
         {
             path: "/components/button",
@@ -82,6 +79,21 @@ const components: MenuItem = {
             path: "/components/table",
             caption: "Table",
             component: <Table />
+        },
+        {
+            path: "/components/modalWrapper",
+            caption: "Modal Wrapper",
+            component: <ModalWrapper />
+        },
+        {
+            path: "/components/stepper",
+            caption: "Stepper",
+            component: <Stepper />
+        },
+        {
+            path: "/components/timeline",
+            caption: "Timeline",
+            component: <Timeline />
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };

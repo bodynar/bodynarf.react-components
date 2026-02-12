@@ -7,6 +7,10 @@ import Text from "./text";
 import Multiline from "./multiline";
 import Number from "./number";
 import Password from "./password";
+import Switch from "./switch";
+import Slider from "./slider";
+import RadioGroup from "./radioGroup";
+import TimePicker from "./timePicker";
 
 const controls: MenuItem = {
     name: "control-group",
@@ -46,6 +50,26 @@ const controls: MenuItem = {
             path: "/controls/password",
             caption: "Password",
             component: <Password />
+        },
+        {
+            path: "/controls/switch",
+            caption: "Switch",
+            component: <Switch />
+        },
+        {
+            path: "/controls/slider",
+            caption: "Slider",
+            component: <Slider />
+        },
+        {
+            path: "/controls/radioGroup",
+            caption: "Radio Group",
+            component: <RadioGroup />
+        },
+        {
+            path: "/controls/timePicker",
+            caption: "Time Picker",
+            component: <TimePicker />
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };
