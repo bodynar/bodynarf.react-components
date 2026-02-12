@@ -1,6 +1,6 @@
 {
     "name": "@bodynarf/react.components",
-    "version": "1.14.0",
+    "version": "1.14.1",
     "author": {
         "name": "Artem",
         "email": "bodynar@gmail.com"
@@ -27,13 +27,17 @@
         "transfer": "npm run copy_styles && npm run copy_main",
         "build_transfer": "npm run build && npm run transfer",
         "prepublish": "npm run build_transfer && cd dist && npm pack",
-        "publish_pkg": "npm run build_transfer && cd dist && npm publish --access=public",
-        "lint": "npx eslint src/**/*.ts src/**/*.tsx"
+        "publish_pkg": "npm run lint && npm run validate:scss && npm run build_transfer && cd dist && npm publish --access=public",
+        "lint": "npx eslint src/**/*.ts src/**/*.tsx",
+        "lint:scss": "npx stylelint \"src/**/*.scss\"",
+        "build:scss": "npx sass --load-path=node_modules src/:dist/ --no-source-map",
+        "validate:scss": "npm run lint:scss && npm run build:scss"
     },
     "devDependencies": {
         "@eslint/js": "^9.30.1",
         "@types/react": "^18.0.11",
         "@types/react-dom": "^18.0.5",
+        "bulma": "^0.9.4",
         "copyfiles": "^2.4.1",
         "eslint": "^9.32.0",
         "eslint-plugin-import": "^2.32.0",
@@ -41,6 +45,9 @@
         "eslint-plugin-react-hooks": "^5.2.0",
         "eslint-plugin-react-refresh": "^0.4.20",
         "react": ">=18.1.0",
+        "sass": "^1.77.0",
+        "stylelint": "^16.6.0",
+        "stylelint-config-standard-scss": "^13.1.0",
         "tsc-alias": "^1.8.6",
         "typescript": "~5.8.3",
         "typescript-eslint": "^8.35.1"

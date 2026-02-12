@@ -31,14 +31,13 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
 
     id: propsId,
 }) => {
-    const generatedId = useId();
-    const id = propsId ?? generatedId;
-    const containerRef = useRef<HTMLDivElement>(null);
-
     const [isListVisible, setListVisible] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>("");
     const [isOpenUp, setIsOpenUp] = useState<boolean>(false);
 
+    const generatedId = useId();
+    const id = propsId ?? generatedId;
+    const containerRef = useRef<HTMLDivElement>(null);
 
     const filteredItems = useMemo(
         () =>

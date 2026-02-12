@@ -24,8 +24,8 @@ const EmptyLabel: FC<EmptyLabelProps> = ({
 
     return (
         <label
-            className={elClassName}
             onClick={onClick}
+            className={elClassName}
         >
             <span className="mr-2">
                 {caption}

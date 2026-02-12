@@ -1,7 +1,7 @@
 # Change log
 All changes will be published here in reverse chronological order
 
-## v1.3.0
+## v1.3.0 (v1.13.0)
 - **ModalWrapper** *(new)*
   - Added new modal window wrapper component based on Bulma modal.
   - Supports `title`, `size`, `className`, `data` props.

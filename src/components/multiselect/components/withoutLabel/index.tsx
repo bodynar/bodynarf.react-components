@@ -33,9 +33,6 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
 
     id: propsId, checkboxConfig,
 }) => {
-    const generatedId = useId();
-    const id = propsId ?? generatedId;
-    const containerRef = useRef<HTMLDivElement>(null);
 
     const [isListVisible, setListVisible] = useState<boolean>(false);
     const [selectedItems, setSelectedItems] = useState<Array<string>>(
@@ -46,6 +43,10 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
         []
     );
     const [isOpenUp, setIsOpenUp] = useState<boolean>(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    const generatedId = useId();
+    const id = propsId ?? generatedId;
 
     const onItemClick = useCallback(
         (item: MultiselectItemModel) => {

@@ -26,18 +26,13 @@ export interface DropdownProps extends BaseElementProps {
     items: Array<SelectableItem>;
 
     /**
-     * Action to update selected value, which stored outside
-    */
-    onSelect: (item?: SelectableItem) => void;
-
-    /** Input element placeholder */
-    placeholder?: string;
-
-    /**
      * Selected value.
      * Must be stored outside
     */
     value: Optional<SelectableItem>;
+
+    /** Input element placeholder */
+    placeholder?: string;
 
     /** Hide component list when its opened and user click outside */
     hideOnOuterClick?: boolean;
@@ -83,4 +78,9 @@ export interface DropdownProps extends BaseElementProps {
      * Text which would be displayed when search query applied and no items found
      */
     noDataByQuery?: string;
+
+    /**
+     * Action to update selected value, which stored outside
+    */
+    onSelect: (item?: SelectableItem) => void;
 }

@@ -1,9 +1,6 @@
 export { default as Accordion } from "./accordion";
 export * from "./accordion";
 
-export { default as Anchor } from "./anchor";
-export * from "./anchor";
-
 export { default as Breadcrumbs } from "./breadcrumbs";
 export * from "./breadcrumbs";
 

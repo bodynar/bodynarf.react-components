@@ -19,9 +19,9 @@ const Accordion: FC<AccordionProps> = ({
 
     className, title, data,
 }) => {
-    const expandablePanelRef = useRef<HTMLDivElement>(null);
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
     const [maxHeight, setMaxHeight] = useState<number | undefined>(defaultExpanded ? undefined : 0);
+    const expandablePanelRef = useRef<HTMLDivElement>(null);
 
     const toggleCollapse = useCallback(
         () => setMaxHeight(isExpanded ? 0 : expandablePanelRef.current!.scrollHeight),
