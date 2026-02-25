@@ -10,12 +10,13 @@ import CodeExample from "@app/sharedComponents/codeExample";
 
 /** Slider component demo */
 const Slider: FC = () => {
+    // Event log for onValueChange demo
     const [onValueChangeLog, setOnValueChangeLog] = useState("");
     const appendOnValueChangeLog = useCallback(
         (value?: number) => setOnValueChangeLog(
             t => t
                 + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
+                + new Date().toLocaleTimeString()
                 + " => " + `new value: ${value}`
         ),
         []
@@ -40,11 +41,11 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SliderComponent from "@bodynarf/react.components/components/primitives/slider";`,
+                            `import { Slider } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            "<SliderComponent />",
+                            "<Slider />",
                         ].join("\n")}
                     />
                 }
@@ -67,13 +68,14 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SliderComponent from "@bodynarf/react.components/components/primitives/slider";`,
+                            `import { Slider } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SliderComponent`,
+                            `<Slider`,
                             `    min={0}`,
                             `    max={50}`,
+                            `    defaultValue={25}`,
                             "/>",
                         ].join("\n")}
                     />
@@ -82,6 +84,7 @@ const Slider: FC = () => {
                 <SliderComponent
                     min={0}
                     max={50}
+                    defaultValue={25}
                 />
             </ComponentUseCase>
 
@@ -92,14 +95,15 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SliderComponent from "@bodynarf/react.components/components/primitives/slider";`,
+                            `import { Slider } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SliderComponent`,
+                            `<Slider`,
                             `    min={0}`,
                             `    max={100}`,
                             `    step={10}`,
+                            `    defaultValue={30}`,
                             "/>",
                         ].join("\n")}
                     />
@@ -109,6 +113,7 @@ const Slider: FC = () => {
                     min={0}
                     max={100}
                     step={10}
+                    defaultValue={30}
                 />
             </ComponentUseCase>
 
@@ -119,11 +124,11 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SliderComponent from "@bodynarf/react.components/components/primitives/slider";`,
+                            `import { Slider } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SliderComponent`,
+                            `<Slider`,
                             `    defaultValue={75}`,
                             "/>",
                         ].join("\n")}
@@ -144,15 +149,15 @@ const Slider: FC = () => {
                         code={[
                             `import { useCallback } from "react";`,
                             "",
-                            `import SliderComponent from "@bodynarf/react.components/components/primitives/slider";`,
+                            `import { Slider } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
-                            `const handleValueChange = useCallback((value?: number) => {`,
-                            `    console.log("New value:", value);`,
+                            `const handleValueChange = useCallback((newValue?: number) => {`,
+                            `    console.log("New value:", newValue);`,
                             `}, []);`,
                             "/* ... */",
                             "",
-                            `<SliderComponent`,
+                            `<Slider`,
                             `    onValueChange={handleValueChange}`,
                             "/>",
                         ].join("\n")}
@@ -174,11 +179,11 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SliderComponent from "@bodynarf/react.components/components/primitives/slider";`,
+                            `import { Slider } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SliderComponent`,
+                            `<Slider`,
                             `    showValue`,
                             "/>",
                         ].join("\n")}
@@ -197,11 +202,11 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SliderComponent from "@bodynarf/react.components/components/primitives/slider";`,
+                            `import { Slider } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SliderComponent`,
+                            `<Slider`,
                             `    showMinMax`,
                             `    min={0}`,
                             `    max={100}`,
@@ -224,13 +229,12 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SliderComponent from "@bodynarf/react.components/components/primitives/slider";`,
+                            `import { Slider } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SliderComponent`,
+                            `<Slider`,
                             `    showProgress`,
-                            `    defaultValue={50}`,
                             "/>",
                         ].join("\n")}
                     />
@@ -238,7 +242,6 @@ const Slider: FC = () => {
             >
                 <SliderComponent
                     showProgress
-                    defaultValue={50}
                 />
             </ComponentUseCase>
 
@@ -249,11 +252,11 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SliderComponent from "@bodynarf/react.components/components/primitives/slider";`,
+                            `import { Slider } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SliderComponent`,
+                            `<Slider`,
                             `    circle`,
                             "/>",
                         ].join("\n")}
@@ -272,14 +275,15 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SliderComponent from "@bodynarf/react.components/components/primitives/slider";`,
+                            `import { Slider } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SliderComponent`,
-                            `    vertical`,
-                            `    style={{ height: "200px" }}`,
-                            "/>",
+                            `<div style={{ height: "200px" }}>`,
+                            `    <Slider`,
+                            `        vertical`,
+                            `    />`,
+                            `</div>`,
                         ].join("\n")}
                     />
                 }
@@ -297,12 +301,11 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SliderComponent from "@bodynarf/react.components/components/primitives/slider";`,
-                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import { Slider, ElementColor } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SliderComponent`,
+                            `<Slider`,
                             `    min={0}`,
                             `    max={100}`,
                             `    step={5}`,
@@ -345,12 +348,11 @@ const Slider: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import SliderComponent from "@bodynarf/react.components/components/primitives/slider";`,
+                            `import { ElementSize, Slider } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            '<SliderComponent',
+                            '<Slider',
                             `    size={ElementSize.${id}}`,
                             '/>',
                         ].join("\n")}
@@ -370,12 +372,11 @@ const Slider: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import SliderComponent from "@bodynarf/react.components/components/primitives/slider";`,
+                            `import { ElementColor, Slider } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            '<SliderComponent',
+                            '<Slider',
                             `    style={ElementColor.${id}}`,
                             '/>',
                         ].join("\n")}

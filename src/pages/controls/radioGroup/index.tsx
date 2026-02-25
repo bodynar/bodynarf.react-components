@@ -1,6 +1,7 @@
 import { FC, useCallback, useState } from "react";
 
 import { ElementColor, ElementSize, RadioGroup as RadioGroupComponent, RadioItem } from "@bodynarf/react.components";
+import "@bodynarf/react.components/components/primitives/radioGroup/component/style.scss";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -22,12 +23,13 @@ const sampleItemsWithDisabled: Array<RadioItem> = [
 
 /** RadioGroup component demo */
 const RadioGroup: FC = () => {
+    // Event log for onValueChange demo
     const [onValueChangeLog, setOnValueChangeLog] = useState("");
     const appendOnValueChangeLog = useCallback(
         (item: RadioItem) => setOnValueChangeLog(
             t => t
                 + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
+                + new Date().toLocaleTimeString()
                 + " => " + `selected: ${item.displayValue} (value: ${item.value})`
         ),
         []
@@ -321,7 +323,7 @@ const RadioGroup: FC = () => {
                             "",
                             "const items: Array<RadioItem> = [",
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
-                            `    { id: "2", value: "option2", displayValue: "Option 2 (disabled)", disabled: true },`,
+                            `    { id: "2", value: "option2", displayValue: "Option 2", disabled: true },`,
                             `    { id: "3", value: "option3", displayValue: "Option 3" },`,
                             "];",
                             "",

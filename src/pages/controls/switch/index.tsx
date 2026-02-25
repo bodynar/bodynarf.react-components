@@ -10,12 +10,13 @@ import CodeExample from "@app/sharedComponents/codeExample";
 
 /** Switch component demo */
 const Switch: FC = () => {
+    // Event log for onValueChange demo
     const [onValueChangeLog, setOnValueChangeLog] = useState("");
     const appendOnValueChangeLog = useCallback(
-        (value?: boolean) => setOnValueChangeLog(
+        (value: boolean) => setOnValueChangeLog(
             t => t
                 + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
+                + new Date().toLocaleTimeString()
                 + " => " + `new value: ${value}`
         ),
         []
@@ -40,11 +41,11 @@ const Switch: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SwitchComponent from "@bodynarf/react.components/components/primitives/switch";`,
+                            `import { Switch } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SwitchComponent`,
+                            `<Switch`,
                             `    label={{ caption: "Toggle switch" }}`,
                             `/>`,
                         ].join("\n")}
@@ -71,11 +72,11 @@ const Switch: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SwitchComponent from "@bodynarf/react.components/components/primitives/switch";`,
+                            `import { Switch } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SwitchComponent`,
+                            `<Switch`,
                             `    label={{ caption: "Default checked" }}`,
                             `    defaultValue`,
                             "/>",
@@ -98,17 +99,17 @@ const Switch: FC = () => {
                         code={[
                             `import { useCallback } from "react";`,
                             "",
-                            `import SwitchComponent from "@bodynarf/react.components/components/primitives/switch";`,
+                            `import { Switch } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
-                            `const handleValueChange = useCallback((value?: boolean) => {`,
-                            `    console.log("New value:", value);`,
+                            `const handleChange = useCallback((newValue: boolean) => {`,
+                            `    console.log("Changed to:", newValue);`,
                             `}, []);`,
                             "/* ... */",
                             "",
-                            `<SwitchComponent`,
+                            `<Switch`,
                             `    label={{ caption: "Track changes" }}`,
-                            `    onValueChange={handleValueChange}`,
+                            `    onValueChange={handleChange}`,
                             "/>",
                         ].join("\n")}
                     />
@@ -130,11 +131,11 @@ const Switch: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SwitchComponent from "@bodynarf/react.components/components/primitives/switch";`,
+                            `import { Switch } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SwitchComponent`,
+                            `<Switch`,
                             `    label={{ caption: "Rounded switch" }}`,
                             `    rounded`,
                             "/>",
@@ -155,11 +156,11 @@ const Switch: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SwitchComponent from "@bodynarf/react.components/components/primitives/switch";`,
+                            `import { Switch } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SwitchComponent`,
+                            `<Switch`,
                             `    label={{ caption: "Outlined switch" }}`,
                             `    outlined`,
                             "/>",
@@ -180,11 +181,11 @@ const Switch: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SwitchComponent from "@bodynarf/react.components/components/primitives/switch";`,
+                            `import { Switch } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SwitchComponent`,
+                            `<Switch`,
                             `    label={{ caption: "Thin switch" }}`,
                             `    thin`,
                             "/>",
@@ -205,11 +206,11 @@ const Switch: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import SwitchComponent from "@bodynarf/react.components/components/primitives/switch";`,
+                            `import { Switch } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SwitchComponent`,
+                            `<Switch`,
                             `    label={{ caption: "RTL switch" }}`,
                             `    rtl`,
                             "/>",
@@ -226,15 +227,15 @@ const Switch: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="isFormLabel"
-                description="Renders the switch in form label mode"
+                description="Renders the switch in form label mode with horizontal layout"
                 code={
                     <CodeExample
                         code={[
-                            `import SwitchComponent from "@bodynarf/react.components/components/primitives/switch";`,
+                            `import { Switch } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SwitchComponent`,
+                            `<Switch`,
                             `    label={{ caption: "Form label mode" }}`,
                             `    isFormLabel`,
                             "/>",
@@ -249,17 +250,43 @@ const Switch: FC = () => {
             </ComponentUseCase>
 
             <ComponentUseCase
-                caption="Combined styles"
-                description="Multiple style options can be combined"
+                captionIsCode
+                caption="disabled"
+                description="Disables the switch input"
                 code={
                     <CodeExample
                         code={[
-                            `import SwitchComponent from "@bodynarf/react.components/components/primitives/switch";`,
-                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import { Switch } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SwitchComponent`,
+                            `<Switch`,
+                            `    label={{ caption: "Disabled switch" }}`,
+                            `    disabled`,
+                            `    defaultValue`,
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SwitchComponent
+                    label={{ caption: "Disabled switch" }}
+                    disabled
+                    defaultValue
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                caption="Combined styles"
+                description="Multiple style options can be combined for custom appearance"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { Switch, ElementColor } from "@bodynarf/react.components";`,
+                            "",
+                            "/* ... */",
+                            "",
+                            `<Switch`,
                             `    label={{ caption: "Rounded outlined switch" }}`,
                             `    rounded`,
                             `    outlined`,
@@ -292,15 +319,14 @@ const Switch: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import SwitchComponent from "@bodynarf/react.components/components/primitives/switch";`,
+                            `import { Switch, ElementSize } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            '<SwitchComponent',
+                            "<Switch",
                             `    label={{ caption: "Size demo" }}`,
                             `    size={ElementSize.${id}}`,
-                            '/>',
+                            "/>",
                         ].join("\n")}
                     />
                 }
@@ -319,15 +345,14 @@ const Switch: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import SwitchComponent from "@bodynarf/react.components/components/primitives/switch";`,
+                            `import { Switch, ElementColor } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
-                            '<SwitchComponent',
+                            "<Switch",
                             `    label={{ caption: "Color demo" }}`,
                             `    style={ElementColor.${id}}`,
-                            '/>',
+                            "/>",
                         ].join("\n")}
                     />
                 }
@@ -335,6 +360,7 @@ const Switch: FC = () => {
                     <SwitchComponent
                         label={{ caption: "Color demo" }}
                         style={color}
+                        defaultValue
                     />
                 }
             />

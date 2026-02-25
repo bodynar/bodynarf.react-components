@@ -8,15 +8,25 @@ import ComponentColorCase from "@app/sharedComponents/colorUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
 
+/** Format TimeValue to display string */
+const formatTime = (time?: TimeValue): string => {
+    if (!time) return "Not set";
+    const h = time.hours.toString().padStart(2, "0");
+    const m = time.minutes.toString().padStart(2, "0");
+    const s = time.seconds !== undefined ? ":" + time.seconds.toString().padStart(2, "0") : "";
+    return `${h}:${m}${s}`;
+};
+
 /** TimePicker component demo */
 const TimePicker: FC = () => {
+    // Event log for onValueChange demo
     const [onValueChangeLog, setOnValueChangeLog] = useState("");
     const appendOnValueChangeLog = useCallback(
         (value?: TimeValue) => setOnValueChangeLog(
             t => t
                 + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + `new value: ${value?.hours}:${value?.minutes}${value?.seconds !== undefined ? ":" + value.seconds : ""}`
+                + new Date().toLocaleTimeString()
+                + " => " + `new value: ${formatTime(value)}`
         ),
         []
     );
@@ -72,7 +82,7 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import { TimePicker, TimeValue } from "@bodynarf/react.components";`,
                             "",
                             "/* ... */",
                             "",
@@ -165,6 +175,7 @@ const TimePicker: FC = () => {
                             `<TimePicker`,
                             `    label={{ caption: "Step 15", horizontal: true }}`,
                             `    step={15}`,
+                            `    defaultValue={{ hours: 12, minutes: 0 }}`,
                             "/>",
                         ].join("\n")}
                     />
@@ -173,6 +184,7 @@ const TimePicker: FC = () => {
                 <TimePickerComponent
                     label={{ caption: "Step 15", horizontal: true }}
                     step={15}
+                    defaultValue={{ hours: 12, minutes: 0 }}
                 />
             </ComponentUseCase>
 

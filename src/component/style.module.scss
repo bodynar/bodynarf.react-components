@@ -1,4 +1,5 @@
 .root {
+    position: relative;
     height: 100%;
 
     gap: 1rem;
@@ -7,13 +8,15 @@
         width: 15%;
         flex: none;
 
-        overflow: auto;
+        overflow: hidden;
         height: 100%;
     }
 
     .content {
+        position: relative;
         height: 100%;
         overflow-y: auto;
+        overscroll-behavior: contain;
 
         border-radius: 0;
         padding-right: 7.25rem;
