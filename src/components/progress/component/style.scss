@@ -1,18 +1,23 @@
-// Bulma variables
-$black: #0a0a0a !default;
-$white: #fff !default;
-$light: #f5f5f5 !default;
-$dark: #363636 !default;
-$primary: #485fc7 !default;
-$link: #485fc7 !default;
-$info: #3e8ed0 !default;
-$success: #48c78e !default;
-$warning: #ffe08a !default;
-$danger: #f14668 !default;
-$text: #4a4a4a !default;
-$background: #f5f5f5 !default;
-$radius: 4px !default;
-$speed: 0.25s !default;
+// Bulma variables - compatible with v0.9.x and v1.x
+// Uses CSS variables with fallbacks matching Bulma 0.9.4 defaults
+// v1.x: CSS variables (--bulma-*) will be used if defined
+// v0.9.x: Fallback values will be used (no CSS variables in 0.9.x)
+
+// Colors
+$black: var(--bulma-black, #0a0a0a);
+$white: var(--bulma-white, #fff);
+$light: var(--bulma-light, #f5f5f5);
+$dark: var(--bulma-dark, #363636);
+$primary: var(--bulma-primary, #00d1b2);
+$link: var(--bulma-link, #485fc7);
+$info: var(--bulma-info, #3e8ed0);
+$success: var(--bulma-success, #48c78e);
+$warning: var(--bulma-warning, #ffe08a);
+$danger: var(--bulma-danger, #f14668);
+$text: var(--bulma-text, #4a4a4a);
+$background: var(--bulma-background, #f5f5f5);
+$radius: var(--bulma-radius, 4px);
+$speed: var(--bulma-speed, 0.25s);
 
 $size-small: 0.75rem !default;
 $size-normal: 1rem !default;

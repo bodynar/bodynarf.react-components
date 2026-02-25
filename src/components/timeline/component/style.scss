@@ -1,4 +1,28 @@
-@import "bulma/sass/utilities/derived-variables";
+@use "sass:list";
+
+// Bulma variables - compatible with v0.9.x and v1.x
+// Uses CSS variables with fallbacks matching Bulma 0.9.4 defaults
+// v1.x: CSS variables (--bulma-*) will be used if defined
+// v0.9.x: Fallback values will be used (no CSS variables in 0.9.x)
+
+// Colors
+$primary: var(--bulma-primary, #00d1b2);
+$white: var(--bulma-white, #fff);
+$black: var(--bulma-black, #0a0a0a);
+$grey-lighter: var(--bulma-grey-lighter, #dbdbdb);
+$grey-light: var(--bulma-grey-light, #b5b5b5);
+$grey: var(--bulma-grey, #7a7a7a);
+$grey-darker: var(--bulma-grey-darker, #363636);
+
+// Color map for variations
+$colors: (
+    "primary": ($primary, $white),
+    "link": (var(--bulma-link, #485fc7), $white),
+    "info": (var(--bulma-info, #3e8ed0), $white),
+    "success": (var(--bulma-success, #48c78e), $white),
+    "warning": (var(--bulma-warning, #ffe08a), rgba(0, 0, 0, 0.7)),
+    "danger": (var(--bulma-danger, #f14668), $white)
+);
 
 $timeline-marker-size: 1.5rem !default;
 $timeline-marker-size-small: 1.25rem !default;
@@ -241,7 +265,7 @@ $timeline-item-spacing: 2rem !default;
         }
 
         @each $name, $pair in $colors {
-            $color: nth($pair, 1);
+            $color: list.nth($pair, 1);
 
             .bbr-timeline-item.is-#{$name} .bbr-timeline-marker {
                 background: $timeline-marker-hollow-bg;
@@ -371,8 +395,8 @@ $timeline-item-spacing: 2rem !default;
 
     // Color variations
     @each $name, $pair in $colors {
-        $color: nth($pair, 1);
-        $color-invert: nth($pair, 2);
+        $color: list.nth($pair, 1);
+        $color-invert: list.nth($pair, 2);
 
         &.is-#{$name} {
             .bbr-timeline-marker {

@@ -1,4 +1,33 @@
-@import "bulma/sass/utilities/derived-variables";
+@use "sass:list";
+
+// Bulma variables - compatible with v0.9.x and v1.x
+// Uses CSS variables with fallbacks matching Bulma 0.9.4 defaults
+// v1.x: CSS variables (--bulma-*) will be used if defined
+// v0.9.x: Fallback values will be used (no CSS variables in 0.9.x)
+
+// Colors
+$primary: var(--bulma-primary, #00d1b2);
+$white: var(--bulma-white, #fff);
+$grey-lighter: var(--bulma-grey-lighter, #dbdbdb);
+$grey-light: var(--bulma-grey-light, #b5b5b5);
+$grey: var(--bulma-grey, #7a7a7a);
+$radius: var(--bulma-radius, 4px);
+
+// Sizes - Sass variables for calculations
+$size-small: 0.75rem;
+$size-normal: 1rem;
+$size-medium: 1.25rem;
+$size-large: 1.5rem;
+
+// Color map for variations
+$colors: (
+    "primary": ($primary, $white),
+    "link": (var(--bulma-link, #485fc7), $white),
+    "info": (var(--bulma-info, #3e8ed0), $white),
+    "success": (var(--bulma-success, #48c78e), $white),
+    "warning": (var(--bulma-warning, #ffe08a), rgba(0, 0, 0, 0.7)),
+    "danger": (var(--bulma-danger, #f14668), $white)
+);
 
 $switch-background: $grey-light !default;
 $switch-border: 0.1rem solid transparent !default;
@@ -181,8 +210,8 @@ $switch-focus: 1px dotted $grey-light !default;
 
     // Color variations
     @each $name, $pair in $colors {
-        $color: nth($pair, 1);
-        $color-invert: nth($pair, 2);
+        $color: list.nth($pair, 1);
+        $color-invert: list.nth($pair, 2);
 
         &.is-#{$name} {
             &:checked + label::before {
