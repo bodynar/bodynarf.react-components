@@ -1,0 +1,33 @@
+// // Import component styles
+// @use "@bodynarf/react.components/components/button/component/style.scss";
+// @use "@bodynarf/react.components/components/primitives/radioGroup/component/style.scss" as radioGroup;
+// @use "@bodynarf/react.components/components/primitives/switch/component/style.scss" as switch;
+
+// Add custom styles for examples here
+.section {
+    padding-top: 2rem;
+}
+
+.box {
+    margin-bottom: 1.5rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Custom minimal value display - no background, no arrow
+.slider-minimal-value {
+    .bbr-slider-output {
+        background: transparent;
+        box-shadow: none;
+        color: inherit;
+        font-weight: 600;
+        padding: 0;
+        margin-top: 0.25rem;
+
+        &::after {
+            display: none;
+        }
+    }
+}
