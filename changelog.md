@@ -1,7 +1,7 @@
 # Change log
 All changes will be published here in reverse chronological order
 
-## v1.3.0 (v1.13.0)
+## v1.14.0
 - **ModalWrapper** *(new)*
   - Added new modal window wrapper component based on Bulma modal.
   - Supports `title`, `size`, `className`, `data` props.
@@ -27,6 +27,9 @@ All changes will be published here in reverse chronological order
   - Additional options: `showValue` (tooltip with current value), `showMinMax` (min/max labels), `showProgress` (filled track).
   - Supports vertical mode via `vertical` prop with configurable height.
   - Circle style thumb available via `circle` prop.
+  - Added `valuePosition` prop to position the value tooltip below the slider (`"bottom"`) in horizontal mode.
+  - Tooltip positioning now adjusts based on thumb size for all sizes (Small, Normal, Medium, Large).
+  - Custom value formatting via `valueFormatter` callback.
 
 - **RadioGroup** *(new)*
   - Added new radio group component for single selection from multiple options.

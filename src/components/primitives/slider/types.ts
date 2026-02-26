@@ -26,6 +26,12 @@ export type SliderProps = Omit<BaseNotNullableInputElementProps<number>,
     showValue?: boolean;
 
     /**
+     * Position of the value tooltip in horizontal mode.
+     * @default "top"
+     */
+    valuePosition?: "top" | "bottom";
+
+    /**
      * Display min and max labels below the slider.
      * @default false
      */

@@ -77,7 +77,7 @@ const Timeline: FC<TimelineProps> = ({
                         )}
 
                         {/* Marker */}
-                        <div className="bbr-timeline-marker">
+                        <div className={`bbr-timeline-marker${item.marker !== undefined && item.icon === undefined ? " has-text-marker" : ""}`}>
                             {item.icon !== undefined ? (
                                 <span className="bbr-timeline-icon">
                                     <i className={`fas ${item.icon}`} />

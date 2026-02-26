@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useCallback } from "react";
 
 import { emptyFn, generateGuid, getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
 
-import { ElementSize } from "@bbr/types";
+import { ElementColor, ElementSize } from "@bbr/types";
 import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 
@@ -15,7 +15,7 @@ const Switch: FC<SwitchProps> = ({
     onValueChange = emptyFn, defaultValue,
     label,
     name = generateGuid(),
-    size = ElementSize.Normal, style,
+    size = ElementSize.Normal, style = ElementColor.Primary,
     disabled = false,
     rounded = false, outlined = false, thin = false, rtl = false,
     isFormLabel = false,

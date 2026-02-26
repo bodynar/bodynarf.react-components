@@ -44,7 +44,7 @@ $switch-focus: 1px dotted $grey-light !default;
     $switch-width: $switch-height * 2;
     $paddle-height: $switch-height - ($switch-paddle-offset * 2);
     $paddle-width: $switch-height - ($switch-paddle-offset * 2);
-    $paddle-active-offest: $switch-width - $paddle-width - ($switch-paddle-offset * 1.5);
+    $paddle-active-offset: $switch-width - $paddle-width - ($switch-paddle-offset * 1.5);
 
     + label {
         position: relative;
@@ -99,12 +99,16 @@ $switch-focus: 1px dotted $grey-light !default;
 
         &::after {
             left: auto;
-            right: $paddle-active-offest;
+            right: $paddle-active-offset;
         }
     }
 
+    &:checked + label::before {
+        background: $switch-background-active;
+    }
+
     &:checked + label::after {
-        left: $paddle-active-offest;
+        left: $paddle-active-offset;
     }
 
     &.is-rtl:checked + label::after {
@@ -187,10 +191,6 @@ $switch-focus: 1px dotted $grey-light !default;
                 cursor: not-allowed;
             }
         }
-    }
-
-    &:checked + label::before {
-        background: $switch-background-active;
     }
 
     // Size variations

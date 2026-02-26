@@ -119,6 +119,18 @@ $timeline-item-spacing: 2rem !default;
         font-size: 0.65rem;
     }
 
+    // Text marker - pill shape with auto width
+    .bbr-timeline-marker.has-text-marker {
+        width: auto;
+        min-width: $timeline-marker-size;
+        padding: 0 0.5rem;
+        border-radius: 999px;
+
+        .bbr-timeline-marker-content {
+            white-space: nowrap;
+        }
+    }
+
     // Content box
     .bbr-timeline-content {
         flex: 1;
@@ -303,6 +315,11 @@ $timeline-item-spacing: 2rem !default;
             height: $timeline-marker-size-small;
             min-width: $timeline-marker-size-small;
             font-size: 0.625rem;
+
+            &.has-text-marker {
+                width: auto;
+                min-width: $timeline-marker-size-small;
+            }
         }
 
         .bbr-timeline-icon,
@@ -339,6 +356,11 @@ $timeline-item-spacing: 2rem !default;
             height: $timeline-marker-size-medium;
             min-width: $timeline-marker-size-medium;
             font-size: 0.875rem;
+
+            &.has-text-marker {
+                width: auto;
+                min-width: $timeline-marker-size-medium;
+            }
         }
 
         .bbr-timeline-icon,
@@ -367,6 +389,11 @@ $timeline-item-spacing: 2rem !default;
             height: $timeline-marker-size-large;
             min-width: $timeline-marker-size-large;
             font-size: 1rem;
+
+            &.has-text-marker {
+                width: auto;
+                min-width: $timeline-marker-size-large;
+            }
         }
 
         .bbr-timeline-icon,
@@ -406,7 +433,7 @@ $timeline-item-spacing: 2rem !default;
             }
 
             .bbr-timeline-connector {
-                background: rgba($color, 0.3);
+                background: color-mix(in srgb, $color 30%, transparent);
             }
         }
 

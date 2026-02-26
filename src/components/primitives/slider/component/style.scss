@@ -89,13 +89,23 @@ $slider-output-radius: $radius !default;
         width: auto;
         height: 200px;
         padding-top: 0;
-        padding-left: 0.5rem;
+        padding-left: 0;
+    }
+}
+
+.bbr-slider-track-wrapper {
+    position: relative;
+    width: 100%;
+
+    &.is-vertical {
+        width: auto;
+        height: 100%;
     }
 }
 
 .bbr-slider-output {
     position: absolute;
-    top: -1.5rem;
+    bottom: 100%;
     display: inline-block;
     width: $slider-output-width;
     padding: 0.25rem 0.5rem;
@@ -115,6 +125,55 @@ $slider-output-radius: $radius !default;
         border-width: 5px;
         border-style: solid;
         border-color: $slider-output-background transparent transparent transparent;
+    }
+
+    // Vertical mode - position to the right of slider
+    &.is-vertical {
+        bottom: auto;
+        left: 1.25rem;
+
+        &::after {
+            top: 50%;
+            left: -10px;
+            margin-top: -5px;
+            margin-left: 0;
+            border-color: transparent $slider-output-background transparent transparent;
+        }
+    }
+
+    // Bottom mode - position below the slider (horizontal only)
+    &.is-bottom {
+        bottom: auto;
+        top: 100%;
+
+        &::after {
+            top: auto;
+            bottom: 100%;
+            border-color: transparent transparent $slider-output-background transparent;
+        }
+    }
+
+    // Color variations for output
+    @each $name, $pair in $colors {
+        $color: list.nth($pair, 1);
+        $color-invert: list.nth($pair, 2);
+
+        &.is-#{$name} {
+            background-color: $color;
+            color: $color-invert;
+
+            &::after {
+                border-color: $color transparent transparent transparent;
+            }
+
+            &.is-vertical::after {
+                border-color: transparent $color transparent transparent;
+            }
+
+            &.is-bottom::after {
+                border-color: transparent transparent $color transparent;
+            }
+        }
     }
 }
 
