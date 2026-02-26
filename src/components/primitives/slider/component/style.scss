@@ -149,7 +149,7 @@ $slider-output-radius: $radius !default;
         &::after {
             top: auto;
             bottom: 100%;
-            border-color: transparent transparent $slider-output-background transparent;
+            border-color: transparent transparent $slider-output-background;
         }
     }
 
@@ -171,7 +171,7 @@ $slider-output-radius: $radius !default;
             }
 
             &.is-bottom::after {
-                border-color: transparent transparent $color transparent;
+                border-color: transparent transparent $color;
             }
         }
     }
