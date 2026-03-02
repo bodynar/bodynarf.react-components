@@ -67,6 +67,7 @@ const Stepper: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Stepper"
+                version="1.14"
                 description={
                     <>
                         Stepper - a component for displaying multi-step processes or wizards.

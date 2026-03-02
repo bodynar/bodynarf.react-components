@@ -36,6 +36,7 @@ const Number: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Number"
+                version="1.4"
                 description="Component for entering numeric values"
             />
 

@@ -40,6 +40,7 @@ const Tag: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Tag"
+                version="1.5"
                 baseTypeName="BaseElementProps"
                 description="A component for displaying information about a category or tag"
             />

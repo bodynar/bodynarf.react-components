@@ -35,6 +35,7 @@ const TimePicker: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="TimePicker"
+                version="1.14"
                 baseTypeName="BaseInputElementProps"
                 description={
                     <>

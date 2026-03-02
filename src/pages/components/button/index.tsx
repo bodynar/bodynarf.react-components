@@ -42,6 +42,7 @@ const Button: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Button"
+                version="0.1"
                 baseTypeName="BaseElementProps"
             />
 

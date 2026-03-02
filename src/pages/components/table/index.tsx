@@ -32,6 +32,7 @@ const Table: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Table"
+                version="1.8"
                 baseTypeName="BaseElementProps"
                 description="A table component for displaying data in a grouped format"
             />

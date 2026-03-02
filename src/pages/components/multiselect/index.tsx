@@ -35,6 +35,7 @@ const Multiselect: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Multiselect"
+                version="1.10"
                 baseTypeName="BaseElementProps"
                 description={
                     <>

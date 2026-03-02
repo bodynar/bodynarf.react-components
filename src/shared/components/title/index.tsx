@@ -14,18 +14,26 @@ type DemoComponentTitleInfoMessageProps = {
 
     /** Name of base type to show props display warning */
     baseTypeName?: string;
+
+    /** Version of the library when this component was added */
+    version?: string;
 };
 
 /** Title info message about further demo of component use */
 const DemoComponentTitleInfoMessage: FC<DemoComponentTitleInfoMessageProps> = ({
     name, description,
-    baseTypeName
+    baseTypeName, version
 }) => {
     return (
         <div className="block">
             <h4 className="title is-4">
                 {name}
             </h4>
+            {!isNullOrEmpty(version) &&
+                <span className="tag is-info is-light mb-2">
+                    Added in v{version}
+                </span>
+            }
             {!isNullOrEmpty(baseTypeName) &&
                 <span style={{ fontStyle: "italic", whiteSpace: "pre-line" }}>
                     <hr />

@@ -26,6 +26,7 @@ const Color: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Color picker"
+                version="1.7"
                 description="Control for selecting a color from the RGB palette"
             />
 

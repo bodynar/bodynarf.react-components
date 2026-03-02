@@ -1,6 +1,7 @@
 import { FC, useCallback, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router";
 
+import { isNullOrEmpty } from "@bodynarf/utils";
 import { getClassName } from "@bodynarf/utils";
 
 import { displayName, dependencies, devDependencies } from "package.json";
@@ -17,6 +18,9 @@ import Icon from "@bodynarf/react.components/components/icon";
 
 /** component lib version */
 const packageVersion = dependencies["@bodynarf/react.components"];
+
+/** component lib version (major.minor only) */
+const packageVersionShort = packageVersion.split(".").slice(0, 2).join(".");
 
 /** bulma css lib version */
 const bulmaVersion = devDependencies.bulma;
@@ -183,8 +187,10 @@ const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
 /** Menu item with link */
 // eslint-disable-next-line react/no-multi-comp
 const MenuItem: FC<RouteMenuItem & { activeItem?: RouteMenuItem; }> = ({
-    path, caption, activeItem,
+    path, caption, activeItem, version,
 }) => {
+    const isNew = !isNullOrEmpty(version) && version === packageVersionShort;
+
     return (
         <li>
             <Link
@@ -192,6 +198,11 @@ const MenuItem: FC<RouteMenuItem & { activeItem?: RouteMenuItem; }> = ({
                 className={activeItem?.path === path ? styles["is-active"] : undefined}
             >
                 {caption}
+                {isNew &&
+                    <span className="tag is-danger ml-2" style={{ fontSize: "0.65rem", padding: "0 0.4em", height: "1.25em" }}>
+                        NEW
+                    </span>
+                }
             </Link>
         </li>
     );

@@ -37,6 +37,7 @@ const Text: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Text"
+                version="0.1"
                 description="Component for entering single line text values"
             />
 

@@ -30,6 +30,7 @@ const ModalWrapper: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="ModalWrapper"
+                version="1.14"
                 description={
                     <>
                         ModalWrapper - a modal window component for dialogs, confirmations, and forms.

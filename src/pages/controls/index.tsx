@@ -19,57 +19,68 @@ const controls: MenuItem = {
         {
             path: "/controls/color",
             caption: "Color picker",
-            component: <ColorPicker />
+            component: <ColorPicker />,
+            version: "1.7",
         },
         {
             path: "/controls/checkbox",
             caption: "Check box",
-            component: <Checkbox />
+            component: <Checkbox />,
+            version: "1.3",
         },
         {
             path: "/controls/date",
             caption: "Date picker",
-            component: <Date />
+            component: <Date />,
+            version: "0.1",
         },
         {
             path: "/controls/text",
             caption: "Text",
-            component: <Text />
+            component: <Text />,
+            version: "0.1",
         },
         {
             path: "/controls/multiline",
             caption: "Multiline",
-            component: <Multiline />
+            component: <Multiline />,
+            version: "0.1",
         },
         {
             path: "/controls/number",
             caption: "Number",
-            component: <Number />
+            component: <Number />,
+            version: "1.4",
         },
         {
             path: "/controls/password",
             caption: "Password",
-            component: <Password />
+            component: <Password />,
+            version: "1.4",
         },
         {
             path: "/controls/switch",
             caption: "Switch",
-            component: <Switch />
+            component: <Switch />,
+            version: "1.14",
         },
         {
             path: "/controls/slider",
             caption: "Slider",
-            component: <Slider />
+            component: <Slider />,
+            version: "1.14",
         },
         {
             path: "/controls/radioGroup",
             caption: "Radio Group",
-            component: <RadioGroup />
+            component: <RadioGroup />,
+            version: "1.14",
         },
         {
             path: "/controls/timePicker",
             caption: "Time Picker",
-            component: <TimePicker />
+            component: <TimePicker />,
+            version: "1.14",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };

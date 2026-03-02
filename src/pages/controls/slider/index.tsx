@@ -26,6 +26,7 @@ const Slider: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Slider"
+                version="1.14"
                 description={
                     <>
                         Slider - a range/slider component for selecting numeric values with Bulma styling.

@@ -37,6 +37,7 @@ const Multiline: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Multiline"
+                version="0.1"
                 description="Control for entering multiline text"
             />
 

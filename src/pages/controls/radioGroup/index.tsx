@@ -39,6 +39,7 @@ const RadioGroup: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="RadioGroup"
+                version="1.14"
                 description={
                     <>
                         RadioGroup - a component for single selection from multiple options with Bulma styling.

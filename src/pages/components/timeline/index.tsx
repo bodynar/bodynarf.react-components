@@ -49,6 +49,7 @@ const Timeline: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Timeline"
+                version="1.14"
                 description={
                     <>
                         Timeline - a component for displaying chronological events or history.

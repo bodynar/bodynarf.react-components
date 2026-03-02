@@ -36,6 +36,7 @@ const DateDemo: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Date picker"
+                version="0.1"
                 description="Control for selecting a specific date"
             />
 

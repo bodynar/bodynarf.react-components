@@ -26,6 +26,7 @@ const Switch: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Switch"
+                version="1.14"
                 description={
                     <>
                         Switch - a toggle/switch component for boolean values with Bulma styling.

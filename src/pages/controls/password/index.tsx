@@ -25,6 +25,7 @@ const Password: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Password"
+                version="1.4"
                 description="Component for entering sensitive data (e.g., password)"
             />
 

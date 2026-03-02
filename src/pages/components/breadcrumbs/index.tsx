@@ -32,6 +32,7 @@ const Breadcrumbs: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Breadcrumbs"
+                version="1.8"
                 baseTypeName="BaseElementProps"
                 description="Breadcrumbs is a navigation component that displays the current page’s location within a hierarchy. It shows a sequence of links (or items) representing the navigation path, making it easier for users to move back to previous sections."
             />

@@ -15,6 +15,7 @@ const Dropdown: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Dropdown"
+                version="0.1"
                 baseTypeName="BaseElementProps"
                 description={
                     <>

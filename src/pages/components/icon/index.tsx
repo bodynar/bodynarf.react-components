@@ -24,6 +24,7 @@ const Icon: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Icon"
+                version="0.1"
                 baseTypeName="BaseElementProps"
                 description={
                     <>

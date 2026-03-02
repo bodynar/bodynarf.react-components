@@ -38,6 +38,7 @@ const File: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="File"
+                version="1.11"
                 baseTypeName="BaseElementProps"
                 description="A component for selecting a file for further processing"
             />

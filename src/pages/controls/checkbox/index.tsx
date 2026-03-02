@@ -25,6 +25,7 @@ const Checkbox: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="Checkbox"
+                version="1.3"
                 baseTypeName="BaseInputElementProps"
                 description={
                     <>

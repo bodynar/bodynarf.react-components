@@ -24,76 +24,91 @@ const components: MenuItem = {
             path: "/components/icon",
             caption: "Icon",
             component: <Icon />,
+            version: "0.1",
         },
         {
             path: "/components/accordion",
             caption: "Accordion",
             component: <Accordion />,
+            version: "1.6",
         },
         {
             path: "/components/button",
             caption: "Button",
             component: <Button />,
+            version: "0.1",
         },
         {
             path: "/components/tag",
             caption: "Tag",
             component: <Tag />,
+            version: "1.5",
         },
         {
             path: "/components/dropdown",
             caption: "Dropdown",
-            component: <Dropdown />
+            component: <Dropdown />,
+            version: "0.1",
         },
         {
             path: "/components/multiselect",
             caption: "Multiselect",
-            component: <Multiselect />
+            component: <Multiselect />,
+            version: "1.10",
         },
         {
             path: "/components/tabs",
             caption: "Tabs",
-            component: <Tabs />
+            component: <Tabs />,
+            version: "1.6",
         },
         {
             path: "/components/search",
             caption: "Search",
-            component: <Search />
+            component: <Search />,
+            version: "0.1",
         },
         {
             path: "/components/paginator",
             caption: "Paginator",
-            component: <Paginator />
+            component: <Paginator />,
+            version: "1.4",
         },
         {
             path: "/components/breadcrumbs",
             caption: "Breadcrumbs",
-            component: <Breadcrumbs />
+            component: <Breadcrumbs />,
+            version: "1.8",
         },
         {
             path: "/components/file",
             caption: "File",
-            component: <File />
+            component: <File />,
+            version: "1.11",
         },
         {
             path: "/components/table",
             caption: "Table",
-            component: <Table />
+            component: <Table />,
+            version: "1.8",
         },
         {
             path: "/components/modalWrapper",
             caption: "Modal Wrapper",
-            component: <ModalWrapper />
+            component: <ModalWrapper />,
+            version: "1.14",
         },
         {
             path: "/components/stepper",
             caption: "Stepper",
-            component: <Stepper />
+            component: <Stepper />,
+            version: "1.14",
         },
         {
             path: "/components/timeline",
             caption: "Timeline",
-            component: <Timeline />
+            component: <Timeline />,
+            version: "1.14",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };
