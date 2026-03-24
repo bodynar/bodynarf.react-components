@@ -2,6 +2,8 @@
 // @use "@bodynarf/react.components/components/button/component/style.scss";
 // @use "@bodynarf/react.components/components/primitives/radioGroup/component/style.scss" as radioGroup;
 // @use "@bodynarf/react.components/components/primitives/switch/component/style.scss" as switch;
+@use "@bodynarf/react.components/components/primitives/checkbox/component/style.scss" as checkbox;
+@use "@bodynarf/react.components/components/table/component/style.scss" as table;
 
 // Add custom styles for examples here
 .section {
