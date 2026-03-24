@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useCallback } from "react";
+import { ChangeEvent, FC, useCallback, useRef, useEffect } from "react";
 
 import { emptyFn, generateGuid, getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
 
@@ -9,6 +9,7 @@ import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import "./style.scss";
 
 import { CheckBoxProps } from "../..";
+
 // todo: https://justboil.github.io/bulma-checkbox/
 /** Boolean input component */
 const CheckBox: FC<CheckBoxProps> = ({
@@ -20,13 +21,24 @@ const CheckBox: FC<CheckBoxProps> = ({
     rounded = false, block = false,
     withoutBorder = false, hasBackgroundColor = false, fixBackgroundColor = false,
     isFormLabel = false,
+    checked, indeterminate = false,
 
     className, data, title
 }) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+
     const onChecked = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.checked),
         [onValueChange]
     );
+
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.indeterminate = indeterminate;
+        }
+    }, [indeterminate]);
+
+    const isControlled = checked !== undefined;
 
     const elClassName = getClassName([
         "is-checkradio",
@@ -56,13 +68,15 @@ const CheckBox: FC<CheckBoxProps> = ({
             >
                 <input
                     id={name}
+
                     name={name}
+                    ref={inputRef}
                     type="checkbox"
                     disabled={disabled}
                     {...dataAttributes}
                     onChange={onChecked}
                     className={elClassName}
-                    defaultChecked={defaultValue}
+                    {...(isControlled ? { checked } : { defaultChecked: defaultValue })}
                 />
                 <label
                     title={title}
@@ -89,13 +103,15 @@ const CheckBox: FC<CheckBoxProps> = ({
         >
             <input
                 id={name}
+
                 name={name}
+                ref={inputRef}
                 type="checkbox"
                 disabled={disabled}
                 {...dataAttributes}
                 onChange={onChecked}
                 className={elClassName}
-                defaultChecked={defaultValue}
+                {...(isControlled ? { checked } : { defaultChecked: defaultValue })}
             />
             <label
                 htmlFor={name}

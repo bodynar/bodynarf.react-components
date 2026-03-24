@@ -1,6 +1,20 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.14.4
+- **Table**
+  - Added `ref` support via `forwardRef` for direct access to the underlying `<table>` element.
+  - Added multiple row selection feature:
+    - `selectable` prop enables a checkbox column for row selection.
+    - `selectedRows` prop accepts an array of string keys corresponding to child row `key` props.
+    - `onSelectedRowsChange` callback fires when selection changes.
+    - Header checkbox supports "select all" with indeterminate state for partial selection.
+  - Added `headerCheckBoxConfig` and `rowCheckBoxConfig` props (`Pick<CheckBoxProps, ...>`) for visual customization of selection checkboxes (size, style, rounded, block, etc.).
+
+- **Checkbox**
+  - Added `checked` prop for controlled mode (when provided, overrides `defaultValue`).
+  - Added `indeterminate` prop for displaying a dash instead of a checkmark (useful for "select all" partial selection).
+
 ## v1.14.0
 - **ModalWrapper** *(new)*
   - Added new modal window wrapper component based on Bulma modal.

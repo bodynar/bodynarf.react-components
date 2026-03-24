@@ -34,4 +34,16 @@ export type CheckBoxProps = Omit<BaseNotNullableInputElementProps<boolean>,
      * Label will be placed at left
      */
     isFormLabel?: boolean;
+
+    /**
+     * Controlled checked state.
+     * @description When provided, component works in controlled mode instead of using `defaultValue`
+     */
+    checked?: boolean;
+
+    /**
+     * Indeterminate state.
+     * @description Displays a dash instead of a checkmark. Useful for "select all" partial selection
+     */
+    indeterminate?: boolean;
 };
