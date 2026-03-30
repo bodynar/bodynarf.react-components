@@ -1,4 +1,4 @@
-import { Children, forwardRef, isValidElement, useCallback, useMemo } from "react";
+import { Children, cloneElement, forwardRef, isValidElement, useCallback, useMemo } from "react";
 
 import { getClassName } from "@bodynarf/utils";
 
@@ -130,18 +130,17 @@ const Table = forwardRef<HTMLTableElement, TableProps>(({
 
                         const key = String(child.key);
 
-                        return (
-                            <tr {...child.props}>
-                                <td className="bbr-table__select-cell">
-                                    <CheckBox
-                                        {...rowCheckBoxConfig}
-                                        checked={selectedRows.includes(key)}
-                                        onValueChange={() => onRowSelectChange(key)}
-                                    />
-                                </td>
-                                {child.props.children}
-                            </tr>
+                        const selectionCell = (
+                            <td className="bbr-table__select-cell">
+                                <CheckBox
+                                    {...rowCheckBoxConfig}
+                                    checked={selectedRows.includes(key)}
+                                    onValueChange={() => onRowSelectChange(key)}
+                                />
+                            </td>
                         );
+
+                        return cloneElement(child, { selectionCell } as Record<string, unknown>);
                     })
                     : children
                 }

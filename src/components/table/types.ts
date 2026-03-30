@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 import { BaseElementProps } from "@bbr/types";
 import { CheckBoxProps } from "@bbr/components/primitives/checkbox";
@@ -99,4 +99,13 @@ export type TableProps = BaseElementProps & {
 
     /** Callback when selected rows change */
     onSelectedRowsChange?: (selectedRows: Array<string>) => void;
+};
+
+/**
+ * Selection cell injected by Table when `selectable` is enabled.
+ * @description Row components should accept this prop and render it as the first `<td>` inside their `<tr>`
+ */
+export type TableSelectionCellProps = {
+    /** Checkbox cell element to render inside the row */
+    selectionCell?: ReactElement;
 };
