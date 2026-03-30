@@ -7,6 +7,9 @@ export * from "./breadcrumbs";
 export { default as Button } from "./button";
 export * from "./button";
 
+export { default as SplitButton } from "./splitButton";
+export * from "./splitButton";
+
 export { default as Dropdown } from "./dropdown";
 export * from "./dropdown";
 

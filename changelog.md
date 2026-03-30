@@ -1,6 +1,17 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.14.5
+- **SplitButton** *(new)*
+  - Added new split-button component with a dropdown of alternative actions.
+  - Primary button triggers main action via `onClick`, chevron toggle opens a dropdown list of secondary actions.
+  - Supports all `ButtonStyle` variants (Primary, Info, Success, Warning, Danger, Link, etc.).
+  - Supports `light`, `outlined`, `rounded`, `disabled`, `size`, `icon` props — consistent with `Button`.
+  - Each dropdown action (`SplitButtonAction`) supports `caption`, `icon`, `title`, `disabled`, and its own `onClick`.
+  - Actions list is validated at compile-time to contain at least 1 item (non-empty tuple type).
+  - Auto-detects available space and opens upward when near the bottom of the viewport.
+  - Closes on outside click (configurable via `hideOnOuterClick`).
+
 ## v1.14.4
 - **Table**
   - Added `ref` support via `forwardRef` for direct access to the underlying `<table>` element.

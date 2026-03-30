@@ -1,0 +1,98 @@
+.bbr-split-button {
+    position: relative;
+    display: inline-flex;
+
+    &__buttons {
+        display: inline-flex;
+
+        & > .button {
+            margin-right: 0 !important;
+        }
+
+        & > .button:first-child {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-right: none;
+        }
+
+        & > .button:last-child {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        & > .button.is-rounded-left {
+            border-top-left-radius: 9999px;
+            border-bottom-left-radius: 9999px;
+        }
+
+        & > .button.is-rounded-right {
+            border-top-right-radius: 9999px;
+            border-bottom-right-radius: 9999px;
+        }
+    }
+
+    &__toggle {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+
+        .bbr-icon {
+            transition: 0.25s ease-in-out transform;
+        }
+    }
+
+    &.is-active &__toggle .bbr-icon {
+        transform: rotate(180deg);
+    }
+
+    &__menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 100%;
+        z-index: 20;
+        padding-top: 4px;
+    }
+
+    &.is-active &__menu {
+        display: block;
+    }
+
+    &.is-up &__menu {
+        top: auto;
+        bottom: 100%;
+        padding-top: 0;
+        padding-bottom: 4px;
+    }
+
+    &.is-active.is-up &__toggle .bbr-icon {
+        transform: rotate(360deg);
+    }
+
+    &__item {
+        cursor: pointer;
+        user-select: none;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+
+        transition: 0.15s ease-in-out;
+        transition-property: color, background-color;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: #0a0a0a;
+        }
+
+        &:active {
+            background-color: rgba(0, 0, 0, 0.15);
+            color: #0a0a0a;
+        }
+
+        &--disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    }
+}
