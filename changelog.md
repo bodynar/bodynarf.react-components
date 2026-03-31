@@ -1,7 +1,7 @@
 # Change log
 All changes will be published here in reverse chronological order
 
-## v1.14.5
+## v1.14.6
 - **SplitButton** *(new)*
   - Added new split-button component with a dropdown of alternative actions.
   - Primary button triggers main action via `onClick`, chevron toggle opens a dropdown list of secondary actions.
