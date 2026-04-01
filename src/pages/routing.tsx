@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 
 import Home from "./home";
-import HooksPage from "./hooks";
 
 import componentsRoutes from "./components";
 import controlsRoutes from "./controls";
 import propsRoutes from "./props";
+import hooksRoutes from "./hooks";
 
 /** Menu single item */
 export type MenuItem = {
@@ -40,11 +40,7 @@ const routeList: Array<RouteMenuItem | MenuItem> = [
     { ...componentsRoutes },
     { ...controlsRoutes },
     { ...propsRoutes },
-    {
-        caption: "Hooks",
-        path: "/hooks",
-        component: <HooksPage />,
-    } as RouteMenuItem & Partial<Pick<MenuItem, "children">>,
+    { ...hooksRoutes },
 ];
 
 export default routeList;

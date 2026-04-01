@@ -1,519 +1,77 @@
-import { FC, useCallback, useRef, useState } from "react";
+import { MenuItem } from "../routing";
 
-import {
-    useDebounceHandler,
-    useMount,
-    useUnmount,
-    usePrevious,
-    useTimeout,
-    useInterval,
-    useUpdateEffect,
-    useLocalStorage,
-    usePagination,
-    useEventListener,
-    useComponentOutsideClick,
-} from "@bodynarf/react.components";
+import UseDebounceHandler from "./useDebounceHandler";
+import UseMount from "./useMount";
+import UseUnmount from "./useUnmount";
+import UsePrevious from "./usePrevious";
+import UseTimeout from "./useTimeout";
+import UseInterval from "./useInterval";
+import UseUpdateEffect from "./useUpdateEffect";
+import UseLocalStorage from "./useLocalStorage";
+import UsePagination from "./usePagination";
+import UseEventListener from "./useEventListener";
+import UseComponentOutsideClick from "./useComponentOutsideClick";
 
-import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
-import ComponentUseCase from "@app/sharedComponents/useCase";
-import CodeExample from "@app/sharedComponents/codeExample";
-
-/** Hooks documentation page */
-const HooksPage: FC = () => {
-    // useDebounceHandler demo
-    const handleAsyncAction = useCallback(async () => {
-        await new Promise(resolve => setTimeout(resolve, 500));
-    }, []);
-    const [debounceActive, debouncedHandler] = useDebounceHandler(handleAsyncAction, 3);
-
-    // useMount demo
-    const [mountMessage, setMountMessage] = useState("");
-    useMount(() => {
-        setMountMessage("Component mounted!");
-    });
-
-    // useUnmount demo - just for documentation, no visible effect
-    useUnmount(() => {
-        // cleanup on unmount
-    });
-
-    // usePrevious demo
-    const [count, setCount] = useState(0);
-    const prevCount = usePrevious(count);
-
-    // useTimeout demo
-    const [timeoutMessage, setTimeoutMessage] = useState("Waiting...");
-    const [timeoutDelay, setTimeoutDelay] = useState<number | null>(null);
-    useTimeout(() => setTimeoutMessage("Timeout fired!"), timeoutDelay);
-
-    // useInterval demo
-    const [intervalCount, setIntervalCount] = useState(0);
-    const [intervalActive, setIntervalActive] = useState(false);
-    useInterval(() => setIntervalCount(c => c + 1), intervalActive ? 1000 : null);
-
-    // useUpdateEffect demo
-    const [updateCount, setUpdateCount] = useState(0);
-    const [updateEffectLog, setUpdateEffectLog] = useState("Not triggered yet");
-    useUpdateEffect(() => {
-        setUpdateEffectLog(`Effect triggered! Count: ${updateCount}`);
-    }, [updateCount]);
-
-    // useLocalStorage demo
-    const [storedValue, setStoredValue] = useLocalStorage("demo-key", "initial value");
-
-    // usePagination demo
-    const demoItems = Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`);
-    const [paginationState, getPageItems] = usePagination(demoItems.length, 5);
-    const currentPageItems = getPageItems(demoItems) as string[];
-
-    // useEventListener demo
-    const [lastKey, setLastKey] = useState<string>("Press any key...");
-    useEventListener("keydown", (e) => setLastKey(e.key));
-
-    // useComponentOutsideClick demo
-    const [outsideOpen, setOutsideOpen] = useState(false);
-    const [outsideClickLog, setOutsideClickLog] = useState("");
-    const outsideRef = useRef<HTMLDivElement>(null);
-    useComponentOutsideClick(
-        "#outside-click-demo",
-        outsideOpen,
-        () => {
-            setOutsideClickLog("Clicked outside!");
-            setOutsideOpen(false);
+const hooks: MenuItem = {
+    name: "hooks-group",
+    caption: "Hooks",
+    children: [
+        {
+            path: "/hooks/useDebounceHandler",
+            caption: "useDebounceHandler",
+            component: <UseDebounceHandler />,
         },
-        outsideOpen,
-    );
-
-    return (
-        <section>
-            <DemoComponentTitleInfoMessage
-                name="Hooks"
-                description="A collection of custom React hooks from @bodynarf/react.components library for common UI patterns and state management."
-            />
-
-            <ComponentUseCase
-                caption="useDebounceHandler"
-                description="Returns a debounced handler that prevents rapid successive calls. Useful for buttons that trigger async operations."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { useDebounceHandler } from "@bodynarf/react.components";`,
-                            "",
-                            "const MyComponent = () => {",
-                            "    const handleAsync = async () => {",
-                            "        await fetchData();",
-                            "    };",
-                            "",
-                            "    const [isActive, debouncedHandler] = useDebounceHandler(handleAsync, 3);",
-                            "",
-                            "    return (",
-                            "        <button",
-                            "            disabled={!isActive}",
-                            "            onClick={debouncedHandler}",
-                            "        >",
-                            "            {isActive ? 'Click me' : 'Please wait...'}",
-                            "        </button>",
-                            "    );",
-                            "};",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <div>
-                    <button
-                        type="button"
-                        className={`button ${debounceActive ? "is-primary" : "is-loading"}`}
-                        disabled={!debounceActive}
-                        onClick={debouncedHandler}
-                    >
-                        {debounceActive ? "Click me (3s debounce)" : "Please wait..."}
-                    </button>
-                </div>
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                caption="useMount"
-                description="Executes a function only once during the component's initial render (mount). Similar to useEffect with empty dependency array."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { useMount } from "@bodynarf/react.components";`,
-                            "",
-                            "const MyComponent = () => {",
-                            "    useMount(() => {",
-                            "        console.log('Component mounted!');",
-                            "        initializeData();",
-                            "    });",
-                            "",
-                            "    return <div>Content</div>;",
-                            "};",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <span className="tag is-success is-medium">
-                    {mountMessage}
-                </span>
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                caption="useUnmount"
-                description="Runs a cleanup function only when the component unmounts. Useful for removing subscriptions or clearing resources."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { useUnmount } from "@bodynarf/react.components";`,
-                            "",
-                            "const MyComponent = () => {",
-                            "    useUnmount(() => {",
-                            "        console.log('Component unmounted!');",
-                            "        cleanupResources();",
-                            "    });",
-                            "",
-                            "    return <div>Content</div>;",
-                            "};",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <span className="tag is-info is-medium">
-                    Cleanup will run on unmount (check console when navigating away)
-                </span>
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                caption="usePrevious"
-                description="Stores and returns the previous value of a state or prop. Returns undefined on the first render."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { usePrevious } from "@bodynarf/react.components";`,
-                            "",
-                            "const MyComponent = () => {",
-                            "    const [count, setCount] = useState(0);",
-                            "    const prevCount = usePrevious(count);",
-                            "",
-                            "    return (",
-                            "        <div>",
-                            "            <p>Current: {count}, Previous: {prevCount}</p>",
-                            "            <button onClick={() => setCount(c => c + 1)}>",
-                            "                Increment",
-                            "            </button>",
-                            "        </div>",
-                            "    );",
-                            "};",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <div>
-                    <p className="mb-2">
-                        {`Current: ${count}, Previous: ${prevCount ?? "undefined"}`}
-                    </p>
-                    <button
-                        type="button"
-                        className="button is-small is-primary"
-                        onClick={() => setCount(c => c + 1)}
-                    >
-                        Increment
-                    </button>
-                </div>
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                caption="useTimeout"
-                description="Executes a callback after a specified delay. Automatically clears timeout if delay changes or component unmounts. Pass null to disable."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { useTimeout } from "@bodynarf/react.components";`,
-                            "",
-                            "const MyComponent = () => {",
-                            "    const [message, setMessage] = useState('Waiting...');",
-                            "",
-                            "    useTimeout(() => setMessage('Timeout fired!'), 2000);",
-                            "",
-                            "    return <span>{message}</span>;",
-                            "};",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <div>
-                    <span className="tag is-warning is-medium mr-2">
-                        {timeoutMessage}
-                    </span>
-                    <button
-                        type="button"
-                        className="button is-small"
-                        onClick={() => {
-                            setTimeoutMessage("Waiting...");
-                            setTimeoutDelay(2000);
-                        }}
-                    >
-                        Start 2s timeout
-                    </button>
-                </div>
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                caption="useInterval"
-                description="Executes a callback repeatedly with a fixed time delay. Automatically clears interval on unmount. Pass null to disable."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { useInterval } from "@bodynarf/react.components";`,
-                            "",
-                            "const MyComponent = () => {",
-                            "    const [count, setCount] = useState(0);",
-                            "    const [active, setActive] = useState(false);",
-                            "",
-                            "    useInterval(",
-                            "        () => setCount(c => c + 1),",
-                            "        active ? 1000 : null",
-                            "    );",
-                            "",
-                            "    return (",
-                            "        <div>",
-                            "            <span>Count: {count}</span>",
-                            "            <button onClick={() => setActive(!active)}>",
-                            "                {active ? 'Stop' : 'Start'}",
-                            "            </button>",
-                            "        </div>",
-                            "    );",
-                            "};",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <div>
-                    <span className="tag is-link is-medium mr-2">
-                        {`Count: ${intervalCount}`}
-                    </span>
-                    <button
-                        type="button"
-                        className={`button is-small ${intervalActive ? "is-danger" : "is-success"}`}
-                        onClick={() => setIntervalActive(!intervalActive)}
-                    >
-                        {intervalActive ? "Stop" : "Start"}
-                    </button>
-                </div>
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                caption="useUpdateEffect"
-                description="Works like useEffect, but skips execution on the initial render. Runs only on subsequent updates."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { useUpdateEffect } from "@bodynarf/react.components";`,
-                            "",
-                            "const MyComponent = () => {",
-                            "    const [count, setCount] = useState(0);",
-                            "",
-                            "    useUpdateEffect(() => {",
-                            "        console.log('Count updated:', count);",
-                            "        // This won't run on first render!",
-                            "    }, [count]);",
-                            "",
-                            "    return (",
-                            "        <button onClick={() => setCount(c => c + 1)}>",
-                            "            Increment ({count})",
-                            "        </button>",
-                            "    );",
-                            "};",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <div>
-                    <p className="mb-2">
-                        {updateEffectLog}
-                    </p>
-                    <button
-                        type="button"
-                        className="button is-small is-primary"
-                        onClick={() => setUpdateCount(c => c + 1)}
-                    >
-                        {`Increment (${updateCount})`}
-                    </button>
-                </div>
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                caption="useLocalStorage"
-                description="Stores state in localStorage and keeps it in sync. Returns a tuple [value, setValue] similar to useState."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { useLocalStorage } from "@bodynarf/react.components";`,
-                            "",
-                            "const MyComponent = () => {",
-                            "    const [token, setToken] = useLocalStorage('auth-token', '');",
-                            "",
-                            "    return (",
-                            "        <input",
-                            "            value={token}",
-                            "            onChange={e => setToken(e.target.value)}",
-                            "            placeholder='Enter token'",
-                            "        />",
-                            "    );",
-                            "};",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <div>
-                    <input
-                        className="input is-small"
-                        style={{ maxWidth: "300px" }}
-                        value={storedValue}
-                        onChange={e => setStoredValue(e.target.value)}
-                        placeholder="Type here (persisted in localStorage)"
-                    />
-                    <p className="is-size-7 mt-1 has-text-grey">
-                        {`Key: "demo-key", Value: "${storedValue}"`}
-                    </p>
-                </div>
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                caption="usePagination"
-                description="Hook for pagination state management. Returns paginator state and a function to slice current page items."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { usePagination } from "@bodynarf/react.components";`,
-                            "",
-                            "const MyComponent = () => {",
-                            "    const items = ['Item 1', 'Item 2', /* ... */];",
-                            "    const [state, getPageItems] = usePagination(items.length, 5);",
-                            "    const currentItems = getPageItems(items);",
-                            "",
-                            "    return (",
-                            "        <div>",
-                            "            <ul>",
-                            "                {currentItems.map(item => <li>{item}</li>)}",
-                            "            </ul>",
-                            "            <p>Page {state.currentPage} of {state.pagesCount}</p>",
-                            "            <button onClick={() => state.onPageChange(state.currentPage + 1)}>",
-                            "                Next",
-                            "            </button>",
-                            "        </div>",
-                            "    );",
-                            "};",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <div>
-                    <ul className="mb-2">
-                        {currentPageItems.map(item => (
-                            <li key={item}>
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
-                    <p className="is-size-7 mb-2">
-                        {`Page ${paginationState.currentPage} of ${paginationState.pagesCount}`}
-                    </p>
-                    <div className="buttons are-small">
-                        <button
-                            type="button"
-                            className="button"
-                            disabled={paginationState.currentPage === 1}
-                            onClick={() => paginationState.onPageChange(paginationState.currentPage - 1)}
-                        >
-                            Previous
-                        </button>
-                        <button
-                            type="button"
-                            className="button"
-                            disabled={paginationState.currentPage === paginationState.pagesCount}
-                            onClick={() => paginationState.onPageChange(paginationState.currentPage + 1)}
-                        >
-                            Next
-                        </button>
-                    </div>
-                </div>
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                caption="useEventListener"
-                description="Attaches an event listener to a given element (default: window). Automatically cleans up on unmount."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { useEventListener } from "@bodynarf/react.components";`,
-                            "",
-                            "const MyComponent = () => {",
-                            "    const [lastKey, setLastKey] = useState('');",
-                            "",
-                            "    useEventListener('keydown', (e) => setLastKey(e.key));",
-                            "",
-                            "    return <span>Last key: {lastKey}</span>;",
-                            "};",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <span className="tag is-primary is-medium">
-                    {`Last key: ${lastKey}`}
-                </span>
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                caption="useComponentOutsideClick"
-                description="Subscribes to clicks outside a component identified by a CSS selector. Useful for closing dropdowns, modals, and popovers."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { useComponentOutsideClick } from "@bodynarf/react.components";`,
-                            "",
-                            "const MyComponent = () => {",
-                            "    const [open, setOpen] = useState(false);",
-                            "",
-                            "    useComponentOutsideClick(",
-                            `        "#my-component",`,
-                            "        open,",
-                            "        () => setOpen(false),",
-                            "        open,",
-                            "    );",
-                            "",
-                            "    return (",
-                            `        <div id="my-component">`,
-                            "            <button onClick={() => setOpen(true)}>Open</button>",
-                            "            {open && <div>Click outside to close</div>}",
-                            "        </div>",
-                            "    );",
-                            "};",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <div
-                    id="outside-click-demo"
-                    ref={outsideRef}
-                >
-                    <button
-                        type="button"
-                        className={`button is-small ${outsideOpen ? "is-warning" : "is-info"}`}
-                        onClick={() => {
-                            setOutsideOpen(true);
-                            setOutsideClickLog("");
-                        }}
-                    >
-                        {outsideOpen ? "Now click outside me!" : "Click to activate"}
-                    </button>
-                    {outsideClickLog &&
-                        <span className="tag is-danger is-medium ml-2">
-                            {outsideClickLog}
-                        </span>
-                    }
-                </div>
-            </ComponentUseCase>
-        </section>
-    );
+        {
+            path: "/hooks/useMount",
+            caption: "useMount",
+            component: <UseMount />,
+        },
+        {
+            path: "/hooks/useUnmount",
+            caption: "useUnmount",
+            component: <UseUnmount />,
+        },
+        {
+            path: "/hooks/usePrevious",
+            caption: "usePrevious",
+            component: <UsePrevious />,
+        },
+        {
+            path: "/hooks/useTimeout",
+            caption: "useTimeout",
+            component: <UseTimeout />,
+        },
+        {
+            path: "/hooks/useInterval",
+            caption: "useInterval",
+            component: <UseInterval />,
+        },
+        {
+            path: "/hooks/useUpdateEffect",
+            caption: "useUpdateEffect",
+            component: <UseUpdateEffect />,
+        },
+        {
+            path: "/hooks/useLocalStorage",
+            caption: "useLocalStorage",
+            component: <UseLocalStorage />,
+        },
+        {
+            path: "/hooks/usePagination",
+            caption: "usePagination",
+            component: <UsePagination />,
+        },
+        {
+            path: "/hooks/useEventListener",
+            caption: "useEventListener",
+            component: <UseEventListener />,
+        },
+        {
+            path: "/hooks/useComponentOutsideClick",
+            caption: "useComponentOutsideClick",
+            component: <UseComponentOutsideClick />,
+        },
+    ].sort((x, y) => x.caption.localeCompare(y.caption))
 };
 
-export default HooksPage;
+export default hooks;
