@@ -1,8 +1,9 @@
 .anchor-heading {
     scroll-margin-top: 1rem;
     position: relative;
+    display: inline-block;
 
-    > span {
+    > span:not(.anchor-heading__toast) {
         display: inline-flex;
         align-items: center;
         transition: transform 0.2s ease;
@@ -20,7 +21,7 @@
         }
     }
 
-    &:hover > span::after {
+    &:hover > span:not(.anchor-heading__toast)::after {
         width: 100%;
     }
 
@@ -35,7 +36,7 @@
         position: absolute;
     }
 
-    &:hover > span {
+    &:hover > span:not(.anchor-heading__toast) {
         transform: translateX(1.4em);
     }
 
@@ -46,7 +47,7 @@
     .anchor-heading__toast {
         position: absolute;
         left: 0;
-        top: 100%;
+        top: calc(100% + 4px);
         background: hsl(0, 0%, 21%);
         color: white;
         padding: 0.25rem 0.6rem;
