@@ -26,7 +26,6 @@ const ScrollToAnchor: FC<ScrollToAnchorProps> = ({
             if (el) {
                 el.scrollIntoView({ behavior: "smooth", block: "start" });
             } else {
-                // пробуем ещё раз на следующем кадре
                 requestAnimationFrame(tryScroll);
             }
         };

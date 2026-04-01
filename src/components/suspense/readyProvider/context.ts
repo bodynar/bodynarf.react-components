@@ -4,6 +4,7 @@ import { createContext } from "react";
 export const SuspenseReadyContext = createContext<{
     /** Whether suspense has resolved */
     isReady: boolean;
+
     /** Set ready state */
     setReady: (ready: boolean) => void;
 }>({

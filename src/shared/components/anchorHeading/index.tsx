@@ -1,4 +1,4 @@
-import { FC, useCallback } from "react";
+import { FC, useCallback, useState } from "react";
 
 import { Icon } from "@bodynarf/react.components";
 
@@ -39,12 +39,16 @@ const getBaseUrl = (): string => {
 /** Heading with anchor link that copies URL to clipboard on click */
 const AnchorHeading: FC<AnchorHeadingProps> = ({ caption, captionIsCode = false }) => {
     const anchor = caption.toLowerCase().replace(/\s+/g, "-");
+    const [showToast, setShowToast] = useState(false);
 
     const handleClick = useCallback(() => {
         const url = `${getBaseUrl()}#${anchor}`;
         navigator.clipboard.writeText(url);
 
         window.history.replaceState(null, "", url);
+
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 1500);
     }, [anchor]);
 
     return (
@@ -55,7 +59,7 @@ const AnchorHeading: FC<AnchorHeadingProps> = ({ caption, captionIsCode = false 
             <span
                 role="link"
                 onClick={handleClick}
-                style={{ color: "inherit", cursor: "pointer" }}
+                className="is-clickable"
             >
                 {captionIsCode
                     ?
@@ -68,6 +72,13 @@ const AnchorHeading: FC<AnchorHeadingProps> = ({ caption, captionIsCode = false 
                     <Icon name="link-45deg" />
                 </span>
             </span>
+            {showToast === true
+                ?
+                <span className="anchor-heading__toast">
+                    Link copied to clipboard
+                </span>
+                : null
+            }
         </h5>
     );
 };

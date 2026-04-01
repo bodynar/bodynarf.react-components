@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, Suspense } from "react";
 
 import { useSuspenseReady } from "../readyProvider/hooks";
-import PageLoader from "../../pageLoader";
+import PageLoader from "../pageLoader";
 import SuspenseTracker from "../tracker";
 
 const SuspenseWrapper: FC<PropsWithChildren> = ({

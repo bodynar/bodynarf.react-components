@@ -26,8 +26,8 @@ const App: FC = () => {
                 className={`column box ${styles.content} pt-5 pl-5`}
             >
                 <SuspenseReadyProvider>
-
                     <ScrollToAnchor parentContainerRef={contentRef} />
+
                     <Routes>
                         <Route
                             path="*"

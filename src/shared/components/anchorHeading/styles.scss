@@ -1,20 +1,75 @@
 .anchor-heading {
     scroll-margin-top: 1rem;
+    position: relative;
 
     > span {
         display: inline-flex;
         align-items: center;
+        transition: transform 0.2s ease;
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+    }
+
+    &:hover > span::after {
+        width: 100%;
     }
 
     .anchor-heading__icon {
         opacity: 0;
         transition: opacity 0.2s ease;
         order: -1;
+        width: 0;
+        overflow: visible;
+        white-space: nowrap;
+        left: -1rem;
         position: absolute;
-        right: 98.35%;
+    }
+
+    &:hover > span {
+        transform: translateX(1.4em);
     }
 
     &:hover .anchor-heading__icon {
         opacity: 1;
+    }
+
+    .anchor-heading__toast {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        background: hsl(0, 0%, 21%);
+        color: white;
+        padding: 0.25rem 0.6rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        pointer-events: none;
+        animation: anchor-toast-fade 1.5s ease forwards;
+        z-index: 10;
+    }
+}
+
+@keyframes anchor-toast-fade {
+    0% {
+        opacity: 0;
+    }
+    15% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
