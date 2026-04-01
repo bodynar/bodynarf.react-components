@@ -15,6 +15,8 @@ import Table from "./table";
 import ModalWrapper from "./modalWrapper";
 import Stepper from "./stepper";
 import Timeline from "./timeline";
+import Progress from "./progress";
+import SplitButton from "./splitButton";
 
 const components: MenuItem = {
     name: "component-group",
@@ -108,6 +110,18 @@ const components: MenuItem = {
             path: "/components/timeline",
             caption: "Timeline",
             component: <Timeline />,
+            version: "1.14",
+        },
+        {
+            path: "/components/progress",
+            caption: "Progress",
+            component: <Progress />,
+            version: "1.14",
+        },
+        {
+            path: "/components/splitButton",
+            caption: "Split Button",
+            component: <SplitButton />,
             version: "1.14",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))

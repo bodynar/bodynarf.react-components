@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 
 import {
     useDebounceHandler,
@@ -10,6 +10,8 @@ import {
     useUpdateEffect,
     useLocalStorage,
     usePagination,
+    useEventListener,
+    useComponentOutsideClick,
 } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -63,6 +65,24 @@ const HooksPage: FC = () => {
     const demoItems = Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`);
     const [paginationState, getPageItems] = usePagination(demoItems.length, 5);
     const currentPageItems = getPageItems(demoItems) as string[];
+
+    // useEventListener demo
+    const [lastKey, setLastKey] = useState<string>("Press any key...");
+    useEventListener("keydown", (e) => setLastKey(e.key));
+
+    // useComponentOutsideClick demo
+    const [outsideOpen, setOutsideOpen] = useState(false);
+    const [outsideClickLog, setOutsideClickLog] = useState("");
+    const outsideRef = useRef<HTMLDivElement>(null);
+    useComponentOutsideClick(
+        "#outside-click-demo",
+        outsideOpen,
+        () => {
+            setOutsideClickLog("Clicked outside!");
+            setOutsideOpen(false);
+        },
+        outsideOpen,
+    );
 
     return (
         <section>
@@ -415,6 +435,81 @@ const HooksPage: FC = () => {
                             Next
                         </button>
                     </div>
+                </div>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                caption="useEventListener"
+                description="Attaches an event listener to a given element (default: window). Automatically cleans up on unmount."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useEventListener } from "@bodynarf/react.components";`,
+                            "",
+                            "const MyComponent = () => {",
+                            "    const [lastKey, setLastKey] = useState('');",
+                            "",
+                            "    useEventListener('keydown', (e) => setLastKey(e.key));",
+                            "",
+                            "    return <span>Last key: {lastKey}</span>;",
+                            "};",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <span className="tag is-primary is-medium">
+                    {`Last key: ${lastKey}`}
+                </span>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                caption="useComponentOutsideClick"
+                description="Subscribes to clicks outside a component identified by a CSS selector. Useful for closing dropdowns, modals, and popovers."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useComponentOutsideClick } from "@bodynarf/react.components";`,
+                            "",
+                            "const MyComponent = () => {",
+                            "    const [open, setOpen] = useState(false);",
+                            "",
+                            "    useComponentOutsideClick(",
+                            `        "#my-component",`,
+                            "        open,",
+                            "        () => setOpen(false),",
+                            "        open,",
+                            "    );",
+                            "",
+                            "    return (",
+                            `        <div id="my-component">`,
+                            "            <button onClick={() => setOpen(true)}>Open</button>",
+                            "            {open && <div>Click outside to close</div>}",
+                            "        </div>",
+                            "    );",
+                            "};",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <div
+                    id="outside-click-demo"
+                    ref={outsideRef}
+                >
+                    <button
+                        type="button"
+                        className={`button is-small ${outsideOpen ? "is-warning" : "is-info"}`}
+                        onClick={() => {
+                            setOutsideOpen(true);
+                            setOutsideClickLog("");
+                        }}
+                    >
+                        {outsideOpen ? "Now click outside me!" : "Click to activate"}
+                    </button>
+                    {outsideClickLog &&
+                        <span className="tag is-danger is-medium ml-2">
+                            {outsideClickLog}
+                        </span>
+                    }
                 </div>
             </ComponentUseCase>
         </section>
