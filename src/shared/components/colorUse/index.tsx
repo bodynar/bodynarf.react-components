@@ -3,6 +3,7 @@ import { FC, ReactNode } from "react";
 import { Dropdown, ElementColor } from "@bodynarf/react.components";
 
 import { Colors, useColorSelection } from "../..";
+import AnchorHeading from "../anchorHeading";
 
 /** Component color use case props type */
 type ComponentColorCaseProps = {
@@ -34,15 +35,7 @@ const ComponentColorCase: FC<ComponentColorCaseProps> = ({
         <>
             <hr />
             <div className="block">
-                <h5 className="subtitle is-5">
-                    {captionIsCode
-                        ?
-                        <code>
-                            {caption}
-                        </code>
-                        : caption
-                    }
-                </h5>
+                <AnchorHeading caption={caption} captionIsCode={captionIsCode} />
                 <p style={{ whiteSpace: "pre-line" }}>
                     {description}
                 </p>

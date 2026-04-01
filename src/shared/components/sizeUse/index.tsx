@@ -3,6 +3,7 @@ import { FC, ReactNode } from "react";
 import { ElementSize, Dropdown } from "@bodynarf/react.components";
 
 import { Sizes, useSizeSelection } from "../..";
+import AnchorHeading from "../anchorHeading";
 
 /** Component size use case props type */
 type ComponentSizeCaseProps = {
@@ -34,15 +35,7 @@ const ComponentSizeCase: FC<ComponentSizeCaseProps> = ({
         <>
             <hr />
             <div className="block">
-                <h5 className="subtitle is-5">
-                    {captionIsCode
-                        ?
-                        <code>
-                            {caption}
-                        </code>
-                        : caption
-                    }
-                </h5>
+                <AnchorHeading caption={caption} captionIsCode={captionIsCode} />
                 <p style={{ whiteSpace: "pre-line" }}>
                     {description}
                 </p>

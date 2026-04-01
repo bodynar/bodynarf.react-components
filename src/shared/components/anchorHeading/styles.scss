@@ -1,0 +1,20 @@
+.anchor-heading {
+    scroll-margin-top: 1rem;
+
+    > span {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .anchor-heading__icon {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        order: -1;
+        position: absolute;
+        right: 98.35%;
+    }
+
+    &:hover .anchor-heading__icon {
+        opacity: 1;
+    }
+}

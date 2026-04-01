@@ -1,5 +1,7 @@
 import { FC, ReactNode } from "react";
 
+import AnchorHeading from "../anchorHeading";
+
 /** Component use case props type */
 type ComponentUseCaseProps = {
     /** Case caption */
@@ -28,15 +30,10 @@ const ComponentUseCase: FC<ComponentUseCaseProps> = ({
         <>
             <hr />
             <div className="block">
-                <h5 className="subtitle is-5">
-                    {captionIsCode
-                        ?
-                        <code>
-                            {caption}
-                        </code>
-                        : caption
-                    }
-                </h5>
+                <AnchorHeading
+                    caption={caption}
+                    captionIsCode={captionIsCode}
+                />
                 {typeof description === "string"
                     ?
                     <p style={{ whiteSpace: "pre-line" }}>
