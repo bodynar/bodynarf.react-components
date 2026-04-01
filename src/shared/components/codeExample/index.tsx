@@ -1,9 +1,10 @@
 import { FC, useCallback, useEffect, useState } from "react";
 
-import { BundledLanguage, codeToHtml } from "shiki";
+import { BundledLanguage } from "shiki";
 
-import { isNullOrEmpty } from "@bodynarf/utils";
 import { Button, ButtonStyle } from "@bodynarf/react.components";
+
+import { getHighlightedCode } from "./shikiResource";
 
 import styles from "./styles.module.scss";
 
@@ -28,60 +29,43 @@ type CodeExampleProps = {
 /** Code example with highlight and copy button */
 const CodeExample: FC<CodeExampleProps> = ({
     code,
-    language = "tsx", hideLanguage = false,
+    language = "tsx",
+    hideLanguage = false,
 }) => {
-    const [codeInHtml, setCodeInHtml] = useState("");
     const [isCopied, setIsCopied] = useState(false);
     const [, setTimerId] = useState<NodeJS.Timeout | undefined>();
 
-    const onCopyBtnClick = useCallback(
-        () => {
-            window.navigator.clipboard
-                .writeText(code)
-                .then(() => setIsCopied(true));
-        },
-        [code]
-    );
+    const onCopyBtnClick = useCallback(() => {
+        window.navigator.clipboard
+            .writeText(code)
+            .then(() => setIsCopied(true));
+    }, [code]);
 
     useEffect(() => {
-        if (!isNullOrEmpty(code)) {
-            codeToHtml(code, {
-                lang: language,
-                theme: "one-light"
-            }).then(setCodeInHtml);
+        if (isCopied) {
+            const timerId = setTimeout(() => {
+                setIsCopied(false);
+                setTimerId(x => {
+                    clearTimeout(x);
+                    return undefined;
+                });
+            }, 3000);
+
+            setTimerId(timerId);
         }
-    }, [code, language]);
+    }, [isCopied]);
 
-    useEffect(
-        () => {
-            if (isCopied) {
-                const timerId = setTimeout(
-                    () => {
-                        setIsCopied(false);
-
-                        setTimerId(x => {
-                            clearTimeout(x);
-                            return undefined;
-                        });
-                    },
-                    3 * 1000
-                );
-
-                setTimerId(timerId);
-            }
-        },
-        [isCopied]
-    );
+    // 🚀 Suspense here
+    const codeInHtml = getHighlightedCode(code, language);
 
     return (
         <div className={styles["code-example"]}>
             {!hideLanguage && !isCopied &&
-                <span
-                    className={`is-size-7 is-italic ${styles["lang-name"]}`}
-                >
+                <span className={`is-size-7 is-italic ${styles["lang-name"]}`}>
                     {language}
                 </span>
             }
+
             {!isCopied &&
                 <Button
                     style={ButtonStyle.Text}
@@ -91,6 +75,7 @@ const CodeExample: FC<CodeExampleProps> = ({
                     title={`Copy to clipboard ${language} code`}
                 />
             }
+
             {!!isCopied &&
                 <div className={styles["copied-block"]}>
                     <span className="is-size-7">
@@ -102,12 +87,11 @@ const CodeExample: FC<CodeExampleProps> = ({
                     />
                 </div>
             }
+
             <div
                 className={styles["code-container"]}
                 // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{
-                    __html: codeInHtml
-                }}
+                dangerouslySetInnerHTML={{ __html: codeInHtml }}
             />
         </div>
     );
