@@ -1,41 +1,17 @@
 import { FC, Ref } from "react";
 
-import { IconProps, PaginatorProps, SortColumn, TableProps, TableSelectionCellProps } from "@bbr/components";
-import { ButtonStyle } from "@bbr/components/button";
+import { IconProps, PaginatorProps, SearchProps, SortColumn, SplitButtonAction, SplitButtonProps, TableProps, TableSelectionCellProps } from "@bbr/components";
+import { ButtonProps } from "@bbr/components/button";
+import { BaseElementProps } from "@bbr/types";
 
-/** Table row action type */
-export type ComplexTableAction =
-    & Omit<IconProps, "onClick">
-    & {
-        /** Action icon click handler */
-        onClick: (itemId: string) => void;
-    };
+// Used in jsdoc
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { useComplexTable } from "@bbr/hooks";
 
 /** Table item type */
 export type ComplexTableItem = {
     /** Unique item identifier */
     id: string;
-};
-
-/** Toolbar action type */
-export type ToolbarAction = {
-    /** Unique action identifier */
-    id: string;
-
-    /** Button text */
-    caption: string;
-
-    /** Button style */
-    style?: ButtonStyle;
-
-    /** Click handler */
-    onClick: () => void;
-};
-
-/** Multi-selection configuration */
-export type SelectionConfig = {
-    /** Actions for selected items */
-    actions: Array<ToolbarAction>;
 };
 
 /* `ComplexTable` component props type */
@@ -44,51 +20,80 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
         | "headings"
         | "className"
         | "currentSortColumn"
-        | "selectedRows"
     >
-    & Pick<PaginatorProps, "position" | "showNextButtons">
     & {
         /** Table items */
         items: Array<TItem>;
 
-        /** Total number of pages */
-        pagesCount: number;
-
-        /** Current page */
-        currentPage: number;
-
         /** Text to display when there are no items */
         noItemsCaption: string;
 
-        /** Whether an active search query is present (affects empty table text) */
-        hasActiveSearch?: boolean;
+        /**
+         * Total number of pages. Used for pagination.
+         * Must be passed from the hook {@link useComplexTable} to work correctly.
+         */
+        pagesCount: number;
 
-        /** Data loading flag (displays an overlay over the table) */
-        loading?: boolean;
+        /**
+         * Current page number. Used for pagination.
+         * Must be passed from the hook {@link useComplexTable} to work correctly.
+         */
+        currentPage: number;
 
-        /** Multi-selection configuration. If provided, a selection toggle button and action bar are shown */
-        selection?: SelectionConfig;
-
-        /** Paginator size */
-        paginatorSize?: PaginatorProps["size"];
+        /**
+         * Keys of currently selected rows.
+         * @description Values correspond to `key` props of child row elements
+         * Must be passed from the hook {@link useComplexTable} to work correctly.
+         */
+        selectedRows?: Array<string>;
 
         /** Search field placeholder */
         searchPlaceholder?: string;
 
-        /** Ref for the table container (scroll management) */
-        containerRef?: Ref<HTMLTableElement>;
+        /** Text to display when no items match the search query */
+        noItemsFoundBySearchCaption?: string;
 
         /** Component for rendering a table item */
         itemComponent?: FC<ComplexTableItemProps<TItem>>;
 
+        /** Configuration for the inner table */
+        tableConfig?: ComplexTableInnerTableProps;
+
+        /** Configuration for the paginator */
+        paginatorConfig?: ComplexTablePaginatorConfig;
+
+        /** Configuration for the search field */
+        searchProps?: Omit<SearchProps, "onSearch">;
+
         /**
-         * Actions for each table row.
-         * Displayed as buttons in the last column
+         * Configuration for selection bar.
+         * If not provided, a default selection bar with the same actions as in `selection` is rendered.
          */
-        actions?: Array<ComplexTableAction>;
+        selectionBarConfig?: ComplexTableSelectionBarConfig;
+
+        /**
+         * Whether an active search query is present. Affects the text displayed when no items are found.
+         * Must be passed from the hook {@link useComplexTable} to work correctly.
+         */
+        hasActiveSearch?: boolean;
+
+        /**
+         * Data loading flag. Displays an overlay over the table when `true`.
+         * Must be passed from the hook {@link useComplexTable} to work correctly.
+         */
+        loading?: boolean;
+
+
+        /** Ref for the table container (scroll management) */
+        /**
+         * Ref for the table container. Used for scroll management in the hook.
+         * Must be passed from the hook {@link useComplexTable} to work correctly.
+         */
+        containerRef?: Ref<HTMLTableElement>;
 
         /**
          * Page change handler
+         * Must be passed from the hook {@link useComplexTable} to work correctly.
          * @param page Page number
          */
         onPageChange: (page: number) => void;
@@ -101,6 +106,7 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
 
         /**
          * Search handler. If provided, a search bar is displayed
+         * Must be passed from the hook {@link useComplexTable} to work correctly.
          * @param query Search query
          */
         onSearch?: (query: string) => void;
@@ -109,6 +115,7 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
          * Sort change handler.
          * Called when a sortable column header is clicked.
          * Toggle order: ascending → descending → no sorting
+         * Must be passed from the hook {@link useComplexTable} to work correctly.
          * @param sortColumn Current sort or `undefined` when reset
          */
         onSortChange?: (sortColumn?: SortColumn) => void;
@@ -116,10 +123,13 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
         /**
          * Selected items change handler.
          * Called when the set of selected rows changes
+         * Must be passed from the hook {@link useComplexTable} to work correctly.
          * @param selectedIds Selected item identifiers
          */
         onSelectionChange?: (selectedIds: Array<string>) => void;
     };
+
+// #region Table item props types
 
 /** `ComplexTableItem` component props type */
 export type ComplexTableItemProps<TItem extends ComplexTableItem = ComplexTableItem> =
@@ -138,3 +148,69 @@ export type ComplexTableItemProps<TItem extends ComplexTableItem = ComplexTableI
          */
         onRowClick?: (itemId: string) => void;
     };
+
+/** Table row action type */
+export type ComplexTableAction =
+    & Omit<IconProps, "onClick">
+    & {
+        /** Action icon click handler */
+        onClick: (itemId: string) => void;
+    };
+
+// #endregion Table item props types
+
+/** Props for the inner table of `ComplexTable` */
+type ComplexTableInnerTableProps = Omit<
+    TableProps,
+    | "headings" | "children" | "currentSortColumn"
+    | "selectable" | "selectedRows" | "onSelectedRowsChange"
+>;
+
+/** Props for the paginator of `ComplexTable` */
+type ComplexTablePaginatorConfig = Omit<
+    PaginatorProps,
+    | "count" | "currentPage" | "onPageChange"
+>;
+
+/** Common props for the selection bar of `ComplexTable` */
+type ComplexTableSelectionBarBase =
+    & BaseElementProps
+    & {
+        /** Configuration for the multi-selection toggle button */
+        multiSelectionToggleButtonConfig?: Omit<ButtonProps, "onClick">;
+
+        /**
+         * Placeholder for the selected items count in the selection bar.
+         * @param count Selected items count
+         * @return Placeholder text
+         */
+        selectedCountPlaceholder: (count: number) => string;
+    };
+
+/** Selection bar rendered as a list of separate buttons */
+type ComplexTableSelectionBarButtonList =
+    & ComplexTableSelectionBarBase
+    & {
+        /** Type of the selection bar */
+        type: "Button list";
+
+        /** Actions rendered as individual buttons */
+        actions: Array<ButtonProps>;
+    };
+
+/** Selection bar rendered as a split button */
+type ComplexTableSelectionBarSplitButton =
+    & ComplexTableSelectionBarBase
+    & {
+        /** Type of the selection bar */
+        type: "SplitButton";
+
+        /** Configuration for the split button */
+        splitButtonConfig: SplitButtonProps;
+    };
+
+/** Props for the selection bar of `ComplexTable` */
+type ComplexTableSelectionBarConfig = ComplexTableSelectionBarButtonList | ComplexTableSelectionBarSplitButton;
+
+/** Toolbar action type */
+export type ToolbarAction = SplitButtonAction | ButtonProps;
