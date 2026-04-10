@@ -83,3 +83,6 @@ export * from "./primitives/text";
 
 export { default as TimePicker } from "./primitives/timePicker";
 export * from "./primitives/timePicker";
+
+export { default as ComplexTable } from "./complexTable";
+export * from "./complexTable";

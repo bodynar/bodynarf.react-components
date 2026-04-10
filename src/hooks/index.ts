@@ -9,3 +9,4 @@ export * from "./useTimeout";
 export * from "./useInterval";
 export * from "./useEventListener";
 export * from "./useLocalStorage";
+export * from "./useComplexTable";
