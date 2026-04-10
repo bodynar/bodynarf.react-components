@@ -8,19 +8,19 @@ import { ToolbarAction } from "@bbr/components/complexTable/types";
 
 import "./styles.scss";
 
-/** Максимальное количество действий, при котором используются отдельные кнопки */
+/** Maximum number of actions that are rendered as separate buttons */
 const MAX_BUTTON_ACTIONS = 4;
 
-/** Пропсы компонента `SelectionBar` */
+/** `SelectionBar` component props */
 type SelectionBarProps = {
-    /** Количество выбранных элементов */
+    /** Number of selected items */
     selectedCount: number;
 
-    /** Действия над выбранными элементами */
+    /** Actions for selected items */
     selectionActions?: Array<ToolbarAction>;
 };
 
-/** Панель действий над выбранными элементами */
+/** Action bar for selected items */
 const SelectionBar: FC<SelectionBarProps> = ({
     selectedCount,
     selectionActions,
@@ -52,7 +52,7 @@ const SelectionBar: FC<SelectionBarProps> = ({
         <div className="complex-table-selection-bar block">
             <div className="complex-table-selection-bar__content">
                 <span className="complex-table-selection-bar__text">
-                    Выбрано:
+                    Selected:
                     {' '}
                     {selectedCount}
                 </span>
@@ -73,14 +73,14 @@ const SelectionBar: FC<SelectionBarProps> = ({
     );
 };
 
-// #region Вспомогательные компоненты
+// #region Helper components
 
 type SelectionBarActionProps = {
-    /** Действие */
+    /** Action */
     action: ToolbarAction;
 };
 
-// Правило отключено: Вспомогательный компонент для SelectionBar
+// Rule disabled: Helper component for SelectionBar
 // eslint-disable-next-line react/no-multi-comp
 const SelectionBarAction: FC<SelectionBarActionProps> = ({ action }) => {
     const handleClick = useCallback(
@@ -97,6 +97,6 @@ const SelectionBarAction: FC<SelectionBarActionProps> = ({ action }) => {
     );
 };
 
-// #endregion Вспомогательные компоненты
+// #endregion Helper components
 
 export default SelectionBar;

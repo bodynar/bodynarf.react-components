@@ -1,8 +1,9 @@
-/* eslint-disable custom/functional-component-definition */ // Правило отключено: Требуется generic компонент
+/* eslint-disable custom/functional-component-definition */ // Rule disabled: Generic component required
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
 
 import { getClassName, isNotNullish, isNullish, isNullOrEmpty } from "@bodynarf/utils";
-import { ElElementColor, ementColor, ElementPosition, Paginator, SortColumn, Table, TableHeading } from "@bbr/components";
+import { Paginator, SortColumn, Table, TableHeading } from "@bbr/components";
+import { ElementColor, ElementPosition } from "@bbr/types";
 
 import "./styles.scss";
 
@@ -12,14 +13,14 @@ import ComplexTableItemCmp from "../components/tableItem";
 import ComplexTableToolbar from "../components/toolbar";
 import SelectionBar from "../components/selectionBar";
 
-/** Заголовок для колонки действий */
+/** Heading for the actions column */
 const ACTIONS_HEADING: TableHeading = {
     caption: "",
     sortable: false,
     className: "complex-table__actions-column",
 };
 
-/* Комплексная таблица с пагинацией и фильтрацией */
+/* Complex table with pagination and filtering */
 const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>({
     items,
     itemComponent = ComplexTableItemCmp as unknown as FC<ComplexTableItemProps<TItem>>,
@@ -31,9 +32,9 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
     actions,
     containerRef,
     selection,
-    searchPlaceholder = "Поиск",
+    searchPlaceholder = "Search",
     ...tableProps
-}: ComplexTableProps<TItem>): React.JSX.Element | null => {
+}: ComplexTableProps<TItem>): JSX.Element | null => {
     const [currentSortColumn, setCurrentSortColumn] = useState<SortColumn | undefined>();
     const [selectedRows, setSelectedRows] = useState<Array<string>>([]);
     const [selectable, setSelectable] = useState(false);
@@ -51,7 +52,7 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
     const toggleButton = useMemo(
         () => isNotNullish(selection)
             ? {
-                caption: selectable ? "Выключить выбор" : "Включить выбор",
+                caption: selectable ? "Disable selection" : "Enable selection",
                 onClick: () => setSelectable(prev => !prev),
             }
             : undefined,
@@ -137,7 +138,6 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
 
                 fullWidth
                 hoverable
-                // hasStickyHeader
                 headings={headings}
                 selectable={selectable}
                 selectedRows={selectedRows}
@@ -174,8 +174,8 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
                         onPageChange={onPageChange}
                         showNextButtons={showNextButtons}
                         resources={{
-                            nextPageCaption: "Дальше",
-                            previousPageCaption: "Назад"
+                            nextPageCaption: "Next",
+                            previousPageCaption: "Previous"
                         }}
                     />
                 )

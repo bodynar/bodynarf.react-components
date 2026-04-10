@@ -3,42 +3,42 @@ import { FC, Ref } from "react";
 import { IconProps, PaginatorProps, SortColumn, TableProps, TableSelectionCellProps } from "@bbr/components";
 import { ButtonStyle } from "@bbr/components/button";
 
-/** Типизация действия строки таблицы */
+/** Table row action type */
 export type ComplexTableAction =
     & Omit<IconProps, "onClick">
     & {
-        /** Обработчик клика по иконке действия */
+        /** Action icon click handler */
         onClick: (itemId: string) => void;
     };
 
-/** Типизация элемента таблицы */
+/** Table item type */
 export type ComplexTableItem = {
-    /** Уникальный идентификатор элемента */
+    /** Unique item identifier */
     id: string;
 };
 
-/** Типизация действия тулбара */
+/** Toolbar action type */
 export type ToolbarAction = {
-    /** Уникальный идентификатор действия */
+    /** Unique action identifier */
     id: string;
 
-    /** Текст кнопки */
+    /** Button text */
     caption: string;
 
-    /** Стиль кнопки */
+    /** Button style */
     style?: ButtonStyle;
 
-    /** Обработчик клика */
+    /** Click handler */
     onClick: () => void;
 };
 
-/** Конфигурация множественного выбора */
+/** Multi-selection configuration */
 export type SelectionConfig = {
-    /** Действия над выбранными элементами */
+    /** Actions for selected items */
     actions: Array<ToolbarAction>;
 };
 
-/* Типизация пропсов компонента `ComplexTable` */
+/* `ComplexTable` component props type */
 export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem> =
     & Pick<TableProps,
         | "headings"
@@ -48,93 +48,93 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
     >
     & Pick<PaginatorProps, "position" | "showNextButtons">
     & {
-        /** Элементы таблицы */
+        /** Table items */
         items: Array<TItem>;
 
-        /** Общее количество страниц */
+        /** Total number of pages */
         pagesCount: number;
 
-        /** Текущая страница */
+        /** Current page */
         currentPage: number;
 
-        /** Текст для отображения при отсутствии элементов */
+        /** Text to display when there are no items */
         noItemsCaption: string;
 
-        /** Флаг наличия активного поискового запроса (влияет на текст пустой таблицы) */
+        /** Whether an active search query is present (affects empty table text) */
         hasActiveSearch?: boolean;
 
-        /** Флаг загрузки данных (отображает оверлей поверх таблицы) */
+        /** Data loading flag (displays an overlay over the table) */
         loading?: boolean;
 
-        /** Конфигурация множественного выбора. Если указана - отображается кнопка выбора и панель действий */
+        /** Multi-selection configuration. If provided, a selection toggle button and action bar are shown */
         selection?: SelectionConfig;
 
-        /** Размер пагинатора */
+        /** Paginator size */
         paginatorSize?: PaginatorProps["size"];
 
-        /** Подсказка для поля поиска */
+        /** Search field placeholder */
         searchPlaceholder?: string;
 
-        /** Реф для контейнера таблицы (управление скроллом) */
+        /** Ref for the table container (scroll management) */
         containerRef?: Ref<HTMLTableElement>;
 
-        /** Компонент для рендеринга элемента таблицы */
+        /** Component for rendering a table item */
         itemComponent?: FC<ComplexTableItemProps<TItem>>;
 
         /**
-         * Действия для каждой строки таблицы.
-         * Отображаются как кнопки в последнем столбце
+         * Actions for each table row.
+         * Displayed as buttons in the last column
          */
         actions?: Array<ComplexTableAction>;
 
         /**
-         * Обработчик смены страницы
-         * @param page Номер страницы
+         * Page change handler
+         * @param page Page number
          */
         onPageChange: (page: number) => void;
 
         /**
-         * Обработчик клика на строку таблицы
-         * @param itemId Идентификатор элемента
+         * Table row click handler
+         * @param itemId Item identifier
          */
         onRowClick?: (itemId: string) => void;
 
         /**
-         * Обработчик поиска. Если указан - отображается строка поиска
-         * @param query Поисковый запрос
+         * Search handler. If provided, a search bar is displayed
+         * @param query Search query
          */
         onSearch?: (query: string) => void;
 
         /**
-         * Обработчик изменения сортировки.
-         * Вызывается при клике на сортируемый заголовок столбца.
-         * Порядок переключения: по возрастанию → по убыванию → без сортировки
-         * @param sortColumn Текущая сортировка или `undefined` при сбросе
+         * Sort change handler.
+         * Called when a sortable column header is clicked.
+         * Toggle order: ascending → descending → no sorting
+         * @param sortColumn Current sort or `undefined` when reset
          */
         onSortChange?: (sortColumn?: SortColumn) => void;
 
         /**
-         * Обработчик изменения выбранных элементов.
-         * Вызывается при изменении набора выбранных строк
-         * @param selectedIds Идентификаторы выбранных элементов
+         * Selected items change handler.
+         * Called when the set of selected rows changes
+         * @param selectedIds Selected item identifiers
          */
         onSelectionChange?: (selectedIds: Array<string>) => void;
     };
 
-/** Типизация пропсов компонента `ComplexTableItem` */
+/** `ComplexTableItem` component props type */
 export type ComplexTableItemProps<TItem extends ComplexTableItem = ComplexTableItem> =
     & TableSelectionCellProps
     & Pick<TableProps, "headings">
     & {
-        /** Элемент таблицы */
+        /** Table item */
         item: TItem;
 
-        /** Действия для строки */
+        /** Row actions */
         actions?: Array<ComplexTableAction>;
 
         /**
-         * Обработчик клика на строку таблицы
-         * @param itemId Идентификатор элемента
+         * Table row click handler
+         * @param itemId Item identifier
          */
         onRowClick?: (itemId: string) => void;
     };

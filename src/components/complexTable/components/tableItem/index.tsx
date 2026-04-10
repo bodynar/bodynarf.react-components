@@ -6,7 +6,7 @@ import { ComplexTableItem, ComplexTableItemProps } from "@bbr/components/complex
 
 import ActionIcon from "../actionIcon";
 
-/** Компонент элемента таблицы */
+/** Table item component */
 const ComplexTableItemCmp: FC<ComplexTableItemProps<ComplexTableItem & Record<string, unknown>>> = ({
     headings,
     item,

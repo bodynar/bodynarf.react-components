@@ -4,16 +4,16 @@ import Icon from "@bbr/components/icon";
 
 import { ComplexTableAction } from "@bbr/components/complexTable/types";
 
-/** Пропсы компонента `ActionIcon` */
+/** `ActionIcon` component props */
 type ActionIconProps = {
-    /** Идентификатор элемента таблицы */
+    /** Table item identifier */
     itemId: string;
 
-    /** Конфигурация действия */
+    /** Action configuration */
     action: ComplexTableAction;
 };
 
-/** Иконка действия строки таблицы */
+/** Table row action icon */
 const ActionIcon: FC<ActionIconProps> = ({ itemId, action }) => {
     const { onClick, ...iconProps } = action;
 

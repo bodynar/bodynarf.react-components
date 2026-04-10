@@ -4,31 +4,31 @@ import { isNotNullish } from "@bodynarf/utils";
 import { Search } from "@bbr/components";
 import Button, { ButtonStyle } from "@bbr/components/button";
 
-/** Конфигурация кнопки-переключателя */
+/** Toggle button configuration */
 type ToggleButtonConfig = {
-    /** Текст кнопки */
+    /** Button text */
     caption: string;
 
-    /** Обработчик клика */
+    /** Click handler */
     onClick: () => void;
 };
 
-/** Пропсы компонента `ComplexTableToolbar` */
+/** `ComplexTableToolbar` component props */
 type ComplexTableToolbarProps = {
-    /** Подсказка для поля поиска */
+    /** Search field placeholder */
     searchPlaceholder: string;
 
-    /** Конфигурация кнопки переключения множественного выбора */
+    /** Multi-selection toggle button configuration */
     toggleButton?: ToggleButtonConfig;
 
-    /** Заблокировать кнопки тулбара */
+    /** Disable toolbar buttons */
     disabled?: boolean;
 
-    /** Обработчик поиска */
+    /** Search handler */
     onSearch?: (query: string) => void;
 };
 
-/** Тулбар комплексной таблицы (кнопка выбора + Search) */
+/** Complex table toolbar (selection toggle + Search) */
 const ComplexTableToolbar: FC<ComplexTableToolbarProps> = ({
     toggleButton,
     searchPlaceholder,

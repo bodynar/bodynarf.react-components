@@ -29,9 +29,9 @@ const EmptyComplexTable: FC<
                             {hasActiveSearch === true
                                 ? (
                                     <>
-                                        По вашему запросу записи не найдены.
+                                        No records found for your query.
                                         <br />
-                                        Попробуйте изменить или упростить поисковый запрос
+                                        Try changing or simplifying the search query
                                     </>
                                 ) : noItemsCaption
                             }
