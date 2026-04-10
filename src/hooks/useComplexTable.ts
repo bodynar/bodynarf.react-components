@@ -3,83 +3,83 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { isNotNullish } from "@bodynarf/utils";
 import { SortColumn } from "@bbr/components/table";
 
-/** Размер страницы по умолчанию */
-const DEFAULT_PAGE_SIZE = 25;
+/** Default page size */
+const DEFAULT_PAGE_SIZE = 30;
 
-/** Параметры запроса постраничной загрузки */
+/** Paged request parameters */
 export type PagedRequest = {
-    /** Смещение от начала списка */
+    /** Offset from the beginning of the list */
     offset: number;
 
-    /** Максимальное количество элементов */
+    /** Maximum number of items */
     limit: number;
 
-    /** Поисковый запрос */
+    /** Search query */
     search?: string;
 
-    /** Имя столбца для сортировки */
+    /** Column name to sort by */
     sortBy?: string;
 
-    /** Порядок сортировки */
+    /** Sort order */
     sortOrder?: "asc" | "desc";
 };
 
-/** Опции хука `useComplexTable` */
+/** Options for the `useComplexTable` hook */
 export type UseComplexTableOptions = {
-    /** Общее количество доступных элементов (известно при инициализации) */
+    /** Total number of available items (known at initialization) */
     totalCount: number;
 
-    /** Количество элементов на странице */
+    /** Number of items per page */
     pageSize?: number;
 
     /**
-     * Функция загрузки страницы элементов.
-     * @returns Общее количество доступных элементов
+     * Function to load a page of items.
+     * @returns Total number of available items
      */
     loadPage: (params: PagedRequest) => Promise<number>;
 };
 
-/** Результат хука `useComplexTable` */
+/** Result of the `useComplexTable` hook */
 export type UseComplexTableResult = {
-    /** Идентификаторы выбранных элементов */
+    /** Selected item identifiers */
     selectedIds: Array<string>;
 
-    /** Пропсы для передачи в `ComplexTable` через spread */
+    /** Props to spread onto `ComplexTable` */
     tableProps: {
-        /** Ссылка на контейнер таблицы для управления прокруткой */
+        /** Reference to the table container for scroll management */
         containerRef: React.RefObject<HTMLTableElement | null>;
 
-        /** Общее количество страниц */
+        /** Total number of pages */
         pagesCount: number;
 
-        /** Текущая страница */
+        /** Current page */
         currentPage: number;
 
-        /** Флаг наличия активного поискового запроса */
+        /** Whether an active search query is present */
         hasActiveSearch: boolean;
 
-        /** Флаг загрузки данных */
+        /** Data loading flag */
         loading: boolean;
 
-        /** Обработчик смены страницы */
+        /** Page change handler */
         onPageChange: (page: number) => void;
 
-        /** Обработчик поиска */
+        /** Search handler */
         onSearch: (query: string) => void;
 
-        /** Обработчик изменения сортировки */
+        /** Sort change handler */
         onSortChange: (sortColumn?: SortColumn) => void;
 
-        /** Обработчик изменения выбранных элементов */
+        /** Selection change handler */
         onSelectionChange: (selectedIds: Array<string>) => void;
     };
 };
 
 /**
- * Хук управления состоянием `ComplexTable` с серверной пагинацией, поиском, сортировкой и множественным выбором.
+ * Hook for managing `ComplexTable` state with server-side pagination, search, sorting, and multi-selection.
  *
- * Предполагается, что первая страница данных уже загружена и передана в `ComplexTable` как `items`,
- * а общее количество элементов известно при инициализации (`totalCount`).
+ * Assumes the first page of data is already loaded and passed to `ComplexTable` as `items`,
+ * and the total number of items is known at initialization (`totalCount`).
  *
  * @example
  * ```tsx
@@ -96,7 +96,7 @@ export type UseComplexTableResult = {
  *     {...tableProps}
  *     items={items}
  *     headings={headings}
- *     noItemsCaption="Записей нет"
+ *     noItemsCaption="No records"
  * />
  * ```
  */
