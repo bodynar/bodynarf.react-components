@@ -49,14 +49,14 @@ const SelectionBar: FC<SelectionBarProps> = ({
     }
 
     return (
-        <div className="complex-table-selection-bar block">
-            <div className="complex-table-selection-bar__content">
-                <span className="complex-table-selection-bar__text">
+        <div className="bbr-complex-table-selection-bar block">
+            <div className="bbr-complex-table-selection-bar__content">
+                <span className="bbr-complex-table-selection-bar__text">
                     Selected:
                     {' '}
                     {selectedCount}
                 </span>
-                <div className="complex-table-selection-bar__actions">
+                <div className="bbr-complex-table-selection-bar__actions">
                     {selectionActions.length > MAX_BUTTON_ACTIONS
                         ? <SplitButton {...splitButtonConfig!} />
                         : selectionActions.map(action => (

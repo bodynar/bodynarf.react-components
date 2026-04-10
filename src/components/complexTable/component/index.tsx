@@ -94,9 +94,9 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
     }, [selectable, onSelectionChange]);
 
     const wrapperClassName = getClassName([
-        "complex-table__wrapper",
-        isNotNullish(onSearch) ? "complex-table__wrapper--with-search" : undefined,
-        isNotNullish(selection) ? "complex-table__wrapper--with-toolbar" : undefined,
+        "bbr-complex-table__wrapper",
+        isNotNullish(onSearch) ? "bbr-complex-table__wrapper--with-search" : undefined,
+        isNotNullish(selection) ? "bbr-complex-table__wrapper--with-toolbar" : undefined,
         tableProps.className,
     ]);
 
@@ -184,8 +184,8 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
 
             {loading
                 ? (
-                    <div className="complex-table__loading-overlay">
-                        <div className="complex-table__spinner" />
+                    <div className="bbr-complex-table__loading-overlay">
+                        <div className="bbr-complex-table__spinner" />
                     </div>
                 )
                 : null
