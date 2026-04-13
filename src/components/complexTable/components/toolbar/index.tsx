@@ -1,46 +1,32 @@
-import { FC, useCallback } from "react";
+import { FC } from "react";
 
-import { isNotNullish } from "@bodynarf/utils";
-import { Search } from "@bbr/components";
-import Button, { ButtonStyle } from "@bbr/components/button";
+import { ActionFn, isNotNullish } from "@bodynarf/utils";
 
-/** Toggle button configuration */
-type ToggleButtonConfig = {
-    /** Button text */
-    caption: string;
+import Button from "@bbr/components/button";
+import { ComplexTableItem, ComplexTableProps } from "@bbr/components/complexTable";
+import Search from "@bbr/components/search";
 
-    /** Click handler */
-    onClick: () => void;
-};
+/** Props for the {@link ComplexTableToolbar} component */
+export type ComplexTableToolbarProps =
+    Pick<
+        ComplexTableProps<ComplexTableItem>,
+        | "searchConfig"
+        | "selectionBarConfig" | "loading"
+        | "onSearch"
+    > & {
+        /** Whether the toolbar is disabled */
+        disabled?: boolean;
 
-/** `ComplexTableToolbar` component props */
-type ComplexTableToolbarProps = {
-    /** Search field placeholder */
-    searchPlaceholder: string;
-
-    /** Multi-selection toggle button configuration */
-    toggleButton?: ToggleButtonConfig;
-
-    /** Disable toolbar buttons */
-    disabled?: boolean;
-
-    /** Search handler */
-    onSearch?: (query: string) => void;
-};
+        /** Toggle multi-selection mode */
+        toggleMultiSelection: ActionFn;
+    };
 
 /** Complex table toolbar (selection toggle + Search) */
 const ComplexTableToolbar: FC<ComplexTableToolbarProps> = ({
-    toggleButton,
-    searchPlaceholder,
-    disabled = false,
-    onSearch,
+    searchConfig, selectionBarConfig, onSearch, toggleMultiSelection,
+    loading, disabled = false,
 }) => {
-    const handleToggleClick = useCallback(
-        () => toggleButton?.onClick(),
-        [toggleButton],
-    );
-
-    const hasContent = isNotNullish(toggleButton) || isNotNullish(onSearch);
+    const hasContent = isNotNullish(selectionBarConfig) || isNotNullish(searchConfig);
 
     if (!hasContent) {
         return null;
@@ -48,27 +34,31 @@ const ComplexTableToolbar: FC<ComplexTableToolbarProps> = ({
 
     return (
         <div className="block columns is-vcentered">
-            {isNotNullish(toggleButton)
+            {isNotNullish(selectionBarConfig)
                 ? (
                     <div className="column is-flex-grow-0">
                         <Button
+                            {...selectionBarConfig.multiSelectionToggleButtonConfig}
+
                             disabled={disabled}
-                            style={ButtonStyle.Link}
-                            onClick={handleToggleClick}
-                            caption={toggleButton.caption}
+                            isLoading={loading}
+                            onClick={toggleMultiSelection}
                         />
                     </div>
                 )
                 : <div />
             }
-            {isNotNullish(onSearch)
+            {isNotNullish(searchConfig)
                 ? (
                     <div className="column">
                         <Search
+                            {...searchConfig?.searchProps}
+
                             disabled={disabled}
                             onSearch={onSearch}
-                            searchType="byTyping"
-                            caption={searchPlaceholder}
+                            isLoading={loading}
+                            caption={searchConfig.searchPlaceholder}
+                            searchType={searchConfig.searchProps?.searchType ?? "byTyping"}
                         />
                     </div>
                 )
