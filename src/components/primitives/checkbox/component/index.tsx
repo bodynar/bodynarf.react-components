@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback, useRef, useEffect } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNotNullish, isNullish, isNullOrEmpty } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
@@ -97,25 +97,33 @@ const CheckBox: FC<CheckBoxProps> = ({
         ? undefined
         : mapDataAttributes(label.data);
 
+    const wrapperClassName = getClassName([
+        "bbr-field",
+        "bbr-input",
+        "field",
+        isNullish(label) || isNullOrEmpty(label.caption) ? undefined : "mr-2",
+    ]);
+
     return (
         <div
-            className="bbr-field bbr-input field mr-2"
+            className={wrapperClassName}
         >
             <input
-                id={name}
+                {...(isControlled ? { checked } : { defaultChecked: defaultValue })}
+                {...dataAttributes}
 
+                id={name}
                 name={name}
                 ref={inputRef}
                 type="checkbox"
                 disabled={disabled}
-                {...dataAttributes}
                 onChange={onChecked}
                 className={elClassName}
-                {...(isControlled ? { checked } : { defaultChecked: defaultValue })}
             />
             <label
-                htmlFor={name}
                 {...labelDataAttributes}
+
+                htmlFor={name}
                 className={labelClassName}
                 title={isEmptyLabel ? title : label?.title}
             >
