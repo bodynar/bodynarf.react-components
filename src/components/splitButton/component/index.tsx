@@ -22,6 +22,7 @@ const SplitButton: FC<SplitButtonProps> = ({
     light = false,
     outlined = false,
     rounded = false,
+    isLoading = false,
     disabled = false,
     onClick,
     actions,
@@ -47,7 +48,7 @@ const SplitButton: FC<SplitButtonProps> = ({
     }, [actions.length]);
 
     const onToggleClick = useCallback(() => {
-        if (disabled) {
+        if (disabled || isLoading) {
             return;
         }
 
@@ -57,7 +58,7 @@ const SplitButton: FC<SplitButtonProps> = ({
         }
 
         setIsOpen(state => !state);
-    }, [disabled, shouldOpenUpward]);
+    }, [disabled, isLoading, shouldOpenUpward]);
 
     const onActionClick = useCallback(
         (action: SplitButtonAction) => {
@@ -67,12 +68,12 @@ const SplitButton: FC<SplitButtonProps> = ({
     );
 
     const onPrimaryClick = useCallback(() => {
-        if (disabled) {
+        if (disabled || isLoading) {
             return;
         }
 
         onClick();
-    }, [disabled, onClick]);
+    }, [disabled, isLoading, onClick]);
 
     useComponentOutsideClick(
         `[data-split-button-id="${id}"]`, isOpen,
@@ -90,6 +91,7 @@ const SplitButton: FC<SplitButtonProps> = ({
         sizeClass,
         outlined ? "is-outlined" : "",
         rounded ? "is-rounded-left" : "",
+        isLoading ? "is-loading" : "",
     ]);
 
     const toggleClassName = getClassName([
@@ -121,9 +123,10 @@ const SplitButton: FC<SplitButtonProps> = ({
 
     return (
         <div
+            {...dataAttributes}
+
             title={title}
             ref={containerRef}
-            {...dataAttributes}
             data-split-button-id={id}
             className={containerClassName}
         >

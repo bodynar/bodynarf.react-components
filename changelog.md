@@ -1,6 +1,10 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.14.7
+- **SplitButton**
+  - Added `isLoading` prop to display a loading state on the primary button. When active, both the primary button click and the dropdown toggle are disabled (readonly mode).
+
 ## v1.14.6
 - **SplitButton** *(new)*
   - Added new split-button component with a dropdown of alternative actions.

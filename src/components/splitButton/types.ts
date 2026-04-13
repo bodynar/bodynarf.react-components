@@ -53,6 +53,9 @@ export type SplitButtonProps =
         /** Should button corners be rounded */
         rounded?: boolean;
 
+        /** Display loading icon */
+        isLoading?: boolean;
+
         /** Is button disabled */
         disabled?: boolean;
 

@@ -38,6 +38,10 @@
         .bbr-icon {
             transition: 0.25s ease-in-out transform;
         }
+
+        .is-loading ~ & {
+            pointer-events: none;
+        }
     }
 
     &.is-active &__toggle .bbr-icon {
