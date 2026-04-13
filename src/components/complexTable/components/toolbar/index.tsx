@@ -3,13 +3,13 @@ import { FC } from "react";
 import { ActionFn, isNotNullish } from "@bodynarf/utils";
 
 import Button from "@bbr/components/button";
-import { ComplexTableItem, ComplexTableProps } from "@bbr/components/complexTable";
+import { ComplexTableProps } from "@bbr/components/complexTable";
 import Search from "@bbr/components/search";
 
 /** Props for the {@link ComplexTableToolbar} component */
 export type ComplexTableToolbarProps =
     Pick<
-        ComplexTableProps<ComplexTableItem>,
+        ComplexTableProps,
         | "searchConfig"
         | "selectionBarConfig" | "loading"
         | "onSearch"
