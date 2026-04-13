@@ -2,6 +2,9 @@
 All changes will be published here in reverse chronological order
 
 ## v1.14.7
+- **Table**
+  - Selection checkbox click (`stopPropagation`) now only prevents row click propagation when the click target is inside the checkbox (`.bbr-field`), allowing clicks on the rest of the selection cell to propagate normally.
+
 - **SplitButton**
   - Added `isLoading` prop to display a loading state on the primary button. When active, both the primary button click and the dropdown toggle are disabled (readonly mode).
 

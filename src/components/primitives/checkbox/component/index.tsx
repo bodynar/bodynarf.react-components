@@ -67,16 +67,16 @@ const CheckBox: FC<CheckBoxProps> = ({
                 }}
             >
                 <input
-                    id={name}
+                    {...dataAttributes}
+                    {...(isControlled ? { checked } : { defaultChecked: defaultValue })}
 
+                    id={name}
                     name={name}
                     ref={inputRef}
                     type="checkbox"
                     disabled={disabled}
-                    {...dataAttributes}
                     onChange={onChecked}
                     className={elClassName}
-                    {...(isControlled ? { checked } : { defaultChecked: defaultValue })}
                 />
                 <label
                     title={title}
