@@ -6,15 +6,24 @@ import { ComplexTableItem, ComplexTableItemProps } from "@bbr/components/complex
 
 import ActionIcon from "../actionIcon";
 
+/** {@link ComplexTableItemDefaultComponent} props */
+export type ComplexTableItemDefaultComponentProps = ComplexTableItemProps<
+    ComplexTableItem & Record<string, unknown>
+> & {
+    /** Whether the row is selected */
+    selected: boolean;
+};
+
 /** Table item component */
-const ComplexTableItemCmp: FC<ComplexTableItemProps<ComplexTableItem & Record<string, unknown>>> = ({
+const ComplexTableItemDefaultComponent: FC<ComplexTableItemDefaultComponentProps> = ({
     headings,
     item,
+    selected,
     actions,
     onRowClick,
 }) => {
     const rowClassName = getClassName([
-        item.selected ? "is-selected" : undefined,
+        selected ? "is-selected" : undefined,
         isNotNullish(onRowClick) ? "is-clickable" : undefined,
     ]);
 
@@ -26,7 +35,7 @@ const ComplexTableItemCmp: FC<ComplexTableItemProps<ComplexTableItem & Record<st
     return (
         <tr
             onClick={handleRowClick}
-            className={rowClassName || undefined}
+            className={rowClassName}
         >
             {headings.map((heading, index) => (
                 <td key={heading.name ?? index}>
@@ -55,4 +64,4 @@ const ComplexTableItemCmp: FC<ComplexTableItemProps<ComplexTableItem & Record<st
     );
 };
 
-export default ComplexTableItemCmp;
+export default ComplexTableItemDefaultComponent;

@@ -1,50 +1,25 @@
-import { FC, useCallback, useMemo } from "react";
+import { FC } from "react";
 
 import { isNullish } from "@bodynarf/utils";
-import Button, { ButtonStyle } from "@bbr/components/button";
-import SplitButton, { SplitButtonProps } from "@bbr/components/splitButton";
 
-import { ToolbarAction } from "@bbr/components/complexTable/types";
+import Button from "@bbr/components/button";
+import SplitButton from "@bbr/components/splitButton";
+
+import { ComplexTableProps } from "@bbr/components/complexTable/types";
 
 import "./styles.scss";
 
-/** Maximum number of actions that are rendered as separate buttons */
-const MAX_BUTTON_ACTIONS = 4;
-
-/** `SelectionBar` component props */
-type SelectionBarProps = {
-    /** Number of selected items */
-    selectedCount: number;
-
-    /** Actions for selected items */
-    selectionActions?: Array<ToolbarAction>;
-};
+/** {@link SelectionBar} component props */
+export type SelectionBarProps = Pick<
+    ComplexTableProps,
+    | "selectionBarConfig" | "loading" | "selectedRows"
+>;
 
 /** Action bar for selected items */
 const SelectionBar: FC<SelectionBarProps> = ({
-    selectedCount,
-    selectionActions,
+    selectionBarConfig, loading, selectedRows
 }) => {
-    const splitButtonConfig = useMemo((): SplitButtonProps | undefined => {
-        if (isNullish(selectionActions) || selectionActions.length <= MAX_BUTTON_ACTIONS) {
-            return undefined;
-        }
-
-        const [primary, ...rest] = selectionActions;
-
-        return {
-            caption: primary.caption,
-            style: primary.style ?? ButtonStyle.Default,
-            onClick: primary.onClick,
-            actions: rest.map(action => ({
-                id: action.id,
-                caption: action.caption,
-                onClick: action.onClick,
-            })) as SplitButtonProps["actions"],
-        };
-    }, [selectionActions]);
-
-    if (selectedCount === 0 || isNullish(selectionActions) || selectionActions.length === 0) {
+    if (selectedRows?.length === 0 || isNullish(selectionBarConfig)) {
         return null;
     }
 
@@ -52,51 +27,33 @@ const SelectionBar: FC<SelectionBarProps> = ({
         <div className="bbr-complex-table-selection-bar block">
             <div className="bbr-complex-table-selection-bar__content">
                 <span className="bbr-complex-table-selection-bar__text">
-                    Selected:
-                    {' '}
-                    {selectedCount}
+                    {selectionBarConfig.selectedCountPlaceholder(selectedRows?.length ?? 0)}
                 </span>
                 <div className="bbr-complex-table-selection-bar__actions">
-                    {selectionActions.length > MAX_BUTTON_ACTIONS
-                        ? <SplitButton {...splitButtonConfig!} />
-                        : selectionActions.map(action => (
-                            <SelectionBarAction
-                                key={action.id}
+                    {selectionBarConfig.type === "SplitButton"
+                        ? (
+                            <SplitButton
+                                {...selectionBarConfig.splitButtonConfig}
 
-                                action={action}
-                            />
-                        ))
+                                isLoading={loading}
+                            />)
+                        : (
+                            <>
+                                {selectionBarConfig.actions.map((action, index) => (
+                                    <Button
+                                        // eslint-disable-next-line react/no-array-index-key
+                                        key={`${index}__${action.style}`}
+
+                                        {...action}
+                                    />
+                                ))}
+                            </>
+                        )
                     }
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
-
-// #region Helper components
-
-type SelectionBarActionProps = {
-    /** Action */
-    action: ToolbarAction;
-};
-
-// Rule disabled: Helper component for SelectionBar
-// eslint-disable-next-line react/no-multi-comp
-const SelectionBarAction: FC<SelectionBarActionProps> = ({ action }) => {
-    const handleClick = useCallback(
-        () => action.onClick(),
-        [action],
-    );
-
-    return (
-        <Button
-            onClick={handleClick}
-            caption={action.caption}
-            style={action.style ?? ButtonStyle.Default}
-        />
-    );
-};
-
-// #endregion Helper components
 
 export default SelectionBar;

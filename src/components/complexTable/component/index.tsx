@@ -3,13 +3,12 @@ import { FC, useCallback, useEffect, useMemo, useState } from "react";
 
 import { getClassName, isNotNullish, isNullish, isNullOrEmpty } from "@bodynarf/utils";
 import { Paginator, SortColumn, Table, TableHeading } from "@bbr/components";
-import { ElementColor, ElementPosition } from "@bbr/types";
 
 import "./styles.scss";
 
 import { ComplexTableItem, ComplexTableItemProps, ComplexTableProps } from "../types";
 import EmptyComplexTable from "../components/emptyTable";
-import ComplexTableItemCmp from "../components/tableItem";
+import ComplexTableItemDefaultComponent from "../components/tableItem";
 import ComplexTableToolbar from "../components/toolbar";
 import SelectionBar from "../components/selectionBar";
 
@@ -17,101 +16,90 @@ import SelectionBar from "../components/selectionBar";
 const ACTIONS_HEADING: TableHeading = {
     caption: "",
     sortable: false,
-    className: "complex-table__actions-column",
+    className: "bbr-complex-table__actions-column",
 };
 
 /* Complex table with pagination and filtering */
 const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>({
+    headings, className, currentSortColumn,
     items,
-    itemComponent = ComplexTableItemCmp as unknown as FC<ComplexTableItemProps<TItem>>,
-    pagesCount, currentPage, paginatorSize,
-    position = ElementPosition.Left, showNextButtons = true,
+    noItemsCaption,
+    tableConfig, paginatorConfig, searchConfig, selectionBarConfig,
+    onRowClick,
+
+    selectedRows,
+    onPageChange, onSearch, onSortChange, onSelectionChange,
+
+    actions,
+    itemComponent = ComplexTableItemDefaultComponent as unknown as FC<ComplexTableItemProps<TItem>>,
+    pagesCount, currentPage,
     loading = false,
     hasActiveSearch = false,
-    onSearch, onSortChange, onPageChange, onSelectionChange, onRowClick,
-    actions,
     containerRef,
-    selection,
-    searchPlaceholder = "Search",
-    ...tableProps
 }: ComplexTableProps<TItem>): JSX.Element | null => {
-    const [currentSortColumn, setCurrentSortColumn] = useState<SortColumn | undefined>();
-    const [selectedRows, setSelectedRows] = useState<Array<string>>([]);
     const [selectable, setSelectable] = useState(false);
 
-    const headings = useMemo(() => {
-        let result = tableProps.headings;
+    const headingColumns = useMemo(() => {
+        let result = headings;
 
         if (isNotNullish(actions) && actions.length > 0) {
             result = [...result, ACTIONS_HEADING];
         }
 
         return result;
-    }, [tableProps.headings, actions]);
-
-    const toggleButton = useMemo(
-        () => isNotNullish(selection)
-            ? {
-                caption: selectable ? "Disable selection" : "Enable selection",
-                onClick: () => setSelectable(prev => !prev),
-            }
-            : undefined,
-        [selection, selectable],
-    );
+    }, [headings, actions]);
 
     const handleHeaderClick = useCallback((heading: TableHeading) => {
         if (!heading.sortable || isNullOrEmpty(heading.name)) {
             return;
         }
 
-        setCurrentSortColumn(prev => {
-            let next: SortColumn | undefined;
+        let next: SortColumn | undefined;
 
-            if (isNullish(prev) || prev.columnName !== heading.name) {
-                next = { columnName: heading.name!, ascending: true };
-            } else if (prev.ascending) {
-                next = { columnName: heading.name!, ascending: false };
-            } else {
-                next = undefined;
-            }
+        if (isNullish(currentSortColumn) || currentSortColumn.columnName !== heading.name) {
+            next = { columnName: heading.name!, ascending: true };
+        } else if (currentSortColumn.ascending) {
+            next = { columnName: heading.name!, ascending: false };
+        } else {
+            next = undefined;
+        }
 
-            onSortChange?.(next);
+        onSortChange?.(next);
+    }, [currentSortColumn, onSortChange]);
 
-            return next;
-        });
-    }, [onSortChange]);
-
-    const handleSelectedRowsChange = useCallback((rows: Array<string>) => {
-        setSelectedRows(rows);
-        onSelectionChange?.(rows);
-    }, [onSelectionChange]);
+    const toggleMultiSelect = useCallback(() => setSelectable(prev => !prev), []);
 
     useEffect(() => {
         if (!selectable) {
-            setSelectedRows([]);
-            onSelectionChange?.([]);
+            onSelectionChange([]);
         }
     }, [selectable, onSelectionChange]);
 
     const wrapperClassName = getClassName([
         "bbr-complex-table__wrapper",
         isNotNullish(onSearch) ? "bbr-complex-table__wrapper--with-search" : undefined,
-        isNotNullish(selection) ? "bbr-complex-table__wrapper--with-toolbar" : undefined,
-        tableProps.className,
+        isNotNullish(selectionBarConfig) || isNotNullish(searchConfig) ? "bbr-complex-table__wrapper--with-toolbar" : undefined,
+        className,
     ]);
 
     if (items.length === 0) {
         return (
             <div className={wrapperClassName}>
                 <ComplexTableToolbar
+                    loading={loading}
                     onSearch={onSearch}
-                    toggleButton={toggleButton}
                     disabled={!hasActiveSearch}
-                    searchPlaceholder={searchPlaceholder}
+                    searchConfig={searchConfig}
+                    selectionBarConfig={selectionBarConfig}
+                    toggleMultiSelection={toggleMultiSelect}
                 />
 
                 <EmptyComplexTable
-                    {...tableProps}
+                    headings={headingColumns}
+                    tableConfig={tableConfig}
+                    searchConfig={searchConfig}
+                    noItemsCaption={noItemsCaption}
+                    hasActiveSearch={hasActiveSearch}
                 />
             </div>
         );
@@ -123,29 +111,28 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
             className={wrapperClassName}
         >
             <ComplexTableToolbar
+                loading={loading}
                 onSearch={onSearch}
-                toggleButton={toggleButton}
-                searchPlaceholder={searchPlaceholder}
+                searchConfig={searchConfig}
+                selectionBarConfig={selectionBarConfig}
+                toggleMultiSelection={toggleMultiSelect}
             />
 
             <SelectionBar
-                selectedCount={selectedRows.length}
-                selectionActions={selection?.actions}
+                loading={loading}
+                selectedRows={selectedRows}
+                selectionBarConfig={selectionBarConfig}
             />
 
             <Table
-                {...tableProps}
+                {...tableConfig}
 
-                fullWidth
-                hoverable
-                headings={headings}
-                selectable={selectable}
+                className={className}
+                headings={headingColumns}
                 selectedRows={selectedRows}
                 onHeaderClick={handleHeaderClick}
                 currentSortColumn={currentSortColumn}
-                onSelectedRowsChange={handleSelectedRowsChange}
-                rowCheckBoxConfig={{ style: ElementColor.Link, hasBackgroundColor: true, fixBackgroundColor: true }}
-                headerCheckBoxConfig={{ style: ElementColor.Link, hasBackgroundColor: true, fixBackgroundColor: true }}
+                onSelectedRowsChange={onSelectionChange}
             >
                 {items.map(item => {
                     const Item = itemComponent;
@@ -156,8 +143,8 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
 
                             item={item}
                             actions={actions}
-                            headings={headings}
                             onRowClick={onRowClick}
+                            headings={headingColumns}
                         />
                     );
                 })}
@@ -166,17 +153,11 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
             {pagesCount > 1
                 ? (
                     <Paginator
-                        nearPagesCount={1}
+                        {...paginatorConfig}
+
                         count={pagesCount}
-                        position={position}
-                        size={paginatorSize}
                         currentPage={currentPage}
                         onPageChange={onPageChange}
-                        showNextButtons={showNextButtons}
-                        resources={{
-                            nextPageCaption: "Next",
-                            previousPageCaption: "Previous"
-                        }}
                     />
                 )
                 : null
