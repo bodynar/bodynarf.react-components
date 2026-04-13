@@ -33,11 +33,11 @@
         border: 0.25rem solid hsl(0, 0%, 86%);
         border-top-color: hsl(217, 71%, 53%);
         border-radius: 50%;
-        animation: complex-table-spin 0.6s linear infinite;
+        animation: bbr-complex-table-spin 0.6s linear infinite;
     }
 }
 
-@keyframes complex-table-spin {
+@keyframes bbr-complex-table-spin {
     to {
         transform: rotate(360deg);
     }

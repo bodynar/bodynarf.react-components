@@ -4,7 +4,7 @@ import Icon from "@bbr/components/icon";
 
 import { ComplexTableAction } from "@bbr/components/complexTable/types";
 
-/** `ActionIcon` component props */
+/** {@link ActionIcon} component props */
 type ActionIconProps = {
     /** Table item identifier */
     itemId: string;

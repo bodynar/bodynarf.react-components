@@ -1,6 +1,6 @@
 import { FC, Ref } from "react";
 
-import { IconProps, PaginatorProps, SearchProps, SortColumn, SplitButtonAction, SplitButtonProps, TableProps, TableSelectionCellProps } from "@bbr/components";
+import { IconProps, PaginatorProps, SearchProps, SortColumn, SplitButtonProps, TableProps, TableSelectionCellProps } from "@bbr/components";
 import { ButtonProps } from "@bbr/components/button";
 import { BaseElementProps } from "@bbr/types";
 
@@ -14,7 +14,7 @@ export type ComplexTableItem = {
     id: string;
 };
 
-/* `ComplexTable` component props type */
+/** {@link ComplexTable} component props type */
 export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem> =
     & Pick<TableProps,
         | "headings"
@@ -129,7 +129,7 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
 
 // #region Table item props types
 
-/** `ComplexTableItem` component props type */
+/** {@link ComplexTableItem} component props type */
 export type ComplexTableItemProps<TItem extends ComplexTableItem = ComplexTableItem> =
     & TableSelectionCellProps
     & Pick<TableProps, "headings">
@@ -157,6 +157,7 @@ export type ComplexTableAction =
 
 // #endregion Table item props types
 
+/** {@link ComplexTable} search configuration */
 export type ComplexTableSearchConfig = {
     /** Search field placeholder */
     searchPlaceholder: string;
@@ -168,20 +169,20 @@ export type ComplexTableSearchConfig = {
     searchProps?: Omit<SearchProps, "onSearch">;
 };
 
-/** Props for the inner table of `ComplexTable` */
+/** Props for the inner table of {@link ComplexTable} */
 export type ComplexTableInnerTableProps = Omit<
     TableProps,
     | "headings" | "children" | "currentSortColumn"
     | "selectable" | "selectedRows" | "onSelectedRowsChange"
 >;
 
-/** Props for the paginator of `ComplexTable` */
+/** Props for the paginator of {@link ComplexTable} */
 export type ComplexTablePaginatorConfig = Omit<
     PaginatorProps,
     | "count" | "currentPage" | "onPageChange"
 >;
 
-/** Common props for the selection bar of `ComplexTable` */
+/** Common props for the selection bar of {@link ComplexTable} */
 export type ComplexTableSelectionBarBase =
     & BaseElementProps
     & {
@@ -218,8 +219,5 @@ export type ComplexTableSelectionBarSplitButton =
         splitButtonConfig: SplitButtonProps;
     };
 
-/** Props for the selection bar of `ComplexTable` */
+/** Props for the selection bar of {@link ComplexTable} */
 export type ComplexTableSelectionBarConfig = ComplexTableSelectionBarButtonList | ComplexTableSelectionBarSplitButton;
-
-/** Toolbar action type */
-export type ToolbarAction = SplitButtonAction | ButtonProps; // TODO ???
