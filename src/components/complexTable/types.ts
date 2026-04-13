@@ -47,12 +47,6 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
          */
         selectedRows?: Array<string>;
 
-        /** Search field placeholder */
-        searchPlaceholder?: string;
-
-        /** Text to display when no items match the search query */
-        noItemsFoundBySearchCaption?: string;
-
         /** Component for rendering a table item */
         itemComponent?: FC<ComplexTableItemProps<TItem>>;
 
@@ -62,14 +56,19 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
         /** Configuration for the paginator */
         paginatorConfig?: ComplexTablePaginatorConfig;
 
-        /** Configuration for the search field */
-        searchProps?: Omit<SearchProps, "onSearch">;
-
         /**
          * Configuration for selection bar.
          * If not provided, a default selection bar with the same actions as in `selection` is rendered.
          */
         selectionBarConfig?: ComplexTableSelectionBarConfig;
+
+        /**
+         * Configuration for the search field. If provided, a search bar is displayed
+        */
+        searchConfig?: ComplexTableSearchConfig;
+
+        /** Row actions */
+        actions?: Array<ComplexTableAction>;
 
         /**
          * Whether an active search query is present. Affects the text displayed when no items are found.
@@ -82,7 +81,6 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
          * Must be passed from the hook {@link useComplexTable} to work correctly.
          */
         loading?: boolean;
-
 
         /** Ref for the table container (scroll management) */
         /**
@@ -99,17 +97,11 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
         onPageChange: (page: number) => void;
 
         /**
-         * Table row click handler
-         * @param itemId Item identifier
-         */
-        onRowClick?: (itemId: string) => void;
-
-        /**
-         * Search handler. If provided, a search bar is displayed
+         * Search handler.
          * Must be passed from the hook {@link useComplexTable} to work correctly.
          * @param query Search query
          */
-        onSearch?: (query: string) => void;
+        onSearch: (query: string) => void;
 
         /**
          * Sort change handler.
@@ -118,7 +110,7 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
          * Must be passed from the hook {@link useComplexTable} to work correctly.
          * @param sortColumn Current sort or `undefined` when reset
          */
-        onSortChange?: (sortColumn?: SortColumn) => void;
+        onSortChange: (sortColumn?: SortColumn) => void;
 
         /**
          * Selected items change handler.
@@ -126,7 +118,13 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
          * Must be passed from the hook {@link useComplexTable} to work correctly.
          * @param selectedIds Selected item identifiers
          */
-        onSelectionChange?: (selectedIds: Array<string>) => void;
+        onSelectionChange: (selectedIds: Array<string>) => void;
+
+        /**
+         * Table row click handler
+         * @param itemId Item identifier
+         */
+        onRowClick?: (itemId: string) => void;
     };
 
 // #region Table item props types
@@ -159,25 +157,36 @@ export type ComplexTableAction =
 
 // #endregion Table item props types
 
+export type ComplexTableSearchConfig = {
+    /** Search field placeholder */
+    searchPlaceholder: string;
+
+    /** Text to display when no items match the search query */
+    noItemsFoundBySearchCaption: string;
+
+    /** Configuration for the search field */
+    searchProps?: Omit<SearchProps, "onSearch">;
+};
+
 /** Props for the inner table of `ComplexTable` */
-type ComplexTableInnerTableProps = Omit<
+export type ComplexTableInnerTableProps = Omit<
     TableProps,
     | "headings" | "children" | "currentSortColumn"
     | "selectable" | "selectedRows" | "onSelectedRowsChange"
 >;
 
 /** Props for the paginator of `ComplexTable` */
-type ComplexTablePaginatorConfig = Omit<
+export type ComplexTablePaginatorConfig = Omit<
     PaginatorProps,
     | "count" | "currentPage" | "onPageChange"
 >;
 
 /** Common props for the selection bar of `ComplexTable` */
-type ComplexTableSelectionBarBase =
+export type ComplexTableSelectionBarBase =
     & BaseElementProps
     & {
         /** Configuration for the multi-selection toggle button */
-        multiSelectionToggleButtonConfig?: Omit<ButtonProps, "onClick">;
+        multiSelectionToggleButtonConfig: Omit<ButtonProps, "onClick">;
 
         /**
          * Placeholder for the selected items count in the selection bar.
@@ -188,7 +197,7 @@ type ComplexTableSelectionBarBase =
     };
 
 /** Selection bar rendered as a list of separate buttons */
-type ComplexTableSelectionBarButtonList =
+export type ComplexTableSelectionBarButtonList =
     & ComplexTableSelectionBarBase
     & {
         /** Type of the selection bar */
@@ -199,7 +208,7 @@ type ComplexTableSelectionBarButtonList =
     };
 
 /** Selection bar rendered as a split button */
-type ComplexTableSelectionBarSplitButton =
+export type ComplexTableSelectionBarSplitButton =
     & ComplexTableSelectionBarBase
     & {
         /** Type of the selection bar */
@@ -210,7 +219,7 @@ type ComplexTableSelectionBarSplitButton =
     };
 
 /** Props for the selection bar of `ComplexTable` */
-type ComplexTableSelectionBarConfig = ComplexTableSelectionBarButtonList | ComplexTableSelectionBarSplitButton;
+export type ComplexTableSelectionBarConfig = ComplexTableSelectionBarButtonList | ComplexTableSelectionBarSplitButton;
 
 /** Toolbar action type */
-export type ToolbarAction = SplitButtonAction | ButtonProps;
+export type ToolbarAction = SplitButtonAction | ButtonProps; // TODO ???
