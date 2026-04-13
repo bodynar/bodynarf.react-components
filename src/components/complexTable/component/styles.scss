@@ -1,20 +1,6 @@
 .bbr-complex-table {
     &__wrapper {
         position: relative;
-
-        .bbr-table__select-cell {
-            width: 5rem;
-        }
-
-        [role="row-actions"] {
-            width: 15rem;
-            min-width: 15rem;
-        }
-    }
-
-    &__actions-column {
-        width: 15rem;
-        min-width: 15rem;
     }
 
     &__loading-overlay {

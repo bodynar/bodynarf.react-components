@@ -87,7 +87,10 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
          * Ref for the table container. Used for scroll management in the hook.
          * Must be passed from the hook {@link useComplexTable} to work correctly.
          */
-        containerRef?: Ref<HTMLTableElement>;
+        containerRef?: Ref<HTMLDivElement>;
+
+        /** Ref for the inner table element */
+        tableRef?: Ref<HTMLTableElement>;
 
         /**
          * Page change handler

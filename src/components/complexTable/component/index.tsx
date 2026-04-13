@@ -35,7 +35,7 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
     pagesCount, currentPage,
     loading = false,
     hasActiveSearch = false,
-    containerRef,
+    containerRef, tableRef,
 }: ComplexTableProps<TItem>): JSX.Element | null => {
     const [selectable, setSelectable] = useState(false);
 
@@ -127,7 +127,9 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
             <Table
                 {...tableConfig}
 
+                ref={tableRef}
                 className={className}
+                selectable={selectable}
                 headings={headingColumns}
                 selectedRows={selectedRows}
                 onHeaderClick={handleHeaderClick}

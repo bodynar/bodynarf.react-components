@@ -47,7 +47,7 @@ export type UseComplexTableResult = {
     /** Props to spread onto `ComplexTable` */
     tableProps: {
         /** Reference to the table container for scroll management */
-        containerRef: React.RefObject<HTMLTableElement | null>;
+        containerRef: React.RefObject<HTMLDivElement>;
 
         /** Total number of pages */
         pagesCount: number;
@@ -116,7 +116,7 @@ export function useComplexTable({
         setTotal(totalCount);
     }, [totalCount]);
 
-    const tableContainerRef = useRef<HTMLTableElement | null>(null);
+    const tableContainerRef = useRef<HTMLDivElement>(null);
 
     const pagesCount = Math.ceil(total / pageSize);
 

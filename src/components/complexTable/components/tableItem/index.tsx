@@ -4,7 +4,7 @@ import { getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { ComplexTableItem, ComplexTableItemProps } from "@bbr/components/complexTable/types";
 
-import ActionIcon from "../actionIcon";
+import ComplexTableRowAction from "../rowAction";
 
 /** {@link ComplexTableItemDefaultComponent} props */
 export type ComplexTableItemDefaultComponentProps = ComplexTableItemProps<
@@ -21,6 +21,7 @@ const ComplexTableItemDefaultComponent: FC<ComplexTableItemDefaultComponentProps
     selected,
     actions,
     onRowClick,
+    selectionCell,
 }) => {
     const rowClassName = getClassName([
         selected ? "is-selected" : undefined,
@@ -37,6 +38,7 @@ const ComplexTableItemDefaultComponent: FC<ComplexTableItemDefaultComponentProps
             onClick={handleRowClick}
             className={rowClassName}
         >
+            {selectionCell}
             {headings.map((heading, index) => (
                 <td key={heading.name ?? index}>
                     {heading.name ? String(item[heading.name] ?? "") : ""}
@@ -50,7 +52,7 @@ const ComplexTableItemDefaultComponent: FC<ComplexTableItemDefaultComponentProps
                         style={{ gap: "0.25rem" }}
                     >
                         {actions.map(action => (
-                            <ActionIcon
+                            <ComplexTableRowAction
                                 key={action.name}
 
                                 action={action}

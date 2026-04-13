@@ -1,6 +1,6 @@
 import { Children, cloneElement, forwardRef, isValidElement, useCallback, useMemo } from "react";
 
-import { getClassName } from "@bodynarf/utils";
+import { getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { mapDataAttributes } from "@bbr/utils";
 import CheckBox from "@bbr/components/primitives/checkbox";
@@ -87,11 +87,23 @@ const Table = forwardRef<HTMLTableElement, TableProps>(({
         [selectedRows, onSelectedRowsChange],
     );
 
+    const stopPropagation = useCallback(
+        (e: React.MouseEvent) => {
+            const closestField = (e.target as HTMLElement).closest(".bbr-table__select-cell .bbr-field");
+
+            if (isNotNullish(closestField)) {
+                e.stopPropagation();
+            }
+        },
+        [],
+    );
+
     return (
         <table
+            {...dataAttributes}
+
             ref={ref}
             title={title}
-            {...dataAttributes}
             className={elClassName}
         >
             <thead>
@@ -100,8 +112,9 @@ const Table = forwardRef<HTMLTableElement, TableProps>(({
                         ? (
                             <th className="bbr-table__select-cell">
                                 <CheckBox
-                                    checked={allSelected}
                                     {...headerCheckBoxConfig}
+
+                                    checked={allSelected}
                                     indeterminate={someSelected}
                                     onValueChange={onSelectAllChange}
                                 />
@@ -131,9 +144,13 @@ const Table = forwardRef<HTMLTableElement, TableProps>(({
                         const key = String(child.key);
 
                         const selectionCell = (
-                            <td className="bbr-table__select-cell">
+                            <td
+                                onClick={stopPropagation}
+                                className="bbr-table__select-cell"
+                            >
                                 <CheckBox
                                     {...rowCheckBoxConfig}
+
                                     checked={selectedRows.includes(key)}
                                     onValueChange={() => onRowSelectChange(key)}
                                 />

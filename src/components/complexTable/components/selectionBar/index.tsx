@@ -19,7 +19,10 @@ export type SelectionBarProps = Pick<
 const SelectionBar: FC<SelectionBarProps> = ({
     selectionBarConfig, loading, selectedRows
 }) => {
-    if (selectedRows?.length === 0 || isNullish(selectionBarConfig)) {
+    if (isNullish(selectedRows)
+        || selectedRows?.length === 0
+        || isNullish(selectionBarConfig)
+    ) {
         return null;
     }
 

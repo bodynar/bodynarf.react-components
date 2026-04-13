@@ -4,8 +4,8 @@ import Icon from "@bbr/components/icon";
 
 import { ComplexTableAction } from "@bbr/components/complexTable/types";
 
-/** {@link ActionIcon} component props */
-type ActionIconProps = {
+/** {@link ComplexTableRowAction} component props */
+type ComplexTableRowActionProps = {
     /** Table item identifier */
     itemId: string;
 
@@ -14,7 +14,7 @@ type ActionIconProps = {
 };
 
 /** Table row action icon */
-const ActionIcon: FC<ActionIconProps> = ({ itemId, action }) => {
+const ComplexTableRowAction: FC<ComplexTableRowActionProps> = ({ itemId, action }) => {
     const { onClick, ...iconProps } = action;
 
     const handleClick = useCallback(
@@ -38,4 +38,4 @@ const ActionIcon: FC<ActionIconProps> = ({ itemId, action }) => {
     );
 };
 
-export default ActionIcon;
+export default ComplexTableRowAction;
