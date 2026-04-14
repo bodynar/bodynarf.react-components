@@ -37,7 +37,11 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
     hasActiveSearch = false,
     containerRef, tableRef,
 }: ComplexTableProps<TItem>): JSX.Element | null => {
-    const [selectable, setSelectable] = useState(false);
+    const selectableProp = selectionBarConfig?.selectable;
+    const onSelectableChange = selectionBarConfig?.onSelectableChange;
+    const [internalSelectable, setInternalSelectable] = useState(false);
+    const isControlled = selectableProp !== undefined;
+    const selectable = isControlled ? selectableProp! : internalSelectable;
 
     const headingColumns = useMemo(() => {
         let result = headings;
@@ -67,7 +71,15 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
         onSortChange?.(next);
     }, [currentSortColumn, onSortChange]);
 
-    const toggleMultiSelect = useCallback(() => setSelectable(prev => !prev), []);
+    const toggleMultiSelect = useCallback(() => {
+        const next = !selectable;
+
+        if (!isControlled) {
+            setInternalSelectable(next);
+        }
+
+        onSelectableChange?.(next);
+    }, [selectable, isControlled, onSelectableChange]);
 
     useEffect(() => {
         if (!selectable) {
