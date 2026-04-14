@@ -192,9 +192,6 @@ export type ComplexTablePaginatorConfig = Omit<
 export type ComplexTableSelectionBarBase =
     & BaseElementProps
     & {
-        /** Configuration for the multi-selection toggle button */
-        multiSelectionToggleButtonConfig: Omit<ButtonProps, "onClick">;
-
         /**
          * Placeholder for the selected items count in the selection bar.
          * @param count Selected items count
