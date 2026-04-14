@@ -1,5 +1,5 @@
 /* eslint-disable custom/functional-component-definition */ // Rule disabled: Generic component required
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, useCallback, useMemo } from "react";
 
 import { getClassName, isNotNullish, isNullish, isNullOrEmpty } from "@bodynarf/utils";
 import { Paginator, SortColumn, Table, TableHeading } from "@bbr/components";
@@ -37,12 +37,6 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
     hasActiveSearch = false,
     containerRef, tableRef,
 }: ComplexTableProps<TItem>): JSX.Element | null => {
-    const selectableProp = selectionBarConfig?.selectable;
-    const onSelectableChange = selectionBarConfig?.onSelectableChange;
-    const [internalSelectable, setInternalSelectable] = useState(false);
-    const isControlled = selectableProp !== undefined;
-    const selectable = isControlled ? selectableProp! : internalSelectable;
-
     const headingColumns = useMemo(() => {
         let result = headings;
 
@@ -52,6 +46,8 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
 
         return result;
     }, [headings, actions]);
+
+    const hasMultiSelection = useMemo(() => isNotNullish(selectionBarConfig), [selectionBarConfig]);
 
     const handleHeaderClick = useCallback((heading: TableHeading) => {
         if (!heading.sortable || isNullOrEmpty(heading.name)) {
@@ -71,22 +67,6 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
         onSortChange?.(next);
     }, [currentSortColumn, onSortChange]);
 
-    const toggleMultiSelect = useCallback(() => {
-        const next = !selectable;
-
-        if (!isControlled) {
-            setInternalSelectable(next);
-        }
-
-        onSelectableChange?.(next);
-    }, [selectable, isControlled, onSelectableChange]);
-
-    useEffect(() => {
-        if (!selectable) {
-            onSelectionChange([]);
-        }
-    }, [selectable, onSelectionChange]);
-
     const wrapperClassName = getClassName([
         "bbr-complex-table__wrapper",
         isNotNullish(onSearch) ? "bbr-complex-table__wrapper--with-search" : undefined,
@@ -102,8 +82,6 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
                     onSearch={onSearch}
                     disabled={!hasActiveSearch}
                     searchConfig={searchConfig}
-                    selectionBarConfig={selectionBarConfig}
-                    toggleMultiSelection={toggleMultiSelect}
                 />
 
                 <EmptyComplexTable
@@ -126,8 +104,6 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
                 loading={loading}
                 onSearch={onSearch}
                 searchConfig={searchConfig}
-                selectionBarConfig={selectionBarConfig}
-                toggleMultiSelection={toggleMultiSelect}
             />
 
             <SelectionBar
@@ -139,11 +115,12 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
             <Table
                 {...tableConfig}
 
+                fullWidth
                 ref={tableRef}
                 className={className}
-                selectable={selectable}
                 headings={headingColumns}
                 selectedRows={selectedRows}
+                selectable={hasMultiSelection}
                 onHeaderClick={handleHeaderClick}
                 currentSortColumn={currentSortColumn}
                 onSelectedRowsChange={onSelectionChange}

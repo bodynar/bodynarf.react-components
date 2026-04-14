@@ -1,8 +1,7 @@
 import { FC } from "react";
 
-import { ActionFn, isNotNullish } from "@bodynarf/utils";
+import { getClassName, isNullish } from "@bodynarf/utils";
 
-import Button from "@bbr/components/button";
 import { ComplexTableProps } from "@bbr/components/complexTable";
 import Search from "@bbr/components/search";
 
@@ -11,59 +10,43 @@ export type ComplexTableToolbarProps =
     Pick<
         ComplexTableProps,
         | "searchConfig"
-        | "selectionBarConfig" | "loading"
+        | "loading"
         | "onSearch"
     > & {
         /** Whether the toolbar is disabled */
         disabled?: boolean;
-
-        /** Toggle multi-selection mode */
-        toggleMultiSelection: ActionFn;
     };
 
 /** Complex table toolbar (selection toggle + Search) */
 const ComplexTableToolbar: FC<ComplexTableToolbarProps> = ({
-    searchConfig, selectionBarConfig, onSearch, toggleMultiSelection,
+    searchConfig, onSearch,
     loading, disabled = false,
 }) => {
-    const hasContent = isNotNullish(selectionBarConfig) || isNotNullish(searchConfig);
-
-    if (!hasContent) {
+    if (isNullish(searchConfig)) {
         return null;
     }
 
+    const className = getClassName([
+        "bbr-complex-table__toolbar",
+        "block",
+        "columns",
+        "is-vcentered",
+        searchConfig.containerClassName,
+    ]);
+
     return (
-        <div className="block columns is-vcentered">
-            {isNotNullish(selectionBarConfig)
-                ? (
-                    <div className="column is-flex-grow-0">
-                        <Button
-                            {...selectionBarConfig.multiSelectionToggleButtonConfig}
+        <div className={className}>
+            <div className="column">
+                <Search
+                    {...searchConfig?.searchProps}
 
-                            disabled={disabled}
-                            isLoading={loading}
-                            onClick={toggleMultiSelection}
-                        />
-                    </div>
-                )
-                : <div />
-            }
-            {isNotNullish(searchConfig)
-                ? (
-                    <div className="column">
-                        <Search
-                            {...searchConfig?.searchProps}
-
-                            disabled={disabled}
-                            onSearch={onSearch}
-                            isLoading={loading}
-                            caption={searchConfig.searchPlaceholder}
-                            searchType={searchConfig.searchProps?.searchType ?? "byTyping"}
-                        />
-                    </div>
-                )
-                : null
-            }
+                    disabled={disabled}
+                    onSearch={onSearch}
+                    isLoading={loading}
+                    caption={searchConfig.searchPlaceholder}
+                    searchType={searchConfig.searchProps?.searchType ?? "byTyping"}
+                />
+            </div>
         </div>
     );
 };

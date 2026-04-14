@@ -170,6 +170,9 @@ export type ComplexTableSearchConfig = {
 
     /** Configuration for the search field */
     searchProps?: Omit<SearchProps, "onSearch">;
+
+    /** CSS class for the search container */
+    containerClassName?: string;
 };
 
 /** Props for the inner table of {@link ComplexTable} */
@@ -193,24 +196,11 @@ export type ComplexTableSelectionBarBase =
         multiSelectionToggleButtonConfig: Omit<ButtonProps, "onClick">;
 
         /**
-         * Controls whether multi-row selection mode is active.
-         * When provided, the component operates in controlled mode.
-         */
-        selectable?: boolean;
-
-        /**
          * Placeholder for the selected items count in the selection bar.
          * @param count Selected items count
          * @return Placeholder text
          */
         selectedCountPlaceholder: (count: number) => string;
-
-        /**
-         * Called when the user toggles multi-row selection mode.
-         * Use together with `selectable` for controlled mode.
-         * @param selectable New selectable state
-         */
-        onSelectableChange?: (selectable: boolean) => void;
     };
 
 /** Selection bar rendered as a list of separate buttons */
