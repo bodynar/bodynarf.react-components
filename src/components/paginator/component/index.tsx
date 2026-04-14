@@ -6,6 +6,7 @@ import { getPositionClassName, getSizeClassName, mapDataAttributes } from "@bbr/
 import { ElementPosition, ElementSize } from "@bbr/types";
 
 import { PaginatorProps } from "../..";
+import PaginatorNextButtons from "../components/nextButtons";
 
 /**
  * Paginator component.
@@ -14,8 +15,9 @@ import { PaginatorProps } from "../..";
 const Paginator: FC<PaginatorProps> = ({
     count, onPageChange, currentPage = 0,
     position = ElementPosition.Left, size = ElementSize.Normal,
-    rounded = false, showNextButtons = false,
+    rounded = false,
     nearPagesCount = 3, resources,
+    showNextButtons = false, nextButtonsConfig,
 
     className, title, data,
 }) => {
@@ -27,6 +29,14 @@ const Paginator: FC<PaginatorProps> = ({
 
     const canGoBack = useMemo(() => currentPage > 1, [currentPage]);
     const canGoForward = useMemo(() => currentPage < count, [currentPage, count]);
+
+    const goBack = useCallback(
+        () => onPageChange(currentPage - 1),
+        [currentPage, onPageChange]);
+
+    const goForward = useCallback(
+        () => onPageChange(currentPage + 1),
+        [currentPage, onPageChange]);
 
     const pageChange = useCallback(
         (event: MouseEvent<HTMLElement>) => {
@@ -62,32 +72,25 @@ const Paginator: FC<PaginatorProps> = ({
 
     return (
         <nav
+            {...dataAttributes}
+
             title={title}
             role="navigation"
-            {...dataAttributes}
             className={classNames}
             aria-label="pagination"
         >
-            {!!showNextButtons &&
-                <>
-                    <a
-                        onClick={pageChange}
-                        data-page={currentPage - 1}
-                        title={canGoBack ? resources?.previousPageTitle : undefined}
-                        className={`pagination-previous${canGoBack ? "" : " is-disabled"}`}
-                    >
-                        {resources?.previousPageCaption ?? "Previous"}
-                    </a>
-                    <a
-                        onClick={pageChange}
-                        data-page={currentPage + 1}
-                        title={canGoForward ? resources?.nextPageTitle : undefined}
-                        className={`pagination-next${canGoForward ? "" : " is-disabled"}`}
-                    >
-                        {resources?.nextPageCaption ?? "Next page"}
-                    </a>
-                </>
-            }
+            <PaginatorNextButtons
+                goBack={goBack}
+                goForward={goForward}
+                canGoBack={canGoBack}
+                resources={resources}
+                pageChange={pageChange}
+                currentPage={currentPage}
+                canGoForward={canGoForward}
+                showNextButtons={showNextButtons}
+                nextButtonsConfig={nextButtonsConfig}
+            />
+
             <ul className="pagination-list">
                 {currentPage !== 1 && !pageNumbers.includes(1) &&
                     <>
@@ -109,6 +112,7 @@ const Paginator: FC<PaginatorProps> = ({
                         </li>
                     </>
                 }
+
                 {pageNumbers.map(x =>
                     <li key={x}>
                         <a
@@ -122,6 +126,7 @@ const Paginator: FC<PaginatorProps> = ({
                         </a>
                     </li>
                 )}
+
                 {currentPage != count && !pageNumbers.includes(count) &&
                     <>
                         <li>

@@ -1,7 +1,12 @@
 # Change log
 All changes will be published here in reverse chronological order
 
-## v1.14.8
+## v1.14.7
+- **Paginator**
+  - Added `nextButtonsConfig` prop (`{ previousButtonConfig, nextButtonConfig }`) to render Previous/Next navigation as `Button` components with full styling support (`style`, `caption`, `rounded`, `outlined`, `icon`, etc.).
+  - Each button is configured independently via `NextButtonConfig` (`Omit<ButtonProps, "onClick" | "disabled">`).
+  - `showNextButtons` is preserved for backwards compatibility with link-based navigation.
+
 - **ComplexTable** *(new)*
   - Table component with built-in pagination, search, sorting, and multi-row selection.
   - Multi-row selection is always active when `selectionBarConfig` is provided — no toggle button required.
@@ -9,7 +14,6 @@ All changes will be published here in reverse chronological order
   - `selectable` and `onSelectableChange` in `selectionBarConfig` allow controlling selection mode from outside the component.
   - Supports custom row component via `itemComponent`, per-row actions via `actions`, and loading overlay via `loading`.
 
-## v1.14.7
 - **Table**
   - Selection checkbox click (`stopPropagation`) now only prevents row click propagation when the click target is inside the checkbox (`.bbr-field`), allowing clicks on the rest of the selection cell to propagate normally.
 
