@@ -26,7 +26,7 @@ const ComplexTableToolbar: FC<ComplexTableToolbarProps> = ({
         return null;
     }
 
-    const className = getClassName([
+    const containerClassName = getClassName([
         "bbr-complex-table__toolbar",
         "block",
         "columns",
@@ -34,19 +34,23 @@ const ComplexTableToolbar: FC<ComplexTableToolbarProps> = ({
         searchConfig.containerClassName,
     ]);
 
-    return (
-        <div className={className}>
-            <div className="column">
-                <Search
-                    {...searchConfig?.searchProps}
+    const className = getClassName([
+        "column",
+        searchConfig?.searchProps?.className,
+    ]);
 
-                    disabled={disabled}
-                    onSearch={onSearch}
-                    isLoading={loading}
-                    caption={searchConfig.searchPlaceholder}
-                    searchType={searchConfig.searchProps?.searchType ?? "byTyping"}
-                />
-            </div>
+    return (
+        <div className={containerClassName}>
+            <Search
+                {...searchConfig?.searchProps}
+
+                disabled={disabled}
+                onSearch={onSearch}
+                isLoading={loading}
+                className={className}
+                caption={searchConfig.searchPlaceholder}
+                searchType={searchConfig.searchProps?.searchType ?? "byTyping"}
+            />
         </div>
     );
 };
