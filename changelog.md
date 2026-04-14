@@ -1,6 +1,14 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.14.8
+- **ComplexTable** *(new)*
+  - Table component with built-in pagination, search, sorting, and multi-row selection.
+  - Multi-row selection is always active when `selectionBarConfig` is provided — no toggle button required.
+  - Selection bar supports two layouts: list of buttons (`Button list`) or a split button (`SplitButton`).
+  - `selectable` and `onSelectableChange` in `selectionBarConfig` allow controlling selection mode from outside the component.
+  - Supports custom row component via `itemComponent`, per-row actions via `actions`, and loading overlay via `loading`.
+
 ## v1.14.7
 - **Table**
   - Selection checkbox click (`stopPropagation`) now only prevents row click propagation when the click target is inside the checkbox (`.bbr-field`), allowing clicks on the rest of the selection cell to propagate normally.
