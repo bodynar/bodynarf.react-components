@@ -6,6 +6,7 @@ import { getPositionClassName, getSizeClassName, mapDataAttributes } from "@bbr/
 import { ElementPosition, ElementSize } from "@bbr/types";
 
 import { PaginatorProps } from "../..";
+import { generatePageNumbers } from "../utils";
 import PaginatorNextButtons from "../components/nextButtons";
 import PaginatorNavButtons from "../components/navButtons";
 
@@ -14,7 +15,7 @@ import PaginatorNavButtons from "../components/navButtons";
  * Used for visualization of paging configuration
 */
 const Paginator: FC<PaginatorProps> = ({
-    count, onPageChange, currentPage = 0,
+    count, onPageChange, currentPage = 1,
     position = ElementPosition.Left, size = ElementSize.Normal,
     rounded = false,
     nearPagesCount = 3, resources,
@@ -22,10 +23,6 @@ const Paginator: FC<PaginatorProps> = ({
 
     className, title, data,
 }) => {
-    if (currentPage > count) {
-        throw new Error(`Current page "${currentPage}" must be less than amount of pages "${count}"`);
-    }
-
     const pageNumbers = useMemo(() => generatePageNumbers(currentPage, count, nearPagesCount), [currentPage, count, nearPagesCount]);
 
     const canGoBack = useMemo(() => currentPage > 1, [currentPage]);
@@ -36,7 +33,7 @@ const Paginator: FC<PaginatorProps> = ({
 
     const pageChange = useCallback(
         (event: MouseEvent<HTMLElement>) => {
-            const target = event.target as HTMLElement;
+            const target = event.currentTarget;
 
             const pageRaw = target.dataset["page"];
 
@@ -56,6 +53,14 @@ const Paginator: FC<PaginatorProps> = ({
 
             onPageChange(pageNumber);
         }, [onPageChange, currentPage, count]);
+
+    if (currentPage > count) {
+        if (count > 0) {
+            console.error(`[Paginator] currentPage (${currentPage}) is greater than count (${count})`);
+        }
+
+        return null;
+    }
 
     if (pageNumbers.length <= 1) {
         return null;
@@ -115,23 +120,3 @@ const Paginator: FC<PaginatorProps> = ({
 };
 
 export default Paginator;
-
-/**
- * Get nearest numbers from each side (left & right)
- * @param page Number of current page
- * @param count Amount of pages
- * @param size Amount of pages from left & right to current page
- * @throws Current page is greater than pages amount
- * @returns Array of nearest numbers to current page
- */
-const generatePageNumbers = (page: number, count: number, size: number): Array<number> => {
-    if (page < 0 || count <= 0 || page > count) {
-        return [];
-    }
-
-    return [
-        ...new Array(size).fill(page).map((_, i) => page - i - 1).filter(x => x > 0 && x < page).reverse(),
-        page,
-        ...new Array(size).fill(page).map((_, i) => page + i + 1).filter(x => x > 0 && x > page && x <= count)
-    ];
-};

@@ -157,7 +157,10 @@ const Table = forwardRef<HTMLTableElement, TableProps>(({
                             </td>
                         );
 
-                        return cloneElement(child, { selectionCell } as Record<string, unknown>);
+                        return cloneElement(child, {
+                            selectionCell,
+                            selected: selectedRows.includes(key),
+                        } as Record<string, unknown>);
                     })
                     : children
                 }

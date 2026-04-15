@@ -134,8 +134,8 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
 
                             item={item}
                             actions={actions}
+                            headings={headings}
                             onRowClick={onRowClick}
-                            headings={headingColumns}
                         />
                     );
                 })}

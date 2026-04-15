@@ -177,7 +177,7 @@ const PaginatorInternalNavButtons: FC<PaginatorInternalNavButtonsProps> = ({
                 </li>
             )}
 
-            {currentPage != count && !pageNumbers.includes(count) &&
+            {currentPage !== count && !pageNumbers.includes(count) &&
                 <>
                     <li>
                         <span className="pagination-ellipsis">

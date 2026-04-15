@@ -6,19 +6,13 @@ import { ComplexTableItem, ComplexTableItemProps } from "@bbr/components/complex
 
 import ComplexTableRowAction from "../rowAction";
 
-/** {@link ComplexTableItemDefaultComponent} props */
-export type ComplexTableItemDefaultComponentProps = ComplexTableItemProps<
-    ComplexTableItem & Record<string, unknown>
-> & {
-    /** Whether the row is selected */
-    selected: boolean;
-};
-
 /** Table item component */
-const ComplexTableItemDefaultComponent: FC<ComplexTableItemDefaultComponentProps> = ({
+const ComplexTableItemDefaultComponent: FC<ComplexTableItemProps<
+    ComplexTableItem & Record<string, unknown>
+>> = ({
     headings,
     item,
-    selected,
+    selected = false,
     actions,
     onRowClick,
     selectionCell,

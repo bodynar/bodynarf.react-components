@@ -108,4 +108,7 @@ export type TableProps = BaseElementProps & {
 export type TableSelectionCellProps = {
     /** Checkbox cell element to render inside the row */
     selectionCell?: ReactElement;
+
+    /** Whether the row is selected */
+    selected?: boolean;
 };
