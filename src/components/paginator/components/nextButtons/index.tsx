@@ -1,16 +1,17 @@
 import { MouseEvent, FC } from "react";
 
-import { ActionFn, isNotNullish, isNullish } from "@bodynarf/utils";
+import { ActionFn, isNotNullish } from "@bodynarf/utils";
 
 import Button from "@bbr/components/button";
 
 import { PaginatorProps } from "../..";
 
+/** Props for {@link PaginatorNextButtons} */
 export type PaginatorNextButtonsProps =
     & Pick<
         PaginatorProps,
         | "nextButtonsConfig" | "showNextButtons"
-        | "resources" | "currentPage"
+        | "resources" | "currentPage" | "size" | "rounded"
     >
     & {
         /** Indicates if the previous page button should be enabled */
@@ -34,26 +35,32 @@ export type PaginatorNextButtonsProps =
 
 /** Next\previous buttons component */
 const PaginatorNextButtons: FC<PaginatorNextButtonsProps> = ({
-    nextButtonsConfig,
+    nextButtonsConfig, size, rounded,
     showNextButtons, resources, currentPage,
     canGoBack, canGoForward, goBack, goForward, pageChange,
 }) => {
-    if (!showNextButtons && isNullish(nextButtonsConfig)) {
+    const shouldBeVisibleByButtons = isNotNullish(nextButtonsConfig) && nextButtonsConfig.style === "aside";
+
+    if (!showNextButtons && !shouldBeVisibleByButtons) {
         return null;
     }
 
-    if (isNotNullish(nextButtonsConfig)) {
+    if (shouldBeVisibleByButtons) {
         return (
             <>
                 <Button
                     {...nextButtonsConfig.previousButtonConfig}
 
+                    size={size}
                     onClick={goBack}
+                    rounded={rounded}
                     disabled={!canGoBack}
                 />
                 <Button
                     {...nextButtonsConfig.nextButtonConfig}
 
+                    size={size}
+                    rounded={rounded}
                     onClick={goForward}
                     disabled={!canGoForward}
                 />

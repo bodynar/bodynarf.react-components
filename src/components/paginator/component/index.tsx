@@ -7,6 +7,7 @@ import { ElementPosition, ElementSize } from "@bbr/types";
 
 import { PaginatorProps } from "../..";
 import PaginatorNextButtons from "../components/nextButtons";
+import PaginatorNavButtons from "../components/navButtons";
 
 /**
  * Paginator component.
@@ -30,13 +31,8 @@ const Paginator: FC<PaginatorProps> = ({
     const canGoBack = useMemo(() => currentPage > 1, [currentPage]);
     const canGoForward = useMemo(() => currentPage < count, [currentPage, count]);
 
-    const goBack = useCallback(
-        () => onPageChange(currentPage - 1),
-        [currentPage, onPageChange]);
-
-    const goForward = useCallback(
-        () => onPageChange(currentPage + 1),
-        [currentPage, onPageChange]);
+    const goBack = useCallback(() => onPageChange(currentPage - 1), [currentPage, onPageChange]);
+    const goForward = useCallback(() => onPageChange(currentPage + 1), [currentPage, onPageChange]);
 
     const pageChange = useCallback(
         (event: MouseEvent<HTMLElement>) => {
@@ -48,11 +44,17 @@ const Paginator: FC<PaginatorProps> = ({
                 return;
             }
 
-            const page = +(pageRaw);
+            const pageNumber = Number.parseInt(pageRaw);
 
-            if (page !== currentPage && page > 0 && page <= count) {
-                onPageChange(page);
+            if (isNaN(pageNumber)) {
+                return;
             }
+
+            if (pageNumber === currentPage || pageNumber <= 0 || pageNumber > count) {
+                return;
+            }
+
+            onPageChange(pageNumber);
         }, [onPageChange, currentPage, count]);
 
     if (pageNumbers.length <= 1) {
@@ -80,6 +82,7 @@ const Paginator: FC<PaginatorProps> = ({
             aria-label="pagination"
         >
             <PaginatorNextButtons
+                size={size}
                 goBack={goBack}
                 goForward={goForward}
                 canGoBack={canGoBack}
@@ -91,63 +94,19 @@ const Paginator: FC<PaginatorProps> = ({
                 nextButtonsConfig={nextButtonsConfig}
             />
 
-            <ul className="pagination-list">
-                {currentPage !== 1 && !pageNumbers.includes(1) &&
-                    <>
-                        <li>
-                            <a
-                                data-page={1}
-                                onClick={pageChange}
-                                className="pagination-link"
-                                title={resources?.openConcretePageTitleTemplate?.format(1)}
-                                aria-label={resources?.openConcretePageTitleTemplate?.format(1)}
-                            >
-                                1
-                            </a>
-                        </li>
-                        <li>
-                            <span className="pagination-ellipsis">
-                                &hellip;
-                            </span>
-                        </li>
-                    </>
-                }
-
-                {pageNumbers.map(x =>
-                    <li key={x}>
-                        <a
-                            data-page={x}
-                            onClick={pageChange}
-                            aria-label={resources?.openConcretePageTitleTemplate?.format(x)}
-                            className={`pagination-link${currentPage === x ? " is-current" : ""}`}
-                            title={currentPage === x ? undefined : resources?.openConcretePageTitleTemplate?.format(x)}
-                        >
-                            {x}
-                        </a>
-                    </li>
-                )}
-
-                {currentPage != count && !pageNumbers.includes(count) &&
-                    <>
-                        <li>
-                            <span className="pagination-ellipsis">
-                                &hellip;
-                            </span>
-                        </li>
-                        <li>
-                            <a
-                                data-page={count}
-                                onClick={pageChange}
-                                className="pagination-link"
-                                title={resources?.openConcretePageTitleTemplate?.format(count)}
-                                aria-label={resources?.openConcretePageTitleTemplate?.format(count)}
-                            >
-                                {count}
-                            </a>
-                        </li>
-                    </>
-                }
-            </ul>
+            <PaginatorNavButtons
+                size={size}
+                count={count}
+                goBack={goBack}
+                goForward={goForward}
+                resources={resources}
+                canGoBack={canGoBack}
+                pageChange={pageChange}
+                pageNumbers={pageNumbers}
+                currentPage={currentPage}
+                canGoForward={canGoForward}
+                nextButtonsConfig={nextButtonsConfig}
+            />
         </nav>
     );
 };
