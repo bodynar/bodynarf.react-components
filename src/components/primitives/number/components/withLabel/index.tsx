@@ -40,7 +40,7 @@ const NumberWithLabel: FC<
                     event.target.value = resetValue.toString();
                     onValueChange(resetValue);
                 }
-                onBlur?.();
+                onBlur?.(event);
             },
             [resetToDefaultOnBlur, defaultValue, onValueChange, onBlur]
         );
@@ -70,6 +70,8 @@ const NumberWithLabel: FC<
             >
                 <div className={inputContainerClassName}>
                     <input
+                        {...dataAttributes}
+
                         id={name}
                         step={step}
                         name={name}
@@ -79,7 +81,6 @@ const NumberWithLabel: FC<
                         onChange={onChange}
                         readOnly={readonly}
                         disabled={disabled}
-                        {...dataAttributes}
                         onBlur={onInputBlur}
                         onKeyDown={onKeyDown}
                         autoFocus={autoFocus}

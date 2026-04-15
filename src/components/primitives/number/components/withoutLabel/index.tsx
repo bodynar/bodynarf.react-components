@@ -38,7 +38,8 @@ const NumberWithoutLabel: FC<NumberProps> = ({
                 event.target.value = resetValue.toString();
                 onValueChange(resetValue);
             }
-            onBlur?.();
+
+            onBlur?.(event);
         },
         [resetToDefaultOnBlur, defaultValue, onValueChange, onBlur]
     );
@@ -65,6 +66,8 @@ const NumberWithoutLabel: FC<NumberProps> = ({
         >
             <div className={containerClassName}>
                 <input
+                    {...dataAttributes}
+
                     id={name}
                     step={step}
                     name={name}
@@ -74,7 +77,6 @@ const NumberWithoutLabel: FC<NumberProps> = ({
                     onChange={onChange}
                     readOnly={readonly}
                     disabled={disabled}
-                    {...dataAttributes}
                     onBlur={onInputBlur}
                     onKeyDown={onKeyDown}
                     autoFocus={autoFocus}

@@ -7,6 +7,12 @@ All changes will be published here in reverse chronological order
   - Each button is configured independently via `NextButtonConfig` (`Omit<ButtonProps, "onClick" | "disabled">`).
   - `showNextButtons` is preserved for backwards compatibility with link-based navigation.
 
+- **ClickableElement**
+  - Changed `onClick` type from `ActionFn` (`() => void`) to `(event: MouseEvent<HTMLElement>) => void`. Existing zero-arg handlers remain compatible.
+
+- **BlurableElement**
+  - Changed `onBlur` type from `ActionFn` (`() => void`) to `(event: FocusEvent<HTMLElement>) => void`. Existing zero-arg handlers remain compatible.
+
 - **ComplexTable** *(new)*
   - Table component with built-in pagination, search, sorting, and multi-row selection.
   - Multi-row selection is always active when `selectionBarConfig` is provided — no toggle button required.
