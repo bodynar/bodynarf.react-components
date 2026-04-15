@@ -115,6 +115,7 @@ const PaginatorNavButtons: FC<PaginatorNavButtonsProps> = ({
         </ul>
     );
 };
+
 export default PaginatorNavButtons;
 
 /** Props for {@link PaginatorInternalNavButtons} */

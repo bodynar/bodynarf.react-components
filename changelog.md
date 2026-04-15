@@ -4,9 +4,10 @@ All changes will be published here in reverse chronological order
 ## v1.14.7
 - **Paginator**
   - Added `nextButtonsConfig` prop (`{ previousButtonConfig, nextButtonConfig, style }`) to render Previous/Next navigation as `Button` components with full styling support (`style`, `caption`, `rounded`, `outlined`, `icon`, etc.).
-  - Each button is configured independently via `PaginatorDirectionStepButtonConfig` (`Omit<ButtonProps, "onClick" | "disabled">`).
+  - Each button is configured independently via `PaginatorDirectionStepButtonConfig` (`Omit<ButtonProps, "onClick" | "disabled" | "size" | "rounded" | "caption">`).
   - Added `style` option in `nextButtonsConfig`: `"aside"` places buttons at outer edges, `"inline"` places them beside page numbers.
-  - Extracted internal `PaginatorNavButtons` component for rendering the page number list.
+  - Added `pageButtonsConfig` prop (`{ default, active }`) to render page number buttons as `Button` components. `default` styles non-active pages, `active` styles the current page.
+  - Extracted internal `PaginatorNavButtons` and `PaginatorInternalNavButton` components for rendering the page number list.
   - `showNextButtons` is preserved for backwards compatibility with link-based navigation.
 
 - **ClickableElement**
