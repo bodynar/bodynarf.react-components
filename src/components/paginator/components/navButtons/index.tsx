@@ -66,15 +66,17 @@ const PaginatorNavButtons: FC<PaginatorNavButtonsProps> = ({
 
         return (
             <ul className="pagination-list">
-                <Button
-                    {...nextButtonsConfig.previousButtonConfig}
+                <li>
+                    <Button
+                        {...nextButtonsConfig.previousButtonConfig}
 
-                    size={size}
-                    onClick={goBack}
-                    rounded={rounded}
-                    disabled={!canGoBack}
-                    className={backButtonClassName}
-                />
+                        size={size}
+                        onClick={goBack}
+                        rounded={rounded}
+                        disabled={!canGoBack}
+                        className={backButtonClassName}
+                    />
+                </li>
 
                 <PaginatorInternalNavButtons
                     size={size}
@@ -87,15 +89,17 @@ const PaginatorNavButtons: FC<PaginatorNavButtonsProps> = ({
                     pageButtonsConfig={pageButtonsConfig}
                 />
 
-                <Button
-                    {...nextButtonsConfig.nextButtonConfig}
+                <li>
+                    <Button
+                        {...nextButtonsConfig.nextButtonConfig}
 
-                    size={size}
-                    rounded={rounded}
-                    onClick={goForward}
-                    disabled={!canGoForward}
-                    className={beforeButtonClassName}
-                />
+                        size={size}
+                        rounded={rounded}
+                        onClick={goForward}
+                        disabled={!canGoForward}
+                        className={beforeButtonClassName}
+                    />
+                </li>
             </ul>
         );
     }
