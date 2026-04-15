@@ -1,20 +1,30 @@
 import { FC, MouseEvent } from "react";
 
-import { ActionFn, isNotNullish } from "@bodynarf/utils";
+import { ActionFn, getClassName, isNotNullish } from "@bodynarf/utils";
+
 import { PaginatorProps } from "@bbr/components/paginator";
 import Button from "@bbr/components/button";
+import { ElementSize } from "@bbr/types";
 
 import { PaginatorInternalNavButton } from "../navButton";
+
+/** Mapping of element sizes to corresponding margin class names */
+const paginatorInternalNavButtonSizeToMarginSizeMap: Map<ElementSize, 1 | 2 | 3 | 4> = new Map([
+    [ElementSize.Small, 1],
+    [ElementSize.Normal, 2],
+    [ElementSize.Medium, 3],
+    [ElementSize.Large, 4],
+]);
 
 /** Props for {@link PaginatorNavButtons} */
 export type PaginatorNavButtonsProps =
     & Pick<
         PaginatorProps,
-        | "currentPage" | "count"
-        | "resources"
-        | "nextButtonsConfig" | "pageButtonsConfig"
-        | "size" | "rounded"
-    > & {
+        | "currentPage" | "count" | "resources"
+        | "nextButtonsConfig" | "pageButtonsConfig" | "rounded"
+    >
+    & Required<Pick<PaginatorProps, "size">>
+    & {
         /** Array of page numbers to be displayed */
         pageNumbers: Array<number>;
 
@@ -44,6 +54,16 @@ const PaginatorNavButtons: FC<PaginatorNavButtonsProps> = ({
     const shouldNextButtonsBeShown = isNotNullish(nextButtonsConfig) && nextButtonsConfig.style === "inline";
 
     if (shouldNextButtonsBeShown) {
+        const backButtonClassName = getClassName([
+            nextButtonsConfig.previousButtonConfig.className,
+            `mr-${paginatorInternalNavButtonSizeToMarginSizeMap.get(size) ?? 2}`,
+        ]);
+
+        const beforeButtonClassName = getClassName([
+            nextButtonsConfig.nextButtonConfig.className,
+            `ml-${paginatorInternalNavButtonSizeToMarginSizeMap.get(size) ?? 2}`,
+        ]);
+
         return (
             <ul className="pagination-list">
                 <Button
@@ -53,10 +73,13 @@ const PaginatorNavButtons: FC<PaginatorNavButtonsProps> = ({
                     onClick={goBack}
                     rounded={rounded}
                     disabled={!canGoBack}
+                    className={backButtonClassName}
                 />
 
                 <PaginatorInternalNavButtons
+                    size={size}
                     count={count}
+                    rounded={rounded}
                     resources={resources}
                     pageChange={pageChange}
                     pageNumbers={pageNumbers}
@@ -71,6 +94,7 @@ const PaginatorNavButtons: FC<PaginatorNavButtonsProps> = ({
                     rounded={rounded}
                     onClick={goForward}
                     disabled={!canGoForward}
+                    className={beforeButtonClassName}
                 />
             </ul>
         );
@@ -81,6 +105,7 @@ const PaginatorNavButtons: FC<PaginatorNavButtonsProps> = ({
             <PaginatorInternalNavButtons
                 size={size}
                 count={count}
+                rounded={rounded}
                 resources={resources}
                 pageChange={pageChange}
                 pageNumbers={pageNumbers}
@@ -93,12 +118,14 @@ const PaginatorNavButtons: FC<PaginatorNavButtonsProps> = ({
 export default PaginatorNavButtons;
 
 /** Props for {@link PaginatorInternalNavButtons} */
-type PaginatorInternalNavButtonsProps = Pick<
-    PaginatorNavButtonsProps,
-    | "currentPage" | "count" | "resources"
-    | "pageNumbers" | "pageChange" | "pageButtonsConfig"
-    | "size" | "rounded"
->;
+type PaginatorInternalNavButtonsProps =
+    & Pick<
+        PaginatorNavButtonsProps,
+        | "currentPage" | "count" | "resources"
+        | "pageNumbers" | "pageChange" | "pageButtonsConfig"
+        | "rounded"
+    >
+    & Required<Pick<PaginatorProps, "size">>;
 
 // Internal reusable component
 // eslint-disable-next-line react/no-multi-comp
@@ -114,6 +141,7 @@ const PaginatorInternalNavButtons: FC<PaginatorInternalNavButtonsProps> = ({
                         <PaginatorInternalNavButton
                             page={1}
                             size={size}
+                            isBeforeEllipsis
                             rounded={rounded}
                             onClick={pageChange}
                             resources={resources}
@@ -130,8 +158,10 @@ const PaginatorInternalNavButtons: FC<PaginatorInternalNavButtonsProps> = ({
                 </>
             }
 
-            {pageNumbers.map(x =>
-                <li key={x}>
+            {pageNumbers.map((x, i) =>
+                <li
+                    key={x}
+                >
                     <PaginatorInternalNavButton
                         page={x}
                         size={size}
@@ -140,6 +170,7 @@ const PaginatorInternalNavButtons: FC<PaginatorInternalNavButtonsProps> = ({
                         resources={resources}
                         isCurrentPage={currentPage === x}
                         pageButtonsConfig={pageButtonsConfig}
+                        isBeforeEllipsis={i === pageNumbers.length - 1}
                         className={`pagination-link${currentPage === x ? " is-current" : ""}`}
                     />
                 </li>
@@ -156,6 +187,7 @@ const PaginatorInternalNavButtons: FC<PaginatorInternalNavButtonsProps> = ({
                         <PaginatorInternalNavButton
                             size={size}
                             page={count}
+                            isBeforeEllipsis
                             rounded={rounded}
                             onClick={pageChange}
                             resources={resources}
@@ -168,5 +200,3 @@ const PaginatorInternalNavButtons: FC<PaginatorInternalNavButtonsProps> = ({
         </>
     );
 };
-
-

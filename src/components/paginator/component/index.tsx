@@ -84,6 +84,7 @@ const Paginator: FC<PaginatorProps> = ({
             <PaginatorNextButtons
                 size={size}
                 goBack={goBack}
+                rounded={rounded}
                 goForward={goForward}
                 canGoBack={canGoBack}
                 resources={resources}
@@ -98,6 +99,7 @@ const Paginator: FC<PaginatorProps> = ({
                 size={size}
                 count={count}
                 goBack={goBack}
+                rounded={rounded}
                 goForward={goForward}
                 resources={resources}
                 canGoBack={canGoBack}

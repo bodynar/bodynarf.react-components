@@ -101,10 +101,21 @@ export type PaginatorProps = BaseElementProps & {
     };
 
     /**
-     * Configuration for page buttons (with page numbers).
-     * If set page number buttons will be rendered as `Button` components with full styling support.
+     * Configuration for page number buttons.
+     * If set, page numbers will be rendered as `Button` components instead of plain links.
+     * @example
+     * pageButtonsConfig={{
+     *   default: { style: ButtonStyle.Light },
+     *   active: { style: ButtonStyle.Primary },
+     * }}
      */
-    pageButtonsConfig?: PaginatorDirectionStepButtonConfig;
+    pageButtonsConfig?: {
+        /** Configuration for non-active page buttons */
+        default: PaginatorDirectionStepButtonConfig;
+
+        /** Configuration for the current (active) page button */
+        active: PaginatorDirectionStepButtonConfig;
+    };
 
     /** Page change handler */
     onPageChange: (page: number) => void;
