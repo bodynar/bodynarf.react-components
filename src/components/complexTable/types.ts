@@ -118,10 +118,10 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
         /**
          * Selected items change handler.
          * Called when the set of selected rows changes
-         * Must be passed from the hook {@link useComplexTable} to work correctly.
+         * Must be passed from the hook {@link useComplexTable} to work correctly when row selection is enabled.
          * @param selectedIds Selected item identifiers
          */
-        onSelectionChange: (selectedIds: Array<string>) => void;
+        onSelectionChange?: (selectedIds: Array<string>) => void;
 
         /**
          * Table row click handler
