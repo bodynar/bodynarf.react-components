@@ -4,7 +4,7 @@ import { ButtonProps } from "@bbr/components/button";
 /** Configuration for the next buttons */
 export type PaginatorDirectionStepButtonConfig = Omit<
     ButtonProps,
-    | "onClick" | "disabled" | "size"
+    | "onClick" | "disabled" | "size" | "rounded" | "caption"
 >;
 
 /** Props for {@link Paginator} component */
@@ -30,10 +30,10 @@ export type PaginatorProps = BaseElementProps & {
     /** Configuration for next buttons */
     nextButtonsConfig?: {
         /** Configuration for the previous button */
-        previousButtonConfig: PaginatorDirectionStepButtonConfig;
+        previousButtonConfig: PaginatorDirectionStepButtonConfig & Pick<ButtonProps, "caption">;
 
         /** Configuration for the next button */
-        nextButtonConfig: PaginatorDirectionStepButtonConfig;
+        nextButtonConfig: PaginatorDirectionStepButtonConfig & Pick<ButtonProps, "caption">;
 
         /** Buttons placement relative to page numbers: beside pages or at outer edges */
         style: "inline" | "aside";

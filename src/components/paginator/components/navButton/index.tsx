@@ -1,6 +1,6 @@
 import { FC, MouseEventHandler } from "react";
 
-import { isNotNullish } from "@bodynarf/utils";
+import { getClassName, isNotNullish } from "@bodynarf/utils";
 import { PaginatorProps } from "@bbr/components/paginator";
 import Button from "@bbr/components/button";
 
@@ -30,6 +30,11 @@ export const PaginatorInternalNavButton: FC<PaginatorInternalNavButtonProps> = (
     pageButtonsConfig, size, resources, rounded,
 }) => {
     if (isNotNullish(pageButtonsConfig)) {
+        const buttonClassName = getClassName([
+            pageButtonsConfig.className,
+            className,
+        ]);
+
         return (
             <Button
                 {...pageButtonsConfig}
@@ -39,6 +44,7 @@ export const PaginatorInternalNavButton: FC<PaginatorInternalNavButtonProps> = (
                 rounded={rounded}
                 onClick={onClick}
                 caption={String(page)}
+                className={buttonClassName}
                 title={isCurrentPage ? undefined : resources?.openConcretePageTitleTemplate?.format(page)}
             />
         );

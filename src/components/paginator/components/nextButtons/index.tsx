@@ -1,6 +1,6 @@
 import { MouseEvent, FC } from "react";
 
-import { ActionFn, isNotNullish } from "@bodynarf/utils";
+import { ActionFn, getClassName, isNotNullish } from "@bodynarf/utils";
 
 import Button from "@bbr/components/button";
 
@@ -46,6 +46,16 @@ const PaginatorNextButtons: FC<PaginatorNextButtonsProps> = ({
     }
 
     if (shouldBeVisibleByButtons) {
+        const previousClassName = getClassName([
+            nextButtonsConfig.previousButtonConfig.className,
+            "pagination-previous"
+        ]);
+
+        const nextClassName = getClassName([
+            nextButtonsConfig.nextButtonConfig.className,
+            "pagination-next"
+        ]);
+
         return (
             <>
                 <Button
@@ -55,6 +65,7 @@ const PaginatorNextButtons: FC<PaginatorNextButtonsProps> = ({
                     onClick={goBack}
                     rounded={rounded}
                     disabled={!canGoBack}
+                    className={previousClassName}
                 />
                 <Button
                     {...nextButtonsConfig.nextButtonConfig}
@@ -63,6 +74,7 @@ const PaginatorNextButtons: FC<PaginatorNextButtonsProps> = ({
                     rounded={rounded}
                     onClick={goForward}
                     disabled={!canGoForward}
+                    className={nextClassName}
                 />
             </>
         );

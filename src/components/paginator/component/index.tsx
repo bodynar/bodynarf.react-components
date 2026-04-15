@@ -18,7 +18,7 @@ const Paginator: FC<PaginatorProps> = ({
     position = ElementPosition.Left, size = ElementSize.Normal,
     rounded = false,
     nearPagesCount = 3, resources,
-    showNextButtons = false, nextButtonsConfig,
+    showNextButtons = false, nextButtonsConfig, pageButtonsConfig,
 
     className, title, data,
 }) => {
@@ -105,6 +105,7 @@ const Paginator: FC<PaginatorProps> = ({
                 pageNumbers={pageNumbers}
                 currentPage={currentPage}
                 canGoForward={canGoForward}
+                pageButtonsConfig={pageButtonsConfig}
                 nextButtonsConfig={nextButtonsConfig}
             />
         </nav>

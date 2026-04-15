@@ -111,15 +111,16 @@ const PaginatorInternalNavButtons: FC<PaginatorInternalNavButtonsProps> = ({
             {currentPage !== 1 && !pageNumbers.includes(1) &&
                 <>
                     <li>
-                        <a
-                            data-page={1}
+                        <PaginatorInternalNavButton
+                            page={1}
+                            size={size}
+                            rounded={rounded}
                             onClick={pageChange}
-                            className="pagination-link"
-                            title={resources?.openConcretePageTitleTemplate?.format(1)}
-                            aria-label={resources?.openConcretePageTitleTemplate?.format(1)}
-                        >
-                            1
-                        </a>
+                            resources={resources}
+                            isCurrentPage={currentPage === 1}
+                            pageButtonsConfig={pageButtonsConfig}
+                            className={`pagination-link${currentPage === 1 ? " is-current" : ""}`}
+                        />
                     </li>
                     <li>
                         <span className="pagination-ellipsis">
