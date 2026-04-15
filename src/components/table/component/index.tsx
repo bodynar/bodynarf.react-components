@@ -54,8 +54,13 @@ const Table = forwardRef<HTMLTableElement, TableProps>(({
         [children],
     );
 
-    const allSelected = selectable && rowKeys.length > 0 && selectedRows.length === rowKeys.length;
-    const someSelected = selectable && selectedRows.length > 0 && !allSelected;
+    const selectedCurrentRowKeys = useMemo(
+        () => rowKeys.filter(key => selectedRows.includes(key)),
+        [rowKeys, selectedRows],
+    );
+
+    const allSelected = selectable && rowKeys.length > 0 && selectedCurrentRowKeys.length === rowKeys.length;
+    const someSelected = selectable && selectedCurrentRowKeys.length > 0 && !allSelected;
 
     const onSelectAllChange = useCallback(
         () => {
@@ -64,12 +69,15 @@ const Table = forwardRef<HTMLTableElement, TableProps>(({
             }
 
             if (allSelected) {
-                onSelectedRowsChange([]);
+                onSelectedRowsChange(selectedRows.filter(key => !rowKeys.includes(key)));
             } else {
-                onSelectedRowsChange([...rowKeys]);
+                onSelectedRowsChange([
+                    ...selectedRows,
+                    ...rowKeys.filter(key => !selectedRows.includes(key)),
+                ]);
             }
         },
-        [allSelected, rowKeys, onSelectedRowsChange],
+        [allSelected, rowKeys, selectedRows, onSelectedRowsChange],
     );
 
     const onRowSelectChange = useCallback(
