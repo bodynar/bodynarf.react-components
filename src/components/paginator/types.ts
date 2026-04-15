@@ -2,12 +2,12 @@ import { BaseElementProps, ElementPosition, ElementSize } from "@bbr/types";
 import { ButtonProps } from "@bbr/components/button";
 
 /** Configuration for the next buttons */
-export type NextButtonConfig = Omit<
+export type PaginatorDirectionStepButtonConfig = Omit<
     ButtonProps,
-    | "onClick"
-    | "disabled"
+    | "onClick" | "disabled" | "size"
 >;
 
+/** Props for {@link Paginator} component */
 export type PaginatorProps = BaseElementProps & {
     /** Amount of pages */
     count: number;
@@ -30,13 +30,15 @@ export type PaginatorProps = BaseElementProps & {
     /** Configuration for next buttons */
     nextButtonsConfig?: {
         /** Configuration for the previous button */
-        previousButtonConfig: NextButtonConfig;
+        previousButtonConfig: PaginatorDirectionStepButtonConfig;
 
         /** Configuration for the next button */
-        nextButtonConfig: NextButtonConfig;
+        nextButtonConfig: PaginatorDirectionStepButtonConfig;
+
+        /** Buttons placement relative to page numbers: beside pages or at outer edges */
+        style: "inline" | "aside";
     };
 
-    /** Display "Previous" \ "Next" buttons */
     /**
      * Display "Previous" \ "Next" buttons.
      * @deprecated Use `nextButtonsConfig` prop instead
@@ -97,6 +99,12 @@ export type PaginatorProps = BaseElementProps & {
          */
         openConcretePageTitleTemplate?: string;
     };
+
+    /**
+     * Configuration for page buttons (with page numbers).
+     * If set page number buttons will be rendered as `Button` components with full styling support.
+     */
+    pageButtonsConfig?: PaginatorDirectionStepButtonConfig;
 
     /** Page change handler */
     onPageChange: (page: number) => void;
