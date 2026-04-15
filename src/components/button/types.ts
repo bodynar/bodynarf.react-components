@@ -12,7 +12,7 @@ export type ButtonProps =
 
         /**
          * Type of button (color)
-         * @deprecated Use `style` prop instead
+         * @deprecated [Will be removed in v1.15] Use `style` prop instead
          */
         type?: ButtonType;
 
@@ -43,7 +43,7 @@ export type ButtonProps =
 
 /**
  * Button types according to Bulma framework
- * @deprecated Use `ButtonStyle` enum
+ * @deprecated [Will be removed in v1.15] Use `ButtonStyle` enum
  */
 export type ButtonType =
     | "default" /** color: transparent */
