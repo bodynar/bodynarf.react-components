@@ -6,7 +6,7 @@
  * @returns Array of page numbers to display
  */
 export const generatePageNumbers = (page: number, count: number, size: number): Array<number> => {
-    if (page < 0 || count <= 0 || page > count) {
+    if (page <= 0 || count <= 0 || page > count || size < 0) {
         return [];
     }
 
