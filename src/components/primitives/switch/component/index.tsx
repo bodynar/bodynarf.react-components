@@ -53,11 +53,12 @@ const Switch: FC<SwitchProps> = ({
                 }}
             >
                 <input
+                    {...dataAttributes}
+
                     id={name}
                     name={name}
                     type="checkbox"
                     disabled={disabled}
-                    {...dataAttributes}
                     onChange={onChecked}
                     className={elClassName}
                     defaultChecked={defaultValue}
@@ -86,18 +87,20 @@ const Switch: FC<SwitchProps> = ({
             className="bbr-field bbr-input field mr-2"
         >
             <input
+                {...dataAttributes}
+
                 id={name}
                 name={name}
                 type="checkbox"
                 disabled={disabled}
-                {...dataAttributes}
                 onChange={onChecked}
                 className={elClassName}
                 defaultChecked={defaultValue}
             />
             <label
-                htmlFor={name}
                 {...labelDataAttributes}
+
+                htmlFor={name}
                 className={labelClassName}
                 title={isEmptyLabel ? title : label?.title}
             >

@@ -77,8 +77,9 @@ const Stepper: FC<StepperProps> = ({
 
     return (
         <div
-            title={title}
             {...dataAttributes}
+
+            title={title}
             className={containerClassName}
         >
             {steps.map((step, index) => {

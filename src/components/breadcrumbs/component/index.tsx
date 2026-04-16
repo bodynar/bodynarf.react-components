@@ -39,8 +39,9 @@ const BreadCrumbs: FC<BreadcrumbsProps> = ({
 
     return (
         <nav
-            title={title}
             {...dataAttributes}
+
+            title={title}
             className={elClassName}
             aria-label="breadcrumbs"
         >

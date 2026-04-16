@@ -71,8 +71,9 @@ const Tabs: FC<TabsProps> = ({
 
     return (
         <nav
-            title={title}
             {...dataAttributes}
+
+            title={title}
             onClick={onTabsClick}
             className={elClassName}
         >

@@ -50,6 +50,7 @@ const Accordion: FC<AccordionProps> = ({
     return (
         <article
             {...dataAttributes}
+
             className={elClassName}
             aria-expanded={isExpanded}
         >

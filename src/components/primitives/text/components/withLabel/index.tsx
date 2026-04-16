@@ -55,6 +55,8 @@ const TextWithLabel: FC<TextWithLabelProps> = ({
         >
             <div className={inputContainerClassName}>
                 <input
+                    {...dataAttributes}
+
                     id={name}
                     type="text"
                     name={name}
@@ -64,7 +66,6 @@ const TextWithLabel: FC<TextWithLabelProps> = ({
                     readOnly={readonly}
                     disabled={disabled}
                     onChange={onChange}
-                    {...dataAttributes}
                     onKeyDown={onKeyDown}
                     autoFocus={autoFocus}
                     className={elClassName}
