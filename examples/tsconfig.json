@@ -24,8 +24,7 @@
         "paths": {
             "@bodynarf/react.components": ["../dist"],
             "@bodynarf/react.components/*": ["../dist/*"]
-        },
-        "typeRoots": ["../node_modules/@types", "../node_modules"]
+        }
     },
     "include": ["src", "src/vite-env.d.ts"]
 }
