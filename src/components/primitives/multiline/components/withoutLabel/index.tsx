@@ -62,6 +62,7 @@ const MultilineWithoutLabel: FC<MultilineProps> = ({
                     disabled={disabled}
                     onChange={onChange}
                     readOnly={readonly}
+
                     autoFocus={autoFocus}
                     onKeyDown={onKeyDown}
                     className={elClassName}

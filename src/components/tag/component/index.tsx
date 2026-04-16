@@ -43,7 +43,6 @@ const Tag: FC<TagProps> = ({
             title={title}
             onClick={onClick}
             className={elClassName}
-
             style={isNullish(customColor)
                 ? undefined
                 : {

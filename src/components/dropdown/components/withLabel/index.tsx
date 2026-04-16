@@ -7,19 +7,19 @@ import { DropdownProps } from "../..";
 import DropdownCompact from "../compact";
 
 /** Dropdown component with label */
-const DropdownWithLabel: FC<BaseInputWithLabel<DropdownProps>> = (props) => {
+const DropdownWithLabel: FC<BaseInputWithLabel<DropdownProps>> = ({ label, ...props }) => {
     const id = useId();
 
     return (
         <LabelWrapper
             id={id}
-            // eslint-disable-next-line react/destructuring-assignment
-            label={props.label}
+            label={label}
             size={ElementSize.Normal}
         >
             <DropdownCompact
-                id={id}
                 {...props}
+
+                id={id}
             />
         </LabelWrapper>
     );

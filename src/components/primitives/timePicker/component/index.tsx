@@ -86,71 +86,71 @@ const TimePicker: FC<
     data,
     hint,
 }) => {
-    const elClassName = useMemo(() => getClassName([
-        className,
-        getSizeClassName(size, ElementSize.Normal),
-        getStyleClassName(style, validationState),
-        rounded === true ? "is-rounded" : "",
-        "input",
-        "bbr-time-picker",
-    ]), [className, size, style, validationState, rounded]);
+        const elClassName = useMemo(() => getClassName([
+            className,
+            getSizeClassName(size, ElementSize.Normal),
+            getStyleClassName(style, validationState),
+            rounded === true ? "is-rounded" : "",
+            "input",
+            "bbr-time-picker",
+        ]), [className, size, style, validationState, rounded]);
 
-    const inputContainerClassName = useMemo(() => getClassName([
-        "control",
-        loading === true ? "is-loading" : "",
-    ]), [loading]);
+        const inputContainerClassName = useMemo(() => getClassName([
+            "control",
+            loading === true ? "is-loading" : "",
+        ]), [loading]);
 
-    const stringifiedDefValue = useMemo(
-        () => formatTimeValue(defaultValue, showSeconds),
-        [defaultValue, showSeconds]
-    );
+        const stringifiedDefValue = useMemo(
+            () => formatTimeValue(defaultValue, showSeconds),
+            [defaultValue, showSeconds]
+        );
 
-    const onChange = useCallback(
-        (event: ChangeEvent<HTMLInputElement>) => {
-            const parsed = parseTimeString(event.target.value, showSeconds);
+        const onChange = useCallback(
+            (event: ChangeEvent<HTMLInputElement>) => {
+                const parsed = parseTimeString(event.target.value, showSeconds);
 
-            onValueChange(parsed);
-        },
-        [onValueChange, showSeconds]
-    );
+                onValueChange(parsed);
+            },
+            [onValueChange, showSeconds]
+        );
 
-    const dataAttributes = mapDataAttributes(data);
+        const dataAttributes = mapDataAttributes(data);
 
-    return (
-        <ComponentWithLabel
-            id={name}
-            size={size}
-            label={label}
-        >
-            <div className={inputContainerClassName}>
-                <input
-                    id={name}
+        return (
+            <ComponentWithLabel
+                id={name}
+                size={size}
+                label={label}
+            >
+                <div className={inputContainerClassName}>
+                    <input
+                        {...dataAttributes}
 
-                    min={min}
-                    max={max}
-                    type="time"
-                    name={name}
-                    title={title}
-                    onBlur={onBlur}
-                    onKeyUp={onKeyUp}
-                    {...dataAttributes}
-                    onChange={onChange}
-                    readOnly={readonly}
-                    disabled={disabled}
-                    onKeyDown={onKeyDown}
-                    autoFocus={autoFocus}
-                    className={elClassName}
-                    placeholder={placeholder}
-                    defaultValue={stringifiedDefValue}
-                    step={showSeconds === true ? step : step * 60}
+                        id={name}
+                        min={min}
+                        max={max}
+                        type="time"
+                        name={name}
+                        title={title}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                        onChange={onChange}
+                        readOnly={readonly}
+                        disabled={disabled}
+                        onKeyDown={onKeyDown}
+                        autoFocus={autoFocus}
+                        className={elClassName}
+                        placeholder={placeholder}
+                        defaultValue={stringifiedDefValue}
+                        step={showSeconds === true ? step : step * 60}
+                    />
+                </div>
+                <InternalHint
+                    hint={hint}
+                    validationState={validationState}
                 />
-            </div>
-            <InternalHint
-                hint={hint}
-                validationState={validationState}
-            />
-        </ComponentWithLabel>
-    );
-};
+            </ComponentWithLabel>
+        );
+    };
 
 export default TimePicker;

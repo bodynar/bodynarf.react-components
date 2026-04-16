@@ -82,6 +82,8 @@ const FileUpload: FC<FileUploadProps> = ({
             }
             <label className="file-label">
                 <input
+                    {...dataAttributes}
+
                     id={name}
                     type="file"
                     name={name}
@@ -90,7 +92,6 @@ const FileUpload: FC<FileUploadProps> = ({
                     accept={accept}
                     disabled={disabled}
                     onChange={onChange}
-                    {...dataAttributes}
                     className="file-input"
                     placeholder={placeholder}
                 />

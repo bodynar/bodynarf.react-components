@@ -57,6 +57,8 @@ const MultilineWithLabel: FC<
             >
                 <div className={inputContainerClassName}>
                     <textarea
+                        {...dataAttributes}
+
                         id={name}
                         name={name}
                         rows={rows}
@@ -66,7 +68,6 @@ const MultilineWithLabel: FC<
                         disabled={disabled}
                         onChange={onChange}
                         readOnly={readonly}
-                        {...dataAttributes}
                         autoFocus={autoFocus}
                         onKeyDown={onKeyDown}
                         className={elClassName}

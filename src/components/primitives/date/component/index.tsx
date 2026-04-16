@@ -65,6 +65,8 @@ const DatePicker: FC<
             >
                 <div className={inputContainerClassName}>
                     <input
+                        {...dataAttributes}
+
                         id={name}
                         type="date"
                         name={name}
@@ -74,7 +76,6 @@ const DatePicker: FC<
                         readOnly={readonly}
                         disabled={disabled}
                         onChange={onChange}
-                        {...dataAttributes}
                         onKeyDown={onKeyDown}
                         autoFocus={autoFocus}
                         className={elClassName}

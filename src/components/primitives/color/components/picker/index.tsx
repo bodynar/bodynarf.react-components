@@ -64,9 +64,10 @@ const ColorPickerControl: FC<ColorPickerControlProps> = ({
         <>
             <div className="control bbr-input">
                 <input
+                    {...data}
+
                     id={id}
                     name={id}
-                    {...data}
                     type="color"
                     title={title}
                     disabled={disabled}
@@ -122,12 +123,13 @@ const PickerWithPreview: FC<
                 <div className="is-flex is-flex-direction-row is-flex-wrap-nowrap is-justify-content-start">
                     <div className={controlContainerClassName}>
                         <input
+                            {...dataAttributes}
+
                             id={id}
                             name={id}
                             type="color"
                             title={title}
                             disabled={disabled}
-                            {...dataAttributes}
                             autoFocus={autoFocus}
                             onChange={onValueChange}
                             defaultValue={defaultValue}
@@ -166,12 +168,13 @@ const PickerWithPreview: FC<
                 </button>
                 <div className={controlContainerClassName}>
                     <input
+                        {...dataAttributes}
+
                         id={id}
                         name={id}
                         type="color"
                         title={title}
                         disabled={disabled}
-                        {...dataAttributes}
                         autoFocus={autoFocus}
                         onChange={onValueChange}
                         defaultValue={defaultValue}
