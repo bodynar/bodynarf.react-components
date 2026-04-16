@@ -54,6 +54,9 @@ export * from "./timeline";
 export { default as Progress } from "./progress";
 export * from "./progress";
 
+export { default as Toast } from "./toast";
+export * from "./toast";
+
 // Primitives
 export { default as Checkbox } from "./primitives/checkbox";
 export * from "./primitives/checkbox";

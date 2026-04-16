@@ -1,0 +1,17 @@
+.bbr-toast {
+    &__container {
+        position: fixed;
+        top: 1.5rem;
+        z-index: 9999;
+        min-width: 280px;
+        max-width: 420px;
+
+        &--right {
+            right: 1.5rem;
+        }
+
+        &--left {
+            left: 1.5rem;
+        }
+    }
+}

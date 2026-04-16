@@ -8,6 +8,13 @@ All changes will be published here in reverse chronological order
   - `Card.Header` extends `ClickableElement` — accepts `onClick`, which automatically applies `is-clickable` class.
   - All sub-components and the root `Card` accept `className`, `title` and `data` props from `BaseElementProps`.
 
+- **Toast** *(new)*
+  - Inline or fixed-position notification component based on Bulma `notification`.
+  - Supports all `ElementColor` variants via `color` prop.
+  - Optional close button (shown by default) with `onClose` callback.
+  - `fixed` prop renders the toast in a fixed overlay at the top of the viewport.
+  - `position` prop (`ElementFloatPosition.Left` / `Right`) controls horizontal placement in fixed mode.
+
 ## v1.14.7
 - **Paginator**
   - Added `nextButtonsConfig` prop (`{ previousButtonConfig, nextButtonConfig, style }`) to render Previous/Next navigation as `Button` components with full styling support (`style`, `caption`, `rounded`, `outlined`, `icon`, etc.).
