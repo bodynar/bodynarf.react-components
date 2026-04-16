@@ -39,12 +39,13 @@ Simple react components based on html elements.
 #### Components
  - **Anchor** - simple anchor (link) component
  - **Button** - button that allows user to interact with system by clicking it _(assume everyone knows what is button)_
+ - **SplitButton** - button with a primary action and a dropdown of alternative actions
  - **File** - file upload component with customizable placeholder, file type filtering and boxed style option
  - **Icon** - *see p.4 of installation*
  - **Progress** - progress bar component with percentage display, indeterminate state and animation
  - **Tag** - small component stands for tag visualization
  - **BreadCrumbs** - speaks for it self
- - **Table** - table with sortable headers
+ - **Table** - table with sortable headers and multi-row selection
 
 ### Complex components
 Complex components is set of components built via combining simple components or represent complex logical component
@@ -52,6 +53,7 @@ Complex components is set of components built via combining simple components or
  - **Dropdown** - Custom dropdown component, based on html div elements & css (requires icon, see icon component description)
  - **ModalWrapper** - Modal window component with customizable header, body and action buttons
  - **Multiselect** - Dropdown with option to select several records
+ - **ComplexTable** - table with built-in pagination, search, sorting, and multi-row selection
  - **Paginator** - Pagination elements to navigate through paged list
 
 	Example:
@@ -65,6 +67,15 @@ Complex components is set of components built via combining simple components or
 			count={pagesCount}
 			currentPage={currentPage}
 			onPageChange={onPageChange}
+			pageButtonsConfig={{
+				default: { style: ButtonStyle.Light },
+				active: { style: ButtonStyle.Primary },
+			}}
+			nextButtonsConfig={{
+				style: "inline",
+				previousButtonConfig: { style: ButtonStyle.Dark, caption: "Back" },
+				nextButtonConfig: { style: ButtonStyle.Primary, caption: "Forward" },
+			}}
 		/>
 	```
  - **Search** - Search bar with optional button to perform search

@@ -58,13 +58,14 @@ const PasswordWithoutLabel: FC<PasswordProps> = ({
         >
             <div className={containerClassName}>
                 <input
+                    {...dataAttributes}
+
                     id={name}
                     name={name}
                     title={title}
                     onKeyUp={onKeyUp}
                     disabled={disabled}
                     onChange={onChange}
-                    {...dataAttributes}
                     onKeyDown={onKeyDown}
                     autoFocus={autoFocus}
                     className={elClassName}

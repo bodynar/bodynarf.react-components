@@ -6,31 +6,34 @@ import { getPositionClassName, getSizeClassName, mapDataAttributes } from "@bbr/
 import { ElementPosition, ElementSize } from "@bbr/types";
 
 import { PaginatorProps } from "../..";
+import { generatePageNumbers } from "../utils";
+import PaginatorNextButtons from "../components/nextButtons";
+import PaginatorNavButtons from "../components/navButtons";
 
 /**
  * Paginator component.
  * Used for visualization of paging configuration
 */
 const Paginator: FC<PaginatorProps> = ({
-    count, onPageChange, currentPage = 0,
+    count, onPageChange, currentPage = 1,
     position = ElementPosition.Left, size = ElementSize.Normal,
-    rounded = false, showNextButtons = false,
+    rounded = false,
     nearPagesCount = 3, resources,
+    showNextButtons = false, nextButtonsConfig, pageButtonsConfig,
 
     className, title, data,
 }) => {
-    if (currentPage > count) {
-        throw new Error(`Current page "${currentPage}" must be less than amount of pages "${count}"`);
-    }
-
     const pageNumbers = useMemo(() => generatePageNumbers(currentPage, count, nearPagesCount), [currentPage, count, nearPagesCount]);
 
     const canGoBack = useMemo(() => currentPage > 1, [currentPage]);
     const canGoForward = useMemo(() => currentPage < count, [currentPage, count]);
 
+    const goBack = useCallback(() => onPageChange(currentPage - 1), [currentPage, onPageChange]);
+    const goForward = useCallback(() => onPageChange(currentPage + 1), [currentPage, onPageChange]);
+
     const pageChange = useCallback(
         (event: MouseEvent<HTMLElement>) => {
-            const target = event.target as HTMLElement;
+            const target = event.currentTarget;
 
             const pageRaw = target.dataset["page"];
 
@@ -38,12 +41,31 @@ const Paginator: FC<PaginatorProps> = ({
                 return;
             }
 
-            const page = +(pageRaw);
+            const pageNumber = Number.parseInt(pageRaw);
 
-            if (page !== currentPage && page > 0 && page <= count) {
-                onPageChange(page);
+            if (isNaN(pageNumber)) {
+                return;
             }
+
+            if (pageNumber === currentPage || pageNumber <= 0 || pageNumber > count) {
+                return;
+            }
+
+            onPageChange(pageNumber);
         }, [onPageChange, currentPage, count]);
+
+    if (currentPage <= 0) {
+        console.error(`[Paginator] currentPage (${currentPage}) must be >= 1`);
+        return null;
+    }
+
+    if (currentPage > count) {
+        if (count > 0) {
+            console.error(`[Paginator] currentPage (${currentPage}) is greater than count (${count})`);
+        }
+
+        return null;
+    }
 
     if (pageNumbers.length <= 1) {
         return null;
@@ -62,109 +84,44 @@ const Paginator: FC<PaginatorProps> = ({
 
     return (
         <nav
+            {...dataAttributes}
+
             title={title}
             role="navigation"
-            {...dataAttributes}
             className={classNames}
             aria-label="pagination"
         >
-            {!!showNextButtons &&
-                <>
-                    <a
-                        onClick={pageChange}
-                        data-page={currentPage - 1}
-                        title={canGoBack ? resources?.previousPageTitle : undefined}
-                        className={`pagination-previous${canGoBack ? "" : " is-disabled"}`}
-                    >
-                        {resources?.previousPageCaption ?? "Previous"}
-                    </a>
-                    <a
-                        onClick={pageChange}
-                        data-page={currentPage + 1}
-                        title={canGoForward ? resources?.nextPageTitle : undefined}
-                        className={`pagination-next${canGoForward ? "" : " is-disabled"}`}
-                    >
-                        {resources?.nextPageCaption ?? "Next page"}
-                    </a>
-                </>
-            }
-            <ul className="pagination-list">
-                {currentPage !== 1 && !pageNumbers.includes(1) &&
-                    <>
-                        <li>
-                            <a
-                                data-page={1}
-                                onClick={pageChange}
-                                className="pagination-link"
-                                title={resources?.openConcretePageTitleTemplate?.format(1)}
-                                aria-label={resources?.openConcretePageTitleTemplate?.format(1)}
-                            >
-                                1
-                            </a>
-                        </li>
-                        <li>
-                            <span className="pagination-ellipsis">
-                                &hellip;
-                            </span>
-                        </li>
-                    </>
-                }
-                {pageNumbers.map(x =>
-                    <li key={x}>
-                        <a
-                            data-page={x}
-                            onClick={pageChange}
-                            aria-label={resources?.openConcretePageTitleTemplate?.format(x)}
-                            className={`pagination-link${currentPage === x ? " is-current" : ""}`}
-                            title={currentPage === x ? undefined : resources?.openConcretePageTitleTemplate?.format(x)}
-                        >
-                            {x}
-                        </a>
-                    </li>
-                )}
-                {currentPage != count && !pageNumbers.includes(count) &&
-                    <>
-                        <li>
-                            <span className="pagination-ellipsis">
-                                &hellip;
-                            </span>
-                        </li>
-                        <li>
-                            <a
-                                data-page={count}
-                                onClick={pageChange}
-                                className="pagination-link"
-                                title={resources?.openConcretePageTitleTemplate?.format(count)}
-                                aria-label={resources?.openConcretePageTitleTemplate?.format(count)}
-                            >
-                                {count}
-                            </a>
-                        </li>
-                    </>
-                }
-            </ul>
+            <PaginatorNextButtons
+                size={size}
+                goBack={goBack}
+                rounded={rounded}
+                goForward={goForward}
+                canGoBack={canGoBack}
+                resources={resources}
+                pageChange={pageChange}
+                currentPage={currentPage}
+                canGoForward={canGoForward}
+                showNextButtons={showNextButtons}
+                nextButtonsConfig={nextButtonsConfig}
+            />
+
+            <PaginatorNavButtons
+                size={size}
+                count={count}
+                goBack={goBack}
+                rounded={rounded}
+                goForward={goForward}
+                resources={resources}
+                canGoBack={canGoBack}
+                pageChange={pageChange}
+                pageNumbers={pageNumbers}
+                currentPage={currentPage}
+                canGoForward={canGoForward}
+                pageButtonsConfig={pageButtonsConfig}
+                nextButtonsConfig={nextButtonsConfig}
+            />
         </nav>
     );
 };
 
 export default Paginator;
-
-/**
- * Get nearest numbers from each side (left & right)
- * @param page Number of current page
- * @param count Amount of pages
- * @param size Amount of pages from left & right to current page
- * @throws Current page is greater than pages amount
- * @returns Array of nearest numbers to current page
- */
-const generatePageNumbers = (page: number, count: number, size: number): Array<number> => {
-    if (page < 0 || count <= 0 || page > count) {
-        return [];
-    }
-
-    return [
-        ...new Array(size).fill(page).map((_, i) => page - i - 1).filter(x => x > 0 && x < page).reverse(),
-        page,
-        ...new Array(size).fill(page).map((_, i) => page + i + 1).filter(x => x > 0 && x > page && x <= count)
-    ];
-};

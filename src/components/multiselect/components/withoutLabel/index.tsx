@@ -149,9 +149,10 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
             <div
                 key={id}
 
+                {...dataAttributes}
+
                 title={title}
                 ref={containerRef}
-                {...dataAttributes}
                 data-dropdown-id={id}
                 className={classNames}
             >

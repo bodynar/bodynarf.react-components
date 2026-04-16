@@ -7,6 +7,9 @@ export * from "./breadcrumbs";
 export { default as Button } from "./button";
 export * from "./button";
 
+export { default as SplitButton } from "./splitButton";
+export * from "./splitButton";
+
 export { default as Dropdown } from "./dropdown";
 export * from "./dropdown";
 
@@ -80,3 +83,6 @@ export * from "./primitives/text";
 
 export { default as TimePicker } from "./primitives/timePicker";
 export * from "./primitives/timePicker";
+
+export { default as ComplexTable } from "./complexTable";
+export * from "./complexTable";

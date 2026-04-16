@@ -63,6 +63,7 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
     return (
         <div
             {...dataAttributes}
+
             className={elClassName}
         >
             <div

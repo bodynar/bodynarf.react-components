@@ -38,11 +38,11 @@ const Tag: FC<TagProps> = ({
 
     return (
         <span
+            {...dataAttributes}
+
             title={title}
             onClick={onClick}
-            {...dataAttributes}
             className={elClassName}
-
             style={isNullish(customColor)
                 ? undefined
                 : {

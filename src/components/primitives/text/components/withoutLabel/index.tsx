@@ -50,6 +50,8 @@ const TextWithoutLabel: FC<TextProps> = ({
         >
             <div className={containerClassName}>
                 <input
+                    {...dataAttributes}
+
                     id={name}
                     type="text"
                     name={name}
@@ -59,7 +61,6 @@ const TextWithoutLabel: FC<TextProps> = ({
                     readOnly={readonly}
                     disabled={disabled}
                     onChange={onChange}
-                    {...dataAttributes}
                     onKeyDown={onKeyDown}
                     autoFocus={autoFocus}
                     className={elClassName}

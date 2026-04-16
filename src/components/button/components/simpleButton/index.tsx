@@ -16,11 +16,12 @@ const SimpleButton: FC<SimpleButtonProps> = ({
 
     return (
         <button
+            {...dataAttributes}
+
             type="button"
             title={title}
             onClick={onClick}
             disabled={disabled}
-            {...dataAttributes}
             className={className}
         >
             {caption}

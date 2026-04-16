@@ -1,6 +1,61 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.14.7
+- **Paginator**
+  - Added `nextButtonsConfig` prop (`{ previousButtonConfig, nextButtonConfig, style }`) to render Previous/Next navigation as `Button` components with full styling support (`style`, `caption`, `rounded`, `outlined`, `icon`, etc.).
+  - Each button is configured independently via `PaginatorDirectionStepButtonConfig` (`Omit<ButtonProps, "onClick" | "disabled" | "size" | "rounded" | "caption">`).
+  - Added `style` option in `nextButtonsConfig`: `"aside"` places buttons at outer edges, `"inline"` places them beside page numbers.
+  - Added `pageButtonsConfig` prop (`{ default, active }`) to render page number buttons as `Button` components. `default` styles non-active pages, `active` styles the current page.
+  - Extracted internal `PaginatorNavButtons` and `PaginatorInternalNavButton` components for rendering the page number list.
+  - `showNextButtons` is preserved for backwards compatibility with link-based navigation.
+
+- **ClickableElement**
+  - Changed `onClick` type from `ActionFn` (`() => void`) to `(event: MouseEvent<HTMLElement>) => void`. Existing zero-arg handlers remain compatible.
+
+- **BlurableElement**
+  - Changed `onBlur` type from `ActionFn` (`() => void`) to `(event: FocusEvent<HTMLElement>) => void`. Existing zero-arg handlers remain compatible.
+
+- **ComplexTable** *(new)*
+  - Table component with built-in server-side pagination, search, sorting, and multi-row selection.
+  - Designed to be used with the `useComplexTable` hook, which manages paging, search, and sort state and exposes a `tableProps` object to spread directly onto the component. The hook's `loadPage` callback receives `{ offset, limit, search?, sortBy?, sortOrder? }` and returns the new total item count.
+  - Multi-row selection is always active when `selectionBarConfig` is provided — no toggle button required.
+  - Selection bar supports two layouts: list of buttons (`Button list`, with `actions: ButtonProps[]`) or a split button (`SplitButton`, with `splitButtonConfig: SplitButtonProps`). Both layouts accept `selectedCountPlaceholder` to format the selected count label.
+  - Optional `searchConfig` prop enables a toolbar with a search input (`searchPlaceholder`, `noItemsFoundBySearchCaption`, `searchProps`, `containerClassName`).
+  - Inner `<Table>` and `<Paginator>` can be further configured via `tableConfig` and `paginatorConfig`.
+  - Supports custom row component via `itemComponent`, per-row icon actions via `actions` (`ComplexTableAction`), loading overlay via `loading`, and row click handling via `onRowClick`.
+
+- **Table**
+  - Selection checkbox click (`stopPropagation`) now only prevents row click propagation when the click target is inside the checkbox (`.bbr-field`), allowing clicks on the rest of the selection cell to propagate normally.
+
+- **SplitButton**
+  - Added `isLoading` prop to display a loading state on the primary button. When active, both the primary button click and the dropdown toggle are disabled (readonly mode).
+
+## v1.14.6
+- **SplitButton** *(new)*
+  - Added new split-button component with a dropdown of alternative actions.
+  - Primary button triggers main action via `onClick`, chevron toggle opens a dropdown list of secondary actions.
+  - Supports all `ButtonStyle` variants (Primary, Info, Success, Warning, Danger, Link, etc.).
+  - Supports `light`, `outlined`, `rounded`, `disabled`, `size`, `icon` props — consistent with `Button`.
+  - Each dropdown action (`SplitButtonAction`) supports `caption`, `icon`, `title`, `disabled`, and its own `onClick`.
+  - Actions list is validated at compile-time to contain at least 1 item (non-empty tuple type).
+  - Auto-detects available space and opens upward when near the bottom of the viewport.
+  - Closes on outside click (configurable via `hideOnOuterClick`).
+
+## v1.14.4
+- **Table**
+  - Added `ref` support via `forwardRef` for direct access to the underlying `<table>` element.
+  - Added multiple row selection feature:
+    - `selectable` prop enables a checkbox column for row selection.
+    - `selectedRows` prop accepts an array of string keys corresponding to child row `key` props.
+    - `onSelectedRowsChange` callback fires when selection changes.
+    - Header checkbox supports "select all" with indeterminate state for partial selection.
+  - Added `headerCheckBoxConfig` and `rowCheckBoxConfig` props (`Pick<CheckBoxProps, ...>`) for visual customization of selection checkboxes (size, style, rounded, block, etc.).
+
+- **Checkbox**
+  - Added `checked` prop for controlled mode (when provided, overrides `defaultValue`).
+  - Added `indeterminate` prop for displaying a dash instead of a checkmark (useful for "select all" partial selection).
+
 ## v1.14.0
 - **ModalWrapper** *(new)*
   - Added new modal window wrapper component based on Bulma modal.

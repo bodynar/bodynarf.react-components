@@ -1,6 +1,7 @@
 {
     "name": "@bodynarf/react.components",
-    "version": "1.14.3",
+    "version": "1.14.7",
+    "type": "module",
     "author": {
         "name": "Artem",
         "email": "bodynar@gmail.com"
@@ -28,7 +29,7 @@
         "copy_main": "copyfiles package.json *.md .npmignore dist",
         "transfer": "npm run copy_styles && npm run copy_main",
         "build_transfer": "npm run build && npm run transfer",
-        "prepublish": "npm run build_transfer && cd dist && npm pack",
+        "prepublish": "npm run lint && npm run validate:scss && npm run build_transfer && cd dist && npm pack",
         "publish_pkg": "npm run lint && npm run validate:scss && npm run build_transfer && cd dist && npm publish --access=public",
         "lint": "npx eslint src/**/*.ts src/**/*.tsx",
         "lint:scss": "npx stylelint \"src/**/*.scss\"",

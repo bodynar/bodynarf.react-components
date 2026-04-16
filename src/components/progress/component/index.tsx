@@ -37,8 +37,9 @@ const Progress: FC<ProgressProps> = ({
         return (
             <div>
                 <div
-                    title={title}
                     {...dataAttributes}
+
+                    title={title}
                     className={elClassName}
                 />
                 {!!showValue && (
@@ -69,10 +70,11 @@ const Progress: FC<ProgressProps> = ({
         <div>
             {animated ? (
                 <div
+                    {...dataAttributes}
+
                     title={title}
                     data-min={min}
                     data-max={max}
-                    {...dataAttributes}
                     className={elClassName}
                     data-value={progressValue}
                 >
@@ -85,10 +87,11 @@ const Progress: FC<ProgressProps> = ({
                 </div>
             ) : (
                 <progress
+                    {...dataAttributes}
+
                     max={max}
                     title={title}
                     data-min={min}
-                    {...dataAttributes}
                     value={progressValue}
                     className={elClassName}
                 />

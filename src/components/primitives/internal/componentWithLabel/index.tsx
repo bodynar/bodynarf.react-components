@@ -55,9 +55,10 @@ const ComponentWithLabel: FC<ComponentWithLabelProps> = ({
             >
                 <div className={labelContainerClassName}>
                     <label
+                        {...dataAttributes}
+
                         htmlFor={id}
                         title={label.title}
-                        {...dataAttributes}
                         className={labelClassName}
                     >
                         {label.caption}
@@ -77,9 +78,10 @@ const ComponentWithLabel: FC<ComponentWithLabelProps> = ({
             className="bbr-field bbr-input field"
         >
             <label
+                {...dataAttributes}
+
                 htmlFor={id}
                 title={label.title}
-                {...dataAttributes}
                 className={labelClassName}
             >
                 {label.caption}

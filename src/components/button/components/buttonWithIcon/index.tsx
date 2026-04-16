@@ -34,17 +34,19 @@ const ButtonWithIcon: FC<ButtonWithIconProps> = ({
     if (icon.position === ElementPosition.Right) {
         return (
             <button
+                {...dataAttributes}
+
                 type="button"
                 title={title}
                 onClick={onClick}
                 disabled={disabled}
-                {...dataAttributes}
                 className={className}
             >
                 {caption}
 
                 <Icon
                     {...icon}
+
                     className={iconClassName}
                 />
             </button>
@@ -53,15 +55,17 @@ const ButtonWithIcon: FC<ButtonWithIconProps> = ({
 
     return (
         <button
+            {...dataAttributes}
+
             type="button"
             title={title}
             onClick={onClick}
             disabled={disabled}
-            {...dataAttributes}
             className={className}
         >
             <Icon
                 {...icon}
+
                 className={iconClassName}
             />
 

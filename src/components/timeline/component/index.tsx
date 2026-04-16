@@ -50,8 +50,9 @@ const Timeline: FC<TimelineProps> = ({
 
     return (
         <div
-            title={title}
             {...dataAttributes}
+
+            title={title}
             className={containerClassName}
         >
             {items.map((item, index) => {

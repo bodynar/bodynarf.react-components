@@ -153,9 +153,10 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
             <div
                 key={id}
 
+                {...dataAttributes}
+
                 title={title}
                 ref={containerRef}
-                {...dataAttributes}
                 data-dropdown-id={id}
                 className={classNames}
             >

@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback, useMemo, useState } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullish } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName } from "@bodynarf/utils";
 
 import { ElementSize, ElementColor } from "@bbr/types";
 import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
@@ -61,14 +61,6 @@ const Slider: FC<SliderProps> = ({
         [onValueChange]
     );
 
-    const handleBlur = useCallback(() => {
-        if (isNullish(onBlur)) {
-            return;
-        }
-
-        onBlur();
-    }, [onBlur]);
-
     const elClassName = getClassName([
         "slider",
         "bbr-slider",
@@ -121,6 +113,8 @@ const Slider: FC<SliderProps> = ({
                     </output>
                 )}
                 <input
+                    {...dataAttributes}
+
                     min={min}
                     max={max}
                     step={step}
@@ -128,10 +122,9 @@ const Slider: FC<SliderProps> = ({
                     title={title}
                     value={value}
                     id={elementId}
+                    onBlur={onBlur}
                     name={elementId}
-                    {...dataAttributes}
                     disabled={disabled}
-                    onBlur={handleBlur}
                     onChange={onChange}
                     className={elClassName}
                     style={{

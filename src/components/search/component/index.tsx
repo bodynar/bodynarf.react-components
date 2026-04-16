@@ -63,11 +63,12 @@ const Search: FC<SearchProps> = ({
             >
                 <div className={elClassName}>
                     <input
+                        {...dataAttributes}
+
                         type="search"
                         title={title}
                         disabled={disabled}
                         onChange={onChange}
-                        {...dataAttributes}
                         placeholder={caption}
                         autoFocus={autoFocus}
                         defaultValue={searchValue}
@@ -106,11 +107,12 @@ const Search: FC<SearchProps> = ({
             className={elClassName}
         >
             <input
+                {...dataAttributes}
+
                 type="search"
                 title={title}
                 disabled={disabled}
                 onChange={onChange}
-                {...dataAttributes}
                 placeholder={caption}
                 autoFocus={autoFocus}
                 defaultValue={searchValue}

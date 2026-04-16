@@ -1,6 +1,6 @@
-import { ChangeEvent, FC, useCallback } from "react";
+import { ChangeEvent, FC, useCallback, useRef, useEffect } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNotNullish, isNullish, isNullOrEmpty } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
@@ -9,6 +9,7 @@ import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import "./style.scss";
 
 import { CheckBoxProps } from "../..";
+
 // todo: https://justboil.github.io/bulma-checkbox/
 /** Boolean input component */
 const CheckBox: FC<CheckBoxProps> = ({
@@ -20,13 +21,24 @@ const CheckBox: FC<CheckBoxProps> = ({
     rounded = false, block = false,
     withoutBorder = false, hasBackgroundColor = false, fixBackgroundColor = false,
     isFormLabel = false,
+    checked, indeterminate = false,
 
     className, data, title
 }) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+
     const onChecked = useCallback(
         (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.checked),
         [onValueChange]
     );
+
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.indeterminate = indeterminate;
+        }
+    }, [indeterminate]);
+
+    const isControlled = checked !== undefined;
 
     const elClassName = getClassName([
         "is-checkradio",
@@ -55,14 +67,16 @@ const CheckBox: FC<CheckBoxProps> = ({
                 }}
             >
                 <input
+                    {...dataAttributes}
+                    {...(isControlled ? { checked } : { defaultChecked: defaultValue })}
+
                     id={name}
                     name={name}
+                    ref={inputRef}
                     type="checkbox"
                     disabled={disabled}
-                    {...dataAttributes}
                     onChange={onChecked}
                     className={elClassName}
-                    defaultChecked={defaultValue}
                 />
                 <label
                     title={title}
@@ -83,23 +97,33 @@ const CheckBox: FC<CheckBoxProps> = ({
         ? undefined
         : mapDataAttributes(label.data);
 
+    const wrapperClassName = getClassName([
+        "bbr-field",
+        "bbr-input",
+        "field",
+        isNullish(label) || isNullOrEmpty(label.caption) ? undefined : "mr-2",
+    ]);
+
     return (
         <div
-            className="bbr-field bbr-input field mr-2"
+            className={wrapperClassName}
         >
             <input
+                {...(isControlled ? { checked } : { defaultChecked: defaultValue })}
+                {...dataAttributes}
+
                 id={name}
                 name={name}
+                ref={inputRef}
                 type="checkbox"
                 disabled={disabled}
-                {...dataAttributes}
                 onChange={onChecked}
                 className={elClassName}
-                defaultChecked={defaultValue}
             />
             <label
-                htmlFor={name}
                 {...labelDataAttributes}
+
+                htmlFor={name}
                 className={labelClassName}
                 title={isEmptyLabel ? title : label?.title}
             >

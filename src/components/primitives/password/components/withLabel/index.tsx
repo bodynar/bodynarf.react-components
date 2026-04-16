@@ -60,13 +60,14 @@ const PasswordWithLabel: FC<BaseInputWithLabel<PasswordProps>> = ({
         >
             <div className={inputContainerClassName}>
                 <input
+                    {...dataAttributes}
+
                     id={name}
                     name={name}
                     title={title}
                     onKeyUp={onKeyUp}
                     disabled={disabled}
                     onChange={onChange}
-                    {...dataAttributes}
                     onKeyDown={onKeyDown}
                     autoFocus={autoFocus}
                     className={elClassName}

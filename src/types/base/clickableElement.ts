@@ -1,8 +1,11 @@
-import { ActionFn } from "@bodynarf/utils";
+import { MouseEventHandler } from "react";
 
 /** Element with click event */
 export type ClickableElement = {
-    /** Click handler */
-    onClick?: ActionFn;
+    /**
+     * Click handler
+     * @param event Mouse event from the clicked element
+     */
+    onClick?: MouseEventHandler<HTMLElement>;
 };
 

@@ -46,6 +46,7 @@ const Button: FC<ButtonProps> = (props) => {
         return (
             <ButtonWithIcon
                 {...props}
+
                 icon={props.icon}
                 className={className}
             />
@@ -54,6 +55,7 @@ const Button: FC<ButtonProps> = (props) => {
         return (
             <SimpleButton
                 {...props}
+
                 className={className}
             />
         );

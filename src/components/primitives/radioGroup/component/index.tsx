@@ -61,8 +61,9 @@ const RadioGroup: FC<RadioGroupProps> = ({
 
     return (
         <div
-            title={title}
             {...dataAttributes}
+
+            title={title}
             className={containerClassName}
         >
             {items.map((item) => {
@@ -91,8 +92,9 @@ const RadioGroup: FC<RadioGroupProps> = ({
                             className={radioClassName}
                         />
                         <label
-                            htmlFor={itemId}
                             {...itemDataAttributes}
+
+                            htmlFor={itemId}
                         >
                             {item.displayValue}
                         </label>

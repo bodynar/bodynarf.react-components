@@ -12,7 +12,7 @@ export interface BreadCrumb {
 
     /**
      * Is current page. Will be not clickable
-     * @deprecated Since v1.2.0 Not used anymore
+     * @deprecated [Will be removed in v1.15] Not used anymore
      */
     active?: boolean;
 
@@ -21,13 +21,13 @@ export interface BreadCrumb {
 
     /**
      * Displayed text
-     * @deprecated Use `caption` instead
+     * @deprecated [Will be removed in v1.15] Use `caption` instead
      */
     title?: string;
 
     /**
      * Page address
-     * @deprecated Since v1.2.0 Use `href`
+     * @deprecated [Will be removed in v1.15] Use `href`
      */
     path?: string;
 }
