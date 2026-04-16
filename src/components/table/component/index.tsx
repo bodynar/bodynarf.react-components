@@ -48,9 +48,18 @@ const Table = forwardRef<HTMLTableElement, TableProps>(({
     const dataAttributes = mapDataAttributes(data);
 
     const rowKeys = useMemo(
-        () => Children.map(children, (child) =>
-            isValidElement(child) ? String(child.key) : null
-        )?.filter((key): key is string => key !== null) ?? [],
+        () => Children.map(children, (child) => {
+            if (!isValidElement(child)) {
+                return null;
+            }
+            if (child.key === null) {
+                console.warn("[Table] A selectable row is missing a `key` prop and will be excluded from selection.");
+
+                return null;
+            }
+
+            return String(child.key);
+        })?.filter((key): key is string => key !== null) ?? [],
         [children],
     );
 
@@ -146,6 +155,10 @@ const Table = forwardRef<HTMLTableElement, TableProps>(({
                 {selectable
                     ? Children.map(children, (child) => {
                         if (!isValidElement(child)) {
+                            return child;
+                        }
+
+                        if (child.key === null) {
                             return child;
                         }
 

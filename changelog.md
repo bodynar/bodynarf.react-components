@@ -17,11 +17,13 @@ All changes will be published here in reverse chronological order
   - Changed `onBlur` type from `ActionFn` (`() => void`) to `(event: FocusEvent<HTMLElement>) => void`. Existing zero-arg handlers remain compatible.
 
 - **ComplexTable** *(new)*
-  - Table component with built-in pagination, search, sorting, and multi-row selection.
+  - Table component with built-in server-side pagination, search, sorting, and multi-row selection.
+  - Designed to be used with the `useComplexTable` hook, which manages paging, search, and sort state and exposes a `tableProps` object to spread directly onto the component. The hook's `loadPage` callback receives `{ offset, limit, search?, sortBy?, sortOrder? }` and returns the new total item count.
   - Multi-row selection is always active when `selectionBarConfig` is provided — no toggle button required.
-  - Selection bar supports two layouts: list of buttons (`Button list`) or a split button (`SplitButton`).
-  - `selectable` and `onSelectableChange` in `selectionBarConfig` allow controlling selection mode from outside the component.
-  - Supports custom row component via `itemComponent`, per-row actions via `actions`, and loading overlay via `loading`.
+  - Selection bar supports two layouts: list of buttons (`Button list`, with `actions: ButtonProps[]`) or a split button (`SplitButton`, with `splitButtonConfig: SplitButtonProps`). Both layouts accept `selectedCountPlaceholder` to format the selected count label.
+  - Optional `searchConfig` prop enables a toolbar with a search input (`searchPlaceholder`, `noItemsFoundBySearchCaption`, `searchProps`, `containerClassName`).
+  - Inner `<Table>` and `<Paginator>` can be further configured via `tableConfig` and `paginatorConfig`.
+  - Supports custom row component via `itemComponent`, per-row icon actions via `actions` (`ComplexTableAction`), loading overlay via `loading`, and row click handling via `onRowClick`.
 
 - **Table**
   - Selection checkbox click (`stopPropagation`) now only prevents row click propagation when the click target is inside the checkbox (`.bbr-field`), allowing clicks on the rest of the selection cell to propagate normally.

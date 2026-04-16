@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef, RefObject } from "react";
 
 import { isNotNullish } from "@bodynarf/utils";
 import { SortColumn } from "@bbr/components/table";
@@ -47,7 +47,7 @@ export type UseComplexTableResult = {
     /** Props to spread onto `ComplexTable` */
     tableProps: {
         /** Reference to the table container for scroll management */
-        containerRef: React.RefObject<HTMLDivElement>;
+        containerRef: RefObject<HTMLDivElement>;
 
         /** Total number of pages */
         pagesCount: number;
@@ -139,7 +139,7 @@ export function useComplexTable({
                 limit: pageSize,
                 search: searchRef.current,
                 sortBy: sortRef.current?.columnName,
-                sortOrder: sortRef.current?.ascending ? "asc" : "desc",
+                sortOrder: sortRef.current ? (sortRef.current.ascending ? "asc" : "desc") : undefined,
             });
 
             setTotal(newTotal);
@@ -156,7 +156,13 @@ export function useComplexTable({
         setSearch(searchValue);
         setLoading(true);
 
-        loadPage({ offset: 0, limit: pageSize, search: searchValue, sortBy: sortRef.current?.columnName, sortOrder: sortRef.current?.ascending ? "asc" : "desc" })
+        loadPage({
+            offset: 0,
+            limit: pageSize,
+            search: searchValue,
+            sortBy: sortRef.current?.columnName,
+            sortOrder: sortRef.current ? (sortRef.current.ascending ? "asc" : "desc") : undefined
+        })
             .then(newTotal => {
                 setTotal(newTotal);
                 setCurrentPage(1);
@@ -169,7 +175,13 @@ export function useComplexTable({
         setSort(sortColumn);
         setLoading(true);
 
-        loadPage({ offset: 0, limit: pageSize, search: searchRef.current, sortBy: sortColumn?.columnName, sortOrder: sortColumn?.ascending ? "asc" : "desc" })
+        loadPage({
+            offset: 0,
+            limit: pageSize,
+            search: searchRef.current,
+            sortBy: sortColumn?.columnName,
+            sortOrder: sortColumn ? (sortColumn.ascending ? "asc" : "desc") : undefined
+        })
             .then(newTotal => {
                 setTotal(newTotal);
                 setCurrentPage(1);

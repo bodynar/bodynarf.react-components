@@ -54,6 +54,11 @@ const Paginator: FC<PaginatorProps> = ({
             onPageChange(pageNumber);
         }, [onPageChange, currentPage, count]);
 
+    if (currentPage <= 0) {
+        console.error(`[Paginator] currentPage (${currentPage}) must be >= 1`);
+        return null;
+    }
+
     if (currentPage > count) {
         if (count > 0) {
             console.error(`[Paginator] currentPage (${currentPage}) is greater than count (${count})`);
