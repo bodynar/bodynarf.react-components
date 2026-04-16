@@ -60,6 +60,10 @@ export * from "./toast";
 export { default as Tooltip } from "./tooltip";
 export * from "./tooltip";
 
+export { default as SidePanel } from "./sidePanel";
+export * from "./sidePanel";
+export * from "./tooltip";
+
 // Primitives
 export { default as Checkbox } from "./primitives/checkbox";
 export * from "./primitives/checkbox";
