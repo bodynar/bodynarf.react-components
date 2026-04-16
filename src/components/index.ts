@@ -4,6 +4,10 @@ export * from "./accordion";
 export { default as Breadcrumbs } from "./breadcrumbs";
 export * from "./breadcrumbs";
 
+export { default as Card } from "./card";
+export * from "./card";
+export * from "./breadcrumbs";
+
 export { default as Button } from "./button";
 export * from "./button";
 

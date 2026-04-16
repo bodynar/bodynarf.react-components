@@ -1,6 +1,13 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.15.0
+- **Card** *(new)*
+  - Compound component with `Card.Header`, `Card.Body` and `Card.Footer` sub-components.
+  - All three sections are optional and can be used in any combination.
+  - `Card.Header` extends `ClickableElement` — accepts `onClick`, which automatically applies `is-clickable` class.
+  - All sub-components and the root `Card` accept `className`, `title` and `data` props from `BaseElementProps`.
+
 ## v1.14.7
 - **Paginator**
   - Added `nextButtonsConfig` prop (`{ previousButtonConfig, nextButtonConfig, style }`) to render Previous/Next navigation as `Button` components with full styling support (`style`, `caption`, `rounded`, `outlined`, `icon`, etc.).
