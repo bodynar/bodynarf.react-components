@@ -57,6 +57,9 @@ export * from "./progress";
 export { default as Toast } from "./toast";
 export * from "./toast";
 
+export { default as Tooltip } from "./tooltip";
+export * from "./tooltip";
+
 // Primitives
 export { default as Checkbox } from "./primitives/checkbox";
 export * from "./primitives/checkbox";
