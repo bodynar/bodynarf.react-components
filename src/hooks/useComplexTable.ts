@@ -42,7 +42,7 @@ export type UseComplexTableOptions = {
 /** Result of the `useComplexTable` hook */
 export type UseComplexTableResult = {
     /** Selected item identifiers */
-    selectedIds: Array<string>;
+    selectedRows: Array<string>;
 
     /** Props to spread onto `ComplexTable` */
     tableProps: {
@@ -117,6 +117,7 @@ export function useComplexTable({
     }, [totalCount]);
 
     const tableContainerRef = useRef<HTMLDivElement>(null);
+    const requestIdRef = useRef(0);
 
     const pagesCount = Math.ceil(total / pageSize);
 
@@ -131,6 +132,7 @@ export function useComplexTable({
     }, []);
 
     const handleLoadPage = useCallback(async (page: number) => {
+        const requestId = ++requestIdRef.current;
         setLoading(true);
 
         try {
@@ -142,16 +144,23 @@ export function useComplexTable({
                 sortOrder: sortRef.current ? (sortRef.current.ascending ? "asc" : "desc") : undefined,
             });
 
+            if (requestId !== requestIdRef.current) {
+                return;
+            }
+
             setTotal(newTotal);
             setCurrentPage(page);
             scrollToTop();
         } finally {
-            setLoading(false);
+            if (requestId === requestIdRef.current) {
+                setLoading(false);
+            }
         }
     }, [loadPage, pageSize, scrollToTop]);
 
     const onSearch = useCallback((query: string) => {
         const searchValue = query.length > 0 ? query : undefined;
+        const requestId = ++requestIdRef.current;
 
         setSearch(searchValue);
         setLoading(true);
@@ -164,14 +173,24 @@ export function useComplexTable({
             sortOrder: sortRef.current ? (sortRef.current.ascending ? "asc" : "desc") : undefined
         })
             .then(newTotal => {
+                if (requestId !== requestIdRef.current) {
+                    return;
+                }
+
                 setTotal(newTotal);
                 setCurrentPage(1);
                 scrollToTop();
             })
-            .finally(() => setLoading(false));
+            .finally(() => {
+                if (requestId === requestIdRef.current) {
+                    setLoading(false);
+                }
+            });
     }, [loadPage, pageSize, scrollToTop]);
 
     const onSortChange = useCallback((sortColumn?: SortColumn) => {
+        const requestId = ++requestIdRef.current;
+
         setSort(sortColumn);
         setLoading(true);
 
@@ -183,11 +202,19 @@ export function useComplexTable({
             sortOrder: sortColumn ? (sortColumn.ascending ? "asc" : "desc") : undefined
         })
             .then(newTotal => {
+                if (requestId !== requestIdRef.current) {
+                    return;
+                }
+
                 setTotal(newTotal);
                 setCurrentPage(1);
                 scrollToTop();
             })
-            .finally(() => setLoading(false));
+            .finally(() => {
+                if (requestId === requestIdRef.current) {
+                    setLoading(false);
+                }
+            });
     }, [loadPage, pageSize, scrollToTop]);
 
     const onSelectionChange = useCallback((ids: Array<string>) => {
@@ -195,7 +222,7 @@ export function useComplexTable({
     }, []);
 
     return {
-        selectedIds,
+        selectedRows: selectedIds,
         tableProps: {
             containerRef: tableContainerRef,
             pagesCount,

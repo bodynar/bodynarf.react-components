@@ -41,7 +41,7 @@ const PaginatorNextButtons: FC<PaginatorNextButtonsProps> = ({
 }) => {
     const shouldBeVisibleByButtons = isNotNullish(nextButtonsConfig) && nextButtonsConfig.style === "aside";
 
-    if (!showNextButtons && !shouldBeVisibleByButtons) {
+    if (!shouldBeVisibleByButtons && (!showNextButtons || isNotNullish(nextButtonsConfig))) {
         return null;
     }
 
