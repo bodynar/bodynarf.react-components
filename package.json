@@ -1,6 +1,7 @@
 {
     "name": "@bodynarf/react.components",
     "version": "1.14.7",
+    "type": "module",
     "author": {
         "name": "Artem",
         "email": "bodynar@gmail.com"
