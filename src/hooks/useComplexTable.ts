@@ -61,6 +61,9 @@ export type UseComplexTableResult = {
         /** Data loading flag */
         loading: boolean;
 
+        /** Current sort column */
+        currentSortColumn?: SortColumn;
+
         /** Page change handler */
         onPageChange: (page: number) => void;
 
@@ -233,6 +236,7 @@ export function useComplexTable({
             onSearch,
             onSortChange,
             onSelectionChange,
+            currentSortColumn: sort,
         },
     };
 }
