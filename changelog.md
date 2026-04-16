@@ -2,6 +2,19 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
+- **Tooltip** *(breaking change — API refactor)*
+  - Replaced `trigger` and `content` props with a compound component pattern.
+  - `<Tooltip.Hint>` — wraps the popup content (previously `content` prop).
+  - `<Tooltip.Target>` — wraps the anchor element (previously `trigger` prop).
+  - Both sub-components accept any `ReactNode` as children and are scanned internally via `React.Children.forEach`.
+  - `TooltipHintProps` and `TooltipTargetProps` are exported from the package for typed usage.
+
+- **Tooltip** *(fixes)*
+  - Hovering over the tooltip popup itself no longer dismisses it — a transparent bridge element fills the gap between the trigger and the popup, and `onMouseLeave` uses an 80 ms debounce to absorb cursor movement across that gap.
+  - Tooltip content is now rendered before the trigger in the DOM, preventing Bulma's `:not(:last-child)` selector from applying unwanted margin to trigger buttons inside a `.buttons` container.
+  - Slide animation is now position-aware: each placement (`Top`, `Bottom`, `Left`, `Right`) uses its own directional offset, so the popup no longer jumps to a wrong position on enter.
+  - Dismiss animation added — content stays in the DOM and CSS `transition` drives both enter and exit opacity/transform, replacing the previous `@keyframes`-only approach that had no exit animation.
+
 - **Card** *(new)*
   - Compound component with `Card.Header`, `Card.Body` and `Card.Footer` sub-components.
   - All three sections are optional and can be used in any combination.
@@ -14,6 +27,17 @@ All changes will be published here in reverse chronological order
   - Optional close button (shown by default) with `onClose` callback.
   - `fixed` prop renders the toast in a fixed overlay at the top of the viewport.
   - `position` prop (`ElementFloatPosition.Left` / `Right`) controls horizontal placement in fixed mode.
+  - `autoClose` prop (ms) automatically calls `onClose` after the given delay.
+
+- **Tooltip** *(new)*
+  - Hover/click-triggered popup with configurable position, animation and close behaviour.
+  - Compound component: use `<Tooltip.Hint>` for popup content and `<Tooltip.Target>` for the anchor element.
+  - `position` (`TooltipPosition`): `Top` (default), `Bottom`, `Left`, `Right`.
+  - `animation` (`TooltipAnimation`): `None`, `Fade` (default), `Slide`.
+  - `closeOn` (`TooltipCloseOn`): `MouseLeave` (default), `OutsideClick`, `Manual`.
+  - `openDelay` (ms) — delay before showing the tooltip, default `0`.
+  - `lifetime` (ms) — auto-hide after given duration.
+  - `visible` — controlled-mode prop; when provided, open/close events are ignored.
 
 ## v1.14.7
 - **Paginator**
