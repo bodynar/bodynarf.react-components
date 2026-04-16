@@ -169,7 +169,7 @@ export type ComplexTableSearchConfig = {
     noItemsFoundBySearchCaption: string;
 
     /** Configuration for the search field */
-    searchProps?: Omit<SearchProps, "onSearch">;
+    searchProps?: Omit<SearchProps, "onSearch" | "caption">;
 
     /** CSS class for the search container */
     containerClassName?: string;
