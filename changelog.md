@@ -2,19 +2,6 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
-- **Tooltip** *(breaking change — API refactor)*
-  - Replaced `trigger` and `content` props with a compound component pattern.
-  - `<Tooltip.Hint>` — wraps the popup content (previously `content` prop).
-  - `<Tooltip.Target>` — wraps the anchor element (previously `trigger` prop).
-  - Both sub-components accept any `ReactNode` as children and are scanned internally via `React.Children.forEach`.
-  - `TooltipHintProps` and `TooltipTargetProps` are exported from the package for typed usage.
-
-- **Tooltip** *(fixes)*
-  - Hovering over the tooltip popup itself no longer dismisses it — a transparent bridge element fills the gap between the trigger and the popup, and `onMouseLeave` uses an 80 ms debounce to absorb cursor movement across that gap.
-  - Tooltip content is now rendered before the trigger in the DOM, preventing Bulma's `:not(:last-child)` selector from applying unwanted margin to trigger buttons inside a `.buttons` container.
-  - Slide animation is now position-aware: each placement (`Top`, `Bottom`, `Left`, `Right`) uses its own directional offset, so the popup no longer jumps to a wrong position on enter.
-  - Dismiss animation added — content stays in the DOM and CSS `transition` drives both enter and exit opacity/transform, replacing the previous `@keyframes`-only approach that had no exit animation.
-
 - **Card** *(new)*
   - Compound component with `Card.Header`, `Card.Body` and `Card.Footer` sub-components.
   - All three sections are optional and can be used in any combination.
@@ -38,6 +25,22 @@ All changes will be published here in reverse chronological order
   - `openDelay` (ms) — delay before showing the tooltip, default `0`.
   - `lifetime` (ms) — auto-hide after given duration.
   - `visible` — controlled-mode prop; when provided, open/close events are ignored.
+  - Hovering over the popup itself no longer dismisses it — a transparent bridge element fills the gap, and `onMouseLeave` uses an 80 ms debounce.
+  - Tooltip content is rendered before the trigger in the DOM, preventing Bulma's `:not(:last-child)` margin on trigger buttons inside `.buttons`.
+  - Slide animation is position-aware: each placement uses its own directional offset.
+  - Dismiss animation added — `transition` drives both enter and exit opacity/transform.
+
+- **SidePanel** *(new)*
+  - Sliding side panel with compound sub-components `SidePanel.Title` and `SidePanel.Body`.
+  - `SidePanel.Title` renders a header with an optional built-in close (×) button (`showCloseButton`, default `true`).
+  - `SidePanel.Body` renders a scrollable content area.
+  - `position` (`ElementFloatPosition`): `Left` (default), `Right` — controls which side the panel slides in from.
+  - `size` (`SidePanelSize`): `Small` (15vw), `Normal` (20vw, default), `Medium` (35vw), `Large` (50vw).
+  - `customWidth` (number) — arbitrary panel width in vw units; overrides `size` when provided.
+  - `closeOnOverlayClick` (default `true`) — closes the panel when the backdrop is clicked.
+  - Panel also closes on Escape key press.
+  - Backdrop fades in/out via CSS `opacity` transition; panel slides via `transform: translateX` transition.
+  - `box-shadow` appears only after the panel is fully open (animates together with the slide).
 
 - **ModalWrapper** *(extended)*
   - Added compound component pattern: `ModalWrapper.Header`, `ModalWrapper.Body`, `ModalWrapper.Footer`.
