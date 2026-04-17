@@ -39,6 +39,16 @@ All changes will be published here in reverse chronological order
   - `lifetime` (ms) — auto-hide after given duration.
   - `visible` — controlled-mode prop; when provided, open/close events are ignored.
 
+- **ModalWrapper** *(extended)*
+  - Added compound component pattern: `ModalWrapper.Header`, `ModalWrapper.Body`, `ModalWrapper.Footer`.
+  - Only `ModalWrapper.Body` is required; `ModalWrapper.Header` and `ModalWrapper.Footer` are optional.
+  - When `ModalWrapper.Body` is detected in children, compound mode activates automatically — legacy `title` / `actions` props are ignored. No breaking change.
+  - `ModalWrapper.Header` renders a fully customizable `modal-card-head` — add any content, extra buttons, or icons.
+  - `ModalWrapper.Footer` renders a `modal-card-foot` with arbitrary content instead of the `actions` button array.
+  - Added `showMaximizeButton` prop (default `false`) — renders a maximize / restore icon button (`arrows-angle-expand` / `arrows-angle-contract`) to the left of the close button.
+  - Maximize stretches the modal card to `95vw × 95vh`; restore returns it to its original size. Both transitions are animated.
+  - `actions` prop is now optional (defaults to empty array); no breaking change.
+
 ## v1.14.7
 - **Paginator**
   - Added `nextButtonsConfig` prop (`{ previousButtonConfig, nextButtonConfig, style }`) to render Previous/Next navigation as `Button` components with full styling support (`style`, `caption`, `rounded`, `outlined`, `icon`, etc.).

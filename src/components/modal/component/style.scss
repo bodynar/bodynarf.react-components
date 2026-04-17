@@ -5,12 +5,15 @@
         .modal-card {
             max-height: calc(100vh - 40px);
             width: auto;
+            height: auto;
             min-width: 300px;
             max-width: calc(100vw - 40px);
+            transition: min-width 0.25s ease, max-width 0.25s ease, min-height 0.25s ease, max-height 0.25s ease;
         }
 
         .modal-card-head {
             border-bottom: 1px solid #dbdbdb;
+            gap: 0.5rem;
         }
 
         .modal-card-foot {
@@ -37,6 +40,25 @@
         &.is-large .modal-card {
             min-width: 600px;
             max-width: 960px;
+        }
+
+        // Maximized state
+        &.bbr-modal--maximized .modal-card {
+            min-width: 95vw;
+            max-width: 95vw;
+            max-height: 95vh;
+            min-height: 95vh;
+        }
+    }
+
+    &__maximize {
+        flex-shrink: 0;
+        cursor: pointer;
+        opacity: 0.55;
+        transition: opacity 0.15s ease;
+
+        &:hover {
+            opacity: 1;
         }
     }
 }
