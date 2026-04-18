@@ -2,6 +2,18 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
+- **Calendar** *(new)*
+  - Standalone date-picker panel component with day-grid, month-picker and year-picker views.
+  - `value` / `onChange` for controlled usage; `initialView` (`"month"` | `"year"`) to open in a non-default view.
+  - `locale` (BCP 47 tag, default `"en-US"`) localises month names and weekday labels via `Intl.DateTimeFormat`.
+  - `style` (`ElementColor`) tints the accent colour and panel border; `size` (`ElementSize`) scales font and minimum width.
+  - `minDate` / `maxDate` restrict the selectable range — days outside the range are rendered as disabled.
+  - Navigation arrows are disabled when scrolling further would exceed `minDate` (prev) or `maxDate` (next); applies in all three views.
+  - `todayButtonConfig?: CalendarFooterButtonConfig` — optional footer Today button (full `ButtonProps` passthrough minus `onClick`, `static`, `size`, `disabled`). Disabled automatically when the selected date is already today; hidden entirely when today falls outside `minDate` / `maxDate`.
+  - `clearButtonConfig?: CalendarFooterButtonConfig` — optional footer Clear button; only visible when a date is currently selected.
+  - Footer layout: one button renders centered at full width; two buttons split the footer evenly.
+  - Pre-selected `value` is validated on mount — if it falls outside `minDate` / `maxDate` it is cleared via `onChange(undefined)` and a `console.error` is logged.
+
 - **Card** *(new)*
   - Compound component with `Card.Header`, `Card.Body` and `Card.Footer` sub-components.
   - All three sections are optional and can be used in any combination.
