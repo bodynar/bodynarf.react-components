@@ -25,6 +25,14 @@ All changes will be published here in reverse chronological order
   - **Blur validation**: on focus loss with unconfirmed text — auto-selects on exact match or single prefix match; applies red wavy underline otherwise.
   - Supports `label` (vertical & horizontal), `defaultValue`, `placeholder`, `disabled`, `readonly`, `loading` from `BaseInputElementProps`.
 
+- **Badge** *(new)*
+  - Overlay indicator rendered on the top-right corner of any child element.
+  - `value` — numeric badge; when `value > max` displays `{max}+`.
+  - `max` (default `99`) — overflow threshold.
+  - `dot` — small dot variant with no text, useful for "has new" signals; mutually exclusive with `value`.
+  - `color` (`ElementColor`, default `Danger`) — badge background colour.
+  - `hidden` (default `false`) — hides the badge without unmounting the child.
+
 - **animations.scss** *(new)*
   - Standalone global animation stylesheet (`src/animations.scss`) — import once at the app entry point, then apply animations via `className` on any element.
   - **Infinite** (support pause via `bbr-anim-paused`): `bbr-pulse`, `bbr-spin`, `bbr-spin-reverse`, `bbr-bounce`, `bbr-heartbeat`, `bbr-float`, `bbr-wobble`.

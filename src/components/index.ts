@@ -110,3 +110,7 @@ export * from "./complexTable";
 
 export { default as Alert } from "./alert";
 export * from "./alert";
+
+export { default as Badge } from "./badge";
+export * from "./badge";
+
