@@ -2,6 +2,18 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
+- **ConfirmDialog** *(new)*
+  - Focused confirmation modal built on Bulma `modal-card`.
+  - `visible` — controls whether the dialog is rendered.
+  - `title` (default `"Are you sure?"`) — heading text.
+  - `message?: ReactNode` — optional body; accepts a plain string or arbitrary React content.
+  - `confirmLabel` / `cancelLabel` (defaults `"Confirm"` / `"Cancel"`) — button labels.
+  - `confirmColor` (`ElementColor`, default `Danger`) — colour of the confirm button; mapped to `ButtonStyle` via an explicit `Map` (no type casts).
+  - `icon` (default `"exclamation-triangle"`) — Bootstrap Icons name shown in the header.
+  - `isLoading` (default `false`) — disables both buttons and shows a spinner on confirm; intended for async `onConfirm` handlers.
+  - `cancellable` (default `false`) — when `true`, clicking the backdrop or pressing `Escape` does **not** close the dialog; the user must interact with a button.
+  - `onConfirm` / `onCancel` — action callbacks.
+
 - **Carousel** *(new)*
   - Slides carousel with optional auto-play, navigation dots, arrow buttons and loop.
   - `items: CarouselItem[]` — slide definitions; each item has a `key` and arbitrary `children` (`ReactNode`).

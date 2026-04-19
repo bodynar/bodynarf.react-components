@@ -114,3 +114,6 @@ export * from "./alert";
 export { default as Badge } from "./badge";
 export * from "./badge";
 
+
+export { default as ConfirmDialog } from "./confirmDialog";
+export * from "./confirmDialog";
