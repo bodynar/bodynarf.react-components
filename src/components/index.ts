@@ -1,6 +1,9 @@
 export { default as Accordion } from "./accordion";
 export * from "./accordion";
 
+export { default as Avatar } from "./avatar";
+export * from "./avatar";
+
 export { default as Breadcrumbs } from "./breadcrumbs";
 export * from "./breadcrumbs";
 

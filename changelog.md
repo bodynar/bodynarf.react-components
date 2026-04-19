@@ -1,6 +1,18 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.16.0
+- **Avatar** *(new)*
+  - Displays a user avatar as a circle, square or rounded square (`shape?: AvatarShape`).
+  - `src` + `alt` — renders an `<img>`; on load error automatically falls back to initials or icon.
+  - `initials?: string` — text fallback when no image is available (e.g. `"JD"`).
+  - `icon?: string` — Bootstrap icon name (without `bi-`) used as fallback when neither image nor initials are provided.
+  - `status?: AvatarStatus` — optional status indicator dot: `Online` (green), `Away` (yellow), `Offline` (grey).
+  - `shape?: AvatarShape` — `Circle` (default), `Square`, `RoundedSquare` (4 px corners).
+  - `size?: ElementSize` — Small (24 px), Normal (40 px, default), Medium (56 px), Large (72 px).
+  - `color?: string` — background colour for initials / icon mode; accepts any CSS colour value.
+  - `onClick` — from `ClickableElement`; presence automatically adds `is-clickable` cursor.
+
 ## v1.15.0
 - **Calendar** *(new)*
   - Standalone date-picker panel component with day-grid, month-picker and year-picker views.

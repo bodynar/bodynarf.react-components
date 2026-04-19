@@ -1,0 +1,125 @@
+.bbr-avatar {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    user-select: none;
+    flex-shrink: 0;
+
+    &.is-clickable {
+        cursor: pointer;
+    }
+
+    &--circle {
+        .bbr-avatar__inner {
+            border-radius: 50%;
+        }
+    }
+
+    &--rounded-square {
+        .bbr-avatar__inner {
+            border-radius: 4px;
+        }
+    }
+
+    &.is-small {
+        width: 24px;
+        height: 24px;
+        font-size: 0.6rem;
+
+        .bbr-avatar__icon {
+            font-size: 0.75rem;
+        }
+
+        .bbr-avatar__status {
+            width: 7px;
+            height: 7px;
+        }
+    }
+
+    &.is-medium {
+        width: 56px;
+        height: 56px;
+        font-size: 1.375rem;
+
+        .bbr-avatar__icon {
+            font-size: 1.75rem;
+        }
+
+        .bbr-avatar__status {
+            bottom: 3px;
+            right: 3px;
+        }
+    }
+
+    &.is-large {
+        width: 72px;
+        height: 72px;
+        font-size: 1.75rem;
+
+        .bbr-avatar__icon {
+            font-size: 2.25rem;
+        }
+
+        .bbr-avatar__status {
+            width: 13px;
+            height: 13px;
+            bottom: 4px;
+            right: 4px;
+        }
+    }
+
+    &__inner {
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background-color: #bdbdbd;
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    &__initials {
+        font-weight: 500;
+        color: #fff;
+        line-height: 1;
+        font-size: 1em;
+    }
+
+    &__icon {
+        color: #fff;
+        font-size: 1.25rem;
+        line-height: 1;
+    }
+
+    &__status {
+        position: absolute;
+        bottom: 1px;
+        right: 1px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+
+        &--online {
+            background-color: #48c774;
+        }
+
+        &--offline {
+            background-color: #b5b5b5;
+        }
+
+        &--away {
+            background-color: #ffdd57;
+        }
+    }
+}
