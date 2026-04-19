@@ -1,7 +1,7 @@
 # Change log
 All changes will be published here in reverse chronological order
 
-## v1.16.0
+## v1.15.0
 - **Avatar** *(new)*
   - Displays a user avatar as a circle, square or rounded square (`shape?: AvatarShape`).
   - `src` + `alt` — renders an `<img>`; on load error automatically falls back to initials or icon.
@@ -13,7 +13,6 @@ All changes will be published here in reverse chronological order
   - `color?: string` — background colour for initials / icon mode; accepts any CSS colour value.
   - `onClick` — from `ClickableElement`; presence automatically adds `is-clickable` cursor.
 
-## v1.15.0
 - **Calendar** *(new)*
   - Standalone date-picker panel component with day-grid, month-picker and year-picker views.
   - `value` / `onChange` for controlled usage; `initialView` (`"month"` | `"year"`) to open in a non-default view.
