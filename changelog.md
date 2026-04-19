@@ -10,6 +10,21 @@ All changes will be published here in reverse chronological order
   - `closable` (default `true`) — shows a close (×) button in the header; requires `header` to be set.
   - `onClose` — callback fired when the close button is clicked.
 
+- **AutoComplete** *(new)*
+  - Text input with a dropdown suggestions list.
+  - `items` — static suggestion array; filtered locally (case-insensitive substring match).
+  - `onSearch` — async or sync search function for server-side lookup; called after debounce.
+  - `debounce` (ms, default `300`) — delay before `onSearch` / static filter fires.
+  - `maxSuggestions` (default `8`) — caps the number of visible dropdown items.
+  - `noResultsText` (default `"No results"`) — message shown when the dropdown is open but nothing matches.
+  - `isSearching` — external loading flag; shows Bulma spinner on the control.
+  - `clearable` (default `false`) — shows a × button when an item is confirmed selected; clicking it resets the field and calls `onSelect(undefined)`.
+  - `onSelect` — called with the selected `AutoCompleteItem` on pick, or `undefined` on clear / invalid blur.
+  - `onValueChange` — fires on every raw keystroke (before selection).
+  - Keyboard navigation: `↑` / `↓` move highlight, `Enter` confirms, `Escape` closes.
+  - **Blur validation**: on focus loss with unconfirmed text — auto-selects on exact match or single prefix match; applies red wavy underline otherwise.
+  - Supports `label` (vertical & horizontal), `defaultValue`, `placeholder`, `disabled`, `readonly`, `loading` from `BaseInputElementProps`.
+
 - **animations.scss** *(new)*
   - Standalone global animation stylesheet (`src/animations.scss`) — import once at the app entry point, then apply animations via `className` on any element.
   - **Infinite** (support pause via `bbr-anim-paused`): `bbr-pulse`, `bbr-spin`, `bbr-spin-reverse`, `bbr-bounce`, `bbr-heartbeat`, `bbr-float`, `bbr-wobble`.
