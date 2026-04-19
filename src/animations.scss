@@ -1,10 +1,8 @@
 // ── BBR global animations ─────────────────────────────────────────────────────
-//
 // Usage:
 //   <div class="bbr-pulse" />
 //   <div class="bbr-spin bbr-anim-paused" />   ← pause any infinite animation
 //   <div class="bbr-shake" />                  ← plays once; re-trigger via key change
-//
 // Infinite:  bbr-pulse, bbr-spin, bbr-spin-reverse, bbr-bounce, bbr-heartbeat,
 //            bbr-float, bbr-wobble
 // One-time:  bbr-shake, bbr-fade-in, bbr-pop, bbr-flip, bbr-slide-in-left,
@@ -38,8 +36,15 @@
 }
 
 @keyframes bbr-fade-in {
-    from { opacity: 0; transform: scale(0.75); }
-    to   { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.75);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes bbr-heartbeat {
@@ -64,21 +69,36 @@
 }
 
 @keyframes bbr-pop {
-    0%   { transform: scale(0); opacity: 0; }
-    60%  { transform: scale(1.2); opacity: 1; }
-    80%  { transform: scale(0.9); }
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    80% { transform: scale(0.9); }
     100% { transform: scale(1); }
 }
 
 @keyframes bbr-flip {
-    0%   { transform: perspective(400px) rotateY(0deg); }
-    40%  { transform: perspective(400px) rotateY(-180deg) scale(1.1); }
+    0% { transform: perspective(400px) rotateY(0deg); }
+    40% { transform: perspective(400px) rotateY(-180deg) scale(1.1); }
     100% { transform: perspective(400px) rotateY(-360deg) scale(1); }
 }
 
 @keyframes bbr-slide-in-left {
-    from { transform: translateX(-60px); opacity: 0; }
-    to   { transform: translateX(0); opacity: 1; }
+    from {
+        transform: translateX(-60px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 @keyframes bbr-spin-reverse {
@@ -87,11 +107,14 @@
 }
 
 @keyframes bbr-rubber-band {
-    0%   { transform: scale(1, 1); }
-    30%  { transform: scale(1.35, 0.75); }
-    50%  { transform: scale(0.8, 1.15); }
-    65%  { transform: scale(1.1, 0.9); }
-    80%  { transform: scale(0.97, 1.03); }
+    0% {
+        transform: scale(1, 1);
+    }
+
+    30% { transform: scale(1.35, 0.75); }
+    50% { transform: scale(0.8, 1.15); }
+    65% { transform: scale(1.1, 0.9); }
+    80% { transform: scale(0.97, 1.03); }
     100% { transform: scale(1, 1); }
 }
 
@@ -104,18 +127,39 @@
 }
 
 @keyframes bbr-zoom-in {
-    from { transform: scale(0.5); opacity: 0; }
-    to   { transform: scale(1); opacity: 1; }
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 @keyframes bbr-slide-in-right {
-    from { transform: translateX(60px); opacity: 0; }
-    to   { transform: translateX(0); opacity: 1; }
+    from {
+        transform: translateX(60px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 @keyframes bbr-slide-in-down {
-    from { transform: translateY(-50px); opacity: 0; }
-    to   { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 // ── Classes ───────────────────────────────────────────────────────────────────
