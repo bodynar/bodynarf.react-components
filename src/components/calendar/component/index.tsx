@@ -98,6 +98,7 @@ const Calendar: FC<CalendarProps> = ({
     const todayInRange = useMemo(() => {
         const min = isNotNullish(minDate) ? startOfDay(minDate) : null;
         const max = isNotNullish(maxDate) ? startOfDay(maxDate) : null;
+
         return (min === null || today >= min) && (max === null || today <= max);
     }, [today, minDate, maxDate]);
 
@@ -132,6 +133,7 @@ const Calendar: FC<CalendarProps> = ({
             const curYear = displayDate.getFullYear();
             return curYear - (curYear % YEARS_PER_PAGE);
         });
+
         setView("year-picker");
     }, [displayDate]);
 
@@ -152,6 +154,7 @@ const Calendar: FC<CalendarProps> = ({
     const handleTodayClick = useCallback(() => {
         const todayDate = getToday();
         onChange?.(todayDate);
+
         setDisplayDate(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1));
         setView("days");
     }, [onChange]);
@@ -173,9 +176,10 @@ const Calendar: FC<CalendarProps> = ({
                 `[Calendar] Pre-selected value ${value.toISOString()} is outside the allowed range ` +
                 `[${min?.toISOString() ?? "\u2212\u221e"}, ${max?.toISOString() ?? "+\u221e"}]. It will be cleared.`
             );
+
             onChange?.(undefined);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const calendarClassName = getClassName([
