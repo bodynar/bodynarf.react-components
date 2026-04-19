@@ -107,3 +107,6 @@ export * from "./primitives/timePicker";
 
 export { default as ComplexTable } from "./complexTable";
 export * from "./complexTable";
+
+export { default as Alert } from "./alert";
+export * from "./alert";

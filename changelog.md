@@ -2,6 +2,14 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
+- **Alert** *(new)*
+  - Styled message banner based on Bulma `message`.
+  - `children` — arbitrary React content rendered as the message body.
+  - `color` (`ElementColor`, default `Info`) — controls the colour variant of the banner.
+  - `header` — optional title rendered in a `.message-header` block above the body.
+  - `closable` (default `true`) — shows a close (×) button in the header; requires `header` to be set.
+  - `onClose` — callback fired when the close button is clicked.
+
 - **animations.scss** *(new)*
   - Standalone global animation stylesheet (`src/animations.scss`) — import once at the app entry point, then apply animations via `className` on any element.
   - **Infinite** (support pause via `bbr-anim-paused`): `bbr-pulse`, `bbr-spin`, `bbr-spin-reverse`, `bbr-bounce`, `bbr-heartbeat`, `bbr-float`, `bbr-wobble`.
