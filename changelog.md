@@ -2,6 +2,14 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
+- **ContextMenu** *(new)*
+  - Right-click context menu that attaches to any `children` element.
+  - `items: ContextMenuItem[]` — menu entries; each item has `key`, optional `label`, `icon` (Bootstrap Icons), `disabled` and `onClick`. An item with no `label` renders as a horizontal divider.
+  - `disabled` (default `false`) — suppresses the custom menu entirely when `true`.
+  - Rendered via `createPortal` directly into `<body>` — fully isolated from the trigger's DOM tree; parent CSS selectors (e.g. `.notification:not(:last-child)`) never affect the menu.
+  - Auto-flip: after opening, the menu measures its own dimensions and flips upward and/or leftward if it would overflow the viewport.
+  - Closes on outside click, `Escape` key press, or any scroll event (captured in the capture phase, so nested scrollable containers are also handled).
+
 - **ConfirmDialog** *(new)*
   - Focused confirmation modal built on Bulma `modal-card`.
   - `visible` — controls whether the dialog is rendered.

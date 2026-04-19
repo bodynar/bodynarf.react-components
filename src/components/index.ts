@@ -117,3 +117,6 @@ export * from "./badge";
 
 export { default as ConfirmDialog } from "./confirmDialog";
 export * from "./confirmDialog";
+
+export { default as ContextMenu } from "./contextMenu";
+export * from "./contextMenu";
