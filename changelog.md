@@ -2,6 +2,12 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
+- **animations.scss** *(new)*
+  - Standalone global animation stylesheet (`src/animations.scss`) — import once at the app entry point, then apply animations via `className` on any element.
+  - **Infinite** (support pause via `bbr-anim-paused`): `bbr-pulse`, `bbr-spin`, `bbr-spin-reverse`, `bbr-bounce`, `bbr-heartbeat`, `bbr-float`, `bbr-wobble`.
+  - **One-time** (re-trigger by changing React `key`): `bbr-shake`, `bbr-fade-in`, `bbr-pop`, `bbr-flip`, `bbr-rubber-band`, `bbr-tada`, `bbr-zoom-in`, `bbr-slide-in-left`, `bbr-slide-in-right`, `bbr-slide-in-down`.
+  - `bbr-anim-paused` — pauses any running animation via `animation-play-state: paused`.
+
 - **Avatar** *(new)*
   - Displays a user avatar as a circle, square or rounded square (`shape?: AvatarShape`).
   - `src` + `alt` — renders an `<img>`; on load error automatically falls back to initials or icon.
