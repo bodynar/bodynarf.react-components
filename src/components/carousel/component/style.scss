@@ -1,0 +1,107 @@
+.bbr-carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    user-select: none;
+
+    &__track {
+        width: 100%;
+        height: 100%;
+    }
+
+    &__slide {
+        width: 100%;
+    }
+
+    // ── Fade effect ────────────────────────────────────────────────────────────
+
+    &--fade &__track {
+        position: relative;
+    }
+
+    &--fade &__slide {
+        display: none;
+    }
+
+    &--fade &__slide--active {
+        display: block;
+        animation: bbr-carousel-fade 0.3s ease;
+    }
+
+    // ── Slide effect ───────────────────────────────────────────────────────────
+
+    &--slide &__track {
+        display: flex;
+        transition: transform 0.35s ease;
+    }
+
+    &--slide &__slide {
+        display: block;
+        flex: 0 0 100%;
+        min-width: 100%;
+    }
+
+    // ── Controls ───────────────────────────────────────────────────────────────
+
+    &__arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.4);
+        border: none;
+        border-radius: 50%;
+        width: 2.25rem;
+        height: 2.25rem;
+        color: #fff;
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s;
+
+        &:hover:not(:disabled) {
+            background: rgba(0, 0, 0, 0.65);
+        }
+
+        &:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        &--prev { left: 0.6rem; }
+        &--next { right: 0.6rem; }
+    }
+
+    &__dots {
+        position: absolute;
+        bottom: 0.65rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 0.4rem;
+        z-index: 10;
+    }
+
+    &__dot {
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.55);
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: background 0.2s, transform 0.2s;
+
+        &--active {
+            background: #fff;
+            transform: scale(1.3);
+        }
+    }
+}
+
+@keyframes bbr-carousel-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

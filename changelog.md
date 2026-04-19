@@ -2,6 +2,19 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
+- **Carousel** *(new)*
+  - Slides carousel with optional auto-play, navigation dots, arrow buttons and loop.
+  - `items: CarouselItem[]` — slide definitions; each item has a `key` and arbitrary `children` (`ReactNode`).
+  - `effect` (`CarouselEffect`, default `Fade`) — transition effect between slides:
+    - `Fade` — active slide fades in/out via CSS opacity animation.
+    - `Slide` — track scrolls horizontally; in loop mode uses a clone-pair technique so wrap-around is seamless in both directions.
+  - `showArrows` (default `true`) — prev/next chevron buttons; disabled at boundaries when `loop={false}`.
+  - `showDots` (default `true`) — clickable dot indicators; both arrows and dots are hidden when only one slide is present.
+  - `loop` (default `true`) — wraps around from last to first and vice-versa.
+  - `autoPlay` (default `false`) — auto-advances slides on a timer; paused when `count ≤ 1`.
+  - `interval` (ms, default `3000`) — auto-play delay.
+  - `activeIndex` + `onChange` — controlled mode; the component becomes fully controlled when `activeIndex` is provided.
+
 - **Alert** *(new)*
   - Styled message banner based on Bulma `message`.
   - `children` — arbitrary React content rendered as the message body.
