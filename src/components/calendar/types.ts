@@ -37,6 +37,18 @@ export type CalendarProps = BaseElementProps & {
      */
     locale?: string;
 
+    /** Start bound of an active date range. When set, single-selection highlighting is suppressed */
+    rangeStart?: Date;
+
+    /** Confirmed end bound of the date range */
+    rangeEnd?: Date;
+
+    /** Tentative hover date shown as a preview range end while the user picks the second bound */
+    hoverDate?: Date;
+
+    /** Called when the pointer enters a day cell; called with undefined when the pointer leaves the grid */
+    onDayHover?: (date: Date | undefined) => void;
+
     /** Called when the user selects a day or clears the selection */
     onChange?: (date?: Date) => void;
 };

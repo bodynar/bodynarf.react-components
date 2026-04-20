@@ -30,6 +30,11 @@ const Calendar: FC<CalendarProps> = ({
     clearButtonConfig,
     initialView,
     locale = "en-US",
+    rangeStart,
+    rangeEnd,
+    hoverDate,
+    onDayHover,
+
     className, title, data,
 }) => {
     const [displayDate, setDisplayDate] = useState<Date>(() => {
@@ -216,7 +221,11 @@ const Calendar: FC<CalendarProps> = ({
                     locale={locale}
                     minDate={minDate}
                     maxDate={maxDate}
+                    rangeEnd={rangeEnd}
                     selectedDate={value}
+                    hoverDate={hoverDate}
+                    onDayHover={onDayHover}
+                    rangeStart={rangeStart}
                     displayDate={displayDate}
                     onDayClick={handleDayClick}
                 />

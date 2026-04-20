@@ -167,7 +167,7 @@
     &__days {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        gap: 1px;
+        gap: 0; // must be 0 so range band is continuous
     }
 
     &__day {
@@ -177,28 +177,36 @@
         aspect-ratio: 1;
         padding: 0;
         border: none;
-        border-radius: 4px;
+        border-radius: 0; // circle lives in __day-inner
         background: transparent;
         cursor: pointer;
         font-size: inherit;
         color: inherit;
-        transition: 0.15s ease-in-out background-color, 0.15s ease-in-out color;
 
-        &:hover:not(:disabled) {
-            background-color: var(--bbr-calendar-hover-bg);
+        // ── Range band backgrounds ─────────────────────────────────────────────
+        &--in-range {
+            background: var(--bbr-calendar-accent-light);
         }
 
-        &--today {
-            background-color: var(--bbr-calendar-accent-light);
-            font-weight: 600;
+        &--range-start {
+            // right-half band connects to the next cell
+            background: linear-gradient(
+                to right,
+                transparent 50%,
+                var(--bbr-calendar-accent-light) 50%
+            );
         }
 
-        &--selected {
-            background-color: var(--bbr-calendar-accent) !important;
-            color: #fff !important;
-            font-weight: 600;
+        &--range-end {
+            // left-half band connects to the previous cell
+            background: linear-gradient(
+                to left,
+                transparent 50%,
+                var(--bbr-calendar-accent-light) 50%
+            );
         }
 
+        // ── State modifiers ────────────────────────────────────────────────────
         &--other-month {
             color: var(--bbr-calendar-other-month);
         }
@@ -209,6 +217,51 @@
             cursor: not-allowed;
             pointer-events: none;
             opacity: 0.45;
+        }
+    }
+
+    // The circle rendered inside each day button
+    &__day-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 25%;
+        transition: 0.12s ease-in-out background-color, 0.12s ease-in-out color;
+
+        // Today — light accent circle
+        .bbr-calendar__day--today & {
+            background-color: var(--bbr-calendar-accent-light);
+            font-weight: 600;
+        }
+
+        // Hover (non-selected states)
+        .bbr-calendar__day:hover:not(:disabled) & {
+            background-color: var(--bbr-calendar-hover-bg);
+        }
+
+        // Single-selection and range endpoints — solid accent circle
+        .bbr-calendar__day--selected &,
+        .bbr-calendar__day--range-start &,
+        .bbr-calendar__day--range-end &,
+        .bbr-calendar__day--range-anchor & {
+            background-color: var(--bbr-calendar-accent) !important;
+            color: #fff !important;
+            font-weight: 600;
+        }
+
+        // Keep accent circle on hover for selected/anchor states
+        .bbr-calendar__day--selected:hover:not(:disabled) &,
+        .bbr-calendar__day--range-start:hover:not(:disabled) &,
+        .bbr-calendar__day--range-end:hover:not(:disabled) &,
+        .bbr-calendar__day--range-anchor:hover:not(:disabled) & {
+            background-color: var(--bbr-calendar-accent) !important;
+        }
+
+        // In-range cells: no circle, just the band from the parent button
+        .bbr-calendar__day--in-range & {
+            background-color: transparent !important;
         }
     }
 
