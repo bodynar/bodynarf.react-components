@@ -9,6 +9,19 @@ All changes will be published here in reverse chronological order
 - **EmptyState** *(fixed)*
   - Colors were not applied — SCSS selector incorrectly checked for `has-text-*` classes; component emits `is-*` classes. Fixed selectors and added hardcoded hex values for each color variant.
 
+- **Skeleton** *(new)*
+  - `Skeleton.Text` — one or more shimmer text-line placeholders; `lines` and `lastLineWidth` props.
+  - `Skeleton.Block` — rectangular placeholder with explicit `width` / `height`.
+  - `Skeleton.Avatar` — circular or square placeholder in four `ElementSize` values.
+  - `Skeleton.Button` — button-shaped placeholder; size-based or explicit `width`.
+  - Sub-components split into individual files under `components/skeletonText|Block|Avatar|Button/`.
+
+- **Notification** *(new)*
+  - `NotificationContainer.Provider` — wraps the app (or a subtree) and owns the notification queue.
+  - `NotificationContainer` — fixed-position stack; `position` (`ElementPosition.Left | Right`) and `maxVisible` props.
+  - `useNotification()` hook — returns `add`, `remove`, `clear` for programmatic control.
+  - `NotificationItem`: `content: ReactNode`, `color`, `autoClose` (ms), `closable` (default `true`).
+
 - **TagGroup** *(new)*
   - Editable list of string tags rendered as Bulma tag pills inside a text-field-style container.
   - `value: string[]` + `onChange` — fully controlled; duplicates are silently ignored.
