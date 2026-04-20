@@ -2,6 +2,22 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
+### New hooks
+
+- **useDebounce** *(new)* — returns a debounced copy of `value` that only updates after `delay` ms of inactivity.
+- **useDebounceHandler** *(new)* — wraps an async handler and returns `[canFire, fire]`; `canFire` is `false` for `debounceTime` seconds after each invocation.
+- **usePrevious** *(new)* — stores and returns the previous render's value of any state or prop; returns `undefined` on the first render.
+- **useUpdateEffect** *(new)* — identical to `useEffect` but skips execution on the initial render.
+- **useTimeout** *(new)* — fires `callback` once after `delay` ms; pass `null` to disable. Auto-clears on unmount or delay change.
+- **useInterval** *(new)* — repeats `callback` every `delay` ms; pass `null` to pause without unmounting. Auto-clears on unmount.
+- **useEventListener** *(new)* — attaches a typed event listener to `window` (default) or any `HTMLElement` / `Document`; cleans up automatically.
+- **useLocalStorage** *(new)* — `useState`-like hook that persists its value to `localStorage`; initialises from storage on first render.
+- **useSessionStorage** *(new)* — mirrors `useLocalStorage` API but uses `sessionStorage`; value is cleared when the tab is closed.
+- **useClipboard** *(new)* — copies text to the clipboard via the Clipboard API; exposes `{ copy, copied, reset }`. `copied` resets automatically after `resetDelay` ms (default `2000`).
+- **useKeyPress** *(new)* — tracks whether a specific `KeyboardEvent.key` is currently held down; returns `boolean`.
+- **useFocus** *(new)* — returns `[ref, isFocused]`; attach `ref` to any element to reactively track its focus state.
+- **useWindowSize** *(new)* — reactively tracks `{ width, height }` of the browser viewport; updates on every `resize` event.
+
 - **TreeView** *(new)*
   - Hierarchical tree with expand/collapse, selection, keyboard navigation and checkbox support.
   - `nodes: TreeNode[]` — root-level tree; each node has `id`, `label`, optional `icon` (Bootstrap Icons), `children` and `disabled`.
