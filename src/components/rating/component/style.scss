@@ -1,0 +1,54 @@
+.bbr-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.1em;
+    line-height: 1;
+
+    &__star-wrap {
+        position: relative;
+        display: inline-flex;
+    }
+
+    &__half-trigger {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        z-index: 1;
+        cursor: pointer;
+    }
+
+    &__star {
+        cursor: pointer;
+        transition: color 0.12s, transform 0.1s;
+        color: #d4d4d4;
+
+        &--full,
+        &--half {
+            color: #f5a623;
+        }
+
+        &:hover {
+            transform: scale(1.15);
+        }
+    }
+
+    // Sizes — inherit from Bulma icon sizing
+    &.is-small  { font-size: 0.85rem; }
+    &.is-normal { font-size: 1.15rem; }
+    &.is-medium { font-size: 1.4rem; }
+    &.is-large  { font-size: 1.75rem; }
+
+    &--readonly {
+        .bbr-rating__star,
+        .bbr-rating__half-trigger {
+            cursor: default;
+            pointer-events: none;
+
+            &:hover {
+                transform: none;
+            }
+        }
+    }
+}

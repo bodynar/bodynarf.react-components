@@ -27,6 +27,23 @@ All changes will be published here in reverse chronological order
   - `color` (`ElementColor`, default `Default`) — applies colored border to all cells and a matching focus ring. Uses custom `bbr-otp--color-*` BEM modifiers (not Bulma `is-*`) to prevent Bulma's color inheritance from making typed text white.
   - Supports paste, Backspace (delete current then previous), and ← → arrow key navigation between cells.
 
+- **Rating** *(new)*
+  - Star-based rating input.
+  - `value` (0–`max`), `max` (default `5`), `onChange`.
+  - `allowHalf` (default `false`) — enables 0.5-increment selection via the left-half trigger area.
+  - `clearable` (default `true`) — clicking the active star resets to 0.
+  - `readonly` (default `false`) — disables hover and click; useful for display-only contexts.
+  - `size` (`ElementSize`, default `Normal`) — maps to font-size via Bulma icon sizing classes.
+
+- **SegmentedControl** *(new)*
+  - Pill-style option selector built on Bulma `buttons has-addons`.
+  - `options: SegmentedOption[]` — each option has `value`, `label`, optional `icon` and `disabled`.
+  - `value` / `onChange` — fully controlled.
+  - `color` (`ElementColor`, default `Primary`) — accent color of the active segment; `Default` maps to `is-dark`.
+  - `size` (`ElementSize.Small | Normal | Medium | Large`, default `Normal`).
+  - `fullWidth` (default `false`) — stretches to container width, each button takes equal space.
+  - `disabled` (default `false`) — disables all options globally.
+
 - **ImageViewer** *(new)*
   - Lightbox-style overlay for single images and galleries.
   - `images: ImageViewerImage[]` — each entry has `src`, optional `alt` and `caption`.
