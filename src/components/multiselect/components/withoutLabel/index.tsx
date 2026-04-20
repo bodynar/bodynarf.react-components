@@ -212,7 +212,6 @@ type DropdownContentProps = Pick<MultiselectProps,
     onItemSelectChange: (item: MultiselectItemModel, selected: boolean) => void;
 };
 
-// eslint-disable-next-line react/no-multi-comp
 const DropdownContent: FC<DropdownContentProps> = ({
     noDataText, id, listMaxHeight, noDataByQuery,
     items, selectedItems,

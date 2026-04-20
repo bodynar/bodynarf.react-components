@@ -96,7 +96,6 @@ const MultiselectItem: FC<MultiselectItemProps> = ({
 export default MultiselectItem;
 
 /** Single item in multiselect component with icon */
-// eslint-disable-next-line react/no-multi-comp
 const MultiselectItemWithIcon: FC<MultiselectItemProps> = ({
     item, selected, rootId,
     onChange, onItemClick,

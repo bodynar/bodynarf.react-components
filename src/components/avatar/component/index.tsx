@@ -5,6 +5,8 @@ import { getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
 import { ElementSize } from "@bbr/types";
 import { getSizeClassName, mapDataAttributes } from "@bbr/utils";
 
+import Icon from "@bbr/components/icon";
+
 import "./style.scss";
 
 import { AvatarProps, AvatarShape } from "..";
@@ -64,7 +66,10 @@ const Avatar: FC<AvatarProps> = ({
                 ) : null}
 
                 {showIcon ? (
-                    <i className={getClassName(["bbr-avatar__icon", "bi", `bi-${icon}`])} />
+                    <Icon
+                        name={icon}
+                        className="bbr-avatar__icon"
+                    />
                 ) : null}
             </div>
 

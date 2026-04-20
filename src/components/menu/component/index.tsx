@@ -4,6 +4,8 @@ import { getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
 
 import { mapDataAttributes } from "@bbr/utils";
 
+import Icon from "@bbr/components/icon";
+
 import "./style.scss";
 
 import { MenuItemConfig, MenuProps } from "..";
@@ -112,7 +114,7 @@ const MenuItem: FC<MenuItemProps> = ({
             >
                 {isNotNullish(item.icon) && (
                     <span className="icon is-small mr-2">
-                        <i className={`bi bi-${item.icon}`} />
+                        <Icon name={item.icon} />
                     </span>
                 )}
                 {item.label}

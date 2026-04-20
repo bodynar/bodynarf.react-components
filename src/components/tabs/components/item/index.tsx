@@ -51,7 +51,6 @@ const TabItem: FC<TabItemProps> = ({
 export default TabItem;
 
 /** Tabs panel single tab item with icon component */
-// eslint-disable-next-line react/no-multi-comp
 const TabItemWithIcon: FC<TabItemProps> = ({
     item, activeItem
 }) => {

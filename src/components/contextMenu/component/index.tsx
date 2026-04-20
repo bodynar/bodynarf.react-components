@@ -11,6 +11,8 @@ import { createPortal } from "react-dom";
 
 import { getClassName, isNotNullish } from "@bodynarf/utils";
 
+import Icon from "@bbr/components/icon";
+
 import { mapDataAttributes } from "@bbr/utils";
 
 import "./style.scss";
@@ -144,7 +146,12 @@ const ContextMenu: FC<ContextMenuProps> = ({
                                     item.disabled ? "is-disabled" : "",
                                 ])}
                             >
-                                {item.icon ? <i className={`bi bi-${item.icon} bbr-context-menu__icon`} /> : null}
+                                {item.icon ? (
+                                    <Icon
+                                        name={item.icon}
+                                        className="bbr-context-menu__icon"
+                                    />
+                                ) : null}
                                 {item.label}
                             </a>
                         );

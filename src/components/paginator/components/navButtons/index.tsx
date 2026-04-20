@@ -133,7 +133,6 @@ type PaginatorInternalNavButtonsProps =
     & Required<Pick<PaginatorProps, "size">>;
 
 // Internal reusable component
-// eslint-disable-next-line react/no-multi-comp
 const PaginatorInternalNavButtons: FC<PaginatorInternalNavButtonsProps> = ({
     currentPage, count, resources,
     pageNumbers, pageChange, size, rounded, pageButtonsConfig,
