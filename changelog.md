@@ -18,204 +18,48 @@ All changes will be published here in reverse chronological order
 - **useFocus** *(new)* — returns `[ref, isFocused]`; attach `ref` to any element to reactively track its focus state.
 - **useWindowSize** *(new)* — reactively tracks `{ width, height }` of the browser viewport; updates on every `resize` event.
 
-- **TreeView** *(new)*
-  - Hierarchical tree with expand/collapse, selection, keyboard navigation and checkbox support.
-  - `nodes: TreeNode[]` — root-level tree; each node has `id`, `label`, optional `icon` (Bootstrap Icons), `children` and `disabled`.
-  - Uncontrolled by default; switches to fully controlled when `expandedIds` + `onToggleExpand` and/or `selectedIds` + `onSelect` are provided.
-  - `multiSelect` (default `false`) — allows selecting multiple nodes simultaneously.
-  - **Selection modifiers** (requires `multiSelect`):
-    - Plain click — toggle node and all its non-disabled descendants.
-    - Shift+Click — range from the last anchor to the clicked node (including all descendants); if the clicked node is already selected, every node in the range is toggled instead of set.
-    - Space / Enter — keyboard-select the focused node.
-  - **Parent ↔ child propagation**: selecting a parent selects all its non-disabled descendants; deselecting propagates the same way. The reverse direction is reflected in the checkbox state (see below).
-  - `showCheckboxes` (default `false`) — renders a BBR `CheckBox` next to each label.
-  - `checkboxConfig?: TreeViewCheckboxConfig` — visual configuration for the BBR Checkbox (`style`, `rounded`, `size`, `hasBackgroundColor`, `fixBackgroundColor`). When provided, checkboxes are shown automatically.
-  - **Aggregate checkbox state** — parent checkbox state is derived from its non-disabled descendants:
-    - all selected → checked
-    - none selected → unchecked
-    - some selected → indeterminate (dash)
-  - **Keyboard navigation** (focus the container, then):
-    - `↓` / `↑` — move focus to next / previous visible non-disabled node.
-    - `→` — expand if collapsed, otherwise move focus to the first child.
-    - `←` — collapse if expanded, otherwise move focus to the parent.
-    - Space / Enter — select the focused node.
-  - `selectionColor` (`ElementColor`) — accent color for the selected-node highlight and keyboard focus ring; all 7 Bulma variants supported via CSS custom properties.
-  - Focus ring is hidden when focus moves to a child element (checked via `relatedTarget`).
+- **TreeView** *(new)* — Hierarchical tree component for displaying nested data (file explorers, org charts, category trees). Supports expand/collapse, single and multi-selection with parent ↔ child propagation, optional checkboxes with indeterminate state, and full keyboard navigation (arrows, Enter, Space). Uncontrolled by default; becomes controlled when `expandedIds`/`selectedIds` are provided.
 
-- **Popover** *(new)*
-  - Lightweight floating panel anchored to any trigger element.
-  - Slot-based API: `Popover.Trigger` wraps the activator; `Popover.Content` holds arbitrary `ReactNode` content.
-  - `position` (`PopoverPosition.Top | Bottom | Left | Right`, default `Bottom`) — placement of the bubble relative to the trigger.
-  - Uncontrolled by default (internal open state); switches to fully controlled when `visible` + `onToggle` are provided.
-  - Closes on outside click (via `useComponentOutsideClick`); controlled mode delegates close to `onToggle`.
+- **Popover** *(new)* — Lightweight floating panel anchored to a trigger element; useful for rich tooltips, mini-forms or contextual actions. Compound component: `Popover.Trigger` + `Popover.Content`. Uncontrolled by default; becomes controlled with `visible` + `onToggle`.
 
-- **DateRangePicker** *(new)*
-  - Single-calendar date range picker — first click anchors the start, second click confirms the end.
-  - While the end date is being chosen, moving the pointer over the calendar shows a live range-band preview.
-  - Selected range is highlighted: endpoints get solid accent circles, intermediate days get a continuous tinted band.
-  - `value: DateRange` (`{ start, end }`) + `onChange` — fully controlled.
-  - `style` (`ElementColor`, default `Primary`) — accent color applied to the calendar highlight.
-  - `size` (`ElementSize`) — forwarded to the inner `Calendar`.
-  - `minDate` / `maxDate` — constrain the selectable range.
-  - `locale` (BCP 47, default `"en-US"`) — forwarded to month / weekday labels.
-  - `labelConfig?: DateRangePickerLabelConfig` — optional overrides for all user-visible strings:
-    - `placeholder` (default `"Select range"`) — shown when nothing is selected.
-    - `separator` (default `" → "`) — rendered between start and end in the label bar.
-    - `pendingSuffix` (default `"…"`) — appended to the start date while the end date is not yet picked.
-    - `clearAriaLabel` (default `"Clear range"`) — accessible label for the × clear button.
-  - Calendar extended internally: `CalendarDaysGrid` gained `rangeStart`, `rangeEnd`, `hoverDate`, `onDayHover` props; day cells render inside `__day-inner` spans for circle/band separation.
+- **DateRangePicker** *(new)* — Calendar-based date range selector for booking, reporting and filtering flows. First click sets start, second sets end; live hover preview between dates. Fully controlled.
 
-- **Spinner** *(fixed)*
-  - Colors were invisible — replaced unresolvable `var(--bulma-*)` CSS variables with hardcoded hex values matching Bulma defaults.
-  - Improved rotation visibility — border pattern changed from 2-side (`bottom + left`) to 3-side (`top + right + bottom`) with one transparent side, producing a clear ¾-arc gap.
+- **Spinner** *(new)* — Loading indicator for async operations and pending states.
 
-- **EmptyState** *(fixed)*
-  - Colors were not applied — SCSS selector incorrectly checked for `has-text-*` classes; component emits `is-*` classes. Fixed selectors and added hardcoded hex values for each color variant.
+- **EmptyState** *(new)* — Placeholder for empty lists, search results or pages with no data.
 
-- **Stat** *(new)*
-  - KPI / statistics display card.
-  - `value: string | number` + `label` — primary metric and its description.
-  - `icon` — optional Bootstrap Icons name; rendered in a colored badge.
-  - `color` (`ElementColor`, default `Primary`) — accent color of the icon badge (hardcoded bg + text per variant; Bulma CSS vars are not used).
-  - `trend?: StatTrend` — optional badge with `label` text and `direction` (`Up` / `Down` / `Neutral`); colored green / red / grey automatically.
+- **Stat** *(new)* — KPI / statistics display card for dashboards. Shows a primary metric value with label, optional icon badge and trend indicator (up/down/neutral).
 
-- **OtpInput** *(new)*
-  - One-time password / PIN input rendered as a row of single-character cells.
-  - `length` (default `6`) — number of cells.
-  - `type` — `"text"` (default) or `"password"`.
-  - `numbersOnly` (default `true`) — restricts input to digits; set `false` for alphanumeric.
-  - `autoFocus` (default `false`) — focuses the first cell on mount.
-  - `disabled` (default `false`) — dims and disables all cells.
-  - `size` (`ElementSize`, default `Normal`) — Small / Normal / Medium / Large.
-  - `color` (`ElementColor`, default `Default`) — applies colored border to all cells and a matching focus ring. Uses custom `bbr-otp--color-*` BEM modifiers (not Bulma `is-*`) to prevent Bulma's color inheritance from making typed text white.
-  - Supports paste, Backspace (delete current then previous), and ← → arrow key navigation between cells.
+- **OtpInput** *(new)* — One-time password / PIN input rendered as a row of single-character cells. Supports paste, Backspace navigation and arrow keys between cells.
 
-- **Rating** *(new)*
-  - Star-based rating input.
-  - `value` (0–`max`), `max` (default `5`), `onChange`.
-  - `allowHalf` (default `false`) — enables 0.5-increment selection via the left-half trigger area.
-  - `clearable` (default `true`) — clicking the active star resets to 0.
-  - `readonly` (default `false`) — disables hover and click; useful for display-only contexts.
-  - `size` (`ElementSize`, default `Normal`) — maps to font-size via Bulma icon sizing classes.
+- **Rating** *(new)* — Star-based rating input for reviews and feedback forms. Supports half-star increments and read-only display mode.
 
-- **SegmentedControl** *(new)*
-  - Pill-style option selector built on Bulma `buttons has-addons`.
-  - `options: SegmentedOption[]` — each option has `value`, `label`, optional `icon` and `disabled`.
-  - `value` / `onChange` — fully controlled.
-  - `color` (`ElementColor`, default `Primary`) — accent color of the active segment; `Default` maps to `is-dark`.
-  - `size` (`ElementSize.Small | Normal | Medium | Large`, default `Normal`).
-  - `fullWidth` (default `false`) — stretches to container width, each button takes equal space.
-  - `disabled` (default `false`) — disables all options globally.
+- **SegmentedControl** *(new)* — Pill-style option selector (tab bar alternative) for switching between a small set of values. Fully controlled.
 
-- **ImageViewer** *(new)*
-  - Lightbox-style overlay for single images and galleries.
-  - `images: ImageViewerImage[]` — each entry has `src`, optional `alt` and `caption`.
-  - `visible` / `onClose` — fully controlled open state.
-  - `initialIndex` (default `0`) — which image to show on open.
-  - Navigation arrows and ← → keyboard support; arrows are hidden for single-image mode.
-  - Closes on Escape, overlay click, or the × button.
+- **ImageViewer** *(new)* — Lightbox-style fullscreen overlay for viewing single images and galleries. Supports keyboard navigation and closes on Escape. Fully controlled (`visible` + `onClose`).
 
-- **Menu** *(new)*
-  - Vertical navigation sidebar based on Bulma `.menu`.
-  - `sections: MenuSectionConfig[]` — each section has an optional `label` and a list of items.
-  - `MenuItemConfig`: `id`, `label`, optional `icon` (Bootstrap Icons), `href`, `disabled`.
-  - `activeItemId` — controlled highlight; matching item receives `is-active`.
-  - `onItemClick(id)` — fires for non-disabled items.
-  - Items with `href` render as real `<a>` tags; items without render as `<a href="#">`.
-  - Disabled items are dimmed and non-interactive (`pointer-events: none`).
+- **Menu** *(new)* — Vertical navigation sidebar based on Bulma `.menu`. Supports grouped sections, icons, active item highlight and disabled items.
 
-- **Skeleton** *(new)*
-  - `Skeleton.Text` — one or more shimmer text-line placeholders; `lines` and `lastLineWidth` props.
-  - `Skeleton.Block` — rectangular placeholder with explicit `width` / `height`.
-  - `Skeleton.Avatar` — circular or square placeholder in four `ElementSize` values.
-  - `Skeleton.Button` — button-shaped placeholder; size-based or explicit `width`.
-  - Sub-components split into individual files under `components/skeletonText|Block|Avatar|Button/`.
+- **Skeleton** *(new)* — Shimmer placeholders for content loading states. Compound component with sub-variants: `Skeleton.Text`, `Skeleton.Block`, `Skeleton.Avatar`, `Skeleton.Button`.
 
-- **Notification** *(new)*
-  - `NotificationContainer.Provider` — wraps the app (or a subtree) and owns the notification queue.
-  - `NotificationContainer` — fixed-position stack; `position` (`ElementPosition.Left | Right`) and `maxVisible` props.
-  - `useNotification()` hook — returns `add`, `remove`, `clear` for programmatic control.
-  - `NotificationItem`: `content: ReactNode`, `color`, `autoClose` (ms), `closable` (default `true`).
+- **Notification** *(new)* — Toast-like notification system with auto-close and stacking. Requires `NotificationContainer.Provider` as a wrapper around the app/subtree. Programmatic control via `useNotification()` hook (`add`, `remove`, `clear`).
 
-- **TagGroup** *(new)*
-  - Editable list of string tags rendered as Bulma tag pills inside a text-field-style container.
-  - `value: string[]` + `onChange` — fully controlled; duplicates are silently ignored.
-  - `color` (`ElementColor`, default `Primary`) — tag color applied via `Tag` component.
-  - `size` (`ElementSize`, excluding `Small`, default `Normal`) — tag and delete-button size; the × button inherits the same size class so both elements scale together.
-  - `placeholder` (default `"Add tag…"`) — shown in the input when the list is empty.
-  - `addable` (default `true`) — shows the text input for adding new tags.
-  - `removable` (default `true`) — shows the × delete button on each tag.
-  - `disabled` (default `false`) — disables the entire component; input and all × buttons become inert.
-  - `confirmKeys` (default `["Enter", ","]`) — keys that commit the current input as a new tag. `Backspace` on empty input removes the last tag.
-  - `maxTags` — optional upper limit; the input is hidden once the limit is reached.
-  - Tags are rendered using the `Tag` component; `Tag` gained an `onRemove` prop that renders a sized delete button via `has-addons`.
+- **TagGroup** *(new)* — Editable tag list for label management, filtering and multi-value inputs. Supports add/remove, duplicate prevention, configurable confirm keys and max tag limit.
 
 - **Tag** *(updated)*
   - Added `onRemove?: () => void` — when provided, the component wraps itself in a `<div class="tags has-addons">` and appends an `is-delete` span. The delete span receives the same size class as the tag so they always scale together.
 
-- **ContextMenu** *(new)*
-  - Right-click context menu that attaches to any `children` element.
-  - `items: ContextMenuItem[]` — menu entries; each item has `key`, optional `label`, `icon` (Bootstrap Icons), `disabled` and `onClick`. An item with no `label` renders as a horizontal divider.
-  - `disabled` (default `false`) — suppresses the custom menu entirely when `true`.
-  - Rendered via `createPortal` directly into `<body>` — fully isolated from the trigger's DOM tree; parent CSS selectors (e.g. `.notification:not(:last-child)`) never affect the menu.
-  - Auto-flip: after opening, the menu measures its own dimensions and flips upward and/or leftward if it would overflow the viewport.
-  - Closes on outside click, `Escape` key press, or any scroll event (captured in the capture phase, so nested scrollable containers are also handled).
+- **ContextMenu** *(new)* — Right-click context menu for any element. Rendered via portal into `<body>`, auto-flips when near viewport edges. Closes on outside click, Escape or scroll.
 
-- **ConfirmDialog** *(new)*
-  - Focused confirmation modal built on Bulma `modal-card`.
-  - `visible` — controls whether the dialog is rendered.
-  - `title` (default `"Are you sure?"`) — heading text.
-  - `message?: ReactNode` — optional body; accepts a plain string or arbitrary React content.
-  - `confirmLabel` / `cancelLabel` (defaults `"Confirm"` / `"Cancel"`) — button labels.
-  - `confirmColor` (`ElementColor`, default `Danger`) — colour of the confirm button; mapped to `ButtonStyle` via an explicit `Map` (no type casts).
-  - `icon` (default `"exclamation-triangle"`) — Bootstrap Icons name shown in the header.
-  - `isLoading` (default `false`) — disables both buttons and shows a spinner on confirm; intended for async `onConfirm` handlers.
-  - `cancellable` (default `false`) — when `true`, clicking the backdrop or pressing `Escape` does **not** close the dialog; the user must interact with a button.
-  - `onConfirm` / `onCancel` — action callbacks.
+- **ConfirmDialog** *(new)* — Focused confirmation modal for destructive or important actions. Supports async confirm with loading state. `cancellable` mode prevents closing via backdrop/Escape — user must click a button.
 
-- **Carousel** *(new)*
-  - Slides carousel with optional auto-play, navigation dots, arrow buttons and loop.
-  - `items: CarouselItem[]` — slide definitions; each item has a `key` and arbitrary `children` (`ReactNode`).
-  - `effect` (`CarouselEffect`, default `Fade`) — transition effect between slides:
-    - `Fade` — active slide fades in/out via CSS opacity animation.
-    - `Slide` — track scrolls horizontally; in loop mode uses a clone-pair technique so wrap-around is seamless in both directions.
-  - `showArrows` (default `true`) — prev/next chevron buttons; disabled at boundaries when `loop={false}`.
-  - `showDots` (default `true`) — clickable dot indicators; both arrows and dots are hidden when only one slide is present.
-  - `loop` (default `true`) — wraps around from last to first and vice-versa.
-  - `autoPlay` (default `false`) — auto-advances slides on a timer; paused when `count ≤ 1`.
-  - `interval` (ms, default `3000`) — auto-play delay.
-  - `activeIndex` + `onChange` — controlled mode; the component becomes fully controlled when `activeIndex` is provided.
+- **Carousel** *(new)* — Slides carousel for image galleries, banners and onboarding flows. Supports Fade and Slide effects, auto-play, loop, dots and arrow navigation. Uncontrolled by default; becomes controlled with `activeIndex` + `onChange`.
 
-- **Alert** *(new)*
-  - Styled message banner based on Bulma `message`.
-  - `children` — arbitrary React content rendered as the message body.
-  - `color` (`ElementColor`, default `Info`) — controls the colour variant of the banner.
-  - `header` — optional title rendered in a `.message-header` block above the body.
-  - `closable` (default `true`) — shows a close (×) button in the header; requires `header` to be set.
-  - `onClose` — callback fired when the close button is clicked.
+- **Alert** *(new)* — Styled message banner for informational, warning or error notices. Optional closable header.
 
-- **AutoComplete** *(new)*
-  - Text input with a dropdown suggestions list.
-  - `items` — static suggestion array; filtered locally (case-insensitive substring match).
-  - `onSearch` — async or sync search function for server-side lookup; called after debounce.
-  - `debounce` (ms, default `300`) — delay before `onSearch` / static filter fires.
-  - `maxSuggestions` (default `8`) — caps the number of visible dropdown items.
-  - `noResultsText` (default `"No results"`) — message shown when the dropdown is open but nothing matches.
-  - `isSearching` — external loading flag; shows Bulma spinner on the control.
-  - `clearable` (default `false`) — shows a × button when an item is confirmed selected; clicking it resets the field and calls `onSelect(undefined)`.
-  - `onSelect` — called with the selected `AutoCompleteItem` on pick, or `undefined` on clear / invalid blur.
-  - `onValueChange` — fires on every raw keystroke (before selection).
-  - Keyboard navigation: `↑` / `↓` move highlight, `Enter` confirms, `Escape` closes.
-  - **Blur validation**: on focus loss with unconfirmed text — auto-selects on exact match or single prefix match; applies red wavy underline otherwise.
-  - Supports `label` (vertical & horizontal), `defaultValue`, `placeholder`, `disabled`, `readonly`, `loading` from `BaseInputElementProps`.
+- **AutoComplete** *(new)* — Text input with dropdown suggestions for search and selection. Supports static items (local filter) and async `onSearch` for server-side lookup. Blur validation auto-selects on exact/prefix match or shows an error underline.
 
-- **Badge** *(new)*
-  - Overlay indicator rendered on the top-right corner of any child element.
-  - `value` — numeric badge; when `value > max` displays `{max}+`.
-  - `max` (default `99`) — overflow threshold.
-  - `dot` — small dot variant with no text, useful for "has new" signals; mutually exclusive with `value`.
-  - `color` (`ElementColor`, default `Danger`) — badge background colour.
-  - `hidden` (default `false`) — hides the badge without unmounting the child.
+- **Badge** *(new)* — Overlay indicator (counter or dot) rendered on the top-right corner of any child element. Useful for unread counts, "new" markers and notification badges.
 
 - **animations.scss** *(new)*
   - Standalone global animation stylesheet (`src/animations.scss`) — import once at the app entry point, then apply animations via `className` on any element.
@@ -223,68 +67,17 @@ All changes will be published here in reverse chronological order
   - **One-time** (re-trigger by changing React `key`): `bbr-shake`, `bbr-fade-in`, `bbr-pop`, `bbr-flip`, `bbr-rubber-band`, `bbr-tada`, `bbr-zoom-in`, `bbr-slide-in-left`, `bbr-slide-in-right`, `bbr-slide-in-down`.
   - `bbr-anim-paused` — pauses any running animation via `animation-play-state: paused`.
 
-- **Avatar** *(new)*
-  - Displays a user avatar as a circle, square or rounded square (`shape?: AvatarShape`).
-  - `src` + `alt` — renders an `<img>`; on load error automatically falls back to initials or icon.
-  - `initials?: string` — text fallback when no image is available (e.g. `"JD"`).
-  - `icon?: string` — Bootstrap icon name (without `bi-`) used as fallback when neither image nor initials are provided.
-  - `status?: AvatarStatus` — optional status indicator dot: `Online` (green), `Away` (yellow), `Offline` (grey).
-  - `shape?: AvatarShape` — `Circle` (default), `Square`, `RoundedSquare` (4 px corners).
-  - `size?: ElementSize` — Small (24 px), Normal (40 px, default), Medium (56 px), Large (72 px).
-  - `color?: string` — background colour for initials / icon mode; accepts any CSS colour value.
-  - `onClick` — from `ClickableElement`; presence automatically adds `is-clickable` cursor.
+- **Avatar** *(new)* — User avatar component with automatic fallback chain: image → initials → icon. Supports status indicator dot (Online/Away/Offline) and multiple shapes (circle, square, rounded square).
 
-- **Calendar** *(new)*
-  - Standalone date-picker panel component with day-grid, month-picker and year-picker views.
-  - `value` / `onChange` for controlled usage; `initialView` (`"month"` | `"year"`) to open in a non-default view.
-  - `locale` (BCP 47 tag, default `"en-US"`) localises month names and weekday labels via `Intl.DateTimeFormat`.
-  - `style` (`ElementColor`) tints the accent colour and panel border; `size` (`ElementSize`) scales font and minimum width.
-  - `minDate` / `maxDate` restrict the selectable range — days outside the range are rendered as disabled.
-  - Navigation arrows are disabled when scrolling further would exceed `minDate` (prev) or `maxDate` (next); applies in all three views.
-  - `todayButtonConfig?: CalendarFooterButtonConfig` — optional footer Today button (full `ButtonProps` passthrough minus `onClick`, `static`, `size`, `disabled`). Disabled automatically when the selected date is already today; hidden entirely when today falls outside `minDate` / `maxDate`.
-  - `clearButtonConfig?: CalendarFooterButtonConfig` — optional footer Clear button; only visible when a date is currently selected.
-  - Footer layout: one button renders centered at full width; two buttons split the footer evenly.
-  - Pre-selected `value` is validated on mount — if it falls outside `minDate` / `maxDate` it is cleared via `onChange(undefined)` and a `console.error` is logged.
+- **Calendar** *(new)* — Standalone date-picker panel with day-grid, month-picker and year-picker views. Supports locale, min/max date range, optional Today and Clear footer buttons. Pre-selected value outside min/max is auto-cleared on mount.
 
-- **Card** *(new)*
-  - Compound component with `Card.Header`, `Card.Body` and `Card.Footer` sub-components.
-  - All three sections are optional and can be used in any combination.
-  - `Card.Header` extends `ClickableElement` — accepts `onClick`, which automatically applies `is-clickable` class.
-  - All sub-components and the root `Card` accept `className`, `title` and `data` props from `BaseElementProps`.
+- **Card** *(new)* — Generic content container. Compound component with optional `Card.Header`, `Card.Body` and `Card.Footer` sub-components in any combination.
 
-- **Toast** *(new)*
-  - Inline or fixed-position notification component based on Bulma `notification`.
-  - Supports all `ElementColor` variants via `color` prop.
-  - Optional close button (shown by default) with `onClose` callback.
-  - `fixed` prop renders the toast in a fixed overlay at the top of the viewport.
-  - `position` prop (`ElementFloatPosition.Left` / `Right`) controls horizontal placement in fixed mode.
-  - `autoClose` prop (ms) automatically calls `onClose` after the given delay.
+- **Toast** *(new)* — Inline or fixed-position notification banner. Supports auto-close and color variants. Use `fixed` + `position` for viewport-anchored toasts.
 
-- **Tooltip** *(new)*
-  - Hover/click-triggered popup with configurable position, animation and close behaviour.
-  - Compound component: use `<Tooltip.Hint>` for popup content and `<Tooltip.Target>` for the anchor element.
-  - `position` (`TooltipPosition`): `Top` (default), `Bottom`, `Left`, `Right`.
-  - `animation` (`TooltipAnimation`): `None`, `Fade` (default), `Slide`.
-  - `closeOn` (`TooltipCloseOn`): `MouseLeave` (default), `OutsideClick`, `Manual`.
-  - `openDelay` (ms) — delay before showing the tooltip, default `0`.
-  - `lifetime` (ms) — auto-hide after given duration.
-  - `visible` — controlled-mode prop; when provided, open/close events are ignored.
-  - Hovering over the popup itself no longer dismisses it — a transparent bridge element fills the gap, and `onMouseLeave` uses an 80 ms debounce.
-  - Tooltip content is rendered before the trigger in the DOM, preventing Bulma's `:not(:last-child)` margin on trigger buttons inside `.buttons`.
-  - Slide animation is position-aware: each placement uses its own directional offset.
-  - Dismiss animation added — `transition` drives both enter and exit opacity/transform.
+- **Tooltip** *(new)* — Hover/click-triggered popup for contextual hints and help text. Compound component: `Tooltip.Hint` (content) + `Tooltip.Target` (anchor). Supports Fade/Slide animation, configurable close behavior (MouseLeave, OutsideClick, Manual) and controlled mode.
 
-- **SidePanel** *(new)*
-  - Sliding side panel with compound sub-components `SidePanel.Title` and `SidePanel.Body`.
-  - `SidePanel.Title` renders a header with an optional built-in close (×) button (`showCloseButton`, default `true`).
-  - `SidePanel.Body` renders a scrollable content area.
-  - `position` (`ElementFloatPosition`): `Left` (default), `Right` — controls which side the panel slides in from.
-  - `size` (`SidePanelSize`): `Small` (15vw), `Normal` (20vw, default), `Medium` (35vw), `Large` (50vw).
-  - `customWidth` (number) — arbitrary panel width in vw units; overrides `size` when provided.
-  - `closeOnOverlayClick` (default `true`) — closes the panel when the backdrop is clicked.
-  - Panel also closes on Escape key press.
-  - Backdrop fades in/out via CSS `opacity` transition; panel slides via `transform: translateX` transition.
-  - `box-shadow` appears only after the panel is fully open (animates together with the slide).
+- **SidePanel** *(new)* — Sliding side panel with backdrop overlay for detail views, settings and filters. Compound component: `SidePanel.Title` + `SidePanel.Body`. Closes on Escape and backdrop click.
 
 - **ModalWrapper** *(extended)*
   - Added compound component pattern: `ModalWrapper.Header`, `ModalWrapper.Body`, `ModalWrapper.Footer`.
