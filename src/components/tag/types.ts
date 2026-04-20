@@ -31,4 +31,10 @@ export type TagProps =
             /** Background color */
             backgroundColor: string;
         };
+
+        /**
+         * Called when the remove (×) button is clicked.
+         * When provided, a delete button is rendered alongside the tag.
+         */
+        onRemove?: () => void;
     };

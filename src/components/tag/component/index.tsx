@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 
 import { getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
 
@@ -15,7 +15,7 @@ const Tag: FC<TagProps> = ({
     size = ElementSize.Normal, style = ElementColor.Default,
     rounded = false, lightColor = false, customColor,
 
-    onClick,
+    onClick, onRemove,
     className, title, data,
 }) => {
     if (isNotNullish(customColor)) {
@@ -34,26 +34,72 @@ const Tag: FC<TagProps> = ({
         isNullish(onClick) ? "" : "is-clickable",
     ]);
 
-    const dataAttributes = mapDataAttributes(data);
+    const sizeClass = getSizeClassName(size, ElementSize.Normal);
+
+    const onDeleteClick = useCallback((e: React.MouseEvent<HTMLSpanElement>) => {
+        e.stopPropagation();
+        onRemove!();
+    }, [onRemove]);
+
+    if (isNullish(onRemove)) {
+        return (
+            <TagSpan
+                data={data}
+                title={title}
+                content={content}
+                onClick={onClick}
+                className={elClassName}
+                customColor={customColor}
+            />
+        );
+    }
 
     return (
-        <span
-            {...dataAttributes}
-
-            title={title}
-            onClick={onClick}
-            className={elClassName}
-            style={isNullish(customColor)
-                ? undefined
-                : {
-                    color: customColor?.color,
-                    backgroundColor: customColor?.backgroundColor,
-                }
-            }
-        >
-            {content}
-        </span>
+        <div className="tags has-addons">
+            <TagSpan
+                data={data}
+                title={title}
+                content={content}
+                onClick={onClick}
+                className={elClassName}
+                customColor={customColor}
+            />
+            <span
+                role="button"
+                onClick={onDeleteClick}
+                className={getClassName(["tag", "is-delete", "is-clickable", sizeClass])}
+            />
+        </div>
     );
 };
 
 export default Tag;
+
+/** Props for the {@link TagSpan} component */
+type TagSpanProps =
+    & Pick<TagProps,
+        | "title" | "customColor"
+        | "content" | "onClick"
+        | "className" | "data"
+    >;
+
+const TagSpan: FC<TagSpanProps> = ({
+    title, content, onClick, className, data, customColor
+}) => (
+    <span
+        {...mapDataAttributes(data)}
+
+        title={title}
+        onClick={onClick}
+        className={className}
+        style={isNullish(customColor)
+            ? undefined
+            : {
+                color: customColor?.color,
+                backgroundColor: customColor?.backgroundColor,
+            }
+        }
+    >
+        {content}
+    </span>
+);

@@ -2,6 +2,22 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
+- **TagGroup** *(new)*
+  - Editable list of string tags rendered as Bulma tag pills inside a text-field-style container.
+  - `value: string[]` + `onChange` — fully controlled; duplicates are silently ignored.
+  - `color` (`ElementColor`, default `Primary`) — tag color applied via `Tag` component.
+  - `size` (`ElementSize`, excluding `Small`, default `Normal`) — tag and delete-button size; the × button inherits the same size class so both elements scale together.
+  - `placeholder` (default `"Add tag…"`) — shown in the input when the list is empty.
+  - `addable` (default `true`) — shows the text input for adding new tags.
+  - `removable` (default `true`) — shows the × delete button on each tag.
+  - `disabled` (default `false`) — disables the entire component; input and all × buttons become inert.
+  - `confirmKeys` (default `["Enter", ","]`) — keys that commit the current input as a new tag. `Backspace` on empty input removes the last tag.
+  - `maxTags` — optional upper limit; the input is hidden once the limit is reached.
+  - Tags are rendered using the `Tag` component; `Tag` gained an `onRemove` prop that renders a sized delete button via `has-addons`.
+
+- **Tag** *(updated)*
+  - Added `onRemove?: () => void` — when provided, the component wraps itself in a `<div class="tags has-addons">` and appends an `is-delete` span. The delete span receives the same size class as the tag so they always scale together.
+
 - **ContextMenu** *(new)*
   - Right-click context menu that attaches to any `children` element.
   - `items: ContextMenuItem[]` — menu entries; each item has `key`, optional `label`, `icon` (Bootstrap Icons), `disabled` and `onClick`. An item with no `label` renders as a horizontal divider.
