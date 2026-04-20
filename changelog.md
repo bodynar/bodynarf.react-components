@@ -2,6 +2,13 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
+- **Spinner** *(fixed)*
+  - Colors were invisible — replaced unresolvable `var(--bulma-*)` CSS variables with hardcoded hex values matching Bulma defaults.
+  - Improved rotation visibility — border pattern changed from 2-side (`bottom + left`) to 3-side (`top + right + bottom`) with one transparent side, producing a clear ¾-arc gap.
+
+- **EmptyState** *(fixed)*
+  - Colors were not applied — SCSS selector incorrectly checked for `has-text-*` classes; component emits `is-*` classes. Fixed selectors and added hardcoded hex values for each color variant.
+
 - **TagGroup** *(new)*
   - Editable list of string tags rendered as Bulma tag pills inside a text-field-style container.
   - `value: string[]` + `onChange` — fully controlled; duplicates are silently ignored.
