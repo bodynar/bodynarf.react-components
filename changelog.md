@@ -2,6 +2,29 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
+- **Popover** *(new)*
+  - Lightweight floating panel anchored to any trigger element.
+  - Slot-based API: `Popover.Trigger` wraps the activator; `Popover.Content` holds arbitrary `ReactNode` content.
+  - `position` (`PopoverPosition.Top | Bottom | Left | Right`, default `Bottom`) — placement of the bubble relative to the trigger.
+  - Uncontrolled by default (internal open state); switches to fully controlled when `visible` + `onToggle` are provided.
+  - Closes on outside click (via `useComponentOutsideClick`); controlled mode delegates close to `onToggle`.
+
+- **DateRangePicker** *(new)*
+  - Single-calendar date range picker — first click anchors the start, second click confirms the end.
+  - While the end date is being chosen, moving the pointer over the calendar shows a live range-band preview.
+  - Selected range is highlighted: endpoints get solid accent circles, intermediate days get a continuous tinted band.
+  - `value: DateRange` (`{ start, end }`) + `onChange` — fully controlled.
+  - `style` (`ElementColor`, default `Primary`) — accent color applied to the calendar highlight.
+  - `size` (`ElementSize`) — forwarded to the inner `Calendar`.
+  - `minDate` / `maxDate` — constrain the selectable range.
+  - `locale` (BCP 47, default `"en-US"`) — forwarded to month / weekday labels.
+  - `labelConfig?: DateRangePickerLabelConfig` — optional overrides for all user-visible strings:
+    - `placeholder` (default `"Select range"`) — shown when nothing is selected.
+    - `separator` (default `" → "`) — rendered between start and end in the label bar.
+    - `pendingSuffix` (default `"…"`) — appended to the start date while the end date is not yet picked.
+    - `clearAriaLabel` (default `"Clear range"`) — accessible label for the × clear button.
+  - Calendar extended internally: `CalendarDaysGrid` gained `rangeStart`, `rangeEnd`, `hoverDate`, `onDayHover` props; day cells render inside `__day-inner` spans for circle/band separation.
+
 - **Spinner** *(fixed)*
   - Colors were invisible — replaced unresolvable `var(--bulma-*)` CSS variables with hardcoded hex values matching Bulma defaults.
   - Improved rotation visibility — border pattern changed from 2-side (`bottom + left`) to 3-side (`top + right + bottom`) with one transparent side, producing a clear ¾-arc gap.

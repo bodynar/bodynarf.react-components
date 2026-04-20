@@ -1,0 +1,22 @@
+.bbr-date-range-picker {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &__label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 0.75rem;
+        background: #f5f5f5;
+        border: 1px solid #dbdbdb;
+        border-radius: 4px;
+        min-height: 2.25rem;
+        font-size: 0.9rem;
+    }
+
+    &__label-text {
+        flex: 1;
+        color: #363636;
+    }
+}
