@@ -1,9 +1,10 @@
-﻿import { Children, FC, ReactNode, isValidElement, useCallback, useEffect, useMemo, useState } from "react";
+﻿import { Children, FC, ReactNode, isValidElement, useCallback, useMemo, useState } from "react";
 
 import { getClassName, isNotNullish, isNotNullOrEmpty } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getSizeClassName, mapDataAttributes } from "@bbr/utils";
+import { useEventListener } from "@bbr/hooks";
 import Button from "@bbr/components/button";
 import Icon from "@bbr/components/icon";
 
@@ -46,21 +47,15 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
         setIsMaximized(prev => !prev);
     }, []);
 
-    useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape" && closeOnEscape) {
-                onCloseClick();
-            } else if (event.key === "Enter" && isNotNullish(onEnterPress)) {
-                onEnterPress();
-            }
-        };
-
-        document.addEventListener("keydown", handleKeyDown);
-
-        return () => {
-            document.removeEventListener("keydown", handleKeyDown);
-        };
+    const handleKeyDown = useCallback((event: KeyboardEvent) => {
+        if (event.key === "Escape" && closeOnEscape) {
+            onCloseClick();
+        } else if (event.key === "Enter" && isNotNullish(onEnterPress)) {
+            onEnterPress();
+        }
     }, [closeOnEscape, onCloseClick, onEnterPress]);
+
+    useEventListener("keydown", handleKeyDown, document);
 
     // Scan children for compound sub-components
     let slotHeader: ReactNode = null;

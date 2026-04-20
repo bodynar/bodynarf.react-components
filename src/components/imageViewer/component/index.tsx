@@ -3,6 +3,7 @@ import { FC, useCallback, useEffect, useState } from "react";
 import { getClassName } from "@bodynarf/utils";
 
 import { mapDataAttributes } from "@bbr/utils";
+import { useEventListener } from "@bbr/hooks";
 import Icon from "@bbr/components/icon";
 
 import "./style.scss";
@@ -28,36 +29,32 @@ const ImageViewer: FC<ImageViewerProps> = ({
         setCurrentIndex(i => (i + 1) % images.length);
     }, [images.length]);
 
+    const hasMultiple = images.length > 1;
+
+    const onKeyDown = useCallback((e: globalThis.KeyboardEvent) => {
+        if (!visible) {
+            return;
+        }
+
+        if (e.key === "Escape") {
+            onClose();
+        }
+        else if (e.key === "ArrowLeft" && hasMultiple) {
+            prev();
+        }
+        else if (e.key === "ArrowRight" && hasMultiple) {
+            next();
+        }
+    }, [visible, hasMultiple, prev, next, onClose]);
+
+    useEventListener("keydown", onKeyDown, document);
+
     // Reset to initialIndex each time the viewer opens
     useEffect(() => {
         if (visible) {
             setCurrentIndex(initialIndex);
         }
     }, [visible, initialIndex]);
-
-    const hasMultiple = images.length > 1;
-
-    useEffect(() => {
-        if (!visible) {
-            return undefined;
-        }
-
-        const onKeyDown = (e: globalThis.KeyboardEvent) => {
-            if (e.key === "Escape") {
-                onClose();
-            }
-            else if (e.key === "ArrowLeft" && hasMultiple) {
-                prev();
-            }
-            else if (e.key === "ArrowRight" && hasMultiple) {
-                next();
-            }
-        };
-
-        document.addEventListener("keydown", onKeyDown);
-
-        return () => document.removeEventListener("keydown", onKeyDown);
-    }, [visible, hasMultiple, prev, next, onClose]);
 
     if (!visible || images.length === 0) {
         return null;

@@ -1,9 +1,10 @@
-import { FC, useEffect, useRef } from "react";
+import { FC } from "react";
 
 import { getClassName } from "@bodynarf/utils";
 
 import { ElementColor } from "@bbr/types";
 import { getElementColorClassName } from "@bbr/utils";
+import { useTimeout } from "@bbr/hooks";
 
 import { NotificationItem } from "../..";
 
@@ -15,21 +16,7 @@ type NotificationEntryProps = {
 
 /** A single notification toast entry */
 const NotificationEntry: FC<NotificationEntryProps> = ({ item, onClose }) => {
-    const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-    useEffect(() => {
-        if (!item.autoClose) {
-            return undefined;
-        }
-
-        timerRef.current = setTimeout(() => onClose(item.id), item.autoClose);
-
-        return () => {
-            if (timerRef.current !== null) {
-                clearTimeout(timerRef.current);
-            }
-        };
-    }, [item.id, item.autoClose, onClose]);
+    useTimeout(() => onClose(item.id), item.autoClose ?? null);
 
     const notificationClassName = getClassName([
         "bbr-notification-entry",

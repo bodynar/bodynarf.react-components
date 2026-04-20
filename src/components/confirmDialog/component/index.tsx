@@ -1,9 +1,10 @@
-import { FC, useEffect } from "react";
+import { FC, useCallback } from "react";
 
 import { getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { ElementColor } from "@bbr/types";
 import { mapDataAttributes } from "@bbr/utils";
+import { useEventListener } from "@bbr/hooks";
 import Button, { ButtonStyle } from "@bbr/components/button";
 import Icon from "@bbr/components/icon";
 
@@ -27,21 +28,13 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
 
     className, title: elTitle, data,
 }) => {
-    useEffect(() => {
-        if (!visible || cancellable) {
-            return undefined;
+    const handleKeyDown = useCallback((e: KeyboardEvent) => {
+        if (visible && !cancellable && e.key === "Escape") {
+            onCancel();
         }
-
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === "Escape") {
-                onCancel();
-            }
-        };
-
-        document.addEventListener("keydown", handleKeyDown);
-
-        return () => document.removeEventListener("keydown", handleKeyDown);
     }, [visible, cancellable, onCancel]);
+
+    useEventListener("keydown", handleKeyDown, document);
 
     if (!visible) {
         return null;
