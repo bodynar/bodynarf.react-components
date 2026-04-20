@@ -1,0 +1,86 @@
+.bbr-image-viewer {
+    &__content {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 90vw;
+        max-height: 90vh;
+        z-index: 30;
+    }
+
+    &__close {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 40;
+    }
+
+    &__nav {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 40;
+        background: rgba(0, 0, 0, 0.45);
+        border: none;
+        border-radius: 50%;
+        width: 2.5rem;
+        height: 2.5rem;
+        color: #fff;
+        font-size: 1.25rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        &--prev {
+            left: 1rem;
+        }
+
+        &--next {
+            right: 1rem;
+        }
+    }
+
+    &__figure {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
+
+    &__img {
+        max-width: 90vw;
+        max-height: 80vh;
+        object-fit: contain;
+        border-radius: 4px;
+        display: block;
+        user-select: none;
+    }
+
+    &__caption {
+        color: #fff;
+        margin-top: 0.75rem;
+        font-size: 0.9rem;
+        text-align: center;
+        max-width: 600px;
+    }
+
+    &__counter {
+        position: fixed;
+        bottom: 1.25rem;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        background: rgba(0, 0, 0, 0.45);
+        padding: 0.2rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        z-index: 40;
+    }
+}

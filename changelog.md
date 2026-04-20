@@ -9,6 +9,23 @@ All changes will be published here in reverse chronological order
 - **EmptyState** *(fixed)*
   - Colors were not applied — SCSS selector incorrectly checked for `has-text-*` classes; component emits `is-*` classes. Fixed selectors and added hardcoded hex values for each color variant.
 
+- **ImageViewer** *(new)*
+  - Lightbox-style overlay for single images and galleries.
+  - `images: ImageViewerImage[]` — each entry has `src`, optional `alt` and `caption`.
+  - `visible` / `onClose` — fully controlled open state.
+  - `initialIndex` (default `0`) — which image to show on open.
+  - Navigation arrows and ← → keyboard support; arrows are hidden for single-image mode.
+  - Closes on Escape, overlay click, or the × button.
+
+- **Menu** *(new)*
+  - Vertical navigation sidebar based on Bulma `.menu`.
+  - `sections: MenuSectionConfig[]` — each section has an optional `label` and a list of items.
+  - `MenuItemConfig`: `id`, `label`, optional `icon` (Bootstrap Icons), `href`, `disabled`.
+  - `activeItemId` — controlled highlight; matching item receives `is-active`.
+  - `onItemClick(id)` — fires for non-disabled items.
+  - Items with `href` render as real `<a>` tags; items without render as `<a href="#">`.
+  - Disabled items are dimmed and non-interactive (`pointer-events: none`).
+
 - **Skeleton** *(new)*
   - `Skeleton.Text` — one or more shimmer text-line placeholders; `lines` and `lastLineWidth` props.
   - `Skeleton.Block` — rectangular placeholder with explicit `width` / `height`.
