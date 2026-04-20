@@ -1,0 +1,85 @@
+.bbr-otp {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    &--disabled {
+        opacity: 0.55;
+        pointer-events: none;
+    }
+
+    &__cell {
+        width: 2.5rem !important;
+        text-align: center;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        font-size: 1.1rem;
+        font-weight: 600;
+        caret-color: transparent;
+
+        &:focus {
+            caret-color: currentcolor;
+        }
+    }
+
+    // Color variants — border color on cells (custom modifiers, not Bulma is-* to avoid color inheritance)
+    &--color-primary .bbr-otp__cell {
+        border-color: #00d1b2;
+    }
+    &--color-link .bbr-otp__cell {
+        border-color: #485fc7;
+    }
+    &--color-info .bbr-otp__cell {
+        border-color: #3e8ed0;
+    }
+    &--color-success .bbr-otp__cell {
+        border-color: #48c774;
+    }
+    &--color-warning .bbr-otp__cell {
+        border-color: #ffe08a;
+    }
+    &--color-danger .bbr-otp__cell {
+        border-color: #f14668;
+    }
+
+    &--color-primary .bbr-otp__cell:focus {
+        border-color: #00d1b2;
+        box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
+    }
+    &--color-link .bbr-otp__cell:focus {
+        border-color: #485fc7;
+        box-shadow: 0 0 0 0.125em rgba(72, 95, 199, 0.25);
+    }
+    &--color-info .bbr-otp__cell:focus {
+        border-color: #3e8ed0;
+        box-shadow: 0 0 0 0.125em rgba(62, 142, 208, 0.25);
+    }
+    &--color-success .bbr-otp__cell:focus {
+        border-color: #48c774;
+        box-shadow: 0 0 0 0.125em rgba(72, 199, 116, 0.25);
+    }
+    &--color-warning .bbr-otp__cell:focus {
+        border-color: #ffe08a;
+        box-shadow: 0 0 0 0.125em rgba(255, 224, 138, 0.25);
+    }
+    &--color-danger .bbr-otp__cell:focus {
+        border-color: #f14668;
+        box-shadow: 0 0 0 0.125em rgba(241, 70, 104, 0.25);
+    }
+
+    // Size variants (propagated from parent)
+    &.is-small .bbr-otp__cell {
+        width: 2rem !important;
+        font-size: 0.875rem;
+    }
+
+    &.is-medium .bbr-otp__cell {
+        width: 3rem !important;
+        font-size: 1.25rem;
+    }
+
+    &.is-large .bbr-otp__cell {
+        width: 3.5rem !important;
+        font-size: 1.5rem;
+    }
+}

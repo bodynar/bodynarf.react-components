@@ -9,6 +9,24 @@ All changes will be published here in reverse chronological order
 - **EmptyState** *(fixed)*
   - Colors were not applied — SCSS selector incorrectly checked for `has-text-*` classes; component emits `is-*` classes. Fixed selectors and added hardcoded hex values for each color variant.
 
+- **Stat** *(new)*
+  - KPI / statistics display card.
+  - `value: string | number` + `label` — primary metric and its description.
+  - `icon` — optional Bootstrap Icons name; rendered in a colored badge.
+  - `color` (`ElementColor`, default `Primary`) — accent color of the icon badge (hardcoded bg + text per variant; Bulma CSS vars are not used).
+  - `trend?: StatTrend` — optional badge with `label` text and `direction` (`Up` / `Down` / `Neutral`); colored green / red / grey automatically.
+
+- **OtpInput** *(new)*
+  - One-time password / PIN input rendered as a row of single-character cells.
+  - `length` (default `6`) — number of cells.
+  - `type` — `"text"` (default) or `"password"`.
+  - `numbersOnly` (default `true`) — restricts input to digits; set `false` for alphanumeric.
+  - `autoFocus` (default `false`) — focuses the first cell on mount.
+  - `disabled` (default `false`) — dims and disables all cells.
+  - `size` (`ElementSize`, default `Normal`) — Small / Normal / Medium / Large.
+  - `color` (`ElementColor`, default `Default`) — applies colored border to all cells and a matching focus ring. Uses custom `bbr-otp--color-*` BEM modifiers (not Bulma `is-*`) to prevent Bulma's color inheritance from making typed text white.
+  - Supports paste, Backspace (delete current then previous), and ← → arrow key navigation between cells.
+
 - **ImageViewer** *(new)*
   - Lightbox-style overlay for single images and galleries.
   - `images: ImageViewerImage[]` — each entry has `src`, optional `alt` and `caption`.
