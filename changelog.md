@@ -2,6 +2,30 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
+- **TreeView** *(new)*
+  - Hierarchical tree with expand/collapse, selection, keyboard navigation and checkbox support.
+  - `nodes: TreeNode[]` — root-level tree; each node has `id`, `label`, optional `icon` (Bootstrap Icons), `children` and `disabled`.
+  - Uncontrolled by default; switches to fully controlled when `expandedIds` + `onToggleExpand` and/or `selectedIds` + `onSelect` are provided.
+  - `multiSelect` (default `false`) — allows selecting multiple nodes simultaneously.
+  - **Selection modifiers** (requires `multiSelect`):
+    - Plain click — toggle node and all its non-disabled descendants.
+    - Shift+Click — range from the last anchor to the clicked node (including all descendants); if the clicked node is already selected, every node in the range is toggled instead of set.
+    - Space / Enter — keyboard-select the focused node.
+  - **Parent ↔ child propagation**: selecting a parent selects all its non-disabled descendants; deselecting propagates the same way. The reverse direction is reflected in the checkbox state (see below).
+  - `showCheckboxes` (default `false`) — renders a BBR `CheckBox` next to each label.
+  - `checkboxConfig?: TreeViewCheckboxConfig` — visual configuration for the BBR Checkbox (`style`, `rounded`, `size`, `hasBackgroundColor`, `fixBackgroundColor`). When provided, checkboxes are shown automatically.
+  - **Aggregate checkbox state** — parent checkbox state is derived from its non-disabled descendants:
+    - all selected → checked
+    - none selected → unchecked
+    - some selected → indeterminate (dash)
+  - **Keyboard navigation** (focus the container, then):
+    - `↓` / `↑` — move focus to next / previous visible non-disabled node.
+    - `→` — expand if collapsed, otherwise move focus to the first child.
+    - `←` — collapse if expanded, otherwise move focus to the parent.
+    - Space / Enter — select the focused node.
+  - `selectionColor` (`ElementColor`) — accent color for the selected-node highlight and keyboard focus ring; all 7 Bulma variants supported via CSS custom properties.
+  - Focus ring is hidden when focus moves to a child element (checked via `relatedTarget`).
+
 - **Popover** *(new)*
   - Lightweight floating panel anchored to any trigger element.
   - Slot-based API: `Popover.Trigger` wraps the activator; `Popover.Content` holds arbitrary `ReactNode` content.
