@@ -20,6 +20,7 @@ const Paginator: FC<PaginatorProps> = ({
     rounded = false,
     nearPagesCount = 3, resources,
     showNextButtons = false, nextButtonsConfig, pageButtonsConfig,
+    ariaLabel = "pagination",
 
     className, title, data,
 }) => {
@@ -89,7 +90,7 @@ const Paginator: FC<PaginatorProps> = ({
             title={title}
             role="navigation"
             className={classNames}
-            aria-label="pagination"
+            aria-label={ariaLabel}
         >
             <PaginatorNextButtons
                 size={size}

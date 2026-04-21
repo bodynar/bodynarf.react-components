@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 import { FC, ReactNode } from "react";
 
 import { getClassName, isNullish } from "@bodynarf/utils";
@@ -19,6 +18,7 @@ const BreadCrumbs: FC<BreadcrumbsProps> = ({
     items,
     position = ElementPosition.Left, size = ElementSize.Normal, separator = "arrow",
     elementGenerator = DefaultElementGenerator,
+    ariaLabel = "breadcrumbs",
 
     className, title, data,
 }) => {
@@ -42,8 +42,8 @@ const BreadCrumbs: FC<BreadcrumbsProps> = ({
             {...dataAttributes}
 
             title={title}
+            aria-label={ariaLabel}
             className={elClassName}
-            aria-label="breadcrumbs"
         >
             <ul>
                 {items.map((breadCrumb, i, a) =>

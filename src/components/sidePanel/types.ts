@@ -68,6 +68,12 @@ export type SidePanelTitleProps = BaseElementProps & {
      * @default true
      */
     showCloseButton?: boolean;
+
+    /**
+     * Accessible label for the close button.
+     * @default "Close panel"
+     */
+    closeLabel?: string;
 };
 
 /** SidePanel.Body sub-component props */

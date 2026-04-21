@@ -17,6 +17,7 @@ const AutoCompleteWithoutLabel: FC<AutoCompleteProps> = ({
     disabled = false,
     readonly = false,
     noResultsText = "No results",
+    clearTitle,
     className, title, data,
     ...hookProps
 }) => {
@@ -58,6 +59,7 @@ const AutoCompleteWithoutLabel: FC<AutoCompleteProps> = ({
                 isInvalid={isInvalid}
                 onClear={handleClear}
                 onFocus={openDropdown}
+                clearTitle={clearTitle}
                 inputValue={inputValue}
                 placeholder={placeholder}
                 onKeyDown={handleKeyDown}

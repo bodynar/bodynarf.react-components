@@ -58,6 +58,24 @@ export type ModalWrapperProps = BaseElementProps & {
      */
     closeOnEscape?: boolean;
 
+    /**
+     * Accessible label for the close button.
+     * @default "close"
+     */
+    closeLabel?: string;
+
+    /**
+     * Title text for the maximize button when the modal is in normal state.
+     * @default "Maximize"
+     */
+    maximizeLabel?: string;
+
+    /**
+     * Title text for the maximize button when the modal is maximized.
+     * @default "Restore"
+     */
+    restoreLabel?: string;
+
     /** Close button click handler */
     onCloseClick: ActionFn;
 

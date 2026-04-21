@@ -15,6 +15,7 @@ type InputControlProps = {
     disabled: boolean;
     readonly: boolean;
     placeholder?: string;
+    clearTitle?: string;
 
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
     onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
@@ -41,6 +42,7 @@ const AutoCompleteInputControl: FC<InputControlProps> = ({
     onFocus,
     onClear,
     setClearPending,
+    clearTitle = "Clear",
 }) => {
     const inputClassName = getClassName([
         "input",
@@ -78,8 +80,8 @@ const AutoCompleteInputControl: FC<InputControlProps> = ({
                 ? (
                     <span
                         role="button"
-                        title="Clear"
                         onClick={onClear}
+                        title={clearTitle}
                         className="icon is-right bbr-autocomplete__clear"
                         onPointerDown={e => {
                             e.preventDefault();

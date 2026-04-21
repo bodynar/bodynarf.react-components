@@ -14,6 +14,7 @@ const Spinner: FC<SpinnerProps> = ({
     size = ElementSize.Normal,
     color = ElementColor.Primary,
     overlay = false,
+    loadingLabel = "Loading",
 
     className, title, data,
 }) => {
@@ -31,7 +32,7 @@ const Spinner: FC<SpinnerProps> = ({
             {...(!overlay ? dataAttributes : {})}
 
             role="status"
-            aria-label="Loading"
+            aria-label={loadingLabel}
             className={spinnerClassName}
             title={!overlay ? title : undefined}
         />

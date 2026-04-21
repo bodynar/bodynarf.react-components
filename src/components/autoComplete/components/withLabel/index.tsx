@@ -23,6 +23,7 @@ const AutoCompleteWithLabel: FC<AutoCompleteWithLabelProps> = ({
     disabled = false,
     readonly = false,
     noResultsText = "No results",
+    clearTitle,
     className, title, data,
     ...hookProps
 }) => {
@@ -57,6 +58,7 @@ const AutoCompleteWithLabel: FC<AutoCompleteWithLabelProps> = ({
             isInvalid={isInvalid}
             onClear={handleClear}
             onFocus={openDropdown}
+            clearTitle={clearTitle}
             inputValue={inputValue}
             onKeyDown={handleKeyDown}
             placeholder={placeholder}

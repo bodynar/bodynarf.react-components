@@ -16,6 +16,7 @@ const Alert: FC<AlertProps> = ({
     header,
     closable = true,
     onClose = emptyFn,
+    closeLabel = "close",
 
     className, title, data,
 }) => {
@@ -45,8 +46,8 @@ const Alert: FC<AlertProps> = ({
                         <button
                             type="button"
                             onClick={onClose}
-                            aria-label="close"
                             className="delete"
+                            aria-label={closeLabel}
                         />
                     ) : null}
                 </div>

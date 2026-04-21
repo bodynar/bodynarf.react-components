@@ -33,8 +33,8 @@ const NotificationEntry: FC<NotificationEntryProps> = ({ item, onClose }) => {
                     <button
                         type="button"
                         className="delete"
-                        aria-label="Dismiss"
                         onClick={handleClose}
+                        aria-label={item.dismissLabel ?? "Dismiss"}
                     />
                 )
                 : null}

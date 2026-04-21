@@ -11,6 +11,7 @@ import { useSidePanelContext } from "../../component/context";
 const SidePanelTitle: FC<SidePanelTitleProps> = ({
     children,
     showCloseButton = true,
+    closeLabel = "Close panel",
     className, title, data,
 }) => {
     const { onClose } = useSidePanelContext();
@@ -36,7 +37,7 @@ const SidePanelTitle: FC<SidePanelTitleProps> = ({
                 <button
                     type="button"
                     onClick={onClose}
-                    aria-label="Close panel"
+                    aria-label={closeLabel}
                     className="bbr-side-panel__close delete"
                 />
             )}

@@ -47,6 +47,12 @@ export type BreadcrumbsProps = BaseElementProps & {
     separator?: "arrow" | "bullet" | "dot" | "succeeds";
 
     /**
+     * Accessible label for the `<nav>` landmark.
+     * @default "breadcrumbs"
+     */
+    ariaLabel?: string;
+
+    /**
      * Function that generates each element
      * @example
      * elementGenerator={breadCrumb =>

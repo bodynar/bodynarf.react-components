@@ -30,6 +30,9 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
     closeOnBackgroundClick = true,
     closeOnEscape = true,
     onEnterPress,
+    closeLabel = "close",
+    maximizeLabel = "Maximize",
+    restoreLabel = "Restore",
 
     className, data,
 }) => {
@@ -92,16 +95,16 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
                 <Icon
                     onClick={toggleMaximize}
                     className="bbr-modal__maximize"
-                    title={isMaximized ? "Restore" : "Maximize"}
+                    title={isMaximized ? restoreLabel : maximizeLabel}
                     name={isMaximized ? "arrows-angle-contract" : "arrows-angle-expand"}
                 />
             )}
             {!!showCloseButton && (
                 <button
                     type="button"
-                    aria-label="close"
                     className="delete"
                     onClick={onCloseClick}
+                    aria-label={closeLabel}
                 />
             )}
         </>

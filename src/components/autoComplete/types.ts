@@ -46,6 +46,12 @@ export type AutoCompleteProps = BaseInputElementProps<string> & {
     clearable?: boolean;
 
     /**
+     * Title attribute for the clear (×) button.
+     * @default "Clear"
+     */
+    clearTitle?: string;
+
+    /**
      * Called when the user types (after debounce).
      * Use this for async/server-side search.
      * Return value is set as the suggestion list.

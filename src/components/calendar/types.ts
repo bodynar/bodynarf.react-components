@@ -46,6 +46,18 @@ export type CalendarProps = BaseElementProps & {
     /** Tentative hover date shown as a preview range end while the user picks the second bound */
     hoverDate?: Date;
 
+    /**
+     * Accessible label for the "previous" navigation button.
+     * @default "Previous"
+     */
+    prevLabel?: string;
+
+    /**
+     * Accessible label for the "next" navigation button.
+     * @default "Next"
+     */
+    nextLabel?: string;
+
     /** Called when the pointer enters a day cell; called with undefined when the pointer leaves the grid */
     onDayHover?: (date: Date | undefined) => void;
 

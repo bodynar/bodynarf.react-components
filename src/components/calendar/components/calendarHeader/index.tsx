@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 import { FC, useMemo } from "react";
 
 import Icon from "@bbr/components/icon";
@@ -26,6 +25,18 @@ export type CalendarHeaderProps = {
     /** Whether the next navigation button should be disabled */
     isNextDisabled?: boolean;
 
+    /**
+     * Accessible label for the "previous" navigation button.
+     * @default "Previous"
+     */
+    prevLabel?: string;
+
+    /**
+     * Accessible label for the "next" navigation button.
+     * @default "Next"
+     */
+    nextLabel?: string;
+
     /** Called when the user clicks the left (previous) navigation arrow */
     onPrev: () => void;
 
@@ -51,6 +62,8 @@ const CalendarHeader: FC<CalendarHeaderProps> = ({
     onYearClick,
     isPrevDisabled,
     isNextDisabled,
+    prevLabel = "Previous",
+    nextLabel = "Next",
 }) => {
     const year = displayDate.getFullYear();
     const month = displayDate.getMonth();
@@ -65,7 +78,7 @@ const CalendarHeader: FC<CalendarHeaderProps> = ({
             <button
                 type="button"
                 onClick={onPrev}
-                aria-label="Previous"
+                aria-label={prevLabel}
                 disabled={isPrevDisabled}
                 className="bbr-calendar__nav-btn"
             >
@@ -95,7 +108,7 @@ const CalendarHeader: FC<CalendarHeaderProps> = ({
             <button
                 type="button"
                 onClick={onNext}
-                aria-label="Next"
+                aria-label={nextLabel}
                 disabled={isNextDisabled}
                 className="bbr-calendar__nav-btn"
             >

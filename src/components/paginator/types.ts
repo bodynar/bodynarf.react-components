@@ -117,6 +117,12 @@ export type PaginatorProps = BaseElementProps & {
         active: PaginatorDirectionStepButtonConfig;
     };
 
+    /**
+     * Accessible label for the `<nav>` pagination landmark.
+     * @default "pagination"
+     */
+    ariaLabel?: string;
+
     /** Page change handler */
     onPageChange: (page: number) => void;
 };

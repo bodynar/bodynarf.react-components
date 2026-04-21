@@ -34,6 +34,8 @@ const Calendar: FC<CalendarProps> = ({
     rangeEnd,
     hoverDate,
     onDayHover,
+    prevLabel = "Previous",
+    nextLabel = "Next",
 
     className, title, data,
 }) => {
@@ -208,6 +210,8 @@ const Calendar: FC<CalendarProps> = ({
                 locale={locale}
                 onPrev={handlePrev}
                 onNext={handleNext}
+                prevLabel={prevLabel}
+                nextLabel={nextLabel}
                 displayDate={displayDate}
                 onYearClick={handleYearClick}
                 onMonthClick={handleMonthClick}

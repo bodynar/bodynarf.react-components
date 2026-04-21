@@ -21,4 +21,10 @@ export type SpinnerProps = BaseElementProps & {
      * @default false
      */
     overlay?: boolean;
+
+    /**
+     * Accessible label for the spinner status element.
+     * @default "Loading"
+     */
+    loadingLabel?: string;
 };

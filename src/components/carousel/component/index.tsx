@@ -21,6 +21,9 @@ const Carousel: FC<CarouselProps> = ({
     effect = CarouselEffect.Fade,
     activeIndex: controlledIndex,
     onChange,
+    prevSlideLabel = "Previous slide",
+    nextSlideLabel = "Next slide",
+    goToSlideLabel = "Go to slide {0}",
 
     className, title, data,
 }) => {
@@ -206,7 +209,7 @@ const Carousel: FC<CarouselProps> = ({
                     <button
                         type="button"
                         onClick={prev}
-                        aria-label="Previous slide"
+                        aria-label={prevSlideLabel}
                         disabled={!loop && currentIndex === 0}
                         className="bbr-carousel__arrow bbr-carousel__arrow--prev"
                     >
@@ -215,7 +218,7 @@ const Carousel: FC<CarouselProps> = ({
                     <button
                         type="button"
                         onClick={next}
-                        aria-label="Next slide"
+                        aria-label={nextSlideLabel}
                         disabled={!loop && currentIndex === count - 1}
                         className="bbr-carousel__arrow bbr-carousel__arrow--next"
                     >
@@ -233,7 +236,7 @@ const Carousel: FC<CarouselProps> = ({
 
                             type="button"
                             onClick={() => goTo(i)}
-                            aria-label={`Go to slide ${i + 1}`}
+                            aria-label={goToSlideLabel.replace("{0}", String(i + 1))}
                             className={getClassName([
                                 "bbr-carousel__dot",
                                 i === currentIndex ? "bbr-carousel__dot--active" : "",

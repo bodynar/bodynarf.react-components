@@ -27,6 +27,12 @@ export type NotificationItem = {
      * @default true
      */
     closable?: boolean;
+
+    /**
+     * Accessible label for the dismiss button.
+     * @default "Dismiss"
+     */
+    dismissLabel?: string;
 };
 
 /** Options for adding a notification */

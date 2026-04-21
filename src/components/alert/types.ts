@@ -28,6 +28,12 @@ export type AlertProps = BaseElementProps & {
      */
     closable?: boolean;
 
+    /**
+     * Accessible label for the close button.
+     * @default "close"
+     */
+    closeLabel?: string;
+
     /** Close button click handler */
     onClose?: ActionFn;
 };
