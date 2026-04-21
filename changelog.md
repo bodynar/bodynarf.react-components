@@ -2,22 +2,7 @@
 All changes will be published here in reverse chronological order
 
 ## v1.15.0
-### New hooks
-
-- **useDebounce** *(new)* — returns a debounced copy of `value` that only updates after `delay` ms of inactivity.
-- **useDebounceHandler** *(new)* — wraps an async handler and returns `[canFire, fire]`; `canFire` is `false` for `debounceTime` seconds after each invocation.
-- **usePrevious** *(new)* — stores and returns the previous render's value of any state or prop; returns `undefined` on the first render.
-- **useUpdateEffect** *(new)* — identical to `useEffect` but skips execution on the initial render.
-- **useTimeout** *(new)* — fires `callback` once after `delay` ms; pass `null` to disable. Auto-clears on unmount or delay change.
-- **useInterval** *(new)* — repeats `callback` every `delay` ms; pass `null` to pause without unmounting. Auto-clears on unmount.
-- **useEventListener** *(new)* — attaches a typed event listener to `window` (default) or any `HTMLElement` / `Document`; cleans up automatically.
-- **useLocalStorage** *(new)* — `useState`-like hook that persists its value to `localStorage`; initialises from storage on first render.
-- **useSessionStorage** *(new)* — mirrors `useLocalStorage` API but uses `sessionStorage`; value is cleared when the tab is closed.
-- **useClipboard** *(new)* — copies text to the clipboard via the Clipboard API; exposes `{ copy, copied, reset }`. `copied` resets automatically after `resetDelay` ms (default `2000`).
-- **useKeyPress** *(new)* — tracks whether a specific `KeyboardEvent.key` is currently held down; returns `boolean`.
-- **useFocus** *(new)* — returns `[ref, isFocused]`; attach `ref` to any element to reactively track its focus state.
-- **useWindowSize** *(new)* — reactively tracks `{ width, height }` of the browser viewport; updates on every `resize` event.
-
+- **Chip** *(new)* — Compact element similar to Tag, but with the delete button rendered inside the chip itself. Supports all Tag features: colors, sizes, rounded, light variants, custom colors, `onClick` and `onRemove`.
 - **TreeView** *(new)* — Hierarchical tree component for displaying nested data (file explorers, org charts, category trees). Supports expand/collapse, single and multi-selection with parent ↔ child propagation, optional checkboxes with indeterminate state, and full keyboard navigation (arrows, Enter, Space). Uncontrolled by default; becomes controlled when `expandedIds`/`selectedIds` are provided.
 
 - **Popover** *(new)* — Lightweight floating panel anchored to a trigger element; useful for rich tooltips, mini-forms or contextual actions. Compound component: `Popover.Trigger` + `Popover.Content`. Uncontrolled by default; becomes controlled with `visible` + `onToggle`.
@@ -92,6 +77,21 @@ All changes will be published here in reverse chronological order
   - Added `showMaximizeButton` prop (default `false`) — renders a maximize / restore icon button (`arrows-angle-expand` / `arrows-angle-contract`) to the left of the close button.
   - Maximize stretches the modal card to `95vw × 95vh`; restore returns it to its original size. Both transitions are animated.
   - `actions` prop is now optional (defaults to empty array); no breaking change.
+### New hooks
+
+- **useDebounce** *(new)* — returns a debounced copy of `value` that only updates after `delay` ms of inactivity.
+- **useDebounceHandler** *(new)* — wraps an async handler and returns `[canFire, fire]`; `canFire` is `false` for `debounceTime` seconds after each invocation.
+- **usePrevious** *(new)* — stores and returns the previous render's value of any state or prop; returns `undefined` on the first render.
+- **useUpdateEffect** *(new)* — identical to `useEffect` but skips execution on the initial render.
+- **useTimeout** *(new)* — fires `callback` once after `delay` ms; pass `null` to disable. Auto-clears on unmount or delay change.
+- **useInterval** *(new)* — repeats `callback` every `delay` ms; pass `null` to pause without unmounting. Auto-clears on unmount.
+- **useEventListener** *(new)* — attaches a typed event listener to `window` (default) or any `HTMLElement` / `Document`; cleans up automatically.
+- **useLocalStorage** *(new)* — `useState`-like hook that persists its value to `localStorage`; initialises from storage on first render.
+- **useSessionStorage** *(new)* — mirrors `useLocalStorage` API but uses `sessionStorage`; value is cleared when the tab is closed.
+- **useClipboard** *(new)* — copies text to the clipboard via the Clipboard API; exposes `{ copy, copied, reset }`. `copied` resets automatically after `resetDelay` ms (default `2000`).
+- **useKeyPress** *(new)* — tracks whether a specific `KeyboardEvent.key` is currently held down; returns `boolean`.
+- **useFocus** *(new)* — returns `[ref, isFocused]`; attach `ref` to any element to reactively track its focus state.
+- **useWindowSize** *(new)* — reactively tracks `{ width, height }` of the browser viewport; updates on every `resize` event.
 
 ## v1.14.7
 - **Paginator**

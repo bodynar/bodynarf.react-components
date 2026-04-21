@@ -54,6 +54,9 @@ export * from "./tabs";
 export { default as Tag } from "./tag";
 export * from "./tag";
 
+export { default as Chip } from "./chip";
+export * from "./chip";
+
 export { default as Timeline } from "./timeline";
 export * from "./timeline";
 

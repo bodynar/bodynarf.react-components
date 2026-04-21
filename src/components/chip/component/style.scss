@@ -1,0 +1,10 @@
+.bbr-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+
+    .bbr-chip__delete {
+        margin-left: 0.25em;
+        margin-right: -0.35em;
+    }
+}
