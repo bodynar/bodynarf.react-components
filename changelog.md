@@ -3,6 +3,13 @@ All changes will be published here in reverse chronological order
 
 ## v1.15.0
 - **Chip** *(new)* — Compact element similar to Tag, but with the delete button rendered inside the chip itself. Supports all Tag features: colors, sizes, rounded, light variants, custom colors, `onClick` and `onRemove`.
+
+- **Multiselect** *(updated)*
+  - Removed `displayMode` and `tagsConfig` props.
+  - Added `resultDisplayConfig` prop (`"default"` | `MultiselectResultAsChipDisplayConfig`). `"default"` preserves existing behavior (summary text like "3 items selected"). When a chip config object is provided, selected items are rendered as removable `Chip` components.
+  - Chip config supports `position`: `"label"` renders chips inside the dropdown trigger with auto-expanding height; `"belowLabel"` renders chips below the standard label.
+  - Chip config extends `ChipProps` (minus `content`, `size`, `onRemove`) — supports `style`, `rounded`, `lightColor`, `customColor`, `className`, `data`, etc.
+  - Added optional `containerClassName` for custom styling of the chips container.
 - **TreeView** *(new)* — Hierarchical tree component for displaying nested data (file explorers, org charts, category trees). Supports expand/collapse, single and multi-selection with parent ↔ child propagation, optional checkboxes with indeterminate state, and full keyboard navigation (arrows, Enter, Space). Uncontrolled by default; becomes controlled when `expandedIds`/`selectedIds` are provided.
 
 - **Popover** *(new)* — Lightweight floating panel anchored to a trigger element; useful for rich tooltips, mini-forms or contextual actions. Compound component: `Popover.Trigger` + `Popover.Content`. Uncontrolled by default; becomes controlled with `visible` + `onToggle`.
@@ -63,10 +70,6 @@ All changes will be published here in reverse chronological order
 - **Tooltip** *(new)* — Hover/click-triggered popup for contextual hints and help text. Compound component: `Tooltip.Hint` (content) + `Tooltip.Target` (anchor). Supports Fade/Slide animation, configurable close behavior (MouseLeave, OutsideClick, Manual) and controlled mode.
 
 - **SidePanel** *(new)* — Sliding side panel with backdrop overlay for detail views, settings and filters. Compound component: `SidePanel.Title` + `SidePanel.Body`. Closes on Escape and backdrop click.
-
-- **Multiselect** *(updated)*
-  - Added `displayMode` prop (`"label"` | `"tags"`). Default `"label"` preserves existing behavior. `"tags"` renders selected items as removable tags (using `Tag` component) inside the dropdown trigger.
-  - Added `tagsConfig` prop — optional configuration for tags display mode: `color`, `size`, `rounded`, `lightColor`.
 
 - **ModalWrapper** *(extended)*
   - Added compound component pattern: `ModalWrapper.Header`, `ModalWrapper.Body`, `ModalWrapper.Footer`.

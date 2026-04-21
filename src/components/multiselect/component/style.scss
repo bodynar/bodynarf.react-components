@@ -31,7 +31,7 @@
         }
     }
 
-    &__tags-label:not(.bbr-dropdown__label--default) {
+    &__chips-label:not(.bbr-dropdown__label--default) {
         height: auto;
         min-height: 2.25rem;
         white-space: normal;
@@ -40,7 +40,7 @@
         padding-left: 0.25rem;
     }
 
-    &__tags-container {
+    &__chips-container {
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
@@ -48,27 +48,24 @@
         flex: 1;
         min-width: 0;
 
-        .tags {
-            .tag {
-                margin-bottom: 0;
-
-                &.bbr-tag {
-                    cursor: default;
-
-                    &:hover {
-                        border-color: transparent;
-                    }
-                }
-            }
-
-            &:not(:last-child),
-            &:last-child {
-                margin-bottom: 0;
-            }
+        .tag {
+            margin-bottom: 0;
         }
 
         @at-root .bbr-dropdown .bbr-dropdown__label span#{&} {
             max-width: unset;
+        }
+    }
+
+    &__chips-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.25rem 0;
+
+        .tag {
+            margin-bottom: 0;
         }
     }
 }

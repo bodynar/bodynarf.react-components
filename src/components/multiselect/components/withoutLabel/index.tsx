@@ -8,10 +8,10 @@ import { useComponentOutsideClick } from "@bbr/hooks";
 import Search from "@bbr/components/search";
 import InternalHint from "@bbr/components/primitives/internal/hint";
 
-import { MultiselectProps, MultiselectItem as MultiselectItemModel } from "../../types";
+import { MultiselectProps, MultiselectItem as MultiselectItemModel, MultiselectResultAsChipDisplayConfig } from "../../types";
 import MultiselectItem from "../item";
 import MultiselectLabel from "../label/component";
-import TagsLabel from "../label/components/tags";
+import ChipsLabel from "../label/components/chips";
 
 /** Props type of `MultiselectWithoutLabel` */
 type MultiselectWithoutLabelProps = MultiselectProps & {
@@ -33,7 +33,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
     hint,
 
     id: propsId, checkboxConfig,
-    displayMode = "label", tagsConfig,
+    resultDisplayConfig = "default",
 }) => {
 
     const [isListVisible, setListVisible] = useState<boolean>(false);
@@ -63,8 +63,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
             item.selected = !isItemSelected;
 
             onChange(item, !isItemSelected);
-        }
-        ,
+        },
         [onChange, selectedItems]
     );
 
@@ -157,10 +156,13 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
 
     const deselectable = isNotNullish(onClear);
 
-    const isTagsMode = displayMode === "tags";
+    const isChipsMode = resultDisplayConfig !== "default";
+    const chipConfig = isChipsMode ? resultDisplayConfig as MultiselectResultAsChipDisplayConfig : undefined;
 
-    const selectedItemModels = isTagsMode
-        ? items.filter(item => selectedItems.includes(item.id))
+    const selectedItemModels = isChipsMode
+        ? selectedItems
+            .map(id => items.find(item => item.id === id))
+            .filter(isNotNullish)
         : [];
 
     return (
@@ -175,15 +177,18 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
                 data-dropdown-id={id}
                 className={classNames}
             >
-                {isTagsMode
+                {isChipsMode
                     ? (
-                        <TagsLabel
+                        <ChipsLabel
                             caption={placeholder}
                             onClick={onLabelClick}
                             onRemove={onTagRemove}
-                            tagsConfig={tagsConfig}
+                            chipConfig={chipConfig!}
+                            deselectable={deselectable}
                             selectedItems={selectedItemModels}
                             className={labelComponentClassName}
+                            selectionCaption={selectionCaption}
+                            selectedItemsCount={selectedItemsCount}
                         />
                     )
                     : (
@@ -212,6 +217,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
                     />
                 </div>
             </div>
+
             <InternalHint
                 hint={hint}
                 validationState={validationState}

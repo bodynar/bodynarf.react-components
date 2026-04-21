@@ -1,35 +1,11 @@
+import { ChipProps } from "../chip";
 import { DropdownProps, SelectableItem } from "../dropdown";
 import { CheckBoxProps } from "../primitives";
-import { ElementColor, ElementSize } from "@bbr/types";
 
 /** Single multiselect item that user can select */
 export type MultiselectItem = SelectableItem & {
     /** Is item selected */
     selected: boolean;
-};
-
-/** Display mode for selected items */
-export type MultiselectDisplayMode = "label" | "tags";
-
-/** Configuration for tags display mode */
-export type MultiselectTagsConfig = {
-    /**
-     * Tag color.
-     * @default ElementColor.Primary
-     */
-    color?: ElementColor;
-
-    /**
-     * Tag size.
-     * @default ElementSize.Normal
-     */
-    size?: Exclude<ElementSize, ElementSize.Small>;
-
-    /** Is tag with rounded border */
-    rounded?: boolean;
-
-    /** Is tag with light color */
-    lightColor?: boolean;
 };
 
 /** Props type of `Multiselect` */
@@ -57,15 +33,8 @@ export type MultiselectProps = Omit<
         | "rounded"
     >;
 
-    /**
-     * Display mode for selected items.
-     * - `"label"` (default): shows selection count in dropdown label
-     * - `"tags"`: shows selected items as removable tags inside the input
-     */
-    displayMode?: MultiselectDisplayMode;
-
-    /** Configuration for tags display mode */
-    tagsConfig?: MultiselectTagsConfig;
+    /** Configuration for result display mode */
+    resultDisplayConfig?: MultiselectResultDisplayConfig;
 
     /**
      * Handler of changing select state of item
@@ -81,3 +50,21 @@ export type MultiselectProps = Omit<
      */
     onClear?: () => void;
 };
+
+/** Configuration for result display mode when using chips */
+export type MultiselectResultAsChipDisplayConfig =
+    & Omit<ChipProps, "content" | "size" | "onRemove">
+    & {
+        /** Position of chips label */
+        position: "label" | "belowLabel";
+
+        /** Custom class name for the container of chips */
+        containerClassName?: string;
+    };
+
+/**
+ * Display mode for selected items in `Multiselect`
+ * - `"default"`: shows selected items as a summary text in the label (e.g. "3 items selected")
+ * - `MultiselectResultAsChipDisplayConfig`: shows selected items as chips below the label, with the provided configuration for chip appearance
+ */
+export type MultiselectResultDisplayConfig = "default" | MultiselectResultAsChipDisplayConfig;
