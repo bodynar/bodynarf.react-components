@@ -79,6 +79,10 @@ All changes will be published here in reverse chronological order
 
 - **SidePanel** *(new)* — Sliding side panel with backdrop overlay for detail views, settings and filters. Compound component: `SidePanel.Title` + `SidePanel.Body`. Closes on Escape and backdrop click.
 
+- **Multiselect** *(updated)*
+  - Added `displayMode` prop (`"label"` | `"tags"`). Default `"label"` preserves existing behavior. `"tags"` renders selected items as removable tags (using `Tag` component) inside the dropdown trigger.
+  - Added `tagsConfig` prop — optional configuration for tags display mode: `color`, `size`, `rounded`, `lightColor`.
+
 - **ModalWrapper** *(extended)*
   - Added compound component pattern: `ModalWrapper.Header`, `ModalWrapper.Body`, `ModalWrapper.Footer`.
   - Only `ModalWrapper.Body` is required; `ModalWrapper.Header` and `ModalWrapper.Footer` are optional.

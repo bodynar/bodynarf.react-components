@@ -52,16 +52,16 @@ export type ConfirmDialogProps = BaseElementProps & {
      */
     icon?: string;
 
-    /** Called when the user clicks the confirm button */
-    onConfirm: ActionFn;
-
-    /** Called when the user clicks cancel, the overlay, or presses Escape */
-    onCancel: ActionFn;
-
     /**
      * When `true`, clicking the backdrop or pressing Escape does NOT close the dialog.
      * The user must interact with one of the buttons.
      * @default false
      */
     cancellable?: boolean;
+
+    /** Called when the user clicks the confirm button */
+    onConfirm: ActionFn;
+
+    /** Called when the user clicks cancel, the overlay, or presses Escape */
+    onCancel: ActionFn;
 };

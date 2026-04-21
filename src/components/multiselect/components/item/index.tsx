@@ -87,8 +87,8 @@ const MultiselectItem: FC<MultiselectItemProps> = ({
 
                 defaultValue={selected}
                 onValueChange={onChecked}
+                label={{ caption: item.displayValue }}
             />
-            {item.displayValue}
         </li>
     );
 };
@@ -135,7 +135,8 @@ const MultiselectItemWithIcon: FC<MultiselectItemProps> = ({
 
     const checkboxClassName = getClassName([
         checkboxConfig?.className,
-        "mb-1"
+        "mb-1",
+        "mr-2",
     ]);
 
     if (icon.position === ElementPosition.Right) {
