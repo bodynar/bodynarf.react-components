@@ -1,4 +1,8 @@
 .bbr-date-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
     &__input {
         cursor: pointer;
         font-variant-numeric: tabular-nums;
