@@ -1,6 +1,7 @@
 import { MenuItem } from "../routing";
 
 import UseDebounceHandler from "./useDebounceHandler";
+import UseDebounce from "./useDebounce";
 import UseMount from "./useMount";
 import UseUnmount from "./useUnmount";
 import UsePrevious from "./usePrevious";
@@ -8,9 +9,14 @@ import UseTimeout from "./useTimeout";
 import UseInterval from "./useInterval";
 import UseUpdateEffect from "./useUpdateEffect";
 import UseLocalStorage from "./useLocalStorage";
+import UseSessionStorage from "./useSessionStorage";
 import UsePagination from "./usePagination";
 import UseEventListener from "./useEventListener";
 import UseComponentOutsideClick from "./useComponentOutsideClick";
+import UseClipboard from "./useClipboard";
+import UseKeyPress from "./useKeyPress";
+import UseFocus from "./useFocus";
+import UseWindowSize from "./useWindowSize";
 
 const hooks: MenuItem = {
     name: "hooks-group",
@@ -71,6 +77,42 @@ const hooks: MenuItem = {
             path: "/hooks/useComponentOutsideClick",
             caption: "useComponentOutsideClick",
             component: <UseComponentOutsideClick />,
+        },
+        {
+            path: "/hooks/useDebounce",
+            caption: "useDebounce",
+            component: <UseDebounce />,
+            version: "1.15",
+        },
+        {
+            path: "/hooks/useSessionStorage",
+            caption: "useSessionStorage",
+            component: <UseSessionStorage />,
+            version: "1.15",
+        },
+        {
+            path: "/hooks/useClipboard",
+            caption: "useClipboard",
+            component: <UseClipboard />,
+            version: "1.15",
+        },
+        {
+            path: "/hooks/useKeyPress",
+            caption: "useKeyPress",
+            component: <UseKeyPress />,
+            version: "1.15",
+        },
+        {
+            path: "/hooks/useFocus",
+            caption: "useFocus",
+            component: <UseFocus />,
+            version: "1.15",
+        },
+        {
+            path: "/hooks/useWindowSize",
+            caption: "useWindowSize",
+            component: <UseWindowSize />,
+            version: "1.15",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };

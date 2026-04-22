@@ -32,7 +32,7 @@ const LeftMenu: FC = () => {
     const activeItem = useMemo(
         () => routeList
             .flatMap(x => isRootMenuItem(x) ? x.children : [x])
-            .filter(({ path }) => path.startsWith(pathname))
+            .filter(({ path }) => path === pathname)
             .pop(),
         [pathname]
     );
