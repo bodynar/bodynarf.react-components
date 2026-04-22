@@ -8,6 +8,7 @@ import KeyboardElementDemo from "./keyboardElement";
 const props: MenuItem = {
     name: "prop-group",
     caption: "Common props",
+    defaultCollapsed: true,
     children: [
         {
             path: "/props/base",

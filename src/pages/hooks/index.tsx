@@ -15,6 +15,7 @@ import UseComponentOutsideClick from "./useComponentOutsideClick";
 const hooks: MenuItem = {
     name: "hooks-group",
     caption: "Hooks",
+    defaultCollapsed: true,
     children: [
         {
             path: "/hooks/useDebounceHandler",

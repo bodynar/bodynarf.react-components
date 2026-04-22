@@ -143,9 +143,10 @@ const LeftMenu: FC = () => {
 /** Menu item with sub items */
 // eslint-disable-next-line react/no-multi-comp
 const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
-    caption, children, activeItem
+    caption, children, activeItem, defaultCollapsed = false,
 }) => {
-    const [collapsed, setIsCollapsed] = useState(false);
+    const containsActive = activeItem != null && children.some(c => c.path === activeItem.path);
+    const [collapsed, setIsCollapsed] = useState(defaultCollapsed && !containsActive);
 
     const onCollapseToggle = useCallback(() => setIsCollapsed(x => !x), [setIsCollapsed]);
 
@@ -198,11 +199,14 @@ const MenuItem: FC<RouteMenuItem & { activeItem?: RouteMenuItem; }> = ({
                 className={activeItem?.path === path ? styles["is-active"] : undefined}
             >
                 {caption}
-                {isNew &&
-                    <span className="tag is-danger ml-2" style={{ fontSize: "0.65rem", padding: "0 0.4em", height: "1.25em" }}>
+                {isNew ? (
+                    <span
+                        className="tag is-danger ml-2"
+                        style={{ fontSize: "0.65rem", padding: "0 0.4em", height: "1.25em" }}
+                    >
                         NEW
                     </span>
-                }
+                ) : null}
             </Link>
         </li>
     );

@@ -17,6 +17,9 @@ export type MenuItem = {
 
     /** Child item as routes to pages */
     children: Array<RouteMenuItem>;
+
+    /** Whether the group is collapsed by default */
+    defaultCollapsed?: boolean;
 };
 
 /** Routing menu item */
