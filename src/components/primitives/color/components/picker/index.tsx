@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 import { ChangeEvent, FC } from "react";
 
 import { getClassName, getFontColorFromString, isNotNullish, isNullish } from "@bodynarf/utils";

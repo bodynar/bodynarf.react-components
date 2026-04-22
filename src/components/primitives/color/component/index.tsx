@@ -1,6 +1,4 @@
-import { FC } from "react";
-
-import { isNullish } from "@bodynarf/utils";
+import { createLabelRouter } from "@bbr/utils";
 
 import "./style.scss";
 
@@ -9,17 +7,6 @@ import ColorPickerWithoutLabel from "../components/withoutLabel";
 import ColorPickerWithLabel from "../components/withLabel";
 
 /** Color picker component */
-const ColorPicker: FC<ColorPickerProps> = (props) =>
-    // eslint-disable-next-line react/destructuring-assignment
-    isNullish(props.label)
-        ? <ColorPickerWithoutLabel {...props} />
-        : (
-            <ColorPickerWithLabel
-                {...props}
-                // eslint-disable-next-line react/destructuring-assignment
-                label={props.label}
-            />
-        )
-    ;
+const ColorPicker = createLabelRouter<ColorPickerProps>(ColorPickerWithoutLabel, ColorPickerWithLabel);
 
 export default ColorPicker;

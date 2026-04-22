@@ -1,6 +1,4 @@
-import { FC } from "react";
-
-import { isNullish } from "@bodynarf/utils";
+import { createLabelRouter } from "@bbr/utils";
 
 import "./style.scss";
 
@@ -9,17 +7,7 @@ import DropdownWithLabel from "../components/withLabel";
 import DropdownCompact from "../components/compact";
 
 /** Dropdown component */
-const Dropdown: FC<DropdownProps> = (props) => {
-    // eslint-disable-next-line react/destructuring-assignment
-    return isNullish(props.label)
-        ? <DropdownCompact {...props} />
-        : (
-            <DropdownWithLabel
-                {...props}
-                // eslint-disable-next-line react/destructuring-assignment
-                label={props.label}
-            />);
-};
+const Dropdown = createLabelRouter<DropdownProps>(DropdownCompact, DropdownWithLabel);
 
 export default Dropdown;
 

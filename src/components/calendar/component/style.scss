@@ -1,0 +1,322 @@
+.bbr-calendar {
+    --bbr-calendar-accent: hsl(217, 71%, 53%);
+    --bbr-calendar-accent-light: hsla(217, 71%, 53%, 0.12);
+    --bbr-calendar-border: #dbdbdb;
+    --bbr-calendar-hover-bg: rgba(0, 0, 0, 0.05);
+    --bbr-calendar-other-month: #c0c0c0;
+
+    display: inline-flex;
+    flex-direction: column;
+    border: 1px solid var(--bbr-calendar-border);
+    border-radius: 4px;
+    background-color: #fff;
+    user-select: none;
+    min-width: 16rem;
+
+    // ─── Color modifiers (Bulma palette) ─────────────────────────────────────
+    &.is-primary {
+        --bbr-calendar-accent: hsl(171, 100%, 41%);
+        --bbr-calendar-accent-light: hsla(171, 100%, 41%, 0.12);
+        border-color: hsl(171, 100%, 41%);
+    }
+
+    &.is-link {
+        --bbr-calendar-accent: hsl(217, 71%, 53%);
+        --bbr-calendar-accent-light: hsla(217, 71%, 53%, 0.12);
+        border-color: hsl(217, 71%, 53%);
+    }
+
+    &.is-info {
+        --bbr-calendar-accent: hsl(207, 61%, 53%);
+        --bbr-calendar-accent-light: hsla(207, 61%, 53%, 0.12);
+        border-color: hsl(207, 61%, 53%);
+    }
+
+    &.is-success {
+        --bbr-calendar-accent: hsl(153, 53%, 53%);
+        --bbr-calendar-accent-light: hsla(153, 53%, 53%, 0.12);
+        border-color: hsl(153, 53%, 53%);
+    }
+
+    &.is-warning {
+        --bbr-calendar-accent: hsl(44, 100%, 55%);
+        --bbr-calendar-accent-light: hsla(44, 100%, 55%, 0.14);
+        border-color: hsl(44, 100%, 55%);
+    }
+
+    &.is-danger {
+        --bbr-calendar-accent: hsl(348, 86%, 61%);
+        --bbr-calendar-accent-light: hsla(348, 86%, 61%, 0.12);
+        border-color: hsl(348, 86%, 61%);
+    }
+
+    // ─── Size modifiers ───────────────────────────────────────────────────────
+    &.is-small {
+        font-size: 0.75rem;
+        min-width: 13rem;
+    }
+
+    &.is-medium {
+        font-size: 1.1rem;
+        min-width: 18.5rem;
+    }
+
+    &.is-large {
+        font-size: 1.25rem;
+        min-width: 21rem;
+    }
+
+    // ─── Header ───────────────────────────────────────────────────────────────
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.4rem 0.5rem;
+        border-bottom: 1px solid var(--bbr-calendar-border);
+        gap: 0.25rem;
+    }
+
+    &__nav-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.75rem;
+        height: 1.75rem;
+        padding: 0;
+        border: none;
+        border-radius: 4px;
+        background: transparent;
+        cursor: pointer;
+        color: inherit;
+        transition: 0.15s ease-in-out background-color;
+        flex-shrink: 0;
+
+        &:hover {
+            background-color: var(--bbr-calendar-hover-bg);
+        }
+
+        &:active {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+    }
+
+    &__title {
+        flex: 1;
+        text-align: center;
+        font-weight: 600;
+        line-height: 1;
+    }
+
+    &__title--clickable {
+        cursor: pointer;
+        border-radius: 3px;
+        padding: 0.2rem 0.35rem;
+        transition: 0.15s ease-in-out background-color;
+
+        &:hover {
+            background-color: var(--bbr-calendar-hover-bg);
+        }
+    }
+
+    &__title-part {
+        border-radius: 3px;
+        padding: 0.2rem 0.25rem;
+        transition: 0.15s ease-in-out background-color;
+
+        & + & {
+            margin-left: 0.15rem;
+        }
+
+        &--clickable {
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--bbr-calendar-hover-bg);
+            }
+        }
+    }
+
+    // ─── Body ─────────────────────────────────────────────────────────────────
+    &__body {
+        padding: 0.35rem 0.5rem 0.5rem;
+    }
+
+    // ─── Weekday labels ───────────────────────────────────────────────────────
+    &__weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        margin-bottom: 0.2rem;
+    }
+
+    &__weekday {
+        text-align: center;
+        font-size: 0.7em;
+        color: #888;
+        padding: 0.15rem 0;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    // ─── Days grid ────────────────────────────────────────────────────────────
+    &__days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0; // must be 0 so range band is continuous
+    }
+
+    &__day {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1;
+        padding: 0;
+        border: none;
+        border-radius: 0; // circle lives in __day-inner
+        background: transparent;
+        cursor: pointer;
+        font-size: inherit;
+        color: inherit;
+
+        // ── Range band backgrounds ─────────────────────────────────────────────
+        &--in-range {
+            background: var(--bbr-calendar-accent-light);
+        }
+
+        &--range-start {
+            // right-half band connects to the next cell
+            background: linear-gradient(
+                to right,
+                transparent 50%,
+                var(--bbr-calendar-accent-light) 50%
+            );
+        }
+
+        &--range-end {
+            // left-half band connects to the previous cell
+            background: linear-gradient(
+                to left,
+                transparent 50%,
+                var(--bbr-calendar-accent-light) 50%
+            );
+        }
+
+        // ── State modifiers ────────────────────────────────────────────────────
+        &--other-month {
+            color: var(--bbr-calendar-other-month);
+        }
+
+        &--disabled,
+        &:disabled {
+            color: var(--bbr-calendar-other-month);
+            cursor: not-allowed;
+            pointer-events: none;
+            opacity: 0.45;
+        }
+    }
+
+    // The circle rendered inside each day button
+    &__day-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 25%;
+        transition: 0.12s ease-in-out background-color, 0.12s ease-in-out color;
+
+        // Today — light accent circle
+        .bbr-calendar__day--today & {
+            background-color: var(--bbr-calendar-accent-light);
+            font-weight: 600;
+        }
+
+        // Hover (non-selected states)
+        .bbr-calendar__day:hover:not(:disabled) & {
+            background-color: var(--bbr-calendar-hover-bg);
+        }
+
+        // Single-selection and range endpoints — solid accent circle
+        .bbr-calendar__day--selected &,
+        .bbr-calendar__day--range-start &,
+        .bbr-calendar__day--range-end &,
+        .bbr-calendar__day--range-anchor & {
+            background-color: var(--bbr-calendar-accent) !important;
+            color: #fff !important;
+            font-weight: 600;
+        }
+
+        // Keep accent circle on hover for selected/anchor states
+        .bbr-calendar__day--selected:hover:not(:disabled) &,
+        .bbr-calendar__day--range-start:hover:not(:disabled) &,
+        .bbr-calendar__day--range-end:hover:not(:disabled) &,
+        .bbr-calendar__day--range-anchor:hover:not(:disabled) & {
+            background-color: var(--bbr-calendar-accent) !important;
+        }
+
+        // In-range cells: no circle, just the band from the parent button
+        .bbr-calendar__day--in-range & {
+            background-color: transparent !important;
+        }
+    }
+
+    // ─── Month / Year picker ──────────────────────────────────────────────────
+    &__picker {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0.4rem 0.5rem 0.5rem;
+        gap: 0.3rem;
+    }
+
+    &__picker-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.45rem 0.2rem;
+        border: none;
+        border-radius: 4px;
+        background: transparent;
+        cursor: pointer;
+        font-size: inherit;
+        color: inherit;
+        transition: 0.15s ease-in-out background-color, 0.15s ease-in-out color;
+
+        &:hover:not(:disabled) {
+            background-color: var(--bbr-calendar-hover-bg);
+        }
+
+        &--current {
+            font-weight: 600;
+            color: var(--bbr-calendar-accent);
+        }
+
+        &--selected {
+            background-color: var(--bbr-calendar-accent) !important;
+            color: #fff !important;
+            font-weight: 600;
+        }
+
+        &--disabled,
+        &:disabled {
+            color: var(--bbr-calendar-other-month);
+            cursor: not-allowed;
+            pointer-events: none;
+            opacity: 0.45;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        justify-content: space-between;
+        padding: 0.35rem 0.5rem;
+        border-top: 1px solid var(--bbr-calendar-border);
+        gap: 0.25rem;
+    }
+}

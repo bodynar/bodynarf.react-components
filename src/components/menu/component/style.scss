@@ -1,0 +1,11 @@
+.bbr-menu {
+    &__section + &__section {
+        margin-top: 0.75rem;
+    }
+
+    &__item--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}

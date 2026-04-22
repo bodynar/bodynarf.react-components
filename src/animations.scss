@@ -1,0 +1,239 @@
+// ── BBR global animations ─────────────────────────────────────────────────────
+// Usage:
+//   <div class="bbr-pulse" />
+//   <div class="bbr-spin bbr-anim-paused" />   ← pause any infinite animation
+//   <div class="bbr-shake" />                  ← plays once; re-trigger via key change
+// Infinite:  bbr-pulse, bbr-spin, bbr-spin-reverse, bbr-bounce, bbr-heartbeat,
+//            bbr-float, bbr-wobble
+// One-time:  bbr-shake, bbr-fade-in, bbr-pop, bbr-flip, bbr-slide-in-left,
+//            bbr-slide-in-right, bbr-slide-in-down, bbr-rubber-band, bbr-tada, bbr-zoom-in
+
+// ── Keyframes ─────────────────────────────────────────────────────────────────
+
+@keyframes bbr-pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.12); }
+}
+
+@keyframes bbr-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes bbr-bounce {
+    0%, 100% { transform: translateY(0); }
+    40%      { transform: translateY(-10px); }
+    60%      { transform: translateY(-5px); }
+}
+
+@keyframes bbr-shake {
+    0%, 100% { transform: translateX(0); }
+    15%      { transform: translateX(-7px); }
+    35%      { transform: translateX(7px); }
+    55%      { transform: translateX(-4px); }
+    75%      { transform: translateX(4px); }
+    90%      { transform: translateX(-2px); }
+}
+
+@keyframes bbr-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.75);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes bbr-heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%      { transform: scale(1.18); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.12); }
+    56%      { transform: scale(1); }
+}
+
+@keyframes bbr-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+
+@keyframes bbr-wobble {
+    0%, 100% { transform: rotate(0deg); }
+    20%      { transform: rotate(-8deg); }
+    40%      { transform: rotate(6deg); }
+    60%      { transform: rotate(-4deg); }
+    80%      { transform: rotate(3deg); }
+}
+
+@keyframes bbr-pop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    80% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+@keyframes bbr-flip {
+    0% { transform: perspective(400px) rotateY(0deg); }
+    40% { transform: perspective(400px) rotateY(-180deg) scale(1.1); }
+    100% { transform: perspective(400px) rotateY(-360deg) scale(1); }
+}
+
+@keyframes bbr-slide-in-left {
+    from {
+        transform: translateX(-60px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes bbr-spin-reverse {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
+}
+
+@keyframes bbr-rubber-band {
+    0% {
+        transform: scale(1, 1);
+    }
+
+    30% { transform: scale(1.35, 0.75); }
+    50% { transform: scale(0.8, 1.15); }
+    65% { transform: scale(1.1, 0.9); }
+    80% { transform: scale(0.97, 1.03); }
+    100% { transform: scale(1, 1); }
+}
+
+@keyframes bbr-tada {
+    0%       { transform: scale(1) rotate(0deg); }
+    10%, 20% { transform: scale(0.9) rotate(-3deg); }
+    30%, 50%, 70%, 90% { transform: scale(1.1) rotate(3deg); }
+    40%, 60%, 80%      { transform: scale(1.1) rotate(-3deg); }
+    100%     { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes bbr-zoom-in {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes bbr-slide-in-right {
+    from {
+        transform: translateX(60px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes bbr-slide-in-down {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+// ── Classes ───────────────────────────────────────────────────────────────────
+
+.bbr-pulse {
+    animation: bbr-pulse 1.6s ease-in-out infinite;
+}
+
+.bbr-spin {
+    animation: bbr-spin 1.2s linear infinite;
+}
+
+.bbr-bounce {
+    animation: bbr-bounce 0.8s ease-in-out infinite;
+}
+
+.bbr-shake {
+    animation: bbr-shake 0.5s ease-in-out forwards;
+}
+
+.bbr-fade-in {
+    animation: bbr-fade-in 0.4s ease-out forwards;
+}
+
+.bbr-heartbeat {
+    animation: bbr-heartbeat 1.4s ease-in-out infinite;
+}
+
+.bbr-float {
+    animation: bbr-float 2.4s ease-in-out infinite;
+}
+
+.bbr-wobble {
+    animation: bbr-wobble 1.2s ease-in-out infinite;
+}
+
+.bbr-pop {
+    animation: bbr-pop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.bbr-flip {
+    animation: bbr-flip 0.7s ease-in-out forwards;
+}
+
+.bbr-slide-in-left {
+    animation: bbr-slide-in-left 0.35s ease-out forwards;
+}
+
+.bbr-spin-reverse {
+    animation: bbr-spin-reverse 1.2s linear infinite;
+}
+
+.bbr-rubber-band {
+    animation: bbr-rubber-band 0.6s ease-out forwards;
+}
+
+.bbr-tada {
+    animation: bbr-tada 0.8s ease-in-out forwards;
+}
+
+.bbr-zoom-in {
+    animation: bbr-zoom-in 0.35s ease-out forwards;
+}
+
+.bbr-slide-in-right {
+    animation: bbr-slide-in-right 0.35s ease-out forwards;
+}
+
+.bbr-slide-in-down {
+    animation: bbr-slide-in-down 0.35s ease-out forwards;
+}
+
+// Pause any infinite animation
+.bbr-anim-paused {
+    animation-play-state: paused;
+}
+

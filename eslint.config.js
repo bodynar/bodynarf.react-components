@@ -40,6 +40,7 @@ export default tseslint.config([
 			},
 		},
 		rules: {
+			"react/no-multi-comp": 0,
 			"react/react-in-jsx-scope": 0,
 			"no-unused-vars": 0,
 			"react/jsx-indent": 0,
@@ -79,7 +80,7 @@ export default tseslint.config([
 				"ignoreAriaAttributes": false
 			}],
 			"custom/optional-props-last": "warn",
-			"custom/hooks-order": "warn",
+			"custom/hooks-grouped": "warn",
 			"custom/functional-component-definition": "error",
 			"custom/no-duplicate-imports": "error",
 			"custom/no-snake-case": "error",

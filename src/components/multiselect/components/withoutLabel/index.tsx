@@ -3,14 +3,15 @@ import { FC, useCallback, useId, useState, MouseEvent, useRef } from "react";
 import { getClassName, isNotNullish, isNullOrEmpty, isNullish } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { getStyleClassName, mapDataAttributes, shouldOpenUpward } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
 import Search from "@bbr/components/search";
 import InternalHint from "@bbr/components/primitives/internal/hint";
 
-import { MultiselectProps, MultiselectItem as MultiselectItemModel } from "../../types";
+import { MultiselectProps, MultiselectItem as MultiselectItemModel, MultiselectResultAsChipDisplayConfig } from "../../types";
 import MultiselectItem from "../item";
 import MultiselectLabel from "../label/component";
+import ChipsLabel from "../label/components/chips";
 
 /** Props type of `MultiselectWithoutLabel` */
 type MultiselectWithoutLabelProps = MultiselectProps & {
@@ -20,7 +21,7 @@ type MultiselectWithoutLabelProps = MultiselectProps & {
 
 const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
     items, onChange, onClear,
-    hideOnOuterClick, listMaxHeight,
+    hideOnOuterClick = true, listMaxHeight,
     placeholder = "",
     noDataText = "No items found", selectionCaption = "{0} items selected", noDataByQuery = "No items found by specified search",
 
@@ -32,6 +33,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
     hint,
 
     id: propsId, checkboxConfig,
+    resultDisplayConfig = "default",
 }) => {
 
     const [isListVisible, setListVisible] = useState<boolean>(false);
@@ -46,7 +48,6 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
     const containerRef = useRef<HTMLDivElement>(null);
 
     const generatedId = useId();
-    const id = propsId ?? generatedId;
 
     const onItemClick = useCallback(
         (item: MultiselectItemModel) => {
@@ -61,8 +62,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
             item.selected = !isItemSelected;
 
             onChange(item, !isItemSelected);
-        }
-        ,
+        },
         [onChange, selectedItems]
     );
 
@@ -80,18 +80,6 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
         },
         [onChange]
     );
-
-    const shouldOpenUpward = useCallback((element: HTMLDivElement): boolean => {
-        const rect = element.getBoundingClientRect();
-        const spaceBelow = window.innerHeight - rect.bottom;
-        const spaceAbove = rect.top;
-
-        const estimatedHeight =
-            Math.min(items.length, 8) * 33 // 33 = 21px item height + 12px padding, 8 - max items in list
-            + 20; // 16px - padding top-bottom + 4px margin-top
-
-        return spaceBelow < estimatedHeight && spaceAbove > spaceBelow;
-    }, [items.length]);
 
     const onLabelClick = useCallback(
         (event: MouseEvent<HTMLElement>): void => {
@@ -111,19 +99,32 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
             } else {
                 // Check if we should open upward
                 if (containerRef.current) {
-                    const openUp = shouldOpenUpward(containerRef.current);
+                    const openUp = shouldOpenUpward(containerRef.current, items.length);
                     setIsOpenUp(openUp);
                 }
 
                 setListVisible(state => !state);
             }
-        }, [onClear, setListVisible, disabled, shouldOpenUpward]);
+        }, [onClear, setListVisible, disabled, items.length]);
+
+    const onTagRemove = useCallback(
+        (item: MultiselectItemModel) => {
+            setSelectedItems(x => x.filter(x => x !== item.id));
+
+            item.selected = false;
+
+            onChange(item, false);
+        },
+        [onChange]
+    );
 
     useComponentOutsideClick(
-        `[data-dropdown-id="${id}"]`, isListVisible,
+        `[data-dropdown-id="${propsId ?? generatedId}"]`, isListVisible,
         () => setListVisible(false),
         hideOnOuterClick,
     );
+
+    const id = propsId ?? generatedId;
 
     const classNames: string = getClassName([
         "bbr-multiselect",
@@ -144,6 +145,15 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
 
     const deselectable = isNotNullish(onClear);
 
+    const isChipsMode = resultDisplayConfig !== "default";
+    const chipConfig = isChipsMode ? resultDisplayConfig as MultiselectResultAsChipDisplayConfig : undefined;
+
+    const selectedItemModels = isChipsMode
+        ? selectedItems
+            .map(id => items.find(item => item.id === id))
+            .filter(isNotNullish)
+        : [];
+
     return (
         <>
             <div
@@ -156,14 +166,31 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
                 data-dropdown-id={id}
                 className={classNames}
             >
-                <MultiselectLabel
-                    caption={placeholder}
-                    onClick={onLabelClick}
-                    deselectable={deselectable}
-                    className={labelComponentClassName}
-                    selectionCaption={selectionCaption}
-                    selectedItemsCount={selectedItemsCount}
-                />
+                {isChipsMode
+                    ? (
+                        <ChipsLabel
+                            caption={placeholder}
+                            onClick={onLabelClick}
+                            onRemove={onTagRemove}
+                            chipConfig={chipConfig!}
+                            deselectable={deselectable}
+                            selectedItems={selectedItemModels}
+                            className={labelComponentClassName}
+                            selectionCaption={selectionCaption}
+                            selectedItemsCount={selectedItemsCount}
+                        />
+                    )
+                    : (
+                        <MultiselectLabel
+                            caption={placeholder}
+                            onClick={onLabelClick}
+                            deselectable={deselectable}
+                            className={labelComponentClassName}
+                            selectionCaption={selectionCaption}
+                            selectedItemsCount={selectedItemsCount}
+                        />
+                    )
+                }
                 <div className="dropdown-menu">
                     <DropdownContent
                         id={id}
@@ -179,6 +206,7 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
                     />
                 </div>
             </div>
+
             <InternalHint
                 hint={hint}
                 validationState={validationState}
@@ -212,7 +240,6 @@ type DropdownContentProps = Pick<MultiselectProps,
     onItemSelectChange: (item: MultiselectItemModel, selected: boolean) => void;
 };
 
-// eslint-disable-next-line react/no-multi-comp
 const DropdownContent: FC<DropdownContentProps> = ({
     noDataText, id, listMaxHeight, noDataByQuery,
     items, selectedItems,

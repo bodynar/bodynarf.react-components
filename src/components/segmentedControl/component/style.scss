@@ -1,0 +1,22 @@
+.bbr-segmented {
+    display: inline-flex;
+    flex-wrap: nowrap;
+
+    &--full {
+        display: flex;
+
+        .bbr-segmented__btn {
+            flex: 1;
+        }
+    }
+
+    &--disabled {
+        opacity: 0.55;
+        pointer-events: none;
+    }
+
+    &__btn {
+        // Smooth colour transition when selected state changes
+        transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+    }
+}

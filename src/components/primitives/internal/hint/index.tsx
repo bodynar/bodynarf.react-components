@@ -78,7 +78,6 @@ type HintWithIconProps = Required<
 };
 
 /** Hint element with icon */
-// eslint-disable-next-line react/no-multi-comp
 const HintWithIcon: FC<HintWithIconProps> = ({
     className,
     content, icon,

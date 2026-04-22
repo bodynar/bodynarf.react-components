@@ -1,0 +1,44 @@
+.bbr-context-menu {
+    position: relative;
+    display: contents;
+
+    &__dropdown {
+        position: fixed;
+        z-index: 9999;
+        min-width: 10rem;
+        padding: 0.35rem 0;
+        border-radius: 4px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        animation: bbr-context-menu-appear 0.1s ease;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.45rem 0.85rem;
+        cursor: pointer;
+
+        &.is-disabled {
+            opacity: 0.45;
+            pointer-events: none;
+            cursor: default;
+        }
+    }
+
+    &__icon {
+        font-size: 0.95rem;
+        flex-shrink: 0;
+    }
+}
+
+@keyframes bbr-context-menu-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

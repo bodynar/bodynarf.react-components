@@ -57,7 +57,6 @@ const DropdownItem: FC<DropdownItemProps> = ({
 export default DropdownItem;
 
 /** Single item in dropdown component with icon */
-// eslint-disable-next-line react/no-multi-comp
 const DropdownItemWithIcon: FC<DropdownItemProps> = ({
     item, selected, onClick
 }) => {

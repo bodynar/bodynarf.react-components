@@ -1,6 +1,106 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.15.0
+- **Chip** *(new)* — Compact element similar to Tag, but with the delete button rendered inside the chip itself. Supports all Tag features: colors, sizes, rounded, light variants, custom colors, `onClick` and `onRemove`.
+
+- **Multiselect** *(updated)*
+  - Removed `displayMode` and `tagsConfig` props.
+  - Added `resultDisplayConfig` prop (`"default"` | `MultiselectResultAsChipDisplayConfig`). `"default"` preserves existing behavior (summary text like "3 items selected"). When a chip config object is provided, selected items are rendered as removable `Chip` components.
+  - Chip config supports `position`: `"label"` renders chips inside the dropdown trigger with auto-expanding height; `"belowLabel"` renders chips below the standard label.
+  - Chip config extends `ChipProps` (minus `content`, `size`, `onRemove`) — supports `style`, `rounded`, `lightColor`, `customColor`, `className`, `data`, etc.
+  - Added optional `containerClassName` for custom styling of the chips container.
+
+- **DateInput** *(new)* — Date input field with masked manual entry and Calendar popover. Supports configurable format (`dd.MM.yyyy`, `MM/dd/yyyy`, etc.), automatic separator insertion, per-character validation (rejects impossible dates like `30.57`), min/max date constraints, locale, all standard input props (sizes, colors, rounded, disabled, readonly, label, hint, validation). Calendar opens on click and closes on date selection or Escape.
+
+- **Date primitive** *(deprecated)* — The native `<input type="date">` wrapper is deprecated since v1.15. Use `DateInput` instead. Will be removed in v1.16.
+
+- **TreeView** *(new)* — Hierarchical tree component for displaying nested data (file explorers, org charts, category trees). Supports expand/collapse, single and multi-selection with parent ↔ child propagation, optional checkboxes with indeterminate state, and full keyboard navigation (arrows, Enter, Space). Uncontrolled by default; becomes controlled when `expandedIds`/`selectedIds` are provided.
+
+- **Popover** *(new)* — Lightweight floating panel anchored to a trigger element; useful for rich tooltips, mini-forms or contextual actions. Compound component: `Popover.Trigger` + `Popover.Content`. Uncontrolled by default; becomes controlled with `visible` + `onToggle`.
+
+- **DateRangePicker** *(new)* — Calendar-based date range selector for booking, reporting and filtering flows. First click sets start, second sets end; live hover preview between dates. Fully controlled.
+
+- **Spinner** *(new)* — Loading indicator for async operations and pending states.
+
+- **EmptyState** *(new)* — Placeholder for empty lists, search results or pages with no data.
+
+- **Stat** *(new)* — KPI / statistics display card for dashboards. Shows a primary metric value with label, optional icon badge and trend indicator (up/down/neutral).
+
+- **OtpInput** *(new)* — One-time password / PIN input rendered as a row of single-character cells. Supports paste, Backspace navigation and arrow keys between cells.
+
+- **Rating** *(new)* — Star-based rating input for reviews and feedback forms. Supports half-star increments and read-only display mode.
+
+- **SegmentedControl** *(new)* — Pill-style option selector (tab bar alternative) for switching between a small set of values. Fully controlled.
+
+- **ImageViewer** *(new)* — Lightbox-style fullscreen overlay for viewing single images and galleries. Supports keyboard navigation and closes on Escape. Fully controlled (`visible` + `onClose`).
+
+- **Menu** *(new)* — Vertical navigation sidebar based on Bulma `.menu`. Supports grouped sections, icons, active item highlight and disabled items.
+
+- **Skeleton** *(new)* — Shimmer placeholders for content loading states. Compound component with sub-variants: `Skeleton.Text`, `Skeleton.Block`, `Skeleton.Avatar`, `Skeleton.Button`.
+
+- **Notification** *(new)* — Toast-like notification system with auto-close and stacking. Requires `NotificationContainer.Provider` as a wrapper around the app/subtree. Programmatic control via `useNotification()` hook (`add`, `remove`, `clear`).
+
+- **TagGroup** *(new)* — Editable tag list for label management, filtering and multi-value inputs. Supports add/remove, duplicate prevention, configurable confirm keys and max tag limit.
+
+- **Tag** *(updated)*
+  - Added `onRemove?: () => void` — when provided, the component wraps itself in a `<div class="tags has-addons">` and appends an `is-delete` span. The delete span receives the same size class as the tag so they always scale together.
+
+- **ContextMenu** *(new)* — Right-click context menu for any element. Rendered via portal into `<body>`, auto-flips when near viewport edges. Closes on outside click, Escape or scroll.
+
+- **ConfirmDialog** *(new)* — Focused confirmation modal for destructive or important actions. Supports async confirm with loading state. `cancellable` mode prevents closing via backdrop/Escape — user must click a button.
+
+- **Carousel** *(new)* — Slides carousel for image galleries, banners and onboarding flows. Supports Fade and Slide effects, auto-play, loop, dots and arrow navigation. Uncontrolled by default; becomes controlled with `activeIndex` + `onChange`.
+
+- **Alert** *(new)* — Styled message banner for informational, warning or error notices. Optional closable header.
+
+- **AutoComplete** *(new)* — Text input with dropdown suggestions for search and selection. Supports static items (local filter) and async `onSearch` for server-side lookup. Blur validation auto-selects on exact/prefix match or shows an error underline.
+
+- **Badge** *(new)* — Overlay indicator (counter or dot) rendered on the top-right corner of any child element. Useful for unread counts, "new" markers and notification badges.
+
+- **animations.scss** *(new)*
+  - Standalone global animation stylesheet (`src/animations.scss`) — import once at the app entry point, then apply animations via `className` on any element.
+  - **Infinite** (support pause via `bbr-anim-paused`): `bbr-pulse`, `bbr-spin`, `bbr-spin-reverse`, `bbr-bounce`, `bbr-heartbeat`, `bbr-float`, `bbr-wobble`.
+  - **One-time** (re-trigger by changing React `key`): `bbr-shake`, `bbr-fade-in`, `bbr-pop`, `bbr-flip`, `bbr-rubber-band`, `bbr-tada`, `bbr-zoom-in`, `bbr-slide-in-left`, `bbr-slide-in-right`, `bbr-slide-in-down`.
+  - `bbr-anim-paused` — pauses any running animation via `animation-play-state: paused`.
+
+- **Avatar** *(new)* — User avatar component with automatic fallback chain: image → initials → icon. Supports status indicator dot (Online/Away/Offline) and multiple shapes (circle, square, rounded square).
+
+- **Calendar** *(new)* — Standalone date-picker panel with day-grid, month-picker and year-picker views. Supports locale, min/max date range, optional Today and Clear footer buttons. Pre-selected value outside min/max is auto-cleared on mount.
+
+- **Card** *(new)* — Generic content container. Compound component with optional `Card.Header`, `Card.Body` and `Card.Footer` sub-components in any combination.
+
+- **Toast** *(new)* — Inline or fixed-position notification banner. Supports auto-close and color variants. Use `fixed` + `position` for viewport-anchored toasts.
+
+- **Tooltip** *(new)* — Hover/click-triggered popup for contextual hints and help text. Compound component: `Tooltip.Hint` (content) + `Tooltip.Target` (anchor). Supports Fade/Slide animation, configurable close behavior (MouseLeave, OutsideClick, Manual) and controlled mode.
+
+- **SidePanel** *(new)* — Sliding side panel with backdrop overlay for detail views, settings and filters. Compound component: `SidePanel.Title` + `SidePanel.Body`. Closes on Escape and backdrop click.
+
+- **ModalWrapper** *(extended)*
+  - Added compound component pattern: `ModalWrapper.Header`, `ModalWrapper.Body`, `ModalWrapper.Footer`.
+  - Only `ModalWrapper.Body` is required; `ModalWrapper.Header` and `ModalWrapper.Footer` are optional.
+  - When `ModalWrapper.Body` is detected in children, compound mode activates automatically — legacy `title` / `actions` props are ignored. No breaking change.
+  - `ModalWrapper.Header` renders a fully customizable `modal-card-head` — add any content, extra buttons, or icons.
+  - `ModalWrapper.Footer` renders a `modal-card-foot` with arbitrary content instead of the `actions` button array.
+  - Added `showMaximizeButton` prop (default `false`) — renders a maximize / restore icon button (`arrows-angle-expand` / `arrows-angle-contract`) to the left of the close button.
+  - Maximize stretches the modal card to `95vw × 95vh`; restore returns it to its original size. Both transitions are animated.
+  - `actions` prop is now optional (defaults to empty array); no breaking change.
+### New hooks
+
+- **useDebounce** *(new)* — returns a debounced copy of `value` that only updates after `delay` ms of inactivity.
+- **useDebounceHandler** *(new)* — wraps an async handler and returns `[canFire, fire]`; `canFire` is `false` for `debounceTime` seconds after each invocation.
+- **usePrevious** *(new)* — stores and returns the previous render's value of any state or prop; returns `undefined` on the first render.
+- **useUpdateEffect** *(new)* — identical to `useEffect` but skips execution on the initial render.
+- **useTimeout** *(new)* — fires `callback` once after `delay` ms; pass `null` to disable. Auto-clears on unmount or delay change.
+- **useInterval** *(new)* — repeats `callback` every `delay` ms; pass `null` to pause without unmounting. Auto-clears on unmount.
+- **useEventListener** *(new)* — attaches a typed event listener to `window` (default) or any `HTMLElement` / `Document`; cleans up automatically.
+- **useLocalStorage** *(new)* — `useState`-like hook that persists its value to `localStorage`; initialises from storage on first render.
+- **useSessionStorage** *(new)* — mirrors `useLocalStorage` API but uses `sessionStorage`; value is cleared when the tab is closed.
+- **useClipboard** *(new)* — copies text to the clipboard via the Clipboard API; exposes `{ copy, copied, reset }`. `copied` resets automatically after `resetDelay` ms (default `2000`).
+- **useKeyPress** *(new)* — tracks whether a specific `KeyboardEvent.key` is currently held down; returns `boolean`.
+- **useFocus** *(new)* — returns `[ref, isFocused]`; attach `ref` to any element to reactively track its focus state.
+- **useWindowSize** *(new)* — reactively tracks `{ width, height }` of the browser viewport; updates on every `resize` event.
+
 ## v1.14.7
 - **Paginator**
   - Added `nextButtonsConfig` prop (`{ previousButtonConfig, nextButtonConfig, style }`) to render Previous/Next navigation as `Button` components with full styling support (`style`, `caption`, `rounded`, `outlined`, `icon`, etc.).

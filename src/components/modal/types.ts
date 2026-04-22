@@ -7,15 +7,24 @@ import { ButtonProps } from "@bbr/components/button";
 
 /** Modal window component props */
 export type ModalWrapperProps = BaseElementProps & {
-    /** Modal window body content */
+    /**
+     * Modal window content.
+     * Can be plain `ReactNode` (legacy) or a combination of
+     * `ModalWrapper.Header`, `ModalWrapper.Body` and `ModalWrapper.Footer` sub-components.
+     */
     children: ReactNode;
 
-    /** Action buttons in the footer */
-    actions: Array<ButtonProps>;
+    /**
+     * Action buttons rendered in the footer (legacy API).
+     * Ignored when `ModalWrapper.Footer` sub-component is present.
+     * @default []
+     */
+    actions?: Array<ButtonProps>;
 
     /**
-     * Modal window title.
-     * If not provided - header will not be displayed
+     * Modal window title rendered in the header (legacy API).
+     * Ignored when `ModalWrapper.Header` sub-component is present.
+     * If not provided and no sub-component header - header section is hidden.
      */
     title?: string;
 
@@ -26,10 +35,16 @@ export type ModalWrapperProps = BaseElementProps & {
     size?: ElementSize;
 
     /**
-     * Show close button in the header.
+     * Show the built-in close (×) button in the header.
      * @default true
      */
     showCloseButton?: boolean;
+
+    /**
+     * Show the maximize / restore button next to the close button.
+     * @default false
+     */
+    showMaximizeButton?: boolean;
 
     /**
      * Close modal when clicking on background overlay.
@@ -43,6 +58,24 @@ export type ModalWrapperProps = BaseElementProps & {
      */
     closeOnEscape?: boolean;
 
+    /**
+     * Accessible label for the close button.
+     * @default "close"
+     */
+    closeLabel?: string;
+
+    /**
+     * Title text for the maximize button when the modal is in normal state.
+     * @default "Maximize"
+     */
+    maximizeLabel?: string;
+
+    /**
+     * Title text for the maximize button when the modal is maximized.
+     * @default "Restore"
+     */
+    restoreLabel?: string;
+
     /** Close button click handler */
     onCloseClick: ActionFn;
 
@@ -51,4 +84,22 @@ export type ModalWrapperProps = BaseElementProps & {
      * If not provided - Enter key will not be handled
      */
     onEnterPress?: ActionFn;
+};
+
+/** ModalWrapper.Header sub-component props */
+export type ModalWrapperHeaderProps = BaseElementProps & {
+    /** Header content — title text, custom buttons, etc. */
+    children: ReactNode;
+};
+
+/** ModalWrapper.Body sub-component props */
+export type ModalWrapperBodyProps = BaseElementProps & {
+    /** Body content */
+    children: ReactNode;
+};
+
+/** ModalWrapper.Footer sub-component props */
+export type ModalWrapperFooterProps = BaseElementProps & {
+    /** Footer content — action buttons, etc. */
+    children: ReactNode;
 };

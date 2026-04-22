@@ -87,8 +87,8 @@ const MultiselectItem: FC<MultiselectItemProps> = ({
 
                 defaultValue={selected}
                 onValueChange={onChecked}
+                label={{ caption: item.displayValue }}
             />
-            {item.displayValue}
         </li>
     );
 };
@@ -96,7 +96,6 @@ const MultiselectItem: FC<MultiselectItemProps> = ({
 export default MultiselectItem;
 
 /** Single item in multiselect component with icon */
-// eslint-disable-next-line react/no-multi-comp
 const MultiselectItemWithIcon: FC<MultiselectItemProps> = ({
     item, selected, rootId,
     onChange, onItemClick,
@@ -136,7 +135,8 @@ const MultiselectItemWithIcon: FC<MultiselectItemProps> = ({
 
     const checkboxClassName = getClassName([
         checkboxConfig?.className,
-        "mb-1"
+        "mb-1",
+        "mr-2",
     ]);
 
     if (icon.position === ElementPosition.Right) {

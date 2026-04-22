@@ -2,7 +2,7 @@ import { useCallback, useId, useState, MouseEvent, FC, useMemo, useRef } from "r
 
 import { getClassName, isNullOrEmpty, isNullish } from "@bodynarf/utils";
 
-import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { getStyleClassName, mapDataAttributes, shouldOpenUpward } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
 import InternalHint from "@bbr/internalComponent/hint";
 
@@ -36,7 +36,6 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
     const [isOpenUp, setIsOpenUp] = useState<boolean>(false);
 
     const generatedId = useId();
-    const id = propsId ?? generatedId;
     const containerRef = useRef<HTMLDivElement>(null);
 
     const filteredItems = useMemo(
@@ -80,18 +79,6 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
             setListVisible(false);
         }, [setListVisible, value, items, onSelect, disabled]);
 
-    const shouldOpenUpward = useCallback((element: HTMLDivElement): boolean => {
-        const rect = element.getBoundingClientRect();
-        const spaceBelow = window.innerHeight - rect.bottom;
-        const spaceAbove = rect.top;
-
-        const estimatedHeight =
-            Math.min(items.length, 8) * 33 // 33 = 21px item height + 12px padding, 8 - max items in list
-            + 20; // 16px - padding top-bottom + 4px margin-top
-
-        return spaceBelow < estimatedHeight && spaceAbove > spaceBelow;
-    }, [items.length]);
-
     const onLabelClick = useCallback(
         (event: MouseEvent<HTMLElement>): void => {
             if (disabled) {
@@ -109,13 +96,13 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
                 setSearchValue("");
             } else {
                 if (containerRef.current) {
-                    const openUp = shouldOpenUpward(containerRef.current);
+                    const openUp = shouldOpenUpward(containerRef.current, items.length);
                     setIsOpenUp(openUp);
                 }
 
                 setListVisible(state => !state);
             }
-        }, [onSelect, setListVisible, disabled, shouldOpenUpward]);
+        }, [onSelect, setListVisible, disabled, items.length]);
 
     const onSearchChange = useCallback(
         (value: string) => {
@@ -127,11 +114,12 @@ const DropdownCompact: FC<DropdownCompactProps> = ({
     );
 
     useComponentOutsideClick(
-        `[data-dropdown-id="${id}"]`, isListVisible,
+        `[data-dropdown-id="${propsId ?? generatedId}"]`, isListVisible,
         () => setListVisible(false),
         hideOnOuterClick,
     );
 
+    const id = propsId ?? generatedId;
 
     const classNames: string = getClassName([
         "bbr-dropdown",
