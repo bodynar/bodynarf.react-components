@@ -1,6 +1,4 @@
-import { FC } from "react";
-
-import { isNullish } from "@bodynarf/utils";
+import { createLabelRouter } from "@bbr/utils";
 
 import "./style.scss";
 
@@ -9,17 +7,6 @@ import PasswordWithLabel from "../components/withLabel";
 import PasswordWithoutLabel from "../components/withoutLabel";
 
 /** Password input component */
-const Password: FC<PasswordProps> = (props) => {
-    // eslint-disable-next-line react/destructuring-assignment
-    return isNullish(props.label)
-        ? <PasswordWithoutLabel {...props} />
-        : (
-            <PasswordWithLabel
-                {...props}
-                // eslint-disable-next-line react/destructuring-assignment
-                label={props.label}
-            />
-        );
-};
+const Password = createLabelRouter<PasswordProps>(PasswordWithoutLabel, PasswordWithLabel);
 
 export default Password;

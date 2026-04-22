@@ -3,7 +3,7 @@ import { FC, useCallback, useId, useRef, useState } from "react";
 import { getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { ElementPosition, ElementSize } from "@bbr/types";
-import { getSizeClassName, mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, mapDataAttributes, shouldOpenUpward } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
 import Icon from "@bbr/components/icon";
 
@@ -35,30 +35,18 @@ const SplitButton: FC<SplitButtonProps> = ({
     const id = useId();
     const containerRef = useRef<HTMLDivElement>(null);
 
-    const shouldOpenUpward = useCallback((element: HTMLDivElement): boolean => {
-        const rect = element.getBoundingClientRect();
-        const spaceBelow = window.innerHeight - rect.bottom;
-        const spaceAbove = rect.top;
-
-        const estimatedHeight =
-            Math.min(actions.length, 8) * 33
-            + 20;
-
-        return spaceBelow < estimatedHeight && spaceAbove > spaceBelow;
-    }, [actions.length]);
-
     const onToggleClick = useCallback(() => {
         if (disabled || isLoading) {
             return;
         }
 
         if (containerRef.current) {
-            const openUp = shouldOpenUpward(containerRef.current);
+            const openUp = shouldOpenUpward(containerRef.current, actions.length);
             setIsOpenUp(openUp);
         }
 
         setIsOpen(state => !state);
-    }, [disabled, isLoading, shouldOpenUpward]);
+    }, [disabled, isLoading, actions.length]);
 
     const onActionClick = useCallback(
         (action: SplitButtonAction) => {

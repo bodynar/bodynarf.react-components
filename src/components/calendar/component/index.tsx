@@ -109,8 +109,6 @@ const Calendar: FC<CalendarProps> = ({
         return (min === null || today >= min) && (max === null || today <= max);
     }, [today, minDate, maxDate]);
 
-    const effectiveTodayConfig = todayInRange ? todayButtonConfig : undefined;
-
     const handlePrev = useCallback(() => {
         if (view === "days") {
             setDisplayDate(d => new Date(d.getFullYear(), d.getMonth() - 1, 1));
@@ -188,6 +186,8 @@ const Calendar: FC<CalendarProps> = ({
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const effectiveTodayConfig = todayInRange ? todayButtonConfig : undefined;
 
     const calendarClassName = getClassName([
         "bbr-calendar",

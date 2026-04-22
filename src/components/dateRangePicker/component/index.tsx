@@ -30,9 +30,6 @@ const DateRangePicker: FC<DateRangePickerProps> = ({
     // Tracks pointer position for live range preview during selection
     const [hoverDate, setHoverDate] = useState<Date | undefined>(undefined);
 
-    const selectedStart = value?.start;
-    const selectedEnd = value?.end;
-
     const handleDayClick = useCallback((clicked: Date | undefined) => {
         if (!clicked) {
             setDraft(undefined);
@@ -67,6 +64,9 @@ const DateRangePicker: FC<DateRangePickerProps> = ({
         setHoverDate(undefined);
         onChange?.({ start: undefined, end: undefined });
     }, [onChange]);
+
+    const selectedStart = value?.start;
+    const selectedEnd = value?.end;
 
     // Props forwarded to Calendar for range display
     const calRangeStart = draft ?? selectedStart;

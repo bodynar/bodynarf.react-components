@@ -8,7 +8,7 @@ let notifCounter = 0;
 const genId = () => `bbr-notif-${++notifCounter}-${Date.now()}`;
 
 /** Provides the notification queue to descendant components */
-const NotificationProvider: FC<{ children: ReactNode }> = ({ children }) => {
+const NotificationProvider: FC<{ children: ReactNode; }> = ({ children }) => {
     const [items, setItems] = useState<NotificationItem[]>([]);
 
     const remove = useCallback((id: string) => {
@@ -27,7 +27,6 @@ const NotificationProvider: FC<{ children: ReactNode }> = ({ children }) => {
         setItems([]);
     }, []);
 
-    // eslint-disable-next-line custom/hooks-order
     const contextValue = useMemo(
         () => ({ items, add, remove, clear }),
         [items, add, remove, clear],

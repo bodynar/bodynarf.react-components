@@ -29,8 +29,6 @@ const ImageViewer: FC<ImageViewerProps> = ({
         setCurrentIndex(i => (i + 1) % images.length);
     }, [images.length]);
 
-    const hasMultiple = images.length > 1;
-
     const onKeyDown = useCallback((e: globalThis.KeyboardEvent) => {
         if (!visible) {
             return;
@@ -39,13 +37,13 @@ const ImageViewer: FC<ImageViewerProps> = ({
         if (e.key === "Escape") {
             onClose();
         }
-        else if (e.key === "ArrowLeft" && hasMultiple) {
+        else if (e.key === "ArrowLeft" && images.length > 1) {
             prev();
         }
-        else if (e.key === "ArrowRight" && hasMultiple) {
+        else if (e.key === "ArrowRight" && images.length > 1) {
             next();
         }
-    }, [visible, hasMultiple, prev, next, onClose]);
+    }, [visible, images.length, prev, next, onClose]);
 
     useEventListener("keydown", onKeyDown, document);
 
@@ -55,6 +53,8 @@ const ImageViewer: FC<ImageViewerProps> = ({
             setCurrentIndex(initialIndex);
         }
     }, [visible, initialIndex]);
+
+    const hasMultiple = images.length > 1;
 
     if (!visible || images.length === 0) {
         return null;

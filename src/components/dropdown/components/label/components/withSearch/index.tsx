@@ -43,11 +43,6 @@ const DropdownLabelWithSearch: FC<DropdownLabelWithSearchProps> = ({
         [onSearchChange]
     );
 
-    const inputClassName = getClassName([
-        "input",
-        deselectable && isNotNullish(selectedItem) ? "px-2" : "pl-0"
-    ]);
-
     const containerOnClick = useCallback(
         (event: MouseEvent<HTMLElement>) => {
             event.stopPropagation();
@@ -62,6 +57,11 @@ const DropdownLabelWithSearch: FC<DropdownLabelWithSearchProps> = ({
         },
         [isListVisible, onClick]
     );
+
+    const inputClassName = getClassName([
+        "input",
+        deselectable && isNotNullish(selectedItem) ? "px-2" : "pl-0"
+    ]);
 
     return (
         <div

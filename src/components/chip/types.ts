@@ -32,6 +32,9 @@ export type ChipProps =
             backgroundColor: string;
         };
 
+        /** `aria-label` for the remove button. Defaults to `"Remove"` */
+        removeLabel?: string;
+
         /**
          * Called when the remove (×) button is clicked.
          * When provided, a delete icon is rendered inside the chip.

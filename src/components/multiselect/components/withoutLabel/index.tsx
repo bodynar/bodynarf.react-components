@@ -3,7 +3,7 @@ import { FC, useCallback, useId, useState, MouseEvent, useRef } from "react";
 import { getClassName, isNotNullish, isNullOrEmpty, isNullish } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { getStyleClassName, mapDataAttributes, shouldOpenUpward } from "@bbr/utils";
 import { useComponentOutsideClick } from "@bbr/hooks";
 import Search from "@bbr/components/search";
 import InternalHint from "@bbr/components/primitives/internal/hint";
@@ -48,7 +48,6 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
     const containerRef = useRef<HTMLDivElement>(null);
 
     const generatedId = useId();
-    const id = propsId ?? generatedId;
 
     const onItemClick = useCallback(
         (item: MultiselectItemModel) => {
@@ -82,18 +81,6 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
         [onChange]
     );
 
-    const shouldOpenUpward = useCallback((element: HTMLDivElement): boolean => {
-        const rect = element.getBoundingClientRect();
-        const spaceBelow = window.innerHeight - rect.bottom;
-        const spaceAbove = rect.top;
-
-        const estimatedHeight =
-            Math.min(items.length, 8) * 33 // 33 = 21px item height + 12px padding, 8 - max items in list
-            + 20; // 16px - padding top-bottom + 4px margin-top
-
-        return spaceBelow < estimatedHeight && spaceAbove > spaceBelow;
-    }, [items.length]);
-
     const onLabelClick = useCallback(
         (event: MouseEvent<HTMLElement>): void => {
             if (disabled) {
@@ -112,13 +99,13 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
             } else {
                 // Check if we should open upward
                 if (containerRef.current) {
-                    const openUp = shouldOpenUpward(containerRef.current);
+                    const openUp = shouldOpenUpward(containerRef.current, items.length);
                     setIsOpenUp(openUp);
                 }
 
                 setListVisible(state => !state);
             }
-        }, [onClear, setListVisible, disabled, shouldOpenUpward]);
+        }, [onClear, setListVisible, disabled, items.length]);
 
     const onTagRemove = useCallback(
         (item: MultiselectItemModel) => {
@@ -132,10 +119,12 @@ const MultiselectWithoutLabel: FC<MultiselectWithoutLabelProps> = ({
     );
 
     useComponentOutsideClick(
-        `[data-dropdown-id="${id}"]`, isListVisible,
+        `[data-dropdown-id="${propsId ?? generatedId}"]`, isListVisible,
         () => setListVisible(false),
         hideOnOuterClick,
     );
+
+    const id = propsId ?? generatedId;
 
     const classNames: string = getClassName([
         "bbr-multiselect",

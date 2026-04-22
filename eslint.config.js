@@ -80,7 +80,7 @@ export default tseslint.config([
 				"ignoreAriaAttributes": false
 			}],
 			"custom/optional-props-last": "warn",
-			"custom/hooks-order": "warn",
+			"custom/hooks-grouped": "warn",
 			"custom/functional-component-definition": "error",
 			"custom/no-duplicate-imports": "error",
 			"custom/no-snake-case": "error",

@@ -4,7 +4,7 @@ import { Children, FC, ReactNode, isValidElement, useCallback, useId, useState }
 import { getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { mapDataAttributes } from "@bbr/utils";
-import { useEventListener } from "@bbr/hooks";
+import { useComponentOutsideClick } from "@bbr/hooks";
 
 import "./style.scss";
 
@@ -26,20 +26,17 @@ const Popover: FC<PopoverProps> & {
 }) => {
         const isControlled = isNotNullish(controlledVisible);
         const [internalVisible, setInternalVisible] = useState(false);
-        const visible = isControlled ? controlledVisible! : internalVisible;
-
         const id = useId();
-        const wrapperId = `popover-${id.replace(/:/g, "")}`;
 
         const toggle = useCallback(() => {
-            const next = !visible;
+            const next = !(isControlled ? controlledVisible! : internalVisible);
 
             if (!isControlled) {
                 setInternalVisible(next);
             }
 
             onToggle?.(next);
-        }, [visible, isControlled, onToggle]);
+        }, [isControlled, controlledVisible, internalVisible, onToggle]);
 
         const close = useCallback(() => {
             if (!isControlled) {
@@ -49,19 +46,10 @@ const Popover: FC<PopoverProps> & {
             onToggle?.(false);
         }, [isControlled, onToggle]);
 
-        const onDocumentClick = useCallback((event: MouseEvent) => {
-            if (!visible) {
-                return;
-            }
+        useComponentOutsideClick(`#popover-${id.replace(/:/g, "")}`, isControlled ? controlledVisible! : internalVisible, close, true);
 
-            const target = event.target as HTMLElement;
-
-            if (target.closest(`#${wrapperId}`) === null) {
-                close();
-            }
-        }, [visible, wrapperId, close]);
-
-        useEventListener("click", onDocumentClick, document);
+        const visible = isControlled ? controlledVisible! : internalVisible;
+        const wrapperId = `popover-${id.replace(/:/g, "")}`;
 
         // Scan children for sub-components
         let triggerSlot: ReactNode = null;

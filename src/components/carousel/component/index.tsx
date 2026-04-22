@@ -27,10 +27,7 @@ const Carousel: FC<CarouselProps> = ({
 
     className, title, data,
 }) => {
-    const [internalIndex, setInternalIndex] = useState(0);
     const isControlled = controlledIndex !== undefined;
-    const currentIndex = isControlled ? controlledIndex! : internalIndex;
-
     const count = items.length;
 
     // slide + loop: render [cloneLast, ...items, cloneFirst] and move the track
@@ -38,8 +35,9 @@ const Carousel: FC<CarouselProps> = ({
     // After the transition ends we snap back to the real counterpart without animation.
     const isSlideLoop = effect === CarouselEffect.Slide && loop;
 
+    const [internalIndex, setInternalIndex] = useState(0);
     // visual position in the extended array (1-based for real slides)
-    const [trackIndex, setTrackIndex] = useState(currentIndex + 1);
+    const [trackIndex, setTrackIndex] = useState(() => (controlledIndex ?? 0) + 1);
     const [skipTransition, setSkipTransition] = useState(false);
     const prevControlledRef = useRef(controlledIndex);
 
@@ -62,7 +60,8 @@ const Carousel: FC<CarouselProps> = ({
 
     const prev = useCallback(() => {
         if (isSlideLoop) {
-            const next = ((currentIndex - 1 + count) % count);
+            const curIdx = isControlled ? controlledIndex! : internalIndex;
+            const next = ((curIdx - 1 + count) % count);
             setSkipTransition(false);
             setTrackIndex(t => t - 1);
 
@@ -72,13 +71,13 @@ const Carousel: FC<CarouselProps> = ({
 
             onChange?.(next);
         } else {
-            goTo(currentIndex - 1);
+            goTo((isControlled ? controlledIndex! : internalIndex) - 1);
         }
-    }, [isSlideLoop, currentIndex, count, isControlled, goTo, onChange]);
+    }, [isSlideLoop, internalIndex, controlledIndex, isControlled, count, goTo, onChange]);
 
     const next = useCallback(() => {
         if (isSlideLoop) {
-            const n = (currentIndex + 1) % count;
+            const n = ((isControlled ? controlledIndex! : internalIndex) + 1) % count;
 
             setSkipTransition(false);
             setTrackIndex(t => t + 1);
@@ -89,9 +88,9 @@ const Carousel: FC<CarouselProps> = ({
 
             onChange?.(n);
         } else {
-            goTo(currentIndex + 1);
+            goTo((isControlled ? controlledIndex! : internalIndex) + 1);
         }
-    }, [isSlideLoop, currentIndex, count, isControlled, goTo, onChange]);
+    }, [isSlideLoop, internalIndex, controlledIndex, isControlled, count, goTo, onChange]);
 
     // After slide animation ends, snap from clone position to the real counterpart
     const handleTransitionEnd = useCallback(() => {
@@ -140,6 +139,8 @@ const Carousel: FC<CarouselProps> = ({
     }, [isSlideLoop, isControlled, controlledIndex, count]);
 
     useInterval(next, autoPlay && count > 1 ? interval : null);
+
+    const currentIndex = isControlled ? controlledIndex! : internalIndex;
 
     const dataAttributes = mapDataAttributes(data);
 

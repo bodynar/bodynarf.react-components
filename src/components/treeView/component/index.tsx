@@ -93,6 +93,9 @@ const TreeView: FC<TreeViewProps> = ({
 
     className, title, data,
 }) => {
+    const isControlledExpand = controlledExpanded !== undefined;
+    const isControlledSelect = controlledSelected !== undefined;
+
     const [internalExpanded, setInternalExpanded] = useState<Set<string>>(emptySet);
     const [internalSelected, setInternalSelected] = useState<Set<string>>(emptySet);
     const [focusedId, setFocusedId] = useState<string | undefined>(undefined);
@@ -100,11 +103,14 @@ const TreeView: FC<TreeViewProps> = ({
 
     const containerRef = useRef<HTMLDivElement>(null);
 
-    const isControlledExpand = controlledExpanded !== undefined;
-    const isControlledSelect = controlledSelected !== undefined;
-
-    const expandedIds = isControlledExpand ? controlledExpanded! : internalExpanded;
-    const selectedIds = isControlledSelect ? controlledSelected! : internalSelected;
+    const expandedIds = useMemo(
+        () => isControlledExpand ? controlledExpanded! : internalExpanded,
+        [isControlledExpand, controlledExpanded, internalExpanded],
+    );
+    const selectedIds = useMemo(
+        () => isControlledSelect ? controlledSelected! : internalSelected,
+        [isControlledSelect, controlledSelected, internalSelected],
+    );
 
     const flatVisible = useMemo(
         () => buildFlatVisible(nodes, expandedIds),

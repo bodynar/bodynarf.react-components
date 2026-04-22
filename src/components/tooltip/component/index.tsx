@@ -3,7 +3,7 @@ import { Children, FC, ReactNode, isValidElement, useCallback, useEffect, useId,
 import { getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { mapDataAttributes } from "@bbr/utils";
-import { useTimeout, useEventListener } from "@bbr/hooks";
+import { useComponentOutsideClick, useTimeout } from "@bbr/hooks";
 
 import "./style.scss";
 
@@ -31,11 +31,7 @@ const Tooltip: FC<TooltipProps> = ({
     const openTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const hideDelayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    const visible = isControlled ? controlledVisible! : internalVisible;
-
     const id = useId();
-    const triggerId = `tooltip-${id.replace(/:/g, "")}`;
-    const selector = `#${triggerId}`;
 
     const hide = useCallback(() => {
         if (openTimerRef.current !== null) {
@@ -89,17 +85,12 @@ const Tooltip: FC<TooltipProps> = ({
         }
     }, [isControlled, openDelay]);
 
-    const onDocumentClick = useCallback((event: MouseEvent) => {
-        if (!visible || closeOn !== TooltipCloseOn.OutsideClick) {
-            return;
-        }
-
-        const target = event.target as HTMLElement;
-
-        if (target.closest(selector) === null) {
-            hide();
-        }
-    }, [visible, closeOn, selector, hide]);
+    useComponentOutsideClick(
+        `#tooltip-${id.replace(/:/g, "")}`,
+        (isControlled ? controlledVisible! : internalVisible) && closeOn === TooltipCloseOn.OutsideClick,
+        hide,
+        true,
+    );
 
     useEffect(() => {
         return () => {
@@ -113,9 +104,10 @@ const Tooltip: FC<TooltipProps> = ({
         };
     }, []);
 
-    useTimeout(hide, visible && isNotNullish(lifetime) ? lifetime! : null);
+    useTimeout(hide, (isControlled ? controlledVisible! : internalVisible) && isNotNullish(lifetime) ? lifetime! : null);
 
-    useEventListener("click", onDocumentClick);
+    const visible = isControlled ? controlledVisible! : internalVisible;
+    const triggerId = `tooltip-${id.replace(/:/g, "")}`;
 
     const wrapperClassName = getClassName([
         "bbr-tooltip",

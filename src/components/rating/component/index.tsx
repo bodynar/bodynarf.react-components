@@ -23,8 +23,6 @@ const Rating: FC<RatingProps> = ({
 }) => {
     const [hovered, setHovered] = useState<number | undefined>(undefined);
 
-    const displayValue = hovered ?? value;
-
     const handleStarClick = useCallback((starValue: number) => {
         if (readonly || !onChange) { return; }
 
@@ -44,6 +42,8 @@ const Rating: FC<RatingProps> = ({
     const handleMouseLeave = useCallback(() => {
         setHovered(undefined);
     }, []);
+
+    const displayValue = hovered ?? value;
 
     const dataAttributes = mapDataAttributes(data);
 

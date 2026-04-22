@@ -30,8 +30,6 @@ const TagGroup: FC<TagGroupProps> = ({
     const [inputValue, setInputValue] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const canAdd = addable && !disabled && (maxTags === undefined || value.length < maxTags);
-
     const addTag = useCallback((raw: string) => {
         const trimmed = raw.trim().replace(/,$/, "");
 
@@ -64,6 +62,8 @@ const TagGroup: FC<TagGroupProps> = ({
             removeTag(value[value.length - 1]);
         }
     }, [confirmKeys, inputValue, value, addTag, removeTag]);
+
+    const canAdd = addable && !disabled && (maxTags === undefined || value.length < maxTags);
 
     const dataAttributes = mapDataAttributes(data);
 

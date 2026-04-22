@@ -1,8 +1,8 @@
-import { ChangeEvent, KeyboardEvent, RefObject, useCallback, useId, useRef, useState } from "react";
+import { ChangeEvent, KeyboardEvent, RefObject, useCallback, useEffect, useId, useRef, useState } from "react";
 
 import { isNotNullish, isNullish, isNotNullOrEmpty } from "@bodynarf/utils";
 
-import { useEventListener } from "@bbr/hooks";
+import { useDebounce, useEventListener } from "@bbr/hooks";
 
 import { AutoCompleteItem, AutoCompleteProps } from "..";
 
@@ -96,11 +96,13 @@ export const useAutoComplete = ({
     const [selectedItem, setSelectedItem] = useState<AutoCompleteItem | undefined>(undefined);
     const [isInvalid, setIsInvalid] = useState(false);
 
-    const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const clearPendingRef = useRef(false);
     const id = useId();
     const inputId = `autocomplete-input-${id.replace(/:/g, "")}`;
+
+    const [searchQuery, setSearchQuery] = useState<string | null>(null);
+    const debouncedSearchQuery = useDebounce(searchQuery, debounceMs);
 
     const isSearching = externalSearching || isInternalSearching;
 
@@ -123,6 +125,32 @@ export const useAutoComplete = ({
         setIsInvalid(false);
     }, []);
 
+    useEffect(() => {
+        if (!isNotNullOrEmpty(debouncedSearchQuery)) { return; }
+
+        const query = debouncedSearchQuery!;
+        let cancelled = false;
+
+        if (isNotNullish(onSearch)) {
+            setIsInternalSearching(true);
+
+            Promise.resolve(onSearch(query)).then(results => {
+                if (cancelled) { return; }
+
+                setSuggestions(results.slice(0, maxSuggestions));
+                setIsOpen(true);
+            }).finally(() => {
+                if (!cancelled) { setIsInternalSearching(false); }
+            });
+        } else {
+            const filtered = filterStatic(query);
+            setSuggestions(filtered);
+            setIsOpen(true);
+        }
+
+        return () => { cancelled = true; };
+    }, [debouncedSearchQuery, onSearch, filterStatic, maxSuggestions]);
+
     const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const query = e.target.value;
         setInputValue(query);
@@ -131,37 +159,16 @@ export const useAutoComplete = ({
         setSelectedItem(undefined);
         setIsInvalid(false);
 
-        if (debounceTimer.current !== null) {
-            clearTimeout(debounceTimer.current);
-        }
-
         if (!isNotNullOrEmpty(query)) {
+            setSearchQuery(null);
             resetDropdown();
             onSelect?.(undefined);
 
             return;
         }
 
-        debounceTimer.current = setTimeout(async () => {
-            debounceTimer.current = null;
-
-            if (isNotNullish(onSearch)) {
-                setIsInternalSearching(true);
-
-                try {
-                    const results = await onSearch(query);
-                    setSuggestions(results.slice(0, maxSuggestions));
-                    setIsOpen(true);
-                } finally {
-                    setIsInternalSearching(false);
-                }
-            } else {
-                const filtered = filterStatic(query);
-                setSuggestions(filtered);
-                setIsOpen(true);
-            }
-        }, debounceMs);
-    }, [onSearch, filterStatic, debounceMs, maxSuggestions, onValueChange, onSelect, resetDropdown]);
+        setSearchQuery(query);
+    }, [onValueChange, onSelect, resetDropdown]);
 
     const selectItem = useCallback((item: AutoCompleteItem) => {
         setInputValue(item.label);
@@ -235,11 +242,7 @@ export const useAutoComplete = ({
             return;
         }
 
-        if (debounceTimer.current !== null) {
-            clearTimeout(debounceTimer.current);
-            debounceTimer.current = null;
-        }
-
+        setSearchQuery(null);
         setIsOpen(false);
         setActiveIndex(-1);
 

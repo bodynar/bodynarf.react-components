@@ -15,7 +15,7 @@ const Chip: FC<ChipProps> = ({
     size = ElementSize.Normal, style = ElementColor.Default,
     rounded = false, lightColor = false, customColor,
 
-    onClick, onRemove,
+    onClick, onRemove, removeLabel = "Remove",
     className, title, data,
 }) => {
     if (isNotNullish(customColor)) {
@@ -58,8 +58,8 @@ const Chip: FC<ChipProps> = ({
             {isNotNullish(onRemove) ? (
                 <button
                     type="button"
-                    aria-label="Remove"
                     onClick={onDeleteClick}
+                    aria-label={removeLabel}
                     className="bbr-chip__delete delete is-small is-clickable"
                 />
             ) : null}
