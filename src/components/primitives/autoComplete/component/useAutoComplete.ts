@@ -1,6 +1,6 @@
 import { ChangeEvent, KeyboardEvent, RefObject, useCallback, useEffect, useId, useRef, useState } from "react";
 
-import { isNotNullish, isNullish, isNotNullOrEmpty } from "@bodynarf/utils";
+import { isNotNullish, isNullish, isNotNullOrEmpty, isUndefined } from "@bodynarf/utils";
 
 import { useDebounce, useEventListener } from "@bbr/hooks";
 
@@ -126,7 +126,9 @@ export const useAutoComplete = ({
     }, []);
 
     useEffect(() => {
-        if (!isNotNullOrEmpty(debouncedSearchQuery)) { return; }
+        if (!isNotNullOrEmpty(debouncedSearchQuery)) {
+            return;
+        }
 
         const query = debouncedSearchQuery!;
         let cancelled = false;
@@ -153,8 +155,10 @@ export const useAutoComplete = ({
 
     const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const query = e.target.value;
+
         setInputValue(query);
         onValueChange?.(query);
+
         setActiveIndex(-1);
         setSelectedItem(undefined);
         setIsInvalid(false);
@@ -171,20 +175,26 @@ export const useAutoComplete = ({
     }, [onValueChange, onSelect, resetDropdown]);
 
     const selectItem = useCallback((item: AutoCompleteItem) => {
-        setInputValue(item.label);
-        onValueChange?.(item.label);
-        onSelect?.(item);
-        setSelectedItem(item);
+        if (item.label !== inputValue) {
+            onValueChange?.(item.label);
+            setInputValue(item.label);
+            onSelect?.(item);
+            setSelectedItem(item);
+        }
+
         resetDropdown();
-    }, [onSelect, onValueChange, resetDropdown]);
+    }, [inputValue, onSelect, onValueChange, resetDropdown]);
 
     const handleClear = useCallback(() => {
+        if (inputValue !== "") {
+            onValueChange?.("");
+        }
+
         setInputValue("");
         setSelectedItem(undefined);
         resetDropdown();
         onSelect?.(undefined);
-        onValueChange?.("");
-    }, [onSelect, onValueChange, resetDropdown]);
+    }, [inputValue, onSelect, onValueChange, resetDropdown]);
 
     const handleKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
         if (!isOpen) {
@@ -246,8 +256,12 @@ export const useAutoComplete = ({
         setIsOpen(false);
         setActiveIndex(-1);
 
-        if (isNotNullish(selectedItem)) { return; }
-        if (!isNotNullOrEmpty(inputValue)) { return; }
+        if (isNotNullish(selectedItem)) {
+            return;
+        }
+        if (!isNotNullOrEmpty(inputValue)) {
+            return;
+        }
 
         if (isNotNullish(staticItems)) {
             const lower = inputValue.toLowerCase();
@@ -270,8 +284,7 @@ export const useAutoComplete = ({
             return;
         }
 
-        if (
-            suggestions.length === 1
+        if (suggestions.length === 1
             && suggestions[0].label.toLowerCase().startsWith(inputValue.toLowerCase())
         ) {
             selectItem(suggestions[0]);
@@ -279,8 +292,12 @@ export const useAutoComplete = ({
             return;
         }
 
-        setIsInvalid(true);
-        onSelect?.(undefined);
+        if (!isUndefined(selectedItem)) {
+            setIsInvalid(true);
+
+            onSelect?.(undefined);
+        }
+
     }, [selectedItem, inputValue, suggestions, staticItems, selectItem, onSelect]);
 
     const onDocumentClick = useCallback((event: MouseEvent) => {

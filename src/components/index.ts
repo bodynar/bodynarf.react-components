@@ -126,8 +126,8 @@ export * from "./skeleton";
 export { default as Spinner } from "./spinner";
 export * from "./spinner";
 
-export { default as AutoComplete } from "./autoComplete";
-export * from "./autoComplete";
+export { default as AutoComplete } from "./primitives/autoComplete";
+export * from "./primitives/autoComplete";
 
 export { default as ConfirmDialog } from "./confirmDialog";
 export * from "./confirmDialog";

@@ -3,6 +3,7 @@ import { FC } from "react";
 import { getClassName } from "@bodynarf/utils";
 
 import { mapDataAttributes } from "@bbr/utils";
+import InternalHint from "@bbr/internalComponent/hint";
 
 import { AutoCompleteProps } from "../..";
 import { useAutoComplete } from "../../component/useAutoComplete";
@@ -22,8 +23,13 @@ const AutoCompleteWithLabel: FC<AutoCompleteWithLabelProps> = ({
     placeholder,
     disabled = false,
     readonly = false,
+    rounded = false,
+    size,
+    style,
     noResultsText = "No results",
     clearTitle,
+    hint,
+    validationState,
     className, title, data,
     ...hookProps
 }) => {
@@ -50,13 +56,16 @@ const AutoCompleteWithLabel: FC<AutoCompleteWithLabelProps> = ({
 
     const inputControl = (
         <AutoCompleteInputControl
+            size={size}
+            style={style}
             isOpen={isOpen}
+            rounded={rounded}
             inputId={inputId}
+            onBlur={handleBlur}
             disabled={disabled}
             readonly={readonly}
-            onBlur={handleBlur}
-            isInvalid={isInvalid}
             onClear={handleClear}
+            isInvalid={isInvalid}
             onFocus={openDropdown}
             clearTitle={clearTitle}
             inputValue={inputValue}
@@ -107,6 +116,10 @@ const AutoCompleteWithLabel: FC<AutoCompleteWithLabelProps> = ({
                             {inputControl}
                             {dropdown}
                         </div>
+                        <InternalHint
+                            hint={hint}
+                            validationState={validationState}
+                        />
                     </div>
                 </div>
             </div>
@@ -130,6 +143,10 @@ const AutoCompleteWithLabel: FC<AutoCompleteWithLabelProps> = ({
             </label>
             {inputControl}
             {dropdown}
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </div>
     );
 };
