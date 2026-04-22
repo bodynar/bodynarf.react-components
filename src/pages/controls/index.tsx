@@ -1,11 +1,14 @@
 import { MenuItem } from "../routing";
 
+import AutoComplete from "./autoComplete";
 import ColorPicker from "./colorPicker";
 import Checkbox from "./checkbox";
 import Date from "./date";
+import DateInput from "./dateInput";
 import Text from "./text";
 import Multiline from "./multiline";
 import Number from "./number";
+import OtpInput from "./otpInput";
 import Password from "./password";
 import Switch from "./switch";
 import Slider from "./slider";
@@ -81,6 +84,24 @@ const controls: MenuItem = {
             caption: "Time Picker",
             component: <TimePicker />,
             version: "1.14",
+        },
+        {
+            path: "/controls/autoComplete",
+            caption: "Auto Complete",
+            component: <AutoComplete />,
+            version: "1.15",
+        },
+        {
+            path: "/controls/dateInput",
+            caption: "Date Input",
+            component: <DateInput />,
+            version: "1.15",
+        },
+        {
+            path: "/controls/otpInput",
+            caption: "OTP Input",
+            component: <OtpInput />,
+            version: "1.15",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };
