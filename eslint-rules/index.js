@@ -5,7 +5,7 @@
 
 import jsxPropsPerLine from "./jsx-props-per-line.js";
 import optionalPropsLast from "./optional-props-last.js";
-import hooksOrder from "./hooks-order.js";
+import hooksGrouped from "./hooks-grouped.js";
 import functionalComponentDefinition from "./functional-component-definition.js";
 import noDuplicateImports from "./no-duplicate-imports.js";
 import noSnakeCase from "./no-snake-case.js";
@@ -16,7 +16,7 @@ export default {
 	rules: {
 		"jsx-props-per-line": jsxPropsPerLine,
 		"optional-props-last": optionalPropsLast,
-		"hooks-order": hooksOrder,
+		"hooks-grouped": hooksGrouped,
 		"functional-component-definition": functionalComponentDefinition,
 		"no-duplicate-imports": noDuplicateImports,
 		"no-snake-case": noSnakeCase,
