@@ -135,6 +135,9 @@ export * from "./confirmDialog";
 export { default as DateRangePicker } from "./dateRangePicker";
 export * from "./dateRangePicker";
 
+export { default as DateInput } from "./primitives/dateInput";
+export * from "./primitives/dateInput";
+
 export { default as EmptyState } from "./emptyState";
 export * from "./emptyState";
 

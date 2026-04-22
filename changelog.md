@@ -10,6 +10,11 @@ All changes will be published here in reverse chronological order
   - Chip config supports `position`: `"label"` renders chips inside the dropdown trigger with auto-expanding height; `"belowLabel"` renders chips below the standard label.
   - Chip config extends `ChipProps` (minus `content`, `size`, `onRemove`) — supports `style`, `rounded`, `lightColor`, `customColor`, `className`, `data`, etc.
   - Added optional `containerClassName` for custom styling of the chips container.
+
+- **DateInput** *(new)* — Date input field with masked manual entry and Calendar popover. Supports configurable format (`dd.MM.yyyy`, `MM/dd/yyyy`, etc.), automatic separator insertion, per-character validation (rejects impossible dates like `30.57`), min/max date constraints, locale, all standard input props (sizes, colors, rounded, disabled, readonly, label, hint, validation). Calendar opens on click and closes on date selection or Escape.
+
+- **Date primitive** *(deprecated)* — The native `<input type="date">` wrapper is deprecated since v1.15. Use `DateInput` instead. Will be removed in v1.16.
+
 - **TreeView** *(new)* — Hierarchical tree component for displaying nested data (file explorers, org charts, category trees). Supports expand/collapse, single and multi-selection with parent ↔ child propagation, optional checkboxes with indeterminate state, and full keyboard navigation (arrows, Enter, Space). Uncontrolled by default; becomes controlled when `expandedIds`/`selectedIds` are provided.
 
 - **Popover** *(new)* — Lightweight floating panel anchored to a trigger element; useful for rich tooltips, mini-forms or contextual actions. Compound component: `Popover.Trigger` + `Popover.Content`. Uncontrolled by default; becomes controlled with `visible` + `onToggle`.

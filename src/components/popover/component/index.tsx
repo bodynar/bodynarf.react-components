@@ -24,89 +24,95 @@ const Popover: FC<PopoverProps> & {
 
     className, title, data,
 }) => {
-    const isControlled = isNotNullish(controlledVisible);
-    const [internalVisible, setInternalVisible] = useState(false);
-    const visible = isControlled ? controlledVisible! : internalVisible;
+        const isControlled = isNotNullish(controlledVisible);
+        const [internalVisible, setInternalVisible] = useState(false);
+        const visible = isControlled ? controlledVisible! : internalVisible;
 
-    const id = useId();
-    const wrapperId = `popover-${id.replace(/:/g, "")}`;
+        const id = useId();
+        const wrapperId = `popover-${id.replace(/:/g, "")}`;
 
-    const toggle = useCallback(() => {
-        const next = !visible;
+        const toggle = useCallback(() => {
+            const next = !visible;
 
-        if (!isControlled) {
-            setInternalVisible(next);
-        }
+            if (!isControlled) {
+                setInternalVisible(next);
+            }
 
-        onToggle?.(next);
-    }, [visible, isControlled, onToggle]);
+            onToggle?.(next);
+        }, [visible, isControlled, onToggle]);
 
-    const close = useCallback(() => {
-        if (!isControlled) {
-            setInternalVisible(false);
-        }
+        const close = useCallback(() => {
+            if (!isControlled) {
+                setInternalVisible(false);
+            }
 
-        onToggle?.(false);
-    }, [isControlled, onToggle]);
+            onToggle?.(false);
+        }, [isControlled, onToggle]);
 
-    const onDocumentClick = useCallback((event: MouseEvent) => {
-        if (!visible) {
-            return;
-        }
+        const onDocumentClick = useCallback((event: MouseEvent) => {
+            if (!visible) {
+                return;
+            }
 
-        const target = event.target as HTMLElement;
+            const target = event.target as HTMLElement;
 
-        if (target.closest(`#${wrapperId}`) === null) {
-            close();
-        }
-    }, [visible, wrapperId, close]);
+            if (target.closest(`#${wrapperId}`) === null) {
+                close();
+            }
+        }, [visible, wrapperId, close]);
 
-    useEventListener("click", onDocumentClick, document);
+        useEventListener("click", onDocumentClick, document);
 
-    // Scan children for sub-components
-    let triggerSlot: ReactNode = null;
-    let contentSlot: ReactNode = null;
+        // Scan children for sub-components
+        let triggerSlot: ReactNode = null;
+        let contentSlot: ReactNode = null;
 
-    Children.forEach(children, child => {
-        if (!isValidElement(child)) { return; }
-        if (child.type === PopoverTrigger) { triggerSlot = child; }
-        else if (child.type === PopoverContent) { contentSlot = child; }
-    });
+        Children.forEach(children, child => {
+            if (!isValidElement(child)) {
+                return;
+            }
 
-    const dataAttributes = mapDataAttributes(data);
+            if (child.type === PopoverTrigger) {
+                triggerSlot = child;
+            }
 
-    const wrapperClassName = getClassName([
-        "bbr-popover",
-        `bbr-popover--${position}`,
-        visible ? "is-active" : "",
-        className,
-    ]);
+            else if (child.type === PopoverContent) {
+                contentSlot = child;
+            }
+        });
 
-    return (
-        <div
-            
-          {...dataAttributes}
+        const dataAttributes = mapDataAttributes(data);
 
-          title={title}
-          id={wrapperId}
-          className={wrapperClassName}
-        
-        >
+        const wrapperClassName = getClassName([
+            "bbr-popover",
+            `bbr-popover--${position}`,
+            visible ? "is-active" : "",
+            className,
+        ]);
+
+        return (
             <div
-                
-              onClick={toggle}
-              className="bbr-popover__trigger"
-            
+                {...dataAttributes}
+
+                title={title}
+                id={wrapperId}
+                className={wrapperClassName}
             >
-                {triggerSlot}
+                <div
+                    onClick={toggle}
+                    className="bbr-popover__trigger"
+                >
+                    {triggerSlot}
+                </div>
+                {visible ? (
+                    <div className="bbr-popover__panel">
+                        <div className="bbr-popover__arrow" />
+                        {contentSlot}
+                    </div>
+                ) : null}
             </div>
-            {visible ? <div className="bbr-popover__panel">
-                    <div className="bbr-popover__arrow" />
-                    {contentSlot}
-                       </div> : null}
-        </div>
-    );
-};
+        );
+    };
 
 Popover.Trigger = PopoverTrigger;
 Popover.Content = PopoverContent;

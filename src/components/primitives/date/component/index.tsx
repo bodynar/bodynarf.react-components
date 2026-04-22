@@ -11,7 +11,10 @@ import "./style.scss";
 
 import { DateProps } from "../..";
 
-/** Date input component */
+/**
+ * Date input component
+ * @deprecated Since v1.15. Use `DateInput` from `@bbr/components/dateInput` instead. Will be removed in v1.16.
+ */
 const DatePicker: FC<
     Omit<DateProps, "label"> & LabeledElement
 > = ({
