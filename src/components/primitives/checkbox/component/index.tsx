@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useCallback, useRef, useEffect } from "react";
 
 import { emptyFn, generateGuid, getClassName, isNotNullish, isNullish, isNullOrEmpty } from "@bodynarf/utils";
 
-import { ElementSize } from "@bbr/types";
+import { ElementColor, ElementSize } from "@bbr/types";
 import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 
@@ -16,7 +16,7 @@ const CheckBox: FC<CheckBoxProps> = ({
     onValueChange = emptyFn, defaultValue,
     label,
     name = generateGuid(),
-    size = ElementSize.Normal, style,
+    size = ElementSize.Normal, style = ElementColor.Default,
     disabled = false,
     rounded = false, block = false,
     withoutBorder = false, hasBackgroundColor = false, fixBackgroundColor = false,
