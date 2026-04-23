@@ -1,7 +1,8 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 
 import { ElementColor, ElementSize, Stepper as StepperComponent, StepItem } from "@bodynarf/react.components";
 
+import Log, { LogRef } from "@app/sharedComponents/log";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
@@ -30,17 +31,12 @@ const stepsWithIcons: Array<StepItem> = [
 
 /** Stepper component demo */
 const Stepper: FC = () => {
-    const [currentStep, setCurrentStep] = useState("step1");
-    const [clickLog, setClickLog] = useState("");
+    const [, setCurrentStep] = useState("step1");
+    const logRef = useRef<LogRef>(null);
 
     const handleStepClick = useCallback(
         (step: StepItem, index: number) => {
-            setClickLog(
-                t => t
-                    + "\n"
-                    + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                    + " => " + `clicked step "${step.title}" at index ${index}`
-            );
+            logRef.current?.append(`clicked step "${step.title}" at index ${index}`);
             setCurrentStep(step.id);
         },
         []
@@ -62,6 +58,23 @@ const Stepper: FC = () => {
             setInteractiveStep(steps[currentIndex - 1]);
         }
     }, [interactiveStep]);
+
+    const [animatedStep, setAnimatedStep] = useState("step1");
+    const handleAnimatedNext = useCallback(() => {
+        const steps = ["step1", "step2", "step3"];
+        const currentIndex = steps.indexOf(animatedStep);
+        if (currentIndex < steps.length - 1) {
+            setAnimatedStep(steps[currentIndex + 1]);
+        }
+    }, [animatedStep]);
+
+    const handleAnimatedPrev = useCallback(() => {
+        const steps = ["step1", "step2", "step3"];
+        const currentIndex = steps.indexOf(animatedStep);
+        if (currentIndex > 0) {
+            setAnimatedStep(steps[currentIndex - 1]);
+        }
+    }, [animatedStep]);
 
     return (
         <section>
@@ -210,14 +223,12 @@ const Stepper: FC = () => {
                 }
             >
                 <StepperComponent
-                    steps={basicSteps}
-                    currentStep={currentStep}
+                    steps={stepsWithDescriptions}
+                    currentStep={stepsWithDescriptions[stepsWithDescriptions.length - 2].id}
                     clickable
                     onStepClick={handleStepClick}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {clickLog}
-                </p>
+                <Log ref={logRef} />
             </ComponentUseCase>
 
             <ComponentUseCase
@@ -343,9 +354,27 @@ const Stepper: FC = () => {
             >
                 <StepperComponent
                     steps={basicSteps}
-                    currentStep="step2"
+                    currentStep={animatedStep}
                     animated
                 />
+                <div className="buttons mt-3">
+                    <button
+                        type="button"
+                        className="button"
+                        onClick={handleAnimatedPrev}
+                        disabled={animatedStep === "step1"}
+                    >
+                        Previous
+                    </button>
+                    <button
+                        type="button"
+                        className="button is-primary"
+                        onClick={handleAnimatedNext}
+                        disabled={animatedStep === "step3"}
+                    >
+                        Next
+                    </button>
+                </div>
             </ComponentUseCase>
 
             <ComponentUseCase
