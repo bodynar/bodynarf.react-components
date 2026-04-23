@@ -1,4 +1,4 @@
-﻿import { Children, FC, ReactNode, isValidElement, useCallback, useMemo, useState } from "react";
+﻿import { Children, FC, ReactElement, ReactNode, isValidElement, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { getClassName, isNotNullish, isNotNullOrEmpty } from "@bodynarf/utils";
 
@@ -37,6 +37,12 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
     className, data,
 }) => {
     const [isMaximized, setIsMaximized] = useState(false);
+
+    const modalCardRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        modalCardRef.current?.focus();
+    }, []);
 
     const contextValue = useMemo(() => ({ onClose: onCloseClick }), [onCloseClick]);
 
@@ -90,7 +96,7 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
     const hasLegacyHeader = hasLegacyTitle || showCloseButton || showMaximizeButton;
 
     const headerButtons = (
-        <>
+        <span className="bbr-modal__header-controls">
             {!!showMaximizeButton && (
                 <Icon
                     onClick={toggleMaximize}
@@ -107,8 +113,10 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
                     aria-label={closeLabel}
                 />
             )}
-        </>
+        </span>
     );
+
+    const hasHeaderControls = showCloseButton || showMaximizeButton;
 
     return (
         <ModalWrapperContext.Provider value={contextValue}>
@@ -121,11 +129,25 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
                     onClick={onBackgroundClick}
                     className="modal-background"
                 />
-                <div className="modal-card">
+                <div
+                    tabIndex={-1}
+                    ref={modalCardRef}
+                    className="modal-card"
+                >
                     {isCompound
                         ? (
                             <>
-                                {slotHeader}
+                                {slotHeader != null
+                                    ? (
+                                        <ModalWrapperHeader
+                                            {...(slotHeader as ReactElement).props}
+                                        >
+                                            {(slotHeader as ReactElement).props.children}
+                                            {!!hasHeaderControls && headerButtons}
+                                        </ModalWrapperHeader>
+                                    )
+                                    : null
+                                }
                                 {slotBody}
                                 {slotFooter}
                             </>
