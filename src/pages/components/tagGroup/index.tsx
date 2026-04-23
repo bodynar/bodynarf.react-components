@@ -18,6 +18,7 @@ const TagGroup: FC = () => {
     const [limitTags, setLimitTags] = useState(["One", "Two", "Three"]);
     const [confirmKeysTags, setConfirmKeysTags] = useState<string[]>([]);
     const [colorTags, setColorTags] = useState(["Alpha", "Beta"]);
+    const [tagConfigTags, setTagConfigTags] = useState(["Rounded", "Light", "Custom"]);
     const [sizeTags] = useState(["Tag A", "Tag B"]);
 
     return (
@@ -209,6 +210,66 @@ const TagGroup: FC = () => {
                     />
                 }
             />
+
+            <ComponentUseCase
+                captionIsCode
+                caption="tagConfig"
+                description={
+                    <>
+                        Additional configuration passed to every rendered tag.
+                        Accepts all <code>TagProps</code> except <code>content</code>, <code>onRemove</code>, <code>size</code> and <code>style</code> (those are controlled by TagGroup directly).
+                        Useful for <code>rounded</code>, <code>lightColor</code> and <code>customColor</code>.
+                    </>
+                }
+                code={
+                    <CodeExample
+                        code={[
+                            `import { TagGroup } from "@bodynarf/react.components";`,
+                            "",
+                            `<TagGroup`,
+                            `    value={tags}`,
+                            `    tagConfig={{ rounded: true, lightColor: true }}`,
+                            `    onChange={setTags}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <div className="is-flex" style={{ gap: "24px", flexWrap: "wrap", alignItems: "flex-start" }}>
+                    <div>
+                        <p className="mb-2 is-italic has-text-grey is-size-7">rounded</p>
+                        <TagGroupComponent
+                            value={tagConfigTags}
+                            tagConfig={{ rounded: true }}
+                            onChange={setTagConfigTags}
+                        />
+                    </div>
+                    <div>
+                        <p className="mb-2 is-italic has-text-grey is-size-7">lightColor</p>
+                        <TagGroupComponent
+                            value={tagConfigTags}
+                            tagConfig={{ lightColor: true }}
+                            onChange={setTagConfigTags}
+                        />
+                    </div>
+                    <div>
+                        <p className="mb-2 is-italic has-text-grey is-size-7">rounded + lightColor</p>
+                        <TagGroupComponent
+                            value={tagConfigTags}
+                            tagConfig={{ rounded: true, lightColor: true }}
+                            onChange={setTagConfigTags}
+                        />
+                    </div>
+                    <div>
+                        <p className="mb-2 is-italic has-text-grey is-size-7">customColor</p>
+                        <TagGroupComponent
+                            value={tagConfigTags}
+                            tagConfig={{ customColor: { color: "#fff", backgroundColor: "#7c3aed" } }}
+                            onChange={setTagConfigTags}
+                        />
+                    </div>
+                </div>
+            </ComponentUseCase>
 
             <ComponentSizeCase
                 captionIsCode
