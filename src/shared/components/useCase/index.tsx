@@ -34,6 +34,7 @@ const ComponentUseCase: FC<ComponentUseCaseProps> = ({
                     caption={caption}
                     captionIsCode={captionIsCode}
                 />
+                <br />
                 {typeof description === "string"
                     ?
                     <p style={{ whiteSpace: "pre-line" }}>
