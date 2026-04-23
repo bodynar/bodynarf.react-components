@@ -309,41 +309,6 @@ $stepper-description-color: $grey !default;
         border-left-color: transparent;
     }
 
-    // Animated connectors
-    &.is-animated {
-        .bbr-stepper-connector.is-completed {
-            position: relative;
-            background: $stepper-connector-color;
-
-            &::after {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 100%;
-                background: $stepper-connector-completed-color;
-                animation: stepper-connector-fill 0.5s ease forwards;
-            }
-        }
-
-        &.is-vertical .bbr-stepper-connector.is-completed::after {
-            width: 100%;
-            height: 0;
-            animation: none;
-
-            @keyframes stepper-connector-fill-vertical {
-                from {
-                    height: 0;
-                }
-                to {
-                    height: 100%;
-                }
-            }
-
-            animation: stepper-connector-fill-vertical 0.5s ease forwards;
-        }
-    }
-
     // Size variations
     &.is-small {
         .bbr-stepper-marker {
@@ -451,6 +416,41 @@ $stepper-description-color: $grey !default;
                 border-top-color: $color;
                 border-left-color: transparent;
             }
+        }
+    }
+
+    // Animated connectors — placed after color variations so the gray
+    // underlay background overrides any color-variant background rule
+    &.is-animated {
+        .bbr-stepper-connector.is-completed {
+            background: $stepper-connector-color;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                background: $stepper-connector-completed-color;
+                animation: stepper-connector-fill 0.5s ease forwards;
+            }
+        }
+
+        &.is-vertical .bbr-stepper-connector.is-completed::after {
+            width: 100%;
+            height: 0;
+            animation: none;
+
+            @keyframes stepper-connector-fill-vertical {
+                from {
+                    height: 0;
+                }
+                to {
+                    height: 100%;
+                }
+            }
+
+            animation: stepper-connector-fill-vertical 0.5s ease forwards;
         }
     }
 }
