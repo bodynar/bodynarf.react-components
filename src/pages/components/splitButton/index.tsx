@@ -1,7 +1,8 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef } from "react";
 
 import { SplitButton as SplitButtonComponent, ButtonStyle, SplitButtonAction, SelectableItem } from "@bodynarf/react.components";
 
+import Log, { LogRef } from "@app/sharedComponents/log";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -25,13 +26,9 @@ const stylesAsSelectList: Array<SelectableItem> =
 
 /** SplitButton component demo */
 const SplitButton: FC = () => {
-    const [log, setLog] = useState("");
+    const logRef = useRef<LogRef>(null);
     const appendLog = useCallback(
-        (text: string) => setLog(
-            prev => prev
-                + "\n"
-                + new Date().toLocaleTimeString() + " => " + text
-        ),
+        (text: string) => logRef.current?.append(text),
         []
     );
 
@@ -91,20 +88,13 @@ const SplitButton: FC = () => {
                     />
                 }
             >
-                <div>
-                    <SplitButtonComponent
-                        caption="Save"
-                        style={ButtonStyle.Primary}
-                        onClick={() => appendLog("Primary: Save")}
-                        actions={demoActions}
-                    />
-                    <pre
-                        className="mt-2"
-                        style={{ maxHeight: "100px", overflow: "auto", fontSize: "0.75rem" }}
-                    >
-                        {log || "Click actions to see log..."}
-                    </pre>
-                </div>
+                <SplitButtonComponent
+                    caption="Save"
+                    style={ButtonStyle.Primary}
+                    onClick={() => appendLog("Primary: Save")}
+                    actions={demoActions}
+                />
+                <Log ref={logRef} />
             </ComponentUseCase>
 
             <ComponentUseCase
