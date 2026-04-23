@@ -52,10 +52,11 @@ const SidePanel: FC<SidePanelProps> = ({
 
     const dataAttributes = mapDataAttributes(data);
 
-    const resolvedWidth = customWidth ?? size;
-    const panelStyle = resolvedWidth !== undefined
-        ? { width: `${resolvedWidth}vw`, maxWidth: "none" }
-        : undefined;
+    const panelStyle = customWidth !== undefined
+        ? { width: customWidth, maxWidth: "none" }
+        : size !== undefined
+            ? { width: `${size}vw`, maxWidth: "none" }
+            : undefined;
 
     return (
         <SidePanelContext.Provider value={contextValue}>
