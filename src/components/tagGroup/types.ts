@@ -1,4 +1,5 @@
 import { BaseElementProps, ElementColor, ElementSize } from "@bbr/types";
+import { TagProps } from "@bbr/components/tag";
 
 /** TagGroup component props */
 export type TagGroupProps = BaseElementProps & {
@@ -52,6 +53,15 @@ export type TagGroupProps = BaseElementProps & {
      * When reached, the input is hidden.
      */
     maxTags?: number;
+
+    /**
+     * Additional configuration passed to each Tag
+     */
+    tagConfig?: Omit<
+        TagProps,
+        | "content" | "onRemove"
+        | "size" | "style"
+    >;
 
     /** Called when the tag list changes (add or remove) */
     onChange: (tags: string[]) => void;
