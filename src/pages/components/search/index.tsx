@@ -1,8 +1,9 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef } from "react";
 
 import { emptyFn, isNullOrEmpty } from "@bodynarf/utils";
 import { SelectableItem, Icon, Search as SearchComponent } from "@bodynarf/react.components";
 
+import Log, { LogRef } from "@app/sharedComponents/log";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -21,23 +22,17 @@ const searchTypesAsSelectList = searchTypes.map((x, i) => ({
 
 /** Search component demo */
 const Search: FC = () => {
-    const [byButtonClickLog, setByButtonClickLog] = useState("");
+    const byButtonLogRef = useRef<LogRef>(null);
     const appendByButtonClickLog = useCallback(
-        (searchPattern: string) => setByButtonClickLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + "search with " + (isNullOrEmpty(searchPattern) ? "[none]" : `"${searchPattern}"`)
+        (searchPattern: string) => byButtonLogRef.current?.append(
+            "search with " + (isNullOrEmpty(searchPattern) ? "[none]" : `"${searchPattern}"`)
         ),
         []
     );
-    const [byTypingLog, setByTypingLog] = useState("");
+    const byTypingLogRef = useRef<LogRef>(null);
     const appendByTypingLog = useCallback(
-        (searchPattern: string) => setByTypingLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + "search with " + (isNullOrEmpty(searchPattern) ? "[none]" : `"${searchPattern}"`)
+        (searchPattern: string) => byTypingLogRef.current?.append(
+            "search with " + (isNullOrEmpty(searchPattern) ? "[none]" : `"${searchPattern}"`)
         ),
         []
     );
@@ -480,9 +475,7 @@ const Search: FC = () => {
                     caption="Search caption"
                     searchButtonTitle="Start search"
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {byButtonClickLog}
-                </p>
+                <Log ref={byButtonLogRef} />
             </ComponentUseCase>
 
             <ComponentUseCase
@@ -514,9 +507,7 @@ const Search: FC = () => {
                     caption="Search caption"
                     onSearch={appendByTypingLog}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {byTypingLog}
-                </p>
+                <Log ref={byTypingLogRef} />
             </ComponentUseCase>
         </section>
     );
