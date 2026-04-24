@@ -3,12 +3,20 @@ import { FC, ReactNode } from "react";
 import { getClassName, isNullish } from "@bodynarf/utils";
 
 import { getPositionClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
-import { ElementIcon, ElementPosition, ElementSize } from "@bbr/types";
+import { ElementPosition, ElementSize } from "@bbr/types";
 import Icon from "@bbr/components/icon";
+
+import "./style.scss";
 
 import { BreadCrumb, BreadcrumbsProps } from "..";
 
-const DefaultElementGenerator: (bc: BreadCrumb) => ReactNode = ((bc) => <BreadCrumbItem item={bc} />);
+const DefaultElementGenerator: (bc: BreadCrumb) => ReactNode = (
+    (bc) => (
+        <BreadCrumbItem
+            item={bc}
+        />
+    )
+);
 
 /**
  * Breadcrumbs navigation panel
@@ -66,16 +74,13 @@ export default BreadCrumbs;
 type BreadCrumbItemProps = {
     /** Breadcrumb item */
     item: BreadCrumb;
-
-    /** Bootstrap icon class name */
-    icon?: ElementIcon;
 };
 
 /** Template for single breadcrumb */
 const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
-    item, icon
+    item
 }) => {
-    if (isNullish(icon)) {
+    if (isNullish(item.icon)) {
         return (
             <a
                 href={item.href ?? item.path}
@@ -85,13 +90,13 @@ const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
         );
     }
 
-    if (icon.position === ElementPosition.Right) {
+    if (item.icon.position === ElementPosition.Right) {
         return (
             <a
                 href={item.href ?? item.path}
             >
                 {item.caption}
-                <Icon {...icon} />
+                <Icon {...item.icon} />
             </a>
         );
     }
@@ -101,7 +106,7 @@ const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
             href={item.href ?? item.path}
         >
 
-            <Icon {...icon} />
+            <Icon {...item.icon} />
             {item.caption}
         </a>
     );
