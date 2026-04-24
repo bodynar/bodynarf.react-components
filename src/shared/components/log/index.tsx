@@ -21,7 +21,8 @@ const Log: FC<LogProps> = ({ ref }: LogProps) => {
         append: (message: string) => {
             const ts = new Date();
             const time = `${ts.getHours()}:${ts.getMinutes()}:${ts.getMilliseconds()}`;
-            setLog(t => t ? `${t}\n${time} => ${message}` : `${time} => ${message}`);
+
+            setLog(t => t ? `${time} => ${message}\n${t}` : `${time} => ${message}`);
         },
     }), []);
 
