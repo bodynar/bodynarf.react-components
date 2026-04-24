@@ -4,6 +4,14 @@
         width: 100%;
     }
 
+    &__card--compact {
+        .bbr-confirm-dialog__head,
+        .bbr-confirm-dialog__foot {
+            background-color: #fff;
+            border: none;
+        }
+    }
+
     &__head {
         gap: 0.5rem;
     }
@@ -19,6 +27,6 @@
 
     &__foot {
         gap: 0.5rem;
-        justify-content: flex-end;
+        justify-content: flex-end !important;
     }
 }
