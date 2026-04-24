@@ -38,6 +38,13 @@ export type DateRangePickerProps = BaseElementProps & {
     /** Optional overrides for all user-visible text strings */
     labelConfig?: DateRangePickerLabelConfig;
 
+    /**
+     * Render the calendar inside a Popover that opens on label click.
+     * When `false` (default) the calendar is always visible below the label.
+     * @default true
+     */
+    asPopover?: boolean;
+
     /** Called when both start and end are selected, or when cleared */
     onChange?: (range: DateRange) => void;
 };
