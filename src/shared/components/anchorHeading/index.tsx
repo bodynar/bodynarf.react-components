@@ -54,7 +54,7 @@ const AnchorHeading: FC<AnchorHeadingProps> = ({ caption, captionIsCode = false 
     return (
         <h5
             id={anchor}
-            className="subtitle is-5 anchor-heading"
+            className="subtitle is-5 anchor-heading has-text-weight-semibold"
         >
             <span
                 role="link"
