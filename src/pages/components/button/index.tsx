@@ -1,42 +1,16 @@
-import { FC, useCallback, useState, } from "react";
+import { FC, useRef } from "react";
 
-import { ElementPosition, SelectableItem, Button as ButtonComponent, ButtonStyle } from "@bodynarf/react.components";
+import { ElementPosition, Button as ButtonComponent, ButtonStyle } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
-import ComponentEnumCase from "@app/sharedComponents/enumSelectionCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import CodeExample from "@app/sharedComponents/codeExample";
-
-const types: Array<string> = [
-    ButtonStyle.Default, ButtonStyle.Primary, ButtonStyle.Link,
-    ButtonStyle.Info, ButtonStyle.Success, ButtonStyle.Warning,
-    ButtonStyle.Danger, ButtonStyle.White, ButtonStyle.Light,
-    ButtonStyle.Dark, ButtonStyle.Black, ButtonStyle.Text,
-    ButtonStyle.Ghost,
-].map(x => x.capitalize());
-
-const typesAsSelectItems = Object
-    .values(ButtonStyle)
-    .map((x, i) => ({
-        displayValue: x.capitalize(),
-        id: i.toString(),
-        value: x,
-    }) as SelectableItem);
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 /** Button component demo */
 const Button: FC = () => {
-
-    const [text, setText] = useState("");
-    const appendText = useCallback(
-        () => setText(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + "clicked"
-        ),
-        []
-    );
+    const onClickLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -48,334 +22,254 @@ const Button: FC = () => {
 
             <ComponentUseCase
                 caption="Minimal use"
-                description="The minimal set of props includes the button type and a caption"
+                description="The minimal set of props: style and either caption or icon."
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
+                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<ButtonComponent',
-                            '    caption="Minimal use"',
-                            '    style={ButtonStyle.Primary}',
-                            '/>',
+                            '<Button caption="Minimal use" style={ButtonStyle.Primary} />',
                         ].join("\n")}
                     />
                 }
             >
-                <ButtonComponent
-                    caption="Minimal use"
-                    style={ButtonStyle.Primary}
-                />
+                <ButtonComponent caption="Minimal use" style={ButtonStyle.Primary} />
+            </ComponentUseCase>
+
+            <hr />
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="style"
+                description="Button color style. Uses the ButtonStyle enum — covers all Bulma button colors."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
+                            "",
+                            `<Button caption="Default"  style={ButtonStyle.Default} />`,
+                            `<Button caption="Primary"  style={ButtonStyle.Primary} />`,
+                            `<Button caption="Link"     style={ButtonStyle.Link} />`,
+                            `<Button caption="Info"     style={ButtonStyle.Info} />`,
+                            `<Button caption="Success"  style={ButtonStyle.Success} />`,
+                            `<Button caption="Warning"  style={ButtonStyle.Warning} />`,
+                            `<Button caption="Danger"   style={ButtonStyle.Danger} />`,
+                            `<Button caption="White"    style={ButtonStyle.White} />`,
+                            `<Button caption="Light"    style={ButtonStyle.Light} />`,
+                            `<Button caption="Dark"     style={ButtonStyle.Dark} />`,
+                            `<Button caption="Black"    style={ButtonStyle.Black} />`,
+                            `<Button caption="Text"     style={ButtonStyle.Text} />`,
+                            `<Button caption="Ghost"    style={ButtonStyle.Ghost} />`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <div className="is-flex is-flex-wrap-wrap" style={{ gap: "0.5rem" }}>
+                    {Object.values(ButtonStyle).map(s => (
+                        <ButtonComponent key={s} caption={s.charAt(0).toUpperCase() + s.slice(1)} style={s} />
+                    ))}
+                </div>
             </ComponentUseCase>
 
             <ComponentUseCase
-                caption="Minimal use"
-                description="For the minimal set of props, you can also use an icon instead of a caption"
+                captionIsCode
+                caption="caption"
+                description="Text displayed inside the button."
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
+                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<ButtonComponent',
-                            '    style={ButtonStyle.Primary}',
-                            '    icon={{ name: "broadcast" }}',
-                            '/>',
+                            `<Button caption="Click me" style={ButtonStyle.Primary} />`,
                         ].join("\n")}
                     />
                 }
             >
-                <ButtonComponent
-                    style={ButtonStyle.Primary}
-                    icon={{ name: "broadcast" }}
-                />
+                <ButtonComponent caption="Click me" style={ButtonStyle.Primary} />
             </ComponentUseCase>
 
             <ComponentUseCase
-                caption="Icon and caption"
-                description="An icon and a caption can be combined together"
+                captionIsCode
+                caption="icon"
+                description="Bootstrap icon shown inside the button. Provide name (without bi- prefix) and optionally position, size or className. Can be used with or without caption."
                 code={
                     <CodeExample
                         code={[
-                            `import { ElementPosition } from "@bodynarf/react.components";`,
-                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
+                            `import { Button, ButtonStyle, ElementPosition } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
+                            `// Icon only`,
+                            `<Button style={ButtonStyle.Primary} icon={{ name: "broadcast" }} />`,
                             "",
-                            '<ButtonComponent',
-                            '    style={ButtonStyle.Primary}',
-                            '    caption="Icon with caption"',
-                            '    icon={{ name: "broadcast", position: ElementPosition.Right }}',
-                            '/>',
+                            `// Icon + caption, icon on the right`,
+                            `<Button`,
+                            `    style={ButtonStyle.Primary}`,
+                            `    caption="Stream"`,
+                            `    icon={{ name: "broadcast", position: ElementPosition.Right }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <ButtonComponent
-                    style={ButtonStyle.Primary}
-                    caption="Icon with caption"
-                    icon={{ name: "broadcast", position: ElementPosition.Right }}
-                />
+                <div className="is-flex" style={{ gap: "0.5rem" }}>
+                    <ButtonComponent style={ButtonStyle.Primary} icon={{ name: "broadcast" }} />
+                    <ButtonComponent style={ButtonStyle.Primary} caption="Left icon" icon={{ name: "broadcast", position: ElementPosition.Left }} />
+                    <ButtonComponent style={ButtonStyle.Primary} caption="Right icon" icon={{ name: "broadcast", position: ElementPosition.Right }} />
+                </div>
             </ComponentUseCase>
-
-            <ComponentEnumCase
-                caption="Types"
-                enumNames={types}
-                lookupValues={typesAsSelectItems}
-                description="The component has its own set of styles, defined by its type"
-                codeProvider={type =>
-                    <CodeExample
-                        code={[
-                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
-                            "",
-                            "/* ... */",
-                            "",
-                            '<ButtonComponent',
-                            `    style={ButtonStyle.${type}}`,
-                            '    caption="Different types"',
-                            '/>',
-                        ].join("\n")}
-                    />
-                }
-                componentProvider={
-                    (value: ButtonStyle) =>
-                        <ButtonComponent
-                            style={value}
-                            caption="Different types"
-                        />
-                }
-            />
 
             <ComponentSizeCase
-                caption="size"
                 captionIsCode
-                description="Button supports all available sizes"
+                caption="size"
+                description="Button supports all available sizes."
                 codeProvider={size =>
                     <CodeExample
                         code={[
-                            `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
+                            `import { Button, ButtonStyle, ElementSize } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<ButtonComponent',
+                            '<Button',
                             `    size={ElementSize.${size}}`,
-                            '    caption="Different sizes"',
+                            '    caption="Button"',
                             '    style={ButtonStyle.Primary}',
                             '/>',
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    size =>
-                        <ButtonComponent
-                            size={size}
-                            style={ButtonStyle.Primary}
-                            caption="Different sizes"
-                        />
+                componentProvider={size =>
+                    <ButtonComponent size={size} style={ButtonStyle.Primary} caption="Button" />
                 }
             />
 
             <ComponentUseCase
                 captionIsCode
                 caption="light"
-                description="The button style can be made lighter. Works with all available types"
+                description="Use the light variant of the assigned style color."
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
+                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<ButtonComponent',
-                            '    light',
-                            '    caption="Light button"',
-                            '    style={ButtonStyle.Primary}',
-                            '/>',
+                            '<Button light caption="Light button" style={ButtonStyle.Primary} />',
                         ].join("\n")}
                     />
                 }
             >
-                <ButtonComponent
-                    light
-                    caption="Light button"
-                    style={ButtonStyle.Primary}
-                />
+                <ButtonComponent light caption="Light button" style={ButtonStyle.Primary} />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="outlined"
-                description="The button can be styled as 'outlined' (border only)"
+                description="Render the button with a border only — no filled background."
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
+                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<ButtonComponent',
-                            '    outlined',
-                            '    caption="Outlined button"',
-                            '    style={ButtonStyle.Primary}',
-                            '/>',
+                            '<Button outlined caption="Outlined" style={ButtonStyle.Primary} />',
                         ].join("\n")}
                     />
                 }
             >
-                <ButtonComponent
-                    outlined
-                    caption="Outlined button"
-                    style={ButtonStyle.Primary}
-                />
+                <ButtonComponent outlined caption="Outlined" style={ButtonStyle.Primary} />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="rounded"
-                description="The button can be styled with rounded corners"
+                description="Render the button with fully rounded corners (pill shape)."
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
+                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<ButtonComponent',
-                            '    rounded',
-                            '    caption="Rounded button"',
-                            '    style={ButtonStyle.Primary}',
-                            '/>',
+                            '<Button rounded caption="Rounded" style={ButtonStyle.Primary} />',
                         ].join("\n")}
                     />
                 }
             >
-                <ButtonComponent
-                    rounded
-                    caption="Rounded button"
-                    style={ButtonStyle.Primary}
-                />
+                <ButtonComponent rounded caption="Rounded" style={ButtonStyle.Primary} />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="isLoading"
-                description="The button can be set to a loading state"
+                description="Show a loading spinner inside the button. The button remains in place but is not interactive."
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
+                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<ButtonComponent',
-                            '    isLoading',
-                            '    caption="Loading button"',
-                            '    style={ButtonStyle.Primary}',
-                            '/>',
+                            '<Button isLoading caption="Loading" style={ButtonStyle.Primary} />',
                         ].join("\n")}
                     />
                 }
             >
-                <ButtonComponent
-                    isLoading
-                    caption="Loading button"
-                    style={ButtonStyle.Primary}
-                />
+                <ButtonComponent isLoading caption="Loading" style={ButtonStyle.Primary} />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="disabled"
-                description="The button can be disabled"
+                description="Disable the button — it is not clickable and is visually dimmed."
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
+                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<ButtonComponent',
-                            '    disabled',
-                            '    caption="Disabled button"',
-                            '    style={ButtonStyle.Primary}',
-                            '/>',
+                            '<Button disabled caption="Disabled" style={ButtonStyle.Primary} />',
                         ].join("\n")}
                     />
                 }
             >
-                <ButtonComponent
-                    disabled
-                    caption="Disabled button"
-                    style={ButtonStyle.Primary}
-                />
+                <ButtonComponent disabled caption="Disabled" style={ButtonStyle.Primary} />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="static"
-                description="The button can be made static (inactive with cleared colors)"
+                description="Make the button non-interactive with cleared colors. Use inside button groups to show a label."
                 code={
                     <CodeExample
                         code={[
-                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
+                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<ButtonComponent',
-                            '    static',
-                            '    caption="Static button"',
-                            '    style={ButtonStyle.Primary}',
-                            '/>',
+                            '<Button static caption="Static" style={ButtonStyle.Primary} />',
                         ].join("\n")}
                     />
                 }
             >
-                <ButtonComponent
-                    static
-                    caption="Static button"
-                    style={ButtonStyle.Primary}
-                />
+                <ButtonComponent static caption="Static" style={ButtonStyle.Primary} />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="onClick"
-                description="Handling the button click event"
+                description="Called when the button is clicked."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react"`,
+                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
                             "",
-                            `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
-                            "",
-                            "/* ... */",
-                            "const CLICK_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
-                            "/* ... */",
-                            "",
-                            '<ButtonComponent',
-                            '    caption="Click me!"',
-                            '    onClick={CLICK_HANDLE_FN}',
+                            '<Button',
+                            '    caption="Click me"',
                             '    style={ButtonStyle.Primary}',
+                            '    onClick={() => console.log("clicked")}',
                             '/>',
                         ].join("\n")}
                     />
                 }
             >
                 <ButtonComponent
-                    caption="Click me!"
-                    onClick={appendText}
+                    caption="Click me"
                     style={ButtonStyle.Primary}
+                    onClick={() => onClickLogRef.current?.append("onClick fired")}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {text}
-                </p>
+                <Log ref={onClickLogRef} />
             </ComponentUseCase>
         </section>
     );
 };
+
 
 export default Button;
