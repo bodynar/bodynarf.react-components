@@ -142,7 +142,6 @@ const ContextMenu: FC<ContextMenuProps> = ({
                                 onClick={item.disabled ? undefined : () => handleItemClick(item.onClick)}
                                 className={getClassName([
                                     "bbr-context-menu__item",
-                                    "dropdown-item",
                                     item.disabled ? "is-disabled" : "",
                                 ])}
                             >
