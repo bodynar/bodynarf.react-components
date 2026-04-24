@@ -153,8 +153,12 @@ const Calendar: FC<CalendarProps> = ({
     }, []);
 
     const handleDayClick = useCallback((date: Date) => {
+        if (isNotNullish(value) && isSameDay(date, value)) {
+            return;
+        }
+
         onChange?.(date);
-    }, [onChange]);
+    }, [onChange, value]);
 
     const handleTodayClick = useCallback(() => {
         const todayDate = getToday();
