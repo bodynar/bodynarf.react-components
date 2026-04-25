@@ -24,7 +24,7 @@ const UsePreviousPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { usePrevious } from "@bodynarf/react.components";`,
+                            `import { usePrevious } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const [count, setCount] = useState(0);",

@@ -26,7 +26,7 @@ const UseDebounceHandlerPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useDebounceHandler } from "@bodynarf/react.components";`,
+                            `import { useDebounceHandler } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const handleAsync = async () => {",

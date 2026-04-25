@@ -26,7 +26,7 @@ const UsePaginationPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { usePagination } from "@bodynarf/react.components";`,
+                            `import { usePagination } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const items = ['Item 1', 'Item 2', /* ... */];",

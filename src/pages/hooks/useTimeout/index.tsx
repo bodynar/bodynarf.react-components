@@ -25,7 +25,7 @@ const UseTimeoutPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useTimeout } from "@bodynarf/react.components";`,
+                            `import { useTimeout } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const [message, setMessage] = useState('Waiting...');",

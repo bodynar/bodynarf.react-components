@@ -29,7 +29,7 @@ const UseWindowSize: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useWindowSize } from "@bodynarf/react.components";`,
+                            `import { useWindowSize } from "@bodynarf/react.components/hooks";`,
                             "",
                             `const { width, height } = useWindowSize();`,
                             "",
@@ -51,7 +51,7 @@ const UseWindowSize: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useWindowSize } from "@bodynarf/react.components";`,
+                            `import { useWindowSize } from "@bodynarf/react.components/hooks";`,
                             "",
                             `const { width } = useWindowSize();`,
                             "",

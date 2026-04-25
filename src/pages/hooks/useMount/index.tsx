@@ -26,7 +26,7 @@ const UseMountPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useMount } from "@bodynarf/react.components";`,
+                            `import { useMount } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    useMount(() => {",

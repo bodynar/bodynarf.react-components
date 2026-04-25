@@ -24,7 +24,7 @@ const UseSessionStorage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useSessionStorage } from "@bodynarf/react.components";`,
+                            `import { useSessionStorage } from "@bodynarf/react.components/hooks";`,
                             "",
                             `const [step, setStep] = useSessionStorage("wizard-step", 1);`,
                             "",
@@ -71,7 +71,7 @@ const UseSessionStorage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useSessionStorage } from "@bodynarf/react.components";`,
+                            `import { useSessionStorage } from "@bodynarf/react.components/hooks";`,
                             "",
                             `const [name, setName] = useSessionStorage("user-name", "");`,
                             "",

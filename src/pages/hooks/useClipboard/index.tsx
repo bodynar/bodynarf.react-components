@@ -26,7 +26,7 @@ const UseClipboard: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useClipboard } from "@bodynarf/react.components";`,
+                            `import { useClipboard } from "@bodynarf/react.components/hooks";`,
                             "",
                             `const { copy, copied } = useClipboard();`,
                             "",
@@ -57,7 +57,7 @@ const UseClipboard: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useClipboard } from "@bodynarf/react.components";`,
+                            `import { useClipboard } from "@bodynarf/react.components/hooks";`,
                             "",
                             `// copied resets after 5 seconds:`,
                             `const { copy, copied } = useClipboard(5000);`,

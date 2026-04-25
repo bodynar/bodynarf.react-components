@@ -24,7 +24,7 @@ const UseEventListenerPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useEventListener } from "@bodynarf/react.components";`,
+                            `import { useEventListener } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const [lastKey, setLastKey] = useState('');",

@@ -25,7 +25,7 @@ const UseKeyPress: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useKeyPress } from "@bodynarf/react.components";`,
+                            `import { useKeyPress } from "@bodynarf/react.components/hooks";`,
                             "",
                             `const isShiftHeld = useKeyPress("Shift");`,
                             `const isEnterHeld = useKeyPress("Enter");`,
@@ -58,7 +58,7 @@ const UseKeyPress: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useKeyPress } from "@bodynarf/react.components";`,
+                            `import { useKeyPress } from "@bodynarf/react.components/hooks";`,
                             "",
                             `const isCtrlHeld = useKeyPress("Control");`,
                             "",

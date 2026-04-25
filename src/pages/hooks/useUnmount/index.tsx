@@ -25,7 +25,7 @@ const UseUnmountPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useUnmount } from "@bodynarf/react.components";`,
+                            `import { useUnmount } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    useUnmount(() => {",

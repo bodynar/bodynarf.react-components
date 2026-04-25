@@ -23,7 +23,7 @@ const UseLocalStoragePage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useLocalStorage } from "@bodynarf/react.components";`,
+                            `import { useLocalStorage } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const [token, setToken] = useLocalStorage('auth-token', '');",

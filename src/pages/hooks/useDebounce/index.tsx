@@ -24,7 +24,7 @@ const UseDebounce: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useDebounce } from "@bodynarf/react.components";`,
+                            `import { useDebounce } from "@bodynarf/react.components/hooks";`,
                             "",
                             `const [inputValue, setInputValue] = useState("");`,
                             `const debouncedValue = useDebounce(inputValue, 500);`,
@@ -58,7 +58,7 @@ const UseDebounce: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useDebounce } from "@bodynarf/react.components";`,
+                            `import { useDebounce } from "@bodynarf/react.components/hooks";`,
                             "",
                             `// 300ms for search-as-you-type:`,
                             `const debouncedSearch = useDebounce(searchText, 300);`,

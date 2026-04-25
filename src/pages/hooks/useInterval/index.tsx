@@ -25,7 +25,7 @@ const UseIntervalPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useInterval } from "@bodynarf/react.components";`,
+                            `import { useInterval } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const [count, setCount] = useState(0);",

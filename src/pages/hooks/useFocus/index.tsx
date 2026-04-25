@@ -24,7 +24,7 @@ const UseFocus: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useFocus } from "@bodynarf/react.components";`,
+                            `import { useFocus } from "@bodynarf/react.components/hooks";`,
                             "",
                             `const [ref, isFocused] = useFocus<HTMLInputElement>();`,
                             "",
@@ -62,7 +62,7 @@ const UseFocus: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useFocus } from "@bodynarf/react.components";`,
+                            `import { useFocus } from "@bodynarf/react.components/hooks";`,
                             "",
                             `const [ref, isFocused] = useFocus<HTMLButtonElement>();`,
                             "",
