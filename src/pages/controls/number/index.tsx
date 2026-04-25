@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useRef } from "react";
 
 import { Icon, NumberInput as NumberComponent } from "@bodynarf/react.components";
 
@@ -7,30 +7,14 @@ import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 /** Number component demo */
 const Number: FC = () => {
-    const [onValueChangeLog, setOnValueChangeLog] = useState("");
-    const appendOnValueChangeLog = useCallback(
-        (value?: number) => setOnValueChangeLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + `new value: ${value}`
-        ),
-        []
-    );
-
-    const [onBlurLog, setOnBlurLog] = useState("");
-    const appendOnBlurLog = useCallback(
-        () => setOnBlurLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + "component lost focus"
-        ),
-        []
-    );
+    const onValueChangeLogRef = useRef<LogRef>(null);
+    const onBlurLogRef = useRef<LogRef>(null);
+    const onKeyDownLogRef = useRef<LogRef>(null);
+    const onKeyUpLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -40,29 +24,15 @@ const Number: FC = () => {
                 description="Component for entering numeric values"
             />
 
-            <div className="block">
-                <p>
-                    For better readability in examples, the
-                    {` `}
-                    <code>
-                        label
-                    </code>
-                    {` `}
-                    prop is included. However, it is not required.
-                </p>
-            </div>
-
             <ComponentUseCase
                 caption="Minimal use"
-                description="Minimal configuration is absent, the component can be used 'empty'"
+                description="The component can be rendered without any props."
                 code={
                     <CodeExample
                         code={[
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent />`,
+                            "<NumberInput />",
                         ].join("\n")}
                     />
                 }
@@ -71,28 +41,21 @@ const Number: FC = () => {
             </ComponentUseCase>
 
             <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Custom component props
-                </h4>
-            </div>
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
 
             <ComponentUseCase
                 captionIsCode
                 caption="step"
-                description="Число, на которое изменяется значение в поле при использовании стрелок увеличения\изменения значения. По умолчанию 1."
+                description="Increment step used when clicking the stepper arrows. Defaults to 1."
                 code={
                     <CodeExample
                         code={[
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent`,
-                            "    step={5}",
+                            `<NumberInput`,
+                            `    step={5}`,
                             `    label={{ caption: "Number demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -105,115 +68,80 @@ const Number: FC = () => {
 
             <ComponentUseCase
                 captionIsCode
-                caption="onBlur"
-                description="Handler for the component blur event. Not set by default."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { useCallback } from "react"`,
-                            "",
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
-                            "",
-                            "/* ... */",
-                            "const ON_BLUR_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent`,
-                            "    onBlur={ON_BLUR_HANDLE_FN}",
-                            `    label={{ caption: "Number demo", horizontal: true }}`,
-                            "/>",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <NumberComponent
-                    onBlur={appendOnBlurLog}
-                    label={{ caption: "Number demo", horizontal: true }}
-                />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {onBlurLog}
-                </p>
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
                 caption="resetToDefaultOnBlur"
-                description="When enabled, resets the value to defaultValue (or 0 if not specified) on focus out if the field is empty. Disabled by default."
+                description="Resets the value to defaultValue (or 0 if not set) on blur when the field is empty. Disabled by default."
                 code={
                     <CodeExample
                         code={[
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent`,
-                            "    resetToDefaultOnBlur",
-                            "    defaultValue={100}",
+                            `// with defaultValue — resets to 100`,
+                            `<NumberInput`,
+                            `    resetToDefaultOnBlur`,
+                            `    defaultValue={100}`,
                             `    label={{ caption: "Clear and blur to reset to 100", horizontal: true }}`,
-                            "/>",
+                            `/>`,
+                            "",
+                            `// without defaultValue — resets to 0`,
+                            `<NumberInput`,
+                            `    resetToDefaultOnBlur`,
+                            `    label={{ caption: "Clear and blur to reset to 0", horizontal: true }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <NumberComponent
-                    resetToDefaultOnBlur
-                    defaultValue={100}
-                    label={{ caption: "Clear and blur to reset to 100", horizontal: true }}
-                />
+                <div className="is-flex is-flex-direction-column" style={{ gap: "0.75rem" }}>
+                    <div>
+                        <p className="mb-1 has-text-grey">with defaultValue={100}</p>
+                        <NumberComponent
+                            resetToDefaultOnBlur
+                            defaultValue={100}
+                            label={{ caption: "Clear and blur to reset to 100", horizontal: true }}
+                        />
+                    </div>
+                    <div>
+                        <p className="mb-1 has-text-grey">without defaultValue (resets to 0)</p>
+                        <NumberComponent
+                            resetToDefaultOnBlur
+                            label={{ caption: "Clear and blur to reset to 0", horizontal: true }}
+                        />
+                    </div>
+                </div>
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
-                caption="resetToDefaultOnBlur (without defaultValue)"
-                description="When resetToDefaultOnBlur is enabled without defaultValue, the field resets to 0 on blur if empty."
+                caption="label"
+                description="Optional label configuration rendered next to the input."
                 code={
                     <CodeExample
                         code={[
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent`,
-                            "    resetToDefaultOnBlur",
-                            `    label={{ caption: "Clear and blur to reset to 0", horizontal: true }}`,
-                            "/>",
+                            `<NumberInput`,
+                            `    label={{ caption: "Number demo", horizontal: false }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <NumberComponent
-                    resetToDefaultOnBlur
-                    label={{ caption: "Clear and blur to reset to 0", horizontal: true }}
-                />
+                <NumberComponent label={{ caption: "Number demo", horizontal: false }} />
             </ComponentUseCase>
-
-            <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Base props implementation
-                    {` `}
-                    <code>
-                        BaseInputElementProps
-                    </code>
-                </h4>
-            </div>
 
             <ComponentUseCase
                 captionIsCode
                 caption="defaultValue"
-                description="Option to set the initial value of the component. Not set by default."
+                description="Sets the initial numeric value. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent`,
-                            '    defaultValue={8910}',
+                            `<NumberInput`,
+                            `    defaultValue={8910}`,
                             `    label={{ caption: "Number demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -227,24 +155,22 @@ const Number: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="placeholder"
-                description="Option to specify the component's placeholder. Not set by default."
+                description="Placeholder text shown when the input is empty. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent`,
-                            '    placeholder="Number demo control"',
+                            `<NumberInput`,
+                            `    placeholder="Enter a number"`,
                             `    label={{ caption: "Number demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <NumberComponent
-                    placeholder="Number demo control"
+                    placeholder="Enter a number"
                     label={{ caption: "Number demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -252,18 +178,16 @@ const Number: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="rounded"
-                description="Option to apply border-radius to the component. Disabled by default."
+                description="Applies border-radius to the component. Disabled by default."
                 code={
                     <CodeExample
                         code={[
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent`,
+                            `<NumberInput`,
                             `    rounded`,
                             `    label={{ caption: "Number demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -277,18 +201,16 @@ const Number: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="disabled"
-                description="Option to render the component as disabled. Not set by default."
+                description="Renders a non-interactive disabled input. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent`,
+                            `<NumberInput`,
                             `    disabled`,
                             `    label={{ caption: "Number demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -302,18 +224,16 @@ const Number: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="readonly"
-                description="Option to render the component in readonly state. Not set by default."
+                description="Renders the input in read-only mode. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent`,
+                            `<NumberInput`,
                             `    readonly`,
                             `    label={{ caption: "Number demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -325,47 +245,42 @@ const Number: FC = () => {
             </ComponentUseCase>
 
             <ComponentSizeCase
-                caption="Sizes"
-                description="The component supports all sizes defined in the ElementSize type"
+                captionIsCode
+                caption="size"
+                description="Controls the visual size of the component. Supports all ElementSize values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput, ElementSize } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent`,
+                            `<NumberInput`,
                             `    size={ElementSize.${id}}`,
                             `    label={{ caption: "Number demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    size =>
-                        <NumberComponent
-                            size={size}
-                            label={{ caption: "Number demo", horizontal: true }}
-                        />
+                componentProvider={size =>
+                    <NumberComponent
+                        size={size}
+                        label={{ caption: "Number demo", horizontal: true }}
+                    />
                 }
             />
 
             <ComponentUseCase
                 captionIsCode
                 caption="loading"
-                description="Option to render the component in a loading state. Not set by default."
+                description="Displays a loading spinner inside the component. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent`,
+                            `<NumberInput`,
                             `    loading`,
                             `    label={{ caption: "Number demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -377,47 +292,42 @@ const Number: FC = () => {
             </ComponentUseCase>
 
             <ComponentColorCase
-                caption="Colors"
-                description="Component supports all available colors"
+                captionIsCode
+                caption="style"
+                description="Color applied to the input border. Supports all ElementColor values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput, ElementColor } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent`,
+                            `<NumberInput`,
                             `    style={ElementColor.${id}}`,
                             `    label={{ caption: "Number demo", horizontal: false }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    style =>
-                        <NumberComponent
-                            style={style}
-                            label={{ caption: "Number demo", horizontal: false }}
-                        />
+                componentProvider={style =>
+                    <NumberComponent
+                        style={style}
+                        label={{ caption: "Number demo", horizontal: false }}
+                    />
                 }
             />
 
             <ComponentUseCase
                 captionIsCode
                 caption="name"
-                description="Option to specify the component name. Used as a form element attribute."
+                description="Specifies the HTML name attribute for use as a form element."
                 code={
                     <CodeExample
                         code={[
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<NumberComponent',
-                            '    name="amount"',
-                            '    label={{ caption: "Number demo", horizontal: false }}',
-                            '/>',
+                            `<NumberInput`,
+                            `    name="amount"`,
+                            `    label={{ caption: "Number demo", horizontal: false }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -433,33 +343,22 @@ const Number: FC = () => {
                 caption="autoFocus"
                 description={
                     <>
-                        Option to set focus on the component input field on initial render
+                        Sets focus on the input on initial render.
                         <br />
-                        <Icon
-                            name="exclamation-triangle-fill"
-                            className="has-text-warning"
-                        />
+                        <Icon name="exclamation-triangle-fill" className="has-text-warning" />
                         {` `}
-                        <span>
-                            Only 1 element on the page can have this flag
-                        </span>
-                        <br />
-                        <span className="is-italic">
-                            Refresh the page and check which component (from the presented examples) received automatic focus
-                        </span>
+                        Only 1 element on the page can have this flag.
                     </>
                 }
                 code={
                     <CodeExample
                         code={[
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
+                            `import { NumberInput } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<NumberComponent',
-                            '    autoFocus',
-                            '    label={{ caption: "Number demo", horizontal: false }}',
-                            '/>',
+                            `<NumberInput`,
+                            `    autoFocus`,
+                            `    label={{ caption: "Number demo", horizontal: false }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -473,33 +372,97 @@ const Number: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="onValueChange"
-                description="Option for handling the onValueChange event. Not set by default."
+                description="Called when the numeric value changes. Receives the new number value."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react"`,
+                            `import { NumberInput } from "@bodynarf/react.components";`,
                             "",
-                            `import NumberComponent from "@bodynarf/react.components/components/primitives/number";`,
-                            "",
-                            "/* ... */",
-                            "const ON_VALUE_CHANGE_HANDLE_FN = useCallback((value: number) => { /* handler fn */}, []);",
-                            "/* ... */",
-                            "",
-                            `<NumberComponent`,
-                            "    onValueChange={ON_VALUE_CHANGE_HANDLE_FN}",
+                            `<NumberInput`,
                             `    label={{ caption: "Number demo", horizontal: true }}`,
-                            "/>",
+                            `    onValueChange={value => console.log("value:", value)}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <NumberComponent
-                    onValueChange={appendOnValueChangeLog}
                     label={{ caption: "Number demo", horizontal: true }}
+                    onValueChange={value => onValueChangeLogRef.current?.append(`value: ${value}`)}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {onValueChangeLog}
-                </p>
+                <Log ref={onValueChangeLogRef} />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="onBlur"
+                description="Called when the input loses focus."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            "",
+                            `<NumberInput`,
+                            `    label={{ caption: "Number demo", horizontal: true }}`,
+                            `    onBlur={() => console.log("blurred")}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <NumberComponent
+                    label={{ caption: "Number demo", horizontal: true }}
+                    onBlur={() => onBlurLogRef.current?.append("blurred")}
+                />
+                <Log ref={onBlurLogRef} />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="onKeyDown"
+                description="Called when a key is pressed while the input is focused."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            "",
+                            `<NumberInput`,
+                            `    label={{ caption: "Number demo", horizontal: true }}`,
+                            `    onKeyDown={e => console.log("keyDown:", e.key)}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <NumberComponent
+                    label={{ caption: "Number demo", horizontal: true }}
+                    onKeyDown={e => onKeyDownLogRef.current?.append(`keyDown: ${e.key}`)}
+                />
+                <Log ref={onKeyDownLogRef} />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="onKeyUp"
+                description="Called when a key is released while the input is focused."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            "",
+                            `<NumberInput`,
+                            `    label={{ caption: "Number demo", horizontal: true }}`,
+                            `    onKeyUp={e => console.log("keyUp:", e.key)}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <NumberComponent
+                    label={{ caption: "Number demo", horizontal: true }}
+                    onKeyUp={e => onKeyUpLogRef.current?.append(`keyUp: ${e.key}`)}
+                />
+                <Log ref={onKeyUpLogRef} />
             </ComponentUseCase>
         </section>
     );
