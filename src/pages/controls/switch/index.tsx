@@ -1,370 +1,291 @@
-import { FC, useCallback, useState } from "react";
+﻿import { FC, useRef } from "react";
 
-import { ElementColor, ElementSize, Switch as SwitchComponent } from "@bodynarf/react.components";
+import { Switch as SwitchComponent } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 /** Switch component demo */
 const Switch: FC = () => {
-    // Event log for onValueChange demo
-    const [onValueChangeLog, setOnValueChangeLog] = useState("");
-    const appendOnValueChangeLog = useCallback(
-        (value: boolean) => setOnValueChangeLog(
-            t => t
-                + "\n"
-                + new Date().toLocaleTimeString()
-                + " => " + `new value: ${value}`
-        ),
-        []
-    );
+    const onValueChangeLogRef = useRef<LogRef>(null);
 
     return (
         <section>
             <DemoComponentTitleInfoMessage
                 name="Switch"
                 version="1.14"
-                description={
-                    <>
-                        Switch - a toggle/switch component for boolean values with Bulma styling.
-                        <br />
-                        Supports various styles including rounded, outlined, and thin variants.
-                    </>
-                }
+                description="Toggle switch component for boolean values."
             />
 
             <ComponentUseCase
                 caption="Minimal use"
-                description="Minimal configuration: component with a label"
+                description="The component can be rendered with just a label."
                 code={
                     <CodeExample
                         code={[
                             `import { Switch } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
+                            `<Switch label={{ caption: "Toggle" }} />`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SwitchComponent label={{ caption: "Toggle" }} />
+            </ComponentUseCase>
+
+            <hr />
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="label"
+                description="Label configuration rendered next to the switch."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { Switch } from "@bodynarf/react.components";`,
                             "",
                             `<Switch`,
-                            `    label={{ caption: "Toggle switch" }}`,
+                            `    label={{ caption: "My label", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SwitchComponent
-                    label={{ caption: "Toggle switch" }}
-                />
+                <SwitchComponent label={{ caption: "My label", horizontal: true }} />
             </ComponentUseCase>
-
-            <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Custom component props
-                </h4>
-            </div>
 
             <ComponentUseCase
                 captionIsCode
                 caption="defaultValue"
-                description="Option to set the initial checked state of the switch"
+                description="Sets the initial checked state. Defaults to false."
                 code={
                     <CodeExample
                         code={[
                             `import { Switch } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Switch`,
-                            `    label={{ caption: "Default checked" }}`,
+                            `    label={{ caption: "Switch demo" }}`,
                             `    defaultValue`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SwitchComponent
-                    label={{ caption: "Default checked" }}
-                    defaultValue
-                />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onValueChange"
-                description="Handler for the value change event. Called when the switch state changes."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { useCallback } from "react";`,
-                            "",
-                            `import { Switch } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
-                            `const handleChange = useCallback((newValue: boolean) => {`,
-                            `    console.log("Changed to:", newValue);`,
-                            `}, []);`,
-                            "/* ... */",
-                            "",
-                            `<Switch`,
-                            `    label={{ caption: "Track changes" }}`,
-                            `    onValueChange={handleChange}`,
-                            "/>",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <SwitchComponent
-                    label={{ caption: "Track changes" }}
-                    onValueChange={appendOnValueChangeLog}
-                />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {onValueChangeLog}
-                </p>
+                <SwitchComponent label={{ caption: "Switch demo" }} defaultValue />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="rounded"
-                description="Adds rounded/pill shape to the switch"
+                description="Applies pill-shaped rounded edges to the switch. Not set by default."
                 code={
                     <CodeExample
                         code={[
                             `import { Switch } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Switch`,
-                            `    label={{ caption: "Rounded switch" }}`,
+                            `    label={{ caption: "Switch demo" }}`,
                             `    rounded`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SwitchComponent
-                    label={{ caption: "Rounded switch" }}
-                    rounded
-                />
+                <SwitchComponent label={{ caption: "Switch demo" }} rounded />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="outlined"
-                description="Renders the switch with outlined style"
+                description="Renders the switch with an outlined style. Not set by default."
                 code={
                     <CodeExample
                         code={[
                             `import { Switch } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Switch`,
-                            `    label={{ caption: "Outlined switch" }}`,
+                            `    label={{ caption: "Switch demo" }}`,
                             `    outlined`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SwitchComponent
-                    label={{ caption: "Outlined switch" }}
-                    outlined
-                />
+                <SwitchComponent label={{ caption: "Switch demo" }} outlined />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="thin"
-                description="Renders the switch with a thinner track"
+                description="Renders the switch with a thinner track. Not set by default."
                 code={
                     <CodeExample
                         code={[
                             `import { Switch } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Switch`,
-                            `    label={{ caption: "Thin switch" }}`,
+                            `    label={{ caption: "Switch demo" }}`,
                             `    thin`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SwitchComponent
-                    label={{ caption: "Thin switch" }}
-                    thin
-                />
+                <SwitchComponent label={{ caption: "Switch demo" }} thin />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="rtl"
-                description="Right-to-left mode - positions the switch on the right side of the label"
+                description="Right-to-left mode â€” places the switch on the right side of the label. Not set by default."
                 code={
                     <CodeExample
                         code={[
                             `import { Switch } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Switch`,
-                            `    label={{ caption: "RTL switch" }}`,
+                            `    label={{ caption: "Switch demo" }}`,
                             `    rtl`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SwitchComponent
-                    label={{ caption: "RTL switch" }}
-                    rtl
-                />
+                <SwitchComponent label={{ caption: "Switch demo" }} rtl />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="isFormLabel"
-                description="Renders the switch in form label mode with horizontal layout"
+                description="Renders the label as a form element label positioned to the left. Not set by default."
                 code={
                     <CodeExample
                         code={[
                             `import { Switch } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Switch`,
-                            `    label={{ caption: "Form label mode" }}`,
+                            `    label={{ caption: "Switch demo" }}`,
                             `    isFormLabel`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SwitchComponent
-                    label={{ caption: "Form label mode" }}
-                    isFormLabel
-                />
+                <SwitchComponent label={{ caption: "Switch demo" }} isFormLabel />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="disabled"
-                description="Disables the switch input"
+                description="Renders a non-interactive switch. Not set by default."
                 code={
                     <CodeExample
                         code={[
                             `import { Switch } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Switch`,
-                            `    label={{ caption: "Disabled switch" }}`,
+                            `    label={{ caption: "Switch demo" }}`,
                             `    disabled`,
                             `    defaultValue`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SwitchComponent
-                    label={{ caption: "Disabled switch" }}
-                    disabled
-                    defaultValue
-                />
+                <SwitchComponent label={{ caption: "Switch demo" }} disabled defaultValue />
             </ComponentUseCase>
-
-            <ComponentUseCase
-                caption="Combined styles"
-                description="Multiple style options can be combined for custom appearance"
-                code={
-                    <CodeExample
-                        code={[
-                            `import { Switch, ElementColor } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
-                            "",
-                            `<Switch`,
-                            `    label={{ caption: "Rounded outlined switch" }}`,
-                            `    rounded`,
-                            `    outlined`,
-                            `    style={ElementColor.Success}`,
-                            "/>",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <SwitchComponent
-                    label={{ caption: "Rounded outlined switch" }}
-                    rounded
-                    outlined
-                    style={ElementColor.Success}
-                />
-            </ComponentUseCase>
-
-            <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Size and color variations
-                </h4>
-            </div>
 
             <ComponentSizeCase
                 captionIsCode
                 caption="size"
-                description="The component supports all sizes defined in the ElementSize type"
+                description="Controls the visual size of the component. Supports all ElementSize values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { Switch, ElementSize } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<Switch",
-                            `    label={{ caption: "Size demo" }}`,
+                            `<Switch`,
+                            `    label={{ caption: "Switch demo" }}`,
                             `    size={ElementSize.${id}}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={(size: ElementSize) =>
-                    <SwitchComponent
-                        label={{ caption: "Size demo" }}
-                        size={size}
-                    />
+                componentProvider={size =>
+                    <SwitchComponent label={{ caption: "Switch demo" }} size={size} />
                 }
             />
 
             <ComponentColorCase
                 captionIsCode
                 caption="style"
-                description="The component supports all colors defined in the ElementColor type"
+                description="Color applied to the switch when checked. Supports all ElementColor values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { Switch, ElementColor } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<Switch",
-                            `    label={{ caption: "Color demo" }}`,
+                            `<Switch`,
+                            `    label={{ caption: "Switch demo" }}`,
                             `    style={ElementColor.${id}}`,
-                            "/>",
+                            `    defaultValue`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={(color: ElementColor) =>
-                    <SwitchComponent
-                        label={{ caption: "Color demo" }}
-                        style={color}
-                        defaultValue
-                    />
+                componentProvider={style =>
+                    <SwitchComponent label={{ caption: "Switch demo" }} style={style} defaultValue />
                 }
             />
+
+            <ComponentUseCase
+                captionIsCode
+                caption="name"
+                description="Specifies the HTML name attribute for use as a form element."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { Switch } from "@bodynarf/react.components";`,
+                            "",
+                            `<Switch`,
+                            `    label={{ caption: "Switch demo" }}`,
+                            `    name="mySwitch"`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SwitchComponent label={{ caption: "Switch demo" }} name="mySwitch" />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="onValueChange"
+                description="Called when the switch state changes. Receives the new boolean value."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { Switch } from "@bodynarf/react.components";`,
+                            "",
+                            `<Switch`,
+                            `    label={{ caption: "Switch demo" }}`,
+                            `    onValueChange={value => console.log("value:", value)}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SwitchComponent
+                    label={{ caption: "Switch demo" }}
+                    onValueChange={value => onValueChangeLogRef.current?.append(`value: ${value}`)}
+                />
+                <Log ref={onValueChangeLogRef} />
+            </ComponentUseCase>
         </section>
     );
 };
