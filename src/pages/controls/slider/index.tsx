@@ -1,50 +1,34 @@
-import { FC, useCallback, useState } from "react";
+﻿import { FC, useRef } from "react";
 
-import { ElementColor, ElementSize, Slider as SliderComponent } from "@bodynarf/react.components";
+import { Slider as SliderComponent } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 /** Slider component demo */
 const Slider: FC = () => {
-    // Event log for onValueChange demo
-    const [onValueChangeLog, setOnValueChangeLog] = useState("");
-    const appendOnValueChangeLog = useCallback(
-        (value?: number) => setOnValueChangeLog(
-            t => t
-                + "\n"
-                + new Date().toLocaleTimeString()
-                + " => " + `new value: ${value}`
-        ),
-        []
-    );
+    const onValueChangeLogRef = useRef<LogRef>(null);
+    const onBlurLogRef = useRef<LogRef>(null);
 
     return (
         <section>
             <DemoComponentTitleInfoMessage
                 name="Slider"
                 version="1.14"
-                description={
-                    <>
-                        Slider - a range/slider component for selecting numeric values with Bulma styling.
-                        <br />
-                        Supports various customizations including progress display, vertical mode, and value tooltips.
-                    </>
-                }
+                description="Range slider component for selecting numeric values."
             />
 
             <ComponentUseCase
                 caption="Minimal use"
-                description="Minimal configuration: just the component without any props"
+                description="The component can be rendered without any props."
                 code={
                     <CodeExample
                         code={[
                             `import { Slider } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
                             "",
                             "<Slider />",
                         ].join("\n")}
@@ -55,340 +39,364 @@ const Slider: FC = () => {
             </ComponentUseCase>
 
             <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Custom component props
-                </h4>
-            </div>
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
 
             <ComponentUseCase
                 captionIsCode
-                caption="min, max"
-                description="Set the minimum and maximum values for the slider. Default is 0-100."
+                caption="min"
+                description="Minimum value of the slider. Not set by default."
                 code={
                     <CodeExample
                         code={[
                             `import { Slider } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Slider`,
-                            `    min={0}`,
-                            `    max={50}`,
-                            `    defaultValue={25}`,
-                            "/>",
+                            `    min={20}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SliderComponent
-                    min={0}
-                    max={50}
-                    defaultValue={25}
-                />
+                <SliderComponent min={20} defaultValue={20} showMinMax />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="max"
+                description="Maximum value of the slider. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { Slider } from "@bodynarf/react.components";`,
+                            "",
+                            `<Slider`,
+                            `    max={50}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SliderComponent max={50} showMinMax />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="step"
-                description="Set the step increment for the slider value"
+                description="Step increment between selectable values. Defaults to 1."
                 code={
                     <CodeExample
                         code={[
                             `import { Slider } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Slider`,
-                            `    min={0}`,
-                            `    max={100}`,
                             `    step={10}`,
-                            `    defaultValue={30}`,
-                            "/>",
+                            `    showValue`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SliderComponent
-                    min={0}
-                    max={100}
-                    step={10}
-                    defaultValue={30}
-                />
+                <SliderComponent step={10} showValue />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="defaultValue"
-                description="Set the initial value of the slider"
+                description="Initial value of the slider. Not set by default."
                 code={
                     <CodeExample
                         code={[
                             `import { Slider } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<Slider`,
                             `    defaultValue={75}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SliderComponent
-                    defaultValue={75}
-                />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onValueChange"
-                description="Handler for the value change event. Called when the slider value changes."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { useCallback } from "react";`,
-                            "",
-                            `import { Slider } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
-                            `const handleValueChange = useCallback((newValue?: number) => {`,
-                            `    console.log("New value:", newValue);`,
-                            `}, []);`,
-                            "/* ... */",
-                            "",
-                            `<Slider`,
-                            `    onValueChange={handleValueChange}`,
-                            "/>",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <SliderComponent
-                    onValueChange={appendOnValueChangeLog}
-                />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {onValueChangeLog}
-                </p>
+                <SliderComponent defaultValue={75} showValue />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="showValue"
-                description="Show a tooltip with the current value when dragging"
+                description="Displays the current value as a tooltip above the slider thumb. Defaults to false."
                 code={
                     <CodeExample
                         code={[
                             `import { Slider } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Slider`,
                             `    showValue`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SliderComponent
-                    showValue
-                />
+                <SliderComponent showValue />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="valuePosition"
+                description='Position of the value tooltip in horizontal mode. Defaults to "top".'
+                code={
+                    <CodeExample
+                        code={[
+                            `import { Slider } from "@bodynarf/react.components";`,
+                            "",
+                            `<Slider`,
+                            `    showValue`,
+                            `    valuePosition="bottom"`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SliderComponent showValue valuePosition="bottom" />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="showMinMax"
-                description="Display min and max value labels on the sides of the slider"
+                description="Displays min and max value labels below the slider. Defaults to false."
                 code={
                     <CodeExample
                         code={[
                             `import { Slider } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Slider`,
                             `    showMinMax`,
                             `    min={0}`,
                             `    max={100}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SliderComponent
-                    showMinMax
-                    min={0}
-                    max={100}
-                />
+                <SliderComponent showMinMax min={0} max={100} />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="showProgress"
-                description="Show filled track to indicate progress from minimum to current value"
+                description="Fills the track from start to the current value. Defaults to true."
                 code={
                     <CodeExample
                         code={[
                             `import { Slider } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Slider`,
-                            `    showProgress`,
-                            "/>",
+                            `    showProgress={false}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SliderComponent
-                    showProgress
-                />
+                <SliderComponent showProgress={false} defaultValue={50} />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="circle"
-                description="Use a circular thumb style instead of the default"
+                description="Applies a circular/rounded style to the slider thumb. Defaults to false."
                 code={
                     <CodeExample
                         code={[
                             `import { Slider } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Slider`,
                             `    circle`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SliderComponent
-                    circle
-                />
+                <SliderComponent circle />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="vertical"
-                description="Render the slider in vertical orientation. Height can be customized."
+                description="Renders the slider in vertical orientation. Defaults to false."
                 code={
                     <CodeExample
                         code={[
                             `import { Slider } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<div style={{ height: "200px" }}>`,
-                            `    <Slider`,
-                            `        vertical`,
-                            `    />`,
-                            `</div>`,
+                            `<Slider`,
+                            `    vertical`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <div style={{ height: "200px" }}>
-                    <SliderComponent
-                        vertical
-                    />
-                </div>
+                <SliderComponent vertical />
             </ComponentUseCase>
 
             <ComponentUseCase
-                caption="Combined options"
-                description="Multiple options can be combined for a fully featured slider"
+                captionIsCode
+                caption="verticalHeight"
+                description='Height of the slider in vertical mode. Any CSS unit is accepted. Defaults to "200px".'
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider, ElementColor } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { Slider } from "@bodynarf/react.components";`,
                             "",
                             `<Slider`,
-                            `    min={0}`,
-                            `    max={100}`,
-                            `    step={5}`,
-                            `    defaultValue={50}`,
-                            `    showValue`,
-                            `    showMinMax`,
-                            `    showProgress`,
-                            `    circle`,
-                            `    style={ElementColor.Primary}`,
-                            "/>",
+                            `    vertical`,
+                            `    verticalHeight="300px"`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SliderComponent
-                    min={0}
-                    max={100}
-                    step={5}
-                    defaultValue={50}
-                    showValue
-                    showMinMax
-                    showProgress
-                    circle
-                    style={ElementColor.Primary}
-                />
+                <SliderComponent vertical verticalHeight="300px" />
             </ComponentUseCase>
 
-            <hr />
+            <ComponentUseCase
+                captionIsCode
+                caption="valueFormatter"
+                description="Formats the displayed value when showValue is enabled."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { Slider } from "@bodynarf/react.components";`,
+                            "",
+                            `<Slider`,
+                            `    showValue`,
+                            `    valueFormatter={value => \`\${value}%\`}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SliderComponent showValue valueFormatter={value => `${value}%`} />
+            </ComponentUseCase>
 
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Size and color variations
-                </h4>
-            </div>
+            <ComponentUseCase
+                captionIsCode
+                caption="name"
+                description="Specifies the HTML name attribute for use as a form element."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { Slider } from "@bodynarf/react.components";`,
+                            "",
+                            `<Slider`,
+                            `    name="volume"`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SliderComponent name="volume" />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="disabled"
+                description="Renders the slider as non-interactive. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { Slider } from "@bodynarf/react.components";`,
+                            "",
+                            `<Slider`,
+                            `    disabled`,
+                            `    defaultValue={40}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SliderComponent disabled defaultValue={40} />
+            </ComponentUseCase>
 
             <ComponentSizeCase
                 captionIsCode
                 caption="size"
-                description="The component supports all sizes defined in the ElementSize type"
+                description="Controls the visual size of the component. Supports all ElementSize values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementSize, Slider } from "@bodynarf/react.components";`,
+                            `import { Slider, ElementSize } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<Slider',
+                            `<Slider`,
                             `    size={ElementSize.${id}}`,
-                            '/>',
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={(size: ElementSize) =>
-                    <SliderComponent
-                        size={size}
-                    />
+                componentProvider={size =>
+                    <SliderComponent size={size} />
                 }
             />
 
             <ComponentColorCase
                 captionIsCode
                 caption="style"
-                description="The component supports all colors defined in the ElementColor type"
+                description="Color applied to the slider track and thumb. Supports all ElementColor values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementColor, Slider } from "@bodynarf/react.components";`,
+                            `import { Slider, ElementColor } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<Slider',
+                            `<Slider`,
                             `    style={ElementColor.${id}}`,
-                            '/>',
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={(color: ElementColor) =>
-                    <SliderComponent
-                        style={color}
-                    />
+                componentProvider={style =>
+                    <SliderComponent style={style} />
                 }
             />
+
+            <ComponentUseCase
+                captionIsCode
+                caption="onValueChange"
+                description="Called when the slider value changes. Receives the new numeric value."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { Slider } from "@bodynarf/react.components";`,
+                            "",
+                            `<Slider`,
+                            `    onValueChange={value => console.log("value:", value)}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SliderComponent
+                    onValueChange={value => onValueChangeLogRef.current?.append(`value: ${value}`)}
+                />
+                <Log ref={onValueChangeLogRef} />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="onBlur"
+                description="Called when the slider loses focus."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { Slider } from "@bodynarf/react.components";`,
+                            "",
+                            `<Slider`,
+                            `    onBlur={() => console.log("blurred")}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SliderComponent
+                    onBlur={() => onBlurLogRef.current?.append("blurred")}
+                />
+                <Log ref={onBlurLogRef} />
+            </ComponentUseCase>
         </section>
     );
 };
