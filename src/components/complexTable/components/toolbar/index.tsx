@@ -51,21 +51,23 @@ const ComplexTableToolbar: FC<ComplexTableToolbarProps> = ({
 
     const className = getClassName([
         "column",
-        searchConfig?.searchProps?.className,
+        searchConfig?.wrapperClassName,
     ]);
 
     return (
         <div className={containerClassName}>
-            <Search
-                {...searchConfig?.searchProps}
+            <div className={className}>
+                <Search
+                    {...searchConfig?.searchProps}
 
-                disabled={disabled}
-                isLoading={loading}
-                className={className}
-                onSearch={handleSearch}
-                caption={searchConfig.searchPlaceholder}
-                searchType={searchConfig.searchProps?.searchType ?? "byTyping"}
-            />
+                    disabled={disabled}
+                    isLoading={loading}
+                    onSearch={handleSearch}
+                    caption={searchConfig.searchPlaceholder}
+                    searchType={searchConfig.searchProps?.searchType ?? "byTyping"}
+                />
+            </div>
+
         </div>
     );
 };

@@ -174,6 +174,9 @@ export type ComplexTableSearchConfig = {
     /** CSS class for the search container */
     containerClassName?: string;
 
+    /** CSS class for the wrapper element around the search field */
+    wrapperClassName?: string;
+
     /**
      * Debounce delay in milliseconds before the search handler is called.
      * When not provided or `<= 0`, the search handler is called immediately on every input change.

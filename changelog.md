@@ -3,80 +3,80 @@ All changes will be published here in reverse chronological order
 
 ## v1.15.1
 
-- **AutoComplete** *(updated)*
-  - Moved from `components/autoComplete` to `components/primitives/autoComplete`. Public re-export path is unchanged — no consumer changes required.
-  - Added `size`, `style` and `rounded` props to align the input appearance with other form primitives.
-  - Added `hint` and `validationState` props — hint text and validation message are now rendered below the input via `InternalHint`.
-  - Fixed: `onFocus` / `onClick` handlers are now suppressed when `readonly` is `true`, preventing the dropdown from opening on read-only inputs.
-  - Fixed: `selectItem` no longer fires `onValueChange` / `onSelect` callbacks when the selected item has not changed.
+- **AutoComplete** *(update)*
+  - Moved from `components/autoComplete` to `components/primitives/autoComplete`. Public re-export path via barrel is unchanged — no consumer changes required.
+  - Added `size?: ElementSize`, `style?: ElementColor` and `rounded?: boolean` props to align appearance with other form primitives.
+  - Added `hint?: string` and `validationState?: ValidationState` — hint text and validation message are now rendered below the input via `InternalHint`.
+  - Fixed: `onFocus` and `onClick` handlers are suppressed when `readonly` is `true`, preventing the dropdown from opening on read-only inputs.
+  - Fixed: `selectItem` no longer fires `onValueChange` / `onSelect` callbacks when the newly selected item's label matches the current input value (no-op selection).
   - Fixed: `handleClear` no longer fires `onValueChange("")` when the input is already empty.
-  - Fixed: blur validation no longer marks the field as invalid when no item has been selected yet (only validates after the user has already made a selection).
+  - Fixed: blur validation no longer marks the field invalid when no item has been selected yet (only validates after the user has previously made a selection).
 
-- **Breadcrumbs** *(bugfix)*
-  - Fixed icon rendering: the icon is now read from `item.icon` instead of a separate internal prop that was never populated.
-  - Added component stylesheet — breadcrumb links now use `display: flex; align-items: center; gap: 0.5rem` so icons and text always stay aligned.
+- **Breadcrumbs** *(update)*
+  - Fixed icon rendering: icon is now read from `item.icon` instead of a separate internal prop that was never populated.
+  - Added `style.scss` — breadcrumb links now use `display: flex; align-items: center; gap: 0.5rem` so icon and text always stay aligned regardless of font size.
 
-- **Calendar** *(bugfix)*
+- **Calendar** *(update)*
   - Fixed: clicking the already-selected day no longer fires `onChange`, preventing redundant state updates.
 
-- **Checkbox** *(bugfix)*
-  - Default value of the `style` prop is now `ElementColor.Default` instead of `undefined`, matching the behavior of all other form primitives.
+- **Checkbox** *(update)*
+  - Default value of the `style` prop changed from `undefined` to `ElementColor.Default`, matching the behavior of all other form primitives.
 
-- **ConfirmDialog** *(updated)*
-  - Added compact mode: when `message` is not provided, a `bbr-confirm-dialog__card--compact` modifier is applied that removes header/footer borders and sets a plain white background, giving message-less dialogs a cleaner appearance.
-  - Fixed footer `justify-content` not being applied in all Bulma builds — rule now uses `!important`.
+- **ConfirmDialog** *(update)*
+  - Added compact mode: when `message` prop is not provided, a `bbr-confirm-dialog__card--compact` CSS modifier is applied. It removes header/footer borders and sets a plain white background, giving message-less dialogs a cleaner appearance.
+  - Fixed: footer `justify-content: flex-end` is now declared with `!important` to prevent Bulma overrides in some build configurations.
 
-- **ContextMenu** *(bugfix)*
-  - Removed the `dropdown-item` Bulma class from menu items. Item styles (color, font-size, line-height, white-space, hover state) are now fully self-contained in the component stylesheet, eliminating style conflicts with global Bulma rules.
+- **ContextMenu** *(update)*
+  - Removed the `dropdown-item` Bulma class from menu items. All item styles (color, font-size, line-height, white-space, hover state) are now self-contained in the component stylesheet, eliminating conflicts with global Bulma rules.
 
-- **DateInput** *(bugfix)*
-  - Container element now uses `display: flex; flex-direction: column; align-items: flex-start` so hint / validation messages do not stretch to full width.
+- **DateInput** *(update)*
+  - Root container now uses `display: flex; flex-direction: column; align-items: flex-start` so hint and validation messages do not stretch to full width.
 
-- **DateRangePicker** *(updated)*
-  - Added `asPopover?: boolean` prop (default `true`). When `true` the calendar opens inside a `Popover` on label click; when `false` the calendar is always rendered inline below the label.
-  - Label element now has hover styles (`border-color` + `background-color` transition) and `cursor: pointer` to better communicate interactivity.
+- **DateRangePicker** *(update)*
+  - Added `asPopover?: boolean` prop (default `true`). When `true` the calendar opens in a `Popover` triggered by clicking the label; when `false` the calendar is always rendered inline below the label.
+  - Label element now has hover styles (`border-color` + `background-color` transition) and `cursor: pointer` to communicate interactivity.
 
-- **Modal** *(updated)*
-  - The modal card now receives `tabIndex={-1}` and is focused automatically on mount, enabling immediate keyboard navigation without a manual click.
-  - Close and maximize buttons are now wrapped in a `<span class="bbr-modal__header-controls">` flex container so they stay right-aligned and evenly spaced regardless of header content length.
-  - Compound mode: when a `Modal.Header` slot is provided, the close/maximize buttons are injected as children of that slot instead of floating outside it, ensuring correct DOM order and styling.
+- **Modal** *(update)*
+  - The modal card now has `tabIndex={-1}` and is focused automatically on mount via `useEffect` + `ref`, enabling immediate keyboard navigation without requiring a manual click.
+  - Close and maximize buttons are wrapped in `<span class="bbr-modal__header-controls">` (`display: flex; gap: 0.35rem; margin-left: auto`) so they stay right-aligned regardless of header content length.
+  - Compound mode: when a `Modal.Header` slot is provided, the header control buttons are injected as children of that slot to maintain correct DOM order and styling.
 
-- **Multiselect** *(bugfix)*
-  - Fixed icon alignment in dropdown items: replaced ad-hoc `is-flex is-align-items-center` inline classes with a dedicated `bbr-dropdown-item--with-icon` modifier (`gap: 0.5rem`) and removed the incorrect position-based icon class construction.
+- **Multiselect** *(update)*
+  - Fixed icon alignment in dropdown items: replaced ad-hoc `is-flex is-align-items-center` inline classes with a dedicated `bbr-dropdown-item--with-icon` modifier (`gap: 0.5rem`). Also removed the incorrect position-based icon class construction that was building wrong class names.
 
-- **OtpInput** *(bugfix)*
+- **OtpInput** *(update)*
   - Fixed: `input.select()` on focus is now skipped when `type="password"` to prevent the browser from briefly revealing masked characters.
 
-- **RadioGroup** *(bugfix)*
-  - Fixed: the custom radio button circle now uses the `$radius` Bulma variable instead of a hardcoded `50%`, ensuring it follows theme customization.
+- **RadioGroup** *(update)*
+  - Fixed: the custom radio button circle now uses the Bulma `$radius` SCSS variable instead of a hardcoded `50%`, ensuring it respects theme customization.
 
-- **SidePanel** *(updated)*
-  - `customWidth` prop type changed from `number` (vw units) to `string` (any CSS length value, e.g. `"320px"`, `"20%"`, `"20vw"`). `size` (numeric vw shorthand) still works as before.
+- **SidePanel** *(update)*
+  - `customWidth` prop type changed from `number` (interpreted as vw units) to `string` (any valid CSS length value, e.g. `"320px"`, `"25%"`, `"30vw"`). The existing `size` prop (numeric vw shorthand) is unchanged.
 
-- **Spinner** *(updated)*
-  - `color` prop type narrowed to `Exclude<ElementColor, ElementColor.Default>` — passing `Default` is now a type error, since a spinner without a color has no visible appearance.
+- **Spinner** *(update)*
+  - `color` prop type narrowed from `ElementColor` to `Exclude<ElementColor, ElementColor.Default>`. Passing `Default` is now a TypeScript error since a default-color spinner has no visible appearance.
 
-- **Stepper** *(bugfix)*
-  - Fixed `animated` prop having no visible effect when a `color` variant was set. The `is-animated` block is now placed after color variants in the stylesheet so its gray underlay `background` correctly overrides the color-variant rule.
-  - Fixed `showNumbers={false}` still showing step numbers on steps that have no icon. The fallback branch now renders `null` instead of a number span when `showNumbers` is `false` and the step provides no icon.
-  - Fixed `clickable` steps: the `status === "completed"` restriction is removed — any step can now be clicked when `clickable` is enabled on the Stepper.
+- **Stepper** *(update)*
+  - Fixed `animated` prop having no visible effect when a `color` variant was set. The `is-animated` SCSS block is now placed after color variant rules so its gray underlay `background` correctly overrides them.
+  - Fixed `showNumbers={false}` still displaying step numbers on steps that have no `icon`. The fallback branch now renders `null` instead of a number span when both `showNumbers` is `false` and no icon is provided.
+  - Fixed `clickable` steps: removed the `status === "completed"` restriction — any step can now be clicked when `clickable` is enabled on the Stepper.
 
-- **Tag** *(bugfix)*
-  - Hover and focus border styles are now scoped to `.is-clickable` — non-interactive tags no longer show a border change on hover.
+- **Tag** *(update)*
+  - Hover and focus border styles are now scoped inside `.is-clickable` selector — non-interactive tags no longer show a border change on hover/focus.
 
-- **TagGroup** *(updated)*
-  - Added `tagConfig` prop — an `Omit<TagProps, "content" | "onRemove" | "size" | "style">` object that is spread onto every rendered Tag, allowing per-group customization of `rounded`, `lightColor`, `customColor`, `className`, etc.
+- **TagGroup** *(update)*
+  - Added `tagConfig?: Omit<TagProps, "content" | "onRemove" | "size" | "style">` prop. The object is spread onto every rendered `Tag`, allowing per-group customization of `rounded`, `lightColor`, `customColor`, `className`, `data`, etc.
 
-- **useComponentOutsideClick** *(bugfix)*
-  - Fixed: click events targeting DOM nodes that were detached during a React re-render (e.g. calendar header buttons replaced during a view switch) are now ignored, preventing false "outside click" dismissals.
+- **useComponentOutsideClick** *(update)*
+  - Fixed: click events targeting DOM nodes that were detached during a React re-render (e.g. a calendar header button replaced on view switch) are now ignored. Previously, `closest()` on a detached node always returned `null`, incorrectly triggering the outside-click handler.
 
-- **ComplexTable** *(updated)*
-  - Added `debounceTime?: number` prop to `ComplexTableSearchConfig`. When set to a positive value, the search handler is called only after the user stops typing for the specified number of milliseconds. When not provided or `<= 0`, the handler is called immediately on every keystroke (previous behavior).
+- **Readme** *(update)*
+  - Added "Import recommendations" section explaining that direct per-component imports are preferred over barrel imports for better tree-shaking. Barrel imports remain acceptable for type-only imports.
 
 ## v1.15.0
 - **Chip** *(new)* — Compact element similar to Tag, but with the delete button rendered inside the chip itself. Supports all Tag features: colors, sizes, rounded, light variants, custom colors, `onClick` and `onRemove`.
 
-- **Multiselect** *(updated)*
+- **Multiselect** *(update)*
   - Removed `displayMode` and `tagsConfig` props.
   - Added `resultDisplayConfig` prop (`"default"` | `MultiselectResultAsChipDisplayConfig`). `"default"` preserves existing behavior (summary text like "3 items selected"). When a chip config object is provided, selected items are rendered as removable `Chip` components.
   - Chip config supports `position`: `"label"` renders chips inside the dropdown trigger with auto-expanding height; `"belowLabel"` renders chips below the standard label.
@@ -85,7 +85,7 @@ All changes will be published here in reverse chronological order
 
 - **DateInput** *(new)* — Date input field with masked manual entry and Calendar popover. Supports configurable format (`dd.MM.yyyy`, `MM/dd/yyyy`, etc.), automatic separator insertion, per-character validation (rejects impossible dates like `30.57`), min/max date constraints, locale, all standard input props (sizes, colors, rounded, disabled, readonly, label, hint, validation). Calendar opens on click and closes on date selection or Escape.
 
-- **Date primitive** *(deprecated)* — The native `<input type="date">` wrapper is deprecated since v1.15. Use `DateInput` instead. Will be removed in v1.16.
+- **Date primitive** *(update)* — The native `<input type="date">` wrapper is deprecated since v1.15. Use `DateInput` instead. Will be removed in v1.16.
 
 - **TreeView** *(new)* — Hierarchical tree component for displaying nested data (file explorers, org charts, category trees). Supports expand/collapse, single and multi-selection with parent ↔ child propagation, optional checkboxes with indeterminate state, and full keyboard navigation (arrows, Enter, Space). Uncontrolled by default; becomes controlled when `expandedIds`/`selectedIds` are provided.
 
@@ -115,7 +115,7 @@ All changes will be published here in reverse chronological order
 
 - **TagGroup** *(new)* — Editable tag list for label management, filtering and multi-value inputs. Supports add/remove, duplicate prevention, configurable confirm keys and max tag limit.
 
-- **Tag** *(updated)*
+- **Tag** *(update)*
   - Added `onRemove?: () => void` — when provided, the component wraps itself in a `<div class="tags has-addons">` and appends an `is-delete` span. The delete span receives the same size class as the tag so they always scale together.
 
 - **ContextMenu** *(new)* — Right-click context menu for any element. Rendered via portal into `<body>`, auto-flips when near viewport edges. Closes on outside click, Escape or scroll.
@@ -148,7 +148,7 @@ All changes will be published here in reverse chronological order
 
 - **SidePanel** *(new)* — Sliding side panel with backdrop overlay for detail views, settings and filters. Compound component: `SidePanel.Title` + `SidePanel.Body`. Closes on Escape and backdrop click.
 
-- **ModalWrapper** *(extended)*
+- **ModalWrapper** *(update)*
   - Added compound component pattern: `ModalWrapper.Header`, `ModalWrapper.Body`, `ModalWrapper.Footer`.
   - Only `ModalWrapper.Body` is required; `ModalWrapper.Header` and `ModalWrapper.Footer` are optional.
   - When `ModalWrapper.Body` is detected in children, compound mode activates automatically — legacy `title` / `actions` props are ignored. No breaking change.
