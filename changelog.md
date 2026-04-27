@@ -70,6 +70,9 @@ All changes will be published here in reverse chronological order
 - **useComponentOutsideClick** *(bugfix)*
   - Fixed: click events targeting DOM nodes that were detached during a React re-render (e.g. calendar header buttons replaced during a view switch) are now ignored, preventing false "outside click" dismissals.
 
+- **ComplexTable** *(updated)*
+  - Added `debounceTime?: number` prop to `ComplexTableSearchConfig`. When set to a positive value, the search handler is called only after the user stops typing for the specified number of milliseconds. When not provided or `<= 0`, the handler is called immediately on every keystroke (previous behavior).
+
 ## v1.15.0
 - **Chip** *(new)* — Compact element similar to Tag, but with the delete button rendered inside the chip itself. Supports all Tag features: colors, sizes, rounded, light variants, custom colors, `onClick` and `onRemove`.
 
