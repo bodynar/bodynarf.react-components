@@ -27,6 +27,8 @@ const UseUpdateEffectPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
+                            `import { useState } from "react";`,
+                            "",
                             `import { useUpdateEffect } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",

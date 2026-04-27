@@ -293,6 +293,7 @@ const DateInput: FC = () => {
                     <CodeExample
                         code={[
                             `import { useCallback } from "react";`,
+                            "",
                             `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
                             "",
                             `const handleBlur = useCallback(() => { /* ... */ }, []);`,

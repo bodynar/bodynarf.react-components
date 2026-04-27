@@ -76,6 +76,7 @@ const KeyboardElementDemo: FC = () => {
                     <CodeExample
                         code={[
                             `import { KeyboardEventHandler } from "react";`,
+                            "",
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `const handleKeyDown: KeyboardEventHandler = (event) => {`,
@@ -105,6 +106,7 @@ const KeyboardElementDemo: FC = () => {
                     <CodeExample
                         code={[
                             `import { KeyboardEventHandler } from "react";`,
+                            "",
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `const handleKeyUp: KeyboardEventHandler = (event) => {`,
@@ -133,6 +135,7 @@ const KeyboardElementDemo: FC = () => {
                     <CodeExample
                         code={[
                             `import { KeyboardEventHandler } from "react";`,
+                            "",
                             `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `const handleKeyDown: KeyboardEventHandler = (event) => {`,

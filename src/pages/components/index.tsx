@@ -42,6 +42,7 @@ import Timeline from "./timeline";
 import Toast from "./toast";
 import Tooltip from "./tooltip";
 import Breadcrumbs from "./breadcrumbs";
+import ComplexTable from "./complexTable";
 import TreeView from "./treeView";
 
 const components: MenuItem = {
@@ -304,6 +305,12 @@ const components: MenuItem = {
             path: "/components/treeView",
             caption: "Tree View",
             component: <TreeView />,
+            createVersion: "1.15",
+        },
+        {
+            path: "/components/complexTable",
+            caption: "Complex Table",
+            component: <ComplexTable />,
             createVersion: "1.15",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))

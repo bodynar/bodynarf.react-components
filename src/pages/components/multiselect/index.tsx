@@ -57,6 +57,8 @@ const Multiselect: FC = () => {
                 code={
                     <CodeExample
                         code={[
+                            `import { useCallback } from "react"`,
+                            "",
                             `import { emptyFn } from "@bodynarf/utils";`,
                             `import { MultiselectItem } from "@bodynarf/react.components";`,
                             `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,

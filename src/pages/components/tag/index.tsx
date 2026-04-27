@@ -217,6 +217,7 @@ const Tag: FC = () => {
                     <CodeExample
                         code={[
                             `import { useCallback } from "react";`,
+                            "",
                             `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
                             "const handleClick = useCallback(() => {",
@@ -246,6 +247,7 @@ const Tag: FC = () => {
                     <CodeExample
                         code={[
                             `import { useCallback } from "react";`,
+                            "",
                             `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
                             "const handleRemove = useCallback(() => {",

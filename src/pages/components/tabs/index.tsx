@@ -20,6 +20,13 @@ const tabs: Array<TabItem> = [
     { caption: `Tab Cinco`, id: "Cinco", },
 ];
 
+const tabsWithIcons: Array<TabItem> = [
+    { caption: "Home", id: "home", icon: { name: "house" } },
+    { caption: "Profile", id: "profile", icon: { name: "person" } },
+    { caption: "Settings", id: "settings", icon: { name: "gear" } },
+    { caption: "Help", id: "help", icon: { name: "question-circle" } },
+];
+
 const tabsStyles: Array<keyof typeof TabsStyle> = [
     "default",
     "boxed",
@@ -65,7 +72,6 @@ const Tabs: FC = () => {
                             `import { TabItem } from "@bodynarf/react.components";`,
                             `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -73,7 +79,7 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            
+                            "",
                             '<TabsComponent',
                             '    items={tabs}',
                             '    onActiveItemChange={emptyFn} // TODO: Replace with your own handler function',
@@ -99,7 +105,6 @@ const Tabs: FC = () => {
                             `import { TabItem } from "@bodynarf/react.components";`,
                             `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -107,7 +112,7 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            
+                            "",
                             '<TabsComponent',
                             '    items={tabs}',
                             '    defaultActive={tabs[3]}',
@@ -135,7 +140,6 @@ const Tabs: FC = () => {
                             `import { ElementSize, TabItem } from "@bodynarf/react.components";`,
                             `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -143,7 +147,7 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            
+                            "",
                             '<TabsComponent',
                             '    items={tabs}',
                             `    size={ElementSize.${id}}`,
@@ -173,7 +177,6 @@ const Tabs: FC = () => {
                             `import { ElementPosition, TabItem } from "@bodynarf/react.components";`,
                             `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -181,7 +184,7 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            
+                            "",
                             '<TabsComponent',
                             '    items={tabs}',
                             '    onActiveItemChange={emptyFn} // TODO: Replace with your own handler function',
@@ -213,7 +216,6 @@ const Tabs: FC = () => {
                             `import { TabItem, TabsStyle } from "@bodynarf/react.components";`,
                             `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -221,7 +223,7 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            
+                            "",
                             '<TabsComponent',
                             '    items={tabs}',
                             '    onActiveItemChange={emptyFn} // TODO: Replace with your own handler function',
@@ -251,7 +253,6 @@ const Tabs: FC = () => {
                             `import { TabItem } from "@bodynarf/react.components";`,
                             `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -259,7 +260,7 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            
+                            "",
                             '<TabsComponent',
                             '    fullWidth',
                             '    items={tabs}',
@@ -288,7 +289,6 @@ const Tabs: FC = () => {
                             `import { TabItem } from "@bodynarf/react.components";`,
                             `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -296,9 +296,9 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
+                            "",
                             "const ON_ACTIVE_ITEM_CHANGE_HANDLE_FN = useCallback((item: TabItem) => { /* handler fn */}, []);",
-                            
+                            "",
                             '<TabsComponent',
                             '    items={tabs}',
                             '    onActiveItemChange={ON_ACTIVE_ITEM_CHANGE_HANDLE_FN}',
@@ -314,6 +314,41 @@ const Tabs: FC = () => {
                 <p style={{ whiteSpace: "pre-line" }}>
                     {activeItemChangeLog}
                 </p>
+            </ComponentUseCase>
+
+            <hr />
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">TabItem props</h4></div>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="icon"
+                description="Optional icon displayed next to the tab caption. Accepts an ElementIcon object with a Bootstrap Icons name (without the bi- prefix)."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import { TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
+                            "",
+                            'const tabs: Array<TabItem> = [',
+                            '    { caption: "Home",     id: "home",     icon: { name: "house" } },',
+                            '    { caption: "Profile",  id: "profile",  icon: { name: "person" } },',
+                            '    { caption: "Settings", id: "settings", icon: { name: "gear" } },',
+                            '    { caption: "Help",     id: "help",     icon: { name: "question-circle" } },',
+                            "];",
+                            "",
+                            '<TabsComponent',
+                            '    items={tabs}',
+                            '    onActiveItemChange={emptyFn}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TabsComponent
+                    items={tabsWithIcons}
+                    onActiveItemChange={emptyFn}
+                />
             </ComponentUseCase>
         </section>
     );

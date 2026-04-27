@@ -114,8 +114,6 @@ const Home: FC = () => {
                         `import { ButtonStyle } from "@bodynarf/react.components";`,
                         `import ButtonComponent from "@bodynarf/react.components/components/button";`,
                         "",
-                        "/* ... */",
-                        "",
                         `<ButtonComponent style={ButtonStyle.Primary} caption="Button caption" />`
                     ].join("\n")}
                 />

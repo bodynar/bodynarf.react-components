@@ -286,6 +286,7 @@ const ComplexTablePage: FC = () => {
                     <CodeExample
                         code={[
                             `import { JSX } from "react";`,
+                            "",
                             `import { ComplexTableItemProps, Icon } from "@bodynarf/react.components";`,
                             "",
                             "// Define outside the page component to keep the reference stable",
