@@ -1,6 +1,8 @@
 import { FC, useCallback, useRef, useState } from "react";
 
-import { Button, ButtonStyle, ElementSize, ModalWrapper as ModalWrapperComponent } from "@bodynarf/react.components";
+import Button from "@bodynarf/react.components/components/button";
+import ModalWrapperComponent from "@bodynarf/react.components/components/modal";
+import { ButtonStyle, ElementSize } from "@bodynarf/react.components";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
@@ -38,9 +40,8 @@ const ModalWrapper: FC = () => {
                         code={[
                             `import { useState, useCallback } from "react";`,
                             "",
-                            `import { ModalWrapper, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `const [isOpen, setIsOpen] = useState(false);`,
                             `const handleClose = useCallback(() => setIsOpen(false), []);`,
@@ -82,9 +83,8 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper`,
@@ -122,9 +122,8 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper`,
@@ -183,9 +182,8 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper, ElementSize, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ElementSize, ButtonStyle } from "@bodynarf/react.components";`,
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper`,
@@ -233,9 +231,8 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper`,
@@ -275,9 +272,8 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper`,
@@ -317,9 +313,8 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper`,
@@ -359,9 +354,8 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper`,
@@ -401,9 +395,8 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper`,
@@ -443,9 +436,8 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper`,
@@ -487,9 +479,8 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper`,
@@ -532,9 +523,10 @@ const ModalWrapper: FC = () => {
                     <CodeExample
                         code={[
                             `import { useCallback } from "react";`,
-                            `import { ModalWrapper, ButtonStyle } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
+                            "",
                             `const handleClose = useCallback(() => {`,
                             `    // called on × button, Escape key, or background click`,
                             `    setIsOpen(false);`,
@@ -585,9 +577,8 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper`,
@@ -646,9 +637,7 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper onCloseClick={handleClose}>`,
@@ -693,9 +682,7 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper onCloseClick={handleClose}>`,
@@ -728,9 +715,7 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper onCloseClick={handleClose}>`,
@@ -769,9 +754,7 @@ const ModalWrapper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ModalWrapper } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import ModalWrapper from "@bodynarf/react.components/components/modal";`,
                             "",
                             `{isOpen ? (`,
                             `    <ModalWrapper onCloseClick={handleClose}>`,

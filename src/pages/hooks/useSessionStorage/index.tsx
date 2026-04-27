@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { useSessionStorage } from "@bodynarf/react.components";
+import { useSessionStorage } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -93,7 +93,7 @@ const UseSessionStorage: FC = () => {
                             />
                         </div>
                     </div>
-                    <p className="has-text-grey is-size-7">Value: "{name}"</p>
+                    <p className="has-text-grey is-size-7">Value: &quot;{name}&quot;</p>
                 </div>
             </ComponentUseCase>
         </section>

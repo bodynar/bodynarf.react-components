@@ -1,6 +1,7 @@
 import { FC, useRef } from "react";
 
-import { Icon, Multiline as MultilineComponent } from "@bodynarf/react.components";
+import Icon from "@bodynarf/react.components/components/icon";
+import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -30,7 +31,7 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             "<Multiline />",
                         ].join("\n")}
@@ -50,7 +51,7 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
                             `    fixed`,
@@ -73,7 +74,7 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
                             `    rows={10}`,
@@ -96,7 +97,7 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
                             `    label={{ caption: "Multiline demo", horizontal: false }}`,
@@ -115,11 +116,11 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
-                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             "    defaultValue={`first line \\nsecond line\\n\\tfin`}",
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -138,7 +139,7 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
                             `    placeholder="Enter your text here..."`,
@@ -161,7 +162,7 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
                             `    disabled`,
@@ -184,7 +185,7 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
                             `    readonly`,
@@ -207,7 +208,8 @@ const Multiline: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Multiline, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
                             `    size={ElementSize.${id}}`,
@@ -231,7 +233,7 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
                             `    loading`,
@@ -254,7 +256,8 @@ const Multiline: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Multiline, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
                             `    style={ElementColor.${id}}`,
@@ -278,7 +281,7 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
                             `    name="symptoms"`,
@@ -309,7 +312,7 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
                             `    autoFocus`,
@@ -332,11 +335,11 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
-                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             `    onValueChange={value => console.log("value:", value)}`,
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -356,11 +359,11 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
-                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             `    onBlur={() => console.log("blurred")}`,
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -380,11 +383,11 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
-                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             `    onKeyDown={e => console.log("keyDown:", e.key)}`,
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -404,11 +407,11 @@ const Multiline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Multiline } from "@bodynarf/react.components";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
                             `<Multiline`,
-                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             `    onKeyUp={e => console.log("keyUp:", e.key)}`,
+                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />

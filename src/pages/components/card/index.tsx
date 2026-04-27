@@ -1,6 +1,6 @@
 import { FC, useRef } from "react";
 
-import { Card as CardComponent } from "@bodynarf/react.components";
+import CardComponent from "@bodynarf/react.components/components/card";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -26,7 +26,7 @@ const Card: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Card } from "@bodynarf/react.components";`,
+                            `import Card from "@bodynarf/react.components/components/card";`,
                             "",
                             "<Card>",
                             "    <Card.Body>",
@@ -54,7 +54,7 @@ const Card: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Card } from "@bodynarf/react.components";`,
+                            `import Card from "@bodynarf/react.components/components/card";`,
                             "",
                             "<Card>",
                             "    <Card.Header>",
@@ -94,7 +94,7 @@ const Card: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Card } from "@bodynarf/react.components";`,
+                            `import Card from "@bodynarf/react.components/components/card";`,
                             "",
                             "<Card>",
                             "    <Card.Header>",
@@ -125,7 +125,7 @@ const Card: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Card } from "@bodynarf/react.components";`,
+                            `import Card from "@bodynarf/react.components/components/card";`,
                             "",
                             "<Card>",
                             "    <Card.Header onClick={() => console.log(\"header clicked\")}>",
@@ -160,7 +160,7 @@ const Card: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Card } from "@bodynarf/react.components";`,
+                            `import Card from "@bodynarf/react.components/components/card";`,
                             "",
                             "<Card>",
                             "    <Card.Body>",
@@ -188,7 +188,7 @@ const Card: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Card } from "@bodynarf/react.components";`,
+                            `import Card from "@bodynarf/react.components/components/card";`,
                             "",
                             "<Card>",
                             "    <Card.Body>",

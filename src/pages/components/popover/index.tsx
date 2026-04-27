@@ -1,6 +1,7 @@
 import { FC, useCallback, useRef, useState } from "react";
 
-import { Popover as PopoverComponent, PopoverPosition } from "@bodynarf/react.components";
+import PopoverComponent from "@bodynarf/react.components/components/popover";
+import { PopoverPosition } from "@bodynarf/react.components";
 
 import Log, { LogRef } from "@app/sharedComponents/log";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -32,9 +33,7 @@ const Popover: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Popover } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Popover from "@bodynarf/react.components/components/popover";`,
                             "",
                             "<Popover>",
                             "    <Popover.Trigger>",
@@ -71,9 +70,8 @@ const Popover: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Popover, PopoverPosition } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { PopoverPosition } from "@bodynarf/react.components";`,
+                            `import Popover from "@bodynarf/react.components/components/popover";`,
                             "",
                             "<Popover position={PopoverPosition.Top}>",
                             "    <Popover.Trigger>",
@@ -106,11 +104,16 @@ const Popover: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Popover } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import Popover from "@bodynarf/react.components/components/popover";`,
                             "",
                             "const [isVisible, setIsVisible] = useState(false);",
                             "",
-                            "<Popover visible={isVisible} onToggle={setIsVisible}>",
+                            "<Popover",
+                            "    visible={isVisible}",
+                            "    onToggle={setIsVisible}",
+                            ">",
                             "    <Popover.Trigger>",
                             "        <button className=\"button\">Controlled trigger</button>",
                             "    </Popover.Trigger>",
@@ -147,11 +150,16 @@ const Popover: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Popover } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import Popover from "@bodynarf/react.components/components/popover";`,
                             "",
                             "const [isVisible, setIsVisible] = useState(false);",
                             "",
-                            "<Popover visible={isVisible} onToggle={v => { console.log('toggled:', v); setIsVisible(v); }}>",
+                            "<Popover",
+                            "    visible={isVisible}",
+                            "    onToggle={v => { console.log('toggled:', v); setIsVisible(v); }}",
+                            ">",
                             "    <Popover.Trigger>",
                             "        <button className=\"button\">Toggle</button>",
                             "    </Popover.Trigger>",

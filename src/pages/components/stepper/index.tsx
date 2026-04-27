@@ -1,6 +1,7 @@
 import { FC, useCallback, useRef, useState } from "react";
 
-import { ElementColor, ElementSize, Stepper as StepperComponent, StepItem } from "@bodynarf/react.components";
+import StepperComponent from "@bodynarf/react.components/components/stepper";
+import { ElementColor, ElementSize, StepItem } from "@bodynarf/react.components";
 
 import Log, { LogRef } from "@app/sharedComponents/log";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -96,7 +97,8 @@ const Stepper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper, StepItem } from "@bodynarf/react.components";`,
+                            `import { StepItem } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             "/* ... */",
                             "",
@@ -135,7 +137,8 @@ const Stepper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper, StepItem } from "@bodynarf/react.components";`,
+                            `import { StepItem } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             "/* ... */",
                             "",
@@ -167,7 +170,8 @@ const Stepper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper, StepItem } from "@bodynarf/react.components";`,
+                            `import { StepItem } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             "/* ... */",
                             "",
@@ -201,7 +205,8 @@ const Stepper: FC = () => {
                         code={[
                             `import { useCallback, useState } from "react";`,
                             "",
-                            `import { Stepper, StepItem } from "@bodynarf/react.components";`,
+                            `import { StepItem } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             "/* ... */",
                             `const [currentStep, setCurrentStep] = useState("step1");`,
@@ -213,9 +218,9 @@ const Stepper: FC = () => {
                             "/* ... */",
                             "",
                             `<Stepper`,
+                            `    clickable`,
                             `    steps={steps}`,
                             `    currentStep={currentStep}`,
-                            `    clickable`,
                             `    onStepClick={handleStepClick}`,
                             `/>`,
                         ].join("\n")}
@@ -239,7 +244,9 @@ const Stepper: FC = () => {
                         code={[
                             `import { useCallback, useState } from "react";`,
                             "",
-                            `import { Button, Stepper, StepItem } from "@bodynarf/react.components";`,
+                            `import { StepItem } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             "/* ... */",
                             `const [currentStep, setCurrentStep] = useState("step1");`,
@@ -285,14 +292,14 @@ const Stepper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             "/* ... */",
                             "",
                             '<Stepper',
+                            `    vertical`,
                             `    steps={steps}`,
                             `    currentStep="step2"`,
-                            `    vertical`,
                             '/>',
                         ].join("\n")}
                     />
@@ -312,7 +319,7 @@ const Stepper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             "/* ... */",
                             "",
@@ -339,14 +346,14 @@ const Stepper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             "/* ... */",
                             "",
                             '<Stepper',
+                            `    animated`,
                             `    steps={steps}`,
                             `    currentStep="step2"`,
-                            `    animated`,
                             '/>',
                         ].join("\n")}
                     />
@@ -384,14 +391,14 @@ const Stepper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             "/* ... */",
                             "",
                             '<Stepper',
+                            `    showArrows`,
                             `    steps={steps}`,
                             `    currentStep="step2"`,
-                            `    showArrows`,
                             '/>',
                         ].join("\n")}
                     />
@@ -419,7 +426,8 @@ const Stepper: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementSize, Stepper } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             "/* ... */",
                             "",
@@ -447,7 +455,8 @@ const Stepper: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementColor, Stepper } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             "/* ... */",
                             "",

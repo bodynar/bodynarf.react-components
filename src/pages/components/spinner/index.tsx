@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 
-import { Spinner as SpinnerComponent, ElementColor } from "@bodynarf/react.components";
+import SpinnerComponent from "@bodynarf/react.components/components/spinner";
+import { ElementColor } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -35,7 +36,7 @@ const Spinner: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Spinner } from "@bodynarf/react.components";`,
+                            `import Spinner from "@bodynarf/react.components/components/spinner";`,
                             "",
                             "/* ... */",
                             "",
@@ -62,7 +63,8 @@ const Spinner: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Spinner, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Spinner from "@bodynarf/react.components/components/spinner";`,
                             "",
                             "/* ... */",
                             "",
@@ -82,7 +84,8 @@ const Spinner: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Spinner, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Spinner from "@bodynarf/react.components/components/spinner";`,
                             "",
                             "/* ... */",
                             "",
@@ -117,7 +120,7 @@ const Spinner: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Spinner } from "@bodynarf/react.components";`,
+                            `import Spinner from "@bodynarf/react.components/components/spinner";`,
                             "",
                             "/* ... */",
                             "",
@@ -151,7 +154,7 @@ const Spinner: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Spinner } from "@bodynarf/react.components";`,
+                            `import Spinner from "@bodynarf/react.components/components/spinner";`,
                             "",
                             "/* ... */",
                             "",

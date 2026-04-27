@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 
-import { Tooltip as TooltipComponent, TooltipPosition, TooltipAnimation, TooltipCloseOn } from "@bodynarf/react.components";
+import TooltipComponent from "@bodynarf/react.components/components/tooltip";
+import { TooltipPosition, TooltipAnimation, TooltipCloseOn } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -25,7 +26,7 @@ const Tooltip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Tooltip } from "@bodynarf/react.components";`,
+                            `import Tooltip from "@bodynarf/react.components/components/tooltip";`,
                             "",
                             "<Tooltip>",
                             "    <Tooltip.Target>",
@@ -56,7 +57,8 @@ const Tooltip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Tooltip, TooltipPosition } from "@bodynarf/react.components";`,
+                            `import { TooltipPosition } from "@bodynarf/react.components";`,
+                            `import Tooltip from "@bodynarf/react.components/components/tooltip";`,
                             "",
                             "<Tooltip position={TooltipPosition.Bottom}>",
                             "    <Tooltip.Target><button className=\"button\">Bottom</button></Tooltip.Target>",
@@ -90,7 +92,8 @@ const Tooltip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Tooltip, TooltipAnimation, TooltipPosition } from "@bodynarf/react.components";`,
+                            `import { TooltipAnimation, TooltipPosition } from "@bodynarf/react.components";`,
+                            `import Tooltip from "@bodynarf/react.components/components/tooltip";`,
                             "",
                             "<Tooltip animation={TooltipAnimation.Slide} position={TooltipPosition.Bottom}>",
                             "    <Tooltip.Target><button className=\"button\">Slide</button></Tooltip.Target>",
@@ -129,7 +132,8 @@ const Tooltip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Tooltip, TooltipCloseOn } from "@bodynarf/react.components";`,
+                            `import { TooltipCloseOn } from "@bodynarf/react.components";`,
+                            `import Tooltip from "@bodynarf/react.components/components/tooltip";`,
                             "",
                             "<Tooltip closeOn={TooltipCloseOn.OutsideClick}>",
                             "    <Tooltip.Target>",
@@ -164,7 +168,7 @@ const Tooltip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Tooltip } from "@bodynarf/react.components";`,
+                            `import Tooltip from "@bodynarf/react.components/components/tooltip";`,
                             "",
                             "<Tooltip openDelay={800}>",
                             "    <Tooltip.Target>",
@@ -199,7 +203,7 @@ const Tooltip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Tooltip } from "@bodynarf/react.components";`,
+                            `import Tooltip from "@bodynarf/react.components/components/tooltip";`,
                             "",
                             "<Tooltip lifetime={2000}>",
                             "    <Tooltip.Target>",
@@ -226,7 +230,10 @@ const Tooltip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Tooltip, TooltipCloseOn } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import { TooltipCloseOn } from "@bodynarf/react.components";`,
+                            `import Tooltip from "@bodynarf/react.components/components/tooltip";`,
                             "",
                             "const [isVisible, setIsVisible] = useState(false);",
                             "",

@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { useClipboard } from "@bodynarf/react.components";
+import { useClipboard } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -10,7 +10,7 @@ const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.demo";
 
 /** useClipboard hook demo */
 const UseClipboard: FC = () => {
-    const { copy, copied, reset } = useClipboard();
+    const { copy, copied } = useClipboard();
     const { copy: copyCustom, copied: copiedCustom } = useClipboard(5000);
 
     return (

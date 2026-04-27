@@ -1,6 +1,7 @@
 import { FC, useRef } from "react";
 
-import { Avatar as AvatarComponent, AvatarShape, AvatarStatus } from "@bodynarf/react.components";
+import AvatarComponent from "@bodynarf/react.components/components/avatar";
+import { AvatarShape, AvatarStatus } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -27,7 +28,7 @@ const Avatar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Avatar } from "@bodynarf/react.components";`,
+                            `import Avatar from "@bodynarf/react.components/components/avatar";`,
                             "",
                             `<Avatar src="https://i.pravatar.cc/80" alt="User" />`,
                         ].join("\n")}
@@ -49,7 +50,7 @@ const Avatar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Avatar } from "@bodynarf/react.components";`,
+                            `import Avatar from "@bodynarf/react.components/components/avatar";`,
                             "",
                             `<Avatar src="https://i.pravatar.cc/80" alt="User" />`,
                         ].join("\n")}
@@ -66,7 +67,7 @@ const Avatar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Avatar } from "@bodynarf/react.components";`,
+                            `import Avatar from "@bodynarf/react.components/components/avatar";`,
                             "",
                             `<Avatar src="https://i.pravatar.cc/80" alt="Jane Doe" />`,
                         ].join("\n")}
@@ -83,7 +84,7 @@ const Avatar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Avatar } from "@bodynarf/react.components";`,
+                            `import Avatar from "@bodynarf/react.components/components/avatar";`,
                             "",
                             `<Avatar initials="JD" color="#4a90e2" />`,
                         ].join("\n")}
@@ -100,7 +101,7 @@ const Avatar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Avatar } from "@bodynarf/react.components";`,
+                            `import Avatar from "@bodynarf/react.components/components/avatar";`,
                             "",
                             `<Avatar icon="person-fill" color="#888" />`,
                         ].join("\n")}
@@ -117,7 +118,7 @@ const Avatar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Avatar } from "@bodynarf/react.components";`,
+                            `import Avatar from "@bodynarf/react.components/components/avatar";`,
                             "",
                             `<Avatar initials="AB" color="#e74c3c" />`,
                             `<Avatar initials="CD" color="#2ecc71" />`,
@@ -140,7 +141,8 @@ const Avatar: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Avatar, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Avatar from "@bodynarf/react.components/components/avatar";`,
                             "",
                             `<Avatar initials="AB" color="#3273dc" size={ElementSize.${id}} />`,
                         ].join("\n")}
@@ -158,7 +160,8 @@ const Avatar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Avatar, AvatarShape } from "@bodynarf/react.components";`,
+                            `import { AvatarShape } from "@bodynarf/react.components";`,
+                            `import Avatar from "@bodynarf/react.components/components/avatar";`,
                             "",
                             `<Avatar initials="CI" color="#3273dc" shape={AvatarShape.Circle} />`,
                             `<Avatar initials="SQ" color="#23d160" shape={AvatarShape.Square} />`,
@@ -190,7 +193,8 @@ const Avatar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Avatar, AvatarStatus } from "@bodynarf/react.components";`,
+                            `import { AvatarStatus } from "@bodynarf/react.components";`,
+                            `import Avatar from "@bodynarf/react.components/components/avatar";`,
                             "",
                             `<Avatar initials="ON" color="#23d160" status={AvatarStatus.Online} />`,
                             `<Avatar initials="AW" color="#ffdd57" status={AvatarStatus.Away} />`,
@@ -222,7 +226,7 @@ const Avatar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Avatar } from "@bodynarf/react.components";`,
+                            `import Avatar from "@bodynarf/react.components/components/avatar";`,
                             "",
                             `<Avatar`,
                             `    initials="JD"`,

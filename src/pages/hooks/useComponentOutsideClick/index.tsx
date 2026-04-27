@@ -1,6 +1,6 @@
 import { FC, useRef, useState } from "react";
 
-import { useComponentOutsideClick } from "@bodynarf/react.components";
+import { useComponentOutsideClick } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -34,6 +34,8 @@ const UseComponentOutsideClickPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
+                            `import { useState } from "react";`,
+                            "",
                             `import { useComponentOutsideClick } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",

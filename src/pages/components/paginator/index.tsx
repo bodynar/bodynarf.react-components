@@ -1,6 +1,7 @@
 import { FC, useCallback, useRef, useState } from "react";
 
-import { ElementPosition, Paginator as PaginatorComponent, ButtonStyle } from "@bodynarf/react.components";
+import PaginatorComponent from "@bodynarf/react.components/components/paginator";
+import { ElementPosition, ButtonStyle } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -36,9 +37,7 @@ const Paginator: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Paginator } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Paginator from "@bodynarf/react.components/components/paginator";`,
                             "",
                             '<Paginator',
                             '    count={10}',
@@ -69,9 +68,7 @@ const Paginator: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Paginator } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Paginator from "@bodynarf/react.components/components/paginator";`,
                             "",
                             '<Paginator',
                             '    count={10}',
@@ -96,9 +93,8 @@ const Paginator: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Paginator, ElementPosition } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ElementPosition } from "@bodynarf/react.components";`,
+                            `import Paginator from "@bodynarf/react.components/components/paginator";`,
                             "",
                             '<Paginator',
                             '    count={10}',
@@ -127,9 +123,7 @@ const Paginator: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Paginator } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Paginator from "@bodynarf/react.components/components/paginator";`,
                             "",
                             '<Paginator',
                             '    rounded',
@@ -156,9 +150,8 @@ const Paginator: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Paginator, ElementSize } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Paginator from "@bodynarf/react.components/components/paginator";`,
                             "",
                             '<Paginator',
                             '    count={10}',
@@ -187,9 +180,7 @@ const Paginator: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Paginator } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Paginator from "@bodynarf/react.components/components/paginator";`,
                             "",
                             '<Paginator',
                             '    count={10}',
@@ -216,9 +207,7 @@ const Paginator: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Paginator } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Paginator from "@bodynarf/react.components/components/paginator";`,
                             "",
                             '<Paginator',
                             '    count={10}',
@@ -245,9 +234,8 @@ const Paginator: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Paginator, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import Paginator from "@bodynarf/react.components/components/paginator";`,
                             "",
                             '<Paginator',
                             '    count={10}',
@@ -296,9 +284,8 @@ const Paginator: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Paginator, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import Paginator from "@bodynarf/react.components/components/paginator";`,
                             "",
                             '<Paginator',
                             '    count={10}',
@@ -331,9 +318,7 @@ const Paginator: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Paginator } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Paginator from "@bodynarf/react.components/components/paginator";`,
                             "",
                             '<Paginator',
                             '    count={10}',
@@ -375,11 +360,10 @@ const Paginator: FC = () => {
                     <CodeExample
                         code={[
                             `import { useCallback } from "react";`,
-                            `import { Paginator } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
+                            `import Paginator from "@bodynarf/react.components/components/paginator";`,
+                            "",
                             "const handlePageChange = useCallback((page: number) => { /* handler fn */ }, []);",
-                            "/* ... */",
                             "",
                             '<Paginator',
                             '    count={10}',

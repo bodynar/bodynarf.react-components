@@ -111,13 +111,13 @@ const Home: FC = () => {
                 </span>
                 <CodeExample
                     code={[
-                        `import ButtonComponent, { ButtonStyle } from "@bodynarf/react.components/components/button";`,
+                        `import { ButtonStyle } from "@bodynarf/react.components";`,
+                        `import ButtonComponent from "@bodynarf/react.components/components/button";`,
                         "",
                         "/* ... */",
                         "",
                         `<ButtonComponent style={ButtonStyle.Primary} caption="Button caption" />`
                     ].join("\n")}
-                    language="tsx"
                 />
                 <span>
                     A detailed description of each component can be found on its documentation page.

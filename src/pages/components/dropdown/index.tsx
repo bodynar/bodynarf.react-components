@@ -1,7 +1,8 @@
 import { FC, useCallback, useRef, useState } from "react";
 
 import { Optional } from "@bodynarf/utils";
-import { Dropdown as DropdownComponent, SelectableItem, ValidationStatus } from "@bodynarf/react.components";
+import DropdownComponent from "@bodynarf/react.components/components/dropdown";
+import { SelectableItem } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -42,8 +43,10 @@ const Dropdown: FC = () => {
                     <CodeExample
                         code={[
                             `import { useState } from "react";`,
+                            "",
                             `import { Optional } from "@bodynarf/utils";`,
-                            `import { Dropdown, SelectableItem } from "@bodynarf/react.components";`,
+                            `import { SelectableItem } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             "const [item, setItem] = useState<Optional<SelectableItem>>();",
                             "",
@@ -75,7 +78,8 @@ const Dropdown: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Dropdown, SelectableItem } from "@bodynarf/react.components";`,
+                            `import { SelectableItem } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             `const items: Array<SelectableItem> = [`,
                             `    { id: "1", value: "tokyo", displayValue: "Tokyo", title: "City: Tokyo" },`,
@@ -108,8 +112,10 @@ const Dropdown: FC = () => {
                     <CodeExample
                         code={[
                             `import { useState } from "react";`,
+                            "",
                             `import { Optional } from "@bodynarf/utils";`,
-                            `import { Dropdown, SelectableItem } from "@bodynarf/react.components";`,
+                            `import { SelectableItem } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             "const [item, setItem] = useState<Optional<SelectableItem>>();",
                             "",
@@ -139,7 +145,9 @@ const Dropdown: FC = () => {
                     <CodeExample
                         code={[
                             `import { useCallback } from "react";`,
-                            `import { Dropdown, SelectableItem } from "@bodynarf/react.components";`,
+                            "",
+                            `import { SelectableItem } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             "const handleSelect = useCallback((selected?: SelectableItem) => {",
                             "    console.log(selected?.displayValue ?? \"deselected\");",
@@ -171,7 +179,7 @@ const Dropdown: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Dropdown } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             `<Dropdown`,
                             `    items={cities}`,
@@ -199,7 +207,7 @@ const Dropdown: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Dropdown } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             `<Dropdown`,
                             `    value={item}`,
@@ -227,7 +235,7 @@ const Dropdown: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Dropdown } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             `<Dropdown`,
                             `    deselectable`,
@@ -256,7 +264,7 @@ const Dropdown: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Dropdown } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             `<Dropdown`,
                             `    value={item}`,
@@ -285,7 +293,7 @@ const Dropdown: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Dropdown } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             `<Dropdown`,
                             `    compact`,
@@ -314,7 +322,7 @@ const Dropdown: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Dropdown } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             `<Dropdown`,
                             `    disabled`,
@@ -343,7 +351,7 @@ const Dropdown: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Dropdown } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             `<Dropdown`,
                             `    value={item}`,
@@ -367,76 +375,12 @@ const Dropdown: FC = () => {
 
             <ComponentUseCase
                 captionIsCode
-                caption="validationState"
-                description="Current validation state. Displays a validation message below the component."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { Dropdown, ValidationStatus } from "@bodynarf/react.components";`,
-                            "",
-                            `<Dropdown`,
-                            `    value={undefined}`,
-                            `    items={cities}`,
-                            `    onSelect={setItem}`,
-                            `    validationState={{`,
-                            `        status: ValidationStatus.Invalid,`,
-                            `        messages: ["Please select a city"],`,
-                            `    }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <DropdownComponent
-                    value={undefined}
-                    items={cities}
-                    onSelect={setItem}
-                    hideOnOuterClick
-                    placeholder="Select a city"
-                    validationState={{
-                        status: ValidationStatus.Invalid,
-                        messages: ["Please select a city"],
-                    }}
-                />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="hint"
-                description="Additional hint text shown below the component to help the user. Overridden by validationState when both are set."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { Dropdown } from "@bodynarf/react.components";`,
-                            "",
-                            `<Dropdown`,
-                            `    value={item}`,
-                            `    items={cities}`,
-                            `    onSelect={setItem}`,
-                            `    hint={{ content: "Choose your city of residence" }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <DropdownComponent
-                    value={item}
-                    items={cities}
-                    onSelect={setItem}
-                    hideOnOuterClick
-                    placeholder="Select a city"
-                    hint={{ content: "Choose your city of residence" }}
-                />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
                 caption="noDataText"
                 description="Text shown inside the dropdown list when items is an empty array."
                 code={
                     <CodeExample
                         code={[
-                            `import { Dropdown } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             `<Dropdown`,
                             `    items={[]}`,
@@ -465,7 +409,7 @@ const Dropdown: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Dropdown } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             `<Dropdown`,
                             `    searchable`,
@@ -494,7 +438,7 @@ const Dropdown: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Dropdown } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             `<Dropdown`,
                             `    searchable`,
@@ -530,7 +474,8 @@ const Dropdown: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Dropdown, SelectableItem } from "@bodynarf/react.components";`,
+                            `import { SelectableItem } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             `const items: Array<SelectableItem> = [`,
                             `    { id: "1", value: "a", displayValue: "Item A", title: "Hover tooltip for A" },`,
@@ -558,7 +503,8 @@ const Dropdown: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Dropdown, SelectableItem } from "@bodynarf/react.components";`,
+                            `import { SelectableItem } from "@bodynarf/react.components";`,
+                            `import Dropdown from "@bodynarf/react.components/components/dropdown";`,
                             "",
                             `const items: Array<SelectableItem> = [`,
                             `    { id: "1", value: "a", displayValue: "Item A", icon: { name: "star" } },`,

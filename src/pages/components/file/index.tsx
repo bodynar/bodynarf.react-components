@@ -1,7 +1,8 @@
 import { FC, useCallback, useRef } from "react";
 
-import { emptyFn } from "@bodynarf/utils";
-import { ElementPosition, File as FileComponent, Icon } from "@bodynarf/react.components";
+import FileComponent from "@bodynarf/react.components/components/file";
+import Icon from "@bodynarf/react.components/components/icon";
+import { ElementPosition } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -37,11 +38,9 @@ const File: FC = () => {
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn}',
+                            '    onValueChange={() => {}}',
                             '/>',
                         ].join("\n")}
                     />
@@ -49,7 +48,7 @@ const File: FC = () => {
             >
                 <FileComponent
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                 />
             </ComponentUseCase>
 
@@ -67,11 +66,9 @@ const File: FC = () => {
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
+                            '    onValueChange={() => {}}',
                             '    placeholder="Choose a file..."',
-                            '    onValueChange={emptyFn}',
                             '/>',
                         ].join("\n")}
                     />
@@ -79,7 +76,7 @@ const File: FC = () => {
             >
                 <FileComponent
                     placeholder="Choose a file..."
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                 />
             </ComponentUseCase>
 
@@ -92,12 +89,10 @@ const File: FC = () => {
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    disabled',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn}',
+                            '    onValueChange={() => {}}',
                             '/>',
                         ].join("\n")}
                     />
@@ -106,7 +101,7 @@ const File: FC = () => {
                 <FileComponent
                     disabled
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                 />
             </ComponentUseCase>
 
@@ -120,12 +115,10 @@ const File: FC = () => {
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
-                            `    size={ElementSize.${size}}`,
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn}',
+                            '    onValueChange={() => {}}',
+                            `    size={ElementSize.${size}}`,
                             '/>',
                         ].join("\n")}
                     />
@@ -135,7 +128,7 @@ const File: FC = () => {
                         <FileComponent
                             size={size}
                             placeholder="File"
-                            onValueChange={emptyFn}
+                            onValueChange={() => {}}
                         />
                 }
             />
@@ -150,12 +143,10 @@ const File: FC = () => {
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
-                            `    style={ElementColor.${id}}`,
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn}',
+                            '    onValueChange={() => {}}',
+                            `    style={ElementColor.${id}}`,
                             '/>',
                         ].join("\n")}
                     />
@@ -165,7 +156,7 @@ const File: FC = () => {
                         <FileComponent
                             style={style}
                             placeholder="File"
-                            onValueChange={emptyFn}
+                            onValueChange={() => {}}
                         />
                 }
             />
@@ -179,12 +170,10 @@ const File: FC = () => {
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    name="docFile"',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn}',
+                            '    onValueChange={() => {}}',
                             '/>',
                         ].join("\n")}
                     />
@@ -193,7 +182,7 @@ const File: FC = () => {
                 <FileComponent
                     name="docFile"
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                 />
             </ComponentUseCase>
 
@@ -206,11 +195,9 @@ const File: FC = () => {
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn}',
+                            '    onValueChange={() => {}}',
                             '    accept="image/png, image/jpeg"',
                             '/>',
                         ].join("\n")}
@@ -219,7 +206,7 @@ const File: FC = () => {
             >
                 <FileComponent
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                     accept="image/png, image/jpeg"
                 />
             </ComponentUseCase>
@@ -251,11 +238,9 @@ const File: FC = () => {
                             `import { ElementPosition } from "@bodynarf/react.components";`,
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn}',
+                            '    onValueChange={() => {}}',
                             `    alignment={ElementPosition.Right}`,
                             '/>',
                         ].join("\n")}
@@ -265,7 +250,7 @@ const File: FC = () => {
                 <FileComponent
                     alignment={ElementPosition.Right}
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                 />
             </ComponentUseCase>
 
@@ -278,12 +263,10 @@ const File: FC = () => {
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn}',
                             '    displayFileName={false}',
+                            '    onValueChange={() => {}}',
                             '/>',
                         ].join("\n")}
                     />
@@ -291,7 +274,7 @@ const File: FC = () => {
             >
                 <FileComponent
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                     displayFileName={false}
                 />
             </ComponentUseCase>
@@ -315,12 +298,10 @@ const File: FC = () => {
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    boxed',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn}',
+                            '    onValueChange={() => {}}',
                             '/>',
                         ].join("\n")}
                     />
@@ -329,7 +310,7 @@ const File: FC = () => {
                 <FileComponent
                     boxed
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                 />
             </ComponentUseCase>
 
@@ -342,11 +323,9 @@ const File: FC = () => {
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn}',
+                            '    onValueChange={() => {}}',
                             '    clearSelectionTitle="Remove file"',
                             '/>',
                         ].join("\n")}
@@ -355,7 +334,7 @@ const File: FC = () => {
             >
                 <FileComponent
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                     clearSelectionTitle="Remove file"
                 />
             </ComponentUseCase>
@@ -368,9 +347,8 @@ const File: FC = () => {
                     <CodeExample
                         code={[
                             `import { useCallback } from "react";`,
-                            `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
+                            `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
                             "const handleValueChange = useCallback((value?: File) => {",
                             "    console.log(value);",

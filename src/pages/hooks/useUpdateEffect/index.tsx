@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { useUpdateEffect } from "@bodynarf/react.components";
+import { useUpdateEffect } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";

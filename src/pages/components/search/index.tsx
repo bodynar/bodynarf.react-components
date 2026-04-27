@@ -1,7 +1,9 @@
 import { FC, useCallback, useRef } from "react";
 
 import { emptyFn, isNullOrEmpty } from "@bodynarf/utils";
-import { SelectableItem, Icon, Search as SearchComponent } from "@bodynarf/react.components";
+import Icon from "@bodynarf/react.components/components/icon";
+import SearchComponent from "@bodynarf/react.components/components/search";
+import { SelectableItem } from "@bodynarf/react.components";
 
 import Log, { LogRef } from "@app/sharedComponents/log";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";

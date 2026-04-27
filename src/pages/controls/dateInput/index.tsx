@@ -1,6 +1,6 @@
 import { FC, useCallback, useRef, useState } from "react";
 
-import { DateInput as DateInputComponent } from "@bodynarf/react.components";
+import DateInputComponent from "@bodynarf/react.components/components/primitives/dateInput";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -41,11 +41,16 @@ const DateInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateInput } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
                             "",
                             `const [value, setValue] = useState<Date | undefined>(undefined);`,
                             "",
-                            `<DateInput defaultValue={value} onValueChange={setValue} />`,
+                            `<DateInput`,
+                            `    defaultValue={value}`,
+                            `    onValueChange={setValue}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -68,10 +73,17 @@ const DateInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateInput } from "@bodynarf/react.components";`,
+                            `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
                             "",
-                            `<DateInput format="MM/dd/yyyy" onValueChange={() => {}} />`,
-                            `<DateInput format="yyyy-MM-dd" onValueChange={() => {}} />`,
+                            `<DateInput`,
+                            `    format="MM/dd/yyyy"`,
+                            `    onValueChange={() => {}}`,
+                            `/>`,
+                            ``,
+                            `<DateInput`,
+                            `    format="yyyy-MM-dd"`,
+                            `    onValueChange={() => {}}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -80,16 +92,16 @@ const DateInput: FC = () => {
                     <div>
                         <p className="has-text-grey is-size-7 mb-1">MM/dd/yyyy</p>
                         <DateInputComponent
-                            defaultValue={formatValue}
                             format="MM/dd/yyyy"
+                            defaultValue={formatValue}
                             onValueChange={setFormatValue}
                         />
                     </div>
                     <div>
                         <p className="has-text-grey is-size-7 mb-1">yyyy-MM-dd</p>
                         <DateInputComponent
-                            defaultValue={formatValue}
                             format="yyyy-MM-dd"
+                            defaultValue={formatValue}
                             onValueChange={setFormatValue}
                         />
                     </div>
@@ -99,14 +111,21 @@ const DateInput: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="locale"
-                description="BCP 47 locale tag used to localise month names and weekday labels in the calendar popover."
+                description="BCP 47 locale tag used to localize month names and weekday labels in the calendar popover."
                 code={
                     <CodeExample
                         code={[
-                            `import { DateInput } from "@bodynarf/react.components";`,
+                            `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
                             "",
-                            `<DateInput locale="ru-RU" onValueChange={() => {}} />`,
-                            `<DateInput locale="de-DE" onValueChange={() => {}} />`,
+                            `<DateInput`,
+                            `    locale="ru-RU"`,
+                            `    onValueChange={() => {}}`,
+                            `/>`,
+                            ``,
+                            `<DateInput`,
+                            `    locale="de-DE"`,
+                            `    onValueChange={() => {}}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -120,8 +139,8 @@ const DateInput: FC = () => {
                             ru-RU
                         </p>
                         <DateInputComponent
-                            defaultValue={localeValue}
                             locale="ru-RU"
+                            defaultValue={localeValue}
                             onValueChange={setLocaleValue}
                         />
                     </div>
@@ -130,8 +149,8 @@ const DateInput: FC = () => {
                             de-DE
                         </p>
                         <DateInputComponent
-                            defaultValue={localeValue}
                             locale="de-DE"
+                            defaultValue={localeValue}
                             onValueChange={setLocaleValue}
                         />
                     </div>
@@ -145,16 +164,16 @@ const DateInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateInput } from "@bodynarf/react.components";`,
+                            `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
                             "",
                             `const today = new Date();`,
                             `const minDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);`,
                             `const maxDate = new Date(today.getFullYear(), today.getMonth() + 2, 0);`,
                             "",
                             `<DateInput`,
-                            `    defaultValue={value}`,
                             `    minDate={minDate}`,
                             `    maxDate={maxDate}`,
+                            `    defaultValue={value}`,
                             `    onValueChange={() => {}}`,
                             `/>`,
                         ].join("\n")}
@@ -163,9 +182,9 @@ const DateInput: FC = () => {
             >
                 <div>
                     <DateInputComponent
-                        defaultValue={minMaxValue}
                         minDate={minDate}
                         maxDate={maxDate}
+                        defaultValue={minMaxValue}
                         onValueChange={setMinMaxValue}
                     />
                     <p className="mt-1 has-text-grey">
@@ -182,13 +201,14 @@ const DateInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateInput } from "@bodynarf/react.components";`,
+                            `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
                             "",
                             `<DateInput`,
                             `    defaultValue={value}`,
                             `    onValueChange={() => {}}`,
                             `    label={{ caption: "Date of birth", horizontal: false }}`,
                             `/>`,
+                            ``,
                             `<DateInput`,
                             `    defaultValue={value}`,
                             `    onValueChange={() => {}}`,
@@ -222,13 +242,13 @@ const DateInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateInput } from "@bodynarf/react.components";`,
+                            `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
                             "",
                             `<DateInput`,
                             `    defaultValue={value}`,
                             `    onValueChange={() => {}}`,
-                            `    label={{ caption: "Appointment", horizontal: true }}`,
                             `    hint={{ content: "Enter in dd.MM.yyyy format" }}`,
+                            `    label={{ caption: "Appointment", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -236,9 +256,9 @@ const DateInput: FC = () => {
             >
                 <DateInputComponent
                     defaultValue={hintValue}
-                    label={{ caption: "Appointment", horizontal: true }}
-                    hint={{ content: "Enter in dd.MM.yyyy format" }}
                     onValueChange={setHintValue}
+                    hint={{ content: "Enter in dd.MM.yyyy format" }}
+                    label={{ caption: "Appointment", horizontal: true }}
                 />
             </ComponentUseCase>
 
@@ -249,16 +269,19 @@ const DateInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateInput } from "@bodynarf/react.components";`,
+                            `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
                             "",
-                            `<DateInput disabled onValueChange={() => {}} />`,
+                            `<DateInput`,
+                            `    disabled`,
+                            `    onValueChange={() => {}}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <DateInputComponent
                     disabled
-                    onValueChange={() => {}}
+                    onValueChange={() => { }}
                 />
             </ComponentUseCase>
 
@@ -269,18 +292,22 @@ const DateInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateInput } from "@bodynarf/react.components";`,
+                            `import { useCallback } from "react";`,
+                            `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
                             "",
                             `const handleBlur = useCallback(() => { /* ... */ }, []);`,
                             "",
-                            `<DateInput onBlur={handleBlur} onValueChange={() => {}} />`,
+                            `<DateInput`,
+                            `    onBlur={handleBlur}`,
+                            `    onValueChange={() => {}}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <DateInputComponent
                     onBlur={appendBlurLog}
-                    onValueChange={() => {}}
+                    onValueChange={() => { }}
                 />
                 <Log ref={blurLogRef} />
             </ComponentUseCase>
@@ -292,7 +319,7 @@ const DateInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateInput } from "@bodynarf/react.components";`,
+                            `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
                             "",
                             `<DateInput`,
                             `    defaultValue={value}`,
@@ -333,16 +360,20 @@ const DateInput: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { DateInput, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
                             "",
-                            `<DateInput size={ElementSize.${id}} onValueChange={() => {}} />`,
+                            `<DateInput`,
+                            `   size={ElementSize.${id}}`,
+                            `   onValueChange={() => {}}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
                 componentProvider={size =>
                     <DateInputComponent
                         size={size}
-                        onValueChange={() => {}}
+                        onValueChange={() => { }}
                     />
                 }
             />

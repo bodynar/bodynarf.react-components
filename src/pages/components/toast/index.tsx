@@ -1,6 +1,7 @@
 import { FC, useRef, useState } from "react";
 
-import { Toast as ToastComponent, ElementColor, ElementPosition, ElementFloatPosition } from "@bodynarf/react.components";
+import ToastComponent from "@bodynarf/react.components/components/toast";
+import { ElementColor, ElementPosition, ElementFloatPosition } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
@@ -32,7 +33,7 @@ const Toast: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Toast } from "@bodynarf/react.components";`,
+                            `import Toast from "@bodynarf/react.components/components/toast";`,
                             "",
                             "<Toast>Operation completed successfully.</Toast>",
                         ].join("\n")}
@@ -49,7 +50,8 @@ const Toast: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Toast, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Toast from "@bodynarf/react.components/components/toast";`,
                             "",
                             `<Toast color={ElementColor.${id}}>`,
                             "    Toast message.",
@@ -71,7 +73,7 @@ const Toast: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Toast } from "@bodynarf/react.components";`,
+                            `import Toast from "@bodynarf/react.components/components/toast";`,
                             "",
                             `<Toast closable={false}>`,
                             "    This toast cannot be closed by the user.",
@@ -97,7 +99,10 @@ const Toast: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Toast, ElementColor } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Toast from "@bodynarf/react.components/components/toast";`,
                             "",
                             "const [visible, setVisible] = useState(true);",
                             "",
@@ -148,10 +153,15 @@ const Toast: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Toast, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Toast from "@bodynarf/react.components/components/toast";`,
                             "",
                             "{isVisible && (",
-                            "    <Toast fixed color={ElementColor.Success} onClose={() => setIsVisible(false)}>",
+                            "    <Toast",
+                            "        fixed",
+                            "        color={ElementColor.Success}",
+                            "        onClose={() => setIsVisible(false)}",
+                            "    >",
                             "        Fixed toast",
                             "    </Toast>",
                             ")}",
@@ -190,9 +200,15 @@ const Toast: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Toast, ElementColor, ElementPosition } from "@bodynarf/react.components";`,
+                            `import { ElementColor, ElementPosition } from "@bodynarf/react.components";`,
+                            `import Toast from "@bodynarf/react.components/components/toast";`,
                             "",
-                            `<Toast fixed color={ElementColor.Info} position={ElementPosition.Left} onClose={...}>`,
+                            `<Toast`,
+                            `    fixed`,
+                            `    onClose={...}`,
+                            `    color={ElementColor.Info}`,
+                            `    position={ElementPosition.Left}`,
+                            `>`,
                             "    Left-side toast",
                             "</Toast>",
                         ].join("\n")}
@@ -245,11 +261,12 @@ const Toast: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Toast, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Toast from "@bodynarf/react.components/components/toast";`,
                             "",
                             `<Toast`,
-                            `    color={ElementColor.Info}`,
                             `    autoClose={3000}`,
+                            `    color={ElementColor.Info}`,
                             `    onClose={() => setVisible(false)}`,
                             `>`,
                             "    This toast auto-closes in 3 seconds.",

@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { useMount } from "@bodynarf/react.components";
+import { useMount } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -31,7 +31,7 @@ const UseMountPage: FC = () => {
                             "const MyComponent = () => {",
                             "    useMount(() => {",
                             "        console.log('Component mounted!');",
-                            "        initializeData();",
+                            "        initializeData(); // some initialization logic",
                             "    });",
                             "",
                             "    return <div>Content</div>;",

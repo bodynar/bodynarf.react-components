@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { ImageViewer as ImageViewerComponent } from "@bodynarf/react.components";
+import ImageViewerComponent from "@bodynarf/react.components/components/imageViewer";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -32,15 +32,17 @@ const ImageViewer: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ImageViewer } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import ImageViewer from "@bodynarf/react.components/components/imageViewer";`,
                             "",
                             "const [isOpen, setIsOpen] = useState(false);",
                             "",
                             `<button onClick={() => setIsOpen(true)}>Open</button>`,
                             `<ImageViewer`,
-                            `    images={[{ src: "/photo.jpg", alt: "Photo" }]}`,
                             `    visible={isOpen}`,
                             `    onClose={() => setIsOpen(false)}`,
+                            `    images={[{ src: "/photo.jpg", alt: "Photo" }]}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -76,9 +78,7 @@ const ImageViewer: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ImageViewer } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import ImageViewer from "@bodynarf/react.components/components/imageViewer";`,
                             "",
                             `const images = [`,
                             `    { src: "/photo1.jpg", alt: "Photo 1", caption: "First image" },`,
@@ -117,7 +117,9 @@ const ImageViewer: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ImageViewer } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import ImageViewer from "@bodynarf/react.components/components/imageViewer";`,
                             "",
                             "const [isOpen, setIsOpen] = useState(false);",
                             "",
@@ -154,7 +156,9 @@ const ImageViewer: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ImageViewer } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import ImageViewer from "@bodynarf/react.components/components/imageViewer";`,
                             "",
                             "const [isOpen, setIsOpen] = useState(false);",
                             "",
@@ -190,7 +194,9 @@ const ImageViewer: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ImageViewer } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import ImageViewer from "@bodynarf/react.components/components/imageViewer";`,
                             "",
                             "const [isOpen, setIsOpen] = useState(false);",
                             "const [startIndex, setStartIndex] = useState(0);",
@@ -247,9 +253,7 @@ const ImageViewer: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ImageViewer } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import ImageViewer from "@bodynarf/react.components/components/imageViewer";`,
                             "",
                             `<ImageViewer`,
                             `    images={[`,
@@ -285,14 +289,12 @@ const ImageViewer: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ImageViewer } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import ImageViewer from "@bodynarf/react.components/components/imageViewer";`,
                             "",
                             `<ImageViewer`,
-                            `    images={[{ src: "/photo.jpg", alt: "A scenic mountain view" }]}`,
                             `    visible={isOpen}`,
                             `    onClose={() => setIsOpen(false)}`,
+                            `    images={[{ src: "/photo.jpg", alt: "A scenic mountain view" }]}`,
                             `/>`,
                         ].join("\n")}
                     />

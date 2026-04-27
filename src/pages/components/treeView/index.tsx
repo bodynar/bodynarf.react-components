@@ -1,6 +1,7 @@
 import { FC, useRef, useState } from "react";
 
-import { TreeView as TreeViewComponent, TreeNode, ElementColor, TreeViewCheckboxConfig } from "@bodynarf/react.components";
+import TreeViewComponent from "@bodynarf/react.components/components/treeView";
+import { TreeNode, ElementColor } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
@@ -85,7 +86,8 @@ const TreeView: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TreeView, TreeNode } from "@bodynarf/react.components";`,
+                            `import { TreeNode } from "@bodynarf/react.components";`,
+                            `import TreeView from "@bodynarf/react.components/components/treeView";`,
                             "",
                             `const nodes: TreeNode[] = [`,
                             `    { id: "1", label: "Root", icon: "folder", children: [`,
@@ -108,7 +110,7 @@ const TreeView: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TreeView } from "@bodynarf/react.components";`,
+                            `import TreeView from "@bodynarf/react.components/components/treeView";`,
                             "",
                             `<TreeView`,
                             `    nodes={nodes}`,
@@ -136,7 +138,9 @@ const TreeView: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TreeView } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import TreeView from "@bodynarf/react.components/components/treeView";`,
                             "",
                             `const [selectedId, setSelectedId] = useState<string>();`,
                             "",
@@ -170,18 +174,25 @@ const TreeView: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TreeView } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import TreeView from "@bodynarf/react.components/components/treeView";`,
                             "",
                             `const [selected, setSelected] = useState<Set<string>>(new Set());`,
                             "",
                             `<TreeView`,
-                            `    nodes={nodes}`,
                             `    multiSelect`,
+                            `    nodes={nodes}`,
                             `    selectedIds={selected}`,
                             `    onSelect={(id, sel) => {`,
                             `        setSelected(prev => {`,
                             `            const next = new Set(prev);`,
-                            `            if (sel) next.add(id); else next.delete(id);`,
+                            `            if (sel) {`,
+                            `                next.add(id);`,
+                            `            } else {`,
+                            `                next.delete(id);`,
+                            `            }`,
+                            ``,
                             `            return next;`,
                             `        });`,
                             `    }}`,
@@ -216,11 +227,11 @@ const TreeView: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TreeView } from "@bodynarf/react.components";`,
+                            `import TreeView from "@bodynarf/react.components/components/treeView";`,
                             "",
                             `<TreeView`,
-                            `    nodes={nodes}`,
                             `    multiSelect`,
+                            `    nodes={nodes}`,
                             `    showCheckboxes`,
                             `/>`,
                         ].join("\n")}
@@ -247,16 +258,21 @@ const TreeView: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TreeView, ElementColor, TreeViewCheckboxConfig } from "@bodynarf/react.components";`,
+                            `import { ElementColor, TreeViewCheckboxConfig } from "@bodynarf/react.components";`,
+                            `import TreeView from "@bodynarf/react.components/components/treeView";`,
                             "",
                             `const config: TreeViewCheckboxConfig = {`,
-                            `    style: ElementColor.Success,`,
                             `    rounded: true,`,
                             `    hasBackgroundColor: true,`,
                             `    fixBackgroundColor: true,`,
+                            `    style: ElementColor.Success,`,
                             `};`,
                             "",
-                            `<TreeView nodes={nodes} multiSelect checkboxConfig={config} />`,
+                            `<TreeView`,
+                            `    multiSelect`,
+                            `    nodes={nodes}`,
+                            `    checkboxConfig={config}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -267,7 +283,7 @@ const TreeView: FC = () => {
                         <TreeViewComponent
                             nodes={sampleNodes}
                             multiSelect
-                            checkboxConfig={{} satisfies TreeViewCheckboxConfig}
+                            checkboxConfig={{}}
                         />
                     </div>
                     <div>
@@ -296,12 +312,13 @@ const TreeView: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { TreeView, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import TreeView from "@bodynarf/react.components/components/treeView";`,
                             "",
                             `<TreeView`,
                             `    nodes={nodes}`,
-                            `    selectionColor={ElementColor.${id}}`,
                             `    selectedIds={new Set(["main"])}`,
+                            `    selectionColor={ElementColor.${id}}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -322,7 +339,9 @@ const TreeView: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TreeView } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import TreeView from "@bodynarf/react.components/components/treeView";`,
                             "",
                             `const [expanded, setExpanded] = useState(new Set(["src"]));`,
                             "",
@@ -332,7 +351,12 @@ const TreeView: FC = () => {
                             `    onToggleExpand={(id, isExpanded) => {`,
                             `        setExpanded(prev => {`,
                             `            const next = new Set(prev);`,
-                            `            if (isExpanded) next.add(id); else next.delete(id);`,
+                            `            if (isExpanded) {`,
+                            `                next.add(id);`,
+                            `            } else {`,
+                            `                next.delete(id);`,
+                            `            }`,
+                            ``,
                             `            return next;`,
                             `        });`,
                             `    }}`,
@@ -366,7 +390,7 @@ const TreeView: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TreeView } from "@bodynarf/react.components";`,
+                            `import TreeView from "@bodynarf/react.components/components/treeView";`,
                             "",
                             `<TreeView`,
                             `    nodes={nodes}`,
@@ -394,7 +418,8 @@ const TreeView: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TreeView, TreeNode } from "@bodynarf/react.components";`,
+                            `import { TreeNode } from "@bodynarf/react.components";`,
+                            `import TreeView from "@bodynarf/react.components/components/treeView";`,
                             "",
                             `const nodes: TreeNode[] = [`,
                             `    {`,

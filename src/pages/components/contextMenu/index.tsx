@@ -1,6 +1,6 @@
 import { FC, useCallback, useRef } from "react";
 
-import { ContextMenu as ContextMenuComponent } from "@bodynarf/react.components";
+import ContextMenuComponent from "@bodynarf/react.components/components/contextMenu";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -30,7 +30,7 @@ const ContextMenu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ContextMenu } from "@bodynarf/react.components";`,
+                            `import ContextMenu from "@bodynarf/react.components/components/contextMenu";`,
                             "",
                             "<ContextMenu",
                             "    items={[",
@@ -70,7 +70,7 @@ const ContextMenu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ContextMenu } from "@bodynarf/react.components";`,
+                            `import ContextMenu from "@bodynarf/react.components/components/contextMenu";`,
                             "",
                             "<ContextMenu",
                             "    items={[",
@@ -104,7 +104,7 @@ const ContextMenu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ContextMenu } from "@bodynarf/react.components";`,
+                            `import ContextMenu from "@bodynarf/react.components/components/contextMenu";`,
                             "",
                             "<ContextMenu items={items}>",
                             "    <img src=\"/photo.jpg\" alt=\"Photo\" />",
@@ -135,7 +135,7 @@ const ContextMenu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ContextMenu } from "@bodynarf/react.components";`,
+                            `import ContextMenu from "@bodynarf/react.components/components/contextMenu";`,
                             "",
                             "<ContextMenu",
                             "    disabled",
@@ -172,7 +172,7 @@ const ContextMenu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ContextMenu } from "@bodynarf/react.components";`,
+                            `import ContextMenu from "@bodynarf/react.components/components/contextMenu";`,
                             "",
                             "<ContextMenu",
                             "    items={[",
@@ -207,7 +207,7 @@ const ContextMenu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ContextMenu } from "@bodynarf/react.components";`,
+                            `import ContextMenu from "@bodynarf/react.components/components/contextMenu";`,
                             "",
                             "<ContextMenu",
                             "    items={[",
@@ -242,7 +242,7 @@ const ContextMenu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ContextMenu } from "@bodynarf/react.components";`,
+                            `import ContextMenu from "@bodynarf/react.components/components/contextMenu";`,
                             "",
                             "<ContextMenu",
                             "    items={[",
@@ -276,7 +276,7 @@ const ContextMenu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ContextMenu } from "@bodynarf/react.components";`,
+                            `import ContextMenu from "@bodynarf/react.components/components/contextMenu";`,
                             "",
                             "<ContextMenu",
                             "    items={[",

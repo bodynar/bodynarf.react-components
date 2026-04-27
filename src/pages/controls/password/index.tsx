@@ -1,6 +1,7 @@
 import { FC, useRef } from "react";
 
-import { Icon, Password as PasswordComponent } from "@bodynarf/react.components";
+import Icon from "@bodynarf/react.components/components/icon";
+import PasswordComponent from "@bodynarf/react.components/components/primitives/password";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -29,7 +30,7 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             "<Password />",
                         ].join("\n")}
@@ -49,7 +50,7 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
                             `    canShowPassword`,
@@ -72,7 +73,7 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
                             `    canShowPassword`,
@@ -97,7 +98,7 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
                             `    label={{ caption: "Password demo", horizontal: false }}`,
@@ -116,7 +117,7 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
                             `    defaultValue="pwd"`,
@@ -139,7 +140,7 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
                             `    placeholder="Enter your password"`,
@@ -162,7 +163,7 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
                             `    rounded`,
@@ -185,7 +186,7 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
                             `    disabled`,
@@ -208,7 +209,8 @@ const Password: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Password, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
                             `    size={ElementSize.${id}}`,
@@ -232,7 +234,7 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
                             `    loading`,
@@ -255,7 +257,8 @@ const Password: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Password, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
                             `    style={ElementColor.${id}}`,
@@ -279,7 +282,7 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
                             `    name="key"`,
@@ -310,7 +313,7 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
                             `    autoFocus`,
@@ -333,11 +336,11 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
-                            `    label={{ caption: "Password demo", horizontal: true }}`,
                             `    onValueChange={value => console.log("value:", value)}`,
+                            `    label={{ caption: "Password demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -357,11 +360,11 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
-                            `    label={{ caption: "Password demo", horizontal: true }}`,
                             `    onKeyDown={e => console.log("keyDown:", e.key)}`,
+                            `    label={{ caption: "Password demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -381,11 +384,11 @@ const Password: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Password } from "@bodynarf/react.components";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
                             `<Password`,
-                            `    label={{ caption: "Password demo", horizontal: true }}`,
                             `    onKeyUp={e => console.log("keyUp:", e.key)}`,
+                            `    label={{ caption: "Password demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />

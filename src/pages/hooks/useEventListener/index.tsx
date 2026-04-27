@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { useEventListener } from "@bodynarf/react.components";
+import { useEventListener } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -24,6 +24,8 @@ const UseEventListenerPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
+                            `import { useState } from "react";`,
+                            "",
                             `import { useEventListener } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",

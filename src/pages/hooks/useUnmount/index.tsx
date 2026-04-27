@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { useUnmount } from "@bodynarf/react.components";
+import { useUnmount } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";

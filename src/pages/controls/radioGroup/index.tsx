@@ -1,7 +1,8 @@
 ﻿import { FC, useRef, useState } from "react";
 
-import { ElementColor, RadioGroup as RadioGroupComponent, RadioItem } from "@bodynarf/react.components";
-import "@bodynarf/react.components/components/primitives/radioGroup/component/style.scss";
+import { Optional } from "@bodynarf/utils";
+import { ElementColor, RadioItem } from "@bodynarf/react.components";
+import RadioGroupComponent from "@bodynarf/react.components/components/primitives/radioGroup";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -18,16 +19,16 @@ const sampleItems: Array<RadioItem> = [
 
 /** RadioGroup component demo */
 const RadioGroup: FC = () => {
-    const [minimalValue, setMinimalValue] = useState<string | undefined>(undefined);
-    const [valueValue, setValueValue] = useState<string | undefined>("2");
-    const [nameValue, setNameValue] = useState<string | undefined>(undefined);
-    const [disabledValue, setDisabledValue] = useState<string | undefined>(undefined);
-    const [horizontalValue, setHorizontalValue] = useState<string | undefined>(undefined);
-    const [blockValue, setBlockValue] = useState<string | undefined>(undefined);
-    const [circleValue, setCircleValue] = useState<string | undefined>(undefined);
-    const [withoutBorderValue, setWithoutBorderValue] = useState<string | undefined>(undefined);
-    const [hasBackgroundColorValue, setHasBackgroundColorValue] = useState<string | undefined>(undefined);
-    const [onValueChangeValue, setOnValueChangeValue] = useState<string | undefined>(undefined);
+    const [minimalValue, setMinimalValue] = useState<Optional<string>>();
+    const [valueValue, setValueValue] = useState<Optional<string>>("2");
+    const [nameValue, setNameValue] = useState<Optional<string>>();
+    const [disabledValue, setDisabledValue] = useState<Optional<string>>();
+    const [horizontalValue, setHorizontalValue] = useState<Optional<string>>();
+    const [blockValue, setBlockValue] = useState<Optional<string>>();
+    const [circleValue, setCircleValue] = useState<Optional<string>>();
+    const [withoutBorderValue, setWithoutBorderValue] = useState<Optional<string>>();
+    const [hasBackgroundColorValue, setHasBackgroundColorValue] = useState<Optional<string>>();
+    const [onValueChangeValue, setOnValueChangeValue] = useState<Optional<string>>();
     const onValueChangeLogRef = useRef<LogRef>(null);
 
     return (
@@ -50,7 +51,8 @@ const RadioGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
                             `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
@@ -80,7 +82,8 @@ const RadioGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
                             `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
@@ -89,8 +92,8 @@ const RadioGroup: FC = () => {
                             `];`,
                             "",
                             `<RadioGroup`,
-                            `    items={items}`,
                             `    value="2"`,
+                            `    items={items}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -110,7 +113,8 @@ const RadioGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
                             `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
@@ -141,7 +145,8 @@ const RadioGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
                             `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
@@ -150,8 +155,8 @@ const RadioGroup: FC = () => {
                             `];`,
                             "",
                             `<RadioGroup`,
-                            `    items={items}`,
                             `    disabled`,
+                            `    items={items}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -172,7 +177,8 @@ const RadioGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
                             `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
@@ -181,8 +187,8 @@ const RadioGroup: FC = () => {
                             `];`,
                             "",
                             `<RadioGroup`,
-                            `    items={items}`,
                             `    horizontal`,
+                            `    items={items}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -203,7 +209,8 @@ const RadioGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
                             `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
@@ -212,8 +219,8 @@ const RadioGroup: FC = () => {
                             `];`,
                             "",
                             `<RadioGroup`,
-                            `    items={items}`,
                             `    block`,
+                            `    items={items}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -234,7 +241,8 @@ const RadioGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
                             `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
@@ -265,7 +273,8 @@ const RadioGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
                             `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
@@ -296,7 +305,8 @@ const RadioGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor, RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
                             `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
@@ -329,7 +339,8 @@ const RadioGroup: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem, ElementSize } from "@bodynarf/react.components";`,
+                            `import { RadioItem, ElementSize } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
                             `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
@@ -356,7 +367,8 @@ const RadioGroup: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem, ElementColor } from "@bodynarf/react.components";`,
+                            `import { RadioItem, ElementColor } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
                             `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
@@ -383,7 +395,8 @@ const RadioGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
                             `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,

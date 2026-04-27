@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { Rating as RatingComponent } from "@bodynarf/react.components";
+import RatingComponent from "@bodynarf/react.components/components/rating";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -29,11 +29,16 @@ const Rating: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Rating } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import Rating from "@bodynarf/react.components/components/rating";`,
                             "",
                             "const [value, setValue] = useState(3);",
                             "",
-                            `<Rating value={value} onChange={setValue} />`,
+                            `<Rating`,
+                            `    value={value}`,
+                            `    onChange={setValue}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -57,9 +62,13 @@ const Rating: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Rating } from "@bodynarf/react.components";`,
+                            `import Rating from "@bodynarf/react.components/components/rating";`,
                             "",
-                            `<Rating value={value} max={10} onChange={setValue} />`,
+                            `<Rating`,
+                            `    max={10}`,
+                            `    value={value}`,
+                            `    onChange={setValue}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -77,11 +86,17 @@ const Rating: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Rating } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import Rating from "@bodynarf/react.components/components/rating";`,
                             "",
                             "const [value, setValue] = useState(3.5);",
                             "",
-                            `<Rating value={value} allowHalf onChange={setValue} />`,
+                            `<Rating`,
+                            `    allowHalf`,
+                            `    value={value}`,
+                            `    onChange={setValue}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -99,9 +114,13 @@ const Rating: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Rating } from "@bodynarf/react.components";`,
+                            `import Rating from "@bodynarf/react.components/components/rating";`,
                             "",
-                            `<Rating value={value} clearable onChange={setValue} />`,
+                            `<Rating`,
+                            `    clearable`,
+                            `    value={value}`,
+                            `    onChange={setValue}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -119,9 +138,13 @@ const Rating: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Rating } from "@bodynarf/react.components";`,
+                            `import Rating from "@bodynarf/react.components/components/rating";`,
                             "",
-                            `<Rating value={4.5} allowHalf readonly />`,
+                            `<Rating`,
+                            `    readonly`,
+                            `    allowHalf`,
+                            `    value={4.5}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -136,9 +159,13 @@ const Rating: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Rating, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Rating from "@bodynarf/react.components/components/rating";`,
                             "",
-                            `<Rating value={3} size={ElementSize.${id}} />`,
+                            `<Rating`,
+                            `    value={3}`,
+                            `    size={ElementSize.${id}}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -160,9 +187,12 @@ const Rating: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Rating } from "@bodynarf/react.components";`,
+                            `import Rating from "@bodynarf/react.components/components/rating";`,
                             "",
-                            `<Rating value={3} className="my-custom-class" />`,
+                            `<Rating`,
+                            `    value={3}`,
+                            `    className="my-custom-class"`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -177,9 +207,12 @@ const Rating: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Rating } from "@bodynarf/react.components";`,
+                            `import Rating from "@bodynarf/react.components/components/rating";`,
                             "",
-                            `<Rating value={3} title="Your rating" />`,
+                            `<Rating`,
+                            `    value={3}`,
+                            `    title="Your rating"`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }

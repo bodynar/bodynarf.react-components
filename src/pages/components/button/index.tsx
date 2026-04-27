@@ -1,6 +1,7 @@
 import { FC, useRef } from "react";
 
-import { ElementPosition, Button as ButtonComponent, ButtonStyle } from "@bodynarf/react.components";
+import ButtonComponent from "@bodynarf/react.components/components/button";
+import { ElementPosition, ButtonStyle } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -26,7 +27,8 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
                             "",
                             '<Button caption="Minimal use" style={ButtonStyle.Primary} />',
                         ].join("\n")}
@@ -46,7 +48,8 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
                             "",
                             `<Button caption="Default"  style={ButtonStyle.Default} />`,
                             `<Button caption="Primary"  style={ButtonStyle.Primary} />`,
@@ -79,7 +82,8 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
                             "",
                             `<Button caption="Click me" style={ButtonStyle.Primary} />`,
                         ].join("\n")}
@@ -96,15 +100,16 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Button, ButtonStyle, ElementPosition } from "@bodynarf/react.components";`,
+                            `import { ButtonStyle, ElementPosition } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
                             "",
                             `// Icon only`,
                             `<Button style={ButtonStyle.Primary} icon={{ name: "broadcast" }} />`,
                             "",
                             `// Icon + caption, icon on the right`,
                             `<Button`,
-                            `    style={ButtonStyle.Primary}`,
                             `    caption="Stream"`,
+                            `    style={ButtonStyle.Primary}`,
                             `    icon={{ name: "broadcast", position: ElementPosition.Right }}`,
                             `/>`,
                         ].join("\n")}
@@ -125,12 +130,13 @@ const Button: FC = () => {
                 codeProvider={size =>
                     <CodeExample
                         code={[
-                            `import { Button, ButtonStyle, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ButtonStyle, ElementSize } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
                             "",
                             '<Button',
-                            `    size={ElementSize.${size}}`,
                             '    caption="Button"',
                             '    style={ButtonStyle.Primary}',
+                            `    size={ElementSize.${size}}`,
                             '/>',
                         ].join("\n")}
                     />
@@ -147,9 +153,14 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
                             "",
-                            '<Button light caption="Light button" style={ButtonStyle.Primary} />',
+                            '<Button',
+                            '   light',
+                            '   caption="Light button"',
+                            '   style={ButtonStyle.Primary}',
+                            '/>',
                         ].join("\n")}
                     />
                 }
@@ -164,9 +175,14 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
                             "",
-                            '<Button outlined caption="Outlined" style={ButtonStyle.Primary} />',
+                            '<Button',
+                            '   outlined',
+                            '   caption="Outlined"',
+                            '   style={ButtonStyle.Primary}',
+                            '/>',
                         ].join("\n")}
                     />
                 }
@@ -181,9 +197,14 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
                             "",
-                            '<Button rounded caption="Rounded" style={ButtonStyle.Primary} />',
+                            '<Button',
+                            '   rounded',
+                            '   caption="Rounded"',
+                            '   style={ButtonStyle.Primary}',
+                            '/>',
                         ].join("\n")}
                     />
                 }
@@ -198,9 +219,14 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
                             "",
-                            '<Button isLoading caption="Loading" style={ButtonStyle.Primary} />',
+                            '<Button',
+                            '   isLoading',
+                            '   caption="Loading"',
+                            '   style={ButtonStyle.Primary}',
+                            '/>',
                         ].join("\n")}
                     />
                 }
@@ -215,9 +241,14 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
                             "",
-                            '<Button disabled caption="Disabled" style={ButtonStyle.Primary} />',
+                            '<Button',
+                            '   disabled',
+                            '   caption="Disabled"',
+                            '   style={ButtonStyle.Primary}',
+                            '/>',
                         ].join("\n")}
                     />
                 }
@@ -232,9 +263,14 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
                             "",
-                            '<Button static caption="Static" style={ButtonStyle.Primary} />',
+                            '<Button',
+                            '   static',
+                            '   caption="Static"',
+                            '   style={ButtonStyle.Primary}',
+                            '/>',
                         ].join("\n")}
                     />
                 }
@@ -249,7 +285,8 @@ const Button: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Button, ButtonStyle } from "@bodynarf/react.components";`,
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
                             "",
                             '<Button',
                             '    caption="Click me"',

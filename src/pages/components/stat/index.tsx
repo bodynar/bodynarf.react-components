@@ -1,6 +1,7 @@
 import { FC } from "react";
 
-import { Stat as StatComponent, StatTrendDirection } from "@bodynarf/react.components";
+import StatComponent from "@bodynarf/react.components/components/stat";
+import { StatTrendDirection } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
@@ -24,11 +25,14 @@ const Stat: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stat } from "@bodynarf/react.components";`,
+                            `import Stat from "@bodynarf/react.components/components/stat";`,
                             "",
                             "/* ... */",
                             "",
-                            `<Stat value={1024} label="Total users" />`,
+                            `<Stat`,
+                            `    value={1024}`,
+                            `    label="Total users"`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -51,11 +55,15 @@ const Stat: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stat } from "@bodynarf/react.components";`,
+                            `import Stat from "@bodynarf/react.components/components/stat";`,
                             "",
                             "/* ... */",
                             "",
-                            `<Stat value={1024} label="Total users" icon="people" />`,
+                            `<Stat`,
+                            `    value={1024}`,
+                            `    icon="people"`,
+                            `    label="Total users"`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -70,7 +78,8 @@ const Stat: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Stat, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Stat from "@bodynarf/react.components/components/stat";`,
                             "",
                             "/* ... */",
                             "",
@@ -104,16 +113,29 @@ const Stat: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stat, StatTrendDirection } from "@bodynarf/react.components";`,
+                            `import { StatTrendDirection } from "@bodynarf/react.components";`,
+                            `import Stat from "@bodynarf/react.components/components/stat";`,
                             "",
                             "/* ... */",
                             "",
-                            `<Stat value="98.7%" label="Uptime" icon="activity"`,
+                            `<Stat`,
+                            `    value="98.7%"`,
+                            `    label="Uptime"`,
+                            `    icon="activity"`,
                             `    trend={{ label: "+2.1%", direction: StatTrendDirection.Up }} />`,
-                            `<Stat value={302} label="Issues" icon="bug"`,
+                            `/>`,
+                            `<Stat`,
+                            `    icon="bug"`,
+                            `    value={302}`,
+                            `    label="Issues"`,
                             `    trend={{ label: "-12%", direction: StatTrendDirection.Down }} />`,
-                            `<Stat value={54} label="Pending" icon="clock"`,
+                            `/>`,
+                            `<Stat`,
+                            `    value={54}`,
+                            `    icon="clock"`,
+                            `    label="Pending"`,
                             `    trend={{ label: "0%", direction: StatTrendDirection.Neutral }} />`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }

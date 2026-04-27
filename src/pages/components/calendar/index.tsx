@@ -1,6 +1,6 @@
 import { FC, useRef, useState } from "react";
 
-import { Calendar as CalendarComponent } from "@bodynarf/react.components";
+import CalendarComponent from "@bodynarf/react.components/components/calendar";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
@@ -34,7 +34,9 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `const [value, setValue] = useState<Date | undefined>();`,
                             "",
@@ -56,7 +58,9 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `const [value, setValue] = useState<Date | undefined>(new Date());`,
                             "",
@@ -75,7 +79,8 @@ const Calendar: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Calendar, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `<Calendar style={ElementColor.${id}} onChange={() => undefined} />`,
                         ].join("\n")}
@@ -93,7 +98,8 @@ const Calendar: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Calendar, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `<Calendar size={ElementSize.${id}} onChange={() => undefined} />`,
                         ].join("\n")}
@@ -111,7 +117,7 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `const minDate = new Date(); // today`,
                             "",
@@ -130,7 +136,7 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `const maxDate = new Date(); // today`,
                             "",
@@ -149,12 +155,12 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `<Calendar`,
                             `    value={value}`,
-                            `    todayButtonConfig={{ caption: "Today" }}`,
                             `    onChange={setValue}`,
+                            `    todayButtonConfig={{ caption: "Today" }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -174,12 +180,12 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `<Calendar`,
                             `    value={value}`,
-                            `    clearButtonConfig={{ caption: "Clear" }}`,
                             `    onChange={setValue}`,
+                            `    clearButtonConfig={{ caption: "Clear" }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -199,7 +205,7 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `<Calendar initialView="month" onChange={setValue} />`,
                             `<Calendar initialView="year" onChange={setValue} />`,
@@ -226,7 +232,7 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `<Calendar locale="ru-RU" onChange={setValue} />`,
                         ].join("\n")}
@@ -243,7 +249,7 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `<Calendar prevLabel="Назад" onChange={setValue} />`,
                         ].join("\n")}
@@ -260,7 +266,7 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `<Calendar nextLabel="Вперёд" onChange={setValue} />`,
                         ].join("\n")}
@@ -277,7 +283,7 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `<Calendar`,
                             `    value={value}`,
@@ -304,7 +310,7 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `<Calendar`,
                             `    onChange={setValue}`,
@@ -332,12 +338,12 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `<Calendar`,
-                            `    rangeStart={minDate}`,
                             `    rangeEnd={maxDate}`,
                             `    onChange={setValue}`,
+                            `    rangeStart={minDate}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -357,11 +363,11 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `<Calendar`,
-                            `    rangeStart={minDate}`,
                             `    rangeEnd={maxDate}`,
+                            `    rangeStart={minDate}`,
                             `    onChange={setValue}`,
                             `/>`,
                         ].join("\n")}
@@ -382,11 +388,11 @@ const Calendar: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Calendar } from "@bodynarf/react.components";`,
+                            `import Calendar from "@bodynarf/react.components/components/calendar";`,
                             "",
                             `<Calendar`,
-                            `    rangeStart={minDate}`,
                             `    hoverDate={today}`,
+                            `    rangeStart={minDate}`,
                             `    onChange={setValue}`,
                             `/>`,
                         ].join("\n")}

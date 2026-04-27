@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 
-import { TagGroup as TagGroupComponent, ElementSize } from "@bodynarf/react.components";
+import TagGroupComponent from "@bodynarf/react.components/components/tagGroup";
+import { ElementSize } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -36,11 +37,16 @@ const TagGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TagGroup } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import TagGroup from "@bodynarf/react.components/components/tagGroup";`,
                             "",
                             `const [tags, setTags] = useState(["React", "TypeScript"]);`,
                             "",
-                            `<TagGroup value={tags} onChange={setTags} />`,
+                            `<TagGroup`,
+                            `    value={tags}`,
+                            `    onChange={setTags}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -58,12 +64,12 @@ const TagGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TagGroup } from "@bodynarf/react.components";`,
+                            `import TagGroup from "@bodynarf/react.components/components/tagGroup";`,
                             "",
                             `<TagGroup`,
                             `    value={tags}`,
-                            `    placeholder="Type and press Enter..."`,
                             `    onChange={setTags}`,
+                            `    placeholder="Type and press Enter..."`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -83,9 +89,13 @@ const TagGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TagGroup } from "@bodynarf/react.components";`,
+                            `import TagGroup from "@bodynarf/react.components/components/tagGroup";`,
                             "",
-                            `<TagGroup value={tags} addable={false} onChange={setTags} />`,
+                            `<TagGroup`,
+                            `    value={tags}`,
+                            `    addable={false}`,
+                            `    onChange={setTags}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -104,9 +114,13 @@ const TagGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TagGroup } from "@bodynarf/react.components";`,
+                            `import TagGroup from "@bodynarf/react.components/components/tagGroup";`,
                             "",
-                            `<TagGroup value={tags} removable={false} onChange={setTags} />`,
+                            `<TagGroup`,
+                            `    value={tags}`,
+                            `    removable={false}`,
+                            `    onChange={setTags}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -125,9 +139,13 @@ const TagGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TagGroup } from "@bodynarf/react.components";`,
+                            `import TagGroup from "@bodynarf/react.components/components/tagGroup";`,
                             "",
-                            `<TagGroup value={tags} disabled onChange={setTags} />`,
+                            `<TagGroup`,
+                            `    value={tags}`,
+                            `    disabled`,
+                            `    onChange={setTags}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -146,9 +164,13 @@ const TagGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TagGroup } from "@bodynarf/react.components";`,
+                            `import TagGroup from "@bodynarf/react.components/components/tagGroup";`,
                             "",
-                            `<TagGroup value={tags} maxTags={5} onChange={setTags} />`,
+                            `<TagGroup`,
+                            `    value={tags}`,
+                            `    maxTags={5}`,
+                            `    onChange={setTags}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -166,12 +188,12 @@ const TagGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TagGroup } from "@bodynarf/react.components";`,
+                            `import TagGroup from "@bodynarf/react.components/components/tagGroup";`,
                             "",
                             `<TagGroup`,
                             `    value={tags}`,
-                            `    confirmKeys={[" ", "Tab"]}`,
                             `    onChange={setTags}`,
+                            `    confirmKeys={[" ", "Tab"]}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -192,12 +214,13 @@ const TagGroup: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { TagGroup, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import TagGroup from "@bodynarf/react.components/components/tagGroup";`,
                             "",
                             `<TagGroup`,
                             `    value={tags}`,
-                            `    color={ElementColor.${id}}`,
                             `    onChange={setTags}`,
+                            `    color={ElementColor.${id}}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -224,12 +247,12 @@ const TagGroup: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TagGroup } from "@bodynarf/react.components";`,
+                            `import TagGroup from "@bodynarf/react.components/components/tagGroup";`,
                             "",
                             `<TagGroup`,
                             `    value={tags}`,
-                            `    tagConfig={{ rounded: true, lightColor: true }}`,
                             `    onChange={setTags}`,
+                            `    tagConfig={{ rounded: true, lightColor: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -278,12 +301,13 @@ const TagGroup: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { TagGroup, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import TagGroup from "@bodynarf/react.components/components/tagGroup";`,
                             "",
                             `<TagGroup`,
                             `    value={tags}`,
-                            `    size={ElementSize.${id}}`,
                             `    onChange={setTags}`,
+                            `    size={ElementSize.${id}}`,
                             `/>`,
                         ].join("\n")}
                     />

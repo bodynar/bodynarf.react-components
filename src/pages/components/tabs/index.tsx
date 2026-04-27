@@ -2,7 +2,8 @@ import { FC, useCallback, useState } from "react";
 
 import { emptyFn, isStringEmpty } from "@bodynarf/utils";
 
-import { SelectableItem, Tabs as TabsComponent, TabItem, TabsStyle } from "@bodynarf/react.components";
+import TabsComponent from "@bodynarf/react.components/components/tabs";
+import { SelectableItem, TabItem, TabsStyle } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -61,7 +62,8 @@ const Tabs: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import TabsComponent, { TabItem } from "@bodynarf/react.components/components/tabs";`,
+                            `import { TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
                             "/* ... */",
                             'const tabs: Array<TabItem> = [',
@@ -95,7 +97,8 @@ const Tabs: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import TabsComponent, { TabItem } from "@bodynarf/react.components/components/tabs";`,
+                            `import { TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
                             "/* ... */",
                             'const tabs: Array<TabItem> = [',
@@ -131,8 +134,8 @@ const Tabs: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import TabsComponent, { TabItem } from "@bodynarf/react.components/components/tabs";`,
+                            `import { ElementSize, TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
                             "/* ... */",
                             'const tabs: Array<TabItem> = [',
@@ -170,8 +173,8 @@ const Tabs: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import { ElementPosition } from "@bodynarf/react.components";`,
-                            `import TabsComponent, { TabItem } from "@bodynarf/react.components/components/tabs";`,
+                            `import { ElementPosition, TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
                             "/* ... */",
                             'const tabs: Array<TabItem> = [',
@@ -211,8 +214,8 @@ const Tabs: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import { ElementPosition } from "@bodynarf/react.components";`,
-                            `import TabsComponent, { TabItem, TabsStyle } from "@bodynarf/react.components/components/tabs";`,
+                            `import { TabItem, TabsStyle } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
                             "/* ... */",
                             'const tabs: Array<TabItem> = [',
@@ -250,7 +253,8 @@ const Tabs: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import TabsComponent, { TabItem } from "@bodynarf/react.components/components/tabs";`,
+                            `import { TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
                             "/* ... */",
                             'const tabs: Array<TabItem> = [',
@@ -287,7 +291,8 @@ const Tabs: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             ``,
-                            `import TabsComponent, { TabItem } from "@bodynarf/react.components/components/tabs";`,
+                            `import { TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
                             "/* ... */",
                             'const tabs: Array<TabItem> = [',
@@ -302,9 +307,8 @@ const Tabs: FC = () => {
                             "/* ... */",
                             "",
                             '<TabsComponent',
-                            '    appendActiveItemChangeLog',
                             '    items={tabs}',
-                            '    onActiveItemChange={ON_SEARCH_HANDLE_FN}',
+                            '    onActiveItemChange={ON_ACTIVE_ITEM_CHANGE_HANDLE_FN}',
                             '/>',
                         ].join("\n")}
                     />

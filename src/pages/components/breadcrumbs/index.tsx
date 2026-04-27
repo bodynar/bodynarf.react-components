@@ -1,6 +1,7 @@
 import { FC } from "react";
 
-import { ElementPosition, Breadcrumbs as BreadcrumbsComponent, BreadCrumb } from "@bodynarf/react.components";
+import BreadcrumbsComponent from "@bodynarf/react.components/components/breadcrumbs";
+import { ElementPosition, BreadCrumb } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -44,7 +45,7 @@ const Breadcrumbs: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Breadcrumbs } from "@bodynarf/react.components";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
                             `const items = [`,
                             `    { caption: "Source", href: "#/source" },`,
@@ -70,7 +71,7 @@ const Breadcrumbs: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Breadcrumbs } from "@bodynarf/react.components";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
                             `<Breadcrumbs`,
                             `    items={[`,
@@ -93,7 +94,8 @@ const Breadcrumbs: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Breadcrumbs, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
                             `<Breadcrumbs items={items} size={ElementSize.${id}} />`,
                         ].join("\n")}
@@ -111,7 +113,8 @@ const Breadcrumbs: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Breadcrumbs, ElementPosition } from "@bodynarf/react.components";`,
+                            `import { ElementPosition } from "@bodynarf/react.components";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
                             `<Breadcrumbs items={items} position={ElementPosition.${id}} />`,
                         ].join("\n")}
@@ -129,7 +132,7 @@ const Breadcrumbs: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Breadcrumbs } from "@bodynarf/react.components";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
                             `<Breadcrumbs items={items} separator="arrow" />`,
                             `<Breadcrumbs items={items} separator="bullet" />`,
@@ -156,7 +159,7 @@ const Breadcrumbs: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Breadcrumbs } from "@bodynarf/react.components";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
                             `<Breadcrumbs items={items} ariaLabel="page navigation" />`,
                         ].join("\n")}
@@ -174,7 +177,9 @@ const Breadcrumbs: FC = () => {
                     <CodeExample
                         code={[
                             `import { ReactNode } from "react";`,
-                            `import { Breadcrumbs, BreadCrumb } from "@bodynarf/react.components";`,
+                            "",
+                            `import { BreadCrumb } from "@bodynarf/react.components";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
                             `const customElementGenerator = (bc: BreadCrumb): ReactNode => (`,
                             `    <button type="button" className="button is-small is-light">`,
@@ -200,7 +205,7 @@ const Breadcrumbs: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Breadcrumbs } from "@bodynarf/react.components";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
                             `<Breadcrumbs`,
                             `    items={[`,
@@ -227,7 +232,7 @@ const Breadcrumbs: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Breadcrumbs } from "@bodynarf/react.components";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
                             `<Breadcrumbs`,
                             `    items={[`,
@@ -256,7 +261,7 @@ const Breadcrumbs: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Breadcrumbs } from "@bodynarf/react.components";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
                             `<Breadcrumbs`,
                             `    items={[`,

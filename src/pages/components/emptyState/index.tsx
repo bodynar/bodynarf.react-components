@@ -1,6 +1,7 @@
 import { FC, useCallback, useRef } from "react";
 
-import { EmptyState as EmptyStateComponent, ButtonStyle } from "@bodynarf/react.components";
+import EmptyStateComponent from "@bodynarf/react.components/components/emptyState";
+import { ButtonStyle } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
@@ -31,9 +32,7 @@ const EmptyState: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { EmptyState } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import EmptyState from "@bodynarf/react.components/components/emptyState";`,
                             "",
                             `<EmptyState title="No items found" />`,
                         ].join("\n")}
@@ -55,9 +54,7 @@ const EmptyState: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { EmptyState } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import EmptyState from "@bodynarf/react.components/components/emptyState";`,
                             "",
                             `<EmptyState title="Nothing to show here" />`,
                         ].join("\n")}
@@ -74,9 +71,7 @@ const EmptyState: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { EmptyState } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import EmptyState from "@bodynarf/react.components/components/emptyState";`,
                             "",
                             `<EmptyState`,
                             `    title="No results"`,
@@ -99,13 +94,11 @@ const EmptyState: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { EmptyState } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import EmptyState from "@bodynarf/react.components/components/emptyState";`,
                             "",
                             `<EmptyState`,
-                            `    title="No search results"`,
                             `    icon="search"`,
+                            `    title="No search results"`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -124,9 +117,8 @@ const EmptyState: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { EmptyState, ElementColor } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import EmptyState from "@bodynarf/react.components/components/emptyState";`,
                             "",
                             `<EmptyState`,
                             `    title="Empty state"`,
@@ -150,14 +142,13 @@ const EmptyState: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { EmptyState, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import EmptyState from "@bodynarf/react.components/components/emptyState";`,
                             "",
                             `<EmptyState`,
+                            `    icon="cart"`,
                             `    title="Your cart is empty"`,
                             `    description="Add some items to get started."`,
-                            `    icon="cart"`,
                             `    action={{`,
                             `        caption: "Browse products",`,
                             `        style: ButtonStyle.Primary,`,
@@ -188,9 +179,7 @@ const EmptyState: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { EmptyState } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import EmptyState from "@bodynarf/react.components/components/emptyState";`,
                             "",
                             `<EmptyState`,
                             `    title="No data available"`,
@@ -223,9 +212,7 @@ const EmptyState: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { EmptyState } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import EmptyState from "@bodynarf/react.components/components/emptyState";`,
                             "",
                             `<EmptyState`,
                             `    compact`,

@@ -1,6 +1,7 @@
 import { FC, useCallback, useRef } from "react";
 
-import { ElementColor, ElementSize, SelectableItem, Tag as TagComponent } from "@bodynarf/react.components";
+import TagComponent from "@bodynarf/react.components/components/tag";
+import { ElementColor, ElementSize, SelectableItem } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";

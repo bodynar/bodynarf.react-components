@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { useFocus } from "@bodynarf/react.components";
+import { useFocus } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -49,7 +49,9 @@ const UseFocus: FC = () => {
                         </div>
                     </div>
                     <p className="mt-1">
-                        Focus state: <strong className={isInputFocused ? "has-text-primary" : "has-text-grey"}>
+                        Focus state:
+                        {' '}
+                        <strong className={isInputFocused ? "has-text-primary" : "has-text-grey"}>
                             {isInputFocused ? "focused" : "not focused"}
                         </strong>
                     </p>

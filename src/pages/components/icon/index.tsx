@@ -1,6 +1,6 @@
 import { FC, useCallback, useRef } from "react";
 
-import { Icon as IconComponent } from "@bodynarf/react.components";
+import IconComponent from "@bodynarf/react.components/components/icon";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -99,8 +99,6 @@ const Icon: FC = () => {
                         code={[
                             `import IconComponent from "@bodynarf/react.components/components/icon";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<IconComponent name="alarm" />',
                         ].join("\n")}
                     />
@@ -121,8 +119,6 @@ const Icon: FC = () => {
                         code={[
                             `import IconComponent from "@bodynarf/react.components/components/icon";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<IconComponent name="star-fill" />',
                         ].join("\n")}
                     />
@@ -140,8 +136,6 @@ const Icon: FC = () => {
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import IconComponent from "@bodynarf/react.components/components/icon";`,
-                            "",
-                            "/* ... */",
                             "",
                             '<IconComponent',
                             '    name="alarm"',
@@ -162,14 +156,13 @@ const Icon: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="onClick"
-                description="Click handler. When provided, the icon becomes interactive."
+                description="Click handler. When provided, the icon becomes interactive. And gets a 'is-clickable' class for styling."
                 code={
                     <CodeExample
                         code={[
                             `import { useCallback } from "react";`,
-                            `import IconComponent from "@bodynarf/react.components/components/icon";`,
                             "",
-                            "/* ... */",
+                            `import IconComponent from "@bodynarf/react.components/components/icon";`,
                             "",
                             "const handleClick = useCallback(() => {",
                             '    console.log("clicked");',

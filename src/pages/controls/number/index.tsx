@@ -1,6 +1,7 @@
 import { FC, useRef } from "react";
 
-import { Icon, NumberInput as NumberComponent } from "@bodynarf/react.components";
+import Icon from "@bodynarf/react.components/components/icon";
+import NumberComponent from "@bodynarf/react.components/components/primitives/number";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -30,7 +31,7 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             "<NumberInput />",
                         ].join("\n")}
@@ -50,7 +51,7 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
                             `    step={5}`,
@@ -73,7 +74,7 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `// with defaultValue — resets to 100`,
                             `<NumberInput`,
@@ -117,7 +118,7 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
                             `    label={{ caption: "Number demo", horizontal: false }}`,
@@ -136,7 +137,7 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
                             `    defaultValue={8910}`,
@@ -159,7 +160,7 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
                             `    placeholder="Enter a number"`,
@@ -182,7 +183,7 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
                             `    rounded`,
@@ -205,7 +206,7 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
                             `    disabled`,
@@ -228,7 +229,7 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
                             `    readonly`,
@@ -251,7 +252,8 @@ const Number: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { NumberInput, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
                             `    size={ElementSize.${id}}`,
@@ -275,7 +277,7 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
                             `    loading`,
@@ -298,7 +300,8 @@ const Number: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { NumberInput, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
                             `    style={ElementColor.${id}}`,
@@ -322,7 +325,7 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
                             `    name="amount"`,
@@ -353,7 +356,7 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
                             `    autoFocus`,
@@ -376,7 +379,7 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
                             `    label={{ caption: "Number demo", horizontal: true }}`,
@@ -400,11 +403,11 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
-                            `    label={{ caption: "Number demo", horizontal: true }}`,
                             `    onBlur={() => console.log("blurred")}`,
+                            `    label={{ caption: "Number demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -424,11 +427,11 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
-                            `    label={{ caption: "Number demo", horizontal: true }}`,
                             `    onKeyDown={e => console.log("keyDown:", e.key)}`,
+                            `    label={{ caption: "Number demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -448,11 +451,11 @@ const Number: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NumberInput } from "@bodynarf/react.components";`,
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
                             "",
                             `<NumberInput`,
-                            `    label={{ caption: "Number demo", horizontal: true }}`,
                             `    onKeyUp={e => console.log("keyUp:", e.key)}`,
+                            `    label={{ caption: "Number demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />

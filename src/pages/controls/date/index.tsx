@@ -1,6 +1,7 @@
 ﻿import { FC, useRef } from "react";
 
-import { Icon, Date as DateComponent } from "@bodynarf/react.components";
+import Icon from "@bodynarf/react.components/components/icon";
+import DateComponent from "@bodynarf/react.components/components/primitives/date";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -36,7 +37,7 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Date } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date label={{ caption: "Date demo", horizontal: true }} />`,
                         ].join("\n")}
@@ -56,7 +57,7 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Date } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date label={{ caption: "Birth date", horizontal: false }} />`,
                         ].join("\n")}
@@ -73,7 +74,7 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Date } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date`,
                             `    defaultValue={new Date(2000, 10, 10)}`,
@@ -96,7 +97,7 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Date } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date`,
                             `    rounded`,
@@ -119,7 +120,7 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Date } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date`,
                             `    disabled`,
@@ -142,7 +143,7 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Date } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date`,
                             `    readonly`,
@@ -165,7 +166,8 @@ const DateDemo: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Date, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date`,
                             `    size={ElementSize.${id}}`,
@@ -189,7 +191,7 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Date } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date`,
                             `    loading`,
@@ -212,7 +214,8 @@ const DateDemo: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Date, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date`,
                             `    style={ElementColor.${id}}`,
@@ -236,7 +239,7 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Date } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date`,
                             `    name="birthDate"`,
@@ -267,7 +270,7 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Date } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date`,
                             `    autoFocus`,
@@ -290,7 +293,7 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Date } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date`,
                             `    label={{ caption: "Date demo", horizontal: true }}`,
@@ -314,11 +317,11 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Date } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date`,
-                            `    label={{ caption: "Date demo", horizontal: true }}`,
                             `    onBlur={() => console.log("blurred")}`,
+                            `    label={{ caption: "Date demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -338,11 +341,11 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Date } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date`,
-                            `    label={{ caption: "Date demo", horizontal: true }}`,
                             `    onKeyDown={e => console.log("keyDown:", e.key)}`,
+                            `    label={{ caption: "Date demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -362,11 +365,11 @@ const DateDemo: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Date } from "@bodynarf/react.components";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
                             `<Date`,
-                            `    label={{ caption: "Date demo", horizontal: true }}`,
                             `    onKeyUp={e => console.log("keyUp:", e.key)}`,
+                            `    label={{ caption: "Date demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />

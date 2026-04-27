@@ -1,6 +1,7 @@
 import { FC, useRef } from "react";
 
-import { AutoComplete as AutoCompleteComponent, AutoCompleteItem } from "@bodynarf/react.components";
+import { AutoCompleteItem } from "@bodynarf/react.components";
+import AutoCompleteComponent from "@bodynarf/react.components/components/autoComplete";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -54,7 +55,7 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `const items = [`,
                             `    { id: "1", label: "Apple" },`,
@@ -90,7 +91,7 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `const handleSearch = async (query: string) => {`,
                             `    const results = await fetchSuggestions(query);`,
@@ -98,8 +99,8 @@ const AutoComplete: FC = () => {
                             `};`,
                             "",
                             `<AutoComplete`,
-                            `    placeholder="Type to search..."`,
                             `    onSearch={handleSearch}`,
+                            `    placeholder="Type to search..."`,
                             `    onSelect={item => console.log(item)}`,
                             `/>`,
                         ].join("\n")}
@@ -126,12 +127,13 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete, AutoCompleteItem } from "@bodynarf/react.components";`,
+                            `import { AutoCompleteItem } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
                             `    items={items}`,
-                            `    onSelect={(item: AutoCompleteItem | undefined) => console.log(item)}`,
                             `    placeholder="Search..."`,
+                            `    onSelect={(item: AutoCompleteItem | undefined) => console.log(item)}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -156,12 +158,12 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
                             `    items={items}`,
-                            `    onValueChange={value => console.log(value)}`,
                             `    placeholder="Search..."`,
+                            `    onValueChange={value => console.log(value)}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -184,7 +186,7 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
                             `    debounce={600}`,
@@ -216,12 +218,12 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
                             `    items={items}`,
-                            `    noResultsText="Nothing found"`,
                             `    placeholder="Search..."`,
+                            `    noResultsText="Nothing found"`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -242,7 +244,7 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
                             `    items={items}`,
@@ -256,8 +258,8 @@ const AutoComplete: FC = () => {
                 <AutoCompleteComponent
                     items={staticItems}
                     maxSuggestions={3}
-                    placeholder='Try "a" — only 3 results shown...'
                     onSelect={() => undefined}
+                    placeholder='Try "a" — only 3 results shown...'
                 />
             </ComponentUseCase>
 
@@ -268,7 +270,7 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
                             `    items={[]}`,
@@ -294,11 +296,11 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
-                            `    items={items}`,
                             `    clearable`,
+                            `    items={items}`,
                             `    placeholder="Clearable..."`,
                             `    onSelect={item => console.log(item)}`,
                             `/>`,
@@ -326,13 +328,13 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
-                            `    items={items}`,
                             `    clearable`,
-                            `    clearTitle="Reset selection"`,
+                            `    items={items}`,
                             `    placeholder="Search..."`,
+                            `    clearTitle="Reset selection"`,
                             `    onSelect={item => console.log(item)}`,
                             `/>`,
                         ].join("\n")}
@@ -360,13 +362,13 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
                             `    items={items}`,
-                            `    label={{ caption: "Fruit", horizontal: false }}`,
-                            `    placeholder="Search..."`,
                             `    onSelect={setSelected}`,
+                            `    placeholder="Search..."`,
+                            `    label={{ caption: "Fruit", horizontal: false }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -375,15 +377,15 @@ const AutoComplete: FC = () => {
                 <div className="is-flex" style={{ gap: "24px", flexWrap: "wrap", alignItems: "flex-start" }}>
                     <AutoCompleteComponent
                         items={staticItems}
-                        label={{ caption: "Fruit", horizontal: false }}
                         placeholder="Search..."
                         onSelect={() => undefined}
+                        label={{ caption: "Fruit", horizontal: false }}
                     />
                     <AutoCompleteComponent
                         items={staticItems}
-                        label={{ caption: "Fruit", horizontal: true }}
-                        placeholder="Horizontal..."
                         onSelect={() => undefined}
+                        placeholder="Horizontal..."
+                        label={{ caption: "Fruit", horizontal: true }}
                     />
                 </div>
             </ComponentUseCase>
@@ -395,14 +397,14 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
                             `    items={items}`,
+                            `    onSelect={setSelected}`,
+                            `    placeholder="Search..."`,
                             `    label={{ caption: "Fruit", horizontal: false }}`,
                             `    hint={{ content: "Start typing to see suggestions" }}`,
-                            `    placeholder="Search..."`,
-                            `    onSelect={setSelected}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -410,10 +412,10 @@ const AutoComplete: FC = () => {
             >
                 <AutoCompleteComponent
                     items={staticItems}
-                    label={{ caption: "Fruit", horizontal: false }}
-                    hint={{ content: "Start typing to see suggestions" }}
                     placeholder="Search..."
                     onSelect={() => undefined}
+                    label={{ caption: "Fruit", horizontal: false }}
+                    hint={{ content: "Start typing to see suggestions" }}
                 />
             </ComponentUseCase>
 
@@ -424,16 +426,20 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
-                            `<AutoComplete items={items} disabled placeholder="Disabled..." />`,
+                            `<AutoComplete`,
+                            `    disabled`,
+                            `    items={items}`,
+                            `    placeholder="Disabled..."`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <AutoCompleteComponent
-                    items={staticItems}
                     disabled
+                    items={staticItems}
                     placeholder="Disabled..."
                     onSelect={() => undefined}
                 />
@@ -446,7 +452,7 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
                             `    items={items}`,
@@ -473,11 +479,11 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
-                            `    items={items}`,
                             `    readonly`,
+                            `    items={items}`,
                             `    defaultValue="Peach"`,
                             `    placeholder="Readonly..."`,
                             `/>`,
@@ -501,11 +507,11 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
-                            `    items={items}`,
                             `    rounded`,
+                            `    items={items}`,
                             `    placeholder="Search..."`,
                             `    onSelect={item => console.log(item)}`,
                             `/>`,
@@ -528,11 +534,11 @@ const AutoComplete: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { AutoComplete } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
-                            `    items={items}`,
                             `    loading`,
+                            `    items={items}`,
                             `    placeholder="Loading..."`,
                             `/>`,
                         ].join("\n")}
@@ -554,12 +560,13 @@ const AutoComplete: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { AutoComplete, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
                             "",
                             `<AutoComplete`,
                             `    items={items}`,
-                            `    size={ElementSize.${id}}`,
                             `    placeholder="Search..."`,
+                            `    size={ElementSize.${id}}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -581,12 +588,13 @@ const AutoComplete: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { AutoComplete, ElementColor } from "@bodynarf/react.components";`,
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
                             "",
                             `<AutoComplete`,
                             `    items={items}`,
-                            `    style={ElementColor.${id}}`,
                             `    placeholder="Search..."`,
+                            `    style={ElementColor.${id}}`,
                             `    onSelect={item => console.log(item)}`,
                             `/>`,
                         ].join("\n")}

@@ -1,6 +1,6 @@
 ﻿import { FC, useRef } from "react";
 
-import { Slider as SliderComponent } from "@bodynarf/react.components";
+import SliderComponent from "@bodynarf/react.components/components/primitives/slider";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -28,7 +28,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             "<Slider />",
                         ].join("\n")}
@@ -48,7 +48,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    min={20}`,
@@ -67,7 +67,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    max={50}`,
@@ -86,7 +86,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    step={10}`,
@@ -106,7 +106,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    defaultValue={75}`,
@@ -125,7 +125,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    showValue`,
@@ -144,7 +144,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    showValue`,
@@ -164,12 +164,12 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
-                            `    showMinMax`,
                             `    min={0}`,
                             `    max={100}`,
+                            `    showMinMax`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -185,7 +185,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    showProgress={false}`,
@@ -204,7 +204,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    circle`,
@@ -223,7 +223,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    vertical`,
@@ -242,7 +242,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    vertical`,
@@ -262,7 +262,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    showValue`,
@@ -282,7 +282,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    name="volume"`,
@@ -301,7 +301,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    disabled`,
@@ -321,7 +321,8 @@ const Slider: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Slider, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    size={ElementSize.${id}}`,
@@ -341,7 +342,8 @@ const Slider: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Slider, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    style={ElementColor.${id}}`,
@@ -361,7 +363,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    onValueChange={value => console.log("value:", value)}`,
@@ -383,7 +385,7 @@ const Slider: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Slider } from "@bodynarf/react.components";`,
+                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
                             "",
                             `<Slider`,
                             `    onBlur={() => console.log("blurred")}`,

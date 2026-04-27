@@ -1,6 +1,7 @@
 import { FC, useRef } from "react";
 
-import { Chip as ChipComponent, ElementColor, ElementSize } from "@bodynarf/react.components";
+import ChipComponent from "@bodynarf/react.components/components/chip";
+import { ElementColor, ElementSize } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
@@ -28,7 +29,7 @@ const Chip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Chip } from "@bodynarf/react.components";`,
+                            `import Chip from "@bodynarf/react.components/components/chip";`,
                             "",
                             `<Chip content="React" />`,
                         ].join("\n")}
@@ -48,7 +49,7 @@ const Chip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Chip } from "@bodynarf/react.components";`,
+                            `import Chip from "@bodynarf/react.components/components/chip";`,
                             "",
                             `<Chip content="TypeScript" />`,
                         ].join("\n")}
@@ -65,7 +66,8 @@ const Chip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Chip, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Chip from "@bodynarf/react.components/components/chip";`,
                             "",
                             `<Chip content="Chip" size={ElementSize.Normal} />`,
                             `<Chip content="Chip" size={ElementSize.Medium} />`,
@@ -88,7 +90,8 @@ const Chip: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Chip, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Chip from "@bodynarf/react.components/components/chip";`,
                             "",
                             `<Chip content="Chip" style={ElementColor.${id}} />`,
                         ].join("\n")}
@@ -106,7 +109,7 @@ const Chip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Chip } from "@bodynarf/react.components";`,
+                            `import Chip from "@bodynarf/react.components/components/chip";`,
                             "",
                             `<Chip content="Rounded chip" rounded />`,
                         ].join("\n")}
@@ -123,9 +126,14 @@ const Chip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Chip, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Chip from "@bodynarf/react.components/components/chip";`,
                             "",
-                            `<Chip content="Light chip" style={ElementColor.Primary} lightColor />`,
+                            `<Chip`,
+                            `    lightColor`,
+                            `    content="Light chip"`,
+                            `    style={ElementColor.Primary}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -140,7 +148,7 @@ const Chip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Chip } from "@bodynarf/react.components";`,
+                            `import Chip from "@bodynarf/react.components/components/chip";`,
                             "",
                             `<Chip`,
                             `    content="Custom color"`,
@@ -163,7 +171,7 @@ const Chip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Chip } from "@bodynarf/react.components";`,
+                            `import Chip from "@bodynarf/react.components/components/chip";`,
                             "",
                             `<Chip`,
                             `    content="Chip"`,
@@ -188,7 +196,7 @@ const Chip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Chip } from "@bodynarf/react.components";`,
+                            `import Chip from "@bodynarf/react.components/components/chip";`,
                             "",
                             `<Chip`,
                             `    content="Clickable"`,
@@ -213,7 +221,8 @@ const Chip: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Chip, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Chip from "@bodynarf/react.components/components/chip";`,
                             "",
                             `<Chip`,
                             `    content="Removable"`,

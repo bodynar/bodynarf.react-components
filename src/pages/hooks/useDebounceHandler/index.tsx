@@ -1,6 +1,6 @@
 import { FC, useCallback } from "react";
 
-import { useDebounceHandler } from "@bodynarf/react.components";
+import { useDebounceHandler } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";

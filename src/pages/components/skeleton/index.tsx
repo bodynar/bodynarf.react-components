@@ -1,6 +1,7 @@
 import { FC } from "react";
 
-import { Skeleton as SkeletonComponent, ElementSize } from "@bodynarf/react.components";
+import SkeletonComponent from "@bodynarf/react.components/components/skeleton";
+import { ElementSize } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -29,7 +30,7 @@ const Skeleton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Skeleton } from "@bodynarf/react.components";`,
+                            `import Skeleton from "@bodynarf/react.components/components/skeleton";`,
                             "",
                             "/* ... */",
                             "",
@@ -50,7 +51,7 @@ const Skeleton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Skeleton } from "@bodynarf/react.components";`,
+                            `import Skeleton from "@bodynarf/react.components/components/skeleton";`,
                             "",
                             "/* ... */",
                             "",
@@ -71,7 +72,7 @@ const Skeleton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Skeleton } from "@bodynarf/react.components";`,
+                            `import Skeleton from "@bodynarf/react.components/components/skeleton";`,
                             "",
                             "/* ... */",
                             "",
@@ -97,7 +98,7 @@ const Skeleton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Skeleton } from "@bodynarf/react.components";`,
+                            `import Skeleton from "@bodynarf/react.components/components/skeleton";`,
                             "",
                             "/* ... */",
                             "",
@@ -116,7 +117,7 @@ const Skeleton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Skeleton } from "@bodynarf/react.components";`,
+                            `import Skeleton from "@bodynarf/react.components/components/skeleton";`,
                             "",
                             "/* ... */",
                             "",
@@ -135,7 +136,7 @@ const Skeleton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Skeleton } from "@bodynarf/react.components";`,
+                            `import Skeleton from "@bodynarf/react.components/components/skeleton";`,
                             "",
                             "/* ... */",
                             "",
@@ -159,7 +160,7 @@ const Skeleton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Skeleton } from "@bodynarf/react.components";`,
+                            `import Skeleton from "@bodynarf/react.components/components/skeleton";`,
                             "",
                             "/* ... */",
                             "",
@@ -178,7 +179,8 @@ const Skeleton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Skeleton, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Skeleton from "@bodynarf/react.components/components/skeleton";`,
                             "",
                             "/* ... */",
                             "",
@@ -205,7 +207,7 @@ const Skeleton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Skeleton } from "@bodynarf/react.components";`,
+                            `import Skeleton from "@bodynarf/react.components/components/skeleton";`,
                             "",
                             "/* ... */",
                             "",
@@ -232,7 +234,7 @@ const Skeleton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Skeleton } from "@bodynarf/react.components";`,
+                            `import Skeleton from "@bodynarf/react.components/components/skeleton";`,
                             "",
                             "/* ... */",
                             "",
@@ -251,7 +253,8 @@ const Skeleton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Skeleton, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Skeleton from "@bodynarf/react.components/components/skeleton";`,
                             "",
                             "/* ... */",
                             "",
@@ -278,7 +281,7 @@ const Skeleton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Skeleton } from "@bodynarf/react.components";`,
+                            `import Skeleton from "@bodynarf/react.components/components/skeleton";`,
                             "",
                             "/* ... */",
                             "",

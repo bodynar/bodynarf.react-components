@@ -1,6 +1,7 @@
 import { FC, useCallback, useState } from "react";
 
-import { Table as TableComponent, TableHeading } from "@bodynarf/react.components";
+import TableComponent from "@bodynarf/react.components/components/table";
+import { TableHeading } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -27,6 +28,10 @@ const Table: FC = () => {
         []
     );
 
+    const [selectableRows, setSelectableRows] = useState<Array<string>>([]);
+    const [headerConfigRows, setHeaderConfigRows] = useState<Array<string>>([]);
+    const [rowConfigRows, setRowConfigRows] = useState<Array<string>>([]);
+
 
     return (
         <section>
@@ -43,7 +48,8 @@ const Table: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import TableComponent, { TableHeading } from "@bodynarf/react.components/components/table";`,
+                            `import { TableHeading } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             "/* ... */",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -97,7 +103,8 @@ const Table: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import TableComponent, { TableHeading } from "@bodynarf/react.components/components/table";`,
+                            `import { TableHeading } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             "/* ... */",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -153,7 +160,8 @@ const Table: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import TableComponent, { TableHeading } from "@bodynarf/react.components/components/table";`,
+                            `import { TableHeading } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             "/* ... */",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -209,7 +217,8 @@ const Table: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import TableComponent, { TableHeading } from "@bodynarf/react.components/components/table";`,
+                            `import { TableHeading } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             "/* ... */",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -265,7 +274,8 @@ const Table: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import TableComponent, { TableHeading } from "@bodynarf/react.components/components/table";`,
+                            `import { TableHeading } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             "/* ... */",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -321,7 +331,8 @@ const Table: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import TableComponent, { TableHeading } from "@bodynarf/react.components/components/table";`,
+                            `import { TableHeading } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             "/* ... */",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -377,7 +388,8 @@ const Table: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import TableComponent, { TableHeading } from "@bodynarf/react.components/components/table";`,
+                            `import { TableHeading } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             "/* ... */",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -433,7 +445,8 @@ const Table: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import TableComponent, { TableHeading } from "@bodynarf/react.components/components/table";`,
+                            `import { TableHeading } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             "/* ... */",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -489,7 +502,8 @@ const Table: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import TableComponent, { TableHeading } from "@bodynarf/react.components/components/table";`,
+                            `import { TableHeading } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             "/* ... */",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -545,7 +559,8 @@ const Table: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import TableComponent, { TableHeading } from "@bodynarf/react.components/components/table";`,
+                            `import { TableHeading } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             "/* ... */",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -601,7 +616,8 @@ const Table: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import TableComponent, { TableHeading } from "@bodynarf/react.components/components/table";`,
+                            `import { TableHeading } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             "/* ... */",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -609,9 +625,12 @@ const Table: FC = () => {
                             '    { caption: "Age", sortable: true, name: "Age" },',
                             '    { caption: "Department", sortable: true, name: "Department" },',
                             '];',
+                            ``,
+                            `const onHeaderClick = (item: TableHeading) => { /* handle click */ };`,
                             "/* ... */",
                             "<TableComponent",
                             '    headings={tableHeadings}',
+                            '    onHeaderClick={onHeaderClick}',
                             '>',
                             '    <tr>',
                             '        <td>John Doe</td>',
@@ -650,6 +669,187 @@ const Table: FC = () => {
                 <p style={{ whiteSpace: "pre-line" }}>
                     {onHeaderClickLog}
                 </p>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="selectable"
+                description="Option to enable row selection via checkboxes. Each child row element must have a unique `key` prop — it is used as the selection identifier. Requires `selectedRows` and `onSelectedRowsChange` to manage the selection state"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useState } from "react";`,
+                            "",
+                            `import { TableHeading } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
+                            "",
+                            'const tableHeadings: Array<TableHeading> = [',
+                            '    { caption: "Name", sortable: false, name: "Name" },',
+                            '    { caption: "Age", sortable: false, name: "Age" },',
+                            '    { caption: "Department", sortable: false, name: "Department" },',
+                            '];',
+                            "",
+                            `const [selectedRows, setSelectedRows] = useState<Array<string>>([]);`,
+                            "",
+                            "<TableComponent",
+                            '    selectable',
+                            '    headings={tableHeadings}',
+                            '    selectedRows={selectedRows}',
+                            '    onSelectedRowsChange={setSelectedRows}',
+                            '>',
+                            '    <tr key="item-1">',
+                            '        <td>John Doe</td>',
+                            '        <td>31</td>',
+                            '        <td>Human Resources</td>',
+                            '    </tr>',
+                            '</TableComponent>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TableComponent
+                    selectable
+                    headings={tableHeadings}
+                    selectedRows={selectableRows}
+                    onSelectedRowsChange={setSelectableRows}
+                >
+                    {numbers.map(x =>
+                        <tr key={`item-${x}`}>
+                            <td>
+                                John Doe
+                            </td>
+                            <td>
+                                {x + 30}
+                            </td>
+                            <td>
+                                Human Resources
+                            </td>
+                        </tr>
+                    )}
+                </TableComponent>
+                <p>
+                    Selected rows: {selectableRows.length === 0 ? "none" : selectableRows.join(", ")}
+                </p>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="headerCheckBoxConfig"
+                description="Visual configuration for the 'select all' checkbox in the table header. Accepts the same visual props as the Checkbox component: size, style, rounded, block, withoutBorder, hasBackgroundColor, fixBackgroundColor"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { TableHeading, TableCheckBoxConfig } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
+                            "",
+                            "/* ... */",
+                            'const tableHeadings: Array<TableHeading> = [',
+                            '    { caption: "Name", sortable: false, name: "Name" },',
+                            '    { caption: "Age", sortable: false, name: "Age" },',
+                            '    { caption: "Department", sortable: false, name: "Department" },',
+                            '];',
+                            "",
+                            `const headerCheckBoxConfig: TableCheckBoxConfig = { rounded: true };`,
+                            `const [selectedRows, setSelectedRows] = useState<Array<string>>([]);`,
+                            "",
+                            "<TableComponent",
+                            '    selectable',
+                            '    headings={tableHeadings}',
+                            '    selectedRows={selectedRows}',
+                            '    onSelectedRowsChange={setSelectedRows}',
+                            '    headerCheckBoxConfig={headerCheckBoxConfig}',
+                            '>',
+                            '    <tr key="item-1">',
+                            '        <td>John Doe</td>',
+                            '        <td>31</td>',
+                            '        <td>Human Resources</td>',
+                            '    </tr>',
+                            '</TableComponent>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TableComponent
+                    selectable
+                    headings={tableHeadings}
+                    selectedRows={headerConfigRows}
+                    onSelectedRowsChange={setHeaderConfigRows}
+                    headerCheckBoxConfig={{ rounded: true }}
+                >
+                    {numbers.map(x =>
+                        <tr key={`item-${x}`}>
+                            <td>
+                                John Doe
+                            </td>
+                            <td>
+                                {x + 30}
+                            </td>
+                            <td>
+                                Human Resources
+                            </td>
+                        </tr>
+                    )}
+                </TableComponent>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="rowCheckBoxConfig"
+                description="Visual configuration for the row selection checkboxes. Accepts the same visual props as the Checkbox component: size, style, rounded, block, withoutBorder, hasBackgroundColor, fixBackgroundColor"
+                code={
+                    <CodeExample
+                        code={[
+                            `import { TableHeading, TableCheckBoxConfig } from "@bodynarf/react.components";`,
+                            `import TableComponent from "@bodynarf/react.components/components/table";`,
+                            "",
+                            "/* ... */",
+                            'const tableHeadings: Array<TableHeading> = [',
+                            '    { caption: "Name", sortable: false, name: "Name" },',
+                            '    { caption: "Age", sortable: false, name: "Age" },',
+                            '    { caption: "Department", sortable: false, name: "Department" },',
+                            '];',
+                            "",
+                            `const rowCheckBoxConfig: TableCheckBoxConfig = { block: true };`,
+                            `const [selectedRows, setSelectedRows] = useState<Array<string>>([]);`,
+                            "/* ... */",
+                            "<TableComponent",
+                            '    selectable',
+                            '    headings={tableHeadings}',
+                            '    selectedRows={selectedRows}',
+                            '    onSelectedRowsChange={setSelectedRows}',
+                            '    rowCheckBoxConfig={rowCheckBoxConfig}',
+                            '>',
+                            '    <tr key="item-1">',
+                            '        <td>John Doe</td>',
+                            '        <td>31</td>',
+                            '        <td>Human Resources</td>',
+                            '    </tr>',
+                            '</TableComponent>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TableComponent
+                    selectable
+                    headings={tableHeadings}
+                    selectedRows={rowConfigRows}
+                    onSelectedRowsChange={setRowConfigRows}
+                    rowCheckBoxConfig={{ block: true }}
+                >
+                    {numbers.map(x =>
+                        <tr key={`item-${x}`}>
+                            <td>
+                                John Doe
+                            </td>
+                            <td>
+                                {x + 30}
+                            </td>
+                            <td>
+                                Human Resources
+                            </td>
+                        </tr>
+                    )}
+                </TableComponent>
             </ComponentUseCase>
         </section>
     );

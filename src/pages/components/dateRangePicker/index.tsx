@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 
-import { DateRangePicker as DateRangePickerComponent, DateRange } from "@bodynarf/react.components";
+import DateRangePickerComponent from "@bodynarf/react.components/components/dateRangePicker";
+import { DateRange } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
@@ -31,11 +32,17 @@ const DateRangePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateRangePicker, DateRange } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import { DateRange } from "@bodynarf/react.components";`,
+                            `import DateRangePicker from "@bodynarf/react.components/components/dateRangePicker";`,
                             "",
                             `const [range, setRange] = useState<DateRange>({ start: undefined, end: undefined });`,
                             "",
-                            `<DateRangePicker value={range} onChange={setRange} />`,
+                            `<DateRangePicker`,
+                            `    value={range}`,
+                            `    onChange={setRange}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -58,11 +65,17 @@ const DateRangePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateRangePicker, DateRange } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import { DateRange } from "@bodynarf/react.components";`,
+                            `import DateRangePicker from "@bodynarf/react.components/components/dateRangePicker";`,
                             "",
                             `const [range, setRange] = useState<DateRange>({ start: undefined, end: undefined });`,
                             "",
-                            `<DateRangePicker value={range} onChange={setRange} />`,
+                            `<DateRangePicker`,
+                            `    value={range}`,
+                            `    onChange={setRange}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -77,7 +90,10 @@ const DateRangePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateRangePicker, DateRange } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import { DateRange } from "@bodynarf/react.components";`,
+                            `import DateRangePicker from "@bodynarf/react.components/components/dateRangePicker";`,
                             "",
                             `const [range, setRange] = useState<DateRange>({ start: undefined, end: undefined });`,
                             "",
@@ -105,12 +121,13 @@ const DateRangePicker: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { DateRangePicker, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import DateRangePicker from "@bodynarf/react.components/components/dateRangePicker";`,
                             "",
                             `<DateRangePicker`,
                             `    value={range}`,
-                            `    style={ElementColor.${id}}`,
                             `    onChange={setRange}`,
+                            `    style={ElementColor.${id}}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -131,12 +148,13 @@ const DateRangePicker: FC = () => {
                 codeProvider={size =>
                     <CodeExample
                         code={[
-                            `import { DateRangePicker, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import DateRangePicker from "@bodynarf/react.components/components/dateRangePicker";`,
                             "",
                             `<DateRangePicker`,
                             `    value={range}`,
-                            `    size={ElementSize.${size}}`,
                             `    onChange={setRange}`,
+                            `    size={ElementSize.${size}}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -157,7 +175,7 @@ const DateRangePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateRangePicker } from "@bodynarf/react.components";`,
+                            `import DateRangePicker from "@bodynarf/react.components/components/dateRangePicker";`,
                             "",
                             `const minDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);`,
                             "",
@@ -184,7 +202,7 @@ const DateRangePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateRangePicker } from "@bodynarf/react.components";`,
+                            `import DateRangePicker from "@bodynarf/react.components/components/dateRangePicker";`,
                             "",
                             `const maxDate = new Date(today.getFullYear(), today.getMonth() + 2, 0);`,
                             "",
@@ -211,7 +229,7 @@ const DateRangePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateRangePicker } from "@bodynarf/react.components";`,
+                            `import DateRangePicker from "@bodynarf/react.components/components/dateRangePicker";`,
                             "",
                             `<DateRangePicker`,
                             `    value={range}`,
@@ -236,7 +254,7 @@ const DateRangePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateRangePicker } from "@bodynarf/react.components";`,
+                            `import DateRangePicker from "@bodynarf/react.components/components/dateRangePicker";`,
                             "",
                             `<DateRangePicker`,
                             `    value={range}`,
@@ -276,12 +294,12 @@ const DateRangePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateRangePicker } from "@bodynarf/react.components";`,
+                            `import DateRangePicker from "@bodynarf/react.components/components/dateRangePicker";`,
                             "",
                             `<DateRangePicker`,
                             `    value={range}`,
-                            `    labelConfig={{ placeholder: "Pick a period" }}`,
                             `    onChange={setRange}`,
+                            `    labelConfig={{ placeholder: "Pick a period" }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -301,12 +319,12 @@ const DateRangePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateRangePicker } from "@bodynarf/react.components";`,
+                            `import DateRangePicker from "@bodynarf/react.components/components/dateRangePicker";`,
                             "",
                             `<DateRangePicker`,
                             `    value={range}`,
-                            `    labelConfig={{ separator: " to " }}`,
                             `    onChange={setRange}`,
+                            `    labelConfig={{ separator: " to " }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -326,12 +344,12 @@ const DateRangePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateRangePicker } from "@bodynarf/react.components";`,
+                            `import DateRangePicker from "@bodynarf/react.components/components/dateRangePicker";`,
                             "",
                             `<DateRangePicker`,
                             `    value={range}`,
-                            `    labelConfig={{ pendingSuffix: " (pick end date)" }}`,
                             `    onChange={setRange}`,
+                            `    labelConfig={{ pendingSuffix: " (pick end date)" }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -351,12 +369,12 @@ const DateRangePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { DateRangePicker } from "@bodynarf/react.components";`,
+                            `import DateRangePicker from "@bodynarf/react.components/components/dateRangePicker";`,
                             "",
                             `<DateRangePicker`,
                             `    value={range}`,
-                            `    labelConfig={{ clearAriaLabel: "Reset selection" }}`,
                             `    onChange={setRange}`,
+                            `    labelConfig={{ clearAriaLabel: "Reset selection" }}`,
                             `/>`,
                         ].join("\n")}
                     />

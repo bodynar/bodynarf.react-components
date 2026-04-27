@@ -2,7 +2,8 @@
 
 import { Color } from "@bodynarf/utils";
 
-import { ElementPosition, ElementFloatPosition, Color as ColorComponent } from "@bodynarf/react.components";
+import ColorComponent from "@bodynarf/react.components/components/primitives/color";
+import { ElementPosition, ElementFloatPosition } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -28,7 +29,7 @@ const ColorPicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Color } from "@bodynarf/react.components";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             "<Color />",
                         ].join("\n")}
@@ -48,7 +49,8 @@ const ColorPicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Color, ElementPosition, ElementFloatPosition } from "@bodynarf/react.components";`,
+                            `import { ElementPosition, ElementFloatPosition } from "@bodynarf/react.components";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             `// preview on the right`,
                             `<Color`,
@@ -82,7 +84,7 @@ const ColorPicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Color } from "@bodynarf/react.components";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             `<Color`,
                             `    label={{ caption: "Color picker", horizontal: false }}`,
@@ -101,7 +103,7 @@ const ColorPicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Color } from "@bodynarf/react.components";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             `<Color`,
                             `    defaultValue={{ red: 75, green: 100, blue: 155 }}`,
@@ -120,7 +122,7 @@ const ColorPicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Color } from "@bodynarf/react.components";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             `<Color rounded />`,
                         ].join("\n")}
@@ -137,7 +139,7 @@ const ColorPicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Color } from "@bodynarf/react.components";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             `<Color disabled />`,
                         ].join("\n")}
@@ -154,11 +156,10 @@ const ColorPicker: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Color, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
-                            `<Color`,
-                            `    size={ElementSize.${id}}`,
-                            `/>`,
+                            `<Color size={ElementSize.${id}} />`,
                         ].join("\n")}
                     />
                 }
@@ -174,7 +175,7 @@ const ColorPicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Color } from "@bodynarf/react.components";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             `<Color name="personalColor" />`,
                         ].join("\n")}
@@ -191,7 +192,7 @@ const ColorPicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Color } from "@bodynarf/react.components";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
                             `<Color`,
                             `    onValueChange={value => console.log("value:", JSON.stringify(value))}`,

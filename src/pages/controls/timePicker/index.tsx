@@ -1,6 +1,7 @@
 ﻿import { FC, useRef } from "react";
 
-import { TimePicker as TimePickerComponent, TimeValue } from "@bodynarf/react.components";
+import TimePickerComponent from "@bodynarf/react.components/components/primitives/timePicker";
+import { TimeValue } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -10,10 +11,16 @@ import CodeExample from "@app/sharedComponents/codeExample";
 import Log, { LogRef } from "@app/sharedComponents/log";
 
 const formatTime = (time?: TimeValue): string => {
-    if (!time) { return "Not set"; }
+    if (!time) {
+        return "Not set";
+    }
+
     const h = time.hours.toString().padStart(2, "0");
     const m = time.minutes.toString().padStart(2, "0");
-    const s = time.seconds !== undefined ? ":" + time.seconds.toString().padStart(2, "0") : "";
+    const s = time.seconds !== undefined
+        ? ":" + time.seconds.toString().padStart(2, "0")
+        : "";
+
     return `${h}:${m}${s}`;
 };
 
@@ -38,7 +45,7 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker label={{ caption: "TimePicker demo", horizontal: false }} />`,
                         ].join("\n")}
@@ -58,7 +65,7 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
                             `    label={{ caption: "Select time", horizontal: true }}`,
@@ -77,11 +84,11 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    defaultValue={{ hours: 14, minutes: 30 }}`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -100,11 +107,11 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    showSeconds`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    defaultValue={{ hours: 10, minutes: 15, seconds: 30 }}`,
                             `/>`,
                         ].join("\n")}
@@ -125,11 +132,11 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    step={15}`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -148,11 +155,11 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    min="09:00"`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -171,11 +178,11 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    max="17:00"`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -194,11 +201,11 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    placeholder="hh:mm"`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -217,11 +224,11 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    rounded`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -240,12 +247,12 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    disabled`,
                             `    defaultValue={{ hours: 9, minutes: 30 }}`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -265,12 +272,12 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    readonly`,
                             `    defaultValue={{ hours: 15, minutes: 45 }}`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -290,11 +297,11 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    loading`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -313,11 +320,12 @@ const TimePicker: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { TimePicker, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    size={ElementSize.${id}}`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -337,11 +345,12 @@ const TimePicker: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { TimePicker, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    style={ElementColor.${id}}`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -361,11 +370,11 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    name="appointmentTime"`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -384,11 +393,12 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker, TimeValue } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
+                            `import { TimeValue } from "@bodynarf/react.components";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    onValueChange={value => console.log("value:", value)}`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -408,11 +418,11 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    onBlur={() => console.log("blurred")}`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -432,11 +442,11 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    onKeyDown={e => console.log("keyDown:", e.key)}`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -456,11 +466,11 @@ const TimePicker: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { TimePicker } from "@bodynarf/react.components";`,
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `    onKeyUp={e => console.log("keyUp:", e.key)}`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />

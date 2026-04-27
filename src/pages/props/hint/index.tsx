@@ -1,6 +1,7 @@
 import { FC } from "react";
 
-import { ElementPosition, Text as TextComponent } from "@bodynarf/react.components";
+import TextComponent from "@bodynarf/react.components/components/primitives/text";
+import { ElementPosition } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";

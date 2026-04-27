@@ -1,6 +1,6 @@
 import { FC, useRef } from "react";
 
-import { Accordion as AccordionComponent } from "@bodynarf/react.components";
+import AccordionComponent from "@bodynarf/react.components/components/accordion";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -28,7 +28,7 @@ const Accordion: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Accordion } from "@bodynarf/react.components";`,
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
                             "",
                             `<Accordion caption="Header">`,
                             "    Content",
@@ -52,7 +52,7 @@ const Accordion: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Accordion } from "@bodynarf/react.components";`,
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
                             "",
                             `<Accordion caption="Header">`,
                             "    <p>Any <strong>ReactNode</strong> content.</p>",
@@ -73,7 +73,7 @@ const Accordion: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Accordion } from "@bodynarf/react.components";`,
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
                             "",
                             `<Accordion caption="My section title">`,
                             "    Content",
@@ -94,7 +94,7 @@ const Accordion: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Accordion } from "@bodynarf/react.components";`,
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
                             "",
                             `<Accordion caption="Header" defaultExpanded>`,
                             "    Content",
@@ -115,7 +115,8 @@ const Accordion: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Accordion, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
                             "",
                             `<Accordion`,
                             `    caption="Size"`,
@@ -141,12 +142,13 @@ const Accordion: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Accordion, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
                             "",
                             `<Accordion`,
                             `    caption="Color"`,
-                            `    style={ElementColor.${id}}`,
                             `    defaultExpanded`,
+                            `    style={ElementColor.${id}}`,
                             `>`,
                             "    Content",
                             "</Accordion>",
@@ -167,7 +169,7 @@ const Accordion: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Accordion } from "@bodynarf/react.components";`,
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
                             "",
                             `<Accordion`,
                             `    caption="onToggle handler"`,

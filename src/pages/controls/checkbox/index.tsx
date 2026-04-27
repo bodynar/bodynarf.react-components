@@ -1,6 +1,8 @@
 ﻿import { FC, useRef } from "react";
 
-import { Icon, ElementColor, Checkbox as CheckboxComponent } from "@bodynarf/react.components";
+import Icon from "@bodynarf/react.components/components/icon";
+import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";
+import { ElementColor } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -79,7 +81,7 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             "<Checkbox />",
                         ].join("\n")}
@@ -99,7 +101,7 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox label={{ caption: "Checkbox demo" }} />`,
                         ].join("\n")}
@@ -116,7 +118,7 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox`,
                             `    block`,
@@ -139,7 +141,7 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox`,
                             `    withoutBorder`,
@@ -162,7 +164,8 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox`,
                             `    hasBackgroundColor`,
@@ -187,7 +190,8 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox`,
                             `    fixBackgroundColor`,
@@ -214,7 +218,7 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox`,
                             `    isFormLabel`,
@@ -237,7 +241,7 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `// checked: true`,
                             `<Checkbox`,
@@ -267,7 +271,7 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox`,
                             `    indeterminate`,
@@ -290,7 +294,7 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox`,
                             `    defaultValue`,
@@ -313,7 +317,7 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox`,
                             `    rounded`,
@@ -336,7 +340,7 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox`,
                             `    disabled`,
@@ -359,7 +363,8 @@ const Checkbox: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Checkbox, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox`,
                             `    size={ElementSize.${id}}`,
@@ -383,7 +388,8 @@ const Checkbox: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Checkbox, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox`,
                             `    style={ElementColor.${id}}`,
@@ -407,7 +413,7 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox`,
                             `    name="agreement"`,
@@ -430,7 +436,7 @@ const Checkbox: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Checkbox } from "@bodynarf/react.components";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
                             `<Checkbox`,
                             `    label={{ caption: "Checkbox demo" }}`,

@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 
-import { SidePanel as SidePanelComponent, SidePanelSize, ElementPosition } from "@bodynarf/react.components";
+import SidePanelComponent from "@bodynarf/react.components/components/sidePanel";
+import { SidePanelSize, ElementPosition } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -36,11 +37,16 @@ const SidePanel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SidePanel } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
                             "",
                             `const [isOpen, setIsOpen] = useState(false);`,
                             "",
-                            `<SidePanel isOpen={isOpen} onClose={() => setIsOpen(false)}>`,
+                            `<SidePanel`,
+                            `    isOpen={isOpen}`,
+                            `    onClose={() => setIsOpen(false)}`,
+                            `>`,
                             `    <SidePanel.Body>`,
                             `        <p>Side panel content.</p>`,
                             `    </SidePanel.Body>`,
@@ -74,12 +80,19 @@ const SidePanel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SidePanel, SidePanelSize } from "@bodynarf/react.components";`,
+                            `import { SidePanelSize } from "@bodynarf/react.components";`,
+                            `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SidePanel isOpen={isOpen} onClose={onClose} size={SidePanelSize.Small}>`,
-                            `    <SidePanel.Body><p>Small (10vw)</p></SidePanel.Body>`,
+                            `<SidePanel`,
+                            `    isOpen={isOpen}`,
+                            `    onClose={onClose}`,
+                            `    size={SidePanelSize.Small}`,
+                            `>`,
+                            `    <SidePanel.Body>`,
+                            `        <p>Small (10vw)</p>`,
+                            `    </SidePanel.Body>`,
                             `</SidePanel>`,
                         ].join("\n")}
                     />
@@ -116,12 +129,18 @@ const SidePanel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SidePanel } from "@bodynarf/react.components";`,
+                            `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SidePanel isOpen={isOpen} onClose={onClose} customWidth="320px">`,
-                            `    <SidePanel.Body><p>Exactly 320px wide.</p></SidePanel.Body>`,
+                            `<SidePanel`,
+                            `    isOpen={isOpen}`,
+                            `    onClose={onClose}`,
+                            `    customWidth="320px"`,
+                            `>`,
+                            `    <SidePanel.Body>`,
+                            `        <p>Exactly 320px wide.</p>`,
+                            `    </SidePanel.Body>`,
                             `</SidePanel>`,
                         ].join("\n")}
                     />
@@ -148,16 +167,17 @@ const SidePanel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SidePanel, ElementPosition } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ElementPosition } from "@bodynarf/react.components";`,
+                            `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
                             "",
                             `<SidePanel`,
                             `    isOpen={isOpen}`,
                             `    onClose={onClose}`,
                             `    position={ElementPosition.Right}`,
                             `>`,
-                            `    <SidePanel.Body><p>Slides from the right.</p></SidePanel.Body>`,
+                            `    <SidePanel.Body>`,
+                            `        <p>Slides from the right.</p>`,
+                            `    </SidePanel.Body>`,
                             `</SidePanel>`,
                         ].join("\n")}
                     />
@@ -181,12 +201,18 @@ const SidePanel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SidePanel } from "@bodynarf/react.components";`,
+                            `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SidePanel isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>`,
-                            `    <SidePanel.Body><p>Clicking backdrop won't close this.</p></SidePanel.Body>`,
+                            `<SidePanel`,
+                            `    isOpen={isOpen}`,
+                            `    onClose={onClose}`,
+                            `    closeOnOverlayClick={false}`,
+                            `>`,
+                            `    <SidePanel.Body>`,
+                            `        <p>Clicking backdrop won't close this.</p>`,
+                            `    </SidePanel.Body>`,
                             `</SidePanel>`,
                         ].join("\n")}
                     />
@@ -215,13 +241,18 @@ const SidePanel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SidePanel } from "@bodynarf/react.components";`,
+                            `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SidePanel isOpen={isOpen} onClose={onClose}>`,
+                            `<SidePanel`,
+                            `    isOpen={isOpen}`,
+                            `    onClose={onClose}`,
+                            `>`,
                             `    <SidePanel.Title>Panel title</SidePanel.Title>`,
-                            `    <SidePanel.Body><p>Content</p></SidePanel.Body>`,
+                            `    <SidePanel.Body>`,
+                            `        <p>Content</p>`,
+                            `    </SidePanel.Body>`,
                             `</SidePanel>`,
                         ].join("\n")}
                     />
@@ -245,13 +276,20 @@ const SidePanel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SidePanel } from "@bodynarf/react.components";`,
+                            `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SidePanel isOpen={isOpen} onClose={onClose}>`,
-                            `    <SidePanel.Title showCloseButton>Panel title</SidePanel.Title>`,
-                            `    <SidePanel.Body><p>Content</p></SidePanel.Body>`,
+                            `<SidePanel`,
+                            `    isOpen={isOpen}`,
+                            `    onClose={onClose}`,
+                            `>`,
+                            `    <SidePanel.Title showCloseButton>`,
+                            `        Panel title`,
+                            `    </SidePanel.Title>`,
+                            `    <SidePanel.Body>`,
+                            `        <p>Content</p>`,
+                            `    </SidePanel.Body>`,
                             `</SidePanel>`,
                         ].join("\n")}
                     />
@@ -275,15 +313,23 @@ const SidePanel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SidePanel } from "@bodynarf/react.components";`,
+                            `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
                             "",
                             "/* ... */",
                             "",
-                            `<SidePanel isOpen={isOpen} onClose={onClose}>`,
-                            `    <SidePanel.Title showCloseButton closeLabel="Dismiss panel">`,
+                            `<SidePanel`,
+                            `    isOpen={isOpen}`,
+                            `    onClose={onClose}`,
+                            `>`,
+                            `    <SidePanel.Title`,
+                            `       showCloseButton`,
+                            `       closeLabel="Dismiss panel"`,
+                            `    >`,
                             `        Panel title`,
                             `    </SidePanel.Title>`,
-                            `    <SidePanel.Body><p>Content</p></SidePanel.Body>`,
+                            `    <SidePanel.Body>`,
+                            `        <p>Content</p>`,
+                            `    </SidePanel.Body>`,
                             `</SidePanel>`,
                         ].join("\n")}
                     />

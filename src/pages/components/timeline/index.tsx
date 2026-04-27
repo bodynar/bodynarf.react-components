@@ -1,6 +1,7 @@
 import { FC } from "react";
 
-import { ElementColor, ElementSize, Timeline as TimelineComponent, TimelineItem } from "@bodynarf/react.components";
+import TimelineComponent from "@bodynarf/react.components/components/timeline";
+import { ElementColor, ElementSize, TimelineItem } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -65,7 +66,8 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline, TimelineItem } from "@bodynarf/react.components";`,
+                            `import { TimelineItem } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             "/* ... */",
                             "",
@@ -98,7 +100,8 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline, TimelineItem } from "@bodynarf/react.components";`,
+                            `import { TimelineItem } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             "/* ... */",
                             "",
@@ -123,7 +126,8 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline, TimelineItem } from "@bodynarf/react.components";`,
+                            `import { TimelineItem } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             "/* ... */",
                             "",
@@ -148,7 +152,8 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline, TimelineItem } from "@bodynarf/react.components";`,
+                            `import { TimelineItem } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             "/* ... */",
                             "",
@@ -172,7 +177,8 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline, TimelineItem, ElementColor } from "@bodynarf/react.components";`,
+                            `import { TimelineItem, ElementColor } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             "/* ... */",
                             "",
@@ -197,7 +203,8 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline, TimelineItem } from "@bodynarf/react.components";`,
+                            `import { TimelineItem } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             "/* ... */",
                             "",
@@ -222,11 +229,14 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             "/* ... */",
                             "",
-                            `<Timeline items={events} animated />`,
+                            `<Timeline`,
+                            `    items={events}`,
+                            `    animated`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -244,11 +254,14 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             "/* ... */",
                             "",
-                            `<Timeline items={events} showConnectors={false} />`,
+                            `<Timeline`,
+                            `    items={events}`,
+                            `    showConnectors={false}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -274,7 +287,8 @@ const Timeline: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementSize, Timeline } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             "/* ... */",
                             "",
@@ -300,7 +314,8 @@ const Timeline: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementColor, Timeline } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             "/* ... */",
                             "",

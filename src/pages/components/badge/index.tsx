@@ -1,6 +1,7 @@
 import { FC } from "react";
 
-import { Badge as BadgeComponent } from "@bodynarf/react.components";
+import BadgeComponent from "@bodynarf/react.components/components/badge";
+import Icon from "@bodynarf/react.components/components/icon";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
@@ -24,7 +25,7 @@ const Badge: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Badge } from "@bodynarf/react.components";`,
+                            `import Badge from "@bodynarf/react.components/components/badge";`,
                             "",
                             "<Badge value={5}>",
                             "    <button className=\"button\">Messages</button>",
@@ -50,11 +51,12 @@ const Badge: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Badge } from "@bodynarf/react.components";`,
+                            `import Badge from "@bodynarf/react.components/components/badge";`,
+                            `import Icon from "@bodynarf/react.components/components/icon";`,
                             "",
                             "<Badge value={3}>",
                             "    <span className=\"icon is-medium\">",
-                            "        <i className=\"bi bi-bell\" />",
+                            "        <Icon name=\"bell\" />",
                             "    </span>",
                             "</Badge>",
                         ].join("\n")}
@@ -63,7 +65,7 @@ const Badge: FC = () => {
             >
                 <BadgeComponent value={3}>
                     <span className="icon is-medium">
-                        <i className="bi bi-bell" />
+                        <Icon name="bell" />
                     </span>
                 </BadgeComponent>
             </ComponentUseCase>
@@ -75,7 +77,7 @@ const Badge: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Badge } from "@bodynarf/react.components";`,
+                            `import Badge from "@bodynarf/react.components/components/badge";`,
                             "",
                             "<Badge value={42}>",
                             "    <button className=\"button\">Inbox</button>",
@@ -96,7 +98,7 @@ const Badge: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Badge } from "@bodynarf/react.components";`,
+                            `import Badge from "@bodynarf/react.components/components/badge";`,
                             "",
                             "<Badge dot>",
                             "    <button className=\"button\">Notifications</button>",
@@ -117,7 +119,7 @@ const Badge: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Badge } from "@bodynarf/react.components";`,
+                            `import Badge from "@bodynarf/react.components/components/badge";`,
                             "",
                             `// value=150, max=99 → shows "99+"`,
                             "<Badge value={150} max={99}>",
@@ -149,7 +151,8 @@ const Badge: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Badge, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Badge from "@bodynarf/react.components/components/badge";`,
                             "",
                             "<Badge",
                             `    value={3}`,
@@ -174,7 +177,7 @@ const Badge: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Badge } from "@bodynarf/react.components";`,
+                            `import Badge from "@bodynarf/react.components/components/badge";`,
                             "",
                             `// Badge is present in the DOM but invisible`,
                             "<Badge value={5} hidden>",

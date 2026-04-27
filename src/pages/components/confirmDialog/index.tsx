@@ -1,6 +1,7 @@
 import { FC, useState, useCallback, useRef } from "react";
 
-import { ConfirmDialog as ConfirmDialogComponent, ElementColor } from "@bodynarf/react.components";
+import ConfirmDialogComponent from "@bodynarf/react.components/components/confirmDialog";
+import { ElementColor } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -59,14 +60,16 @@ const ConfirmDialog: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ConfirmDialog } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import ConfirmDialog from "@bodynarf/react.components/components/confirmDialog";`,
                             "",
                             "const [isOpen, setIsOpen] = useState(false);",
                             "",
                             "<ConfirmDialog",
                             "    visible={isOpen}",
-                            "    onConfirm={() => setIsOpen(false)}",
                             "    onCancel={() => setIsOpen(false)}",
+                            "    onConfirm={() => setIsOpen(false)}",
                             "/>",
                         ].join("\n")}
                     />
@@ -96,14 +99,16 @@ const ConfirmDialog: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ConfirmDialog } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import ConfirmDialog from "@bodynarf/react.components/components/confirmDialog";`,
                             "",
                             "const [isOpen, setIsOpen] = useState(false);",
                             "",
                             "<ConfirmDialog",
                             "    visible={isOpen}",
-                            "    onConfirm={() => setIsOpen(false)}",
                             "    onCancel={() => setIsOpen(false)}",
+                            "    onConfirm={() => setIsOpen(false)}",
                             "/>",
                         ].join("\n")}
                     />
@@ -130,13 +135,13 @@ const ConfirmDialog: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ConfirmDialog } from "@bodynarf/react.components";`,
+                            `import ConfirmDialog from "@bodynarf/react.components/components/confirmDialog";`,
                             "",
                             "<ConfirmDialog",
                             "    visible={isOpen}",
                             `    title="Custom title"`,
-                            "    onConfirm={handleConfirm}",
                             "    onCancel={handleCancel}",
+                            "    onConfirm={handleConfirm}",
                             "/>",
                         ].join("\n")}
                     />
@@ -164,13 +169,13 @@ const ConfirmDialog: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ConfirmDialog } from "@bodynarf/react.components";`,
+                            `import ConfirmDialog from "@bodynarf/react.components/components/confirmDialog";`,
                             "",
                             "<ConfirmDialog",
                             "    visible={isOpen}",
-                            `    message="This action cannot be undone."`,
-                            "    onConfirm={handleConfirm}",
                             "    onCancel={handleCancel}",
+                            "    onConfirm={handleConfirm}",
+                            `    message="This action cannot be undone."`,
                             "/>",
                         ].join("\n")}
                     />
@@ -198,13 +203,13 @@ const ConfirmDialog: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ConfirmDialog } from "@bodynarf/react.components";`,
+                            `import ConfirmDialog from "@bodynarf/react.components/components/confirmDialog";`,
                             "",
                             "<ConfirmDialog",
                             "    visible={isOpen}",
-                            `    confirmLabel="Yes, delete it"`,
                             "    onConfirm={handleConfirm}",
                             "    onCancel={handleCancel}",
+                            `    confirmLabel="Yes, delete it"`,
                             "/>",
                         ].join("\n")}
                     />
@@ -232,13 +237,13 @@ const ConfirmDialog: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ConfirmDialog } from "@bodynarf/react.components";`,
+                            `import ConfirmDialog from "@bodynarf/react.components/components/confirmDialog";`,
                             "",
                             "<ConfirmDialog",
                             "    visible={isOpen}",
-                            `    cancelLabel="No, go back"`,
-                            "    onConfirm={handleConfirm}",
                             "    onCancel={handleCancel}",
+                            "    onConfirm={handleConfirm}",
+                            `    cancelLabel="No, go back"`,
                             "/>",
                         ].join("\n")}
                     />
@@ -266,13 +271,14 @@ const ConfirmDialog: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ConfirmDialog, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import ConfirmDialog from "@bodynarf/react.components/components/confirmDialog";`,
                             "",
                             "<ConfirmDialog",
                             "    visible={isOpen}",
-                            "    confirmColor={ElementColor.Success}",
-                            "    onConfirm={handleConfirm}",
                             "    onCancel={handleCancel}",
+                            "    onConfirm={handleConfirm}",
+                            "    confirmColor={ElementColor.Success}",
                             "/>",
                         ].join("\n")}
                     />
@@ -309,7 +315,7 @@ const ConfirmDialog: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ConfirmDialog } from "@bodynarf/react.components";`,
+                            `import ConfirmDialog from "@bodynarf/react.components/components/confirmDialog";`,
                             "",
                             "const handleConfirm = async () => {",
                             "    setIsLoading(true);",
@@ -353,13 +359,13 @@ const ConfirmDialog: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ConfirmDialog } from "@bodynarf/react.components";`,
+                            `import ConfirmDialog from "@bodynarf/react.components/components/confirmDialog";`,
                             "",
                             "<ConfirmDialog",
-                            "    visible={isOpen}",
                             `    icon="trash"`,
-                            "    onConfirm={handleConfirm}",
+                            "    visible={isOpen}",
                             "    onCancel={handleCancel}",
+                            "    onConfirm={handleConfirm}",
                             "/>",
                         ].join("\n")}
                     />
@@ -388,13 +394,13 @@ const ConfirmDialog: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ConfirmDialog } from "@bodynarf/react.components";`,
+                            `import ConfirmDialog from "@bodynarf/react.components/components/confirmDialog";`,
                             "",
                             "<ConfirmDialog",
-                            "    visible={isOpen}",
                             "    cancellable",
-                            "    onConfirm={handleConfirm}",
+                            "    visible={isOpen}",
                             "    onCancel={handleCancel}",
+                            "    onConfirm={handleConfirm}",
                             "/>",
                         ].join("\n")}
                     />
@@ -424,7 +430,7 @@ const ConfirmDialog: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ConfirmDialog } from "@bodynarf/react.components";`,
+                            `import ConfirmDialog from "@bodynarf/react.components/components/confirmDialog";`,
                             "",
                             "<ConfirmDialog",
                             "    visible={isOpen}",
@@ -460,7 +466,7 @@ const ConfirmDialog: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { ConfirmDialog } from "@bodynarf/react.components";`,
+                            `import ConfirmDialog from "@bodynarf/react.components/components/confirmDialog";`,
                             "",
                             "<ConfirmDialog",
                             "    visible={isOpen}",

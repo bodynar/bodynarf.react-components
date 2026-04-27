@@ -1,6 +1,7 @@
 import { FC, useRef } from "react";
 
-import { Alert as AlertComponent, ElementColor } from "@bodynarf/react.components";
+import AlertComponent from "@bodynarf/react.components/components/alert";
+import { ElementColor } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
@@ -27,7 +28,7 @@ const Alert: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Alert } from "@bodynarf/react.components";`,
+                            `import Alert from "@bodynarf/react.components/components/alert";`,
                             "",
                             "<Alert>",
                             "    This is a default alert message.",
@@ -51,7 +52,7 @@ const Alert: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Alert } from "@bodynarf/react.components";`,
+                            `import Alert from "@bodynarf/react.components/components/alert";`,
                             "",
                             "<Alert>",
                             "    <p>Any <strong>ReactNode</strong> can go here.</p>",
@@ -72,7 +73,8 @@ const Alert: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Alert, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Alert from "@bodynarf/react.components/components/alert";`,
                             "",
                             "<Alert",
                             `    color={ElementColor.${id}}`,
@@ -96,7 +98,8 @@ const Alert: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Alert, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Alert from "@bodynarf/react.components/components/alert";`,
                             "",
                             "<Alert",
                             `    header="Important notice"`,
@@ -120,15 +123,24 @@ const Alert: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Alert, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Alert from "@bodynarf/react.components/components/alert";`,
                             "",
                             `// closable: true (default)`,
-                            "<Alert header=\"Notice\" color={ElementColor.Info} closable>",
+                            "<Alert",
+                            "    closable",
+                            "    header=\"Notice\"",
+                            "    color={ElementColor.Info}",
+                            ">",
                             "    Closable alert.",
                             "</Alert>",
                             "",
                             `// closable: false`,
-                            "<Alert header=\"Notice\" color={ElementColor.Info} closable={false}>",
+                            "<Alert",
+                            "    closable={false}",
+                            "    header=\"Notice\"",
+                            "    color={ElementColor.Info}",
+                            ">",
                             "    Non-closable alert.",
                             "</Alert>",
                         ].join("\n")}
@@ -158,12 +170,13 @@ const Alert: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Alert, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Alert from "@bodynarf/react.components/components/alert";`,
                             "",
                             "<Alert",
                             `    header="Notice"`,
-                            `    color={ElementColor.Info}`,
                             `    closeLabel="Dismiss"`,
+                            `    color={ElementColor.Info}`,
                             ">",
                             "    Alert with custom close button label.",
                             "</Alert>",
@@ -183,7 +196,8 @@ const Alert: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Alert, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Alert from "@bodynarf/react.components/components/alert";`,
                             "",
                             "<Alert",
                             `    header="Closable"`,

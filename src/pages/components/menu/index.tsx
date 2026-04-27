@@ -1,6 +1,6 @@
 import { FC, useCallback, useRef, useState } from "react";
 
-import { Menu as MenuComponent } from "@bodynarf/react.components";
+import MenuComponent from "@bodynarf/react.components/components/menu";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -31,9 +31,7 @@ const Menu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Menu } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Menu from "@bodynarf/react.components/components/menu";`,
                             "",
                             `<Menu`,
                             `    sections={[`,
@@ -75,9 +73,7 @@ const Menu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Menu } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Menu from "@bodynarf/react.components/components/menu";`,
                             "",
                             `<Menu`,
                             `    sections={[`,
@@ -132,14 +128,16 @@ const Menu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Menu } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import Menu from "@bodynarf/react.components/components/menu";`,
                             "",
                             `const [activeId, setActiveId] = useState("dashboard");`,
                             "",
                             `<Menu`,
                             `    activeItemId={activeId}`,
-                            `    sections={[{ items: [...] }]}`,
                             `    onItemClick={setActiveId}`,
+                            `    sections={[{ items: [...] }]}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -170,9 +168,8 @@ const Menu: FC = () => {
                     <CodeExample
                         code={[
                             `import { useCallback } from "react";`,
-                            `import { Menu } from "@bodynarf/react.components";`,
                             "",
-                            "/* ... */",
+                            `import Menu from "@bodynarf/react.components/components/menu";`,
                             "",
                             `const handleItemClick = useCallback((id: string) => {`,
                             `    console.log("clicked:", id);`,
@@ -213,9 +210,7 @@ const Menu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Menu } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Menu from "@bodynarf/react.components/components/menu";`,
                             "",
                             `<Menu`,
                             `    sections={[`,
@@ -256,9 +251,7 @@ const Menu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Menu } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Menu from "@bodynarf/react.components/components/menu";`,
                             "",
                             `<Menu`,
                             `    sections={[`,
@@ -297,9 +290,7 @@ const Menu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Menu } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Menu from "@bodynarf/react.components/components/menu";`,
                             "",
                             `<Menu`,
                             `    sections={[`,
@@ -341,9 +332,7 @@ const Menu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Menu } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Menu from "@bodynarf/react.components/components/menu";`,
                             "",
                             `<Menu`,
                             `    sections={[`,
@@ -387,14 +376,12 @@ const Menu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Menu } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Menu from "@bodynarf/react.components/components/menu";`,
                             "",
                             `<Menu`,
                             `    className="my-custom-menu"`,
-                            `    sections={[{ items: [{ id: "home", label: "Home" }] }]}`,
                             `    onItemClick={() => undefined}`,
+                            `    sections={[{ items: [{ id: "home", label: "Home" }] }]}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -423,14 +410,12 @@ const Menu: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Menu } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Menu from "@bodynarf/react.components/components/menu";`,
                             "",
                             `<Menu`,
                             `    title="Navigation menu"`,
-                            `    sections={[{ items: [{ id: "home", label: "Home" }] }]}`,
                             `    onItemClick={() => undefined}`,
+                            `    sections={[{ items: [{ id: "home", label: "Home" }] }]}`,
                             `/>`,
                         ].join("\n")}
                     />

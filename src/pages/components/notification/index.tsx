@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 
-import { NotificationContainer, useNotification, ElementColor } from "@bodynarf/react.components";
+import NotificationContainer, { useNotification } from "@bodynarf/react.components/components/notification";
+import { ElementColor } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -37,7 +38,8 @@ const Notification: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NotificationContainer, useNotification } from "@bodynarf/react.components";`,
+                            `import { useNotification } from "@bodynarf/react.components";`,
+                            `import NotificationContainer from "@bodynarf/react.components/components/notification";`,
                             "",
                             `// App root:`,
                             `<NotificationContainer.Provider>`,
@@ -75,7 +77,8 @@ const Notification: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NotificationContainer, ElementPosition } from "@bodynarf/react.components";`,
+                            `import { ElementPosition } from "@bodynarf/react.components";`,
+                            `import NotificationContainer from "@bodynarf/react.components/components/notification";`,
                             "",
                             `<NotificationContainer position={ElementPosition.Left} />`,
                             `// or`,
@@ -103,7 +106,7 @@ const Notification: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { NotificationContainer } from "@bodynarf/react.components";`,
+                            `import NotificationContainer from "@bodynarf/react.components/components/notification";`,
                             "",
                             `<NotificationContainer maxVisible={3} />`,
                         ].join("\n")}

@@ -1,12 +1,12 @@
 import { FC, useState } from "react";
 
-import { OtpInput as OtpInputComponent, ElementColor } from "@bodynarf/react.components";
+import { emptyFn } from "@bodynarf/utils";
+import OtpInputComponent from "@bodynarf/react.components/components/otpInput";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
-import { emptyFn } from "@bodynarf/utils";
 
 /** OtpInput component demo */
 const OtpInput: FC = () => {
@@ -30,18 +30,23 @@ const OtpInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { OtpInput } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import OtpInput from "@bodynarf/react.components/components/otpInput";`,
                             "",
                             `const [value, setValue] = useState("");`,
                             "",
-                            `<OtpInput value={value} onChange={setValue} />`,
+                            `<OtpInput`,
+                            `    value={value}`,
+                            `    onChange={setValue}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <div>
                     <OtpInputComponent value={value} onChange={setValue} />
-                    <p className="mt-1 has-text-grey">Value: "{value}"</p>
+                    <p className="mt-1 has-text-grey">Value: &quot;{value}&quot;</p>
                 </div>
             </ComponentUseCase>
 
@@ -52,16 +57,20 @@ const OtpInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { OtpInput } from "@bodynarf/react.components";`,
+                            `import OtpInput from "@bodynarf/react.components/components/otpInput";`,
                             "",
-                            `<OtpInput value={pin} length={4} onChange={setPin} />`,
+                            `<OtpInput`,
+                            `    value={pin}`,
+                            `    length={4}`,
+                            `    onChange={setPin}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <div>
                     <OtpInputComponent value={pin} length={4} onChange={setPin} />
-                    <p className="mt-1 has-text-grey">PIN: "{pin}"</p>
+                    <p className="mt-1 has-text-grey">PIN: &quot;{pin}&quot;</p>
                 </div>
             </ComponentUseCase>
 
@@ -72,7 +81,7 @@ const OtpInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { OtpInput } from "@bodynarf/react.components";`,
+                            `import OtpInput from "@bodynarf/react.components/components/otpInput";`,
                             "",
                             `<OtpInput value={value} type="password" onChange={setValue} />`,
                         ].join("\n")}
@@ -81,7 +90,7 @@ const OtpInput: FC = () => {
             >
                 <div>
                     <OtpInputComponent value={passwordValue} type="password" onChange={setPasswordValue} />
-                    <p className="mt-1 has-text-grey">Value: "{passwordValue}"</p>
+                    <p className="mt-1 has-text-grey">Value: &quot;{passwordValue}&quot;</p>
                 </div>
             </ComponentUseCase>
 
@@ -92,9 +101,13 @@ const OtpInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { OtpInput } from "@bodynarf/react.components";`,
+                            `import OtpInput from "@bodynarf/react.components/components/otpInput";`,
                             "",
-                            `<OtpInput value="123456" disabled onChange={() => {}} />`,
+                            `<OtpInput`,
+                            `    disabled`,
+                            `    value="123456"`,
+                            `    onChange={() => {}}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -109,9 +122,14 @@ const OtpInput: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { OtpInput, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import OtpInput from "@bodynarf/react.components/components/otpInput";`,
                             "",
-                            `<OtpInput value="" color={ElementColor.${id}} onChange={() => {}} />`,
+                            `<OtpInput`,
+                            `    value=""`,
+                            `    onChange={() => {}}`,
+                            `    color={ElementColor.${id}}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -127,16 +145,20 @@ const OtpInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { OtpInput } from "@bodynarf/react.components";`,
+                            `import OtpInput from "@bodynarf/react.components/components/otpInput";`,
                             "",
-                            `<OtpInput value={value} numbersOnly={false} onChange={setValue} />`,
+                            `<OtpInput`,
+                            `    value={value}`,
+                            `    numbersOnly={false}`,
+                            `    onChange={setValue}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <div>
                     <OtpInputComponent value={value} numbersOnly={false} onChange={setValue} />
-                    <p className="mt-1 has-text-grey">Value: "{value}"</p>
+                    <p className="mt-1 has-text-grey">Value: &quot;{value}&quot;</p>
                 </div>
             </ComponentUseCase>
 
@@ -147,9 +169,13 @@ const OtpInput: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { OtpInput } from "@bodynarf/react.components";`,
+                            `import OtpInput from "@bodynarf/react.components/components/otpInput";`,
                             "",
-                            `<OtpInput value={value} autoFocus onChange={setValue} />`,
+                            `<OtpInput`,
+                            `    autoFocus`,
+                            `    value={value}`,
+                            `    onChange={setValue}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }

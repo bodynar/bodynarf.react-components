@@ -1,6 +1,7 @@
 import { FC, useRef, useState } from "react";
 
-import { Carousel as CarouselComponent, CarouselEffect } from "@bodynarf/react.components";
+import CarouselComponent from "@bodynarf/react.components/components/carousel";
+import { CarouselEffect } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -54,7 +55,7 @@ const Carousel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Carousel } from "@bodynarf/react.components";`,
+                            `import Carousel from "@bodynarf/react.components/components/carousel";`,
                             "",
                             `<Carousel`,
                             `    items={[`,
@@ -79,7 +80,7 @@ const Carousel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Carousel } from "@bodynarf/react.components";`,
+                            `import Carousel from "@bodynarf/react.components/components/carousel";`,
                             "",
                             `<Carousel`,
                             `    items={[`,
@@ -102,7 +103,8 @@ const Carousel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Carousel, CarouselEffect } from "@bodynarf/react.components";`,
+                            `import { CarouselEffect } from "@bodynarf/react.components";`,
+                            `import Carousel from "@bodynarf/react.components/components/carousel";`,
                             "",
                             `<Carousel items={slides} effect={CarouselEffect.Fade} />`,
                             `<Carousel items={slides} effect={CarouselEffect.Slide} />`,
@@ -129,7 +131,7 @@ const Carousel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Carousel } from "@bodynarf/react.components";`,
+                            `import Carousel from "@bodynarf/react.components/components/carousel";`,
                             "",
                             `<Carousel items={slides} autoPlay />`,
                         ].join("\n")}
@@ -146,9 +148,13 @@ const Carousel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Carousel } from "@bodynarf/react.components";`,
+                            `import Carousel from "@bodynarf/react.components/components/carousel";`,
                             "",
-                            `<Carousel items={slides} autoPlay interval={1000} />`,
+                            `<Carousel`,
+                            `    autoPlay`,
+                            `    items={slides}`,
+                            `    interval={1000}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -163,7 +169,7 @@ const Carousel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Carousel } from "@bodynarf/react.components";`,
+                            `import Carousel from "@bodynarf/react.components/components/carousel";`,
                             "",
                             `<Carousel items={slides} showDots={false} />`,
                         ].join("\n")}
@@ -189,7 +195,7 @@ const Carousel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Carousel } from "@bodynarf/react.components";`,
+                            `import Carousel from "@bodynarf/react.components/components/carousel";`,
                             "",
                             `<Carousel items={slides} showArrows={false} />`,
                         ].join("\n")}
@@ -215,7 +221,7 @@ const Carousel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Carousel } from "@bodynarf/react.components";`,
+                            `import Carousel from "@bodynarf/react.components/components/carousel";`,
                             "",
                             `<Carousel items={slides} loop={false} />`,
                         ].join("\n")}
@@ -241,7 +247,9 @@ const Carousel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Carousel } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import Carousel from "@bodynarf/react.components/components/carousel";`,
                             "",
                             `const [activeIndex, setActiveIndex] = useState(0);`,
                             "",
@@ -265,7 +273,7 @@ const Carousel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Carousel } from "@bodynarf/react.components";`,
+                            `import Carousel from "@bodynarf/react.components/components/carousel";`,
                             "",
                             `<Carousel`,
                             `    items={slides}`,
@@ -289,9 +297,12 @@ const Carousel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Carousel } from "@bodynarf/react.components";`,
+                            `import Carousel from "@bodynarf/react.components/components/carousel";`,
                             "",
-                            `<Carousel items={slides} prevSlideLabel="Назад" nextSlideLabel="Вперёд" />`,
+                            `<Carousel`,
+                            `    items={slides}`,
+                            `    prevSlideLabel="Назад"`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -306,7 +317,7 @@ const Carousel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Carousel } from "@bodynarf/react.components";`,
+                            `import Carousel from "@bodynarf/react.components/components/carousel";`,
                             "",
                             `<Carousel items={slides} nextSlideLabel="Вперёд" />`,
                         ].join("\n")}
@@ -323,7 +334,7 @@ const Carousel: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Carousel } from "@bodynarf/react.components";`,
+                            `import Carousel from "@bodynarf/react.components/components/carousel";`,
                             "",
                             `<Carousel items={slides} goToSlideLabel="Перейти к слайду {0}" />`,
                         ].join("\n")}

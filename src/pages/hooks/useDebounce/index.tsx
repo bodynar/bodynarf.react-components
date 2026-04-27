@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { useDebounce } from "@bodynarf/react.components";
+import { useDebounce } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -24,6 +24,8 @@ const UseDebounce: FC = () => {
                 code={
                     <CodeExample
                         code={[
+                            `import { useState } from "react";`,
+                            "",
                             `import { useDebounce } from "@bodynarf/react.components/hooks";`,
                             "",
                             `const [inputValue, setInputValue] = useState("");`,

@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { SegmentedControl as SegmentedControlComponent } from "@bodynarf/react.components";
+import SegmentedControlComponent from "@bodynarf/react.components/components/segmentedControl";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
@@ -52,7 +52,9 @@ const SegmentedControl: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SegmentedControl } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import SegmentedControl from "@bodynarf/react.components/components/segmentedControl";`,
                             "",
                             `type View = "list" | "grid" | "table";`,
                             `const [view, setView] = useState<View>("list");`,
@@ -93,13 +95,14 @@ const SegmentedControl: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { SegmentedControl, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import SegmentedControl from "@bodynarf/react.components/components/segmentedControl";`,
                             "",
                             `<SegmentedControl`,
-                            `    color={ElementColor.${id}}`,
                             `    value={value}`,
                             `    options={[...]}`,
                             `    onChange={setValue}`,
+                            `    color={ElementColor.${id}}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -121,13 +124,14 @@ const SegmentedControl: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { SegmentedControl, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import SegmentedControl from "@bodynarf/react.components/components/segmentedControl";`,
                             "",
                             `<SegmentedControl`,
-                            `    size={ElementSize.${id}}`,
                             `    value={value}`,
                             `    options={[...]}`,
                             `    onChange={setValue}`,
+                            `    size={ElementSize.${id}}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -149,7 +153,7 @@ const SegmentedControl: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SegmentedControl } from "@bodynarf/react.components";`,
+                            `import SegmentedControl from "@bodynarf/react.components/components/segmentedControl";`,
                             "",
                             `<SegmentedControl`,
                             `    fullWidth`,
@@ -176,7 +180,7 @@ const SegmentedControl: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SegmentedControl } from "@bodynarf/react.components";`,
+                            `import SegmentedControl from "@bodynarf/react.components/components/segmentedControl";`,
                             "",
                             `<SegmentedControl`,
                             `    disabled`,
@@ -209,7 +213,7 @@ const SegmentedControl: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SegmentedControl } from "@bodynarf/react.components";`,
+                            `import SegmentedControl from "@bodynarf/react.components/components/segmentedControl";`,
                             "",
                             `<SegmentedControl`,
                             `    value={view}`,
@@ -238,7 +242,7 @@ const SegmentedControl: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SegmentedControl } from "@bodynarf/react.components";`,
+                            `import SegmentedControl from "@bodynarf/react.components/components/segmentedControl";`,
                             "",
                             `<SegmentedControl`,
                             `    value={value}`,

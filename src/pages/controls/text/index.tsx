@@ -1,6 +1,7 @@
 ﻿import { FC, useRef } from "react";
 
-import { Icon, Text as TextComponent } from "@bodynarf/react.components";
+import Icon from "@bodynarf/react.components/components/icon";
+import TextComponent from "@bodynarf/react.components/components/primitives/text";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -30,7 +31,7 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text />`,
                         ].join("\n")}
@@ -50,7 +51,7 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
                             `    label={{ caption: "Text demo", horizontal: false }}`,
@@ -69,7 +70,7 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
                             `    defaultValue="bodynarf bulma react"`,
@@ -92,7 +93,7 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
                             `    placeholder="Enter text here"`,
@@ -115,7 +116,7 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
                             `    rounded`,
@@ -138,7 +139,7 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
                             `    disabled`,
@@ -161,7 +162,7 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
                             `    readonly`,
@@ -186,7 +187,8 @@ const Text: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Text, ElementSize } from "@bodynarf/react.components";`,
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
                             `    size={ElementSize.${id}}`,
@@ -210,7 +212,7 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
                             `    loading`,
@@ -233,7 +235,8 @@ const Text: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { Text, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
                             `    style={ElementColor.${id}}`,
@@ -257,7 +260,7 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
                             `    name="firstName"`,
@@ -288,7 +291,7 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
                             `    autoFocus`,
@@ -311,7 +314,7 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
                             `    label={{ caption: "Text demo", horizontal: true }}`,
@@ -335,11 +338,11 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
-                            `    label={{ caption: "Text demo", horizontal: true }}`,
                             `    onBlur={() => console.log("blurred")}`,
+                            `    label={{ caption: "Text demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -359,11 +362,11 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
-                            `    label={{ caption: "Text demo", horizontal: true }}`,
                             `    onKeyDown={e => console.log("keyDown:", e.key)}`,
+                            `    label={{ caption: "Text demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -383,11 +386,11 @@ const Text: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Text } from "@bodynarf/react.components";`,
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
                             "",
                             `<Text`,
-                            `    label={{ caption: "Text demo", horizontal: true }}`,
                             `    onKeyUp={e => console.log("keyUp:", e.key)}`,
+                            `    label={{ caption: "Text demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
