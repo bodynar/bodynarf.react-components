@@ -17,6 +17,7 @@ import UseClipboard from "./useClipboard";
 import UseKeyPress from "./useKeyPress";
 import UseFocus from "./useFocus";
 import UseWindowSize from "./useWindowSize";
+import UseComplexTable from "./useComplexTable";
 
 const hooks: MenuItem = {
     name: "hooks-group",
@@ -112,6 +113,12 @@ const hooks: MenuItem = {
             path: "/hooks/useWindowSize",
             caption: "useWindowSize",
             component: <UseWindowSize />,
+            version: "1.15",
+        },
+        {
+            path: "/hooks/useComplexTable",
+            caption: "useComplexTable",
+            component: <UseComplexTable />,
             version: "1.15",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
