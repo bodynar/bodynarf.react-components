@@ -188,9 +188,10 @@ const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
 /** Menu item with link */
 // eslint-disable-next-line react/no-multi-comp
 const MenuItem: FC<RouteMenuItem & { activeItem?: RouteMenuItem; }> = ({
-    path, caption, activeItem, version,
+    path, caption, activeItem, createVersion, updateVersion,
 }) => {
-    const isNew = !isNullOrEmpty(version) && version === packageVersionShort;
+    const isNew = !isNullOrEmpty(createVersion) && createVersion === packageVersionShort;
+    const isUpdated = !isNullOrEmpty(updateVersion) && updateVersion !== packageVersionShort;
 
     return (
         <li>
@@ -205,6 +206,14 @@ const MenuItem: FC<RouteMenuItem & { activeItem?: RouteMenuItem; }> = ({
                         style={{ fontSize: "0.65rem", padding: "0 0.4em", height: "1.25em" }}
                     >
                         NEW
+                    </span>
+                ) : isUpdated ? (
+                    <span
+                        title="UPDATED"
+                        className="tag is-info ml-2"
+                        style={{ fontSize: "0.65rem", padding: "0 0.4em", height: "1.25em" }}
+                    >
+                        UPD
                     </span>
                 ) : null}
             </Link>

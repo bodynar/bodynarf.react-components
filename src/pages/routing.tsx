@@ -31,7 +31,10 @@ export type RouteMenuItem = Omit<MenuItem, "children" | "name"> & {
     component: ReactNode;
 
     /** Version when component was added */
-    version?: string;
+    createVersion?: string;
+
+    /** Version when component was last updated */
+    updateVersion?: string;
 };
 
 const routeList: Array<RouteMenuItem | MenuItem> = [

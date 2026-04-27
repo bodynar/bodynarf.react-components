@@ -33,7 +33,7 @@ const CodeExample: FC<CodeExampleProps> = ({
     hideLanguage = false,
 }) => {
     const [isCopied, setIsCopied] = useState(false);
-    const [, setTimerId] = useState<NodeJS.Timeout | undefined>();
+    const [, setTimerId] = useState<ReturnType<typeof setTimeout> | undefined>();
 
     const onCopyBtnClick = useCallback(() => {
         window.navigator.clipboard
@@ -46,7 +46,10 @@ const CodeExample: FC<CodeExampleProps> = ({
             const timerId = setTimeout(() => {
                 setIsCopied(false);
                 setTimerId(x => {
-                    clearTimeout(x);
+                    if (x) {
+                        clearTimeout(x);
+                    }
+
                     return undefined;
                 });
             }, 3000);
