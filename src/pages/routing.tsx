@@ -6,6 +6,7 @@ import componentsRoutes from "./components";
 import controlsRoutes from "./controls";
 import propsRoutes from "./props";
 import hooksRoutes from "./hooks";
+import utilsRoutes from "./utils";
 
 /** Menu single item */
 export type MenuItem = {
@@ -47,6 +48,7 @@ const routeList: Array<RouteMenuItem | MenuItem> = [
     { ...controlsRoutes },
     { ...propsRoutes },
     { ...hooksRoutes },
+    { ...utilsRoutes },
 ];
 
 export default routeList;
