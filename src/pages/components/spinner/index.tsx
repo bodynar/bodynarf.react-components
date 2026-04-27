@@ -38,8 +38,6 @@ const Spinner: FC = () => {
                         code={[
                             `import Spinner from "@bodynarf/react.components/components/spinner";`,
                             "",
-                            "/* ... */",
-                            "",
                             "<Spinner />",
                         ].join("\n")}
                     />
@@ -66,8 +64,6 @@ const Spinner: FC = () => {
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import Spinner from "@bodynarf/react.components/components/spinner";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Spinner size={ElementSize.${id}} />`,
                         ].join("\n")}
                     />
@@ -86,8 +82,6 @@ const Spinner: FC = () => {
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import Spinner from "@bodynarf/react.components/components/spinner";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<Spinner color={ElementColor.Success} />`,
                         ].join("\n")}
@@ -122,8 +116,6 @@ const Spinner: FC = () => {
                         code={[
                             `import Spinner from "@bodynarf/react.components/components/spinner";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<div style={{ position: "relative", height: "80px" }}>`,
                             "    <Spinner overlay />",
                             "    <p>Content behind the overlay</p>",
@@ -155,8 +147,6 @@ const Spinner: FC = () => {
                     <CodeExample
                         code={[
                             `import Spinner from "@bodynarf/react.components/components/spinner";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<Spinner loadingLabel="Fetching data..." />`,
                         ].join("\n")}

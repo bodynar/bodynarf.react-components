@@ -27,8 +27,6 @@ const Stat: FC = () => {
                         code={[
                             `import Stat from "@bodynarf/react.components/components/stat";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Stat`,
                             `    value={1024}`,
                             `    label="Total users"`,
@@ -57,8 +55,6 @@ const Stat: FC = () => {
                         code={[
                             `import Stat from "@bodynarf/react.components/components/stat";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Stat`,
                             `    value={1024}`,
                             `    icon="people"`,
@@ -80,8 +76,6 @@ const Stat: FC = () => {
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import Stat from "@bodynarf/react.components/components/stat";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<Stat`,
                             `    value="$48,200"`,
@@ -115,8 +109,6 @@ const Stat: FC = () => {
                         code={[
                             `import { StatTrendDirection } from "@bodynarf/react.components";`,
                             `import Stat from "@bodynarf/react.components/components/stat";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<Stat`,
                             `    value="98.7%"`,

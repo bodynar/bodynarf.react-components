@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 
 import { emptyFn } from "@bodynarf/utils";
+import { ElementSize } from "@bodynarf/react.components";
 import OtpInputComponent from "@bodynarf/react.components/components/otpInput";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -188,6 +189,34 @@ const OtpInput: FC = () => {
                     autoFocus
                     onChange={emptyFn}
                 />
+            </ComponentUseCase>
+            <ComponentUseCase
+                captionIsCode
+                caption="size"
+                description="Controls the visual size of each cell. Accepts any ElementSize value. Defaults to ElementSize.Normal."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import OtpInput from "@bodynarf/react.components/components/otpInput";`,
+                            "",
+                            `<OtpInput`,
+                            `    value=""`,
+                            `    onChange={() => {}}`,
+                            `    size={ElementSize.Large}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <div className="is-flex is-flex-direction-column" style={{ gap: "12px" }}>
+                    {Object.values(ElementSize).map(s => (
+                        <div key={s} className="is-flex is-align-items-center" style={{ gap: "12px" }}>
+                            <span className="is-size-7 has-text-grey" style={{ width: "80px" }}>{s}</span>
+                            <OtpInputComponent value="" size={s} length={4} onChange={emptyFn} />
+                        </div>
+                    ))}
+                </div>
             </ComponentUseCase>
         </section>
     );

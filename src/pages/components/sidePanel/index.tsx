@@ -83,8 +83,6 @@ const SidePanel: FC = () => {
                             `import { SidePanelSize } from "@bodynarf/react.components";`,
                             `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<SidePanel`,
                             `    isOpen={isOpen}`,
                             `    onClose={onClose}`,
@@ -130,8 +128,6 @@ const SidePanel: FC = () => {
                     <CodeExample
                         code={[
                             `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<SidePanel`,
                             `    isOpen={isOpen}`,
@@ -203,8 +199,6 @@ const SidePanel: FC = () => {
                         code={[
                             `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<SidePanel`,
                             `    isOpen={isOpen}`,
                             `    onClose={onClose}`,
@@ -243,8 +237,6 @@ const SidePanel: FC = () => {
                         code={[
                             `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<SidePanel`,
                             `    isOpen={isOpen}`,
                             `    onClose={onClose}`,
@@ -277,8 +269,6 @@ const SidePanel: FC = () => {
                     <CodeExample
                         code={[
                             `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<SidePanel`,
                             `    isOpen={isOpen}`,
@@ -314,8 +304,6 @@ const SidePanel: FC = () => {
                     <CodeExample
                         code={[
                             `import SidePanel from "@bodynarf/react.components/components/sidePanel";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<SidePanel`,
                             `    isOpen={isOpen}`,

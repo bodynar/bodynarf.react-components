@@ -100,8 +100,6 @@ const Stepper: FC = () => {
                             `import { StepItem } from "@bodynarf/react.components";`,
                             `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
-                            "/* ... */",
-                            "",
                             `const steps: Array<StepItem> = [`,
                             `    { id: "step1", title: "Account Setup" },`,
                             `    { id: "step2", title: "Personal Info" },`,
@@ -140,8 +138,6 @@ const Stepper: FC = () => {
                             `import { StepItem } from "@bodynarf/react.components";`,
                             `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
-                            "/* ... */",
-                            "",
                             `const steps: Array<StepItem> = [`,
                             `    { id: "step1", title: "Sign Up", description: "Create your account" },`,
                             `    { id: "step2", title: "Profile", description: "Fill in your details" },`,
@@ -172,8 +168,6 @@ const Stepper: FC = () => {
                         code={[
                             `import { StepItem } from "@bodynarf/react.components";`,
                             `import Stepper from "@bodynarf/react.components/components/stepper";`,
-                            "",
-                            "/* ... */",
                             "",
                             `const steps: Array<StepItem> = [`,
                             `    { id: "step1", title: "Cart", icon: "fa-shopping-cart" },`,
@@ -215,8 +209,7 @@ const Stepper: FC = () => {
                             `    console.log("Clicked:", step.title, "at index:", index);`,
                             `    setCurrentStep(step.id);`,
                             `}, []);`,
-                            "/* ... */",
-                            "",
+                            
                             `<Stepper`,
                             `    clickable`,
                             `    steps={steps}`,
@@ -294,8 +287,6 @@ const Stepper: FC = () => {
                         code={[
                             `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<Stepper',
                             `    vertical`,
                             `    steps={steps}`,
@@ -321,8 +312,6 @@ const Stepper: FC = () => {
                         code={[
                             `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<Stepper',
                             `    steps={steps}`,
                             `    currentStep="step2"`,
@@ -347,8 +336,6 @@ const Stepper: FC = () => {
                     <CodeExample
                         code={[
                             `import Stepper from "@bodynarf/react.components/components/stepper";`,
-                            "",
-                            "/* ... */",
                             "",
                             '<Stepper',
                             `    animated`,
@@ -393,8 +380,6 @@ const Stepper: FC = () => {
                         code={[
                             `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<Stepper',
                             `    showArrows`,
                             `    steps={steps}`,
@@ -429,8 +414,6 @@ const Stepper: FC = () => {
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<Stepper',
                             `    steps={steps}`,
                             `    currentStep="step2"`,
@@ -457,8 +440,6 @@ const Stepper: FC = () => {
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import Stepper from "@bodynarf/react.components/components/stepper";`,
-                            "",
-                            "/* ... */",
                             "",
                             '<Stepper',
                             `    steps={steps}`,

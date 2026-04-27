@@ -73,8 +73,7 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
-                            "",
+                            
                             '<TabsComponent',
                             '    items={tabs}',
                             '    onActiveItemChange={emptyFn} // TODO: Replace with your own handler function',
@@ -108,8 +107,7 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
-                            "",
+                            
                             '<TabsComponent',
                             '    items={tabs}',
                             '    defaultActive={tabs[3]}',
@@ -145,8 +143,7 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
-                            "",
+                            
                             '<TabsComponent',
                             '    items={tabs}',
                             `    size={ElementSize.${id}}`,
@@ -184,8 +181,7 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
-                            "",
+                            
                             '<TabsComponent',
                             '    items={tabs}',
                             '    onActiveItemChange={emptyFn} // TODO: Replace with your own handler function',
@@ -225,8 +221,7 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
-                            "",
+                            
                             '<TabsComponent',
                             '    items={tabs}',
                             '    onActiveItemChange={emptyFn} // TODO: Replace with your own handler function',
@@ -264,8 +259,7 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
-                            "",
+                            
                             '<TabsComponent',
                             '    fullWidth',
                             '    items={tabs}',
@@ -304,8 +298,7 @@ const Tabs: FC = () => {
                             "];",
                             "/* ... */",
                             "const ON_ACTIVE_ITEM_CHANGE_HANDLE_FN = useCallback((item: TabItem) => { /* handler fn */}, []);",
-                            "/* ... */",
-                            "",
+                            
                             '<TabsComponent',
                             '    items={tabs}',
                             '    onActiveItemChange={ON_ACTIVE_ITEM_CHANGE_HANDLE_FN}',

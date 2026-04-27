@@ -69,8 +69,6 @@ const Timeline: FC = () => {
                             `import { TimelineItem } from "@bodynarf/react.components";`,
                             `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
-                            "/* ... */",
-                            "",
                             `const events: Array<TimelineItem> = [`,
                             `    { id: "event1", title: "Project Started", content: "Initial planning" },`,
                             `    { id: "event2", title: "Development", content: "Building features" },`,
@@ -103,8 +101,6 @@ const Timeline: FC = () => {
                             `import { TimelineItem } from "@bodynarf/react.components";`,
                             `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
-                            "/* ... */",
-                            "",
                             `const events: Array<TimelineItem> = [`,
                             `    { id: "e1", title: "Order Placed", content: "Order received", icon: "fa-shopping-cart" },`,
                             `    { id: "e2", title: "Shipped", content: "On its way", icon: "fa-truck" },`,
@@ -128,8 +124,6 @@ const Timeline: FC = () => {
                         code={[
                             `import { TimelineItem } from "@bodynarf/react.components";`,
                             `import Timeline from "@bodynarf/react.components/components/timeline";`,
-                            "",
-                            "/* ... */",
                             "",
                             `const events: Array<TimelineItem> = [`,
                             `    { id: "e1", title: "Founded", timestamp: "January 2020", content: "Small team" },`,
@@ -155,8 +149,6 @@ const Timeline: FC = () => {
                             `import { TimelineItem } from "@bodynarf/react.components";`,
                             `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
-                            "/* ... */",
-                            "",
                             `const events: Array<TimelineItem> = [`,
                             `    { id: "e1", title: "Q1", marker: "2020", content: "First quarter" },`,
                             `    { id: "e2", title: "Q2", marker: "2021", content: "Second quarter" },`,
@@ -179,8 +171,6 @@ const Timeline: FC = () => {
                         code={[
                             `import { TimelineItem, ElementColor } from "@bodynarf/react.components";`,
                             `import Timeline from "@bodynarf/react.components/components/timeline";`,
-                            "",
-                            "/* ... */",
                             "",
                             `const events: Array<TimelineItem> = [`,
                             `    { id: "e1", title: "Planning", content: "Initial planning", color: ElementColor.Info },`,
@@ -206,8 +196,6 @@ const Timeline: FC = () => {
                             `import { TimelineItem } from "@bodynarf/react.components";`,
                             `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Timeline`,
                             `    items={events}`,
                             `    leftAligned={false}`,
@@ -230,8 +218,6 @@ const Timeline: FC = () => {
                     <CodeExample
                         code={[
                             `import Timeline from "@bodynarf/react.components/components/timeline";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<Timeline`,
                             `    items={events}`,
@@ -256,8 +242,6 @@ const Timeline: FC = () => {
                         code={[
                             `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<Timeline`,
                             `    items={events}`,
                             `    showConnectors={false}`,
@@ -269,6 +253,54 @@ const Timeline: FC = () => {
                 <TimelineComponent
                     items={basicEvents}
                     showConnectors={false}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="showTimestampsSeparate"
+                description="Only available when leftAligned={false}. Places timestamps on the opposite side of the connector line from the content, making them visually distinct."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
+                            "",
+                            `<Timeline`,
+                            `    items={events}`,
+                            `    leftAligned={false}`,
+                            `    showTimestampsSeparate`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TimelineComponent
+                    items={eventsWithTimestamps}
+                    leftAligned={false}
+                    showTimestampsSeparate
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="hollow"
+                description="Renders timeline markers as hollow circles instead of filled ones."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
+                            "",
+                            `<Timeline`,
+                            `    hollow`,
+                            `    items={events}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TimelineComponent
+                    items={basicEvents}
+                    hollow
                 />
             </ComponentUseCase>
 
@@ -289,8 +321,6 @@ const Timeline: FC = () => {
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import Timeline from "@bodynarf/react.components/components/timeline";`,
-                            "",
-                            "/* ... */",
                             "",
                             "<Timeline",
                             `    items={events}`,
@@ -316,8 +346,6 @@ const Timeline: FC = () => {
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import Timeline from "@bodynarf/react.components/components/timeline";`,
-                            "",
-                            "/* ... */",
                             "",
                             "<Timeline",
                             `    items={events}`,

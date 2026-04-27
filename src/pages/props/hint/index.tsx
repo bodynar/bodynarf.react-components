@@ -36,8 +36,6 @@ const HintProp: FC = () => {
                         code={[
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<TextComponent`,
                             '    hint={{ content: "Describing hint" }}',
                             "/>",
@@ -58,8 +56,6 @@ const HintProp: FC = () => {
                     <CodeExample
                         code={[
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<TextComponent`,
                             '    hint={{ content: "Example: Agosto", italic: true }}',
@@ -82,8 +78,6 @@ const HintProp: FC = () => {
                         code={[
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<TextComponent`,
                             '    hint={{ content: "Personal Identification Number", grey: true }}',
                             "/>",
@@ -105,8 +99,6 @@ const HintProp: FC = () => {
                         code={[
                             `import { ElementPosition } from "@bodynarf/react.components";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<TextComponent`,
                             '    hint={{ content: "Think outside the box", icon: { name: "box", position: ElementPosition.Right } }}',

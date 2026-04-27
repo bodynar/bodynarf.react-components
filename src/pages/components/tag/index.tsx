@@ -55,8 +55,6 @@ const Tag: FC = () => {
                         code={[
                             `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<Tag content="Minimal use" />',
                         ].join("\n")}
                     />
@@ -77,8 +75,6 @@ const Tag: FC = () => {
                         code={[
                             `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<Tag content="Hello world" />',
                         ].join("\n")}
                     />
@@ -98,8 +94,6 @@ const Tag: FC = () => {
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import Tag from "@bodynarf/react.components/components/tag";`,
-                            "",
-                            "/* ... */",
                             "",
                             '<Tag',
                             '    content="Size tag"',
@@ -127,8 +121,6 @@ const Tag: FC = () => {
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<Tag',
                             '    content="Style tag"',
                             `    style={ElementColor.${id}}`,
@@ -154,8 +146,6 @@ const Tag: FC = () => {
                         code={[
                             `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<Tag',
                             '    rounded',
                             '    content="Rounded tag"',
@@ -179,8 +169,6 @@ const Tag: FC = () => {
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import Tag from "@bodynarf/react.components/components/tag";`,
-                            "",
-                            "/* ... */",
                             "",
                             '<Tag',
                             '    lightColor',
@@ -207,8 +195,6 @@ const Tag: FC = () => {
                         code={[
                             `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<Tag',
                             '    content="Custom color tag"',
                             '    customColor={{ backgroundColor: "#76dffb", color: "white" }}',
@@ -232,8 +218,6 @@ const Tag: FC = () => {
                         code={[
                             `import { useCallback } from "react";`,
                             `import Tag from "@bodynarf/react.components/components/tag";`,
-                            "",
-                            "/* ... */",
                             "",
                             "const handleClick = useCallback(() => {",
                             '    console.log("clicked");',
@@ -263,8 +247,6 @@ const Tag: FC = () => {
                         code={[
                             `import { useCallback } from "react";`,
                             `import Tag from "@bodynarf/react.components/components/tag";`,
-                            "",
-                            "/* ... */",
                             "",
                             "const handleRemove = useCallback(() => {",
                             '    console.log("removed");',
