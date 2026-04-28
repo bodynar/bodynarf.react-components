@@ -1,7 +1,7 @@
 import { FC, useRef } from "react";
 
 import { AutoCompleteItem } from "@bodynarf/react.components";
-import AutoCompleteComponent from "@bodynarf/react.components/components/autoComplete";
+import AutoCompleteComponent from "@bodynarf/react.components/components/primitives/autoComplete";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";

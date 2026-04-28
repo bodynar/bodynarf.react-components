@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 
 import { HashRouter } from "react-router";
 
+import "@bodynarf/utils";
+
 import { NotificationContainer } from "@bodynarf/react.components";
 
 import App from "./component";
