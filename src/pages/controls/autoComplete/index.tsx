@@ -392,35 +392,6 @@ const AutoComplete: FC = () => {
 
             <ComponentUseCase
                 captionIsCode
-                caption="hint"
-                description="Shows a hint message below the input."
-                code={
-                    <CodeExample
-                        code={[
-                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
-                            "",
-                            `<AutoComplete`,
-                            `    items={items}`,
-                            `    onSelect={setSelected}`,
-                            `    placeholder="Search..."`,
-                            `    label={{ caption: "Fruit", horizontal: false }}`,
-                            `    hint={{ content: "Start typing to see suggestions" }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <AutoCompleteComponent
-                    items={staticItems}
-                    placeholder="Search..."
-                    onSelect={() => undefined}
-                    label={{ caption: "Fruit", horizontal: false }}
-                    hint={{ content: "Start typing to see suggestions" }}
-                />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
                 caption="disabled"
                 description="Renders the input in a disabled state."
                 code={

@@ -12,7 +12,6 @@ import Log, { LogRef } from "@app/sharedComponents/log";
 /** Slider component demo */
 const Slider: FC = () => {
     const onValueChangeLogRef = useRef<LogRef>(null);
-    const onBlurLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -376,28 +375,6 @@ const Slider: FC = () => {
                     onValueChange={value => onValueChangeLogRef.current?.append(`value: ${value}`)}
                 />
                 <Log ref={onValueChangeLogRef} />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onBlur"
-                description="Called when the slider loses focus."
-                code={
-                    <CodeExample
-                        code={[
-                            `import Slider from "@bodynarf/react.components/components/primitives/slider";`,
-                            "",
-                            `<Slider`,
-                            `    onBlur={() => console.log("blurred")}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <SliderComponent
-                    onBlur={() => onBlurLogRef.current?.append("blurred")}
-                />
-                <Log ref={onBlurLogRef} />
             </ComponentUseCase>
         </section>
     );

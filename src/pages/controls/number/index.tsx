@@ -13,9 +13,6 @@ import Log, { LogRef } from "@app/sharedComponents/log";
 /** Number component demo */
 const Number: FC = () => {
     const onValueChangeLogRef = useRef<LogRef>(null);
-    const onBlurLogRef = useRef<LogRef>(null);
-    const onKeyDownLogRef = useRef<LogRef>(null);
-    const onKeyUpLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -394,78 +391,6 @@ const Number: FC = () => {
                     onValueChange={value => onValueChangeLogRef.current?.append(`value: ${value}`)}
                 />
                 <Log ref={onValueChangeLogRef} />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onBlur"
-                description="Called when the input loses focus."
-                code={
-                    <CodeExample
-                        code={[
-                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
-                            "",
-                            `<NumberInput`,
-                            `    onBlur={() => console.log("blurred")}`,
-                            `    label={{ caption: "Number demo", horizontal: true }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <NumberComponent
-                    label={{ caption: "Number demo", horizontal: true }}
-                    onBlur={() => onBlurLogRef.current?.append("blurred")}
-                />
-                <Log ref={onBlurLogRef} />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onKeyDown"
-                description="Called when a key is pressed while the input is focused."
-                code={
-                    <CodeExample
-                        code={[
-                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
-                            "",
-                            `<NumberInput`,
-                            `    onKeyDown={e => console.log("keyDown:", e.key)}`,
-                            `    label={{ caption: "Number demo", horizontal: true }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <NumberComponent
-                    label={{ caption: "Number demo", horizontal: true }}
-                    onKeyDown={e => onKeyDownLogRef.current?.append(`keyDown: ${e.key}`)}
-                />
-                <Log ref={onKeyDownLogRef} />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onKeyUp"
-                description="Called when a key is released while the input is focused."
-                code={
-                    <CodeExample
-                        code={[
-                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
-                            "",
-                            `<NumberInput`,
-                            `    onKeyUp={e => console.log("keyUp:", e.key)}`,
-                            `    label={{ caption: "Number demo", horizontal: true }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <NumberComponent
-                    label={{ caption: "Number demo", horizontal: true }}
-                    onKeyUp={e => onKeyUpLogRef.current?.append(`keyUp: ${e.key}`)}
-                />
-                <Log ref={onKeyUpLogRef} />
             </ComponentUseCase>
         </section>
     );

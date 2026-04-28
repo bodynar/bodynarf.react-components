@@ -13,9 +13,6 @@ import Log, { LogRef } from "@app/sharedComponents/log";
 /** Text component demo */
 const Text: FC = () => {
     const onValueChangeLogRef = useRef<LogRef>(null);
-    const onBlurLogRef = useRef<LogRef>(null);
-    const onKeyDownLogRef = useRef<LogRef>(null);
-    const onKeyUpLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -329,78 +326,6 @@ const Text: FC = () => {
                     onValueChange={value => onValueChangeLogRef.current?.append(`value: ${value}`)}
                 />
                 <Log ref={onValueChangeLogRef} />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onBlur"
-                description="Called when the input loses focus."
-                code={
-                    <CodeExample
-                        code={[
-                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
-                            "",
-                            `<Text`,
-                            `    onBlur={() => console.log("blurred")}`,
-                            `    label={{ caption: "Text demo", horizontal: true }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <TextComponent
-                    label={{ caption: "Text demo", horizontal: true }}
-                    onBlur={() => onBlurLogRef.current?.append("blurred")}
-                />
-                <Log ref={onBlurLogRef} />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onKeyDown"
-                description="Called when a key is pressed while the input is focused."
-                code={
-                    <CodeExample
-                        code={[
-                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
-                            "",
-                            `<Text`,
-                            `    onKeyDown={e => console.log("keyDown:", e.key)}`,
-                            `    label={{ caption: "Text demo", horizontal: true }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <TextComponent
-                    label={{ caption: "Text demo", horizontal: true }}
-                    onKeyDown={e => onKeyDownLogRef.current?.append(`keyDown: ${e.key}`)}
-                />
-                <Log ref={onKeyDownLogRef} />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onKeyUp"
-                description="Called when a key is released while the input is focused."
-                code={
-                    <CodeExample
-                        code={[
-                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
-                            "",
-                            `<Text`,
-                            `    onKeyUp={e => console.log("keyUp:", e.key)}`,
-                            `    label={{ caption: "Text demo", horizontal: true }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <TextComponent
-                    label={{ caption: "Text demo", horizontal: true }}
-                    onKeyUp={e => onKeyUpLogRef.current?.append(`keyUp: ${e.key}`)}
-                />
-                <Log ref={onKeyUpLogRef} />
             </ComponentUseCase>
         </section>
     );

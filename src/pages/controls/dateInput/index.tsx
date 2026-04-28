@@ -1,4 +1,4 @@
-import { FC, useCallback, useRef, useState } from "react";
+import { FC, useState } from "react";
 
 import DateInputComponent from "@bodynarf/react.components/components/primitives/dateInput";
 
@@ -6,7 +6,6 @@ import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
-import Log, { LogRef } from "@app/sharedComponents/log";
 
 /** DateInput component demo */
 const DateInput: FC = () => {
@@ -15,16 +14,11 @@ const DateInput: FC = () => {
     const [localeValue, setLocaleValue] = useState<Date | undefined>();
     const [minMaxValue, setMinMaxValue] = useState<Date | undefined>();
     const [labelValue, setLabelValue] = useState<Date | undefined>();
-    const [hintValue, setHintValue] = useState<Date | undefined>();
     const [calendarValue, setCalendarValue] = useState<Date | undefined>();
-
-    const blurLogRef = useRef<LogRef>(null);
 
     const today = new Date();
     const minDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
     const maxDate = new Date(today.getFullYear(), today.getMonth() + 2, 0);
-
-    const appendBlurLog = useCallback(() => blurLogRef.current?.append("blur"), []);
 
     return (
         <section>
@@ -237,33 +231,6 @@ const DateInput: FC = () => {
 
             <ComponentUseCase
                 captionIsCode
-                caption="hint"
-                description="Shows a hint message below the input."
-                code={
-                    <CodeExample
-                        code={[
-                            `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
-                            "",
-                            `<DateInput`,
-                            `    defaultValue={value}`,
-                            `    onValueChange={() => {}}`,
-                            `    hint={{ content: "Enter in dd.MM.yyyy format" }}`,
-                            `    label={{ caption: "Appointment", horizontal: true }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <DateInputComponent
-                    defaultValue={hintValue}
-                    onValueChange={setHintValue}
-                    hint={{ content: "Enter in dd.MM.yyyy format" }}
-                    label={{ caption: "Appointment", horizontal: true }}
-                />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
                 caption="disabled"
                 description="Renders the input in a disabled state."
                 code={
@@ -283,34 +250,6 @@ const DateInput: FC = () => {
                     disabled
                     onValueChange={() => { }}
                 />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onBlur"
-                description="Called when the input loses focus."
-                code={
-                    <CodeExample
-                        code={[
-                            `import { useCallback } from "react";`,
-                            "",
-                            `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
-                            "",
-                            `const handleBlur = useCallback(() => { /* ... */ }, []);`,
-                            "",
-                            `<DateInput`,
-                            `    onBlur={handleBlur}`,
-                            `    onValueChange={() => {}}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <DateInputComponent
-                    onBlur={appendBlurLog}
-                    onValueChange={() => { }}
-                />
-                <Log ref={blurLogRef} />
             </ComponentUseCase>
 
             <ComponentUseCase

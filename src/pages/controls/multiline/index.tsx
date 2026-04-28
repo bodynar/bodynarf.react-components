@@ -13,9 +13,6 @@ import Log, { LogRef } from "@app/sharedComponents/log";
 /** Multiline component demo */
 const Multiline: FC = () => {
     const onValueChangeLogRef = useRef<LogRef>(null);
-    const onBlurLogRef = useRef<LogRef>(null);
-    const onKeyDownLogRef = useRef<LogRef>(null);
-    const onKeyUpLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -350,78 +347,6 @@ const Multiline: FC = () => {
                     onValueChange={value => onValueChangeLogRef.current?.append(`value: ${value}`)}
                 />
                 <Log ref={onValueChangeLogRef} />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onBlur"
-                description="Called when the textarea loses focus."
-                code={
-                    <CodeExample
-                        code={[
-                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
-                            "",
-                            `<Multiline`,
-                            `    onBlur={() => console.log("blurred")}`,
-                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <MultilineComponent
-                    label={{ caption: "Multiline demo", horizontal: true }}
-                    onBlur={() => onBlurLogRef.current?.append("blurred")}
-                />
-                <Log ref={onBlurLogRef} />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onKeyDown"
-                description="Called when a key is pressed while the textarea is focused."
-                code={
-                    <CodeExample
-                        code={[
-                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
-                            "",
-                            `<Multiline`,
-                            `    onKeyDown={e => console.log("keyDown:", e.key)}`,
-                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <MultilineComponent
-                    label={{ caption: "Multiline demo", horizontal: true }}
-                    onKeyDown={e => onKeyDownLogRef.current?.append(`keyDown: ${e.key}`)}
-                />
-                <Log ref={onKeyDownLogRef} />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onKeyUp"
-                description="Called when a key is released while the textarea is focused."
-                code={
-                    <CodeExample
-                        code={[
-                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
-                            "",
-                            `<Multiline`,
-                            `    onKeyUp={e => console.log("keyUp:", e.key)}`,
-                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <MultilineComponent
-                    label={{ caption: "Multiline demo", horizontal: true }}
-                    onKeyUp={e => onKeyUpLogRef.current?.append(`keyUp: ${e.key}`)}
-                />
-                <Log ref={onKeyUpLogRef} />
             </ComponentUseCase>
         </section>
     );
