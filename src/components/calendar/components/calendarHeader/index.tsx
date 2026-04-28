@@ -1,8 +1,9 @@
 import { FC, useMemo } from "react";
 
+import { getMonthNames } from "@bodynarf/utils";
+
 import Icon from "@bbr/components/icon";
 
-import { getMonthNames } from "../../utils";
 import { CalendarView } from "../../types";
 
 /** Props for the CalendarHeader subcomponent */

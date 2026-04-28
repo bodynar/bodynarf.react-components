@@ -1,6 +1,4 @@
-import { getMonthNames, getWeekdayLabels, isSameDay, startOfDay, getToday } from "@bodynarf/utils";
-
-export { getMonthNames, getWeekdayLabels, isSameDay, startOfDay, getToday };
+import { isSameDay, startOfDay } from "@bodynarf/utils";
 
 /** A single cell in the calendar day grid */
 export interface DayCell {

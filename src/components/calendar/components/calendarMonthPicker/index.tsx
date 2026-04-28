@@ -1,8 +1,6 @@
 import { FC, useMemo } from "react";
 
-import { getClassName } from "@bodynarf/utils";
-
-import { getMonthNames } from "../../utils";
+import { getMonthNames, getClassName } from "@bodynarf/utils";
 
 /** Props for the CalendarMonthPicker subcomponent */
 export type CalendarMonthPickerProps = {
