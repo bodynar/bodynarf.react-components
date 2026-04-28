@@ -15,6 +15,7 @@ const UseFocus: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useFocus"
+                version="1.15"
                 description="Tracks the focus state of a DOM element. Returns [ref, isFocused]. Attach ref to any element to reactively track its focus state."
             />
 

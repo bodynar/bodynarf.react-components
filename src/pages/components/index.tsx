@@ -72,6 +72,7 @@ const components: MenuItem = {
             caption: "Tag",
             component: <Tag />,
             createVersion: "1.5",
+            updateVersion: "1.15",
         },
         {
             path: "/components/dropdown",
@@ -84,6 +85,7 @@ const components: MenuItem = {
             caption: "Multiselect",
             component: <Multiselect />,
             createVersion: "1.10",
+            updateVersion: "1.15",
         },
         {
             path: "/components/tabs",
@@ -96,12 +98,14 @@ const components: MenuItem = {
             caption: "Search",
             component: <Search />,
             createVersion: "0.1",
+            updateVersion: "1.14",
         },
         {
             path: "/components/paginator",
             caption: "Paginator",
             component: <Paginator />,
             createVersion: "1.4",
+            updateVersion: "1.14",
         },
         {
             path: "/components/breadcrumbs",
@@ -120,12 +124,14 @@ const components: MenuItem = {
             caption: "Table",
             component: <Table />,
             createVersion: "1.8",
+            updateVersion: "1.14",
         },
         {
             path: "/components/modalWrapper",
             caption: "Modal Wrapper",
             component: <ModalWrapper />,
             createVersion: "1.14",
+            updateVersion: "1.15",
         },
         {
             path: "/components/stepper",
@@ -311,7 +317,7 @@ const components: MenuItem = {
             path: "/components/complexTable",
             caption: "Complex Table",
             component: <ComplexTable />,
-            createVersion: "1.15",
+            createVersion: "1.14",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };

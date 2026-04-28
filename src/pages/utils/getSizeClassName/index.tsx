@@ -17,6 +17,7 @@ const GetSizeClassName: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="getSizeClassName"
+                version="1.14"
                 description="Maps an ElementSize value to the corresponding Bulma CSS size class. Returns an empty string when the value is nullish or equals the optional skipValue parameter."
             />
 
@@ -54,7 +55,7 @@ const GetSizeClassName: FC = () => {
                         ))}
                     </div>
                     <p>
-                        <code>getSizeClassName(ElementSize.{selectedSize})</code>
+                        <code>getSizeClassName(ElementSize.{selectedSize.capitalize()})</code>
                         {" → "}
                         <code>&quot;{getSizeClassName(selectedSize)}&quot;</code>
                     </p>

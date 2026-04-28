@@ -17,6 +17,7 @@ const UseClipboard: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useClipboard"
+                version="1.15"
                 description="Copies text to the clipboard via the Clipboard API. Exposes { copy, copied, reset }. The copied flag resets automatically after resetDelay ms (default 2000)."
             />
 

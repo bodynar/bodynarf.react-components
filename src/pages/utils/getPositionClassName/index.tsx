@@ -17,6 +17,7 @@ const GetPositionClassName: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="getPositionClassName"
+                version="1.14"
                 description="Maps an ElementPosition value to the corresponding Bulma CSS positioning class. Returns an empty string for the default (left) position."
             />
 
@@ -50,7 +51,7 @@ const GetPositionClassName: FC = () => {
                         ))}
                     </div>
                     <p>
-                        <code>getPositionClassName(ElementPosition.{selectedPos || "Left"})</code>
+                        <code>getPositionClassName(ElementPosition.{selectedPos.capitalize() || "Left"})</code>
                         {" → "}
                         <code>&quot;{getPositionClassName(selectedPos)}&quot;</code>
                     </p>

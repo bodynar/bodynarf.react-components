@@ -20,6 +20,7 @@ const UseWindowSize: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useWindowSize"
+                version="1.15"
                 description="Reactively tracks the browser window dimensions. Updates on every resize event. Returns { width, height } of the current viewport."
             />
 

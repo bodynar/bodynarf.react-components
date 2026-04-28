@@ -16,6 +16,7 @@ const UseIntervalPage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useInterval"
+                version="1.15"
                 description="Executes a callback repeatedly with a fixed time delay. Automatically clears interval on unmount. Pass null to disable."
             />
 

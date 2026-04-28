@@ -28,6 +28,7 @@ const hooks: MenuItem = {
             path: "/hooks/useDebounceHandler",
             caption: "useDebounceHandler",
             component: <UseDebounceHandler />,
+            createVersion: "1.15",
         },
         {
             path: "/hooks/useMount",
@@ -43,26 +44,31 @@ const hooks: MenuItem = {
             path: "/hooks/usePrevious",
             caption: "usePrevious",
             component: <UsePrevious />,
+            createVersion: "1.15",
         },
         {
             path: "/hooks/useTimeout",
             caption: "useTimeout",
             component: <UseTimeout />,
+            createVersion: "1.15",
         },
         {
             path: "/hooks/useInterval",
             caption: "useInterval",
             component: <UseInterval />,
+            createVersion: "1.15",
         },
         {
             path: "/hooks/useUpdateEffect",
             caption: "useUpdateEffect",
             component: <UseUpdateEffect />,
+            createVersion: "1.15",
         },
         {
             path: "/hooks/useLocalStorage",
             caption: "useLocalStorage",
             component: <UseLocalStorage />,
+            createVersion: "1.15",
         },
         {
             path: "/hooks/usePagination",
@@ -73,6 +79,7 @@ const hooks: MenuItem = {
             path: "/hooks/useEventListener",
             caption: "useEventListener",
             component: <UseEventListener />,
+            createVersion: "1.15",
         },
         {
             path: "/hooks/useComponentOutsideClick",
@@ -83,43 +90,43 @@ const hooks: MenuItem = {
             path: "/hooks/useDebounce",
             caption: "useDebounce",
             component: <UseDebounce />,
-            version: "1.15",
+            createVersion: "1.15",
         },
         {
             path: "/hooks/useSessionStorage",
             caption: "useSessionStorage",
             component: <UseSessionStorage />,
-            version: "1.15",
+            createVersion: "1.15",
         },
         {
             path: "/hooks/useClipboard",
             caption: "useClipboard",
             component: <UseClipboard />,
-            version: "1.15",
+            createVersion: "1.15",
         },
         {
             path: "/hooks/useKeyPress",
             caption: "useKeyPress",
             component: <UseKeyPress />,
-            version: "1.15",
+            createVersion: "1.15",
         },
         {
             path: "/hooks/useFocus",
             caption: "useFocus",
             component: <UseFocus />,
-            version: "1.15",
+            createVersion: "1.15",
         },
         {
             path: "/hooks/useWindowSize",
             caption: "useWindowSize",
             component: <UseWindowSize />,
-            version: "1.15",
+            createVersion: "1.15",
         },
         {
             path: "/hooks/useComplexTable",
             caption: "useComplexTable",
             component: <UseComplexTable />,
-            version: "1.15",
+            createVersion: "1.14",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };

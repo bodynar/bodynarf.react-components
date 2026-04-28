@@ -16,6 +16,7 @@ const UseTimeoutPage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useTimeout"
+                version="1.15"
                 description="Executes a callback after a specified delay. Automatically clears timeout if delay changes or component unmounts. Pass null to disable."
             />
 

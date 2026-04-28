@@ -15,6 +15,7 @@ const UseDebounce: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useDebounce"
+                version="1.15"
                 description="Returns a debounced copy of value that only updates after the specified delay (ms) of inactivity. Useful for search inputs and live filtering."
             />
 

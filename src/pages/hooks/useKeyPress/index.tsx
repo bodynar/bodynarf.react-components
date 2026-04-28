@@ -16,6 +16,7 @@ const UseKeyPress: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useKeyPress"
+                version="1.15"
                 description="Tracks whether a specific keyboard key is currently held down. Returns true while the key is pressed, false otherwise."
             />
 

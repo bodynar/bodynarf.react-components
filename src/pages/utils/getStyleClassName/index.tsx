@@ -17,6 +17,7 @@ const GetStyleClassName: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="getStyleClassName"
+                version="1.4"
                 description="Returns the Bulma CSS class name for a given ElementColor value, taking the current ValidationState into account. Validation always takes priority over the element style."
             />
 
@@ -51,7 +52,7 @@ const GetStyleClassName: FC = () => {
                         ))}
                     </div>
                     <p>
-                        <code>getStyleClassName(ElementColor.{selectedColor || "Default"})</code>
+                        <code>getStyleClassName(ElementColor.{selectedColor.capitalize() || "Default"})</code>
                         {" → "}
                         <code>&quot;{getStyleClassName(selectedColor)}&quot;</code>
                     </p>

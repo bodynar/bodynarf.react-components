@@ -17,6 +17,7 @@ const UseDebounceHandlerPage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useDebounceHandler"
+                version="1.15"
                 description="Returns a debounced handler that prevents rapid successive calls. Useful for buttons that trigger async operations."
             />
 

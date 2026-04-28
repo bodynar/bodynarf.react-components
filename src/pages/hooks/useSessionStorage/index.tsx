@@ -15,6 +15,7 @@ const UseSessionStorage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useSessionStorage"
+                version="1.15"
                 description="Stores state in sessionStorage and keeps it in sync. Mirrors the useState API. Value is cleared when the tab is closed."
             />
 

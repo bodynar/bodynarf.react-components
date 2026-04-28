@@ -15,6 +15,7 @@ const UseEventListenerPage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useEventListener"
+                version="1.15"
                 description="Attaches an event listener to a given element (default: window). Automatically cleans up on unmount."
             />
 

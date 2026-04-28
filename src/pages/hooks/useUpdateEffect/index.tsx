@@ -18,6 +18,7 @@ const UseUpdateEffectPage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useUpdateEffect"
+                version="1.15"
                 description="Works like useEffect, but skips execution on the initial render. Runs only on subsequent updates."
             />
 

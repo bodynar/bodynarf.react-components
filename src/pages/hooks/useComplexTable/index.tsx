@@ -14,6 +14,7 @@ import CodeExample from "@app/sharedComponents/codeExample";
 
 import { ALL_EMPLOYEES, Employee, PAGE_SIZE } from "../../components/complexTable/data";
 import EmployeeRow from "../../components/complexTable/employeeRow";
+import { Link } from "react-router";
 
 const headings: Array<TableHeading> = [
     { caption: "Name", sortable: true, name: "name" },
@@ -131,7 +132,7 @@ const UseComplexTablePage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useComplexTable"
-                version="1.15"
+                version="1.14"
                 description="Hook for managing ComplexTable state: server-side pagination, search, sorting, multi-row selection, loading overlay, and scroll restoration. Designed to be used exclusively with the ComplexTable component."
             />
 
@@ -314,7 +315,7 @@ const UseComplexTablePage: FC = () => {
                             <code>ComplexTable</code> to keep selection state in sync.
                         </li>
                         <li>
-                            See the <strong>ComplexTable</strong> demo page for a full live example
+                            See the <Link to="/components/complexTable"><strong>ComplexTable</strong></Link> demo page for a full live example
                             with search, sorting, pagination, row actions, and row click.
                         </li>
                     </ul>

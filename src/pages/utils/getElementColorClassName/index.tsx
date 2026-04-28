@@ -17,6 +17,7 @@ const GetElementColorClassName: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="getElementColorClassName"
+                version="1.14"
                 description="Converts an ElementColor enum value to the corresponding Bulma is-* CSS class. Returns an empty string for the Default color or nullish values."
             />
 
@@ -50,7 +51,7 @@ const GetElementColorClassName: FC = () => {
                         ))}
                     </div>
                     <p>
-                        <code>getElementColorClassName(ElementColor.{selectedColor || "Default"})</code>
+                        <code>getElementColorClassName(ElementColor.{selectedColor.capitalize() || "Default"})</code>
                         {" → "}
                         <code>&quot;{getElementColorClassName(selectedColor)}&quot;</code>
                     </p>

@@ -17,6 +17,7 @@ const MapDataAttributes: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="mapDataAttributes"
+                version="1.6"
                 description="Converts a plain key-value object into an object with data-* attribute keys suitable for spreading onto a React HTML element. Returns an empty object when the input is null or undefined."
             />
 

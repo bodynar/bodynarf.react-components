@@ -15,6 +15,7 @@ const UsePreviousPage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="usePrevious"
+                version="1.15"
                 description="Stores and returns the previous value of a state or prop. Returns undefined on the first render."
             />
 
