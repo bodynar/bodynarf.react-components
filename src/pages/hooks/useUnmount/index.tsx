@@ -9,7 +9,7 @@ import CodeExample from "@app/sharedComponents/codeExample";
 /** useUnmount hook demo */
 const UseUnmountPage: FC = () => {
     useUnmount(() => {
-        // cleanup on unmount
+        console.log("[useUnmount DEMO] Component unmounted!");
     });
 
     return (
@@ -29,7 +29,7 @@ const UseUnmountPage: FC = () => {
                             "",
                             "const MyComponent = () => {",
                             "    useUnmount(() => {",
-                            "        console.log('Component unmounted!');",
+                            "        console.log('[useUnmount DEMO] Component unmounted!');",
                             "        cleanupResources();",
                             "    });",
                             "",

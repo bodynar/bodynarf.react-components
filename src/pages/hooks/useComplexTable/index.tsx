@@ -3,6 +3,7 @@
 import {
     ComplexTableAction,
     ComplexTableSearchConfig,
+    ComplexTableSelectionBarConfig,
     TableHeading,
 } from "@bodynarf/react.components";
 import { PagedRequest, useComplexTable } from "@bodynarf/react.components/hooks";
@@ -33,6 +34,12 @@ const simpleHeadings: Array<TableHeading> = [
 const searchConfig: ComplexTableSearchConfig = {
     searchPlaceholder: "Search by name or department...",
     noItemsFoundBySearchCaption: "No employees match your search",
+};
+
+const resultSelectionBarConfig: ComplexTableSelectionBarConfig = {
+    type: "Button list",
+    selectedCountPlaceholder: (count) => `${count} row(s) selected`,
+    actions: [],
 };
 
 const rowActions: Array<ComplexTableAction> = [
@@ -284,6 +291,7 @@ const UseComplexTablePage: FC = () => {
                         headings={simpleHeadings}
                         itemComponent={EmployeeRow}
                         selectedRows={resultSelectedRows}
+                        selectionBarConfig={resultSelectionBarConfig}
                         noItemsCaption="No employees found"
                     />
                     <p className="mt-2 has-text-grey">
