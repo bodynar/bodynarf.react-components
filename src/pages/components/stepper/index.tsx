@@ -24,10 +24,10 @@ const stepsWithDescriptions: Array<StepItem> = [
 ];
 
 const stepsWithIcons: Array<StepItem> = [
-    { id: "step1", title: "Cart", icon: "fa-shopping-cart" },
-    { id: "step2", title: "Shipping", icon: "fa-truck" },
-    { id: "step3", title: "Payment", icon: "fa-credit-card" },
-    { id: "step4", title: "Complete", icon: "fa-check" },
+    { id: "step1", title: "Cart", icon: "cart" },
+    { id: "step2", title: "Shipping", icon: "truck" },
+    { id: "step3", title: "Payment", icon: "credit-card" },
+    { id: "step4", title: "Complete", icon: "check-lg" },
 ];
 
 /** Stepper component demo */
@@ -162,7 +162,7 @@ const Stepper: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="icon"
-                description="Each step can have a custom icon (Font Awesome class name)"
+                description="Each step can have a custom icon (Bootstrap Icons class name). Used as the step indicator when showNumbers={false}."
                 code={
                     <CodeExample
                         code={[
@@ -170,10 +170,10 @@ const Stepper: FC = () => {
                             `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             `const steps: Array<StepItem> = [`,
-                            `    { id: "step1", title: "Cart", icon: "fa-shopping-cart" },`,
-                            `    { id: "step2", title: "Shipping", icon: "fa-truck" },`,
-                            `    { id: "step3", title: "Payment", icon: "fa-credit-card" },`,
-                            `    { id: "step4", title: "Complete", icon: "fa-check" },`,
+                            `    { id: "step1", title: "Cart", icon: "cart3" },`,
+                            `    { id: "step2", title: "Shipping", icon: "truck" },`,
+                            `    { id: "step3", title: "Payment", icon: "credit-card" },`,
+                            `    { id: "step4", title: "Complete", icon: "check-lg" },`,
                             `];`,
                             "",
                             `<Stepper`,
@@ -187,6 +187,7 @@ const Stepper: FC = () => {
                 <StepperComponent
                     steps={stepsWithIcons}
                     currentStep="step2"
+                    showNumbers={false}
                 />
             </ComponentUseCase>
 
