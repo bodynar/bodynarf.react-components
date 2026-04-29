@@ -1,6 +1,8 @@
 import { Button, ButtonStyle, ElementSize } from "@bodynarf/react.components";
 import { FC, Ref, useImperativeHandle, useState } from "react";
 
+import styles from "./styles.module.scss";
+
 /** Public API exposed via ref */
 export type LogRef = {
     /** Append a timestamped message to the log */
@@ -31,8 +33,8 @@ const Log: FC<LogProps> = ({ ref }: LogProps) => {
     }
 
     return (
-        <div style={{ position: "relative", marginTop: "1rem", border: "1px solid #dbdbdb", borderRadius: "4px" }}>
-            <div style={{ position: "absolute", top: "0.25rem", right: "0.85rem", zIndex: 1 }}>
+        <div className={styles.container}>
+            <div className={styles.clearButton}>
                 <Button
                     title="Clear log"
                     style={ButtonStyle.Ghost}
@@ -41,16 +43,7 @@ const Log: FC<LogProps> = ({ ref }: LogProps) => {
                     icon={{ name: "trash", size: ElementSize.Medium }}
                 />
             </div>
-            <pre style={{
-                fontSize: "0.75rem",
-                color: "#666",
-                maxHeight: "7.5rem",
-                padding: "0.5rem 2.25rem 0.5rem 0.75rem",
-                margin: 0,
-                overflowY: "auto",
-                whiteSpace: "pre-wrap",
-            }}
-            >
+            <pre className={styles.output}>
                 {log}
             </pre>
         </div>
