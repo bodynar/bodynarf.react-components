@@ -128,6 +128,13 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
          * @param itemId Item identifier
          */
         onRowClick?: (itemId: string) => void;
+
+        /**
+         * Callback invoked after a page has successfully loaded (page change, search, or sort).
+         * When provided, replaces the default scroll-to-top behavior performed by the hook.
+         * @see {@link useComplexTable} `afterPageLoad` option
+         */
+        afterPageLoad?: () => void;
     };
 
 // #region Table item props types

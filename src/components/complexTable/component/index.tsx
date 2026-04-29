@@ -1,5 +1,5 @@
 /* eslint-disable custom/functional-component-definition */ // Rule disabled: Generic component required
-import { FC, useCallback, useMemo } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef } from "react";
 
 import { getClassName, isNotNullish, isNullish, isNullOrEmpty } from "@bodynarf/utils";
 import { Paginator, SortColumn, Table, TableHeading } from "@bbr/components";
@@ -36,6 +36,7 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
     loading = false,
     hasActiveSearch = false,
     containerRef, tableRef,
+    afterPageLoad,
 }: ComplexTableProps<TItem>): JSX.Element | null => {
     const headingColumns = useMemo(() => {
         let result = headings;
@@ -66,6 +67,17 @@ const ComplexTable = <TItem extends ComplexTableItem & Record<string, unknown>>(
 
         onSortChange?.(next);
     }, [currentSortColumn, onSortChange]);
+
+    const prevLoadingRef = useRef(loading);
+
+    useEffect(() => {
+        const wasLoading = prevLoadingRef.current;
+        prevLoadingRef.current = loading;
+
+        if (wasLoading && !loading) {
+            afterPageLoad?.();
+        }
+    }, [loading, afterPageLoad]);
 
     const wrapperClassName = getClassName([
         "bbr-complex-table__wrapper",

@@ -37,6 +37,12 @@ export type UseComplexTableOptions = {
      * @returns Total number of available items
      */
     loadPage: (params: PagedRequest) => Promise<number>;
+
+    /**
+     * Callback invoked after a page has successfully loaded (page change, search, or sort).
+     * When provided, replaces the default scroll-to-top behavior.
+     */
+    afterPageLoad?: () => void;
 };
 
 /** Result of the `useComplexTable` hook */
@@ -107,6 +113,7 @@ export function useComplexTable({
     loadPage,
     totalCount,
     pageSize = DEFAULT_PAGE_SIZE,
+    afterPageLoad,
 }: UseComplexTableOptions): UseComplexTableResult {
     const [total, setTotal] = useState(totalCount);
     const [currentPage, setCurrentPage] = useState(1);
@@ -126,9 +133,11 @@ export function useComplexTable({
 
     const searchRef = useRef(search);
     const sortRef = useRef(sort);
+    const afterPageLoadRef = useRef(afterPageLoad);
 
     searchRef.current = search;
     sortRef.current = sort;
+    afterPageLoadRef.current = afterPageLoad;
 
     const scrollToTop = useCallback(() => {
         tableContainerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -153,7 +162,7 @@ export function useComplexTable({
 
             setTotal(newTotal);
             setCurrentPage(page);
-            scrollToTop();
+            (afterPageLoadRef.current ?? scrollToTop)();
         } finally {
             if (requestId === requestIdRef.current) {
                 setLoading(false);
@@ -182,7 +191,7 @@ export function useComplexTable({
 
                 setTotal(newTotal);
                 setCurrentPage(1);
-                scrollToTop();
+                (afterPageLoadRef.current ?? scrollToTop)();
             })
             .finally(() => {
                 if (requestId === requestIdRef.current) {
@@ -211,7 +220,7 @@ export function useComplexTable({
 
                 setTotal(newTotal);
                 setCurrentPage(1);
-                scrollToTop();
+                (afterPageLoadRef.current ?? scrollToTop)();
             })
             .finally(() => {
                 if (requestId === requestIdRef.current) {
