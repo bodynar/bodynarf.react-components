@@ -1,10 +1,11 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef } from "react";
 
 import { emptyFn, isStringEmpty } from "@bodynarf/utils";
 
 import TabsComponent from "@bodynarf/react.components/components/tabs";
 import { SelectableItem, TabItem, TabsStyle } from "@bodynarf/react.components";
 
+import Log, { LogRef } from "@app/sharedComponents/log";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -42,14 +43,9 @@ const tabsStylesAsSelectList = tabsStyles.map((x, i) => ({
 
 /** Tabs component demo */
 const Tabs: FC = () => {
-    const [activeItemChangeLog, setActiveItemChangeLog] = useState("");
+const logRef = useRef<LogRef>(null);
     const appendActiveItemChangeLog = useCallback(
-        (item: TabItem) => setActiveItemChangeLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + `active tab changed to "${item.caption} [id="${item.id}"]"`
-        ),
+        (item: TabItem) => logRef.current?.append(`active tab changed to "${item.caption}" [id="${item.id}"]`),
         []
     );
 
@@ -311,9 +307,7 @@ const Tabs: FC = () => {
                     items={tabs}
                     onActiveItemChange={appendActiveItemChangeLog}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {activeItemChangeLog}
-                </p>
+                <Log ref={logRef} />
             </ComponentUseCase>
 
             <hr />
