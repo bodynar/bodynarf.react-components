@@ -187,6 +187,7 @@ $slider-output-radius: $radius !default;
 
 input[type="range"].slider.bbr-slider {
     --progress-percent: 0%;
+    --slider-progress-color: transparent;
 
     appearance: none;
     width: 100%;
@@ -202,7 +203,7 @@ input[type="range"].slider.bbr-slider {
         height: 0.5rem;
         background: linear-gradient(
             to right,
-            $primary var(--progress-percent),
+            var(--slider-progress-color) var(--progress-percent),
             $slider-track-background var(--progress-percent)
         );
         border: $slider-track-border;
@@ -222,7 +223,7 @@ input[type="range"].slider.bbr-slider {
 
     &::-moz-range-progress {
         height: 0.5rem;
-        background: $primary;
+        background: var(--slider-progress-color);
         border-radius: $slider-track-radius;
     }
 
@@ -236,7 +237,7 @@ input[type="range"].slider.bbr-slider {
     }
 
     &::-ms-fill-lower {
-        background: $primary;
+        background: var(--slider-progress-color);
         border-radius: $slider-track-radius;
     }
 
@@ -334,27 +335,20 @@ input[type="range"].slider.bbr-slider {
         @include slider-size($size-large);
     }
 
+    // Progress fill enabled when showProgress prop is true
+    &.has-output-tooltip {
+        --slider-progress-color: #{$primary};
+    }
+
     // Color variations
     @each $name, $pair in $colors {
         $color: list.nth($pair, 1);
 
+        &.has-output-tooltip.is-#{$name} {
+            --slider-progress-color: #{$color};
+        }
+
         &.is-#{$name} {
-            &::-webkit-slider-runnable-track {
-                background: linear-gradient(
-                    to right,
-                    $color var(--progress-percent),
-                    $slider-track-background var(--progress-percent)
-                );
-            }
-
-            &::-moz-range-progress {
-                background: $color;
-            }
-
-            &::-ms-fill-lower {
-                background: $color;
-            }
-
             &:focus {
                 &::-webkit-slider-thumb {
                     border-color: $color;
@@ -382,7 +376,7 @@ input[type="range"].slider.bbr-slider {
             height: 100%;
             background: linear-gradient(
                 to top,
-                $primary var(--progress-percent),
+                var(--slider-progress-color) var(--progress-percent),
                 $slider-track-background var(--progress-percent)
             );
         }
@@ -392,18 +386,5 @@ input[type="range"].slider.bbr-slider {
             margin-left: -0.25rem;
         }
 
-        @each $name, $pair in $colors {
-            $color: list.nth($pair, 1);
-
-            &.is-#{$name} {
-                &::-webkit-slider-runnable-track {
-                    background: linear-gradient(
-                        to top,
-                        $color var(--progress-percent),
-                        $slider-track-background var(--progress-percent)
-                    );
-                }
-            }
-        }
     }
 }
