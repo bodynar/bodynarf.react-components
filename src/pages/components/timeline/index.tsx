@@ -1,7 +1,7 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import TimelineComponent from "@bodynarf/react.components/components/timeline";
-import { ElementColor, ElementSize, TimelineItem } from "@bodynarf/react.components";
+import { Button, ButtonStyle, ElementColor, ElementSize, TimelineItem } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -46,6 +46,7 @@ const eventsWithColors: Array<TimelineItem> = [
 
 /** Timeline component demo */
 const Timeline: FC = () => {
+    const [animationKey, setAnimationKey] = useState(0);
     return (
         <section>
             <DemoComponentTitleInfoMessage
@@ -227,7 +228,16 @@ const Timeline: FC = () => {
                     />
                 }
             >
+                <Button
+                    caption="Restart animation"
+                    style={ButtonStyle.Default}
+                    onClick={() => setAnimationKey(k => k + 1)}
+                    icon={{ name: "arrow-clockwise" }}
+                    size={ElementSize.Small}
+                    className="mb-2"
+                />
                 <TimelineComponent
+                    key={animationKey}
                     items={basicEvents}
                     animated
                 />
