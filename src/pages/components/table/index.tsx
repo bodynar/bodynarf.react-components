@@ -1,7 +1,7 @@
 import { FC, useCallback, useState } from "react";
 
 import TableComponent from "@bodynarf/react.components/components/table";
-import { TableHeading } from "@bodynarf/react.components";
+import { TableHeading, TableSelectionCellProps } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -14,6 +14,23 @@ const tableHeadings: Array<TableHeading> = [
 ];
 
 const numbers = new Array(10).fill({}).map((_, i) => i + 1);
+
+type SelectableRowProps = TableSelectionCellProps & {
+    name: string;
+    age: number;
+    department: string;
+};
+
+const SelectableRow: FC<SelectableRowProps> = ({ selectionCell, name, age, department }) => (
+    <tr
+        key={name}
+    >
+        {selectionCell}
+        <td>{name}</td>
+        <td>{age}</td>
+        <td>{department}</td>
+    </tr>
+);
 
 /** Table component demo */
 const Table: FC = () => {
@@ -663,13 +680,24 @@ const Table: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="selectable"
-                description="Option to enable row selection via checkboxes. Each child row element must have a unique `key` prop — it is used as the selection identifier. Requires `selectedRows` and `onSelectedRowsChange` to manage the selection state"
+                description={(
+                    <span>
+                        Option to enable row selection via checkboxes. Each child row must be a custom component
+                        that accepts <code>TableSelectionCellProps</code> — it receives <code>selectionCell</code> (the
+                        checkbox <code>&lt;td&gt;</code>) and <code>selected</code> (boolean) injected by the table, and
+                        must render <code>selectionCell</code> as the first cell inside its <code>&lt;tr&gt;</code>. A
+                        plain <code>&lt;tr&gt;</code> will not work because it cannot accept or render these injected
+                        props. A unique <code>key</code> prop is required on each row — it is used as the selection
+                        identifier. Requires <code>selectedRows</code> and <code>onSelectedRowsChange</code> to manage
+                        the selection state
+                    </span>
+                )}
                 code={
                     <CodeExample
                         code={[
-                            `import { useState } from "react";`,
+                            `import { FC, useState } from "react";`,
                             "",
-                            `import { TableHeading } from "@bodynarf/react.components";`,
+                            `import { TableHeading, TableSelectionCellProps } from "@bodynarf/react.components";`,
                             `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -677,6 +705,21 @@ const Table: FC = () => {
                             '    { caption: "Age", sortable: false, name: "Age" },',
                             '    { caption: "Department", sortable: false, name: "Department" },',
                             '];',
+                            "",
+                            'type RowProps = TableSelectionCellProps & {',
+                            '    name: string;',
+                            '    age: number;',
+                            '    department: string;',
+                            '};',
+                            "",
+                            'const Row: FC<RowProps> = ({ selectionCell, selected, name, age, department }) => (',
+                            '    <tr className={selected ? "is-selected" : undefined}>',
+                            '        {selectionCell}',
+                            '        <td>{name}</td>',
+                            '        <td>{age}</td>',
+                            '        <td>{department}</td>',
+                            '    </tr>',
+                            ');',
                             "",
                             `const [selectedRows, setSelectedRows] = useState<Array<string>>([]);`,
                             "",
@@ -686,11 +729,7 @@ const Table: FC = () => {
                             '    selectedRows={selectedRows}',
                             '    onSelectedRowsChange={setSelectedRows}',
                             '>',
-                            '    <tr key="item-1">',
-                            '        <td>John Doe</td>',
-                            '        <td>31</td>',
-                            '        <td>Human Resources</td>',
-                            '    </tr>',
+                            '    <Row key="item-1" name="John Doe" age={31} department="Human Resources" />',
                             '</TableComponent>',
                         ].join("\n")}
                     />
@@ -703,17 +742,12 @@ const Table: FC = () => {
                     onSelectedRowsChange={setSelectableRows}
                 >
                     {numbers.map(x =>
-                        <tr key={`item-${x}`}>
-                            <td>
-                                John Doe
-                            </td>
-                            <td>
-                                {x + 30}
-                            </td>
-                            <td>
-                                Human Resources
-                            </td>
-                        </tr>
+                        <SelectableRow
+                            key={`item-${x}`}
+                            name="John Doe"
+                            age={x + 30}
+                            department="Human Resources"
+                        />
                     )}
                 </TableComponent>
                 <p>
@@ -724,13 +758,13 @@ const Table: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="headerCheckBoxConfig"
-                description="Visual configuration for the 'select all' checkbox in the table header. Accepts the same visual props as the Checkbox component: size, style, rounded, block, withoutBorder, hasBackgroundColor, fixBackgroundColor"
+                description="Visual configuration for the 'select all' checkbox in the table header. Accepts the same visual props as the Checkbox component"
                 code={
                     <CodeExample
                         code={[
-                            `import { useState } from "react";`,
+                            `import { FC, useState } from "react";`,
                             "",
-                            `import { TableHeading, TableCheckBoxConfig } from "@bodynarf/react.components";`,
+                            `import { TableHeading, TableCheckBoxConfig, TableSelectionCellProps } from "@bodynarf/react.components";`,
                             `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -738,6 +772,21 @@ const Table: FC = () => {
                             '    { caption: "Age", sortable: false, name: "Age" },',
                             '    { caption: "Department", sortable: false, name: "Department" },',
                             '];',
+                            "",
+                            'type RowProps = TableSelectionCellProps & {',
+                            '    name: string;',
+                            '    age: number;',
+                            '    department: string;',
+                            '};',
+                            "",
+                            'const Row: FC<RowProps> = ({ selectionCell, selected, name, age, department }) => (',
+                            '    <tr className={selected ? "is-selected" : undefined}>',
+                            '        {selectionCell}',
+                            '        <td>{name}</td>',
+                            '        <td>{age}</td>',
+                            '        <td>{department}</td>',
+                            '    </tr>',
+                            ');',
                             "",
                             `const headerCheckBoxConfig: TableCheckBoxConfig = { rounded: true };`,
                             `const [selectedRows, setSelectedRows] = useState<Array<string>>([]);`,
@@ -749,11 +798,7 @@ const Table: FC = () => {
                             '    onSelectedRowsChange={setSelectedRows}',
                             '    headerCheckBoxConfig={headerCheckBoxConfig}',
                             '>',
-                            '    <tr key="item-1">',
-                            '        <td>John Doe</td>',
-                            '        <td>31</td>',
-                            '        <td>Human Resources</td>',
-                            '    </tr>',
+                            '    <Row key="item-1" name="John Doe" age={31} department="Human Resources" />',
                             '</TableComponent>',
                         ].join("\n")}
                     />
@@ -767,17 +812,12 @@ const Table: FC = () => {
                     headerCheckBoxConfig={{ rounded: true }}
                 >
                     {numbers.map(x =>
-                        <tr key={`item-${x}`}>
-                            <td>
-                                John Doe
-                            </td>
-                            <td>
-                                {x + 30}
-                            </td>
-                            <td>
-                                Human Resources
-                            </td>
-                        </tr>
+                        <SelectableRow
+                            key={`item-${x}`}
+                            name="John Doe"
+                            age={x + 30}
+                            department="Human Resources"
+                        />
                     )}
                 </TableComponent>
             </ComponentUseCase>
@@ -785,11 +825,13 @@ const Table: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="rowCheckBoxConfig"
-                description="Visual configuration for the row selection checkboxes. Accepts the same visual props as the Checkbox component: size, style, rounded, block, withoutBorder, hasBackgroundColor, fixBackgroundColor"
+                description="Visual configuration for the row selection checkboxes. Accepts the same visual props as the Checkbox component"
                 code={
                     <CodeExample
                         code={[
-                            `import { TableHeading, TableCheckBoxConfig } from "@bodynarf/react.components";`,
+                            `import { FC, useState } from "react";`,
+                            "",
+                            `import { TableHeading, TableCheckBoxConfig, TableSelectionCellProps } from "@bodynarf/react.components";`,
                             `import TableComponent from "@bodynarf/react.components/components/table";`,
                             "",
                             'const tableHeadings: Array<TableHeading> = [',
@@ -797,6 +839,21 @@ const Table: FC = () => {
                             '    { caption: "Age", sortable: false, name: "Age" },',
                             '    { caption: "Department", sortable: false, name: "Department" },',
                             '];',
+                            "",
+                            'type RowProps = TableSelectionCellProps & {',
+                            '    name: string;',
+                            '    age: number;',
+                            '    department: string;',
+                            '};',
+                            "",
+                            'const Row: FC<RowProps> = ({ selectionCell, selected, name, age, department }) => (',
+                            '    <tr className={selected ? "is-selected" : undefined}>',
+                            '        {selectionCell}',
+                            '        <td>{name}</td>',
+                            '        <td>{age}</td>',
+                            '        <td>{department}</td>',
+                            '    </tr>',
+                            ');',
                             "",
                             `const rowCheckBoxConfig: TableCheckBoxConfig = { block: true };`,
                             `const [selectedRows, setSelectedRows] = useState<Array<string>>([]);`,
@@ -808,11 +865,7 @@ const Table: FC = () => {
                             '    onSelectedRowsChange={setSelectedRows}',
                             '    rowCheckBoxConfig={rowCheckBoxConfig}',
                             '>',
-                            '    <tr key="item-1">',
-                            '        <td>John Doe</td>',
-                            '        <td>31</td>',
-                            '        <td>Human Resources</td>',
-                            '    </tr>',
+                            '    <Row key="item-1" name="John Doe" age={31} department="Human Resources" />',
                             '</TableComponent>',
                         ].join("\n")}
                     />
@@ -826,17 +879,12 @@ const Table: FC = () => {
                     rowCheckBoxConfig={{ block: true }}
                 >
                     {numbers.map(x =>
-                        <tr key={`item-${x}`}>
-                            <td>
-                                John Doe
-                            </td>
-                            <td>
-                                {x + 30}
-                            </td>
-                            <td>
-                                Human Resources
-                            </td>
-                        </tr>
+                        <SelectableRow
+                            key={`item-${x}`}
+                            name="John Doe"
+                            age={x + 30}
+                            department="Human Resources"
+                        />
                     )}
                 </TableComponent>
             </ComponentUseCase>
