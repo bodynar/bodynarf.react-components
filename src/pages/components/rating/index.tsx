@@ -173,52 +173,6 @@ const Rating: FC = () => {
                     <RatingComponent value={3} size={size} />
                 }
             />
-
-            <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">BaseElementProps</h4>
-            </div>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="className"
-                description="Additional CSS class names applied to the root element."
-                code={
-                    <CodeExample
-                        code={[
-                            `import Rating from "@bodynarf/react.components/components/rating";`,
-                            "",
-                            `<Rating`,
-                            `    value={3}`,
-                            `    className="my-custom-class"`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <RatingComponent value={3} className="has-text-danger" />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="title"
-                description="Native HTML title attribute shown as a tooltip on hover."
-                code={
-                    <CodeExample
-                        code={[
-                            `import Rating from "@bodynarf/react.components/components/rating";`,
-                            "",
-                            `<Rating`,
-                            `    value={3}`,
-                            `    title="Your rating"`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <RatingComponent value={3} title="Your rating" />
-            </ComponentUseCase>
         </section>
     );
 };
