@@ -17,10 +17,9 @@ const basicEvents: Array<TimelineItem> = [
 ];
 
 const eventsWithIcons: Array<TimelineItem> = [
-    { id: "event1", title: "Order Placed", content: "Your order has been received", icon: "fa-shopping-cart" },
-    { id: "event2", title: "Processing", content: "Order is being prepared", icon: "fa-cog" },
-    { id: "event3", title: "Shipped", content: "Package is on its way", icon: "fa-truck" },
-    { id: "event4", title: "Delivered", content: "Package has arrived", icon: "fa-check-circle" },
+    { id: "event1", title: "Order Placed", content: "Your order has been received", icon: "cart" },
+    { id: "event2", title: "Processing", content: "Order is being prepared", icon: "gear" },
+    { id: "event3", title: "Shipped", content: "Package is on its way", icon: "truck" },
 ];
 
 const eventsWithTimestamps: Array<TimelineItem> = [
@@ -95,7 +94,7 @@ const Timeline: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="icon"
-                description="Each event can have a custom icon (Font Awesome class name) displayed on the timeline marker"
+                description="Each event can have a custom icon displayed on the timeline marker"
                 code={
                     <CodeExample
                         code={[
@@ -103,9 +102,9 @@ const Timeline: FC = () => {
                             `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             `const events: Array<TimelineItem> = [`,
-                            `    { id: "e1", title: "Order Placed", content: "Order received", icon: "fa-shopping-cart" },`,
-                            `    { id: "e2", title: "Shipped", content: "On its way", icon: "fa-truck" },`,
-                            `    { id: "e3", title: "Delivered", content: "Has arrived", icon: "fa-check-circle" },`,
+                            `    { id: "e1", title: "Order Placed", content: "Your order has been received", icon: "cart" },`,
+                            `    { id: "e2", title: "Processing", content: "Order is being prepared", icon: "gear" },`,
+                            `    { id: "e3", title: "Shipped", content: "Package is on its way", icon: "truck" },`,
                             `];`,
                             "",
                             `<Timeline items={events} />`,
