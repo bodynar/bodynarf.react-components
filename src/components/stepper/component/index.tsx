@@ -7,6 +7,7 @@ import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@
 
 import "./style.scss";
 
+import Icon from "../../icon";
 import { StepItem, StepperProps, StepStatus } from "../types";
 
 /** Get step status based on current step */
@@ -102,11 +103,11 @@ const Stepper: FC<StepperProps> = ({
                         <div className="bbr-stepper-marker">
                             {status === "completed" && !showNumbers ? (
                                 <span className="bbr-stepper-icon">
-                                    <i className="fas fa-check" />
+                                    <Icon name="check" />
                                 </span>
                             ) : step.icon && !showNumbers ? (
                                 <span className="bbr-stepper-icon">
-                                    <i className={`fas ${step.icon}`} />
+                                    <Icon name={step.icon} />
                                 </span>
                             ) : showNumbers ? (
                                 <span className="bbr-stepper-number">

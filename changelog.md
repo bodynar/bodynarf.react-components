@@ -65,6 +65,7 @@ All changes will be published here in reverse chronological order
   - Fixed `animated` prop having no visible effect when a `color` variant was set. The `is-animated` SCSS block is now placed after color variant rules so its gray underlay `background` correctly overrides them.
   - Fixed `showNumbers={false}` still displaying step numbers on steps that have no `icon`. The fallback branch now renders `null` instead of a number span when both `showNumbers` is `false` and no icon is provided.
   - Fixed `clickable` steps: removed the `status === "completed"` restriction — any step can now be clicked when `clickable` is enabled on the Stepper.
+  - Fixed icon rendering: step icons are now rendered via the `Icon` component (bootstrap icons, `bi-` prefix) instead of raw `<i class="fas ...">` Font Awesome classes. The `icon` field on `StepItem` now expects a bootstrap icon name without the `bi-` prefix (e.g. `"check"`, `"person"`).
 
 - **Tag** *(update)*
   - Hover and focus border styles are now scoped inside `.is-clickable` selector — non-interactive tags no longer show a border change on hover/focus.

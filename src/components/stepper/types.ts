@@ -11,7 +11,7 @@ export interface StepItem {
     /** Optional step description */
     description?: string;
 
-    /** Optional icon class (e.g., "fa-check", "fa-user") */
+    /** Optional bootstrap icon name (e.g., "check", "person") */
     icon?: string;
 
     /** Is step clickable (can navigate to this step) */
