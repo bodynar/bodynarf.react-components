@@ -1,4 +1,4 @@
-﻿import { FC, useCallback, useState } from "react";
+﻿import { FC, useCallback, useRef, useState } from "react";
 
 import {
     ComplexTableAction,
@@ -16,6 +16,7 @@ import CodeExample from "@app/sharedComponents/codeExample";
 import { ALL_EMPLOYEES, Employee, PAGE_SIZE } from "../../components/complexTable/data";
 import EmployeeRow from "../../components/complexTable/employeeRow";
 import { Link } from "react-router";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 const headings: Array<TableHeading> = [
     { caption: "Name", sortable: true, name: "name" },
@@ -47,7 +48,7 @@ const rowActions: Array<ComplexTableAction> = [
     { name: "trash-fill", title: "Delete employee", onClick: (id) => alert(`Delete: ${id}`) },
 ];
 
-function runQuery(params: PagedRequest): { items: Employee[]; total: number } {
+function runQuery(params: PagedRequest): { items: Employee[]; total: number; } {
     let result = [...ALL_EMPLOYEES];
 
     if (params.search) {
@@ -135,6 +136,30 @@ const UseComplexTablePage: FC = () => {
         loadPage: resultLoadPage,
     });
 
+    // --- afterPageLoad demo ---
+    const [afterPageLoadItems, setAfterPageLoadItems] = useState<Array<Employee>>(
+        ALL_EMPLOYEES.slice(0, PAGE_SIZE)
+    );
+
+    const afterPageLoadLoadPage = useCallback(
+        async (params: PagedRequest): Promise<number> => {
+            await new Promise<void>(r => setTimeout(r, 300));
+            const { items, total } = runQuery(params);
+            setAfterPageLoadItems(items);
+            return total;
+        },
+        []
+    );
+    const afterPageLoadLogRef = useRef<LogRef>(null);
+
+    const { tableProps: afterPageLoadTableProps } = useComplexTable({
+        totalCount: ALL_EMPLOYEES.length,
+        pageSize: PAGE_SIZE,
+        loadPage: afterPageLoadLoadPage,
+        afterPageLoad: () => afterPageLoadLogRef.current?.append(`Page loaded`),
+    });
+
+
     return (
         <section>
             <DemoComponentTitleInfoMessage
@@ -221,6 +246,10 @@ const UseComplexTablePage: FC = () => {
                             "    // total count of matching items (may differ from initial totalCount",
                             "    // when search is active).",
                             "    loadPage: (params: PagedRequest) => Promise<number>;",
+                            "",
+                            "    // Optional. Called after each successful page load.",
+                            "    // When provided, replaces the default scroll-to-top behavior.",
+                            "    afterPageLoad?: () => void;",
                             "};",
                             "",
                             "type PagedRequest = {",
@@ -302,6 +331,45 @@ const UseComplexTablePage: FC = () => {
                             : `[${resultSelectedRows.map(id => `"${id}"`).join(", ")}]`
                         }
                     </p>
+                </div>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="afterPageLoad"
+                description="Optional callback invoked after each successful page load (page change, search, or sort). When provided, it replaces the default scroll-to-top behavior. Use it to trigger side effects such as scrolling to a custom anchor, logging, or updating external state. Navigate between pages in the table below to see each call logged."
+                code={
+                    <CodeExample
+                        code={[
+                            "const { tableProps } = useComplexTable({",
+                            "    totalCount: 35,",
+                            "    pageSize: 10,",
+                            "    loadPage,",
+                            "",
+                            "    // Called after every successful page change, search, or sort.",
+                            "    // Replaces the default scroll-to-top behavior.",
+                            "    afterPageLoad: () => {",
+                            "        // e.g. scroll to a custom anchor instead of the table top:",
+                            "        document.getElementById('results-anchor')?.scrollIntoView({ behavior: 'smooth' });",
+                            "    },",
+                            "});",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <div>
+                    <ComplexTable
+                        {...afterPageLoadTableProps}
+                        items={afterPageLoadItems}
+                        headings={simpleHeadings}
+                        itemComponent={EmployeeRow}
+                        noItemsCaption="No employees found"
+                    />
+                    <br />
+                    <strong>
+                        <code>afterPageLoad</code> call log (latest first):
+                    </strong>
+                    <Log ref={afterPageLoadLogRef} />
                 </div>
             </ComponentUseCase>
 
