@@ -70,13 +70,13 @@ const Skeleton: FC = () => {
                         code={[
                             `import Skeleton from "@bodynarf/react.components/components/skeleton";`,
                             "",
-                            `<Skeleton.Text lines={3} lastLineWidth="60%" />`,
+                            `<Skeleton.Text lines={3} lastLineWidth="20%" />`,
                         ].join("\n")}
                     />
                 }
             >
                 <div style={{ maxWidth: "300px" }}>
-                    <SkeletonComponent.Text lines={3} lastLineWidth="60%" />
+                    <SkeletonComponent.Text lines={3} lastLineWidth="20%" />
                 </div>
             </ComponentUseCase>
 
