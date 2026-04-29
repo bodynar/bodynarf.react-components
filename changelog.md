@@ -3,6 +3,8 @@ All changes will be published here in reverse chronological order
 
 ## v1.15.1
 
+- **MenuButton** *(new)* — Icon-only toggle button that opens a dropdown list of actions. Similar to `SplitButton` but without a primary action — only the kebab/menu trigger and its dropdown. Supports all button styles, sizes, `light`, `outlined` and `rounded` modifiers, custom toggle icon (default `three-dots-vertical`), `disabled` state, and `hideOnOuterClick`. Dropdown items are defined via `MenuButtonAction` (caption, icon, title, disabled, onClick) or `MenuButtonDivider` (separator `<hr>`); both are covered by the `MenuButtonEntry` union. Dropdown opens upward automatically when there is insufficient space below.
+
 - **AutoComplete** *(update)*
   - Moved from `components/autoComplete` to `components/primitives/autoComplete`. Public re-export path via barrel is unchanged — no consumer changes required.
   - Added `size?: ElementSize`, `style?: ElementColor` and `rounded?: boolean` props to align appearance with other form primitives.

@@ -21,6 +21,9 @@ export * from "./button";
 export { default as SplitButton } from "./splitButton";
 export * from "./splitButton";
 
+export { default as MenuButton } from "./menuButton";
+export * from "./menuButton";
+
 export { default as Dropdown } from "./dropdown";
 export * from "./dropdown";
 
