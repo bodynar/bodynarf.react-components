@@ -342,6 +342,7 @@ const Paginator: FC = () => {
                     showNextButtons
                     currentPage={page}
                     onPageChange={setPage}
+                    nearPagesCount={1}
                     resources={{
                         previousPageCaption: "previousPageCaption",
                         previousPageTitle: "previousPageTitle",
