@@ -13,8 +13,6 @@ import Log, { LogRef } from "@app/sharedComponents/log";
 /** Password component demo */
 const Password: FC = () => {
     const onValueChangeLogRef = useRef<LogRef>(null);
-    const onKeyDownLogRef = useRef<LogRef>(null);
-    const onKeyUpLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -351,54 +349,6 @@ const Password: FC = () => {
                     onValueChange={value => onValueChangeLogRef.current?.append(`value: ${value}`)}
                 />
                 <Log ref={onValueChangeLogRef} />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onKeyDown"
-                description="Called when a key is pressed while the input is focused."
-                code={
-                    <CodeExample
-                        code={[
-                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
-                            "",
-                            `<Password`,
-                            `    onKeyDown={e => console.log("keyDown:", e.key)}`,
-                            `    label={{ caption: "Password demo", horizontal: true }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <PasswordComponent
-                    label={{ caption: "Password demo", horizontal: true }}
-                    onKeyDown={e => onKeyDownLogRef.current?.append(`keyDown: ${e.key}`)}
-                />
-                <Log ref={onKeyDownLogRef} />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="onKeyUp"
-                description="Called when a key is released while the input is focused."
-                code={
-                    <CodeExample
-                        code={[
-                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
-                            "",
-                            `<Password`,
-                            `    onKeyUp={e => console.log("keyUp:", e.key)}`,
-                            `    label={{ caption: "Password demo", horizontal: true }}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <PasswordComponent
-                    label={{ caption: "Password demo", horizontal: true }}
-                    onKeyUp={e => onKeyUpLogRef.current?.append(`keyUp: ${e.key}`)}
-                />
-                <Log ref={onKeyUpLogRef} />
             </ComponentUseCase>
         </section>
     );
