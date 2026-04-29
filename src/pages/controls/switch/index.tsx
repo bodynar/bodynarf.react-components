@@ -142,7 +142,7 @@ const Switch: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="rtl"
-                description="Right-to-left mode â€” places the switch on the right side of the label. Not set by default."
+                description="Right-to-left mode — places the switch on the right side of the label. Not set by default."
                 code={
                     <CodeExample
                         code={[

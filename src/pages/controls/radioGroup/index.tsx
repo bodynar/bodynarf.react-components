@@ -28,6 +28,7 @@ const RadioGroup: FC = () => {
     const [circleValue, setCircleValue] = useState<Optional<string>>();
     const [withoutBorderValue, setWithoutBorderValue] = useState<Optional<string>>();
     const [hasBackgroundColorValue, setHasBackgroundColorValue] = useState<Optional<string>>();
+    const [styleValue, setStyleValue] = useState<Optional<string>>();
     const [onValueChangeValue, setOnValueChangeValue] = useState<Optional<string>>();
     const onValueChangeLogRef = useRef<LogRef>(null);
 
@@ -384,7 +385,7 @@ const RadioGroup: FC = () => {
                     />
                 }
                 componentProvider={style =>
-                    <RadioGroupComponent items={sampleItems} style={style} />
+                    <RadioGroupComponent items={sampleItems} style={style} value={styleValue} onValueChange={item => setStyleValue(item.id)} />
                 }
             />
 

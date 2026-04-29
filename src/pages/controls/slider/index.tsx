@@ -89,13 +89,12 @@ const Slider: FC = () => {
                             "",
                             `<Slider`,
                             `    step={10}`,
-                            `    showValue`,
                             `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <SliderComponent step={10} showValue />
+                <SliderComponent step={10} />
             </ComponentUseCase>
 
             <ComponentUseCase
@@ -114,7 +113,7 @@ const Slider: FC = () => {
                     />
                 }
             >
-                <SliderComponent defaultValue={75} showValue />
+                <SliderComponent defaultValue={75} />
             </ComponentUseCase>
 
             <ComponentUseCase
