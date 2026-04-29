@@ -144,14 +144,14 @@ const SidePanel: FC = () => {
             >
                 <div>
                     <div className="buttons">
-                        <button type="button" className="button" onClick={() => { setCustomWidth("200"); setIsCustomWidthOpen(true); }}>200px</button>
-                        <button type="button" className="button" onClick={() => { setCustomWidth("320"); setIsCustomWidthOpen(true); }}>320px</button>
-                        <button type="button" className="button" onClick={() => { setCustomWidth("500"); setIsCustomWidthOpen(true); }}>500px</button>
-                        <button type="button" className="button" onClick={() => { setCustomWidth("700"); setIsCustomWidthOpen(true); }}>700px</button>
+                        <button type="button" className="button" onClick={() => { setCustomWidth("200px"); setIsCustomWidthOpen(true); }}>200px</button>
+                        <button type="button" className="button" onClick={() => { setCustomWidth("320px"); setIsCustomWidthOpen(true); }}>320px</button>
+                        <button type="button" className="button" onClick={() => { setCustomWidth("500px"); setIsCustomWidthOpen(true); }}>500px</button>
+                        <button type="button" className="button" onClick={() => { setCustomWidth("700px"); setIsCustomWidthOpen(true); }}>700px</button>
                     </div>
                     <SidePanelComponent isOpen={isCustomWidthOpen} onClose={() => setIsCustomWidthOpen(false)} customWidth={customWidth}>
                         <SidePanelComponent.Title>Custom width</SidePanelComponent.Title>
-                        <SidePanelComponent.Body><p>This panel is exactly {customWidth}px wide.</p></SidePanelComponent.Body>
+                        <SidePanelComponent.Body><p>This panel is exactly {customWidth} wide.</p></SidePanelComponent.Body>
                     </SidePanelComponent>
                 </div>
             </ComponentUseCase>
