@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 
 import NotificationContainer, { useNotification } from "@bodynarf/react.components/components/notification";
-import { ElementColor } from "@bodynarf/react.components";
+import { ElementColor, ElementPosition, ElementFloatPosition } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -21,10 +21,11 @@ const colors: Array<ElementColor> = [
 const Notification: FC = () => {
     const { add, remove, clear } = useNotification();
     const [lastId, setLastId] = useState<string | null>(null);
+    const [position, setPosition] = useState<ElementFloatPosition>(ElementPosition.Right);
 
     return (
         <section>
-            <NotificationContainer />
+            <NotificationContainer position={position} />
 
             <DemoComponentTitleInfoMessage
                 name="Notification"
@@ -87,16 +88,22 @@ const Notification: FC = () => {
                     />
                 }
             >
-                <button
-                    type="button"
-                    className="button"
-                    onClick={() => add({ content: "Check bottom-right corner" })}
-                >
-                    Add notification (Right — default)
-                </button>
-                <p className="has-text-grey mt-2">
-                    Container-level prop — set directly on <code>&lt;NotificationContainer&gt;</code>. This demo uses <code>ElementPosition.Right</code> (default).
-                </p>
+                <div className="is-flex" style={{ gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
+                    <button
+                        type="button"
+                        className="button"
+                        onClick={() => add({ content: `Check ${position === ElementPosition.Right ? "bottom-right" : "bottom-left"} corner` })}
+                    >
+                        Add notification
+                    </button>
+                    <button
+                        type="button"
+                        className="button is-info"
+                        onClick={() => setPosition(p => p === ElementPosition.Right ? ElementPosition.Left : ElementPosition.Right)}
+                    >
+                        Toggle position (current: <strong className="ml-1">{position === ElementPosition.Right ? "Right" : "Left"}</strong>)
+                    </button>
+                </div>
             </ComponentUseCase>
 
             <ComponentUseCase
