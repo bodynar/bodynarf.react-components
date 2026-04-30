@@ -60,6 +60,14 @@ const Calendar: FC<CalendarProps> = ({
     const today = useMemo(() => getToday(), []);
 
     const isPrevDisabled = useMemo(() => {
+        if (view === "month-picker" && displayDate.getFullYear() <= 1) {
+            return true;
+        }
+
+        if (view === "year-picker" && yearRangeStart <= 1) {
+            return true;
+        }
+
         if (isNullish(minDate)) {
             return false;
         }

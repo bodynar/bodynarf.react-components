@@ -39,6 +39,7 @@ const CalendarYearPicker: FC<CalendarYearPickerProps> = ({
             const year = yearRangeStart + i;
 
             const isDisabled =
+                year <= 0 ||
                 (minDate !== undefined && year < minDate.getFullYear()) ||
                 (maxDate !== undefined && year > maxDate.getFullYear());
 
