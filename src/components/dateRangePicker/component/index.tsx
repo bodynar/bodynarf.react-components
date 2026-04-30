@@ -1,10 +1,11 @@
 import { FC, useCallback, useState } from "react";
 
-import { getClassName, isNotNullish } from "@bodynarf/utils";
+import { getClassName, isNotNullish, Optional } from "@bodynarf/utils";
 
 import { ElementColor } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import Calendar from "@bbr/components/calendar";
+import Popover from "@bbr/components/popover";
 
 import "./style.scss";
 
@@ -22,15 +23,14 @@ const DateRangePicker: FC<DateRangePickerProps> = ({
     maxDate,
     locale = "en-US",
     labelConfig,
+    asPopover = true,
 
     className, title, data,
 }) => {
-    // First click anchors the start; second click resolves the full range
-    const [draft, setDraft] = useState<Date | undefined>(undefined);
-    // Tracks pointer position for live range preview during selection
-    const [hoverDate, setHoverDate] = useState<Date | undefined>(undefined);
+    const [draft, setDraft] = useState<Optional<Date>>();
+    const [hoverDate, setHoverDate] = useState<Optional<Date>>();
 
-    const handleDayClick = useCallback((clicked: Date | undefined) => {
+    const handleDayClick = useCallback((clicked: Optional<Date>) => {
         if (!clicked) {
             setDraft(undefined);
             setHoverDate(undefined);
@@ -82,6 +82,44 @@ const DateRangePicker: FC<DateRangePickerProps> = ({
         className,
     ]);
 
+    const labelClassName = getClassName([
+        "bbr-date-range-picker__label",
+        getSizeClassName(size),
+    ]);
+
+    const labelContent = (
+        <>
+            <span className="bbr-date-range-picker__label-text">
+                {formatLabel(selectedStart, selectedEnd, draft, locale, labelConfig)}
+            </span>
+            {(isNotNullish(selectedStart) || isNotNullish(draft)) && (
+                <button
+                    type="button"
+                    onClick={handleClear}
+                    className="delete is-small"
+                    aria-label={labelConfig?.clearAriaLabel ?? "Clear range"}
+                />
+            )}
+        </>
+    );
+
+    const calendar = (
+        <Calendar
+            value={calValue}
+
+            size={size}
+            style={style}
+            locale={locale}
+            minDate={minDate}
+            maxDate={maxDate}
+            rangeEnd={calRangeEnd}
+            hoverDate={calHoverDate}
+            onChange={handleDayClick}
+            rangeStart={calRangeStart}
+            onDayHover={handleDayHover}
+        />
+    );
+
     return (
         <div
             {...dataAttributes}
@@ -89,42 +127,36 @@ const DateRangePicker: FC<DateRangePickerProps> = ({
             title={title}
             className={elClassName}
         >
-            <div className="bbr-date-range-picker__label">
-                <span className="bbr-date-range-picker__label-text">
-                    {formatLabel(selectedStart, selectedEnd, draft, locale, labelConfig)}
-                </span>
-                {(isNotNullish(selectedStart) || isNotNullish(draft)) && (
-                    <button
-                        type="button"
-                        onClick={handleClear}
-                        className="delete is-small"
-                        aria-label={labelConfig?.clearAriaLabel ?? "Clear range"}
-                    />
-                )}
-            </div>
-
-            <Calendar
-                value={calValue}
-
-                size={size}
-                style={style}
-                locale={locale}
-                minDate={minDate}
-                maxDate={maxDate}
-                rangeEnd={calRangeEnd}
-                hoverDate={calHoverDate}
-                onChange={handleDayClick}
-                rangeStart={calRangeStart}
-                onDayHover={handleDayHover}
-            />
+            {asPopover
+                ? (
+                    <Popover>
+                        <Popover.Trigger>
+                            <div className={labelClassName}>
+                                {labelContent}
+                            </div>
+                        </Popover.Trigger>
+                        <Popover.Content>
+                            {calendar}
+                        </Popover.Content>
+                    </Popover>
+                )
+                : (
+                    <>
+                        <div className={labelClassName}>
+                            {labelContent}
+                        </div>
+                        {calendar}
+                    </>
+                )
+            }
         </div>
     );
 };
 
 function formatLabel(
-    start: Date | undefined,
-    end: Date | undefined,
-    draft: Date | undefined,
+    start: Optional<Date>,
+    end: Optional<Date>,
+    draft: Optional<Date>,
     locale: string,
     cfg: DateRangePickerProps["labelConfig"],
 ): string {

@@ -24,6 +24,7 @@ const TagGroup: FC<TagGroupProps> = ({
     confirmKeys = DEFAULT_CONFIRM_KEYS,
     maxTags,
     onChange,
+    tagConfig,
 
     className, title, data,
 }) => {
@@ -89,6 +90,8 @@ const TagGroup: FC<TagGroupProps> = ({
                     className="control"
                 >
                     <Tag
+                        {...tagConfig}
+
                         size={size}
                         content={tag}
                         style={color}

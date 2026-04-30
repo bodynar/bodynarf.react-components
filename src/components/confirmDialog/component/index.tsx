@@ -50,6 +50,12 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
         className,
     ]);
 
+    const cardClassName = getClassName([
+        "modal-card",
+        "bbr-confirm-dialog__card",
+        !isNotNullish(message) ? "bbr-confirm-dialog__card--compact" : "",
+    ]);
+
     return (
         <div
             {...dataAttributes}
@@ -61,7 +67,7 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
                 className="modal-background"
                 onClick={cancellable ? undefined : onCancel}
             />
-            <div className="modal-card bbr-confirm-dialog__card">
+            <div className={cardClassName}>
                 <header className="modal-card-head bbr-confirm-dialog__head">
                     <Icon
                         name={icon}

@@ -1,8 +1,8 @@
 import { FC, useMemo } from "react";
 
-import { getClassName } from "@bodynarf/utils";
+import { getClassName, getWeekdayLabels, startOfDay } from "@bodynarf/utils";
 
-import { DayCell, buildDayCells, getWeekdayLabels, startOfDay } from "../../utils";
+import { DayCell, buildDayCells } from "../../utils";
 
 /** Props for the CalendarDaysGrid subcomponent */
 export type CalendarDaysGridProps = {

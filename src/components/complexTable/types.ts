@@ -128,6 +128,13 @@ export type ComplexTableProps<TItem extends ComplexTableItem = ComplexTableItem>
          * @param itemId Item identifier
          */
         onRowClick?: (itemId: string) => void;
+
+        /**
+         * Callback invoked after a page has successfully loaded (page change, search, or sort).
+         * When provided, replaces the default scroll-to-top behavior performed by the hook.
+         * @see {@link useComplexTable} `afterPageLoad` option
+         */
+        afterPageLoad?: () => void;
     };
 
 // #region Table item props types
@@ -173,6 +180,15 @@ export type ComplexTableSearchConfig = {
 
     /** CSS class for the search container */
     containerClassName?: string;
+
+    /** CSS class for the wrapper element around the search field */
+    wrapperClassName?: string;
+
+    /**
+     * Debounce delay in milliseconds before the search handler is called.
+     * When not provided or `<= 0`, the search handler is called immediately on every input change.
+     */
+    debounceTime?: number;
 };
 
 /** Props for the inner table of {@link ComplexTable} */

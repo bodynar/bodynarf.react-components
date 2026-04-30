@@ -1,7 +1,8 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import { getClassName, isNullish } from "@bodynarf/utils";
 
+import { useDebounce, useUpdateEffect } from "@bbr/hooks";
 import { ComplexTableProps } from "@bbr/components/complexTable";
 import Search from "@bbr/components/search";
 
@@ -22,9 +23,23 @@ const ComplexTableToolbar: FC<ComplexTableToolbarProps> = ({
     searchConfig, onSearch,
     loading, disabled = false,
 }) => {
+    const debounceTime = searchConfig?.debounceTime ?? 0;
+    const shouldDebounce = debounceTime > 0;
+
+    const [searchQuery, setSearchQuery] = useState("");
+    const debouncedQuery = useDebounce(searchQuery, shouldDebounce ? debounceTime : 0);
+
+    useUpdateEffect(() => {
+        if (shouldDebounce) {
+            onSearch(debouncedQuery);
+        }
+    }, [debouncedQuery]);
+
     if (isNullish(searchConfig)) {
         return null;
     }
+
+    const handleSearch = shouldDebounce ? setSearchQuery : onSearch;
 
     const containerClassName = getClassName([
         "bbr-complex-table__toolbar",
@@ -36,21 +51,23 @@ const ComplexTableToolbar: FC<ComplexTableToolbarProps> = ({
 
     const className = getClassName([
         "column",
-        searchConfig?.searchProps?.className,
+        searchConfig?.wrapperClassName,
     ]);
 
     return (
         <div className={containerClassName}>
-            <Search
-                {...searchConfig?.searchProps}
+            <div className={className}>
+                <Search
+                    {...searchConfig?.searchProps}
 
-                disabled={disabled}
-                onSearch={onSearch}
-                isLoading={loading}
-                className={className}
-                caption={searchConfig.searchPlaceholder}
-                searchType={searchConfig.searchProps?.searchType ?? "byTyping"}
-            />
+                    disabled={disabled}
+                    isLoading={loading}
+                    onSearch={handleSearch}
+                    caption={searchConfig.searchPlaceholder}
+                    searchType={searchConfig.searchProps?.searchType ?? "byTyping"}
+                />
+            </div>
+
         </div>
     );
 };

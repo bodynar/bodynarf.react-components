@@ -12,7 +12,7 @@ export type SpinnerProps = BaseElementProps & {
      * Color variant.
      * @default ElementColor.Primary
      */
-    color?: ElementColor;
+    color?: Exclude<ElementColor, ElementColor.Default>;
 
     /**
      * When true, the spinner is absolutely positioned and fills its

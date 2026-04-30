@@ -26,6 +26,14 @@ export const useComponentOutsideClick = (
                     return;
                 }
 
+                // If the target was removed from DOM during React re-render
+                // (e.g. a calendar header button replaced on view switch),
+                // closest() would always return null for a detached node —
+                // treating it as an outside click incorrectly. Skip such events.
+                if (!document.contains(target)) {
+                    return;
+                }
+
                 const relatedComponent: Element | null =
                     target.closest(selector);
 

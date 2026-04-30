@@ -21,6 +21,9 @@ export * from "./button";
 export { default as SplitButton } from "./splitButton";
 export * from "./splitButton";
 
+export { default as MenuButton } from "./menuButton";
+export * from "./menuButton";
+
 export { default as Dropdown } from "./dropdown";
 export * from "./dropdown";
 
@@ -126,8 +129,8 @@ export * from "./skeleton";
 export { default as Spinner } from "./spinner";
 export * from "./spinner";
 
-export { default as AutoComplete } from "./autoComplete";
-export * from "./autoComplete";
+export { default as AutoComplete } from "./primitives/autoComplete";
+export * from "./primitives/autoComplete";
 
 export { default as ConfirmDialog } from "./confirmDialog";
 export * from "./confirmDialog";

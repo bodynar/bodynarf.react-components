@@ -103,18 +103,13 @@ const MultiselectItemWithIcon: FC<MultiselectItemProps> = ({
 }) => {
     const icon = item.icon!;
 
-    const className = getClassName([
+    const listItemClassName = getClassName([
         "bbr-dropdown-item",
         "dropdown-item",
+        "bbr-dropdown-item--with-icon",
         selected ? "is-active" : "",
-        "is-flex is-align-items-center",
-    ]);
-
-    const iconClassName = getClassName([
-        icon.className,
-        icon.position === ElementPosition.Right
-            ? "bbr-icon--right"
-            : "bbr-icon--left",
+        "is-flex",
+        "is-align-items-center",
     ]);
 
     const onChecked = useCallback(
@@ -144,7 +139,7 @@ const MultiselectItemWithIcon: FC<MultiselectItemProps> = ({
             <li
                 onClick={onClick}
                 title={item.title}
-                className={className}
+                className={listItemClassName}
             >
                 <Checkbox
                     key={item.id + selected}
@@ -159,7 +154,7 @@ const MultiselectItemWithIcon: FC<MultiselectItemProps> = ({
                 <Icon
                     name={icon.name}
                     size={icon.size}
-                    className={iconClassName}
+                    className={icon.className}
                 />
             </li>
         );
@@ -169,8 +164,8 @@ const MultiselectItemWithIcon: FC<MultiselectItemProps> = ({
         <li
             onClick={onClick}
             title={item.title}
-            className={className}
             data-dropdown-id={rootId}
+            className={listItemClassName}
         >
             <Checkbox
                 key={item.id + selected}
@@ -184,7 +179,7 @@ const MultiselectItemWithIcon: FC<MultiselectItemProps> = ({
             <Icon
                 name={icon.name}
                 size={icon.size}
-                className={iconClassName}
+                className={icon.className}
             />
             {item.displayValue}
         </li>

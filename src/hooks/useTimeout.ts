@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 
+import { withDelay } from "@bodynarf/utils";
+
 /**
  * Executes a callback after a specified delay.
  * Automatically clears timeout if delay changes or component unmounts.
@@ -19,7 +21,7 @@ export const useTimeout = (callback: () => void, delay: number | null) => {
 
     useEffect(() => {
         if (delay === null) return;
-        const id = setTimeout(() => savedCallback.current(), delay);
+        const id = withDelay(delay, () => savedCallback.current());
         return () => clearTimeout(id);
     }, [delay]);
 };

@@ -7,6 +7,7 @@ import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@
 
 import "./style.scss";
 
+import Icon from "../../icon";
 import { StepItem, StepperProps, StepStatus } from "../types";
 
 /** Get step status based on current step */
@@ -58,12 +59,12 @@ const Stepper: FC<StepperProps> = ({
     ]), [className, size, color, vertical, showConnectors, animated, showArrows]);
 
     const handleStepClick = useCallback(
-        (step: StepItem, index: number, status: StepStatus) => {
+        (step: StepItem, index: number) => {
             if (!clickable || isNullish(onStepClick)) {
                 return;
             }
 
-            const isStepClickable = step.clickable !== false && status === "completed";
+            const isStepClickable = step.clickable !== false;
 
             if (isStepClickable) {
                 onStepClick(step, index);
@@ -84,7 +85,7 @@ const Stepper: FC<StepperProps> = ({
         >
             {steps.map((step, index) => {
                 const status = getStepStatus(steps, currentStep, step.id);
-                const isClickable = clickable && step.clickable !== false && status === "completed";
+                const isClickable = clickable && step.clickable !== false;
 
                 const stepClassName = getClassName([
                     "bbr-stepper-step",
@@ -97,22 +98,22 @@ const Stepper: FC<StepperProps> = ({
                         key={step.id}
 
                         className={stepClassName}
-                        onClick={() => handleStepClick(step, index, status)}
+                        onClick={() => handleStepClick(step, index)}
                     >
                         <div className="bbr-stepper-marker">
                             {status === "completed" && !showNumbers ? (
                                 <span className="bbr-stepper-icon">
-                                    <i className="fas fa-check" />
+                                    <Icon name="check" />
                                 </span>
                             ) : step.icon && !showNumbers ? (
                                 <span className="bbr-stepper-icon">
-                                    <i className={`fas ${step.icon}`} />
+                                    <Icon name={step.icon} />
                                 </span>
-                            ) : (
+                            ) : showNumbers ? (
                                 <span className="bbr-stepper-number">
                                     {index + 1}
                                 </span>
-                            )}
+                            ) : null}
                         </div>
                         <div className="bbr-stepper-content">
                             <div className="bbr-stepper-title">

@@ -96,3 +96,23 @@ Complex components is set of components built via combining simple components or
  - **useTimeout** - Execute a callback after a specified delay
  - **useUnmount** - Handle component unmounting event. Useful as component cleanup fn
  - **useUpdateEffect** - Like useEffect, but skips execution on the initial render
+
+## Import recommendations
+
+Prefer importing components directly from their folder rather than from the package barrel file.
+Direct imports avoid pulling the entire library into the bundle and give bundlers (Vite, webpack, etc.) a clear tree-shaking boundary.
+
+**Bad** — barrel import:
+```ts
+import { AutoComplete } from "@bodynarf/react.components";
+```
+
+**Good** — direct import:
+```ts
+import AutoComplete from "@bodynarf/react.components/components/primitives/autoComplete";
+```
+
+For **types only**, barrel imports are acceptable since they are erased at compile time and have no runtime cost:
+```ts
+import type { AutoCompleteItem, AutoCompleteProps } from "@bodynarf/react.components";
+```

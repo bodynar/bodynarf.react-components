@@ -36,7 +36,6 @@ const OtpInput: FC<OtpInputProps> = ({
     const focusCell = useCallback((index: number) => {
         const el = inputsRef.current[Math.max(0, Math.min(index, length - 1))];
         el?.focus();
-        el?.select();
     }, [length]);
 
     const updateValue = useCallback((nextChars: string[]) => {
@@ -139,13 +138,13 @@ const OtpInput: FC<OtpInputProps> = ({
                     disabled={disabled}
                     autoComplete="one-time-code"
                     className="bbr-otp__cell input"
-                    onFocus={e => e.target.select()}
                     onPaste={e => handlePaste(index, e)}
                     onChange={e => handleChange(index, e)}
                     onKeyDown={e => handleKeyDown(index, e)}
                     inputMode={numbersOnly ? "numeric" : "text"}
                     pattern={numbersOnly ? "[0-9]*" : undefined}
                     ref={el => { inputsRef.current[index] = el; }}
+                    onFocus={e => { if (type !== "password") { e.target.select(); } }}
                 />
             ))}
         </div>

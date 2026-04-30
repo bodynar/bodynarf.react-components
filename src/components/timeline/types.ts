@@ -14,7 +14,10 @@ export interface TimelineItem {
     /** Optional timestamp or date string */
     timestamp?: string;
 
-    /** Optional icon class (e.g., "fa-check", "fa-user") */
+    /**
+     * Optional bootstrap icon name (without `bi-` prefix).
+     * @example "check", "person"
+     */
     icon?: string;
 
     /** Optional color override for this specific item */

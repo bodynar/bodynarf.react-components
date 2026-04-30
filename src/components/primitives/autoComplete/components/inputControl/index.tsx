@@ -2,6 +2,8 @@ import { ChangeEvent, FC, KeyboardEvent } from "react";
 
 import { getClassName } from "@bodynarf/utils";
 
+import { ElementColor, ElementSize } from "@bbr/types";
+import { getSizeClassName, getStyleClassName } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 
 /** Props for the AutoComplete input control */
@@ -14,6 +16,9 @@ type InputControlProps = {
     showClearButton: boolean;
     disabled: boolean;
     readonly: boolean;
+    rounded?: boolean;
+    size?: ElementSize;
+    style?: ElementColor;
     placeholder?: string;
     clearTitle?: string;
 
@@ -35,6 +40,9 @@ const AutoCompleteInputControl: FC<InputControlProps> = ({
     showClearButton,
     disabled,
     readonly,
+    rounded = false,
+    size = ElementSize.Normal,
+    style,
     placeholder,
     onChange,
     onKeyDown,
@@ -46,6 +54,9 @@ const AutoCompleteInputControl: FC<InputControlProps> = ({
 }) => {
     const inputClassName = getClassName([
         "input",
+        getSizeClassName(size, ElementSize.Normal),
+        getStyleClassName(style),
+        rounded ? "is-rounded" : "",
         isInvalid ? "bbr-autocomplete__input--invalid" : "",
     ]);
 
@@ -55,6 +66,8 @@ const AutoCompleteInputControl: FC<InputControlProps> = ({
         showClearButton ? "has-icons-right" : "",
     ]);
 
+    const handleFocus = readonly ? undefined : onFocus;
+
     return (
         <div className={controlClassName}>
             <input
@@ -62,14 +75,14 @@ const AutoCompleteInputControl: FC<InputControlProps> = ({
                 id={inputId}
                 role="combobox"
                 onBlur={onBlur}
-                onFocus={onFocus}
-                onClick={onFocus}
                 value={inputValue}
                 autoComplete="off"
                 disabled={disabled}
                 readOnly={readonly}
                 onChange={onChange}
+                onFocus={handleFocus}
                 onKeyDown={onKeyDown}
+                onClick={handleFocus}
                 aria-expanded={isOpen}
                 aria-haspopup="listbox"
                 aria-autocomplete="list"

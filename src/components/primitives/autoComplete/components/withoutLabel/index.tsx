@@ -3,6 +3,7 @@ import { FC } from "react";
 import { getClassName } from "@bodynarf/utils";
 
 import { mapDataAttributes } from "@bbr/utils";
+import InternalHint from "@bbr/internalComponent/hint";
 
 import { AutoCompleteProps } from "../..";
 import { useAutoComplete } from "../../component/useAutoComplete";
@@ -16,8 +17,13 @@ const AutoCompleteWithoutLabel: FC<AutoCompleteProps> = ({
     placeholder,
     disabled = false,
     readonly = false,
+    rounded = false,
+    size,
+    style,
     noResultsText = "No results",
     clearTitle,
+    hint,
+    validationState,
     className, title, data,
     ...hookProps
 }) => {
@@ -51,13 +57,16 @@ const AutoCompleteWithoutLabel: FC<AutoCompleteProps> = ({
             className={getClassName(["bbr-autocomplete", isOpen ? "is-active" : "", className])}
         >
             <AutoCompleteInputControl
+                size={size}
+                style={style}
                 isOpen={isOpen}
+                rounded={rounded}
                 inputId={inputId}
+                onBlur={handleBlur}
                 disabled={disabled}
                 readonly={readonly}
-                onBlur={handleBlur}
-                isInvalid={isInvalid}
                 onClear={handleClear}
+                isInvalid={isInvalid}
                 onFocus={openDropdown}
                 clearTitle={clearTitle}
                 inputValue={inputValue}
@@ -76,6 +85,10 @@ const AutoCompleteWithoutLabel: FC<AutoCompleteProps> = ({
                     noResultsText={noResultsText}
                 />
             ) : null}
+            <InternalHint
+                hint={hint}
+                validationState={validationState}
+            />
         </div>
     );
 };

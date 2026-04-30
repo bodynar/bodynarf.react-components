@@ -1,13 +1,12 @@
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
 
-import { getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
+import { getClassName, isNotNullish, isNullish, isSameDay, startOfDay, getToday } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getElementColorClassName, getSizeClassName, mapDataAttributes } from "@bbr/utils";
 
 import "./style.scss";
 
-import { getToday, isSameDay, startOfDay } from "../utils";
 import { CalendarProps, CalendarView } from "..";
 
 import CalendarHeader from "../components/calendarHeader";
@@ -61,6 +60,14 @@ const Calendar: FC<CalendarProps> = ({
     const today = useMemo(() => getToday(), []);
 
     const isPrevDisabled = useMemo(() => {
+        if (view === "month-picker" && displayDate.getFullYear() <= 1) {
+            return true;
+        }
+
+        if (view === "year-picker" && yearRangeStart <= 1) {
+            return true;
+        }
+
         if (isNullish(minDate)) {
             return false;
         }
@@ -153,8 +160,12 @@ const Calendar: FC<CalendarProps> = ({
     }, []);
 
     const handleDayClick = useCallback((date: Date) => {
+        if (isNotNullish(value) && isSameDay(date, value)) {
+            return;
+        }
+
         onChange?.(date);
-    }, [onChange]);
+    }, [onChange, value]);
 
     const handleTodayClick = useCallback(() => {
         const todayDate = getToday();

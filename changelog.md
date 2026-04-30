@@ -1,10 +1,63 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.15.1
+
+- **MenuButton** *(new)* — Icon button that opens a dropdown list of actions. Supports all `Button` style props (`style`, `size`, `light`, `outlined`, `rounded`). Actions list is validated at compile-time to contain at least 1 item. Supports divider items. Closes on outside click (configurable via `hideOnOuterClick`).
+
+- **AutoComplete** *(update)* — Moved from `components/autoComplete` to `components/primitives/autoComplete`. Re-exports are preserved; no breaking change.
+
+- **TagGroup** *(update)*
+  - Added `tagConfig` prop (`Omit<TagProps, "content" | "onRemove" | "size" | "style">`) for passing additional configuration to each rendered `Tag`.
+
+- **Spinner** *(update)*
+  - **Breaking:** `color` prop narrowed from `ElementColor` to `Exclude<ElementColor, ElementColor.Default>`. `ElementColor.Default` is no longer an accepted value.
+
+- **SidePanel** *(update)*
+  - **Breaking:** `customWidth` prop type changed from `number` (raw vw integer) to `string` (any CSS length value, e.g. `"320px"`, `"20%"`, `"20vw"`).
+
+- **DateRangePicker** *(update)*
+  - Added `asPopover` prop (default `true`). When `false`, the calendar renders inline below the label instead of inside a Popover.
+
+- **ComplexTable** *(update)*
+  - `ComplexTableSearchConfig`: added `debounceTime?: number` — delay in ms before the search handler fires; added `wrapperClassName?: string` — CSS class for the wrapper element around the search field.
+  - `ComplexTableProps`: added `afterPageLoad?: () => void` — callback invoked after each page load (page change, search or sort); replaces the default scroll-to-top behavior when provided.
+
+- **useComplexTable** *(update)*
+  - `UseComplexTableOptions`: added `afterPageLoad?: () => void` — mirrors `ComplexTableProps.afterPageLoad`.
+
+- **Multiselect** *(update)* — Fixed `Checkbox` items rendering without a default style; `style` now defaults to `ElementColor.Default`.
+
+- **Modal** *(update)* — Internal rendering improvements: header controls are now grouped in a wrapper element; improved slot detection for the compound component pattern.
+
+- **Calendar** *(update)* — Fixed: clicking the already-selected day no longer triggers `onChange`.
+
+- **Stepper** *(update)* — `StepItem.icon` now expects a Bootstrap icon name without the `bi-` prefix (e.g. `"check"`) instead of a Font Awesome class.
+
+- **Timeline** *(update)* — `TimelineItem.icon` now expects a Bootstrap icon name without the `bi-` prefix (e.g. `"check"`) instead of a Font Awesome class.
+
+- **OtpInput** *(update)* — Fixed unexpected text selection triggered on focus.
+
+- **Breadcrumbs** *(update)* — Style improvements; icon rendering extracted to a dedicated stylesheet.
+
+- **ContextMenu** *(update)* — Style improvements.
+
+- **ConfirmDialog** *(update)* — Style improvements.
+
+- **RadioGroup** *(update)* — Style fixes.
+
+- **Slider** *(update)* — Style fixes.
+
+- **DateInput** *(update)* — Style fixes.
+
+- **Tag** *(update)* — Style fixes.
+
+- **useComponentOutsideClick** *(update)* — Fixed: detached DOM nodes are now ignored during React re-renders, preventing false-positive "outside click" triggers.
+
 ## v1.15.0
 - **Chip** *(new)* — Compact element similar to Tag, but with the delete button rendered inside the chip itself. Supports all Tag features: colors, sizes, rounded, light variants, custom colors, `onClick` and `onRemove`.
 
-- **Multiselect** *(updated)*
+- **Multiselect** *(update)*
   - Removed `displayMode` and `tagsConfig` props.
   - Added `resultDisplayConfig` prop (`"default"` | `MultiselectResultAsChipDisplayConfig`). `"default"` preserves existing behavior (summary text like "3 items selected"). When a chip config object is provided, selected items are rendered as removable `Chip` components.
   - Chip config supports `position`: `"label"` renders chips inside the dropdown trigger with auto-expanding height; `"belowLabel"` renders chips below the standard label.
@@ -13,7 +66,7 @@ All changes will be published here in reverse chronological order
 
 - **DateInput** *(new)* — Date input field with masked manual entry and Calendar popover. Supports configurable format (`dd.MM.yyyy`, `MM/dd/yyyy`, etc.), automatic separator insertion, per-character validation (rejects impossible dates like `30.57`), min/max date constraints, locale, all standard input props (sizes, colors, rounded, disabled, readonly, label, hint, validation). Calendar opens on click and closes on date selection or Escape.
 
-- **Date primitive** *(deprecated)* — The native `<input type="date">` wrapper is deprecated since v1.15. Use `DateInput` instead. Will be removed in v1.16.
+- **Date primitive** *(update)* — The native `<input type="date">` wrapper is deprecated since v1.15. Use `DateInput` instead. Will be removed in v1.16.
 
 - **TreeView** *(new)* — Hierarchical tree component for displaying nested data (file explorers, org charts, category trees). Supports expand/collapse, single and multi-selection with parent ↔ child propagation, optional checkboxes with indeterminate state, and full keyboard navigation (arrows, Enter, Space). Uncontrolled by default; becomes controlled when `expandedIds`/`selectedIds` are provided.
 
@@ -43,7 +96,7 @@ All changes will be published here in reverse chronological order
 
 - **TagGroup** *(new)* — Editable tag list for label management, filtering and multi-value inputs. Supports add/remove, duplicate prevention, configurable confirm keys and max tag limit.
 
-- **Tag** *(updated)*
+- **Tag** *(update)*
   - Added `onRemove?: () => void` — when provided, the component wraps itself in a `<div class="tags has-addons">` and appends an `is-delete` span. The delete span receives the same size class as the tag so they always scale together.
 
 - **ContextMenu** *(new)* — Right-click context menu for any element. Rendered via portal into `<body>`, auto-flips when near viewport edges. Closes on outside click, Escape or scroll.
@@ -76,7 +129,7 @@ All changes will be published here in reverse chronological order
 
 - **SidePanel** *(new)* — Sliding side panel with backdrop overlay for detail views, settings and filters. Compound component: `SidePanel.Title` + `SidePanel.Body`. Closes on Escape and backdrop click.
 
-- **ModalWrapper** *(extended)*
+- **ModalWrapper** *(update)*
   - Added compound component pattern: `ModalWrapper.Header`, `ModalWrapper.Body`, `ModalWrapper.Footer`.
   - Only `ModalWrapper.Body` is required; `ModalWrapper.Header` and `ModalWrapper.Footer` are optional.
   - When `ModalWrapper.Body` is detected in children, compound mode activates automatically — legacy `title` / `actions` props are ignored. No breaking change.

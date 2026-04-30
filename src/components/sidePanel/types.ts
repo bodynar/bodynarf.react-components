@@ -43,10 +43,10 @@ export type SidePanelProps = BaseElementProps & {
     size?: SidePanelSize;
 
     /**
-     * Custom panel width in vw units (e.g. `40` → `40vw`).
+     * Custom panel width as a CSS value (e.g. `"320px"`, `"20%"`, `"20vw"`).
      * Overrides `size` when provided.
      */
-    customWidth?: number;
+    customWidth?: string;
 
     /**
      * Close the panel when the overlay background is clicked.
