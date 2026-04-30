@@ -76,10 +76,17 @@ const Chip: FC = () => {
                     />
                 }
             >
-                <div className="is-flex" style={{ gap: "12px", alignItems: "center" }}>
-                    <ChipComponent content="Normal" size={ElementSize.Normal} />
-                    <ChipComponent content="Medium" size={ElementSize.Medium} />
-                    <ChipComponent content="Large" size={ElementSize.Large} />
+                <div className="is-flex" style={{ gap: "24px", alignItems: "flex-end" }}>
+                    {([
+                        [ElementSize.Normal, "Normal"],
+                        [ElementSize.Medium, "Medium"],
+                        [ElementSize.Large,  "Large"],
+                    ] as const).map(([size, label]) => (
+                        <div key={label} className="is-flex is-flex-direction-column is-align-items-center" style={{ gap: "4px" }}>
+                            <ChipComponent content="Chip" size={size} />
+                            <span className="has-text-grey is-size-7">{label}</span>
+                        </div>
+                    ))}
                 </div>
             </ComponentUseCase>
 
