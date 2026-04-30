@@ -3,7 +3,7 @@ import { FC, useCallback, useState } from "react";
 import { getClassName, isNotNullish, Optional } from "@bodynarf/utils";
 
 import { ElementColor } from "@bbr/types";
-import { mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, mapDataAttributes } from "@bbr/utils";
 import Calendar from "@bbr/components/calendar";
 import Popover from "@bbr/components/popover";
 
@@ -82,6 +82,11 @@ const DateRangePicker: FC<DateRangePickerProps> = ({
         className,
     ]);
 
+    const labelClassName = getClassName([
+        "bbr-date-range-picker__label",
+        getSizeClassName(size),
+    ]);
+
     const labelContent = (
         <>
             <span className="bbr-date-range-picker__label-text">
@@ -126,7 +131,7 @@ const DateRangePicker: FC<DateRangePickerProps> = ({
                 ? (
                     <Popover>
                         <Popover.Trigger>
-                            <div className="bbr-date-range-picker__label">
+                            <div className={labelClassName}>
                                 {labelContent}
                             </div>
                         </Popover.Trigger>
@@ -137,7 +142,7 @@ const DateRangePicker: FC<DateRangePickerProps> = ({
                 )
                 : (
                     <>
-                        <div className="bbr-date-range-picker__label">
+                        <div className={labelClassName}>
                             {labelContent}
                         </div>
                         {calendar}
