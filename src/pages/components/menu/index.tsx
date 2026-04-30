@@ -64,7 +64,7 @@ const Menu: FC = () => {
             </ComponentUseCase>
 
             <hr />
-            <div><h4>Custom component props</h4></div>
+            <div><h4 className="subtitle is-4 has-text-weight-medium">Custom component props</h4></div>
 
             <ComponentUseCase
                 captionIsCode
@@ -201,7 +201,7 @@ const Menu: FC = () => {
             </ComponentUseCase>
 
             <hr />
-            <div><h4>MenuItemConfig props</h4></div>
+            <div><h4 className="subtitle is-4 has-text-weight-medium">MenuItemConfig props</h4></div>
 
             <ComponentUseCase
                 captionIsCode
@@ -323,7 +323,7 @@ const Menu: FC = () => {
             </ComponentUseCase>
 
             <hr />
-            <div><h4>MenuSectionConfig props</h4></div>
+            <div><h4 className="subtitle is-4 has-text-weight-medium">MenuSectionConfig props</h4></div>
 
             <ComponentUseCase
                 captionIsCode
@@ -360,77 +360,6 @@ const Menu: FC = () => {
                                     { id: "l-no-label", label: "Section without label" },
                                 ]
                             },
-                        ]}
-                        onItemClick={() => undefined}
-                    />
-                </div>
-            </ComponentUseCase>
-
-            <hr />
-            <div><h4>BaseElementProps</h4></div>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="className"
-                description="Additional CSS class name applied to the root menu element."
-                code={
-                    <CodeExample
-                        code={[
-                            `import Menu from "@bodynarf/react.components/components/menu";`,
-                            "",
-                            `<Menu`,
-                            `    className="my-custom-menu"`,
-                            `    onItemClick={() => undefined}`,
-                            `    sections={[{ items: [{ id: "home", label: "Home" }] }]}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <div style={{ width: "200px" }}>
-                    <MenuComponent
-                        className="has-background-light p-2"
-                        sections={[
-                            {
-                                items: [
-                                    { id: "cn-home", label: "Home" },
-                                    { id: "cn-about", label: "About" },
-                                ]
-                            }
-                        ]}
-                        onItemClick={() => undefined}
-                    />
-                </div>
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="title"
-                description="HTML title attribute applied to the root element. Shown as a native browser tooltip on hover."
-                code={
-                    <CodeExample
-                        code={[
-                            `import Menu from "@bodynarf/react.components/components/menu";`,
-                            "",
-                            `<Menu`,
-                            `    title="Navigation menu"`,
-                            `    onItemClick={() => undefined}`,
-                            `    sections={[{ items: [{ id: "home", label: "Home" }] }]}`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-            >
-                <div style={{ width: "200px" }}>
-                    <MenuComponent
-                        title="Navigation menu"
-                        sections={[
-                            {
-                                items: [
-                                    { id: "t-home", label: "Home" },
-                                    { id: "t-about", label: "About" },
-                                ]
-                            }
                         ]}
                         onItemClick={() => undefined}
                     />
