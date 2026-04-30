@@ -1,5 +1,11 @@
 import { FC, useRef } from "react";
-import { Navigate, Route, Routes } from "react-router";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router";
+
+import TooltipComponent from "@bodynarf/react.components/components/tooltip";
+import { TooltipPosition } from "@bodynarf/react.components";
+import Icon from "@bodynarf/react.components/components/icon";
+
+import Customization from "@app/pages/customization";
 
 import routeList, { isRootMenuItem } from "@app/pages/routing";
 
@@ -15,6 +21,9 @@ const routes = routeList.flatMap(x => isRootMenuItem(x) ? x.children : [x]);
 /** Bootstrap component */
 const App: FC = () => {
     const contentRef = useRef<HTMLElement>(null);
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
+    const isCustomizationPage = pathname === "/customization";
 
     return (
         <main className={`${styles.root} columns my-0 ml-6`}>
@@ -48,9 +57,34 @@ const App: FC = () => {
                                 }
                             />
                         )}
+                        <Route
+                            path="/customization"
+                            element={
+                                <SuspenseWrapper>
+                                    <Customization />
+                                </SuspenseWrapper>
+                            }
+                        />
                     </Routes>
                 </SuspenseReadyProvider>
             </main>
+            <div className={styles["settings-button"]}>
+                <TooltipComponent position={TooltipPosition.Left}>
+                    <TooltipComponent.Target>
+                        <button
+                            type="button"
+                            className={`button ${styles["settings-button__btn"]}`}
+                            onClick={() => navigate("/customization")}
+                            disabled={isCustomizationPage}
+                        >
+                            <Icon name="gear" />
+                        </button>
+                    </TooltipComponent.Target>
+                    <TooltipComponent.Hint>
+                        Open Display Settings
+                    </TooltipComponent.Hint>
+                </TooltipComponent>
+            </div>
         </main>
     );
 };
