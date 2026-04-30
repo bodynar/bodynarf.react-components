@@ -90,7 +90,7 @@ const ConfirmDialog: FC = () => {
             </ComponentUseCase>
 
             <hr />
-            <div><h4>Custom component props</h4></div>
+            <div><h4 className="subtitle is-4 has-text-weight-medium">Custom component props</h4></div>
 
             <ComponentUseCase
                 captionIsCode
