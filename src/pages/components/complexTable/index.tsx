@@ -1,8 +1,11 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 
 import {
+    ButtonStyle,
     ComplexTableAction,
     ComplexTableSearchConfig,
+    ElementPosition,
+    ElementSize,
     TableHeading,
 } from "@bodynarf/react.components";
 import { PagedRequest, useComplexTable } from "@bodynarf/react.components/hooks";
@@ -12,6 +15,7 @@ import ComplexTable from "@bodynarf/react.components/components/complexTable";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import CodeExample from "@app/sharedComponents/codeExample";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 import { ALL_EMPLOYEES, Employee, PAGE_SIZE } from "./data";
 import EmployeeRow from "./employeeRow";
@@ -21,7 +25,6 @@ const headings: Array<TableHeading> = [
     { caption: "Department", sortable: true, name: "department" },
     { caption: "Role", sortable: false, name: "role" },
     { caption: "Salary (USD)", sortable: true, name: "salary" },
-    { caption: "Actions", sortable: false, name: "actions" },
 ];
 
 const searchConfig: ComplexTableSearchConfig = {
@@ -40,7 +43,7 @@ const ComplexTablePage: FC = () => {
         ALL_EMPLOYEES.slice(0, PAGE_SIZE)
     );
 
-    const [clickLog, setClickLog] = useState<string>("");
+    const onRowClickLogRef = useRef<LogRef>(null);
 
     const loadPage = useCallback(
         async (params: PagedRequest): Promise<number> => {
@@ -88,11 +91,66 @@ const ComplexTablePage: FC = () => {
     const handleRowClick = useCallback(
         (id: string) => {
             const employee = ALL_EMPLOYEES.find(e => e.id === id);
-            setClickLog(prev =>
-                `${employee?.name ?? id}\n${prev}`.trim()
-            );
+            onRowClickLogRef.current?.append(`clicked: ${employee?.name ?? id}`);
         },
-        [setClickLog]
+        []
+    );
+
+    const [items2, setItems2] = useState<Array<Employee>>(
+        ALL_EMPLOYEES.slice(0, PAGE_SIZE)
+    );
+    const onRowClick2LogRef = useRef<LogRef>(null);
+    const tableRef = useRef<HTMLTableElement>(null);
+
+    const loadPage2 = useCallback(
+        async (params: PagedRequest): Promise<number> => {
+            await new Promise<void>(r => setTimeout(r, 350));
+
+            let filtered = [...ALL_EMPLOYEES];
+
+            if (params.search) {
+                const q = params.search.toLowerCase();
+                filtered = filtered.filter(e =>
+                    e.name.toLowerCase().includes(q) ||
+                    e.department.toLowerCase().includes(q) ||
+                    e.role.toLowerCase().includes(q)
+                );
+            }
+
+            if (params.sortBy) {
+                const key = params.sortBy as keyof Employee;
+                filtered.sort((a, b) => {
+                    const av = a[key];
+                    const bv = b[key];
+                    let cmp: number;
+                    if (typeof av === "string" && typeof bv === "string") {
+                        cmp = av.localeCompare(bv);
+                    } else {
+                        cmp = (av as number) < (bv as number) ? -1 : (av as number) > (bv as number) ? 1 : 0;
+                    }
+                    return params.sortOrder === "desc" ? -cmp : cmp;
+                });
+            }
+
+            const total = filtered.length;
+            setItems2(filtered.slice(params.offset, params.offset + params.limit));
+            return total;
+        },
+        [setItems2]
+    );
+
+    const { tableProps: tableProps2, selectedRows: selectedRows2 } = useComplexTable({
+        totalCount: ALL_EMPLOYEES.length,
+        pageSize: PAGE_SIZE,
+        loadPage: loadPage2,
+    });
+
+    const handleRowClick2 = useCallback(
+        (id: string) => {
+            const employee = ALL_EMPLOYEES.find(e => e.id === id);
+            onRowClick2LogRef.current?.append(`onRowClick: ${employee?.name ?? id}`);
+        },
+        []
     );
 
     return (
@@ -204,17 +262,7 @@ const ComplexTablePage: FC = () => {
                     onRowClick={handleRowClick}
                     noItemsCaption="No employees found"
                 />
-                {clickLog !== "" && (
-                    <div className="notification is-light mt-3">
-                        <strong>Row click log (latest first):</strong>
-                        <pre
-                            className="mt-1"
-                            style={{ maxHeight: "80px", overflow: "auto", background: "transparent" }}
-                        >
-                            {clickLog}
-                        </pre>
-                    </div>
-                )}
+                <Log ref={onRowClickLogRef} />
             </ComponentUseCase>
 
             <ComponentUseCase
@@ -772,6 +820,163 @@ Both types require `}
                 }
             >
                 {null}
+            </ComponentUseCase>
+
+            <hr />
+            <div>
+                <h4 className="subtitle is-4 has-text-weight-semibold">All props combined</h4>
+            </div>
+
+            <ComponentUseCase
+                caption="Full example with all props"
+                description="Live demo using every available ComplexTable prop at once: search, sortable columns, pagination with custom config, row actions, row click, multi-selection with a selection bar, tableConfig (border, hover, zebra), tableRef, className, and containerRef from the hook."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useCallback, useRef, useState } from "react";`,
+                            "",
+                            `import { ButtonStyle, ComplexTableAction, ComplexTableSearchConfig, ElementPosition, ElementSize, TableHeading } from "@bodynarf/react.components";`,
+                            `import { PagedRequest, useComplexTable } from "@bodynarf/react.components/hooks";`,
+                            `import ComplexTable from "@bodynarf/react.components/components/complexTable";`,
+                            "",
+                            "const headings: Array<TableHeading> = [",
+                            '    { caption: "Name",         sortable: true,  name: "name" },',
+                            '    { caption: "Department",   sortable: true,  name: "department" },',
+                            '    { caption: "Role",         sortable: false, name: "role" },',
+                            '    { caption: "Salary (USD)", sortable: true,  name: "salary" },',
+                            '    { caption: "Actions",      sortable: false, name: "actions" },',
+                            "];",
+                            "",
+                            "const [items, setItems] = useState(firstPage);",
+                            "const tableRef = useRef<HTMLTableElement>(null);",
+                            "",
+                            "const loadPage = useCallback(",
+                            "    async ({ offset, limit, search, sortBy, sortOrder }: PagedRequest): Promise<number> => {",
+                            "        const result = await api.getItems({ offset, limit, search, sortBy, sortOrder });",
+                            "        setItems(result.items);",
+                            "        return result.total;",
+                            "    },",
+                            "    [setItems]",
+                            ");",
+                            "",
+                            "const { tableProps, selectedRows } = useComplexTable({",
+                            "    totalCount: 100,",
+                            "    pageSize: 10,",
+                            "    loadPage,",
+                            "});",
+                            "",
+                            "<ComplexTable",
+                            "    // core state — from useComplexTable via spread:",
+                            "    {...tableProps}   // pagesCount, currentPage, currentSortColumn,",
+                            "                      // hasActiveSearch, loading, containerRef,",
+                            "                      // onPageChange, onSearch, onSortChange, onSelectionChange",
+                            "",
+                            "    // data",
+                            "    items={items}",
+                            '    noItemsCaption="No items found"',
+                            "    headings={headings}",
+                            "",
+                            "    // row rendering",
+                            "    itemComponent={MyRow}",
+                            "    selectedRows={selectedRows}",
+                            '    className="mt-4"',
+                            "    tableRef={tableRef}",
+                            "",
+                            "    // row actions (passed to itemComponent via its actions prop)",
+                            "    actions={[",
+                            '        { name: "pencil-fill", title: "Edit",   onClick: (id) => openEdit(id) },',
+                            '        { name: "trash-fill",  title: "Delete", onClick: (id) => confirmDelete(id) },',
+                            "    ]}",
+                            "",
+                            "    // search bar above the table",
+                            "    searchConfig={{",
+                            '        searchPlaceholder: "Search...",',
+                            '        noItemsFoundBySearchCaption: "Nothing found",',
+                            '        containerClassName: "mb-3",',
+                            "        searchProps: { rounded: true },",
+                            "    }}",
+                            "",
+                            "    // inner table appearance",
+                            "    tableConfig={{",
+                            "        hasBorder: true,",
+                            "        hoverable: true,",
+                            "        zebra: true,",
+                            "        narrow: false,",
+                            "        hasStickyHeader: false,",
+                            "        rowCheckBoxConfig:    { size: ElementSize.Small, rounded: true },",
+                            "        headerCheckBoxConfig: { size: ElementSize.Small, rounded: true },",
+                            "    }}",
+                            "",
+                            "    // paginator appearance",
+                            "    paginatorConfig={{",
+                            "        size: ElementSize.Small,",
+                            "        rounded: true,",
+                            "        position: ElementPosition.Right,",
+                            "        nearPagesCount: 2,",
+                            "    }}",
+                            "",
+                            "    // selection bar (shown when one or more rows are selected)",
+                            "    selectionBarConfig={{",
+                            '        type: "Button list",',
+                            "        selectedCountPlaceholder: (count) => `${count} row(s) selected`,",
+                            "        actions: [",
+                            '            { caption: "Export", style: ButtonStyle.Primary, onClick: () => exportRows(selectedRows) },',
+                            '            { caption: "Delete", style: ButtonStyle.Danger,  onClick: () => deleteRows(selectedRows) },',
+                            "        ],",
+                            "    }}",
+                            "",
+                            "    // row click handler",
+                            "    onRowClick={(id) => openDetailPanel(id)}",
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <ComplexTable
+                    {...tableProps2}
+                    items={items2}
+                    headings={headings}
+                    noItemsCaption="No employees found"
+                    itemComponent={EmployeeRow}
+                    selectedRows={selectedRows2}
+                    className="mt-2"
+                    tableRef={tableRef}
+                    actions={[
+                        { name: "pencil-fill", title: "Edit employee",   onClick: (id) => onRowClick2LogRef.current?.append(`action Edit: ${ALL_EMPLOYEES.find(e => e.id === id)?.name ?? id}`) },
+                        { name: "trash-fill",  title: "Delete employee", onClick: (id) => onRowClick2LogRef.current?.append(`action Delete: ${ALL_EMPLOYEES.find(e => e.id === id)?.name ?? id}`) },
+                    ]}
+                    searchConfig={{
+                        searchPlaceholder: "Search by name, department or role...",
+                        noItemsFoundBySearchCaption: "No employees match your search",
+                        containerClassName: "mb-3",
+                        searchProps: { searchType: "byButton", rounded: true },
+                    }}
+                    tableConfig={{
+                        hasBorder: true,
+                        hoverable: true,
+                        zebra: true,
+                        narrow: false,
+                        hasStickyHeader: false,
+                        rowCheckBoxConfig:    { size: ElementSize.Small, rounded: true },
+                        headerCheckBoxConfig: { size: ElementSize.Small, rounded: true },
+                    }}
+                    paginatorConfig={{
+                        size: ElementSize.Small,
+                        rounded: true,
+                        position: ElementPosition.Right,
+                        nearPagesCount: 2,
+                    }}
+                    selectionBarConfig={{
+                        type: "Button list",
+                        selectedCountPlaceholder: (count) => `${count} row(s) selected`,
+                        actions: [
+                            { caption: "Export", style: ButtonStyle.Primary, onClick: () => onRowClick2LogRef.current?.append(`Export: [${selectedRows2.join(", ")}]`) },
+                            { caption: "Delete", style: ButtonStyle.Danger,  onClick: () => onRowClick2LogRef.current?.append(`Delete: [${selectedRows2.join(", ")}]`) },
+                        ],
+                    }}
+                    onRowClick={handleRowClick2}
+                />
+                <Log ref={onRowClick2LogRef} />
             </ComponentUseCase>
         </section>
     );
