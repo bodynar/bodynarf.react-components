@@ -43,6 +43,7 @@ import Toast from "./toast";
 import Tooltip from "./tooltip";
 import Breadcrumbs from "./breadcrumbs";
 import ComplexTable from "./complexTable";
+import MenuButton from "./menuButton";
 import TreeView from "./treeView";
 
 const components: MenuItem = {
@@ -320,6 +321,12 @@ const components: MenuItem = {
             path: "/components/complexTable",
             caption: "Complex Table",
             component: <ComplexTable />,
+            createVersion: "1.15",
+        },
+        {
+            path: "/components/menuButton",
+            caption: "Menu Button",
+            component: <MenuButton />,
             createVersion: "1.15",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
