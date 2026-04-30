@@ -107,7 +107,12 @@ const ContextMenu: FC = () => {
                             `import ContextMenu from "@bodynarf/react.components/components/contextMenu";`,
                             "",
                             "<ContextMenu items={items}>",
-                            "    <img src=\"/photo.jpg\" alt=\"Photo\" />",
+                            "    <div",
+                            "        className=\"box has-background-info-light has-text-centered\"",
+                            "        style={{ cursor: \"context-menu\", width: \"200px\" }}",
+                            "    >",
+                            "        Right-click this box",
+                            "    </div>",
                             "</ContextMenu>",
                         ].join("\n")}
                     />
