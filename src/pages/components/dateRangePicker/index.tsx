@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 
 import DateRangePickerComponent from "@bodynarf/react.components/components/dateRangePicker";
 import { DateRange } from "@bodynarf/react.components";
@@ -8,6 +8,7 @@ import ComponentColorCase from "@app/sharedComponents/colorUse";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 const today = new Date();
 const minDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
@@ -16,6 +17,7 @@ const maxDate = new Date(today.getFullYear(), today.getMonth() + 2, 0);
 /** DateRangePicker component demo */
 const DateRangePicker: FC = () => {
     const [range, setRange] = useState<DateRange>({ start: undefined, end: undefined });
+    const onChangeLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -100,7 +102,7 @@ const DateRangePicker: FC = () => {
                             `<DateRangePicker`,
                             `    value={range}`,
                             `    onChange={(r) => {`,
-                            `        console.log(r.start, r.end);`,
+                            `        console.log(r.start, r.end); // for demo: logRef.current?.append(...)`,
                             `        setRange(r);`,
                             `    }}`,
                             `/>`,
@@ -108,10 +110,14 @@ const DateRangePicker: FC = () => {
                     />
                 }
             >
-                <DateRangePickerComponent value={range} onChange={setRange} />
-                <p className="mt-2 has-text-grey">
-                    Start: {range.start?.toLocaleDateString() ?? "—"} &nbsp; End: {range.end?.toLocaleDateString() ?? "—"}
-                </p>
+                <DateRangePickerComponent
+                    value={range}
+                    onChange={r => {
+                        onChangeLogRef.current?.append(`start: ${r.start?.toLocaleDateString() ?? "—"}, end: ${r.end?.toLocaleDateString() ?? "—"}`);
+                        setRange(r);
+                    }}
+                />
+                <Log ref={onChangeLogRef} />
             </ComponentUseCase>
 
             <ComponentColorCase
