@@ -145,7 +145,6 @@ const LeftMenu: FC = () => {
 };
 
 /** Menu item with sub items */
-// eslint-disable-next-line react/no-multi-comp
 const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
     caption, children, activeItem, defaultCollapsed = false,
 }) => {
@@ -191,12 +190,11 @@ const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
 };
 
 /** Menu item with link */
-// eslint-disable-next-line react/no-multi-comp
 const MenuItem: FC<RouteMenuItem & { activeItem?: RouteMenuItem; }> = ({
     path, caption, activeItem, createVersion, updateVersion,
 }) => {
     const isNew = !isNullOrEmpty(createVersion) && createVersion === packageVersionShort;
-    const isUpdated = !isNullOrEmpty(updateVersion) && updateVersion !== packageVersionShort;
+    const isUpdated = !isNullOrEmpty(updateVersion) && updateVersion === packageVersionShort;
 
     const className = getClassName([
         "is-flex",
