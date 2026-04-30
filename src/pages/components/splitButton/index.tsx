@@ -1,7 +1,9 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef } from "react";
 
-import { SplitButton as SplitButtonComponent, ButtonStyle, SplitButtonAction, SelectableItem } from "@bodynarf/react.components";
+import SplitButtonComponent from "@bodynarf/react.components/components/splitButton";
+import { ButtonStyle, SplitButtonAction, SelectableItem } from "@bodynarf/react.components";
 
+import Log, { LogRef } from "@app/sharedComponents/log";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -25,13 +27,9 @@ const stylesAsSelectList: Array<SelectableItem> =
 
 /** SplitButton component demo */
 const SplitButton: FC = () => {
-    const [log, setLog] = useState("");
+    const logRef = useRef<LogRef>(null);
     const appendLog = useCallback(
-        (text: string) => setLog(
-            prev => prev
-                + "\n"
-                + new Date().toLocaleTimeString() + " => " + text
-        ),
+        (text: string) => logRef.current?.append(text),
         []
     );
 
@@ -71,9 +69,8 @@ const SplitButton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SplitButton, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import SplitButton from "@bodynarf/react.components/components/splitButton";`,
                             "",
                             "<SplitButton",
                             `    caption="Save"`,
@@ -91,20 +88,13 @@ const SplitButton: FC = () => {
                     />
                 }
             >
-                <div>
-                    <SplitButtonComponent
-                        caption="Save"
-                        style={ButtonStyle.Primary}
-                        onClick={() => appendLog("Primary: Save")}
-                        actions={demoActions}
-                    />
-                    <pre
-                        className="mt-2"
-                        style={{ maxHeight: "100px", overflow: "auto", fontSize: "0.75rem" }}
-                    >
-                        {log || "Click actions to see log..."}
-                    </pre>
-                </div>
+                <SplitButtonComponent
+                    caption="Save"
+                    style={ButtonStyle.Primary}
+                    onClick={() => appendLog("Primary: Save")}
+                    actions={demoActions}
+                />
+                <Log ref={logRef} />
             </ComponentUseCase>
 
             <ComponentUseCase
@@ -114,15 +104,14 @@ const SplitButton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SplitButton, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import SplitButton from "@bodynarf/react.components/components/splitButton";`,
                             "",
                             "<SplitButton",
                             `    caption="Download"`,
+                            "    onClick={() => {}}",
                             "    style={ButtonStyle.Info}",
                             `    icon={{ name: "download" }}`,
-                            "    onClick={() => {}}",
                             "    actions={[{ id: '1', caption: 'Export CSV', onClick: () => {} }]}",
                             "/>",
                         ].join("\n")}
@@ -145,15 +134,14 @@ const SplitButton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SplitButton, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import SplitButton from "@bodynarf/react.components/components/splitButton";`,
                             "",
                             "<SplitButton",
-                            `    caption="Action"`,
-                            "    style={ButtonStyle.Success}",
                             "    light",
+                            `    caption="Action"`,
                             "    onClick={() => {}}",
+                            "    style={ButtonStyle.Success}",
                             "    actions={[{ id: '1', caption: 'Option', onClick: () => {} }]}",
                             "/>",
                         ].join("\n")}
@@ -176,15 +164,14 @@ const SplitButton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SplitButton, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import SplitButton from "@bodynarf/react.components/components/splitButton";`,
                             "",
                             "<SplitButton",
-                            `    caption="Action"`,
-                            "    style={ButtonStyle.Danger}",
                             "    outlined",
+                            `    caption="Action"`,
                             "    onClick={() => {}}",
+                            "    style={ButtonStyle.Danger}",
                             "    actions={[{ id: '1', caption: 'Option', onClick: () => {} }]}",
                             "/>",
                         ].join("\n")}
@@ -207,15 +194,14 @@ const SplitButton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SplitButton, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import SplitButton from "@bodynarf/react.components/components/splitButton";`,
                             "",
                             "<SplitButton",
-                            `    caption="Action"`,
-                            "    style={ButtonStyle.Link}",
                             "    rounded",
+                            `    caption="Action"`,
                             "    onClick={() => {}}",
+                            "    style={ButtonStyle.Link}",
                             "    actions={[{ id: '1', caption: 'Option', onClick: () => {} }]}",
                             "/>",
                         ].join("\n")}
@@ -238,15 +224,14 @@ const SplitButton: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { SplitButton, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import SplitButton from "@bodynarf/react.components/components/splitButton";`,
                             "",
                             "<SplitButton",
-                            `    caption="Disabled"`,
-                            "    style={ButtonStyle.Warning}",
                             "    disabled",
+                            `    caption="Disabled"`,
                             "    onClick={() => {}}",
+                            "    style={ButtonStyle.Warning}",
                             "    actions={[{ id: '1', caption: 'Option', onClick: () => {} }]}",
                             "/>",
                         ].join("\n")}
@@ -262,6 +247,71 @@ const SplitButton: FC = () => {
                 />
             </ComponentUseCase>
 
+            <ComponentUseCase
+                captionIsCode
+                caption="isLoading"
+                description="Replaces the primary button content with a loading spinner. The button and dropdown remain disabled while loading."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import SplitButton from "@bodynarf/react.components/components/splitButton";`,
+                            "",
+                            "<SplitButton",
+                            "    isLoading",
+                            "    onClick={() => {}}",
+                            `    caption="Saving..."`,
+                            "    style={ButtonStyle.Primary}",
+                            "    actions={[{ id: '1', caption: 'Option', onClick: () => {} }]}",
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <SplitButtonComponent
+                    caption="Saving..."
+                    style={ButtonStyle.Primary}
+                    isLoading
+                    onClick={() => {}}
+                    actions={[{ id: "1", caption: "Option", onClick: () => {} }]}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="hideOnOuterClick"
+                description="Controls whether the dropdown closes when the user clicks outside the component. Defaults to true. Set to false to keep the dropdown open until an action is selected."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import SplitButton from "@bodynarf/react.components/components/splitButton";`,
+                            "",
+                            "// dropdown stays open on outside click:",
+                            "<SplitButton",
+                            `    caption="Action"`,
+                            "    onClick={() => {}}",
+                            "    hideOnOuterClick={false}",
+                            "    style={ButtonStyle.Info}",
+                            "    actions={[{ id: '1', caption: 'Option', onClick: () => {} }]}",
+                            "/>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <p className="is-size-7 has-text-grey mb-2">
+                    Open the dropdown and click somewhere outside — it will stay open.
+                </p>
+                <SplitButtonComponent
+                    caption="Action"
+                    style={ButtonStyle.Info}
+                    hideOnOuterClick={false}
+                    onClick={() => appendLog("Primary clicked")}
+                    actions={[{ id: "1", caption: "Option", onClick: () => appendLog("Option clicked") }]}
+                />
+                <Log ref={logRef} />
+            </ComponentUseCase>
+
             <ComponentSizeCase
                 captionIsCode
                 caption="size"
@@ -270,15 +320,13 @@ const SplitButton: FC = () => {
                     <CodeExample
                         code={[
                             `import { ElementSize, ButtonStyle } from "@bodynarf/react.components";`,
-                            `import { SplitButton } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import SplitButton from "@bodynarf/react.components/components/splitButton";`,
                             "",
                             "<SplitButton",
                             `    caption="Action"`,
+                            "    onClick={() => {}}",
                             "    style={ButtonStyle.Primary}",
                             `    size={ElementSize.${id}}`,
-                            "    onClick={() => {}}",
                             "    actions={[{ id: '1', caption: 'Option', onClick: () => {} }]}",
                             "/>",
                         ].join("\n")}
@@ -304,14 +352,13 @@ const SplitButton: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { SplitButton, ButtonStyle } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ButtonStyle } from "@bodynarf/react.components";`,
+                            `import SplitButton from "@bodynarf/react.components/components/splitButton";`,
                             "",
                             "<SplitButton",
                             `    caption="Action"`,
-                            `    style={ButtonStyle.${id}}`,
                             "    onClick={() => {}}",
+                            `    style={ButtonStyle.${id}}`,
                             "    actions={[{ id: '1', caption: 'Option', onClick: () => {} }]}",
                             "/>",
                         ].join("\n")}

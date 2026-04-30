@@ -1,37 +1,18 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useRef } from "react";
 
-import { Multiline as MultilineComponent } from "@bodynarf/react.components";
+import Icon from "@bodynarf/react.components/components/icon";
+import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
-import Icon from "@bodynarf/react.components/components/icon";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 /** Multiline component demo */
 const Multiline: FC = () => {
-    const [onValueChangeLog, setOnValueChangeLog] = useState("");
-    const appendOnValueChangeLog = useCallback(
-        (value?: string) => setOnValueChangeLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + `new value: ${value}`
-        ),
-        []
-    );
-
-    const [onBlurLog, setOnBlurLog] = useState("");
-    const appendOnBlurLog = useCallback(
-        () => setOnBlurLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + "component lost focus"
-        ),
-        []
-    );
+    const onValueChangeLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -41,29 +22,15 @@ const Multiline: FC = () => {
                 description="Control for entering multiline text"
             />
 
-            <div className="block">
-                <p>
-                    For better readability in examples, the
-                    {` `}
-                    <code>
-                        label
-                    </code>
-                    {` `}
-                    prop is included. However, it is not required.
-                </p>
-            </div>
-
             <ComponentUseCase
                 caption="Minimal use"
-                description="Minimal configuration is absent, the component can be used 'empty'"
+                description="The component can be rendered without any props."
                 code={
                     <CodeExample
                         code={[
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<MultilineComponent />`,
+                            "<Multiline />",
                         ].join("\n")}
                     />
                 }
@@ -72,28 +39,21 @@ const Multiline: FC = () => {
             </ComponentUseCase>
 
             <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Custom component props
-                </h4>
-            </div>
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
 
             <ComponentUseCase
                 captionIsCode
                 caption="fixed"
-                description="Option to prevent resizing of the component. Not set by default."
+                description="Prevents the textarea from being resized. Disabled by default."
                 code={
                     <CodeExample
                         code={[
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<MultilineComponent`,
-                            "    fixed",
+                            `<Multiline`,
+                            `    fixed`,
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -107,18 +67,16 @@ const Multiline: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="rows"
-                description="Initial number of rows for the component. Not set by default."
+                description="Sets the initial visible row count of the textarea. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<MultilineComponent`,
-                            "    rows={10}",
+                            `<Multiline`,
+                            `    rows={10}`,
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -131,63 +89,36 @@ const Multiline: FC = () => {
 
             <ComponentUseCase
                 captionIsCode
-                caption="onBlur"
-                description="Handler for the component blur event. Not set by default."
+                caption="label"
+                description="Optional label configuration rendered next to the textarea."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react"`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
-                            "",
-                            "/* ... */",
-                            "const ON_BLUR_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
-                            "/* ... */",
-                            "",
-                            `<MultilineComponent`,
-                            "    onBlur={ON_BLUR_HANDLE_FN}",
-                            `    label={{ caption: "Multiline demo", horizontal: true }}`,
-                            "/>",
+                            `<Multiline`,
+                            `    label={{ caption: "Multiline demo", horizontal: false }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <MultilineComponent
-                    onBlur={appendOnBlurLog}
-                    label={{ caption: "Multiline demo", horizontal: true }}
-                />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {onBlurLog}
-                </p>
+                <MultilineComponent label={{ caption: "Multiline demo", horizontal: false }} />
             </ComponentUseCase>
-
-            <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Base props implementation
-                    {` `}
-                    <code>
-                        BaseInputElementProps
-                    </code>
-                </h4>
-            </div>
 
             <ComponentUseCase
                 captionIsCode
                 caption="defaultValue"
-                description="Option to set the initial value of the component. Not set by default."
+                description="Sets the initial text content. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<MultilineComponent`,
+                            `<Multiline`,
+                            "    defaultValue={`first line \\nsecond line\\n\\tfin`}",
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
-                            '    defaultValue={`first line \\nsecond line\\n\\tfin`}',
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -201,24 +132,22 @@ const Multiline: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="placeholder"
-                description="Option to specify the component's placeholder. Not set by default."
+                description="Placeholder text shown when the textarea is empty. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<MultilineComponent`,
-                            '    placeholder="Multiline demo control"',
+                            `<Multiline`,
+                            `    placeholder="Enter your text here..."`,
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <MultilineComponent
-                    placeholder="Multiline demo control"
+                    placeholder="Enter your text here..."
                     label={{ caption: "Multiline demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -226,18 +155,16 @@ const Multiline: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="disabled"
-                description="Option to render the component as disabled. Not set by default."
+                description="Renders a non-interactive disabled textarea. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<MultilineComponent`,
+                            `<Multiline`,
                             `    disabled`,
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -251,18 +178,16 @@ const Multiline: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="readonly"
-                description="Option to render the component in readonly state. Not set by default."
+                description="Renders the textarea in read-only mode — value is visible but not editable. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<MultilineComponent`,
+                            `<Multiline`,
                             `    readonly`,
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -274,47 +199,43 @@ const Multiline: FC = () => {
             </ComponentUseCase>
 
             <ComponentSizeCase
-                caption="Sizes"
-                description="The component supports all sizes defined in the ElementSize type"
+                captionIsCode
+                caption="size"
+                description="Controls the visual size of the component. Supports all ElementSize values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<MultilineComponent`,
+                            `<Multiline`,
                             `    size={ElementSize.${id}}`,
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    size =>
-                        <MultilineComponent
-                            size={size}
-                            label={{ caption: "Multiline demo", horizontal: true }}
-                        />
+                componentProvider={size =>
+                    <MultilineComponent
+                        size={size}
+                        label={{ caption: "Multiline demo", horizontal: true }}
+                    />
                 }
             />
 
             <ComponentUseCase
                 captionIsCode
                 caption="loading"
-                description="Option to render the component in a loading state. Not set by default."
+                description="Displays a loading spinner inside the component. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<MultilineComponent`,
+                            `<Multiline`,
                             `    loading`,
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -326,47 +247,43 @@ const Multiline: FC = () => {
             </ComponentUseCase>
 
             <ComponentColorCase
-                caption="Colors"
-                description="Component supports all available colors"
+                captionIsCode
+                caption="style"
+                description="Color applied to the textarea border. Supports all ElementColor values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<MultilineComponent`,
+                            `<Multiline`,
                             `    style={ElementColor.${id}}`,
                             `    label={{ caption: "Multiline demo", horizontal: false }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    style =>
-                        <MultilineComponent
-                            style={style}
-                            label={{ caption: "Multiline demo", horizontal: false }}
-                        />
+                componentProvider={style =>
+                    <MultilineComponent
+                        style={style}
+                        label={{ caption: "Multiline demo", horizontal: false }}
+                    />
                 }
             />
 
             <ComponentUseCase
                 captionIsCode
                 caption="name"
-                description="Option to specify the component name. Used as a form element attribute."
+                description="Specifies the HTML name attribute for use as a form element."
                 code={
                     <CodeExample
                         code={[
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<MultilineComponent',
-                            '    name="symptoms"',
-                            '    label={{ caption: "Multiline demo", horizontal: false }}',
-                            '/>',
+                            `<Multiline`,
+                            `    name="symptoms"`,
+                            `    label={{ caption: "Multiline demo", horizontal: false }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -382,33 +299,22 @@ const Multiline: FC = () => {
                 caption="autoFocus"
                 description={
                     <>
-                        Option to set focus on the component input field on initial render
+                        Sets focus on the textarea on initial render.
                         <br />
-                        <Icon
-                            name="exclamation-triangle-fill"
-                            className="has-text-warning"
-                        />
+                        <Icon name="exclamation-triangle-fill" className="has-text-warning" />
                         {` `}
-                        <span>
-                            Only 1 element on the page can have this flag
-                        </span>
-                        <br />
-                        <span className="is-italic">
-                            Refresh the page and check which component (from the presented examples) received automatic focus
-                        </span>
+                        Only 1 element on the page can have this flag.
                     </>
                 }
                 code={
                     <CodeExample
                         code={[
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<MultilineComponent',
-                            '    autoFocus',
-                            '    label={{ caption: "Multiline demo", horizontal: false }}',
-                            '/>',
+                            `<Multiline`,
+                            `    autoFocus`,
+                            `    label={{ caption: "Multiline demo", horizontal: false }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -422,33 +328,25 @@ const Multiline: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="onValueChange"
-                description="Option for handling the onValueChange event. Not set by default."
+                description="Called when the textarea value changes. Receives the new string value."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react"`,
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
                             "",
-                            `import MultilineComponent from "@bodynarf/react.components/components/primitives/multiline";`,
-                            "",
-                            "/* ... */",
-                            "const ON_VALUE_CHANGE_HANDLE_FN = useCallback((value: string) => { /* handler fn */}, []);",
-                            "/* ... */",
-                            "",
-                            `<MultilineComponent`,
-                            "    onValueChange={ON_VALUE_CHANGE_HANDLE_FN}",
+                            `<Multiline`,
+                            `    onValueChange={value => console.log("value:", value)}`,
                             `    label={{ caption: "Multiline demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <MultilineComponent
-                    onValueChange={appendOnValueChangeLog}
                     label={{ caption: "Multiline demo", horizontal: true }}
+                    onValueChange={value => onValueChangeLogRef.current?.append(`value: ${value}`)}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {onValueChangeLog}
-                </p>
+                <Log ref={onValueChangeLogRef} />
             </ComponentUseCase>
         </section>
     );

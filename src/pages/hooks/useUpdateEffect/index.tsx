@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { useUpdateEffect } from "@bodynarf/react.components";
+import { useUpdateEffect } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -18,6 +18,7 @@ const UseUpdateEffectPage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useUpdateEffect"
+                version="1.15"
                 description="Works like useEffect, but skips execution on the initial render. Runs only on subsequent updates."
             />
 
@@ -27,7 +28,9 @@ const UseUpdateEffectPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useUpdateEffect } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import { useUpdateEffect } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const [count, setCount] = useState(0);",

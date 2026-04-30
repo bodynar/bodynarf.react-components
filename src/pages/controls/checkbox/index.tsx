@@ -1,25 +1,19 @@
-import { FC, useCallback, useState } from "react";
+﻿import { FC, useRef } from "react";
 
-import { Icon, ElementColor, Checkbox as CheckboxComponent } from "@bodynarf/react.components";
+import Icon from "@bodynarf/react.components/components/icon";
+import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";
+import { ElementColor } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 /** Checkbox component demo */
 const Checkbox: FC = () => {
-    const [onValueChangeLog, setOnValueChangeLog] = useState("");
-    const appendOnValueChangeLog = useCallback(
-        (value?: boolean) => setOnValueChangeLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + `new value: ${value}`
-        ),
-        []
-    );
+    const onValueChangeLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -34,7 +28,7 @@ const Checkbox: FC = () => {
                         <code>
                             boolean
                         </code>
-                        { }
+                        {` `}
                         , i.e. a flag value.
                         <br />
                         To use the component, you need to install the dependency
@@ -73,7 +67,7 @@ const Checkbox: FC = () => {
                     <div className="column">
                         <CodeExample
                             code={[
-                                '/* Project root, main.tsx file */',
+                                `// Project root, main.tsx file`,
                                 `import "bulma-checkradio/dist/css/bulma-checkradio.min.css";`,
                             ].join("\n")}
                         />
@@ -81,29 +75,15 @@ const Checkbox: FC = () => {
                 </div>
             </div>
 
-            <div className="block">
-                <p>
-                    For better readability in examples, the
-                    {` `}
-                    <code>
-                        label
-                    </code>
-                    {` `}
-                    prop is included. However, it is not required.
-                </p>
-            </div>
-
             <ComponentUseCase
                 caption="Minimal use"
-                description="Minimal configuration is absent, the component can be used 'empty'"
+                description="The component can be rendered without any props."
                 code={
                     <CodeExample
                         code={[
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<CheckboxComponent />",
+                            "<Checkbox />",
                         ].join("\n")}
                     />
                 }
@@ -111,51 +91,39 @@ const Checkbox: FC = () => {
                 <CheckboxComponent />
             </ComponentUseCase>
 
+            <hr />
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
+
             <ComponentUseCase
-                caption="Minimal use with label"
-                description="Minimal configuration: onValueChange event handler and optional label"
+                captionIsCode
+                caption="label"
+                description="Optional label configuration rendered next to the checkbox."
                 code={
                     <CodeExample
                         code={[
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<CheckboxComponent`,
-                            `    label={{ caption: "Checkbox demo" }}`,
-                            "/>",
+                            `<Checkbox label={{ caption: "Checkbox demo" }} />`,
                         ].join("\n")}
                     />
                 }
             >
-                <CheckboxComponent
-                    label={{ caption: "Checkbox demo", horizontal: false }}
-                />
+                <CheckboxComponent label={{ caption: "Checkbox demo" }} />
             </ComponentUseCase>
-
-            <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Custom component props
-                </h4>
-            </div>
 
             <ComponentUseCase
                 captionIsCode
                 caption="block"
-                description="Option to stretch the component container. Disabled by default"
+                description="Stretches the component container to full width. Disabled by default."
                 code={
                     <CodeExample
                         code={[
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<CheckboxComponent`,
+                            `<Checkbox`,
                             `    block`,
                             `    label={{ caption: "Checkbox demo" }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -169,18 +137,16 @@ const Checkbox: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="withoutBorder"
-                description="Option to render the component without a border. Disabled by default"
+                description="Renders the component without a border. Disabled by default."
                 code={
                     <CodeExample
                         code={[
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<CheckboxComponent`,
+                            `<Checkbox`,
                             `    withoutBorder`,
                             `    label={{ caption: "Checkbox demo" }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -194,20 +160,18 @@ const Checkbox: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="hasBackgroundColor"
-                description="Option to render the component with background fill. Disabled by default"
+                description="Fills the checkbox with background color. Only works when style is set. Disabled by default."
                 code={
                     <CodeExample
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<CheckboxComponent`,
+                            `<Checkbox`,
                             `    hasBackgroundColor`,
                             `    style={ElementColor.Primary}`,
                             `    label={{ caption: "Checkbox demo" }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -222,21 +186,19 @@ const Checkbox: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="fixBackgroundColor"
-                description="Option to apply background fill only when checked. Disabled by default"
+                description="Makes unchecked background transparent. Only effective when hasBackgroundColor is true. Disabled by default."
                 code={
                     <CodeExample
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<CheckboxComponent`,
+                            `<Checkbox`,
                             `    fixBackgroundColor`,
                             `    hasBackgroundColor`,
                             `    style={ElementColor.Primary}`,
                             `    label={{ caption: "Checkbox demo" }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -252,55 +214,92 @@ const Checkbox: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="isFormLabel"
-                description="Option to render label in a form element style. Disabled by default"
+                description="Renders the label in form element style, placed at the left. Disabled by default."
                 code={
                     <CodeExample
                         code={[
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<CheckboxComponent`,
+                            `<Checkbox`,
                             `    isFormLabel`,
-                            '    label={{ caption: "is Form Label", horizontal: false, }}',
-                            "/>",
+                            `    label={{ caption: "Form Label", horizontal: false }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <CheckboxComponent
                     isFormLabel
-                    label={{ caption: "is Form Label", horizontal: false, }}
+                    label={{ caption: "Form Label", horizontal: false }}
                 />
             </ComponentUseCase>
 
-            <hr />
+            <ComponentUseCase
+                captionIsCode
+                caption="checked"
+                description="Controlled checked state. When provided, component works in controlled mode instead of using defaultValue."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            `// checked: true`,
+                            `<Checkbox`,
+                            `    checked`,
+                            `    label={{ caption: "Checked" }}`,
+                            `/>`,
+                            "",
+                            `// checked: false`,
+                            `<Checkbox`,
+                            `    checked={false}`,
+                            `    label={{ caption: "Unchecked" }}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <div className="is-flex" style={{ gap: "1rem" }}>
+                    <CheckboxComponent checked label={{ caption: "Checked" }} />
+                    <CheckboxComponent checked={false} label={{ caption: "Unchecked" }} />
+                </div>
+            </ComponentUseCase>
 
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Base props implementation
-                    {` `}
-                    <code>
-                        BaseInputElementProps
-                    </code>
-                </h4>
-            </div>
+            <ComponentUseCase
+                captionIsCode
+                caption="indeterminate"
+                description={`Displays a dash instead of a checkmark. Useful for "select all" partial selection scenarios.`}
+                code={
+                    <CodeExample
+                        code={[
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            "",
+                            `<Checkbox`,
+                            `    indeterminate`,
+                            `    label={{ caption: "Indeterminate" }}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <CheckboxComponent
+                    indeterminate
+                    label={{ caption: "Indeterminate" }}
+                />
+            </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="defaultValue"
-                description="Option to set the initial value of the component. Not set by default."
+                description="Sets the initial checked state of the component. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<CheckboxComponent`,
+                            `<Checkbox`,
                             `    defaultValue`,
                             `    label={{ caption: "Checkbox demo" }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -314,18 +313,16 @@ const Checkbox: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="rounded"
-                description="Option to apply border-radius to the component. Disabled by default."
+                description="Applies border-radius to the component. Disabled by default."
                 code={
                     <CodeExample
                         code={[
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<CheckboxComponent`,
+                            `<Checkbox`,
                             `    rounded`,
                             `    label={{ caption: "Checkbox demo" }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -339,18 +336,16 @@ const Checkbox: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="disabled"
-                description="Option to render a disabled component. Not set by default."
+                description="Renders a non-interactive disabled checkbox. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<CheckboxComponent`,
+                            `<Checkbox`,
                             `    disabled`,
                             `    label={{ caption: "Checkbox demo" }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -362,74 +357,68 @@ const Checkbox: FC = () => {
             </ComponentUseCase>
 
             <ComponentSizeCase
-                caption="Sizes"
-                description="The component supports all sizes defined in the ElementSize type"
+                captionIsCode
+                caption="size"
+                description="Controls the visual size of the component. Supports all ElementSize values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<CheckboxComponent`,
+                            `<Checkbox`,
                             `    size={ElementSize.${id}}`,
                             `    label={{ caption: "Checkbox demo" }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    size =>
-                        <CheckboxComponent
-                            size={size}
-                            label={{ caption: "Checkbox demo", horizontal: true }}
-                        />
+                componentProvider={size =>
+                    <CheckboxComponent
+                        size={size}
+                        label={{ caption: "Checkbox demo", horizontal: true }}
+                    />
                 }
             />
 
             <ComponentColorCase
-                caption="Colors"
-                description="Component supports all available colors"
+                captionIsCode
+                caption="style"
+                description="Color applied to the checkbox border and check indicator. Supports all ElementColor values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<CheckboxComponent`,
+                            `<Checkbox`,
                             `    style={ElementColor.${id}}`,
                             `    label={{ caption: "Checkbox demo" }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    style =>
-                        <CheckboxComponent
-                            style={style}
-                            label={{ caption: "Checkbox demo", horizontal: true }}
-                        />
+                componentProvider={style =>
+                    <CheckboxComponent
+                        style={style}
+                        label={{ caption: "Checkbox demo", horizontal: true }}
+                    />
                 }
             />
 
             <ComponentUseCase
                 captionIsCode
                 caption="name"
-                description="Option to specify the component name. Used as a form element attribute."
+                description="Specifies the HTML name attribute for use as a form element."
                 code={
                     <CodeExample
                         code={[
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<CheckboxComponent',
-                            '    name="agreement"',
+                            `<Checkbox`,
+                            `    name="agreement"`,
                             `    label={{ caption: "Checkbox demo" }}`,
-                            '/>',
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -443,33 +432,25 @@ const Checkbox: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="onValueChange"
-                description="Option for handling the onValueChange event. Not set by default"
+                description="Called when the checkbox value changes. Receives the new boolean value."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react"`,
+                            `import Checkbox from "@bodynarf/react.components/components/primitives/checkbox";`,
                             "",
-                            `import CheckboxComponent from "@bodynarf/react.components/components/primitives/checkbox";`,
-                            "",
-                            "/* ... */",
-                            "const ON_VALUE_CHANGE_HANDLE_FN = useCallback((value?: boolean) => { /* handler fn */}, []);",
-                            "/* ... */",
-                            "",
-                            `<CheckboxComponent`,
+                            `<Checkbox`,
                             `    label={{ caption: "Checkbox demo" }}`,
-                            "    onValueChange={ON_VALUE_CHANGE_HANDLE_FN}",
-                            "/>",
+                            `    onValueChange={value => console.log("value:", value)}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <CheckboxComponent
-                    onValueChange={appendOnValueChangeLog}
                     label={{ caption: "Checkbox demo", horizontal: false }}
+                    onValueChange={value => onValueChangeLogRef.current?.append(`value: ${value}`)}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {onValueChangeLog}
-                </p>
+                <Log ref={onValueChangeLogRef} />
             </ComponentUseCase>
         </section>
     );

@@ -4,10 +4,12 @@ import ValidationStateProp from "./validationState";
 import HintProp from "./hint";
 import BaseElementProps from "./baseElementProps";
 import KeyboardElementDemo from "./keyboardElement";
+import BlurableElementDemo from "./blurableElement";
 
 const props: MenuItem = {
     name: "prop-group",
     caption: "Common props",
+    defaultCollapsed: true,
     children: [
         {
             path: "/props/base",
@@ -18,6 +20,11 @@ const props: MenuItem = {
             path: "/props/keyboard",
             caption: "Keyboard events",
             component: <KeyboardElementDemo />
+        },
+        {
+            path: "/props/blur",
+            caption: "Blur event",
+            component: <BlurableElementDemo />
         },
         {
             path: "/props/validation",

@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { useLocalStorage } from "@bodynarf/react.components";
+import { useLocalStorage } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -14,6 +14,7 @@ const UseLocalStoragePage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useLocalStorage"
+                version="1.15"
                 description="Stores state in localStorage and keeps it in sync. Returns a tuple [value, setValue] similar to useState."
             />
 
@@ -23,7 +24,7 @@ const UseLocalStoragePage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useLocalStorage } from "@bodynarf/react.components";`,
+                            `import { useLocalStorage } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const [token, setToken] = useLocalStorage('auth-token', '');",

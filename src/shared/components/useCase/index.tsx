@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react";
 
 import AnchorHeading from "../anchorHeading";
+import { isNotNullish } from "@bodynarf/utils";
 
 /** Component use case props type */
 type ComponentUseCaseProps = {
@@ -34,6 +35,7 @@ const ComponentUseCase: FC<ComponentUseCaseProps> = ({
                     caption={caption}
                     captionIsCode={captionIsCode}
                 />
+                <br />
                 {typeof description === "string"
                     ?
                     <p style={{ whiteSpace: "pre-line" }}>
@@ -41,20 +43,29 @@ const ComponentUseCase: FC<ComponentUseCaseProps> = ({
                     </p>
                     : description
                 }
-                <div className="columns mt-0">
-                    <div className="column is-6">
-                        <span className="mb-2 is-block is-italic has-text-grey">
-                            Code:
-                        </span>
-                        {code}
-                    </div>
-                    <div className="column is-6">
-                        <span className="mb-2 is-block is-italic has-text-grey">
-                            Result:
-                        </span>
-                        {children}
-                    </div>
-                </div>
+                {isNotNullish(code)
+                    ? (
+                        <div className="columns mt-0">
+                            <div className="column is-6">
+                                <span className="mb-2 is-block is-italic has-text-grey">
+                                    Code:
+                                </span>
+                                {code}
+                            </div>
+
+                            {isNotNullish(children)
+                                ? (
+                                    <div className="column is-6">
+                                        <span className="mb-2 is-block is-italic has-text-grey">
+                                            Result:
+                                        </span>
+                                        {children}
+                                    </div>
+                                )
+                                : null}
+                        </div>
+                    )
+                    : null}
             </div>
         </>
     );

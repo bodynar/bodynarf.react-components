@@ -1,38 +1,25 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef } from "react";
 
-import { emptyFn, isNullish } from "@bodynarf/utils";
-import { ElementFloatPosition, ElementPosition, SelectableItem, File as FileComponent, Icon } from "@bodynarf/react.components";
+import FileComponent from "@bodynarf/react.components/components/file";
+import Icon from "@bodynarf/react.components/components/icon";
+import { ElementPosition } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import CodeExample from "@app/sharedComponents/codeExample";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
-import ComponentEnumCase from "@app/sharedComponents/enumSelectionCase";
-
-const floatPositions: Array<ElementFloatPosition> = [
-    ElementPosition.Left,
-    ElementPosition.Right
-];
-
-const floatPositionsAsSelectItems = floatPositions.map((x, i) => ({
-    displayValue: x,
-    id: i.toString(),
-    value: x,
-}) as SelectableItem);
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 /** File component demo */
 const File: FC = () => {
-    const [text, setText] = useState("");
-    const appendText = useCallback(
-        (value?: File) => setText(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + "value changed to " + (isNullish(value) ? "none" : `${value?.name} | ${value?.size}`)
-        ),
-        []
-    );
+    const onValueChangeLogRef = useRef<LogRef>(null);
+
+    const handleValueChange = useCallback((value?: globalThis.File) => {
+        onValueChangeLogRef.current?.append(
+            value == null ? "value changed to none" : `value changed to ${value.name} | ${value.size}`
+        );
+    }, []);
 
     return (
         <section>
@@ -51,11 +38,9 @@ const File: FC = () => {
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onValueChange={() => {}}',
                             '/>',
                         ].join("\n")}
                     />
@@ -63,25 +48,51 @@ const File: FC = () => {
             >
                 <FileComponent
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
+                />
+            </ComponentUseCase>
+
+            <hr />
+            <div>
+                <h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4>
+            </div>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="placeholder"
+                description="Text shown on the file input button when no file is selected."
+                code={
+                    <CodeExample
+                        code={[
+                            `import FileComponent from "@bodynarf/react.components/components/file";`,
+                            "",
+                            '<FileComponent',
+                            '    onValueChange={() => {}}',
+                            '    placeholder="Choose a file..."',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <FileComponent
+                    placeholder="Choose a file..."
+                    onValueChange={() => {}}
                 />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="disabled"
-                description="Option to disable the component functionality and render it in a disabled state. Disabled by default"
+                description="Disable the component — file selection is not allowed. Disabled by default."
                 code={
                     <CodeExample
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    disabled',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onValueChange={() => {}}',
                             '/>',
                         ].join("\n")}
                     />
@@ -90,26 +101,24 @@ const File: FC = () => {
                 <FileComponent
                     disabled
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                 />
             </ComponentUseCase>
 
             <ComponentSizeCase
-                caption="size"
                 captionIsCode
-                description="The component supports all available sizes"
+                caption="size"
+                description="The component supports all available sizes."
                 codeProvider={size =>
                     <CodeExample
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
+                            '    placeholder="File"',
+                            '    onValueChange={() => {}}',
                             `    size={ElementSize.${size}}`,
-                            `    placeholder="File"`,
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '/>',
                         ].join("\n")}
                     />
@@ -119,26 +128,25 @@ const File: FC = () => {
                         <FileComponent
                             size={size}
                             placeholder="File"
-                            onValueChange={emptyFn}
+                            onValueChange={() => {}}
                         />
                 }
             />
 
             <ComponentColorCase
-                caption="Colors"
-                description="The component supports all available styles"
+                captionIsCode
+                caption="style"
+                description="The component supports all available colors."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
-                            "",
-                            "/* ... */",
+                            `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
                             '<FileComponent',
-                            `    size={ElementSize.${id}}`,
-                            `    placeholder="File"`,
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    placeholder="File"',
+                            '    onValueChange={() => {}}',
+                            `    style={ElementColor.${id}}`,
                             '/>',
                         ].join("\n")}
                     />
@@ -148,7 +156,7 @@ const File: FC = () => {
                         <FileComponent
                             style={style}
                             placeholder="File"
-                            onValueChange={emptyFn}
+                            onValueChange={() => {}}
                         />
                 }
             />
@@ -156,18 +164,16 @@ const File: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="name"
-                description="Option to specify the component name. Used as the form element attribute"
+                description="HTML name attribute for the input element. Used as the form element identifier."
                 code={
                     <CodeExample
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    name="docFile"',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onValueChange={() => {}}',
                             '/>',
                         ].join("\n")}
                     />
@@ -176,37 +182,22 @@ const File: FC = () => {
                 <FileComponent
                     name="docFile"
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                 />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="accept"
-                description={
-                    <>
-                        Option describes the types of files available for selection. Not defined by default.
-                        See the detailed attribute description in the
-                        {` `}
-                        <a
-                            target="_blank"
-                            rel="noreferrer"
-                            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/accept"
-                        >
-                            official documentation
-                        </a>
-                    </>
-                }
+                description="File types/extensions allowed for selection. Not defined by default. Accepts MIME types (image/png), file extensions (.png), or audio/*, video/*, image/*. See the MDN accept attribute documentation for details."
                 code={
                     <CodeExample
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onValueChange={() => {}}',
                             '    accept="image/png, image/jpeg"',
                             '/>',
                         ].join("\n")}
@@ -215,28 +206,67 @@ const File: FC = () => {
             >
                 <FileComponent
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                     accept="image/png, image/jpeg"
                 />
             </ComponentUseCase>
 
-            alignment
+            <ComponentUseCase
+                captionIsCode
+                caption="alignment"
+                description={
+                    <>
+                        Horizontal alignment of the upload button. Supports
+                        {` `}
+                        <code>ElementPosition.Left</code>
+                        {` `}
+                        and
+                        {` `}
+                        <code>ElementPosition.Right</code>
+                        .
+                        <br />
+                        <Icon name="exclamation-triangle-fill" className="has-text-warning" />
+                        {` `}
+                        Right alignment cannot be used together with
+                        {` `}
+                        <code>boxed</code>.
+                    </>
+                }
+                code={
+                    <CodeExample
+                        code={[
+                            `import { ElementPosition } from "@bodynarf/react.components";`,
+                            `import FileComponent from "@bodynarf/react.components/components/file";`,
+                            "",
+                            '<FileComponent',
+                            '    placeholder="File"',
+                            '    onValueChange={() => {}}',
+                            `    alignment={ElementPosition.Right}`,
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <FileComponent
+                    alignment={ElementPosition.Right}
+                    placeholder="File"
+                    onValueChange={() => {}}
+                />
+            </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="displayFileName"
-                description="Option to enable displaying the selected file name. Enabled by default"
+                description="Show the selected file name next to the button. Enabled by default — set to false to hide it."
                 code={
                     <CodeExample
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
                             '    displayFileName={false}',
+                            '    onValueChange={() => {}}',
                             '/>',
                         ].join("\n")}
                     />
@@ -244,7 +274,7 @@ const File: FC = () => {
             >
                 <FileComponent
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                     displayFileName={false}
                 />
             </ComponentUseCase>
@@ -254,20 +284,13 @@ const File: FC = () => {
                 caption="boxed"
                 description={
                     <>
-                        Option to use the boxed display mode. Disabled by default.
+                        Use the boxed display mode. Disabled by default.
                         <br />
-                        <Icon
-                            name="exclamation-triangle-fill"
-                            className="has-text-warning"
-                        />
+                        <Icon name="exclamation-triangle-fill" className="has-text-warning" />
                         {` `}
-                        <span>
-                            Cannot be used with
-                            {` `}
-                            <code>
-                                {`alignment={ElementPosition.right}`}
-                            </code>
-                        </span>
+                        Cannot be used together with
+                        {` `}
+                        <code>alignment=&#123;ElementPosition.Right&#125;</code>.
                     </>
                 }
                 code={
@@ -275,12 +298,10 @@ const File: FC = () => {
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    boxed',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onValueChange={() => {}}',
                             '/>',
                         ].join("\n")}
                     />
@@ -289,25 +310,23 @@ const File: FC = () => {
                 <FileComponent
                     boxed
                     placeholder="File"
-                    onValueChange={emptyFn}
+                    onValueChange={() => {}}
                 />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="clearSelectionTitle"
-                description="Prop to set the title text of the button for clearing the selected file"
+                description="Title attribute of the clear-selection button (shown after a file is chosen)."
                 code={
                     <CodeExample
                         code={[
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<FileComponent',
                             '    placeholder="File"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
-                            '    clearSelectionTitle="ReMoVe FiLe"',
+                            '    onValueChange={() => {}}',
+                            '    clearSelectionTitle="Remove file"',
                             '/>',
                         ].join("\n")}
                     />
@@ -315,60 +334,29 @@ const File: FC = () => {
             >
                 <FileComponent
                     placeholder="File"
-                    onValueChange={emptyFn}
-                    clearSelectionTitle="ReMoVe FiLe"
+                    onValueChange={() => {}}
+                    clearSelectionTitle="Remove file"
                 />
             </ComponentUseCase>
-
-            <ComponentEnumCase
-                caption="Alignment"
-                enumNames={floatPositions}
-                lookupValues={floatPositionsAsSelectItems}
-                description="The component can have different alignment options"
-                codeProvider={value =>
-                    <CodeExample
-                        code={[
-                            `import { ElementPosition } from "@bodynarf/react.components";`,
-                            `import FileComponent from "@bodynarf/react.components/components/file";`,
-                            "",
-                            "/* ... */",
-                            "",
-                            '<FileComponent',
-                            '    placeholder="File"',
-                            '    onValueChange={emptyFn} // TODO: Replace with your own handler function',
-                            `    alignment={ElementPosition.${value}}`,
-                            '/>',
-                        ].join("\n")}
-                    />
-                }
-                componentProvider={
-                    (value: ElementFloatPosition) =>
-                        <FileComponent
-                            alignment={value}
-                            placeholder="File"
-                            onValueChange={emptyFn}
-                        />
-                }
-            />
 
             <ComponentUseCase
                 captionIsCode
                 caption="onValueChange"
-                description="Handling the component file selection change event"
+                description="Callback fired when the selected file changes. Receives the selected File or undefined when cleared."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react"`,
+                            `import { useCallback } from "react";`,
                             "",
                             `import FileComponent from "@bodynarf/react.components/components/file";`,
                             "",
-                            "/* ... */",
-                            "const ON_VALUE_CHANGE_HANDLE_FN = useCallback((value?: File) => { /* handler fn */}, []);",
-                            "/* ... */",
+                            "const handleValueChange = useCallback((value?: File) => {",
+                            "    console.log(value);",
+                            "}, []);",
                             "",
                             '<FileComponent',
-                            `    placeholder="File"`,
-                            '    onValueChange={ON_VALUE_CHANGE_HANDLE_FN}',
+                            '    placeholder="File"',
+                            '    onValueChange={handleValueChange}',
                             '/>',
                         ].join("\n")}
                     />
@@ -376,11 +364,9 @@ const File: FC = () => {
             >
                 <FileComponent
                     placeholder="File"
-                    onValueChange={appendText}
+                    onValueChange={handleValueChange}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {text}
-                </p>
+                <Log ref={onValueChangeLogRef} />
             </ComponentUseCase>
         </section>
     );

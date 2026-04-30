@@ -1,16 +1,18 @@
 import { FC, useState } from "react";
 
-import { useMount } from "@bodynarf/react.components";
+import { useMount } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import CodeExample from "@app/sharedComponents/codeExample";
+import { ElementColor, ElementSize, Tag } from "@bodynarf/react.components";
 
 /** useMount hook demo */
 const UseMountPage: FC = () => {
-    const [mountMessage, setMountMessage] = useState("");
+    const [mountMessage, setMountMessage] = useState(false);
     useMount(() => {
-        setMountMessage("Component mounted!");
+        console.log('[useMount DEMO] Component mounted!');
+        setMountMessage(true);
     });
 
     return (
@@ -26,12 +28,12 @@ const UseMountPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useMount } from "@bodynarf/react.components";`,
+                            `import { useMount } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    useMount(() => {",
-                            "        console.log('Component mounted!');",
-                            "        initializeData();",
+                            "        console.log('[useMount DEMO] Component mounted!');",
+                            "        initializeData(); // some initialization logic",
                             "    });",
                             "",
                             "    return <div>Content</div>;",
@@ -40,9 +42,11 @@ const UseMountPage: FC = () => {
                     />
                 }
             >
-                <span className="tag is-success is-medium">
-                    {mountMessage}
-                </span>
+                <Tag
+                    size={ElementSize.Medium}
+                    style={mountMessage ? ElementColor.Success : ElementColor.Info}
+                    content={mountMessage ? "Component mounted" : "Awaiting component mount"}
+                />
             </ComponentUseCase>
         </section>
     );

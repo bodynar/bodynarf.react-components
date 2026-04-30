@@ -1,33 +1,27 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef } from "react";
 
 import { emptyFn } from "@bodynarf/utils";
-import { ElementColor, Multiselect as MultiselectComponent, MultiselectItem } from "@bodynarf/react.components";
+import MultiselectComponent from "@bodynarf/react.components/components/multiselect";
+import { ElementColor, ElementFloatPosition, ElementPosition, MultiselectItem } from "@bodynarf/react.components";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import CodeExample from "@app/sharedComponents/codeExample";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 /** Multiselect component demo */
 const Multiselect: FC = () => {
-    const [onChangeResult, setOnChangeResult] = useState("");
+    const onChangeLogRef = useRef<LogRef>(null);
+    const onClearLogRef = useRef<LogRef>(null);
+
     const appendOnChangeResult = useCallback(
-        (item: MultiselectItem, selected: boolean) => setOnChangeResult(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + `item ${item.displayValue}: ${selected ? "selected" : "not selected"}`
-        ),
+        (item: MultiselectItem, selected: boolean) =>
+            onChangeLogRef.current?.append(`item ${item.displayValue}: ${selected ? "selected" : "not selected"}`),
         []
     );
 
-    const [clearResult, setClearResult] = useState("");
     const appendClearResult = useCallback(
-        () => setClearResult(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + "clear event"
-        ),
+        () => onClearLogRef.current?.append("clear event"),
         []
     );
 
@@ -63,10 +57,12 @@ const Multiselect: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            `import { useCallback } from "react"`,
                             "",
-                            "/* ... */",
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
+                            "",
                             `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
                             "    .map((name, index) => ({",
                             "        value: name,",
@@ -75,11 +71,12 @@ const Multiselect: FC = () => {
                             "        title: `City with name ${name}`",
                             "        selected: false,",
                             "    }) as MultiselectItem);",
-                            "/* ... */",
+                            "",
+                            "const onChangeHandler = useCallback((item: MultiselectItem, selected: boolean) => { /* handler fn */}, []);",
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onChange={onChangeHandler}',
                             '/>',
                         ].join("\n")}
                     />
@@ -103,20 +100,10 @@ const Multiselect: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             ``,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
-                            "/* ... */",
-                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
-                            "    .map((name, index) => ({",
-                            "        value: name,",
-                            "        displayValue: `[${index}] ${name}`,",
-                            "        id: name,",
-                            "        title: `City with name ${name}`",
-                            "        selected: false,",
-                            "    }));",
-                            "/* ... */",
                             "const ON_CHANGE_HANDLE_FN = useCallback((item: MultiselectItem, selected: boolean) => { /* handler fn */}, []);",
-                            "/* ... */",
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
@@ -133,9 +120,7 @@ const Multiselect: FC = () => {
                     hideOnOuterClick
                     placeholder="Default multiselect"
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {onChangeResult}
-                </p>
+                <Log ref={onChangeLogRef} />
             </ComponentUseCase>
 
             <ComponentUseCase
@@ -146,22 +131,12 @@ const Multiselect: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
-                            "",
-                            "/* ... */",
-                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
-                            "    .map((name, index) => ({",
-                            "        value: name,",
-                            "        displayValue: `[${index}] ${name}`,",
-                            "        id: name,",
-                            "        title: `City with name ${name}`",
-                            "        selected: false,",
-                            "    }) as MultiselectItem);",
-                            "/* ... */",
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onChange={onChangeHandler}',
                             '    placeholder="Multiselect with placeholder"',
                             '/>',
                         ].join("\n")}
@@ -185,23 +160,13 @@ const Multiselect: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
-                            "",
-                            "/* ... */",
-                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
-                            "    .map((name, index) => ({",
-                            "        value: name,",
-                            "        displayValue: `[${index}] ${name}`,",
-                            "        id: name,",
-                            "        title: `City with name ${name}`",
-                            "        selected: false,",
-                            "    }) as MultiselectItem);",
-                            "/* ... */",
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
                             '    hideOnOuterClick={false}',
+                            '    onChange={onChangeHandler}',
                             '/>',
                         ].join("\n")}
                     />
@@ -224,23 +189,13 @@ const Multiselect: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
-                            "",
-                            "/* ... */",
-                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
-                            "    .map((name, index) => ({",
-                            "        value: name,",
-                            "        displayValue: `[${index}] ${name}`,",
-                            "        id: name,",
-                            "        title: `City with name ${name}`",
-                            "        selected: false,",
-                            "    }) as MultiselectItem);",
-                            "/* ... */",
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
                             '    listMaxHeight="5rem"',
+                            '    onChange={onChangeHandler}',
                             '/>',
                         ].join("\n")}
                     />
@@ -264,23 +219,13 @@ const Multiselect: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
-                            "",
-                            "/* ... */",
-                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
-                            "    .map((name, index) => ({",
-                            "        value: name,",
-                            "        displayValue: `[${index}] ${name}`,",
-                            "        id: name,",
-                            "        title: `City with name ${name}`",
-                            "        selected: false,",
-                            "    }) as MultiselectItem);",
-                            "/* ... */",
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
                             '<MultiselectComponent',
                             '    compact',
                             '    items={cities}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onChange={onChangeHandler}',
                             '/>',
                         ].join("\n")}
                     />
@@ -304,23 +249,13 @@ const Multiselect: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
-                            "",
-                            "/* ... */",
-                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
-                            "    .map((name, index) => ({",
-                            "        value: name,",
-                            "        displayValue: `[${index}] ${name}`,",
-                            "        id: name,",
-                            "        title: `City with name ${name}`",
-                            "        selected: false,",
-                            "    }) as MultiselectItem);",
-                            "/* ... */",
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
                             '<MultiselectComponent',
                             '    disabled',
                             '    items={cities}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onChange={onChangeHandler}',
                             '/>',
                         ].join("\n")}
                     />
@@ -344,22 +279,12 @@ const Multiselect: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
-                            "",
-                            "/* ... */",
-                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
-                            "    .map((name, index) => ({",
-                            "        value: name,",
-                            "        displayValue: `[${index}] ${name}`,",
-                            "        id: name,",
-                            "        title: `City with name ${name}`",
-                            "        selected: false,",
-                            "    }) as MultiselectItem);",
-                            "/* ... */",
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onChange={onChangeHandler}',
                             '    label={{ caption: "Label caption", horizontal: true }}',
                             '/>',
                         ].join("\n")}
@@ -384,23 +309,13 @@ const Multiselect: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
-                            "",
-                            "/* ... */",
-                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
-                            "    .map((name, index) => ({",
-                            "        value: name,",
-                            "        displayValue: `[${index}] ${name}`,",
-                            "        id: name,",
-                            "        title: `City with name ${name}`",
-                            "        selected: false,",
-                            "    }) as MultiselectItem);",
-                            "/* ... */",
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
                             '<MultiselectComponent',
                             '    items={[]}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
                             '    noDataText="NOTHING HERE"',
+                            '    onChange={onChangeHandler}',
                             '/>',
                         ].join("\n")}
                     />
@@ -424,23 +339,13 @@ const Multiselect: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
-                            "",
-                            "/* ... */",
-                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
-                            "    .map((name, index) => ({",
-                            "        value: name,",
-                            "        displayValue: `[${index}] ${name}`,",
-                            "        id: name,",
-                            "        title: `City with name ${name}`",
-                            "        selected: false,",
-                            "    }) as MultiselectItem);",
-                            "/* ... */",
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
                             '    searchable={false}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onChange={onChangeHandler}',
                             '/>',
                         ].join("\n")}
                     />
@@ -464,23 +369,13 @@ const Multiselect: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
-                            "",
-                            "/* ... */",
-                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
-                            "    .map((name, index) => ({",
-                            "        value: name,",
-                            "        displayValue: `[${index}] ${name}`,",
-                            "        id: name,",
-                            "        title: `City with name ${name}`",
-                            "        selected: false,",
-                            "    }) as MultiselectItem);",
-                            "/* ... */",
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
                             '<MultiselectComponent',
                             '    searchable',
                             '    items={cities}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onChange={onChangeHandler}',
                             '    noDataByQuery="No ItEmS fOuNd"',
                             '/>',
                         ].join("\n")}
@@ -508,24 +403,14 @@ const Multiselect: FC = () => {
                             `import { useCallback } from "react"`,
                             ``,
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
-                            "/* ... */",
-                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
-                            "    .map((name, index) => ({",
-                            "        value: name,",
-                            "        displayValue: `[${index}] ${name}`,",
-                            "        id: name,",
-                            "        title: `City with name ${name}`",
-                            "        selected: false,",
-                            "    }));",
-                            "/* ... */",
                             "const ON_CLEAR_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
-                            "/* ... */",
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onChange={onChangeHandler}',
                             '    onClear={ON_CLEAR_HANDLE_FN}',
                             '/>',
                         ].join("\n")}
@@ -540,21 +425,23 @@ const Multiselect: FC = () => {
                     hideOnOuterClick
                     placeholder="Default multiselect"
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {clearResult}
-                </p>
+                <Log ref={onClearLogRef} />
             </ComponentUseCase>
 
+            <hr />
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">MultiselectItem props</h4></div>
+
             <ComponentUseCase
-                caption="Item Icon"
-                description="It is also possible to configure a list of items with an icon"
+                captionIsCode
+                caption="icon"
+                description="Optional icon configuration for each item. Displayed next to the item label in the dropdown list."
                 code={
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
-                            "/* ... */",
                             `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
                             "    .map((name, index) => ({",
                             "        value: name,",
@@ -568,11 +455,10 @@ const Multiselect: FC = () => {
                             "                : `${++index % 2}-square`,",
                             "        }",
                             "    }));",
-                            "/* ... */",
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onChange={onChangeHandler}',
                             '/>',
                         ].join("\n")}
                     />
@@ -588,15 +474,52 @@ const Multiselect: FC = () => {
             </ComponentUseCase>
 
             <ComponentUseCase
-                caption="Item pre selected state"
-                description="It is also possible to configure a list of items with an selected state"
+                captionIsCode
+                caption="icon.position"
+                description="Icons can be positioned to the right of the label text by setting position to ElementPosition.Right. Default is left."
                 code={
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
+                            `import { ElementPosition } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
-                            "/* ... */",
+                            `const cities = ["Tokyo", "Delhi", "Shanghai"] // TEMP data`,
+                            "    .map((name, index) => ({\n        value: name,\n        displayValue: name,\n        id: name,\n        selected: false,",
+                            "        icon: {",
+                            "            name: \"geo-alt\",",
+                            `            position: ElementPosition.Right,`,
+                            "        }",
+                            "    }));",
+                            "",
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={onChangeHandler}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultiselectComponent
+                    onChange={emptyFn}
+                    items={itemsWithIconsRight}
+
+                    hideOnOuterClick
+                    placeholder="Default multiselect"
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="selected"
+                description="Initial selected state for each item. When true the item is pre-selected when the component mounts."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
+                            "",
                             `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
                             "    .map((name, index) => ({",
                             "        value: name,",
@@ -605,11 +528,10 @@ const Multiselect: FC = () => {
                             "        title: `City with name ${name}`",
                             "        selected: ++index % 4 === 0,",
                             "    }));",
-                            "/* ... */",
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onChange={onChangeHandler}',
                             '/>',
                         ].join("\n")}
                     />
@@ -632,22 +554,12 @@ const Multiselect: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
-                            "",
-                            "/* ... */",
-                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
-                            "    .map((name, index) => ({",
-                            "        value: name,",
-                            "        displayValue: `[${index}] ${name}`,",
-                            "        id: name,",
-                            "        title: `City with name ${name}`",
-                            "        selected: false,",
-                            "    }));",
-                            "/* ... */",
+                            `import { MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onChange={onChangeHandler}',
                             '    selectionCaption="registros seleccionados: {0}"',
                             '/>',
                         ].join("\n")}
@@ -667,28 +579,17 @@ const Multiselect: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="checkboxConfig"
-                description=""
+                description="Customization for the checkboxes rendered inside the dropdown list (color style, rounded corners, background color fill, etc.)"
                 code={
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import MultiselectComponent, { MultiselectItem } from "@bodynarf/react.components/components/multiselect";`,
-                            "",
-                            "/* ... */",
-                            `const cities = ["Tokyo", "Delhi", "Shanghai", "São Paulo", "Mexico City"] // TEMP data`,
-                            "    .map((name, index) => ({",
-                            "        value: name,",
-                            "        displayValue: `[${index}] ${name}`,",
-                            "        id: name,",
-                            "        title: `City with name ${name}`",
-                            "        selected: false,",
-                            "    }));",
-                            "/* ... */",
+                            `import { ElementColor, MultiselectItem } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
                             "",
                             '<MultiselectComponent',
                             '    items={cities}',
-                            '    onChange={emptyFn} // TODO: Replace with your own handler function',
+                            '    onChange={onChangeHandler}',
                             '    checkboxConfig={{',
                             '        style: ElementColor.Success,',
                             '        rounded: true,',
@@ -712,6 +613,78 @@ const Multiselect: FC = () => {
 
                     hideOnOuterClick
                     placeholder="Default multiselect"
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="resultDisplayConfig"
+                description='Controls how selected items are displayed. Use "default" for a summary text label (e.g. "3 items selected"), or provide a chip appearance config with position set to "label" or "belowLabel".'
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import MultiselectComponent from "@bodynarf/react.components/components/multiselect";`,
+                            "",
+                            `// Summary text (default behavior, same as omitting the prop):`,
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={emptyFn}',
+                            '    resultDisplayConfig="default"',
+                            '/>',
+                            "",
+                            `// Chips in the label:`,
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={emptyFn}',
+                            '    resultDisplayConfig={{',
+                            '        position: "label",',
+                            '        style: ElementColor.Danger,',
+                            '        rounded: true,',
+                            '    }}',
+                            '/>',
+                            "",
+                            `// Chips below the label:`,
+                            '<MultiselectComponent',
+                            '    items={cities}',
+                            '    onChange={emptyFn}',
+                            '    resultDisplayConfig={{',
+                            '        position: "belowLabel",',
+                            '        style: ElementColor.Primary,',
+                            '        rounded: true,',
+                            '    }}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <p className="has-text-weight-semibold mb-2">position: &quot;label&quot;</p>
+                <MultiselectComponent
+                    items={cities}
+                    onChange={emptyFn}
+                    resultDisplayConfig={{
+                        position: "label",
+                        style: ElementColor.Danger,
+                        rounded: true,
+                    }}
+
+                    hideOnOuterClick
+                    placeholder="Chips in label"
+                />
+
+                <p className="has-text-weight-semibold mt-4 mb-2">position: &quot;belowLabel&quot;</p>
+                <MultiselectComponent
+                    items={cities}
+                    onChange={emptyFn}
+                    resultDisplayConfig={{
+                        position: "belowLabel",
+                        style: ElementColor.Primary,
+                        rounded: true,
+                    }}
+
+                    hideOnOuterClick
+                    placeholder="Chips below label"
                 />
             </ComponentUseCase>
         </section>
@@ -744,6 +717,17 @@ const itemsWithIcons = cities.map((x, index) => ({
         name: ++index === 2
             ? "exclamation-square"
             : `${++index % 2}-square`,
+    }
+}));
+
+const itemsWithIconsRight: MultiselectItem[] = cities.map((x, index) => ({
+    ...x,
+    displayValue: x.value,
+    icon: {
+        name: ++index === 2
+            ? "exclamation-square"
+            : `${++index % 2}-square`,
+        position: ElementPosition.Right as ElementFloatPosition,
     }
 }));
 

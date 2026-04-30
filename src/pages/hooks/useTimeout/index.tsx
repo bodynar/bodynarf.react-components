@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { useTimeout } from "@bodynarf/react.components";
+import { useTimeout } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -16,6 +16,7 @@ const UseTimeoutPage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useTimeout"
+                version="1.15"
                 description="Executes a callback after a specified delay. Automatically clears timeout if delay changes or component unmounts. Pass null to disable."
             />
 
@@ -25,7 +26,9 @@ const UseTimeoutPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useTimeout } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import { useTimeout } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const [message, setMessage] = useState('Waiting...');",

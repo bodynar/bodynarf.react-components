@@ -1,26 +1,19 @@
-import { FC, useCallback, useState } from "react";
+﻿import { FC, useRef } from "react";
 
 import { Color } from "@bodynarf/utils";
 
-import { ElementPosition, Color as ColorComponent } from "@bodynarf/react.components";
+import ColorComponent from "@bodynarf/react.components/components/primitives/color";
+import { ElementPosition, ElementFloatPosition } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
+import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
-import ComponentSizeCase from "@app/sharedComponents/sizeUse";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
-/** Color component demo */
-const Color: FC = () => {
-    const [onValueChangeLog, setOnValueChangeLog] = useState("");
-    const appendOnValueChangeLog = useCallback(
-        (value?: Color) => setOnValueChangeLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + `new value: ${JSON.stringify(value)}`
-        ),
-        []
-    );
+/** Color picker component demo */
+const ColorPicker: FC = () => {
+    const onValueChangeLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -32,15 +25,13 @@ const Color: FC = () => {
 
             <ComponentUseCase
                 caption="Minimal use"
-                description="Minimal configuration is absent, the component can be used 'empty'"
+                description="The component can be rendered without any props."
                 code={
                     <CodeExample
                         code={[
-                            `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<ColorComponent />",
+                            "<Color />",
                         ].join("\n")}
                     />
                 }
@@ -49,220 +40,174 @@ const Color: FC = () => {
             </ComponentUseCase>
 
             <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Custom component props
-                </h4>
-            </div>
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
 
             <ComponentUseCase
                 captionIsCode
                 caption="preview"
-                description="Option to display a preview button block with the selected color. Not set by default."
+                description="When provided, renders a color preview button next to the picker at the specified position."
                 code={
                     <CodeExample
                         code={[
-                            `import { ElementPosition } from "@bodynarf/react.components";`,
-                            `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
+                            `import { ElementPosition, ElementFloatPosition } from "@bodynarf/react.components";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
-                            "/* ... */",
+                            `// preview on the right`,
+                            `<Color`,
+                            `    preview={{ position: ElementPosition.Right as ElementFloatPosition }}`,
+                            `/>`,
                             "",
-                            `<ColorComponent`,
-                            "    preview={{ position: ElementPosition.Right }}",
-                            "/>",
+                            `// preview on the left`,
+                            `<Color`,
+                            `    preview={{ position: ElementPosition.Left as ElementFloatPosition }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <ColorComponent
-                    preview={{ position: ElementPosition.Right }}
-                />
+                <div className="is-flex is-flex-direction-column" style={{ gap: "0.75rem" }}>
+                    <div>
+                        <p className="mb-1 has-text-grey">position: Right</p>
+                        <ColorComponent preview={{ position: ElementPosition.Right as ElementFloatPosition }} />
+                    </div>
+                    <div>
+                        <p className="mb-1 has-text-grey">position: Left</p>
+                        <ColorComponent preview={{ position: ElementPosition.Left as ElementFloatPosition }} />
+                    </div>
+                </div>
             </ComponentUseCase>
 
-            <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Base props implementation
-                    {` `}
-                    <code>
-                        BaseInputElementProps
-                    </code>
-                </h4>
-            </div>
+            <ComponentUseCase
+                captionIsCode
+                caption="label"
+                description="Optional label configuration rendered next to the picker."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
+                            "",
+                            `<Color`,
+                            `    label={{ caption: "Color picker", horizontal: false }}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <ColorComponent label={{ caption: "Color picker", horizontal: false }} />
+            </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="defaultValue"
-                description="Option to set the initial value of the component. Not set by default."
+                description="Sets the initial selected color. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<ColorComponent`,
-                            `    defaultValue={{ blue: 155, green: 100, red: 75 }}`,
-                            "/>",
+                            `<Color`,
+                            `    defaultValue={{ red: 75, green: 100, blue: 155 }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
-                <ColorComponent
-                    defaultValue={{ blue: 155, green: 100, red: 75 }}
-                />
+                <ColorComponent defaultValue={{ red: 75, green: 100, blue: 155 }} />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="rounded"
-                description="Option to apply border-radius to the component. Disabled by default."
+                description="Applies border-radius to the component. Disabled by default."
                 code={
                     <CodeExample
                         code={[
-                            `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<ColorComponent`,
-                            `    rounded`,
-                            "/>",
+                            `<Color rounded />`,
                         ].join("\n")}
                     />
                 }
             >
-                <ColorComponent
-                    rounded
-                />
+                <ColorComponent rounded />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="disabled"
-                description="Option to render the component as disabled. Not set by default."
+                description="Renders a non-interactive disabled picker. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<ColorComponent`,
-                            `    disabled`,
-                            "/>",
+                            `<Color disabled />`,
                         ].join("\n")}
                     />
                 }
             >
-                <ColorComponent
-                    disabled
-                />
+                <ColorComponent disabled />
             </ComponentUseCase>
 
             <ComponentSizeCase
-                caption="Sizes"
-                description="The component supports all sizes defined in the ElementSize type"
+                captionIsCode
+                caption="size"
+                description="Controls the visual size of the component. Supports all ElementSize values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<ColorComponent`,
-                            `    size={ElementSize.${id}}`,
-                            "/>",
+                            `<Color size={ElementSize.${id}} />`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    size =>
-                        <ColorComponent
-                            size={size}
-                        />
+                componentProvider={size =>
+                    <ColorComponent size={size} />
                 }
             />
 
             <ComponentUseCase
                 captionIsCode
-                caption="label"
-                description="Option to specify the component label. Not set by default."
-                code={
-                    <CodeExample
-                        code={[
-                            `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
-                            "",
-                            "/* ... */",
-                            "",
-                            '<ColorComponent',
-                            '    label={{ caption: "Color picker", horizontal: false }}',
-                            '/>',
-                        ].join("\n")}
-                    />
-                }
-            >
-                <ColorComponent
-                    label={{ caption: "Color picker", horizontal: false }}
-                />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
                 caption="name"
-                description="Option to specify the component name. Used as a form element attribute."
+                description="Specifies the HTML name attribute for use as a form element."
                 code={
                     <CodeExample
                         code={[
-                            `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<ColorComponent',
-                            '    name="personalColor"',
-                            '/>',
+                            `<Color name="personalColor" />`,
                         ].join("\n")}
                     />
                 }
             >
-                <ColorComponent
-                    name="personalColor"
-                />
+                <ColorComponent name="personalColor" />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="onValueChange"
-                description="Option for handling the onValueChange event. Not set by default."
+                description="Called when the selected color changes. Receives the new Color value."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react"`,
+                            `import Color from "@bodynarf/react.components/components/primitives/color";`,
                             "",
-                            `import ColorComponent from "@bodynarf/react.components/components/primitives/color";`,
-                            "",
-                            "/* ... */",
-                            "const ON_VALUE_CHANGE_HANDLE_FN = useCallback((value: Color) => { /* handler fn */}, []);",
-                            "/* ... */",
-                            "",
-                            `<ColorComponent`,
-                            "    onValueChange={ON_VALUE_CHANGE_HANDLE_FN}",
-                            "/>",
+                            `<Color`,
+                            `    onValueChange={value => console.log("value:", JSON.stringify(value))}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <ColorComponent
-                    onValueChange={appendOnValueChangeLog}
+                    onValueChange={(value: Color) => onValueChangeLogRef.current?.append(`value: ${JSON.stringify(value)}`)}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {onValueChangeLog}
-                </p>
+                <Log ref={onValueChangeLogRef} />
             </ComponentUseCase>
         </section>
     );
 };
 
-export default Color;
+export default ColorPicker;

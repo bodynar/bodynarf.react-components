@@ -1,6 +1,7 @@
 import { FC } from "react";
 
-import { ElementPosition, Text as TextComponent } from "@bodynarf/react.components";
+import TextComponent from "@bodynarf/react.components/components/primitives/text";
+import { ElementPosition } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -35,8 +36,6 @@ const HintProp: FC = () => {
                         code={[
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<TextComponent`,
                             '    hint={{ content: "Describing hint" }}',
                             "/>",
@@ -57,8 +56,6 @@ const HintProp: FC = () => {
                     <CodeExample
                         code={[
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<TextComponent`,
                             '    hint={{ content: "Example: Agosto", italic: true }}',
@@ -81,8 +78,6 @@ const HintProp: FC = () => {
                         code={[
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<TextComponent`,
                             '    hint={{ content: "Personal Identification Number", grey: true }}',
                             "/>",
@@ -104,8 +99,6 @@ const HintProp: FC = () => {
                         code={[
                             `import { ElementPosition } from "@bodynarf/react.components";`,
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<TextComponent`,
                             '    hint={{ content: "Think outside the box", icon: { name: "box", position: ElementPosition.Right } }}',

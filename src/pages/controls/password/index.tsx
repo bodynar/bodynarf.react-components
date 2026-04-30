@@ -1,25 +1,18 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useRef } from "react";
 
-import { Icon, Password as PasswordComponent } from "@bodynarf/react.components";
+import Icon from "@bodynarf/react.components/components/icon";
+import PasswordComponent from "@bodynarf/react.components/components/primitives/password";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 /** Password component demo */
 const Password: FC = () => {
-    const [onValueChangeLog, setOnValueChangeLog] = useState("");
-    const appendOnValueChangeLog = useCallback(
-        (value?: string) => setOnValueChangeLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + `new value: ${value}`
-        ),
-        []
-    );
+    const onValueChangeLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -29,29 +22,15 @@ const Password: FC = () => {
                 description="Component for entering sensitive data (e.g., password)"
             />
 
-            <div className="block">
-                <p>
-                    For better readability in examples, the
-                    {` `}
-                    <code>
-                        label
-                    </code>
-                    {` `}
-                    prop is included. However, it is not required.
-                </p>
-            </div>
-
             <ComponentUseCase
                 caption="Minimal use"
-                description="Minimal configuration is absent, the component can be used 'empty'"
+                description="The component can be rendered without any props."
                 code={
                     <CodeExample
                         code={[
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<PasswordComponent />`,
+                            "<Password />",
                         ].join("\n")}
                     />
                 }
@@ -60,28 +39,21 @@ const Password: FC = () => {
             </ComponentUseCase>
 
             <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Custom component props
-                </h4>
-            </div>
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
 
             <ComponentUseCase
                 captionIsCode
                 caption="canShowPassword"
-                description="Option to display the password visibility icon. Not set by default."
+                description="Displays a toggle icon that reveals or hides the password on click. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<PasswordComponent`,
-                            "    canShowPassword",
+                            `<Password`,
+                            `    canShowPassword`,
                             `    label={{ caption: "Password demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -95,19 +67,17 @@ const Password: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="showPasswordIconTitle"
-                description="Option to configure the tooltip text when hovering over the password visibility icon. Works only when canShowPassword is enabled. Default is 'Show password'"
+                description='Tooltip text for the show-password icon. Only used when canShowPassword is enabled. Defaults to &quot;Show password&quot;.'
                 code={
                     <CodeExample
                         code={[
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<PasswordComponent`,
-                            "    canShowPassword",
-                            '    showPasswordIconTitle="sHoW pAsSwOrD"',
+                            `<Password`,
+                            `    canShowPassword`,
+                            `    showPasswordIconTitle="sHoW pAsSwOrD"`,
                             `    label={{ caption: "Password demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -119,33 +89,38 @@ const Password: FC = () => {
                 />
             </ComponentUseCase>
 
-            <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Base props implementation
-                    {` `}
-                    <code>
-                        BaseInputElementProps
-                    </code>
-                </h4>
-            </div>
+            <ComponentUseCase
+                captionIsCode
+                caption="label"
+                description="Optional label configuration rendered next to the input."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
+                            "",
+                            `<Password`,
+                            `    label={{ caption: "Password demo", horizontal: false }}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <PasswordComponent label={{ caption: "Password demo", horizontal: false }} />
+            </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="defaultValue"
-                description="Option to set the initial value of the component. Not set by default."
+                description="Sets the initial password value. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<PasswordComponent`,
-                            '    defaultValue="pwd"',
+                            `<Password`,
+                            `    defaultValue="pwd"`,
                             `    label={{ caption: "Password demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -159,24 +134,22 @@ const Password: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="placeholder"
-                description="Option to specify the component's placeholder. Not set by default."
+                description="Placeholder text shown when the input is empty. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<PasswordComponent`,
-                            '    placeholder="Password demo control"',
+                            `<Password`,
+                            `    placeholder="Enter your password"`,
                             `    label={{ caption: "Password demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <PasswordComponent
-                    placeholder="Password demo control"
+                    placeholder="Enter your password"
                     label={{ caption: "Password demo", horizontal: true }}
                 />
             </ComponentUseCase>
@@ -184,18 +157,16 @@ const Password: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="rounded"
-                description="Option to apply border-radius to the component. Disabled by default."
+                description="Applies border-radius to the component. Disabled by default."
                 code={
                     <CodeExample
                         code={[
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<PasswordComponent`,
+                            `<Password`,
                             `    rounded`,
                             `    label={{ caption: "Password demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -209,18 +180,16 @@ const Password: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="disabled"
-                description="Option to render the component as disabled. Not set by default."
+                description="Renders a non-interactive disabled input. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<PasswordComponent`,
+                            `<Password`,
                             `    disabled`,
                             `    label={{ caption: "Password demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -232,70 +201,43 @@ const Password: FC = () => {
             </ComponentUseCase>
 
             <ComponentSizeCase
-                caption="Sizes"
-                description="The component supports all sizes defined in the ElementSize type"
+                captionIsCode
+                caption="size"
+                description="Controls the visual size of the component. Supports all ElementSize values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<PasswordComponent`,
+                            `<Password`,
                             `    size={ElementSize.${id}}`,
                             `    label={{ caption: "Password demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    size =>
-                        <PasswordComponent
-                            size={size}
-                            label={{ caption: "Password demo", horizontal: true }}
-                        />
+                componentProvider={size =>
+                    <PasswordComponent
+                        size={size}
+                        label={{ caption: "Password demo", horizontal: true }}
+                    />
                 }
             />
 
             <ComponentUseCase
                 captionIsCode
-                caption="label"
-                description="Option to specify the component label. Not set by default."
-                code={
-                    <CodeExample
-                        code={[
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
-                            "",
-                            "/* ... */",
-                            "",
-                            `<PasswordComponent`,
-                            `    label={{ caption: "Password demo", horizontal: false }}`,
-                            "/>",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <PasswordComponent
-                    label={{ caption: "Password demo", horizontal: false }}
-                />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
                 caption="loading"
-                description="Option to render the component in a loading state. Not set by default."
+                description="Displays a loading spinner inside the component. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<PasswordComponent`,
+                            `<Password`,
                             `    loading`,
                             `    label={{ caption: "Password demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -307,47 +249,43 @@ const Password: FC = () => {
             </ComponentUseCase>
 
             <ComponentColorCase
-                caption="Colors"
-                description="Component supports all available colors"
+                captionIsCode
+                caption="style"
+                description="Color applied to the input border. Supports all ElementColor values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<PasswordComponent`,
+                            `<Password`,
                             `    style={ElementColor.${id}}`,
                             `    label={{ caption: "Password demo", horizontal: false }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    style =>
-                        <PasswordComponent
-                            style={style}
-                            label={{ caption: "Password demo", horizontal: false }}
-                        />
+                componentProvider={style =>
+                    <PasswordComponent
+                        style={style}
+                        label={{ caption: "Password demo", horizontal: false }}
+                    />
                 }
             />
 
             <ComponentUseCase
                 captionIsCode
                 caption="name"
-                description="Option to specify the component name. Used as a form element attribute."
+                description="Specifies the HTML name attribute for use as a form element."
                 code={
                     <CodeExample
                         code={[
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<PasswordComponent',
-                            '    name="key"',
-                            '    label={{ caption: "Password demo", horizontal: false }}',
-                            '/>',
+                            `<Password`,
+                            `    name="key"`,
+                            `    label={{ caption: "Password demo", horizontal: false }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -363,33 +301,22 @@ const Password: FC = () => {
                 caption="autoFocus"
                 description={
                     <>
-                        Option to set focus on the component input field on initial render
+                        Sets focus on the input on initial render.
                         <br />
-                        <Icon
-                            name="exclamation-triangle-fill"
-                            className="has-text-warning"
-                        />
+                        <Icon name="exclamation-triangle-fill" className="has-text-warning" />
                         {` `}
-                        <span>
-                            Only 1 element on the page can have this flag
-                        </span>
-                        <br />
-                        <span className="is-italic">
-                            Refresh the page and check which component (from the presented examples) received automatic focus
-                        </span>
+                        Only 1 element on the page can have this flag.
                     </>
                 }
                 code={
                     <CodeExample
                         code={[
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<PasswordComponent',
-                            '    autoFocus',
-                            '    label={{ caption: "Password demo", horizontal: false }}',
-                            '/>',
+                            `<Password`,
+                            `    autoFocus`,
+                            `    label={{ caption: "Password demo", horizontal: false }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -403,33 +330,25 @@ const Password: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="onValueChange"
-                description="Option for handling the onValueChange event. Not set by default."
+                description="Called when the input value changes. Receives the new string value."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react"`,
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
                             "",
-                            `import PasswordComponent from "@bodynarf/react.components/components/primitives/password";`,
-                            "",
-                            "/* ... */",
-                            "const ON_VALUE_CHANGE_HANDLE_FN = useCallback((value: string) => { /* handler fn */}, []);",
-                            "/* ... */",
-                            "",
-                            `<PasswordComponent`,
-                            "    onValueChange={ON_VALUE_CHANGE_HANDLE_FN}",
+                            `<Password`,
+                            `    onValueChange={value => console.log("value:", value)}`,
                             `    label={{ caption: "Password demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <PasswordComponent
-                    onValueChange={appendOnValueChangeLog}
                     label={{ caption: "Password demo", horizontal: true }}
+                    onValueChange={value => onValueChangeLogRef.current?.append(`value: ${value}`)}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {onValueChangeLog}
-                </p>
+                <Log ref={onValueChangeLogRef} />
             </ComponentUseCase>
         </section>
     );

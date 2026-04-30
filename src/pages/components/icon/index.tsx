@@ -1,24 +1,20 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef } from "react";
 
-import { Icon as IconComponent } from "@bodynarf/react.components";
+import IconComponent from "@bodynarf/react.components/components/icon";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import CodeExample from "@app/sharedComponents/codeExample";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 /** Icon component demo */
 const Icon: FC = () => {
-    const [text, setText] = useState("");
-    const appendText = useCallback(
-        () => setText(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + "clicked"
-        ),
-        []
-    );
+    const onClickLogRef = useRef<LogRef>(null);
+
+    const handleClick = useCallback(() => {
+        onClickLogRef.current?.append("clicked");
+    }, []);
 
     return (
         <section>
@@ -103,8 +99,6 @@ const Icon: FC = () => {
                         code={[
                             `import IconComponent from "@bodynarf/react.components/components/icon";`,
                             "",
-                            "/* ... */",
-                            "",
                             '<IconComponent name="alarm" />',
                         ].join("\n")}
                     />
@@ -113,17 +107,35 @@ const Icon: FC = () => {
                 <IconComponent name="alarm" />
             </ComponentUseCase>
 
-            <ComponentSizeCase
-                caption="size"
+            <hr />
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
+
+            <ComponentUseCase
                 captionIsCode
-                description="The component supports all available sizes"
+                caption="name"
+                description="Bootstrap icon name without the bi- prefix. Find icon names on the Bootstrap Icons website."
+                code={
+                    <CodeExample
+                        code={[
+                            `import IconComponent from "@bodynarf/react.components/components/icon";`,
+                            "",
+                            '<IconComponent name="star-fill" />',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <IconComponent name="star-fill" />
+            </ComponentUseCase>
+
+            <ComponentSizeCase
+                captionIsCode
+                caption="size"
+                description="The component supports all available sizes."
                 codeProvider={size =>
                     <CodeExample
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
                             `import IconComponent from "@bodynarf/react.components/components/icon";`,
-                            "",
-                            "/* ... */",
                             "",
                             '<IconComponent',
                             '    name="alarm"',
@@ -144,21 +156,21 @@ const Icon: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="onClick"
-                description="Handling the component click event"
+                description="Click handler. When provided, the icon becomes interactive. And gets a 'is-clickable' class for styling."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react"`,
+                            `import { useCallback } from "react";`,
                             "",
                             `import IconComponent from "@bodynarf/react.components/components/icon";`,
                             "",
-                            "/* ... */",
-                            "const ON_CLICK_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
-                            "/* ... */",
+                            "const handleClick = useCallback(() => {",
+                            '    console.log("clicked");',
+                            "}, []);",
                             "",
                             '<IconComponent',
                             '    name="alarm"',
-                            '    onClick={ON_CLICK_HANDLE_FN}',
+                            '    onClick={handleClick}',
                             '/>',
                         ].join("\n")}
                     />
@@ -166,11 +178,9 @@ const Icon: FC = () => {
             >
                 <IconComponent
                     name="alarm"
-                    onClick={appendText}
+                    onClick={handleClick}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {text}
-                </p>
+                <Log ref={onClickLogRef} />
             </ComponentUseCase>
         </section>
     );

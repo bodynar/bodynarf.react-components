@@ -1,13 +1,15 @@
-import { FC, useCallback, useState } from "react";
+﻿import { FC, useRef, useState } from "react";
 
-import { ElementColor, ElementSize, RadioGroup as RadioGroupComponent, RadioItem } from "@bodynarf/react.components";
-import "@bodynarf/react.components/components/primitives/radioGroup/component/style.scss";
+import { Optional } from "@bodynarf/utils";
+import { ElementColor, RadioItem } from "@bodynarf/react.components";
+import RadioGroupComponent from "@bodynarf/react.components/components/primitives/radioGroup";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 const sampleItems: Array<RadioItem> = [
     { id: "1", value: "option1", displayValue: "Option 1" },
@@ -15,25 +17,20 @@ const sampleItems: Array<RadioItem> = [
     { id: "3", value: "option3", displayValue: "Option 3" },
 ];
 
-const sampleItemsWithDisabled: Array<RadioItem> = [
-    { id: "1", value: "option1", displayValue: "Option 1" },
-    { id: "2", value: "option2", displayValue: "Option 2 (disabled)", disabled: true },
-    { id: "3", value: "option3", displayValue: "Option 3" },
-];
-
 /** RadioGroup component demo */
 const RadioGroup: FC = () => {
-    // Event log for onValueChange demo
-    const [onValueChangeLog, setOnValueChangeLog] = useState("");
-    const appendOnValueChangeLog = useCallback(
-        (item: RadioItem) => setOnValueChangeLog(
-            t => t
-                + "\n"
-                + new Date().toLocaleTimeString()
-                + " => " + `selected: ${item.displayValue} (value: ${item.value})`
-        ),
-        []
-    );
+    const [minimalValue, setMinimalValue] = useState<Optional<string>>();
+    const [valueValue, setValueValue] = useState<Optional<string>>("2");
+    const [nameValue, setNameValue] = useState<Optional<string>>();
+    const [disabledValue, setDisabledValue] = useState<Optional<string>>();
+    const [horizontalValue, setHorizontalValue] = useState<Optional<string>>();
+    const [blockValue, setBlockValue] = useState<Optional<string>>();
+    const [circleValue, setCircleValue] = useState<Optional<string>>();
+    const [withoutBorderValue, setWithoutBorderValue] = useState<Optional<string>>();
+    const [hasBackgroundColorValue, setHasBackgroundColorValue] = useState<Optional<string>>();
+    const [styleValue, setStyleValue] = useState<Optional<string>>();
+    const [onValueChangeValue, setOnValueChangeValue] = useState<Optional<string>>();
+    const onValueChangeLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -51,132 +48,149 @@ const RadioGroup: FC = () => {
 
             <ComponentUseCase
                 caption="Minimal use"
-                description="Minimal configuration: provide an array of items for selection"
+                description="Provide an array of items — that is the only required prop."
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
-                            "const items: Array<RadioItem> = [",
+                            `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
                             `    { id: "2", value: "option2", displayValue: "Option 2" },`,
                             `    { id: "3", value: "option3", displayValue: "Option 3" },`,
-                            "];",
+                            `];`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<RadioGroup",
-                            "    items={items}",
-                            "/>",
+                            `<RadioGroup items={items} />`,
                         ].join("\n")}
                     />
                 }
             >
                 <RadioGroupComponent
                     items={sampleItems}
+                    value={minimalValue}
+                    onValueChange={item => setMinimalValue(item.id)}
                 />
             </ComponentUseCase>
 
             <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Custom component props
-                </h4>
-            </div>
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
 
             <ComponentUseCase
                 captionIsCode
                 caption="value"
-                description="Pre-select an option by providing the item id"
+                description="Pre-selects an option by item id. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
-                            "const items: Array<RadioItem> = [",
+                            `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
                             `    { id: "2", value: "option2", displayValue: "Option 2" },`,
                             `    { id: "3", value: "option3", displayValue: "Option 3" },`,
-                            "];",
+                            `];`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<RadioGroup",
-                            "    items={items}",
+                            `<RadioGroup`,
                             `    value="2"`,
-                            "/>",
+                            `    items={items}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <RadioGroupComponent
                     items={sampleItems}
-                    value="2"
+                    value={valueValue}
+                    onValueChange={item => setValueValue(item.id)}
                 />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
-                caption="onValueChange"
-                description="Handler for the value change event. Called when a different option is selected."
+                caption="name"
+                description="Specifies the HTML name attribute shared by all radio inputs in the group."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
-                            "",
-                            "const items: Array<RadioItem> = [",
+                            `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
                             `    { id: "2", value: "option2", displayValue: "Option 2" },`,
                             `    { id: "3", value: "option3", displayValue: "Option 3" },`,
-                            "];",
+                            `];`,
                             "",
-                            "/* ... */",
-                            `const handleValueChange = useCallback((item: RadioItem) => {`,
-                            `    console.log("Selected:", item.displayValue);`,
-                            `}, []);`,
-                            "/* ... */",
-                            "",
-                            "<RadioGroup",
-                            "    items={items}",
-                            "    onValueChange={handleValueChange}",
-                            "/>",
+                            `<RadioGroup`,
+                            `    items={items}`,
+                            `    name="myGroup"`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <RadioGroupComponent
                     items={sampleItems}
-                    onValueChange={appendOnValueChangeLog}
+                    name="myGroup"
+                    value={nameValue}
+                    onValueChange={item => setNameValue(item.id)}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {onValueChangeLog}
-                </p>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="disabled"
+                description="Renders all radio inputs as non-interactive. Not set by default."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
+                            "",
+                            `const items: Array<RadioItem> = [`,
+                            `    { id: "1", value: "option1", displayValue: "Option 1" },`,
+                            `    { id: "2", value: "option2", displayValue: "Option 2" },`,
+                            `    { id: "3", value: "option3", displayValue: "Option 3" },`,
+                            `];`,
+                            "",
+                            `<RadioGroup`,
+                            `    disabled`,
+                            `    items={items}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <RadioGroupComponent
+                    items={sampleItems}
+                    disabled
+                    value={disabledValue}
+                    onValueChange={item => setDisabledValue(item.id)}
+                />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="horizontal"
-                description="Display options in a horizontal row instead of vertical stack"
+                description="Displays options in a horizontal row. Defaults to false (vertical)."
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
-                            "const items: Array<RadioItem> = [",
+                            `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
                             `    { id: "2", value: "option2", displayValue: "Option 2" },`,
                             `    { id: "3", value: "option3", displayValue: "Option 3" },`,
-                            "];",
+                            `];`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<RadioGroup",
-                            "    items={items}",
-                            "    horizontal",
-                            "/>",
+                            `<RadioGroup`,
+                            `    horizontal`,
+                            `    items={items}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -184,30 +198,31 @@ const RadioGroup: FC = () => {
                 <RadioGroupComponent
                     items={sampleItems}
                     horizontal
+                    value={horizontalValue}
+                    onValueChange={item => setHorizontalValue(item.id)}
                 />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="block"
-                description="Display options with filled background style"
+                description="Applies filled background style to radio buttons. Defaults to false."
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
-                            "const items: Array<RadioItem> = [",
+                            `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
                             `    { id: "2", value: "option2", displayValue: "Option 2" },`,
                             `    { id: "3", value: "option3", displayValue: "Option 3" },`,
-                            "];",
+                            `];`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<RadioGroup",
-                            "    items={items}",
-                            "    block",
-                            "/>",
+                            `<RadioGroup`,
+                            `    block`,
+                            `    items={items}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -215,30 +230,31 @@ const RadioGroup: FC = () => {
                 <RadioGroupComponent
                     items={sampleItems}
                     block
+                    value={blockValue}
+                    onValueChange={item => setBlockValue(item.id)}
                 />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="circle"
-                description="Use circular radio button style (enabled by default)"
+                description="Uses circular radio button style. Defaults to true; set to false to disable."
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
-                            "const items: Array<RadioItem> = [",
+                            `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
                             `    { id: "2", value: "option2", displayValue: "Option 2" },`,
                             `    { id: "3", value: "option3", displayValue: "Option 3" },`,
-                            "];",
+                            `];`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<RadioGroup",
-                            "    items={items}",
-                            "    circle={false}",
-                            "/>",
+                            `<RadioGroup`,
+                            `    items={items}`,
+                            `    circle={false}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -246,30 +262,31 @@ const RadioGroup: FC = () => {
                 <RadioGroupComponent
                     items={sampleItems}
                     circle={false}
+                    value={circleValue}
+                    onValueChange={item => setCircleValue(item.id)}
                 />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="withoutBorder"
-                description="Remove the border from radio buttons"
+                description="Removes the border from radio buttons. Defaults to false."
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
-                            "const items: Array<RadioItem> = [",
+                            `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
                             `    { id: "2", value: "option2", displayValue: "Option 2" },`,
                             `    { id: "3", value: "option3", displayValue: "Option 3" },`,
-                            "];",
+                            `];`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<RadioGroup",
-                            "    items={items}",
-                            "    withoutBorder",
-                            "/>",
+                            `<RadioGroup`,
+                            `    items={items}`,
+                            `    withoutBorder`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -277,31 +294,32 @@ const RadioGroup: FC = () => {
                 <RadioGroupComponent
                     items={sampleItems}
                     withoutBorder
+                    value={withoutBorderValue}
+                    onValueChange={item => setWithoutBorderValue(item.id)}
                 />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="hasBackgroundColor"
-                description="Add background color to the radio buttons (requires style prop)"
+                description="Applies background color to radio buttons. Only works when style is also set. Defaults to false."
                 code={
                     <CodeExample
                         code={[
-                            `import { RadioGroup, RadioItem, ElementColor } from "@bodynarf/react.components";`,
+                            `import { ElementColor, RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
-                            "const items: Array<RadioItem> = [",
+                            `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
                             `    { id: "2", value: "option2", displayValue: "Option 2" },`,
                             `    { id: "3", value: "option3", displayValue: "Option 3" },`,
-                            "];",
+                            `];`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<RadioGroup",
-                            "    items={items}",
-                            "    hasBackgroundColor",
-                            "    style={ElementColor.Primary}",
-                            "/>",
+                            `<RadioGroup`,
+                            `    items={items}`,
+                            `    hasBackgroundColor`,
+                            `    style={ElementColor.Primary}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -310,141 +328,101 @@ const RadioGroup: FC = () => {
                     items={sampleItems}
                     hasBackgroundColor
                     style={ElementColor.Primary}
+                    value={hasBackgroundColorValue}
+                    onValueChange={item => setHasBackgroundColorValue(item.id)}
                 />
             </ComponentUseCase>
-
-            <ComponentUseCase
-                captionIsCode
-                caption="disabled items"
-                description="Individual items can be disabled by setting the disabled property"
-                code={
-                    <CodeExample
-                        code={[
-                            `import { RadioGroup, RadioItem } from "@bodynarf/react.components";`,
-                            "",
-                            "const items: Array<RadioItem> = [",
-                            `    { id: "1", value: "option1", displayValue: "Option 1" },`,
-                            `    { id: "2", value: "option2", displayValue: "Option 2", disabled: true },`,
-                            `    { id: "3", value: "option3", displayValue: "Option 3" },`,
-                            "];",
-                            "",
-                            "/* ... */",
-                            "",
-                            "<RadioGroup",
-                            "    items={items}",
-                            "/>",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <RadioGroupComponent
-                    items={sampleItemsWithDisabled}
-                />
-            </ComponentUseCase>
-
-            <ComponentUseCase
-                caption="Combined styles"
-                description="Multiple style options can be combined"
-                code={
-                    <CodeExample
-                        code={[
-                            `import { RadioGroup, RadioItem, ElementColor } from "@bodynarf/react.components";`,
-                            "",
-                            "const items: Array<RadioItem> = [",
-                            `    { id: "1", value: "option1", displayValue: "Option 1" },`,
-                            `    { id: "2", value: "option2", displayValue: "Option 2" },`,
-                            `    { id: "3", value: "option3", displayValue: "Option 3" },`,
-                            "];",
-                            "",
-                            "/* ... */",
-                            "",
-                            "<RadioGroup",
-                            "    items={items}",
-                            "    horizontal",
-                            "    style={ElementColor.Success}",
-                            "/>",
-                        ].join("\n")}
-                    />
-                }
-            >
-                <RadioGroupComponent
-                    items={sampleItems}
-                    horizontal
-                    style={ElementColor.Success}
-                />
-            </ComponentUseCase>
-
-            <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Size and color variations
-                </h4>
-            </div>
 
             <ComponentSizeCase
                 captionIsCode
                 caption="size"
-                description="The component supports all sizes defined in the ElementSize type"
+                description="Controls the visual size of the component. Supports all ElementSize values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementSize, RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem, ElementSize } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
-                            "const items: Array<RadioItem> = [",
+                            `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
                             `    { id: "2", value: "option2", displayValue: "Option 2" },`,
                             `    { id: "3", value: "option3", displayValue: "Option 3" },`,
-                            "];",
+                            `];`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<RadioGroup',
-                            '    items={items}',
+                            `<RadioGroup`,
+                            `    items={items}`,
                             `    size={ElementSize.${id}}`,
-                            '/>',
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={(size: ElementSize) =>
-                    <RadioGroupComponent
-                        items={sampleItems}
-                        size={size}
-                    />
+                componentProvider={size =>
+                    <RadioGroupComponent items={sampleItems} size={size} />
                 }
             />
 
             <ComponentColorCase
                 captionIsCode
                 caption="style"
-                description="The component supports all colors defined in the ElementColor type"
+                description="Colors the radio buttons. Supports all ElementColor values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementColor, RadioGroup, RadioItem } from "@bodynarf/react.components";`,
+                            `import { RadioItem, ElementColor } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
                             "",
-                            "const items: Array<RadioItem> = [",
+                            `const items: Array<RadioItem> = [`,
                             `    { id: "1", value: "option1", displayValue: "Option 1" },`,
                             `    { id: "2", value: "option2", displayValue: "Option 2" },`,
                             `    { id: "3", value: "option3", displayValue: "Option 3" },`,
-                            "];",
+                            `];`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<RadioGroup',
-                            '    items={items}',
+                            `<RadioGroup`,
+                            `    items={items}`,
                             `    style={ElementColor.${id}}`,
-                            '/>',
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={(color: ElementColor) =>
-                    <RadioGroupComponent
-                        items={sampleItems}
-                        style={color}
-                    />
+                componentProvider={style =>
+                    <RadioGroupComponent items={sampleItems} style={style} value={styleValue} onValueChange={item => setStyleValue(item.id)} />
                 }
             />
+
+            <ComponentUseCase
+                captionIsCode
+                caption="onValueChange"
+                description="Called when the selected option changes. Receives the selected RadioItem."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { RadioItem } from "@bodynarf/react.components";`,
+                            `import RadioGroup from "@bodynarf/react.components/components/primitives/radioGroup";`,
+                            "",
+                            `const items: Array<RadioItem> = [`,
+                            `    { id: "1", value: "option1", displayValue: "Option 1" },`,
+                            `    { id: "2", value: "option2", displayValue: "Option 2" },`,
+                            `    { id: "3", value: "option3", displayValue: "Option 3" },`,
+                            `];`,
+                            "",
+                            `<RadioGroup`,
+                            `    items={items}`,
+                            `    onValueChange={item => console.log("selected:", item.displayValue)}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <RadioGroupComponent
+                    items={sampleItems}
+                    value={onValueChangeValue}
+                    onValueChange={item => {
+                        setOnValueChangeValue(item.id);
+                        onValueChangeLogRef.current?.append(`selected: ${item.displayValue} (value: ${item.value})`);
+                    }}
+                />
+                <Log ref={onValueChangeLogRef} />
+            </ComponentUseCase>
         </section>
     );
 };

@@ -1,30 +1,32 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 
-import { ElementPosition, SelectableItem, Breadcrumbs as BreadcrumbsComponent, BreadCrumb } from "@bodynarf/react.components";
+import BreadcrumbsComponent from "@bodynarf/react.components/components/breadcrumbs";
+import { ElementPosition, BreadCrumb } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
-import ComponentEnumCase from "@app/sharedComponents/enumSelectionCase";
 import ComponentPositionCase from "@app/sharedComponents/positionUse";
 
-const separators: Array<"arrow" | "bullet" | "dot" | "succeeds"> = [
-    "arrow", "bullet", "dot", "succeeds"
+const items: BreadCrumb[] = [
+    { caption: "Source", href: "#/source" },
+    { caption: "Subfolder", href: "#/subfolder" },
+    { caption: "Target", href: "#/target" },
+    { caption: "Current", href: "#/current" },
 ];
 
-const separatorsAsSelectItems = separators.map((x, i) => ({
-    displayValue: x,
-    id: i.toString(),
-    value: x,
-}) as SelectableItem);
-
-const items = [
-    { caption: "Source", href: "#/source", },
-    { caption: "Subfolder", href: "#/subfolder", },
-    { caption: "Target", href: "#/target", },
-    { caption: "Current", href: "#/current", },
+const itemsWithIcons: BreadCrumb[] = [
+    { caption: "Home", href: "#/home", icon: { name: "house" } },
+    { caption: "Library", href: "#/library", icon: { name: "collection" } },
+    { caption: "Data", href: "#/data", icon: { name: "database" } },
 ];
+
+const customElementGenerator = (bc: BreadCrumb) => (
+    <button type="button" className="button is-small is-light">
+        {bc.caption}
+    </button>
+);
 
 /** Breadcrumbs component demo */
 const Breadcrumbs: FC = () => {
@@ -34,27 +36,24 @@ const Breadcrumbs: FC = () => {
                 name="Breadcrumbs"
                 version="1.8"
                 baseTypeName="BaseElementProps"
-                description="Breadcrumbs is a navigation component that displays the current page’s location within a hierarchy. It shows a sequence of links (or items) representing the navigation path, making it easier for users to move back to previous sections."
+                description="Navigation component that shows the current page location within a hierarchy as a sequence of links."
             />
 
             <ComponentUseCase
                 caption="Minimal use"
-                description="Minimal configuration requires only items passed to the items prop"
+                description="Only items is required."
                 code={
                     <CodeExample
                         code={[
-                            `import BreadcrumbsComponent from "@bodynarf/react.components/components/breadcrumbs";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
-                            "/* ... */",
-                            "const items = [",
-                            '    { caption: "Source", href: "#/source", },',
-                            '    { caption: "Subfolder", href: "#/subfolder", },',
-                            '    { caption: "Target", href: "#/target", },',
-                            '    { caption: "Current", href: "#/current", },',
-                            "];",
-                            "/* ... */",
+                            `const items = [`,
+                            `    { caption: "Source", href: "#/source" },`,
+                            `    { caption: "Subfolder", href: "#/subfolder" },`,
+                            `    { caption: "Current", href: "#/current" },`,
+                            `];`,
                             "",
-                            '<BreadcrumbsComponent items={items} />',
+                            `<Breadcrumbs items={items} />`,
                         ].join("\n")}
                     />
                 }
@@ -62,151 +61,229 @@ const Breadcrumbs: FC = () => {
                 <BreadcrumbsComponent items={items} />
             </ComponentUseCase>
 
+            <hr />
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="items"
+                description="Array of BreadCrumb objects. Each item requires caption (display text) and href (link address). Optionally accepts an icon."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
+                            "",
+                            `<Breadcrumbs`,
+                            `    items={[`,
+                            `        { caption: "Home", href: "#/home", icon: { name: "house" } },`,
+                            `        { caption: "Library", href: "#/library", icon: { name: "collection" } },`,
+                            `        { caption: "Data", href: "#/data", icon: { name: "database" } },`,
+                            `    ]}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <BreadcrumbsComponent items={itemsWithIcons} />
+            </ComponentUseCase>
+
             <ComponentSizeCase
-                caption="Sizes"
-                description="The component supports all sizes defined in the ElementSize type"
+                captionIsCode
+                caption="size"
+                description="The component supports all sizes defined in ElementSize."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import BreadcrumbsComponent from "@bodynarf/react.components/components/breadcrumbs";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
-                            "/* ... */",
-                            "const items = [];",
-                            '    { caption: "Source", href: "#/source", },',
-                            '    { caption: "Subfolder", href: "#/subfolder", },',
-                            '    { caption: "Target", href: "#/target", },',
-                            '    { caption: "Current", href: "#/current", },',
-                            "/* ... */",
-                            "",
-                            `<BreadcrumbsComponent`,
-                            `    items={items}`,
-                            `    size={ElementSize.${id}}`,
-                            `/>`,
+                            `<Breadcrumbs items={items} size={ElementSize.${id}} />`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    size =>
-                        <BreadcrumbsComponent
-                            size={size}
-                            items={items}
-                        />
+                componentProvider={size =>
+                    <BreadcrumbsComponent items={items} size={size} />
                 }
             />
 
             <ComponentPositionCase
-                caption="Positions"
-                description="The component supports 3 different positions"
+                captionIsCode
+                caption="position"
+                description="Horizontal alignment of the breadcrumb list."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementPosition } from "@bodynarf/react.components";`,
-                            `import BreadcrumbsComponent from "@bodynarf/react.components/components/breadcrumbs";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
-                            "/* ... */",
-                            "const items = [];",
-                            '    { caption: "Source", href: "#/source", },',
-                            '    { caption: "Subfolder", href: "#/subfolder", },',
-                            '    { caption: "Target", href: "#/target", },',
-                            '    { caption: "Current", href: "#/current", },',
-                            "/* ... */",
-                            "",
-                            `<BreadcrumbsComponent items={items} position={ElementPosition.${id}} />`,
+                            `<Breadcrumbs items={items} position={ElementPosition.${id}} />`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    (position: ElementPosition) =>
-                        <BreadcrumbsComponent
-                            items={items}
-                            position={position}
-                        />
-                }
-            />
-
-            <ComponentEnumCase
-                captionIsCode
-                caption="separator"
-                enumNames={separators}
-                lookupValues={separatorsAsSelectItems}
-                description="Item separators can have different styles"
-                codeProvider={id =>
-                    <CodeExample
-                        code={[
-                            `import BreadcrumbsComponent from "@bodynarf/react.components/components/breadcrumbs";`,
-                            "",
-                            "/* ... */",
-                            "const items = [];",
-                            '    { caption: "Source", href: "#/source", },',
-                            '    { caption: "Subfolder", href: "#/subfolder", },',
-                            '    { caption: "Target", href: "#/target", },',
-                            '    { caption: "Current", href: "#/current", },',
-                            "/* ... */",
-                            "",
-                            `<BreadcrumbsComponent`,
-                            `    items={items}`,
-                            `    separator="${id}"`,
-                            `/>`,
-                        ].join("\n")}
-                    />
-                }
-                componentProvider={
-                    (value: "arrow" | "bullet" | "dot" | "succeeds") =>
-                        <BreadcrumbsComponent
-                            items={items}
-                            separator={value}
-                        />
+                componentProvider={(position: ElementPosition) =>
+                    <BreadcrumbsComponent items={items} position={position} />
                 }
             />
 
             <ComponentUseCase
                 captionIsCode
+                caption="separator"
+                description='Separator style between items. One of: "arrow" (default), "bullet", "dot", "succeeds".'
+                code={
+                    <CodeExample
+                        code={[
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
+                            "",
+                            `<Breadcrumbs items={items} separator="arrow" />`,
+                            `<Breadcrumbs items={items} separator="bullet" />`,
+                            `<Breadcrumbs items={items} separator="dot" />`,
+                            `<Breadcrumbs items={items} separator="succeeds" />`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <div className="is-flex is-flex-direction-column" style={{ gap: "0.75rem" }}>
+                    {(["arrow", "bullet", "dot", "succeeds"] as const).map(sep => (
+                        <div key={sep}>
+                            <p className="mb-1 has-text-grey">{sep}</p>
+                            <BreadcrumbsComponent items={items} separator={sep} />
+                        </div>
+                    ))}
+                </div>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="ariaLabel"
+                description='Accessible label for the nav landmark. Defaults to "breadcrumbs".'
+                code={
+                    <CodeExample
+                        code={[
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
+                            "",
+                            `<Breadcrumbs items={items} ariaLabel="page navigation" />`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <BreadcrumbsComponent items={items} ariaLabel="page navigation" />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
                 caption="elementGenerator"
-                description="It is possible to use a custom generator (template) for rendering breadcrumb items"
+                description="Custom render function for each breadcrumb item. Receives the BreadCrumb object and returns a ReactNode."
                 code={
                     <CodeExample
                         code={[
                             `import { ReactNode } from "react";`,
-                            `import BreadcrumbsComponent, { BreadCrumb } from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
-                            "/* ... */",
-                            "const customElementGenerator: (bc: BreadCrumb) => ReactNode = ((bc) => (",
-                            '    <button type="button">',
-                            "        {bc.caption}",
-                            "    </button>",
-                            "));",
-                            "/* ... */",
-                            "const items = [];",
-                            '    { caption: "Source", href: "#/source", },',
-                            '    { caption: "Subfolder", href: "#/subfolder", },',
-                            '    { caption: "Target", href: "#/target", },',
-                            '    { caption: "Current", href: "#/current", },',
-                            "/* ... */",
+                            `import { BreadCrumb } from "@bodynarf/react.components";`,
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
                             "",
-                            '<BreadcrumbsComponent',
-                            '    items={items}',
-                            '    elementGenerator={customElementGenerator}',
-                            '/>',
+                            `const customElementGenerator = (bc: BreadCrumb): ReactNode => (`,
+                            `    <button type="button" className="button is-small is-light">`,
+                            `        {bc.caption}`,
+                            `    </button>`,
+                            `);`,
+                            "",
+                            `<Breadcrumbs items={items} elementGenerator={customElementGenerator} />`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <BreadcrumbsComponent items={items} elementGenerator={customElementGenerator} />
+            </ComponentUseCase>
+
+            <hr />
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">BreadCrumb props</h4></div>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="caption"
+                description="Display text of the breadcrumb item."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
+                            "",
+                            `<Breadcrumbs`,
+                            `    items={[`,
+                            `        { caption: "Home", href: "#/" },`,
+                            `        { caption: "Settings", href: "#/settings" },`,
+                            `    ]}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <BreadcrumbsComponent
-                    items={items}
-
-                    elementGenerator={customElementGenerator}
+                    items={[
+                        { caption: "Home", href: "#/" },
+                        { caption: "Settings", href: "#/settings" },
+                    ]}
                 />
             </ComponentUseCase>
 
+            <ComponentUseCase
+                captionIsCode
+                caption="href"
+                description="Link address for the breadcrumb item. Used as the href of the rendered anchor element."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
+                            "",
+                            `<Breadcrumbs`,
+                            `    items={[`,
+                            `        { caption: "Home", href: "/" },`,
+                            `        { caption: "Docs", href: "/docs" },`,
+                            `        { caption: "API", href: "/docs/api" },`,
+                            `    ]}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <BreadcrumbsComponent
+                    items={[
+                        { caption: "Home", href: "/" },
+                        { caption: "Docs", href: "/docs" },
+                        { caption: "API", href: "/docs/api" },
+                    ]}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="icon"
+                description="Bootstrap icon shown before the caption. Provide name (without bi- prefix) and optionally position, size or className."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";`,
+                            "",
+                            `<Breadcrumbs`,
+                            `    items={[`,
+                            `        { caption: "Home", href: "#/", icon: { name: "house" } },`,
+                            `        { caption: "Projects", href: "#/projects", icon: { name: "folder" } },`,
+                            `        { caption: "Report", href: "#/report", icon: { name: "file-text" } },`,
+                            `    ]}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <BreadcrumbsComponent
+                    items={[
+                        { caption: "Home", href: "#/", icon: { name: "house" } },
+                        { caption: "Projects", href: "#/projects", icon: { name: "folder" } },
+                        { caption: "Report", href: "#/report", icon: { name: "file-text" } },
+                    ]}
+                />
+            </ComponentUseCase>
         </section>
     );
 };
 
 export default Breadcrumbs;
-
-const customElementGenerator: (bc: BreadCrumb) => ReactNode = ((bc) => (
-    <button type="button">
-        {bc.caption}
-    </button>
-));

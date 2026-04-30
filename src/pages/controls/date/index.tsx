@@ -1,36 +1,19 @@
-import { FC, useCallback, useState } from "react";
+﻿import { FC, useRef } from "react";
 
-import { Icon, Date as DateComponent } from "@bodynarf/react.components";
+import Icon from "@bodynarf/react.components/components/icon";
+import DateComponent from "@bodynarf/react.components/components/primitives/date";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
+import ObsoleteWarning from "@app/sharedComponents/obsoleteWarning";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 /** Date component demo */
 const DateDemo: FC = () => {
-    const [onValueChangeLog, setOnValueChangeLog] = useState("");
-    const appendOnValueChangeLog = useCallback(
-        (value?: Date) => setOnValueChangeLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + `new value: ${value}`
-        ),
-        []
-    );
-
-    const [onBlurLog, setOnBlurLog] = useState("");
-    const appendOnBlurLog = useCallback(
-        () => setOnBlurLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + "component lost focus"
-        ),
-        []
-    );
+    const onValueChangeLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -40,95 +23,60 @@ const DateDemo: FC = () => {
                 description="Control for selecting a specific date"
             />
 
+            <ObsoleteWarning
+                version="1.15"
+                recommendation={<>Use <code>DateInput</code> control instead</>}
+            />
+
             <ComponentUseCase
                 caption="Minimal use"
-                description="Minimal configuration: component label"
+                description="label is required. Provide caption to render the component."
                 code={
                     <CodeExample
                         code={[
-                            `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<DateComponent`,
-                            `    label={{ caption: "Date demo", horizontal: true }}`,
-                            "/>",
+                            `<Date label={{ caption: "Date demo", horizontal: true }} />`,
                         ].join("\n")}
                     />
                 }
             >
-                <DateComponent
-                    label={{ caption: "Date demo", horizontal: true }}
-                />
+                <DateComponent label={{ caption: "Date demo", horizontal: true }} />
             </ComponentUseCase>
 
             <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Custom component props
-                </h4>
-            </div>
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
 
             <ComponentUseCase
                 captionIsCode
-                caption="onBlur"
-                description="Handler for the component blur event. Not set by default."
+                caption="label"
+                description="Required label configuration rendered next to the input."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react"`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
-                            `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
-                            "",
-                            "/* ... */",
-                            "const ON_BLUR_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
-                            "/* ... */",
-                            "",
-                            `<DateComponent`,
-                            "    onBlur={ON_BLUR_HANDLE_FN}",
-                            `    label={{ caption: "Date demo", horizontal: true }}`,
-                            "/>",
+                            `<Date label={{ caption: "Birth date", horizontal: false }} />`,
                         ].join("\n")}
                     />
                 }
             >
-                <DateComponent
-                    onBlur={appendOnBlurLog}
-                    label={{ caption: "Date demo", horizontal: true }}
-                />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {onBlurLog}
-                </p>
+                <DateComponent label={{ caption: "Birth date", horizontal: false }} />
             </ComponentUseCase>
-
-            <hr />
-
-            <div className="block">
-                <h4 className="subtitle is-4">
-                    Base props implementation
-                    {` `}
-                    <code>
-                        BaseInputElementProps
-                    </code>
-                </h4>
-            </div>
 
             <ComponentUseCase
                 captionIsCode
                 caption="defaultValue"
-                description="Option to set the initial value of the component. Not set by default."
+                description="Sets the initial date value. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<DateComponent`,
+                            `<Date`,
                             `    defaultValue={new Date(2000, 10, 10)}`,
                             `    label={{ caption: "Date demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -142,18 +90,16 @@ const DateDemo: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="rounded"
-                description="Option to apply border-radius to the component. Disabled by default."
+                description="Applies border-radius to the component. Disabled by default."
                 code={
                     <CodeExample
                         code={[
-                            `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<DateComponent`,
+                            `<Date`,
                             `    rounded`,
                             `    label={{ caption: "Date demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -167,18 +113,16 @@ const DateDemo: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="disabled"
-                description="Option to render the component as disabled. Not set by default."
+                description="Renders a non-interactive disabled input. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<DateComponent`,
+                            `<Date`,
                             `    disabled`,
                             `    label={{ caption: "Date demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -192,18 +136,16 @@ const DateDemo: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="readonly"
-                description="Option to render the component in readonly state. Not set by default."
+                description="Renders the input in read-only mode — value is visible but not editable. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<DateComponent`,
+                            `<Date`,
                             `    readonly`,
                             `    label={{ caption: "Date demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -215,47 +157,43 @@ const DateDemo: FC = () => {
             </ComponentUseCase>
 
             <ComponentSizeCase
-                caption="Sizes"
-                description="The component supports all sizes defined in the ElementSize type"
+                captionIsCode
+                caption="size"
+                description="Controls the visual size of the component. Supports all ElementSize values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<DateComponent`,
+                            `<Date`,
                             `    size={ElementSize.${id}}`,
                             `    label={{ caption: "Date demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    size =>
-                        <DateComponent
-                            size={size}
-                            label={{ caption: "Date demo", horizontal: true }}
-                        />
+                componentProvider={size =>
+                    <DateComponent
+                        size={size}
+                        label={{ caption: "Date demo", horizontal: true }}
+                    />
                 }
             />
 
             <ComponentUseCase
                 captionIsCode
                 caption="loading"
-                description="Option to render the component in a loading state. Not set by default."
+                description="Displays a loading spinner inside the component. Not set by default."
                 code={
                     <CodeExample
                         code={[
-                            `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<DateComponent`,
+                            `<Date`,
                             `    loading`,
                             `    label={{ caption: "Date demo", horizontal: true }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -267,47 +205,43 @@ const DateDemo: FC = () => {
             </ComponentUseCase>
 
             <ComponentColorCase
-                caption="Colors"
-                description="Component supports all available colors"
+                captionIsCode
+                caption="style"
+                description="Color applied to the input border. Supports all ElementColor values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<DateComponent`,
+                            `<Date`,
                             `    style={ElementColor.${id}}`,
                             `    label={{ caption: "Date demo", horizontal: false }}`,
-                            "/>",
+                            `/>`,
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    style =>
-                        <DateComponent
-                            style={style}
-                            label={{ caption: "Date demo", horizontal: false }}
-                        />
+                componentProvider={style =>
+                    <DateComponent
+                        style={style}
+                        label={{ caption: "Date demo", horizontal: false }}
+                    />
                 }
             />
 
             <ComponentUseCase
                 captionIsCode
                 caption="name"
-                description="Option to specify the component name. Used as a form element attribute."
+                description="Specifies the HTML name attribute for use as a form element."
                 code={
                     <CodeExample
                         code={[
-                            `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<DateComponent',
-                            '    name="birthDate"',
-                            '    label={{ caption: "Date demo", horizontal: false }}',
-                            '/>',
+                            `<Date`,
+                            `    name="birthDate"`,
+                            `    label={{ caption: "Date demo", horizontal: false }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -323,33 +257,22 @@ const DateDemo: FC = () => {
                 caption="autoFocus"
                 description={
                     <>
-                        Option to set focus on the component input field on initial render
+                        Sets focus on the input on initial render.
                         <br />
-                        <Icon
-                            name="exclamation-triangle-fill"
-                            className="has-text-warning"
-                        />
+                        <Icon name="exclamation-triangle-fill" className="has-text-warning" />
                         {` `}
-                        <span>
-                            Only 1 element on the page can have this flag
-                        </span>
-                        <br />
-                        <span className="is-italic">
-                            Refresh the page and check which component (from the presented examples) received automatic focus
-                        </span>
+                        Only 1 element on the page can have this flag.
                     </>
                 }
                 code={
                     <CodeExample
                         code={[
-                            `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<DateComponent',
-                            '    autoFocus',
-                            '    label={{ caption: "Date demo", horizontal: false }}',
-                            '/>',
+                            `<Date`,
+                            `    autoFocus`,
+                            `    label={{ caption: "Date demo", horizontal: false }}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -363,33 +286,25 @@ const DateDemo: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="onValueChange"
-                description="Option for handling the onValueChange event. Not set by default."
+                description="Called when the selected date changes. Receives the new Date value."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react"`,
+                            `import Date from "@bodynarf/react.components/components/primitives/date";`,
                             "",
-                            `import DateComponent from "@bodynarf/react.components/components/primitives/date";`,
-                            "",
-                            "/* ... */",
-                            "const ON_VALUE_CHANGE_HANDLE_FN = useCallback((value?: Date) => { /* handler fn */}, []);",
-                            "/* ... */",
-                            "",
-                            `<DateComponent`,
-                            "    onValueChange={ON_VALUE_CHANGE_HANDLE_FN}",
+                            `<Date`,
                             `    label={{ caption: "Date demo", horizontal: true }}`,
-                            "/>",
+                            `    onValueChange={value => console.log("value:", value)}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
                 <DateComponent
-                    onValueChange={appendOnValueChangeLog}
                     label={{ caption: "Date demo", horizontal: true }}
+                    onValueChange={value => onValueChangeLogRef.current?.append(`value: ${value}`)}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {onValueChangeLog}
-                </p>
+                <Log ref={onValueChangeLogRef} />
             </ComponentUseCase>
         </section>
     );

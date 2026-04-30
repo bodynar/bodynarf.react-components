@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { useEventListener } from "@bodynarf/react.components";
+import { useEventListener } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -15,6 +15,7 @@ const UseEventListenerPage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useEventListener"
+                version="1.15"
                 description="Attaches an event listener to a given element (default: window). Automatically cleans up on unmount."
             />
 
@@ -24,7 +25,9 @@ const UseEventListenerPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useEventListener } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import { useEventListener } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const [lastKey, setLastKey] = useState('');",

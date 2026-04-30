@@ -69,6 +69,7 @@ $border-bottom: 1px solid vars.$color-gray-lighten;
 
         li:not([role="group"]) {
             a {
+                position: relative;
                 color: rgba(0, 0, 0, 0.5);
                 transition: vars.$transition color;
 
@@ -78,6 +79,13 @@ $border-bottom: 1px solid vars.$color-gray-lighten;
 
                 &:hover:not(.is-active) {
                     color: rgba(vars.$color-link, 0.9);
+                }
+
+                :global(.bbr-tag) {
+                    font-size: 0.625rem;
+                    height: 1.25rem;
+                    line-height: 1.25rem;
+                    flex-shrink: 0;
                 }
             }
         }

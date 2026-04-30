@@ -1,6 +1,6 @@
 import { FC, useCallback, useState } from "react";
 
-import { Progress as ProgressComponent } from "@bodynarf/react.components";
+import ProgressComponent from "@bodynarf/react.components/components/progress";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -30,9 +30,7 @@ const Progress: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Progress } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Progress from "@bodynarf/react.components/components/progress";`,
                             "",
                             "<Progress value={40} />",
                         ].join("\n")}
@@ -48,7 +46,9 @@ const Progress: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Progress } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import Progress from "@bodynarf/react.components/components/progress";`,
                             "",
                             "const [value, setValue] = useState(40);",
                             "",
@@ -85,11 +85,12 @@ const Progress: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Progress } from "@bodynarf/react.components";`,
+                            `import Progress from "@bodynarf/react.components/components/progress";`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<Progress value={60} showValue={false} />",
+                            "<Progress",
+                            "    value={60}",
+                            "    showValue={false}",
+                            "/>",
                         ].join("\n")}
                     />
                 }
@@ -107,11 +108,12 @@ const Progress: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Progress } from "@bodynarf/react.components";`,
+                            `import Progress from "@bodynarf/react.components/components/progress";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<Progress indeterminate loadingText="Loading..." />',
+                            "<Progress",
+                            "    indeterminate",
+                            `    loadingText="Loading..."`,
+                            "/>",
                         ].join("\n")}
                     />
                 }
@@ -129,11 +131,12 @@ const Progress: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Progress } from "@bodynarf/react.components";`,
+                            `import Progress from "@bodynarf/react.components/components/progress";`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<Progress value={50} animated={false} />",
+                            "<Progress",
+                            "    value={50}",
+                            "    animated={false}",
+                            "/>",
                         ].join("\n")}
                     />
                 }
@@ -151,11 +154,13 @@ const Progress: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Progress } from "@bodynarf/react.components";`,
+                            `import Progress from "@bodynarf/react.components/components/progress";`,
                             "",
-                            "/* ... */",
-                            "",
-                            "<Progress value={75} min={50} max={200} />",
+                            "<Progress",
+                            "    min={50}",
+                            "    max={200}",
+                            "    value={75}",
+                            "/>",
                         ].join("\n")}
                     />
                 }
@@ -175,13 +180,11 @@ const Progress: FC = () => {
                     <CodeExample
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import { Progress } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Progress from "@bodynarf/react.components/components/progress";`,
                             "",
                             "<Progress",
-                            `    color={ElementColor.${id}}`,
                             "    value={60}",
+                            `    color={ElementColor.${id}}`,
                             "/>",
                         ].join("\n")}
                     />
@@ -202,13 +205,11 @@ const Progress: FC = () => {
                     <CodeExample
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import { Progress } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Progress from "@bodynarf/react.components/components/progress";`,
                             "",
                             "<Progress",
-                            `    size={ElementSize.${id}}`,
                             "    value={60}",
+                            `    size={ElementSize.${id}}`,
                             "/>",
                         ].join("\n")}
                     />

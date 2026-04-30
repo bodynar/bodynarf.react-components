@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { usePrevious } from "@bodynarf/react.components";
+import { usePrevious } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -15,6 +15,7 @@ const UsePreviousPage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="usePrevious"
+                version="1.15"
                 description="Stores and returns the previous value of a state or prop. Returns undefined on the first render."
             />
 
@@ -24,7 +25,9 @@ const UsePreviousPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { usePrevious } from "@bodynarf/react.components";`,
+                            `import { useState } from "react";`,
+                            "",
+                            `import { usePrevious } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const [count, setCount] = useState(0);",

@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { usePagination } from "@bodynarf/react.components";
+import { usePagination } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -26,7 +26,7 @@ const UsePaginationPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { usePagination } from "@bodynarf/react.components";`,
+                            `import { usePagination } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const items = ['Item 1', 'Item 2', /* ... */];",

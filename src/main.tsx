@@ -3,6 +3,10 @@ import { createRoot } from "react-dom/client";
 
 import { HashRouter } from "react-router";
 
+import "@bodynarf/utils";
+
+import { NotificationContainer } from "@bodynarf/react.components";
+
 import App from "./component";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -16,7 +20,9 @@ createRoot(
 ).render(
 	<StrictMode>
 		<HashRouter>
-			<App />
+			<NotificationContainer.Provider>
+				<App />
+			</NotificationContainer.Provider>
 		</HashRouter>
 	</StrictMode>
 );

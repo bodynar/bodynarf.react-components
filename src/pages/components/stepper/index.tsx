@@ -1,7 +1,9 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 
-import { ElementColor, ElementSize, Stepper as StepperComponent, StepItem } from "@bodynarf/react.components";
+import StepperComponent from "@bodynarf/react.components/components/stepper";
+import { ElementColor, ElementSize, StepItem } from "@bodynarf/react.components";
 
+import Log, { LogRef } from "@app/sharedComponents/log";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
@@ -22,25 +24,20 @@ const stepsWithDescriptions: Array<StepItem> = [
 ];
 
 const stepsWithIcons: Array<StepItem> = [
-    { id: "step1", title: "Cart", icon: "fa-shopping-cart" },
-    { id: "step2", title: "Shipping", icon: "fa-truck" },
-    { id: "step3", title: "Payment", icon: "fa-credit-card" },
-    { id: "step4", title: "Complete", icon: "fa-check" },
+    { id: "step1", title: "Cart", icon: "cart" },
+    { id: "step2", title: "Shipping", icon: "truck" },
+    { id: "step3", title: "Payment", icon: "credit-card" },
+    { id: "step4", title: "Complete", icon: "check-lg" },
 ];
 
 /** Stepper component demo */
 const Stepper: FC = () => {
-    const [currentStep, setCurrentStep] = useState("step1");
-    const [clickLog, setClickLog] = useState("");
+    const [, setCurrentStep] = useState("step1");
+    const logRef = useRef<LogRef>(null);
 
     const handleStepClick = useCallback(
         (step: StepItem, index: number) => {
-            setClickLog(
-                t => t
-                    + "\n"
-                    + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                    + " => " + `clicked step "${step.title}" at index ${index}`
-            );
+            logRef.current?.append(`clicked step "${step.title}" at index ${index}`);
             setCurrentStep(step.id);
         },
         []
@@ -63,6 +60,23 @@ const Stepper: FC = () => {
         }
     }, [interactiveStep]);
 
+    const [animatedStep, setAnimatedStep] = useState("step1");
+    const handleAnimatedNext = useCallback(() => {
+        const steps = ["step1", "step2", "step3"];
+        const currentIndex = steps.indexOf(animatedStep);
+        if (currentIndex < steps.length - 1) {
+            setAnimatedStep(steps[currentIndex + 1]);
+        }
+    }, [animatedStep]);
+
+    const handleAnimatedPrev = useCallback(() => {
+        const steps = ["step1", "step2", "step3"];
+        const currentIndex = steps.indexOf(animatedStep);
+        if (currentIndex > 0) {
+            setAnimatedStep(steps[currentIndex - 1]);
+        }
+    }, [animatedStep]);
+
     return (
         <section>
             <DemoComponentTitleInfoMessage
@@ -83,9 +97,8 @@ const Stepper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper, StepItem } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { StepItem } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             `const steps: Array<StepItem> = [`,
                             `    { id: "step1", title: "Account Setup" },`,
@@ -122,9 +135,8 @@ const Stepper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper, StepItem } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { StepItem } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             `const steps: Array<StepItem> = [`,
                             `    { id: "step1", title: "Sign Up", description: "Create your account" },`,
@@ -150,19 +162,18 @@ const Stepper: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="icon"
-                description="Each step can have a custom icon (Font Awesome class name)"
+                description="Each step can have a custom icon (Bootstrap Icons class name). Used as the step indicator when showNumbers={false}."
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper, StepItem } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { StepItem } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             `const steps: Array<StepItem> = [`,
-                            `    { id: "step1", title: "Cart", icon: "fa-shopping-cart" },`,
-                            `    { id: "step2", title: "Shipping", icon: "fa-truck" },`,
-                            `    { id: "step3", title: "Payment", icon: "fa-credit-card" },`,
-                            `    { id: "step4", title: "Complete", icon: "fa-check" },`,
+                            `    { id: "step1", title: "Cart", icon: "cart3" },`,
+                            `    { id: "step2", title: "Shipping", icon: "truck" },`,
+                            `    { id: "step3", title: "Payment", icon: "credit-card" },`,
+                            `    { id: "step4", title: "Complete", icon: "check-lg" },`,
                             `];`,
                             "",
                             `<Stepper`,
@@ -176,6 +187,7 @@ const Stepper: FC = () => {
                 <StepperComponent
                     steps={stepsWithIcons}
                     currentStep="step2"
+                    showNumbers={false}
                 />
             </ComponentUseCase>
 
@@ -188,21 +200,20 @@ const Stepper: FC = () => {
                         code={[
                             `import { useCallback, useState } from "react";`,
                             "",
-                            `import { Stepper, StepItem } from "@bodynarf/react.components";`,
+                            `import { StepItem } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
-                            "/* ... */",
                             `const [currentStep, setCurrentStep] = useState("step1");`,
                             "",
                             `const handleStepClick = useCallback((step: StepItem, index: number) => {`,
                             `    console.log("Clicked:", step.title, "at index:", index);`,
                             `    setCurrentStep(step.id);`,
                             `}, []);`,
-                            "/* ... */",
                             "",
                             `<Stepper`,
+                            `    clickable`,
                             `    steps={steps}`,
                             `    currentStep={currentStep}`,
-                            `    clickable`,
                             `    onStepClick={handleStepClick}`,
                             `/>`,
                         ].join("\n")}
@@ -210,14 +221,12 @@ const Stepper: FC = () => {
                 }
             >
                 <StepperComponent
-                    steps={basicSteps}
-                    currentStep={currentStep}
+                    steps={stepsWithDescriptions}
+                    currentStep={stepsWithDescriptions[stepsWithDescriptions.length - 2].id}
                     clickable
                     onStepClick={handleStepClick}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {clickLog}
-                </p>
+                <Log ref={logRef} />
             </ComponentUseCase>
 
             <ComponentUseCase
@@ -228,9 +237,10 @@ const Stepper: FC = () => {
                         code={[
                             `import { useCallback, useState } from "react";`,
                             "",
-                            `import { Button, Stepper, StepItem } from "@bodynarf/react.components";`,
+                            `import { StepItem } from "@bodynarf/react.components";`,
+                            `import Button from "@bodynarf/react.components/components/button";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
-                            "/* ... */",
                             `const [currentStep, setCurrentStep] = useState("step1");`,
                             "",
                             `<Stepper`,
@@ -274,14 +284,12 @@ const Stepper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             '<Stepper',
+                            `    vertical`,
                             `    steps={steps}`,
                             `    currentStep="step2"`,
-                            `    vertical`,
                             '/>',
                         ].join("\n")}
                     />
@@ -301,9 +309,7 @@ const Stepper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             '<Stepper',
                             `    steps={steps}`,
@@ -328,14 +334,12 @@ const Stepper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             '<Stepper',
+                            `    animated`,
                             `    steps={steps}`,
                             `    currentStep="step2"`,
-                            `    animated`,
                             '/>',
                         ].join("\n")}
                     />
@@ -343,9 +347,27 @@ const Stepper: FC = () => {
             >
                 <StepperComponent
                     steps={basicSteps}
-                    currentStep="step2"
+                    currentStep={animatedStep}
                     animated
                 />
+                <div className="buttons mt-3">
+                    <button
+                        type="button"
+                        className="button"
+                        onClick={handleAnimatedPrev}
+                        disabled={animatedStep === "step1"}
+                    >
+                        Previous
+                    </button>
+                    <button
+                        type="button"
+                        className="button is-primary"
+                        onClick={handleAnimatedNext}
+                        disabled={animatedStep === "step3"}
+                    >
+                        Next
+                    </button>
+                </div>
             </ComponentUseCase>
 
             <ComponentUseCase
@@ -355,14 +377,12 @@ const Stepper: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Stepper } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             '<Stepper',
+                            `    showArrows`,
                             `    steps={steps}`,
                             `    currentStep="step2"`,
-                            `    showArrows`,
                             '/>',
                         ].join("\n")}
                     />
@@ -390,9 +410,8 @@ const Stepper: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementSize, Stepper } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             '<Stepper',
                             `    steps={steps}`,
@@ -418,9 +437,8 @@ const Stepper: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementColor, Stepper } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
                             "",
                             '<Stepper',
                             `    steps={steps}`,

@@ -1,9 +1,11 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef } from "react";
 
 import { emptyFn, isStringEmpty } from "@bodynarf/utils";
 
-import { SelectableItem, Tabs as TabsComponent, TabItem, TabsStyle } from "@bodynarf/react.components";
+import TabsComponent from "@bodynarf/react.components/components/tabs";
+import { SelectableItem, TabItem, TabsStyle } from "@bodynarf/react.components";
 
+import Log, { LogRef } from "@app/sharedComponents/log";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -17,6 +19,13 @@ const tabs: Array<TabItem> = [
     { caption: `Tab Tres`, id: "Tres", },
     { caption: `Tab Cuatro`, id: "Cuatro", },
     { caption: `Tab Cinco`, id: "Cinco", },
+];
+
+const tabsWithIcons: Array<TabItem> = [
+    { caption: "Home", id: "home", icon: { name: "house" } },
+    { caption: "Profile", id: "profile", icon: { name: "person" } },
+    { caption: "Settings", id: "settings", icon: { name: "gear" } },
+    { caption: "Help", id: "help", icon: { name: "question-circle" } },
 ];
 
 const tabsStyles: Array<keyof typeof TabsStyle> = [
@@ -34,14 +43,9 @@ const tabsStylesAsSelectList = tabsStyles.map((x, i) => ({
 
 /** Tabs component demo */
 const Tabs: FC = () => {
-    const [activeItemChangeLog, setActiveItemChangeLog] = useState("");
+const logRef = useRef<LogRef>(null);
     const appendActiveItemChangeLog = useCallback(
-        (item: TabItem) => setActiveItemChangeLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + `active tab changed to "${item.caption} [id="${item.id}"]"`
-        ),
+        (item: TabItem) => logRef.current?.append(`active tab changed to "${item.caption}" [id="${item.id}"]`),
         []
     );
 
@@ -61,9 +65,9 @@ const Tabs: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import TabsComponent, { TabItem } from "@bodynarf/react.components/components/tabs";`,
+                            `import { TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -71,7 +75,6 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
                             "",
                             '<TabsComponent',
                             '    items={tabs}',
@@ -95,9 +98,9 @@ const Tabs: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import TabsComponent, { TabItem } from "@bodynarf/react.components/components/tabs";`,
+                            `import { TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -105,7 +108,6 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
                             "",
                             '<TabsComponent',
                             '    items={tabs}',
@@ -131,10 +133,9 @@ const Tabs: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import TabsComponent, { TabItem } from "@bodynarf/react.components/components/tabs";`,
+                            `import { ElementSize, TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -142,7 +143,6 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
                             "",
                             '<TabsComponent',
                             '    items={tabs}',
@@ -170,10 +170,9 @@ const Tabs: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import { ElementPosition } from "@bodynarf/react.components";`,
-                            `import TabsComponent, { TabItem } from "@bodynarf/react.components/components/tabs";`,
+                            `import { ElementPosition, TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -181,7 +180,6 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
                             "",
                             '<TabsComponent',
                             '    items={tabs}',
@@ -211,10 +209,9 @@ const Tabs: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import { ElementPosition } from "@bodynarf/react.components";`,
-                            `import TabsComponent, { TabItem, TabsStyle } from "@bodynarf/react.components/components/tabs";`,
+                            `import { TabItem, TabsStyle } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -222,7 +219,6 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
                             "",
                             '<TabsComponent',
                             '    items={tabs}',
@@ -250,9 +246,9 @@ const Tabs: FC = () => {
                     <CodeExample
                         code={[
                             `import { emptyFn } from "@bodynarf/utils";`,
-                            `import TabsComponent, { TabItem } from "@bodynarf/react.components/components/tabs";`,
+                            `import { TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -260,7 +256,6 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
                             "",
                             '<TabsComponent',
                             '    fullWidth',
@@ -287,9 +282,9 @@ const Tabs: FC = () => {
                         code={[
                             `import { useCallback } from "react"`,
                             ``,
-                            `import TabsComponent, { TabItem } from "@bodynarf/react.components/components/tabs";`,
+                            `import { TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
                             "",
-                            "/* ... */",
                             'const tabs: Array<TabItem> = [',
                             '    { caption: `Tab Uno`, id: "Uno", },',
                             '    { caption: `Tab Dos`, id: "Dos", },',
@@ -297,14 +292,12 @@ const Tabs: FC = () => {
                             '    { caption: `Tab Cuatro`, id: "Cuatro", },',
                             '    { caption: `Tab Cinco`, id: "Cinco", },',
                             "];",
-                            "/* ... */",
+                            "",
                             "const ON_ACTIVE_ITEM_CHANGE_HANDLE_FN = useCallback((item: TabItem) => { /* handler fn */}, []);",
-                            "/* ... */",
                             "",
                             '<TabsComponent',
-                            '    appendActiveItemChangeLog',
                             '    items={tabs}',
-                            '    onActiveItemChange={ON_SEARCH_HANDLE_FN}',
+                            '    onActiveItemChange={ON_ACTIVE_ITEM_CHANGE_HANDLE_FN}',
                             '/>',
                         ].join("\n")}
                     />
@@ -314,9 +307,42 @@ const Tabs: FC = () => {
                     items={tabs}
                     onActiveItemChange={appendActiveItemChangeLog}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {activeItemChangeLog}
-                </p>
+                <Log ref={logRef} />
+            </ComponentUseCase>
+
+            <hr />
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">TabItem props</h4></div>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="icon"
+                description="Optional icon displayed next to the tab caption. Accepts an ElementIcon object with a Bootstrap Icons name (without the bi- prefix)."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { emptyFn } from "@bodynarf/utils";`,
+                            `import { TabItem } from "@bodynarf/react.components";`,
+                            `import TabsComponent from "@bodynarf/react.components/components/tabs";`,
+                            "",
+                            'const tabs: Array<TabItem> = [',
+                            '    { caption: "Home",     id: "home",     icon: { name: "house" } },',
+                            '    { caption: "Profile",  id: "profile",  icon: { name: "person" } },',
+                            '    { caption: "Settings", id: "settings", icon: { name: "gear" } },',
+                            '    { caption: "Help",     id: "help",     icon: { name: "question-circle" } },',
+                            "];",
+                            "",
+                            '<TabsComponent',
+                            '    items={tabs}',
+                            '    onActiveItemChange={emptyFn}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TabsComponent
+                    items={tabsWithIcons}
+                    onActiveItemChange={emptyFn}
+                />
             </ComponentUseCase>
         </section>
     );

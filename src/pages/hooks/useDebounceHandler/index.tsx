@@ -1,6 +1,6 @@
 import { FC, useCallback } from "react";
 
-import { useDebounceHandler } from "@bodynarf/react.components";
+import { useDebounceHandler } from "@bodynarf/react.components/hooks";
 
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import ComponentUseCase from "@app/sharedComponents/useCase";
@@ -17,6 +17,7 @@ const UseDebounceHandlerPage: FC = () => {
         <section>
             <DemoComponentTitleInfoMessage
                 name="useDebounceHandler"
+                version="1.15"
                 description="Returns a debounced handler that prevents rapid successive calls. Useful for buttons that trigger async operations."
             />
 
@@ -26,7 +27,7 @@ const UseDebounceHandlerPage: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { useDebounceHandler } from "@bodynarf/react.components";`,
+                            `import { useDebounceHandler } from "@bodynarf/react.components/hooks";`,
                             "",
                             "const MyComponent = () => {",
                             "    const handleAsync = async () => {",

@@ -1,25 +1,17 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useRef } from "react";
 
-import { Accordion as AccordionComponent } from "@bodynarf/react.components";
+import AccordionComponent from "@bodynarf/react.components/components/accordion";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 /** Accordion component demo */
 const Accordion: FC = () => {
-    const [text, setText] = useState("");
-    const appendText = useCallback(
-        (collapsed: boolean) => setText(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + (collapsed ? "collapsed" : "expanded")
-        ),
-        []
-    );
+    const onToggleLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -32,24 +24,65 @@ const Accordion: FC = () => {
 
             <ComponentUseCase
                 caption="Minimal use"
-                description="Minimal configuration requires only caption"
+                description="Minimal configuration requires only caption and children."
                 code={
                     <CodeExample
                         code={[
-                            `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<AccordionComponent caption="Header">`,
+                            `<Accordion caption="Header">`,
                             "    Content",
-                            "</AccordionComponent>"
+                            "</Accordion>",
                         ].join("\n")}
                     />
                 }
             >
-                <AccordionComponent
-                    caption="Header"
-                >
+                <AccordionComponent caption="Header">
+                    Content
+                </AccordionComponent>
+            </ComponentUseCase>
+
+            <hr />
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="children"
+                description="Content rendered inside the collapsible panel. Accepts any ReactNode."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
+                            "",
+                            `<Accordion caption="Header">`,
+                            "    <p>Any <strong>ReactNode</strong> content.</p>",
+                            "</Accordion>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <AccordionComponent caption="Header">
+                    <p>Any <strong>ReactNode</strong> content.</p>
+                </AccordionComponent>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="caption"
+                description="Text displayed in the accordion header bar."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
+                            "",
+                            `<Accordion caption="My section title">`,
+                            "    Content",
+                            "</Accordion>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <AccordionComponent caption="My section title">
                     Content
                 </AccordionComponent>
             </ComponentUseCase>
@@ -57,132 +90,104 @@ const Accordion: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="defaultExpanded"
-                description="The accordion will be rendered expanded by default"
+                description="When set, the accordion is rendered in an expanded state on mount."
                 code={
                     <CodeExample
                         code={[
-                            `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<AccordionComponent`,
-                            `    defaultExpanded`,
-                            `    caption="Header"`,
-                            `>`,
+                            `<Accordion caption="Header" defaultExpanded>`,
                             "    Content",
-                            "</AccordionComponent>"
+                            "</Accordion>",
                         ].join("\n")}
                     />
                 }
             >
-                <AccordionComponent
-                    defaultExpanded
-                    caption="Header"
-                >
+                <AccordionComponent caption="Header" defaultExpanded>
                     Content
                 </AccordionComponent>
             </ComponentUseCase>
 
             <ComponentSizeCase
-                caption="Sizes"
-                description="The component supports all sizes defined in the ElementSize type"
+                captionIsCode
+                caption="size"
+                description="Controls the visual size of the accordion header. Supports all ElementSize values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<AccordionComponent`,
-                            `    defaultExpanded`,
+                            `<Accordion`,
                             `    caption="Size"`,
                             `    size={ElementSize.${id}}`,
+                            `    defaultExpanded`,
                             `>`,
                             "    Content",
-                            "</AccordionComponent>",
+                            "</Accordion>",
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    size =>
-                        <AccordionComponent
-                            size={size}
-                            caption="Size"
-                            defaultExpanded
-                        >
-                            Content
-                        </AccordionComponent>
+                componentProvider={size =>
+                    <AccordionComponent caption="Size" size={size} defaultExpanded>
+                        Content
+                    </AccordionComponent>
                 }
             />
 
             <ComponentColorCase
-                caption="Colors"
-                description="Component supports all available colors"
+                captionIsCode
+                caption="style"
+                description="Color variant applied to the accordion header. Supports all ElementColor values."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<AccordionComponent`,
-                            `    defaultExpanded`,
+                            `<Accordion`,
                             `    caption="Color"`,
+                            `    defaultExpanded`,
                             `    style={ElementColor.${id}}`,
                             `>`,
                             "    Content",
-                            "</AccordionComponent>",
+                            "</Accordion>",
                         ].join("\n")}
                     />
                 }
-                componentProvider={
-                    style =>
-                        <AccordionComponent
-                            style={style}
-                            caption="Color"
-                            defaultExpanded
-                        >
-                            Content
-                        </AccordionComponent>
+                componentProvider={style =>
+                    <AccordionComponent caption="Color" style={style} defaultExpanded>
+                        Content
+                    </AccordionComponent>
                 }
             />
 
             <ComponentUseCase
                 captionIsCode
                 caption="onToggle"
-                description="Handle accordion expand/collapse state changes"
+                description="Called when the accordion is expanded or collapsed. Receives the new collapsed state as a boolean."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react"`,
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
                             "",
-                            `import AccordionComponent from "@bodynarf/react.components/components/accordion";`,
-                            "",
-                            "/* ... */",
-                            "const ON_TOGGLE_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
-                            "/* ... */",
-                            "",
-                            `<AccordionComponent`,
+                            `<Accordion`,
                             `    caption="onToggle handler"`,
-                            `    onToggle={ON_TOGGLE_HANDLE_FN}>`,
+                            `    onToggle={collapsed => console.log("collapsed:", collapsed)}`,
                             `>`,
                             "    Content",
-                            "</AccordionComponent>"
+                            "</Accordion>",
                         ].join("\n")}
                     />
                 }
             >
                 <AccordionComponent
-                    onToggle={appendText}
                     caption="onToggle handler"
+                    onToggle={collapsed => onToggleLogRef.current?.append(`collapsed: ${collapsed}`)}
                 >
                     Content
                 </AccordionComponent>
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {text}
-                </p>
+                <Log ref={onToggleLogRef} />
             </ComponentUseCase>
         </section>
     );

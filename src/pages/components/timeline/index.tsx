@@ -1,6 +1,7 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 
-import { ElementColor, ElementSize, Timeline as TimelineComponent, TimelineItem } from "@bodynarf/react.components";
+import TimelineComponent from "@bodynarf/react.components/components/timeline";
+import { Button, ButtonStyle, ElementColor, ElementSize, TimelineItem } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentSizeCase from "@app/sharedComponents/sizeUse";
@@ -16,10 +17,9 @@ const basicEvents: Array<TimelineItem> = [
 ];
 
 const eventsWithIcons: Array<TimelineItem> = [
-    { id: "event1", title: "Order Placed", content: "Your order has been received", icon: "fa-shopping-cart" },
-    { id: "event2", title: "Processing", content: "Order is being prepared", icon: "fa-cog" },
-    { id: "event3", title: "Shipped", content: "Package is on its way", icon: "fa-truck" },
-    { id: "event4", title: "Delivered", content: "Package has arrived", icon: "fa-check-circle" },
+    { id: "event1", title: "Order Placed", content: "Your order has been received", icon: "cart" },
+    { id: "event2", title: "Processing", content: "Order is being prepared", icon: "gear" },
+    { id: "event3", title: "Shipped", content: "Package is on its way", icon: "truck" },
 ];
 
 const eventsWithTimestamps: Array<TimelineItem> = [
@@ -45,6 +45,7 @@ const eventsWithColors: Array<TimelineItem> = [
 
 /** Timeline component demo */
 const Timeline: FC = () => {
+    const [animationKey, setAnimationKey] = useState(0);
     return (
         <section>
             <DemoComponentTitleInfoMessage
@@ -65,9 +66,8 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline, TimelineItem } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { TimelineItem } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             `const events: Array<TimelineItem> = [`,
                             `    { id: "event1", title: "Project Started", content: "Initial planning" },`,
@@ -94,18 +94,17 @@ const Timeline: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="icon"
-                description="Each event can have a custom icon (Font Awesome class name) displayed on the timeline marker"
+                description="Each event can have a custom icon displayed on the timeline marker"
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline, TimelineItem } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { TimelineItem } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             `const events: Array<TimelineItem> = [`,
-                            `    { id: "e1", title: "Order Placed", content: "Order received", icon: "fa-shopping-cart" },`,
-                            `    { id: "e2", title: "Shipped", content: "On its way", icon: "fa-truck" },`,
-                            `    { id: "e3", title: "Delivered", content: "Has arrived", icon: "fa-check-circle" },`,
+                            `    { id: "e1", title: "Order Placed", content: "Your order has been received", icon: "cart" },`,
+                            `    { id: "e2", title: "Processing", content: "Order is being prepared", icon: "gear" },`,
+                            `    { id: "e3", title: "Shipped", content: "Package is on its way", icon: "truck" },`,
                             `];`,
                             "",
                             `<Timeline items={events} />`,
@@ -123,9 +122,8 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline, TimelineItem } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { TimelineItem } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             `const events: Array<TimelineItem> = [`,
                             `    { id: "e1", title: "Founded", timestamp: "January 2020", content: "Small team" },`,
@@ -148,9 +146,8 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline, TimelineItem } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { TimelineItem } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             `const events: Array<TimelineItem> = [`,
                             `    { id: "e1", title: "Q1", marker: "2020", content: "First quarter" },`,
@@ -172,9 +169,8 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline, TimelineItem, ElementColor } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { TimelineItem, ElementColor } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             `const events: Array<TimelineItem> = [`,
                             `    { id: "e1", title: "Planning", content: "Initial planning", color: ElementColor.Info },`,
@@ -197,9 +193,8 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline, TimelineItem } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { TimelineItem } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             `<Timeline`,
                             `    items={events}`,
@@ -222,16 +217,26 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<Timeline items={events} animated />`,
+                            `<Timeline`,
+                            `    items={events}`,
+                            `    animated`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
             >
+                <Button
+                    caption="Restart animation"
+                    style={ButtonStyle.Default}
+                    onClick={() => setAnimationKey(k => k + 1)}
+                    icon={{ name: "arrow-clockwise" }}
+                    size={ElementSize.Small}
+                    className="mb-2"
+                />
                 <TimelineComponent
+                    key={animationKey}
                     items={basicEvents}
                     animated
                 />
@@ -244,11 +249,12 @@ const Timeline: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import { Timeline } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
-                            "/* ... */",
-                            "",
-                            `<Timeline items={events} showConnectors={false} />`,
+                            `<Timeline`,
+                            `    items={events}`,
+                            `    showConnectors={false}`,
+                            `/>`,
                         ].join("\n")}
                     />
                 }
@@ -256,6 +262,54 @@ const Timeline: FC = () => {
                 <TimelineComponent
                     items={basicEvents}
                     showConnectors={false}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="showTimestampsSeparate"
+                description="Only available when leftAligned={false}. Places timestamps on the opposite side of the connector line from the content, making them visually distinct."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
+                            "",
+                            `<Timeline`,
+                            `    items={events}`,
+                            `    leftAligned={false}`,
+                            `    showTimestampsSeparate`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TimelineComponent
+                    items={eventsWithTimestamps}
+                    leftAligned={false}
+                    showTimestampsSeparate
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="hollow"
+                description="Renders timeline markers as hollow circles instead of filled ones."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
+                            "",
+                            `<Timeline`,
+                            `    hollow`,
+                            `    items={events}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TimelineComponent
+                    items={basicEvents}
+                    hollow
                 />
             </ComponentUseCase>
 
@@ -274,9 +328,8 @@ const Timeline: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementSize, Timeline } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ElementSize } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             "<Timeline",
                             `    items={events}`,
@@ -300,9 +353,8 @@ const Timeline: FC = () => {
                 codeProvider={id =>
                     <CodeExample
                         code={[
-                            `import { ElementColor, Timeline } from "@bodynarf/react.components";`,
-                            "",
-                            "/* ... */",
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             "<Timeline",
                             `    items={events}`,

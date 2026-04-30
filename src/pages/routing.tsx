@@ -6,6 +6,7 @@ import componentsRoutes from "./components";
 import controlsRoutes from "./controls";
 import propsRoutes from "./props";
 import hooksRoutes from "./hooks";
+import utilsRoutes from "./utils";
 
 /** Menu single item */
 export type MenuItem = {
@@ -17,6 +18,9 @@ export type MenuItem = {
 
     /** Child item as routes to pages */
     children: Array<RouteMenuItem>;
+
+    /** Whether the group is collapsed by default */
+    defaultCollapsed?: boolean;
 };
 
 /** Routing menu item */
@@ -28,7 +32,10 @@ export type RouteMenuItem = Omit<MenuItem, "children" | "name"> & {
     component: ReactNode;
 
     /** Version when component was added */
-    version?: string;
+    createVersion?: string;
+
+    /** Version when component was last updated */
+    updateVersion?: string;
 };
 
 const routeList: Array<RouteMenuItem | MenuItem> = [
@@ -41,6 +48,7 @@ const routeList: Array<RouteMenuItem | MenuItem> = [
     { ...controlsRoutes },
     { ...propsRoutes },
     { ...hooksRoutes },
+    { ...utilsRoutes },
 ];
 
 export default routeList;

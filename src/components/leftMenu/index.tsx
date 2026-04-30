@@ -1,9 +1,9 @@
 import { FC, useCallback, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router";
 
-import { isNullOrEmpty } from "@bodynarf/utils";
-import { getClassName } from "@bodynarf/utils";
+import { isNullOrEmpty, getClassName } from "@bodynarf/utils";
 
+import { ElementColor, Tag } from "@bodynarf/react.components";
 import { displayName, dependencies, devDependencies } from "package.json";
 
 import routeList, { isRootMenuItem, RouteMenuItem, MenuItem as MenuItemModel } from "@app/pages/routing";
@@ -15,6 +15,10 @@ import npmLogo from "@app/assets/logos/npm Icon.svg";
 
 import styles from "./styles.module.scss";
 import Icon from "@bodynarf/react.components/components/icon";
+
+/** Truncate caption to max 20 characters */
+const truncateCaption = (caption: string): string =>
+    caption.length > 20 ? `${caption.slice(0, 20)}\u2026` : caption;
 
 /** component lib version */
 const packageVersion = dependencies["@bodynarf/react.components"];
@@ -32,7 +36,7 @@ const LeftMenu: FC = () => {
     const activeItem = useMemo(
         () => routeList
             .flatMap(x => isRootMenuItem(x) ? x.children : [x])
-            .filter(({ path }) => path.startsWith(pathname))
+            .filter(({ path }) => path === pathname)
             .pop(),
         [pathname]
     );
@@ -141,11 +145,11 @@ const LeftMenu: FC = () => {
 };
 
 /** Menu item with sub items */
-// eslint-disable-next-line react/no-multi-comp
 const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
-    caption, children, activeItem
+    caption, children, activeItem, defaultCollapsed = false,
 }) => {
-    const [collapsed, setIsCollapsed] = useState(false);
+    const containsActive = activeItem != null && children.some(c => c.path === activeItem.path);
+    const [collapsed, setIsCollapsed] = useState(defaultCollapsed && !containsActive);
 
     const onCollapseToggle = useCallback(() => setIsCollapsed(x => !x), [setIsCollapsed]);
 
@@ -160,10 +164,11 @@ const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
     return (
         <li role="group">
             <span
+                title={caption}
                 className={className}
                 onClick={onCollapseToggle}
             >
-                {caption}
+                {truncateCaption(caption)}
                 <Icon
                     name="chevron-right"
                     className="is-pulled-right"
@@ -185,24 +190,41 @@ const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
 };
 
 /** Menu item with link */
-// eslint-disable-next-line react/no-multi-comp
 const MenuItem: FC<RouteMenuItem & { activeItem?: RouteMenuItem; }> = ({
-    path, caption, activeItem, version,
+    path, caption, activeItem, createVersion, updateVersion,
 }) => {
-    const isNew = !isNullOrEmpty(version) && version === packageVersionShort;
+    const isNew = !isNullOrEmpty(createVersion) && createVersion === packageVersionShort;
+    const isUpdated = !isNullOrEmpty(updateVersion) && updateVersion === packageVersionShort;
+
+    const className = getClassName([
+        "is-flex",
+        "is-align-items-center",
+        activeItem?.path === path ? styles["is-active"] : undefined,
+    ]);
 
     return (
         <li>
             <Link
                 to={path}
-                className={activeItem?.path === path ? styles["is-active"] : undefined}
+                title={caption}
+                className={className}
             >
-                {caption}
-                {isNew &&
-                    <span className="tag is-danger ml-2" style={{ fontSize: "0.65rem", padding: "0 0.4em", height: "1.25em" }}>
-                        NEW
-                    </span>
-                }
+                {isNew ? (
+                    <Tag
+                        title="New"
+                        content="NEW"
+                        className="mr-2"
+                        style={ElementColor.Danger}
+                    />
+                ) : isUpdated ? (
+                    <Tag
+                        content="UPD"
+                        title="Updated"
+                        className="mr-2"
+                        style={ElementColor.Info}
+                    />
+                ) : null}
+                {truncateCaption(caption)}
             </Link>
         </li>
     );

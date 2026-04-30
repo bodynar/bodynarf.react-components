@@ -1,12 +1,14 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef } from "react";
 
-import { ElementColor, ElementSize, SelectableItem, Tag as TagComponent } from "@bodynarf/react.components";
+import TagComponent from "@bodynarf/react.components/components/tag";
+import { ElementColor, ElementSize, SelectableItem } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import ComponentColorCase from "@app/sharedComponents/colorUse";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
 import ComponentEnumCase from "@app/sharedComponents/enumSelectionCase";
+import Log, { LogRef } from "@app/sharedComponents/log";
 
 const sizes: Array<string> =
     Object
@@ -25,16 +27,16 @@ const sizesAsSelectList: Array<SelectableItem> =
 
 /** Tag component demo */
 const Tag: FC = () => {
-    const [clickLog, setClickLog] = useState("");
-    const appendClickLog = useCallback(
-        () => setClickLog(
-            t => t
-                + "\n"
-                + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getMilliseconds()
-                + " => " + "clicked"
-        ),
-        []
-    );
+    const onClickLogRef = useRef<LogRef>(null);
+    const onRemoveLogRef = useRef<LogRef>(null);
+
+    const handleClick = useCallback(() => {
+        onClickLogRef.current?.append("clicked");
+    }, []);
+
+    const handleRemove = useCallback(() => {
+        onRemoveLogRef.current?.append("removed");
+    }, []);
 
     return (
         <section>
@@ -51,16 +53,34 @@ const Tag: FC = () => {
                 code={
                     <CodeExample
                         code={[
-                            `import TagComponent from "@bodynarf/react.components/components/tag";`,
+                            `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<TagComponent content="Minimal use" />',
+                            '<Tag content="Minimal use" />',
                         ].join("\n")}
                     />
                 }
             >
                 <TagComponent content="Minimal use" />
+            </ComponentUseCase>
+
+            <hr />
+            <div><h4 className="subtitle is-4 has-text-weight-semibold">Custom component props</h4></div>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="content"
+                description="Text content displayed inside the tag."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Tag from "@bodynarf/react.components/components/tag";`,
+                            "",
+                            '<Tag content="Hello world" />',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TagComponent content="Hello world" />
             </ComponentUseCase>
 
             <ComponentEnumCase
@@ -73,11 +93,9 @@ const Tag: FC = () => {
                     <CodeExample
                         code={[
                             `import { ElementSize } from "@bodynarf/react.components";`,
-                            `import TagComponent from "@bodynarf/react.components/components/tag";`,
+                            `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<TagComponent',
+                            '<Tag',
                             '    content="Size tag"',
                             `    size={ElementSize.${id}}`,
                             '/>',
@@ -96,16 +114,14 @@ const Tag: FC = () => {
             <ComponentColorCase
                 captionIsCode
                 caption="style"
-                description="Component supports all available colors"
+                description="Element color from the ElementColor enum."
                 codeProvider={id =>
                     <CodeExample
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
-                            `import TagComponent from "@bodynarf/react.components/components/tag";`,
+                            `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<TagComponent',
+                            '<Tag',
                             '    content="Style tag"',
                             `    style={ElementColor.${id}}`,
                             '/>',
@@ -124,17 +140,15 @@ const Tag: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="rounded"
-                description="Option for displaying the component with rounded corners. Disabled by default"
+                description="Display the tag with rounded corners. Disabled by default."
                 code={
                     <CodeExample
                         code={[
-                            `import TagComponent from "@bodynarf/react.components/components/tag";`,
+                            `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<TagComponent',
+                            '<Tag',
                             '    rounded',
-                            '    content="Rounded use"',
+                            '    content="Rounded tag"',
                             '/>',
                         ].join("\n")}
                     />
@@ -142,24 +156,23 @@ const Tag: FC = () => {
             >
                 <TagComponent
                     rounded
-                    content="Rounded use"
+                    content="Rounded tag"
                 />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="lightColor"
-                description="Option for displaying light shades of the style. Disabled by default"
+                description="Display light shades of the style color. Disabled by default."
                 code={
                     <CodeExample
                         code={[
-                            `import TagComponent from "@bodynarf/react.components/components/tag";`,
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<TagComponent',
+                            '<Tag',
                             '    lightColor',
-                            '    content="LightColor use"',
+                            '    content="Light color tag"',
                             '    style={ElementColor.Primary}',
                             '/>',
                         ].join("\n")}
@@ -168,7 +181,7 @@ const Tag: FC = () => {
             >
                 <TagComponent
                     lightColor
-                    content="LightColor use"
+                    content="Light color tag"
                     style={ElementColor.Primary}
                 />
             </ComponentUseCase>
@@ -176,58 +189,84 @@ const Tag: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="customColor"
-                description="Option to set custom component colors, only CSS-valid values can be used. Empty by default"
+                description="Custom color scheme using CSS-valid values. Overrides style when provided."
                 code={
                     <CodeExample
                         code={[
-                            `import TagComponent from "@bodynarf/react.components/components/tag";`,
+                            `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
-                            "/* ... */",
-                            "",
-                            '<TagComponent',
-                            '    content="CustomColor use"',
-                            '    customColor={{ backgroundColor: "#76dffb", color: "white", }}',
+                            '<Tag',
+                            '    content="Custom color tag"',
+                            '    customColor={{ backgroundColor: "#76dffb", color: "white" }}',
                             '/>',
                         ].join("\n")}
                     />
                 }
             >
                 <TagComponent
-                    content="CustomColor use"
-                    customColor={{ backgroundColor: "#76dffb", color: "white", }}
+                    content="Custom color tag"
+                    customColor={{ backgroundColor: "#76dffb", color: "white" }}
                 />
             </ComponentUseCase>
 
             <ComponentUseCase
                 captionIsCode
                 caption="onClick"
-                description="Function for handling click events on the component"
+                description="Click handler. When provided, the tag becomes interactive."
                 code={
                     <CodeExample
                         code={[
-                            `import { useCallback } from "react"`,
+                            `import { useCallback } from "react";`,
                             "",
-                            `import TagComponent from "@bodynarf/react.components/components/tag";`,
+                            `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
-                            "/* ... */",
-                            "const ON_CLICK_HANDLE_FN = useCallback(() => { /* handler fn */}, []);",
-                            "/* ... */",
+                            "const handleClick = useCallback(() => {",
+                            '    console.log("clicked");',
+                            "}, []);",
                             "",
-                            '<TagComponent',
-                            '    content="onClick use"',
-                            '    onClick={ON_CLICK_HANDLE_FN}',
+                            '<Tag',
+                            '    content="Clickable tag"',
+                            '    onClick={handleClick}',
                             '/>',
                         ].join("\n")}
                     />
                 }
             >
                 <TagComponent
-                    content="LightColor use"
-                    onClick={appendClickLog}
+                    content="Clickable tag"
+                    onClick={handleClick}
                 />
-                <p style={{ whiteSpace: "pre-line" }}>
-                    {clickLog}
-                </p>
+                <Log ref={onClickLogRef} />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="onRemove"
+                description="When provided, a delete (×) button is rendered alongside the tag. Clicking it fires the callback."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { useCallback } from "react";`,
+                            "",
+                            `import Tag from "@bodynarf/react.components/components/tag";`,
+                            "",
+                            "const handleRemove = useCallback(() => {",
+                            '    console.log("removed");',
+                            "}, []);",
+                            "",
+                            '<Tag',
+                            '    content="Removable tag"',
+                            '    onRemove={handleRemove}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TagComponent
+                    content="Removable tag"
+                    onRemove={handleRemove}
+                />
+                <Log ref={onRemoveLogRef} />
             </ComponentUseCase>
         </section>
     );

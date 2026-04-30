@@ -1,4 +1,5 @@
-import { SelectableItem, ValidationStatus, Text as TextComponent } from "@bodynarf/react.components";
+import TextComponent from "@bodynarf/react.components/components/primitives/text";
+import { SelectableItem, ValidationStatus } from "@bodynarf/react.components";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
@@ -53,8 +54,6 @@ const ValidationStateProp = () => {
                             'import { ValidationStatus } from "@bodynarf/react.components";',
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<TextComponent`,
                             '    validationState={{ status: ValidationStatus.None }}',
                             "/>",
@@ -79,8 +78,6 @@ const ValidationStateProp = () => {
                             'import { ValidationStatus } from "@bodynarf/react.components";',
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
                             "",
-                            "/* ... */",
-                            "",
                             `<TextComponent`,
                             `    validationState={{ status: ValidationStatus.${id} }}`,
                             "/>",
@@ -104,8 +101,6 @@ const ValidationStateProp = () => {
                         code={[
                             'import { ValidationStatus } from "@bodynarf/react.components";',
                             `import TextComponent from "@bodynarf/react.components/components/primitives/text";`,
-                            "",
-                            "/* ... */",
                             "",
                             `<TextComponent`,
                             '    validationState={{ status: ValidationStatus.Valid, messages: ["Line 1", "Line 2"] }}',
