@@ -85,6 +85,7 @@ const hooks: MenuItem = {
             path: "/hooks/useComponentOutsideClick",
             caption: "useComponentOutsideClick",
             component: <UseComponentOutsideClick />,
+            updateVersion: "1.15",
         },
         {
             path: "/hooks/useDebounce",
@@ -127,6 +128,7 @@ const hooks: MenuItem = {
             caption: "useComplexTable",
             component: <UseComplexTable />,
             createVersion: "1.14",
+            updateVersion: "1.15",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };

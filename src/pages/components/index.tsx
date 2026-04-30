@@ -105,13 +105,14 @@ const components: MenuItem = {
             caption: "Paginator",
             component: <Paginator />,
             createVersion: "1.4",
-            updateVersion: "1.14",
+            updateVersion: "1.15",
         },
         {
             path: "/components/breadcrumbs",
             caption: "Breadcrumbs",
             component: <Breadcrumbs />,
             createVersion: "1.8",
+            updateVersion: "1.15",
         },
         {
             path: "/components/file",
@@ -138,12 +139,14 @@ const components: MenuItem = {
             caption: "Stepper",
             component: <Stepper />,
             createVersion: "1.14",
+            updateVersion: "1.15",
         },
         {
             path: "/components/timeline",
             caption: "Timeline",
             component: <Timeline />,
             createVersion: "1.14",
+            updateVersion: "1.15",
         },
         {
             path: "/components/progress",
@@ -317,7 +320,7 @@ const components: MenuItem = {
             path: "/components/complexTable",
             caption: "Complex Table",
             component: <ComplexTable />,
-            createVersion: "1.14",
+            createVersion: "1.15",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };

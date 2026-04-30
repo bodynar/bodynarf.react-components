@@ -74,12 +74,14 @@ const controls: MenuItem = {
             caption: "Slider",
             component: <Slider />,
             createVersion: "1.14",
+            updateVersion: "1.15",
         },
         {
             path: "/controls/radioGroup",
             caption: "Radio Group",
             component: <RadioGroup />,
             createVersion: "1.14",
+            updateVersion: "1.15",
         },
         {
             path: "/controls/timePicker",
