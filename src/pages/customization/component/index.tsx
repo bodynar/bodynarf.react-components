@@ -3,14 +3,14 @@ import { Link } from "react-router";
 
 import { useLocalStorage } from "@bodynarf/react.components/hooks";
 
-import { LS_PREFIX, ViewMode } from "../constants";
+import { LS_KEYS, ViewMode } from "../constants";
 import SizeOptionSelector from "../components/sizeOptionSelector";
 import ColorOptionSelector from "../components/colorOptionSelector";
 
 /** Display settings page */
 const Customization: FC = () => {
-    const [sizeViewMode, setSizeViewMode] = useLocalStorage(`${LS_PREFIX}sizes`, "dropdown");
-    const [colorViewMode, setColorViewMode] = useLocalStorage(`${LS_PREFIX}colors`, "dropdown");
+    const [sizeViewMode, setSizeViewMode] = useLocalStorage(LS_KEYS.sizes, "dropdown");
+    const [colorViewMode, setColorViewMode] = useLocalStorage(LS_KEYS.colors, "dropdown");
 
     return (
         <section>

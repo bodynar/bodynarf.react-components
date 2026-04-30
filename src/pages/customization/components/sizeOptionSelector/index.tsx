@@ -1,9 +1,10 @@
 import { FC, useCallback, useState } from "react";
 
-import { Dropdown, ElementSize, SelectableItem } from "@bodynarf/react.components";
+import { ElementSize, SelectableItem } from "@bodynarf/react.components";
 import SegmentedControlComponent from "@bodynarf/react.components/components/segmentedControl";
 
 import { Sizes } from "../../../../shared";
+import SizeSelectorView from "../../../../shared/components/sizeSelector";
 
 import { ViewMode, previewOptions } from "../../constants";
 import styles from "../../styles.module.scss";
@@ -38,14 +39,7 @@ const SizeDropdownPreview: FC = () => {
 
     return (
         <div>
-            <Dropdown
-                hideOnOuterClick
-                items={Sizes.selectableItems}
-                onSelect={handleSelect}
-                value={selected}
-                deselectable={false}
-                placeholder="Size"
-            />
+            <SizeSelectorView viewMode="dropdown" value={selected} onSelect={handleSelect} />
             <div className="mt-3">
                 <SegmentedControlComponent
                     size={selected.value as ElementSize}
@@ -61,21 +55,11 @@ const SizeDropdownPreview: FC = () => {
 const SizeButtonsPreview: FC = () => {
     const [selected, setSelected] = useState<SelectableItem>(Sizes.selectableItems[0]);
     const [previewValue, setPreviewValue] = useState("a");
+    const handleSelect = useCallback((item?: SelectableItem) => { if (item) setSelected(item); }, []);
 
     return (
         <div>
-            <div className="buttons">
-                {Sizes.selectableItems.map((item: SelectableItem) => (
-                    <button
-                        key={item.id}
-                        type="button"
-                        className={`button is-small is-outlined${selected.id === item.id ? " is-primary" : ""}`}
-                        onClick={() => setSelected(item)}
-                    >
-                        {item.displayValue}
-                    </button>
-                ))}
-            </div>
+            <SizeSelectorView viewMode="buttons" value={selected} onSelect={handleSelect} />
             <div className="mt-2">
                 <SegmentedControlComponent
                     size={selected.value as ElementSize}

@@ -1,9 +1,10 @@
 import { FC, useCallback, useState } from "react";
 
-import { Dropdown, ElementColor, SelectableItem } from "@bodynarf/react.components";
+import { ElementColor, SelectableItem } from "@bodynarf/react.components";
 import SegmentedControlComponent from "@bodynarf/react.components/components/segmentedControl";
 
 import { Colors } from "../../../../shared";
+import ColorSelectorView from "../../../../shared/components/colorSelector";
 
 import { ViewMode, previewOptions } from "../../constants";
 import styles from "../../styles.module.scss";
@@ -38,14 +39,7 @@ const ColorDropdownPreview: FC = () => {
 
     return (
         <div>
-            <Dropdown
-                hideOnOuterClick
-                items={Colors.selectableItems}
-                onSelect={handleSelect}
-                value={selected}
-                deselectable={false}
-                placeholder="Color"
-            />
+            <ColorSelectorView viewMode="dropdown" value={selected} onSelect={handleSelect} />
             <div className="mt-3">
                 <SegmentedControlComponent
                     color={selected.value as ElementColor}
@@ -61,25 +55,11 @@ const ColorDropdownPreview: FC = () => {
 const ColorButtonsPreview: FC = () => {
     const [selected, setSelected] = useState<SelectableItem>(Colors.selectableItems[0]);
     const [previewValue, setPreviewValue] = useState("a");
+    const handleSelect = useCallback((item?: SelectableItem) => { if (item) setSelected(item); }, []);
 
     return (
         <div>
-            <div className="buttons is-flex-wrap-wrap">
-                {Colors.selectableItems.map((item: SelectableItem) => {
-                    const colorClass = item.value !== "default" ? `is-${item.value}` : "";
-                    const isSelected = selected.id === item.id;
-                    return (
-                        <button
-                            key={item.id}
-                            type="button"
-                            className={`button is-small${colorClass ? ` ${colorClass}` : ""}${!isSelected ? " is-outlined" : ""}`}
-                            onClick={() => setSelected(item)}
-                        >
-                            {item.displayValue}
-                        </button>
-                    );
-                })}
-            </div>
+            <ColorSelectorView viewMode="buttons" value={selected} onSelect={handleSelect} />
             <div className="mt-2">
                 <SegmentedControlComponent
                     color={selected.value as ElementColor}
