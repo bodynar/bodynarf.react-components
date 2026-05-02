@@ -64,8 +64,14 @@ $border-bottom: 1px solid vars.$color-gray-lighten;
         flex-shrink: 0;
     }
 
-    &:hover {
+    &:hover,
+    &--active {
         background: rgba(vars.$color-link, 0.08);
+    }
+
+    &--active {
+        outline: 2px solid rgba(vars.$color-link, 0.3);
+        outline-offset: -2px;
     }
 
     &:not(:last-child) {

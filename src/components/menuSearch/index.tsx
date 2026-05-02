@@ -34,6 +34,7 @@ const MenuSearch: FC = () => {
     const [query, setQuery] = useState("");
     const [isFocused, setIsFocused] = useState(false);
     const [closeKey, setCloseKey] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(-1);
 
     const isOpen = query.trim().length > 0 && isFocused;
 
@@ -52,23 +53,49 @@ const MenuSearch: FC = () => {
     const close = useCallback(() => {
         setQuery("");
         setIsFocused(false);
+        setActiveIndex(-1);
         setCloseKey(k => k + 1);
     }, []);
 
     const handleOverlayClick = useCallback(() => {
         setIsFocused(false);
+        setActiveIndex(-1);
     }, []);
 
     useEventListener("keydown", useCallback((e: KeyboardEvent) => {
         if (e.key === "Escape") {
             close();
+            return;
         }
-    }, [close]));
+
+        if (!isOpen || filteredItems.length === 0) {
+            return;
+        }
+
+        if (e.key === "ArrowDown") {
+            e.preventDefault();
+            setActiveIndex(i => (i + 1) % filteredItems.length);
+        } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            setActiveIndex(i => (i <= 0 ? filteredItems.length - 1 : i - 1));
+        } else if (e.key === "Enter") {
+            if (activeIndex >= 0 && activeIndex < filteredItems.length) {
+                e.preventDefault();
+                navigate(filteredItems[activeIndex].path);
+                close();
+            }
+        }
+    }, [close, isOpen, filteredItems, activeIndex, navigate]));
 
     const handleSelect = useCallback((path: string) => {
         navigate(path);
         close();
     }, [navigate, close]);
+
+    const handleQueryChange = useCallback((value: string) => {
+        setQuery(value);
+        setActiveIndex(-1);
+    }, []);
 
     return (
         <>
@@ -87,19 +114,21 @@ const MenuSearch: FC = () => {
                 <SearchComponent
                     key={closeKey}
                     caption="Search by name..."
-                    onSearch={setQuery}
+                    onSearch={handleQueryChange}
                     searchType="byTyping"
                     size={ElementSize.Small}
                 />
                 {query.trim().length > 0 ? (
                     <div className={`${styles.dropdown}${isOpen ? ` ${styles["dropdown--open"]}` : ""}`}>
                         {/* onMouseDown preventDefault keeps input focused when clicking items */}
-                        <ul onMouseDown={e => e.preventDefault()}>
+                        <ul onMouseDown={e => e.preventDefault()} role="listbox">
                             {filteredItems.length > 0
-                                ? filteredItems.map(item => (
+                                ? filteredItems.map((item, index) => (
                                     <li
                                         key={item.path}
-                                        className={styles.item}
+                                        role="option"
+                                        aria-selected={index === activeIndex}
+                                        className={`${styles.item}${index === activeIndex ? ` ${styles["item--active"]}` : ""}`}
                                         onClick={() => handleSelect(item.path)}
                                     >
                                         <span>{item.caption}</span>
