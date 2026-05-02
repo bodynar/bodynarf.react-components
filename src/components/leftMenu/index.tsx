@@ -73,9 +73,12 @@ const LeftMenu: FC = () => {
                             title="Open React website"
                         />
                     </a>
-                    <span className="has-text-weight-medium">
+                    <Link
+                        to="/home"
+                        className="ml-2 has-text-weight-medium title is-6"
+                    >
                         {displayName}
-                    </span>
+                    </Link>
                 </div>
                 <span
                     title="Version of BBR.Components package"

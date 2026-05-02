@@ -1,6 +1,7 @@
 .root {
     position: relative;
     height: 100%;
+    // margin-left: 2rem !important;
 
     gap: 1rem;
 
@@ -50,7 +51,10 @@
     }
 
     @media (max-width: 768px) {
-        margin-left: 0 !important;
+        margin-left: 0;
+    }
+    @media (min-width: 1366px) {
+        margin-left: 2rem !important;
     }
 }
 

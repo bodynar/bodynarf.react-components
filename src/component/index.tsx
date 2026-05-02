@@ -48,7 +48,7 @@ const App: FC = () => {
     }, []);
 
     return (
-        <main className={`${styles.root} columns my-0 ml-6`}>
+        <main className={`${styles.root} columns my-0`}>
             {menuOpen ? (
                 <div
                     aria-hidden="true"
