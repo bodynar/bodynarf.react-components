@@ -1,12 +1,141 @@
-import { FC } from "react";
+import { FC, useMemo, useState } from "react";
+import { Link } from "react-router";
+
+import { ElementColor, Tag } from "@bodynarf/react.components";
 
 import CodeExample from "@app/sharedComponents/codeExample";
 import TranslationPanel from "src/components/translation-panel";
+import routeList, { isRootMenuItem, RouteMenuItem } from "@app/pages/routing";
+
+const MAX_WHATS_NEW = 3;
+
+const compareVersionsDesc = (a: string, b: string): number => {
+    const [aMaj, aMin] = a.split(".").map(Number);
+    const [bMaj, bMin] = b.split(".").map(Number);
+    if (bMaj !== aMaj) return bMaj - aMaj;
+    return bMin - aMin;
+};
 
 /** Default page */
 const Home: FC = () => {
+    const [dismissed, setDismissed] = useState(false);
+    const whatsNew = useMemo(() => {
+        const allFlatItems = routeList.flatMap(item =>
+            isRootMenuItem(item)
+                ? item.children.map(child => ({ ...child, groupCaption: item.caption }))
+                : [{ ...(item as RouteMenuItem), groupCaption: "" }]
+        );
+
+        const versions = Array.from(
+            new Set(allFlatItems.flatMap(i => [i.createVersion, i.updateVersion].filter(Boolean) as string[]))
+        ).sort(compareVersionsDesc);
+
+        const latest = versions[0];
+        if (!latest) {
+            return null;
+        }
+
+        const added = allFlatItems
+            .filter(i => i.createVersion === latest)
+            .sort((a, b) => a.caption.localeCompare(b.caption));
+        const updated = allFlatItems
+            .filter(i => i.updateVersion === latest)
+            .sort((a, b) => a.caption.localeCompare(b.caption));
+
+        return { version: latest, added, updated };
+    }, []);
+
     return (
         <>
+            {whatsNew != null && !dismissed && (
+                <div
+                    className="block notification"
+                    style={{ borderLeft: "4px solid #485fc7", borderRadius: "0.375rem", paddingLeft: "1.25rem" }}
+                >
+                    <div className="is-flex is-justify-content-space-between is-align-items-flex-start mb-2">
+                        <p className="has-text-weight-semibold">
+                            What&apos;s new in
+                            {` `}
+                            <span style={{ color: "#485fc7" }}>
+                                v{whatsNew.version}
+                            </span>
+                            {` `}
+                            &mdash;
+                            {` `}
+                            <Link to="/changelog" className="is-size-7">
+                                Full changelog
+                            </Link>
+                        </p>
+                        <button
+                            type="button"
+                            className="delete"
+                            title="Dismiss"
+                            onClick={() => setDismissed(true)}
+                        />
+                    </div>
+                    <div className="is-flex" style={{ gap: "2rem", flexWrap: "wrap" }}>
+                        {whatsNew.added.length > 0 && (
+                            <div>
+                                <p className="mb-1 is-flex is-align-items-center" style={{ gap: "0.4rem" }}>
+                                    <Tag content="NEW" style={ElementColor.Danger} />
+                                    <span className="has-text-weight-medium">Added</span>
+                                </p>
+                                <ul style={{ listStyle: "none", paddingLeft: "0.25rem" }}>
+                                    {whatsNew.added.slice(0, MAX_WHATS_NEW).map(item => (
+                                        <li key={item.path}>
+                                            <Link to={item.path} className="has-text-link is-size-7">
+                                                {item.caption}
+                                            </Link>
+                                            {item.groupCaption ? (
+                                                <span className="has-text-grey is-size-7">
+                                                    {` `}({item.groupCaption})
+                                                </span>
+                                            ) : null}
+                                        </li>
+                                    ))}
+                                    {whatsNew.added.length > MAX_WHATS_NEW && (
+                                        <li>
+                                            <Link to="/changelog" className="has-text-grey is-size-7 is-italic">
+                                                +{whatsNew.added.length - MAX_WHATS_NEW} more...
+                                            </Link>
+                                        </li>
+                                    )}
+                                </ul>
+                            </div>
+                        )}
+                        {whatsNew.updated.length > 0 && (
+                            <div>
+                                <p className="mb-1 is-flex is-align-items-center" style={{ gap: "0.4rem" }}>
+                                    <Tag content="UPD" style={ElementColor.Info} />
+                                    <span className="has-text-weight-medium">Updated</span>
+                                </p>
+                                <ul style={{ listStyle: "none", paddingLeft: "0.25rem" }}>
+                                    {whatsNew.updated.slice(0, MAX_WHATS_NEW).map(item => (
+                                        <li key={item.path}>
+                                            <Link to={item.path} className="has-text-link is-size-7">
+                                                {item.caption}
+                                            </Link>
+                                            {item.groupCaption ? (
+                                                <span className="has-text-grey is-size-7">
+                                                    {` `}({item.groupCaption})
+                                                </span>
+                                            ) : null}
+                                        </li>
+                                    ))}
+                                    {whatsNew.updated.length > MAX_WHATS_NEW && (
+                                        <li>
+                                            <Link to="/changelog" className="has-text-grey is-size-7 is-italic">
+                                                +{whatsNew.updated.length - MAX_WHATS_NEW} more...
+                                            </Link>
+                                        </li>
+                                    )}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+
             <div className="block">
                 <h1 className="title is-1">
                     About
@@ -171,8 +300,16 @@ const Home: FC = () => {
 
             <div className="block">
                 <h3 className="subtitle is-3">
-                    PS
+                    About this documentation
                 </h3>
+                <p className="mb-4">
+                    This documentation site was originally written in Russian and translated to English
+                    with the help of
+                    {` `}
+                    <strong>ChatGPT</strong>
+                    . The panel below is a component that you can use in your own projects to display
+                    a similar translation or AI-assistance credit notice.
+                </p>
                 <TranslationPanel />
             </div>
         </>

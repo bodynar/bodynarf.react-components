@@ -36,6 +36,7 @@ $border-bottom: 1px solid vars.$color-gray-lighten;
         overflow-y: auto;
         padding-right: 0.75rem;
         scrollbar-gutter: stable;
+        overflow-x: hidden;
 
         & > li,
         li[role="group"] {

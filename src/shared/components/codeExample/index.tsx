@@ -1,8 +1,9 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback } from "react";
 
 import { BundledLanguage } from "shiki";
 
 import { Button, ButtonStyle } from "@bodynarf/react.components";
+import { useClipboard } from "@bodynarf/react.components/hooks";
 
 import { getHighlightedCode } from "./shikiResource";
 
@@ -32,44 +33,24 @@ const CodeExample: FC<CodeExampleProps> = ({
     language = "tsx",
     hideLanguage = false,
 }) => {
-    const [isCopied, setIsCopied] = useState(false);
-    const [, setTimerId] = useState<ReturnType<typeof setTimeout> | undefined>();
+    const { copy, copied } = useClipboard(3000);
 
     const onCopyBtnClick = useCallback(() => {
-        window.navigator.clipboard
-            .writeText(code)
-            .then(() => setIsCopied(true));
-    }, [code]);
-
-    useEffect(() => {
-        if (isCopied) {
-            const timerId = setTimeout(() => {
-                setIsCopied(false);
-                setTimerId(x => {
-                    if (x) {
-                        clearTimeout(x);
-                    }
-
-                    return undefined;
-                });
-            }, 3000);
-
-            setTimerId(timerId);
-        }
-    }, [isCopied]);
+        copy(code);
+    }, [copy, code]);
 
     // 🚀 Suspense here
     const codeInHtml = getHighlightedCode(code, language);
 
     return (
         <div className={styles["code-example"]}>
-            {!hideLanguage && !isCopied &&
+            {!hideLanguage && !copied &&
                 <span className={`is-size-7 is-italic ${styles["lang-name"]}`}>
                     {language}
                 </span>
             }
 
-            {!isCopied &&
+            {!copied &&
                 <Button
                     style={ButtonStyle.Text}
                     icon={{ name: "clipboard" }}
@@ -79,7 +60,7 @@ const CodeExample: FC<CodeExampleProps> = ({
                 />
             }
 
-            {!!isCopied &&
+            {!!copied &&
                 <div className={styles["copied-block"]}>
                     <span className="is-size-7">
                         Copied!

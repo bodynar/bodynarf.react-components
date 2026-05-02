@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
 
 import { isNullOrEmpty, getClassName } from "@bodynarf/utils";
@@ -15,6 +15,8 @@ import npmLogo from "@app/assets/logos/npm Icon.svg";
 
 import styles from "./styles.module.scss";
 import Icon from "@bodynarf/react.components/components/icon";
+
+import MenuSearch from "../menuSearch";
 
 /** Truncate caption to max 20 characters */
 const truncateCaption = (caption: string): string =>
@@ -71,9 +73,12 @@ const LeftMenu: FC = () => {
                             title="Open React website"
                         />
                     </a>
-                    <span className="has-text-weight-medium">
+                    <Link
+                        to="/home"
+                        className="ml-2 has-text-weight-medium title is-6"
+                    >
                         {displayName}
-                    </span>
+                    </Link>
                 </div>
                 <span
                     title="Version of BBR.Components package"
@@ -92,6 +97,9 @@ const LeftMenu: FC = () => {
                     {bulmaVersion}
                 </span>
             </div>
+
+            <MenuSearch />
+
             <ul className={`${styles.menu} mt-4`}>
                 {routeList.map(routeItem =>
                     isRootMenuItem(routeItem)
@@ -146,12 +154,33 @@ const LeftMenu: FC = () => {
 
 /** Menu item with sub items */
 const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
-    caption, children, activeItem, defaultCollapsed = false,
+    name, caption, children, activeItem, defaultCollapsed = false,
 }) => {
     const containsActive = activeItem != null && children.some(c => c.path === activeItem.path);
-    const [collapsed, setIsCollapsed] = useState(defaultCollapsed && !containsActive);
+    const storageKey = `bbr-menu-collapsed-${name}`;
 
-    const onCollapseToggle = useCallback(() => setIsCollapsed(x => !x), [setIsCollapsed]);
+    const [collapsed, setIsCollapsed] = useState(() => {
+        const stored = localStorage.getItem(storageKey);
+        if (stored !== null) {
+            return stored === "true" && !containsActive;
+        }
+        return defaultCollapsed && !containsActive;
+    });
+
+    // Expand group whenever the active item changes to be inside it
+    useEffect(() => {
+        if (containsActive) {
+            setIsCollapsed(false);
+        }
+    }, [containsActive]);
+
+    const onCollapseToggle = useCallback(() => {
+        setIsCollapsed(x => {
+            const next = !x;
+            localStorage.setItem(storageKey, String(next));
+            return next;
+        });
+    }, [storageKey]);
 
     const className = getClassName([
         "is-block",
@@ -193,17 +222,26 @@ const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
 const MenuItem: FC<RouteMenuItem & { activeItem?: RouteMenuItem; }> = ({
     path, caption, activeItem, createVersion, updateVersion,
 }) => {
+    const liRef = useRef<HTMLLIElement>(null);
     const isNew = !isNullOrEmpty(createVersion) && createVersion === packageVersionShort;
     const isUpdated = !isNullOrEmpty(updateVersion) && updateVersion === packageVersionShort;
+    const isActive = activeItem?.path === path;
+
+    // Scroll this item into view when it becomes active
+    useEffect(() => {
+        if (isActive && liRef.current != null) {
+            liRef.current.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        }
+    }, [isActive]);
 
     const className = getClassName([
         "is-flex",
         "is-align-items-center",
-        activeItem?.path === path ? styles["is-active"] : undefined,
+        isActive ? styles["is-active"] : undefined,
     ]);
 
     return (
-        <li>
+        <li ref={liRef}>
             <Link
                 to={path}
                 title={caption}

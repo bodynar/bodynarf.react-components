@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 import Home from "./home";
+import Changelog from "./changelog";
 
 import componentsRoutes from "./components";
 import controlsRoutes from "./controls";
@@ -43,6 +44,11 @@ const routeList: Array<RouteMenuItem | MenuItem> = [
         caption: "Home",
         path: "/home",
         component: <Home />,
+    } as RouteMenuItem & Partial<Pick<MenuItem, "children">>,
+    {
+        caption: "Changelog",
+        path: "/changelog",
+        component: <Changelog />,
     } as RouteMenuItem & Partial<Pick<MenuItem, "children">>,
     { ...componentsRoutes },
     { ...controlsRoutes },

@@ -6,7 +6,7 @@
     max-width: 100%;
 
     .copy-btn {
-        opacity: 0;
+        opacity: 0.25;
 
         transition: vars.$transition;
         transition-property: background-color, border-color, opacity;

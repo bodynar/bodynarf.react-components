@@ -1,9 +1,13 @@
 import { FC, ReactNode } from "react";
 
-import { ElementSize, Dropdown } from "@bodynarf/react.components";
+import { ElementSize } from "@bodynarf/react.components";
+import { useLocalStorage } from "@bodynarf/react.components/hooks";
 
 import { Sizes, useSizeSelection } from "../..";
 import AnchorHeading from "../anchorHeading";
+import SizeSelectorView from "../sizeSelector";
+
+import { LS_KEYS, ViewMode } from "../../../pages/customization/constants";
 
 /** Component size use case props type */
 type ComponentSizeCaseProps = {
@@ -30,6 +34,7 @@ const ComponentSizeCase: FC<ComponentSizeCaseProps> = ({
     codeProvider, componentProvider,
 }) => {
     const sizeHookValues = useSizeSelection();
+    const [sizeViewMode] = useLocalStorage(LS_KEYS.sizes, "dropdown");
 
     return (
         <>
@@ -45,20 +50,19 @@ const ComponentSizeCase: FC<ComponentSizeCaseProps> = ({
                         <span className="mb-2 is-block is-italic has-text-grey">
                             Code:
                         </span>
-                        {codeProvider(Sizes.keys[+sizeHookValues.selectedValue!.id])}
+                        {codeProvider(Sizes.keys[+sizeHookValues.selectedValue.id])}
                     </div>
                     <div className="column is-6">
                         <span className="mb-2 is-block is-italic has-text-grey">
                             Result:
                         </span>
-                        <Dropdown
-                            hideOnOuterClick
-                            items={Sizes.selectableItems}
-                            onSelect={sizeHookValues.handleOnSelect}
+
+                        <SizeSelectorView
+                            viewMode={sizeViewMode as ViewMode}
                             value={sizeHookValues.selectedValue}
-                            placeholder="Size"
-                            deselectable={false}
+                            onSelect={sizeHookValues.handleOnSelect}
                         />
+
                         <div className="block mt-2">
                             {componentProvider(sizeHookValues.value)}
                         </div>

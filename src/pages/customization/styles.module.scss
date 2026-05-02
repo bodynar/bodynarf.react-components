@@ -1,0 +1,35 @@
+.option-container {
+    display: flex;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.5rem;
+}
+
+.option {
+    flex: 1;
+    padding: 1rem;
+    cursor: pointer;
+    transition: background 0.15s;
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.03);
+    }
+
+    &--selected {
+        background: rgba(72, 95, 199, 0.05);
+        outline: 2px solid #485fc7;
+        outline-offset: -2px;
+    }
+}
+
+.option-divider {
+    width: 1px;
+    background: #e0e0e0;
+    flex-shrink: 0;
+}
+
+.option-label {
+    font-size: 0.75rem;
+    color: #aaa;
+    font-style: italic;
+    margin-bottom: 0.75rem;
+}

@@ -1,9 +1,12 @@
 import { FC, ReactNode } from "react";
 
-import { Dropdown, ElementColor } from "@bodynarf/react.components";
+import { ElementColor } from "@bodynarf/react.components";
+import { useLocalStorage } from "@bodynarf/react.components/hooks";
 
 import { Colors, useColorSelection } from "../..";
 import AnchorHeading from "../anchorHeading";
+import ColorSelectorView from "../colorSelector";
+import { LS_KEYS, ViewMode } from "../../../pages/customization/constants";
 
 /** Component color use case props type */
 type ComponentColorCaseProps = {
@@ -30,6 +33,7 @@ const ComponentColorCase: FC<ComponentColorCaseProps> = ({
     codeProvider, componentProvider,
 }) => {
     const colorHookValues = useColorSelection();
+    const [colorViewMode] = useLocalStorage(LS_KEYS.colors, "dropdown");
 
     return (
         <>
@@ -46,20 +50,20 @@ const ComponentColorCase: FC<ComponentColorCaseProps> = ({
                         <span className="mb-2 is-block is-italic has-text-grey">
                             Code:
                         </span>
-                        {codeProvider(Colors.keys[+colorHookValues.selectedValue!.id])}
+                        {codeProvider(Colors.keys[+colorHookValues.selectedValue.id])}
                     </div>
+
                     <div className="column is-6">
                         <span className="mb-2 is-block is-italic has-text-grey">
                             Result:
                         </span>
-                        <Dropdown
-                            hideOnOuterClick
-                            items={Colors.selectableItems}
-                            onSelect={colorHookValues.handleOnSelect}
+
+                        <ColorSelectorView
+                            viewMode={colorViewMode as ViewMode}
                             value={colorHookValues.selectedValue}
-                            placeholder="Color"
-                            deselectable={false}
+                            onSelect={colorHookValues.handleOnSelect}
                         />
+
                         <div className="block mt-2">
                             {componentProvider(colorHookValues.value)}
                         </div>
