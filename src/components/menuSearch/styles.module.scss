@@ -6,12 +6,12 @@ $border-bottom: 1px solid vars.$color-gray-lighten;
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 100;
+    z-index: 34;
 }
 
 .container {
     position: relative;
-    z-index: 101;
+    z-index: 35;
     padding: 0.5rem 0;
     border-bottom: $border-bottom;
 }

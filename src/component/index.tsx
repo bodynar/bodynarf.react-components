@@ -104,37 +104,43 @@ const App: FC = () => {
                         />
                     </Routes>
                 </SuspenseReadyProvider>
-            </main>
-            <div className={styles["settings-button"]}>
-                <TooltipComponent position={TooltipPosition.Left}>
-                    <TooltipComponent.Target>
-                        <button
-                            type="button"
-                            className={`button ${styles["settings-button__btn"]}`}
-                            onClick={() => navigate("/customization")}
-                            disabled={isCustomizationPage}
-                        >
-                            <Icon name="gear" />
-                        </button>
-                    </TooltipComponent.Target>
-                    <TooltipComponent.Hint>
-                        Open Display Settings
-                    </TooltipComponent.Hint>
-                </TooltipComponent>
-            </div>
-
-            {showBackToTop ? (
-                <div className={styles["back-to-top"]}>
-                    <button
-                        type="button"
-                        title="Back to top"
-                        className={`button ${styles["back-to-top__btn"]}`}
-                        onClick={scrollToTop}
-                    >
-                        <Icon name="arrow-up" />
-                    </button>
+                <div className={styles["settings-button"]}>
+                    <TooltipComponent position={TooltipPosition.Left}>
+                        <TooltipComponent.Target>
+                            <button
+                                type="button"
+                                className={`button ${styles["settings-button__btn"]}`}
+                                onClick={() => navigate("/customization")}
+                                disabled={isCustomizationPage}
+                            >
+                                <Icon name="gear" />
+                            </button>
+                        </TooltipComponent.Target>
+                        <TooltipComponent.Hint>
+                            Open Display Settings
+                        </TooltipComponent.Hint>
+                    </TooltipComponent>
                 </div>
-            ) : null}
+
+                {showBackToTop ? (
+                    <div className={styles["back-to-top"]}>
+                        <TooltipComponent position={TooltipPosition.Left}>
+                            <TooltipComponent.Target>
+                                <button
+                                    type="button"
+                                    className={`button ${styles["back-to-top__btn"]}`}
+                                    onClick={scrollToTop}
+                                >
+                                    <Icon name="arrow-up" />
+                                </button>
+                            </TooltipComponent.Target>
+                            <TooltipComponent.Hint>
+                                Back to top
+                            </TooltipComponent.Hint>
+                        </TooltipComponent>
+                    </div>
+                ) : null}
+            </main>
 
         </main>
     );
