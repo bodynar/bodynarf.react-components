@@ -25,6 +25,12 @@ const App: FC = () => {
     const { pathname } = useLocation();
     const isCustomizationPage = pathname === "/customization";
     const [showBackToTop, setShowBackToTop] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    // Close mobile menu on route change
+    useEffect(() => {
+        setMenuOpen(false);
+    }, [pathname]);
 
     useEffect(() => {
         const el = contentRef.current;
@@ -43,7 +49,22 @@ const App: FC = () => {
 
     return (
         <main className={`${styles.root} columns my-0 ml-6`}>
-            <aside className={`column ${styles["left-menu"]}`}>
+            {menuOpen ? (
+                <div
+                    aria-hidden="true"
+                    onClick={() => setMenuOpen(false)}
+                    className={styles["mobile-overlay"]}
+                />
+            ) : null}
+            <button
+                type="button"
+                className={styles.hamburger}
+                aria-label="Open navigation menu"
+                onClick={() => setMenuOpen(true)}
+            >
+                <Icon name="list" />
+            </button>
+            <aside className={`column ${styles["left-menu"]}${menuOpen ? ` ${styles["left-menu--open"]}` : ""}`}>
                 <LeftMenu />
             </aside>
             <main
