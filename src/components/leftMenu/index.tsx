@@ -151,10 +151,18 @@ const LeftMenu: FC = () => {
 
 /** Menu item with sub items */
 const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
-    caption, children, activeItem, defaultCollapsed = false,
+    name, caption, children, activeItem, defaultCollapsed = false,
 }) => {
     const containsActive = activeItem != null && children.some(c => c.path === activeItem.path);
-    const [collapsed, setIsCollapsed] = useState(defaultCollapsed && !containsActive);
+    const storageKey = `bbr-menu-collapsed-${name}`;
+
+    const [collapsed, setIsCollapsed] = useState(() => {
+        const stored = localStorage.getItem(storageKey);
+        if (stored !== null) {
+            return stored === "true" && !containsActive;
+        }
+        return defaultCollapsed && !containsActive;
+    });
 
     // Expand group whenever the active item changes to be inside it
     useEffect(() => {
@@ -163,7 +171,13 @@ const MenuItemGroup: FC<MenuItemModel & { activeItem?: RouteMenuItem; }> = ({
         }
     }, [containsActive]);
 
-    const onCollapseToggle = useCallback(() => setIsCollapsed(x => !x), [setIsCollapsed]);
+    const onCollapseToggle = useCallback(() => {
+        setIsCollapsed(x => {
+            const next = !x;
+            localStorage.setItem(storageKey, String(next));
+            return next;
+        });
+    }, [storageKey]);
 
     const className = getClassName([
         "is-block",
