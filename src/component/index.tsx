@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router";
 
 import TooltipComponent from "@bodynarf/react.components/components/tooltip";
@@ -24,6 +24,22 @@ const App: FC = () => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
     const isCustomizationPage = pathname === "/customization";
+    const [showBackToTop, setShowBackToTop] = useState(false);
+
+    useEffect(() => {
+        const el = contentRef.current;
+        if (el == null) {
+            return;
+        }
+
+        const onScroll = () => setShowBackToTop(el.scrollTop > 300);
+        el.addEventListener("scroll", onScroll, { passive: true });
+        return () => el.removeEventListener("scroll", onScroll);
+    }, []);
+
+    const scrollToTop = useCallback(() => {
+        contentRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
 
     return (
         <main className={`${styles.root} columns my-0 ml-6`}>
@@ -85,6 +101,20 @@ const App: FC = () => {
                     </TooltipComponent.Hint>
                 </TooltipComponent>
             </div>
+
+            {showBackToTop ? (
+                <div className={styles["back-to-top"]}>
+                    <button
+                        type="button"
+                        title="Back to top"
+                        className={`button ${styles["back-to-top__btn"]}`}
+                        onClick={scrollToTop}
+                    >
+                        <Icon name="arrow-up" />
+                    </button>
+                </div>
+            ) : null}
+
         </main>
     );
 };
