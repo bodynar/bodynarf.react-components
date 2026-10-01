@@ -183,3 +183,6 @@ export * from "./actionBar";
 
 export { default as Stack } from "./stack";
 export * from "./stack";
+
+export { default as Center } from "./center";
+export * from "./center";
