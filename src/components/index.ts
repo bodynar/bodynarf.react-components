@@ -180,3 +180,6 @@ export * from "./otpInput";
 
 export { default as ActionBar } from "./actionBar";
 export * from "./actionBar";
+
+export { default as Stack } from "./stack";
+export * from "./stack";
