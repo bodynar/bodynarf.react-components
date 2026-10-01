@@ -177,3 +177,6 @@ export * from "./segmentedControl";
 
 export { default as OtpInput } from "./otpInput";
 export * from "./otpInput";
+
+export { default as ActionBar } from "./actionBar";
+export * from "./actionBar";
