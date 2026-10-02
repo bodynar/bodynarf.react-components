@@ -1,0 +1,39 @@
+.bbr-toggle-button-group {
+    &.is-vertical {
+        flex-direction: column;
+        align-items: stretch;
+
+        .button {
+            width: 100%;
+            justify-content: flex-start;
+        }
+    }
+
+    // Rounded group: only the outer corners of the first and last buttons are rounded
+    // (a single item is both first and last, so it stays fully rounded)
+    &--rounded {
+        .button {
+            border-radius: 0;
+        }
+
+        .button:first-child {
+            border-top-left-radius: 290486px;
+            border-bottom-left-radius: 290486px;
+        }
+
+        .button:last-child {
+            border-top-right-radius: 290486px;
+            border-bottom-right-radius: 290486px;
+        }
+
+        &.is-vertical {
+            .button:first-child {
+                border-radius: 290486px 290486px 0 0;
+            }
+
+            .button:last-child {
+                border-radius: 0 0 290486px 290486px;
+            }
+        }
+    }
+}
