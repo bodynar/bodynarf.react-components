@@ -1,54 +1,44 @@
-import { BaseElementProps, ElementIcon, ElementSize } from "@bbr/types";
-import { ButtonStyle } from "@bbr/components/button";
+import {
+    BaseElementProps,
+    ButtonStylableElement,
+    DisableableElement,
+    ElementWithIcon,
+    OutlinedElement,
+    RoundedElement,
+    SizableElement,
+} from "@bbr/types";
 
 /** ToggleButton component props */
 export type ToggleButtonProps =
     & BaseElementProps
+    & ElementWithIcon
+    & SizableElement
+    & ButtonStylableElement
+    & OutlinedElement
+    & RoundedElement
+    & DisableableElement
     & {
-        /**
-         * Unique button value.
-         * Used as a key when the button is rendered inside a `ToggleButtonGroup`
-        */
-        value: string;
-
         /** Button displaying text */
         caption?: string;
 
-        /** Configuration of inner icon */
-        icon?: ElementIcon;
-
-        /** Is button active. When set, the component works in controlled mode */
+        /**
+         * Is button active.
+         * When set, the component works in controlled mode.
+         * State changes are reported via {@link ToggleButtonProps.onToggle} only —
+         * updating `active` itself does not emit anything
+        */
         active?: boolean;
 
         /**
          * Is button active initially.
-         * Applied only in uncontrolled mode
+         * Applied only when {@link ToggleButtonProps.active} is not set
          * @default false
         */
         defaultActive?: boolean;
 
         /**
-         * Button style.
-         * @default ButtonStyle.Primary
+         * Called when the button active state changes.
+         * Receives the next active state
         */
-        style?: ButtonStyle;
-
-        /** Button size  */
-        size?: ElementSize;
-
-        /**
-         * Is inactive button outlined.
-         * Active button is always solid
-         * @default false
-        */
-        outlined?: boolean;
-
-        /** Should button corners be rounded */
-        rounded?: boolean;
-
-        /** Is button disabled */
-        disabled?: boolean;
-
-        /** Called when the button active state changes */
         onToggle?: (active: boolean) => void;
     };

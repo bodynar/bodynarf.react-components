@@ -100,7 +100,6 @@ const ToggleButtonGroup: FC<ToggleButtonGroupProps> = ({
                     key={item.value}
 
                     icon={item.icon}
-                    value={item.value}
                     title={item.title}
                     caption={item.caption}
                     disabled={item.disabled}

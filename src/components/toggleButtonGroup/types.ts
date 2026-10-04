@@ -1,9 +1,9 @@
-import { BaseElementProps, ElementSize } from "@bbr/types";
-import { ButtonProps, ButtonStyle } from "@bbr/components/button";
+import { BaseElementProps, ButtonStylableElement, OutlinedElement, RoundedElement, SizableElement } from "@bbr/types";
+import { ToggleButtonProps } from "@bbr/components/toggleButton";
 
 /** A single button in a {@link ToggleButtonGroupProps} */
 export type ToggleButtonGroupItem =
-    & Pick<ButtonProps, "caption" | "icon" | "disabled" | "title">
+    & Pick<ToggleButtonProps, "caption" | "icon" | "disabled" | "title">
     & {
         /** Unique button value across all group items */
         value: string;
@@ -12,6 +12,10 @@ export type ToggleButtonGroupItem =
 /** ToggleButtonGroup component props */
 export type ToggleButtonGroupProps =
     & BaseElementProps
+    & SizableElement
+    & ButtonStylableElement
+    & OutlinedElement
+    & RoundedElement
     & {
         /** Buttons to render */
         items: ToggleButtonGroupItem[];
@@ -36,22 +40,6 @@ export type ToggleButtonGroupProps =
          * Applied only in uncontrolled mode
         */
         defaultValue?: string | string[];
-
-        /** Shared button style applied to every button */
-        style?: ButtonStyle;
-
-        /** Shared button size applied to every button */
-        size?: ElementSize;
-
-        /**
-         * Are inactive buttons outlined.
-         * Active buttons are always solid
-         * @default false
-        */
-        outlined?: boolean;
-
-        /** Should buttons have rounded corners */
-        rounded?: boolean;
 
         /**
          * Is group laid out vertically

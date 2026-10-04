@@ -23,7 +23,6 @@ const ToggleButton: FC<ToggleButtonProps> = (props) => {
     }
 
     const {
-        value,
         caption, icon,
         active: controlledActive,
         defaultActive = false,
@@ -104,7 +103,6 @@ const ToggleButton: FC<ToggleButtonProps> = (props) => {
             {...dataAttributes}
 
             type="button"
-            value={value}
             title={title}
             onClick={onClick}
             disabled={disabled}
