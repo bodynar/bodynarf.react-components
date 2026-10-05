@@ -237,3 +237,72 @@
     animation-play-state: paused;
 }
 
+// ── BorderBeam — animated rotating border ring ────────────────────────────────
+// Apply to any element with `position: relative` (the ::before sits behind it).
+//   <div class="bbr-border-beam bbr-border-beam--aurora">…</div>
+// Color variants (single beam color):  --primary --link --info --success --warning --danger
+// Gradient presets (multi-color beam): --ocean --aurora --fire --rainbow
+
+@property --bbr-beam-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes bbr-beam-rotate {
+    to {
+        --bbr-beam-angle: 360deg;
+    }
+}
+
+.bbr-border-beam {
+    position: relative;
+
+    --bbr-beam-color: var(--bulma-primary, #00d1b2);
+    --bbr-beam-thickness: 2px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: calc(-1 * var(--bbr-beam-thickness));
+        padding: var(--bbr-beam-thickness);
+        border-radius: inherit;
+        z-index: -1;
+        background: conic-gradient(from var(--bbr-beam-angle), transparent 20%, var(--bbr-beam-color) 50%, transparent 80%);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        animation: bbr-beam-rotate 3s linear infinite;
+    }
+
+    // ElementColor variants (single beam color)
+    &--primary { --bbr-beam-color: var(--bulma-primary, #00d1b2); }
+    &--link    { --bbr-beam-color: var(--bulma-link, #485fc7); }
+    &--info    { --bbr-beam-color: var(--bulma-info, #3e8ed0); }
+    &--success { --bbr-beam-color: var(--bulma-success, #48c78e); }
+    &--warning { --bbr-beam-color: var(--bulma-warning, #ffe08a); }
+    &--danger  { --bbr-beam-color: var(--bulma-danger, #f14668); }
+
+    // Gradient presets (multi-color beam) — override the ::before background
+    &--ocean::before {
+        background: conic-gradient(from var(--bbr-beam-angle), transparent 10%, #07f 40%, #00cfff 60%, transparent 90%);
+    }
+
+    &--aurora::before {
+        background: conic-gradient(from var(--bbr-beam-angle), transparent 5%, #0f8 30%, #06f 50%, #a0f 70%, transparent 95%);
+    }
+
+    &--fire::before {
+        background: conic-gradient(from var(--bbr-beam-angle), transparent 5%, #f00 30%, #f80 50%, #ff0 70%, transparent 95%);
+    }
+
+    &--rainbow::before {
+        background: conic-gradient(from var(--bbr-beam-angle), transparent 5%, #f00, #f80, #ff0, #0f0, #08f, #80f, transparent 95%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bbr-border-beam::before {
+        animation: none;
+    }
+}
+
