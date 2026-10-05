@@ -201,3 +201,6 @@ export * from "./dropdownMenu";
 
 export { default as AvatarGroup } from "./avatarGroup";
 export * from "./avatarGroup";
+
+export { default as CircularMeter } from "./circularMeter";
+export * from "./circularMeter";
