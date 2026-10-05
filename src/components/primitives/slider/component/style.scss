@@ -383,7 +383,11 @@ input[type="range"].slider.bbr-slider {
 
         &::-webkit-slider-thumb {
             margin-top: 0;
+
+            // Cross-axis centering of the thumb on the narrow track;
+            // symmetric so it holds with direction: rtl
             margin-left: -0.25rem;
+            margin-right: -0.25rem;
         }
 
     }
