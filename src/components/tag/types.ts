@@ -1,12 +1,21 @@
-import { BaseElementProps, ClickableElement, ElementColor, ElementSize } from "@bbr/types";
+import { BaseElementProps, ClickableElement, ElementIcon, ElementSize, OutlinedElement, RoundedElement, StylableElement } from "@bbr/types";
 
 /** Tag item prop types */
 export type TagProps =
     & BaseElementProps
     & ClickableElement
+    & StylableElement
+    & OutlinedElement
+    & RoundedElement
     & {
         /** Tag content */
         content: string;
+
+        /** Icon rendered before the tag content */
+        iconLeft?: ElementIcon;
+
+        /** Icon rendered after the tag content */
+        iconRight?: ElementIcon;
 
         /**
          * Element size.
@@ -14,14 +23,14 @@ export type TagProps =
         */
         size?: Exclude<ElementSize, ElementSize.Small>;
 
-        /** Element color */
-        style?: ElementColor;
-
-        /** Is element with rounded border */
-        rounded?: boolean;
-
-        /** Is element has light color */
+        /**
+         * Is element has light color.
+         * Soft-deprecated in favor of `light`
+        */
         lightColor?: boolean;
+
+        /** Is element has light color. Synonym of `lightColor` */
+        light?: boolean;
 
         /** Manual color scheme */
         customColor?: {

@@ -1,6 +1,6 @@
 .bbr-tag {
     border: 1px solid transparent;
-    transition: border-color 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out, color 0.15s ease-in-out;
 
     &.is-clickable {
         &.is-light {
@@ -19,6 +19,132 @@
             &:focus,
             &:active {
                 border-color: rgba(0, 0, 0, 0.75);
+            }
+        }
+    }
+}
+
+// Icon margins must beat Bulma's `.tag:not(body) .icon:first-child(:not/:last-child)`
+// rules (0,5,0) — hence the full match plus the `span` element (0,5,1)
+.tag.bbr-tag:not(body) {
+    span.icon.bbr-tag__icon-left {
+        margin-left: 0;
+        margin-right: 0.25rem;
+    }
+
+    span.icon.bbr-tag__icon-right {
+        margin-left: 0.25rem;
+        margin-right: 0;
+    }
+}
+
+// `.bbr-tag` raises the specificity above Bulma's `.tag.is-{color}`
+// background rules, which would otherwise win the cascade tie
+.tag.bbr-tag.is-outlined {
+    background-color: transparent;
+    border: 1px solid currentcolor;
+
+    &.is-primary {
+        color: var(--bulma-primary, #00d1b2);
+        border-color: var(--bulma-primary, #00d1b2);
+    }
+
+    &.is-link {
+        color: var(--bulma-link, #485fc7);
+        border-color: var(--bulma-link, #485fc7);
+    }
+
+    &.is-info {
+        color: var(--bulma-info, #3e8ed0);
+        border-color: var(--bulma-info, #3e8ed0);
+    }
+
+    &.is-success {
+        color: var(--bulma-success, #48c78e);
+        border-color: var(--bulma-success, #48c78e);
+    }
+
+    &.is-warning {
+        color: var(--bulma-warning, #ffe08a);
+        border-color: var(--bulma-warning, #ffe08a);
+    }
+
+    &.is-danger {
+        color: var(--bulma-danger, #f14668);
+        border-color: var(--bulma-danger, #f14668);
+    }
+
+    &.is-light {
+        background-color: transparent;
+
+        &.is-primary {
+            color: var(--bulma-primary-dark, #00947e);
+            border-color: var(--bulma-primary-light, #ebfffc);
+        }
+
+        &.is-link {
+            color: var(--bulma-link-dark, #3850b7);
+            border-color: var(--bulma-link-light, #eff1fa);
+        }
+
+        &.is-info {
+            color: var(--bulma-info-dark, #296fa8);
+            border-color: var(--bulma-info-light, #eff5fb);
+        }
+
+        &.is-success {
+            color: var(--bulma-success-dark, #257953);
+            border-color: var(--bulma-success-light, #effaf5);
+        }
+
+        &.is-warning {
+            color: var(--bulma-warning-dark, #946c00);
+            border-color: var(--bulma-warning-light, #fffaeb);
+        }
+
+        &.is-danger {
+            color: var(--bulma-danger-dark, #cc0f35);
+            border-color: var(--bulma-danger-light, #feecf0);
+        }
+    }
+
+    // Clickable outlined tags fill with their color on hover
+    &.is-clickable {
+        &:hover {
+            &.is-primary {
+                color: #fff;
+                border-color: var(--bulma-primary, #00d1b2);
+                background-color: var(--bulma-primary, #00d1b2);
+            }
+
+            &.is-link {
+                color: #fff;
+                border-color: var(--bulma-link, #485fc7);
+                background-color: var(--bulma-link, #485fc7);
+            }
+
+            &.is-info {
+                color: #fff;
+                border-color: var(--bulma-info, #3e8ed0);
+                background-color: var(--bulma-info, #3e8ed0);
+            }
+
+            &.is-success {
+                color: #fff;
+                border-color: var(--bulma-success, #48c78e);
+                background-color: var(--bulma-success, #48c78e);
+            }
+
+            &.is-warning {
+                color: #fff;
+                border-color: var(--bulma-warning, #ffe08a);
+                background-color: var(--bulma-warning, #ffe08a);
+            }
+
+            &.is-danger {
+                color: #fff;
+                border-color: var(--bulma-danger, #f14668);
+                background-color: var(--bulma-danger, #f14668);
             }
         }
     }
