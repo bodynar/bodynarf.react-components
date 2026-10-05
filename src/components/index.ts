@@ -198,3 +198,6 @@ export * from "./radioCardGroup";
 
 export { default as DropdownMenu } from "./dropdownMenu";
 export * from "./dropdownMenu";
+
+export { default as AvatarGroup } from "./avatarGroup";
+export * from "./avatarGroup";

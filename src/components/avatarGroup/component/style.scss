@@ -1,0 +1,29 @@
+.bbr-avatar-group {
+    display: flex;
+    align-items: center;
+
+    // overlap every avatar after the first one
+    > * + * {
+        margin-left: -10px;
+    }
+
+    // ring to keep overlapped avatars visually separated
+    .bbr-avatar__inner {
+        box-shadow: 0 0 0 2px #fff;
+    }
+
+    &__overflow {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 240px;
+        overflow-y: auto;
+        padding: 8px;
+    }
+
+    &__overflow-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
