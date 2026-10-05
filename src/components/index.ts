@@ -192,3 +192,6 @@ export * from "./toggleButton";
 
 export { default as ToggleButtonGroup } from "./toggleButtonGroup";
 export * from "./toggleButtonGroup";
+
+export { default as RadioCardGroup } from "./radioCardGroup";
+export * from "./radioCardGroup";

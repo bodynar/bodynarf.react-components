@@ -1,0 +1,144 @@
+// Bulma variables - compatible with v0.9.x and v1.x
+// v1.x: CSS variables (--bulma-*) will be used if defined
+// v0.9.x: Fallback values will be used (no CSS variables in 0.9.x)
+$primary: var(--bulma-primary, #00d1b2);
+$primary-light: var(--bulma-primary-light, #ebfffc);
+$text-strong: var(--bulma-text-strong, #363636);
+$grey: var(--bulma-grey, #7a7a7a);
+$grey-light: var(--bulma-grey-light, #b5b5b5);
+$grey-lighter: var(--bulma-grey-lighter, #dbdbdb);
+$white: var(--bulma-white, #fff);
+
+.bbr-radio-card-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+
+    // ── Size modifiers ────────────────────────────────────────────────
+
+    &.is-small {
+        .bbr-radio-card {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+        }
+    }
+
+    &.is-normal {
+        .bbr-radio-card {
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+        }
+    }
+
+    &.is-medium {
+        .bbr-radio-card {
+            padding: 1.125rem 1.25rem;
+            font-size: 1.25rem;
+        }
+    }
+
+    &.is-large {
+        .bbr-radio-card {
+            padding: 1.375rem 1.5rem;
+            font-size: 1.5rem;
+        }
+    }
+
+    // ── Accent color modifiers (selected card, focus ring and icon) ──
+
+    &--primary {
+        --bbr-radio-card-accent: var(--bulma-primary, #00d1b2);
+        --bbr-radio-card-accent-light: var(--bulma-primary-light, #ebfffc);
+    }
+
+    &--link {
+        --bbr-radio-card-accent: var(--bulma-link, #485fc7);
+        --bbr-radio-card-accent-light: var(--bulma-link-light, #eff1fa);
+    }
+
+    &--info {
+        --bbr-radio-card-accent: var(--bulma-info, #3e8ed0);
+        --bbr-radio-card-accent-light: var(--bulma-info-light, #eef6fc);
+    }
+
+    &--success {
+        --bbr-radio-card-accent: var(--bulma-success, #48c78e);
+        --bbr-radio-card-accent-light: var(--bulma-success-light, #effaf5);
+    }
+
+    &--warning {
+        --bbr-radio-card-accent: var(--bulma-warning, #ffe08a);
+        --bbr-radio-card-accent-light: var(--bulma-warning-light, #fffaeb);
+    }
+
+    &--danger {
+        --bbr-radio-card-accent: var(--bulma-danger, #f14668);
+        --bbr-radio-card-accent-light: var(--bulma-danger-light, #feecf0);
+    }
+}
+
+.bbr-radio-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+
+    background-color: $white;
+    border: 1px solid $grey-lighter;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+
+    &:hover:not(.is-disabled) {
+        border-color: $grey-light;
+    }
+
+    // Hidden radio input keeps keyboard navigation and screen readers working
+    &:focus-within {
+        box-shadow: 0 0 0 1px var(--bbr-radio-card-accent, $primary);
+    }
+
+    &.is-selected {
+        border-color: var(--bbr-radio-card-accent, $primary);
+        background-color: var(--bbr-radio-card-accent-light, $primary-light);
+
+        .bbr-radio-card__label {
+            color: var(--bbr-radio-card-accent, $primary);
+        }
+    }
+
+    &.is-disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &__input {
+        position: absolute;
+        width: 0;
+        height: 0;
+        margin: 0;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &__icon {
+        display: inline-flex;
+        font-size: 1.5em;
+        color: var(--bbr-radio-card-accent, $primary);
+    }
+
+    &__label {
+        font-weight: 600;
+        color: $text-strong;
+    }
+
+    &__description {
+        font-size: 0.85em;
+        line-height: 1.4;
+        color: $grey;
+    }
+}
