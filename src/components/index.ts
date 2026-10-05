@@ -195,3 +195,6 @@ export * from "./toggleButtonGroup";
 
 export { default as RadioCardGroup } from "./radioCardGroup";
 export * from "./radioCardGroup";
+
+export { default as DropdownMenu } from "./dropdownMenu";
+export * from "./dropdownMenu";

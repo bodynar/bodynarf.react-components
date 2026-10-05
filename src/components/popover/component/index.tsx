@@ -19,6 +19,7 @@ const Popover: FC<PopoverProps> & {
 } = ({
     children,
     position = PopoverPosition.Bottom,
+    hideOnOuterClick = true,
     visible: controlledVisible,
     onToggle,
 
@@ -46,7 +47,7 @@ const Popover: FC<PopoverProps> & {
             onToggle?.(false);
         }, [isControlled, onToggle]);
 
-        useComponentOutsideClick(`#popover-${id.replace(/:/g, "")}`, isControlled ? controlledVisible! : internalVisible, close, true);
+        useComponentOutsideClick(`#popover-${id.replace(/:/g, "")}`, isControlled ? controlledVisible! : internalVisible, close, hideOnOuterClick);
 
         const visible = isControlled ? controlledVisible! : internalVisible;
         const wrapperId = `popover-${id.replace(/:/g, "")}`;

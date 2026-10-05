@@ -1,17 +1,16 @@
-import { FC, useCallback, useId, useRef, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 
 import { getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { ElementPosition, ElementSize } from "@bbr/types";
 import { getSizeClassName, mapDataAttributes, shouldOpenUpward } from "@bbr/utils";
-import { useComponentOutsideClick } from "@bbr/hooks";
 import Icon from "@bbr/components/icon";
+import DropdownMenu, { DropdownMenuItem } from "@bbr/components/dropdownMenu";
+import { PopoverPosition } from "@bbr/components/popover";
 
 import "./style.scss";
 
 import { SplitButtonAction, SplitButtonProps } from "..";
-
-import DropdownActionItem from "../components/dropdownActionItem";
 
 /** Split button with dropdown of alternative actions */
 const SplitButton: FC<SplitButtonProps> = ({
@@ -30,30 +29,14 @@ const SplitButton: FC<SplitButtonProps> = ({
 
     className, title, data,
 }) => {
-    const [isOpen, setIsOpen] = useState(false);
     const [isOpenUp, setIsOpenUp] = useState(false);
-    const id = useId();
     const containerRef = useRef<HTMLDivElement>(null);
 
-    const onToggleClick = useCallback(() => {
-        if (disabled || isLoading) {
-            return;
+    const onMenuToggle = useCallback((next: boolean) => {
+        if (next && containerRef.current) {
+            setIsOpenUp(shouldOpenUpward(containerRef.current, actions.length));
         }
-
-        if (containerRef.current) {
-            const openUp = shouldOpenUpward(containerRef.current, actions.length);
-            setIsOpenUp(openUp);
-        }
-
-        setIsOpen(state => !state);
-    }, [disabled, isLoading, actions.length]);
-
-    const onActionClick = useCallback(
-        (action: SplitButtonAction) => {
-            action.onClick();
-            setIsOpen(false);
-        }, []
-    );
+    }, [actions.length]);
 
     const onPrimaryClick = useCallback(() => {
         if (disabled || isLoading) {
@@ -63,11 +46,14 @@ const SplitButton: FC<SplitButtonProps> = ({
         onClick();
     }, [disabled, isLoading, onClick]);
 
-    useComponentOutsideClick(
-        `[data-split-button-id="${id}"]`, isOpen,
-        () => setIsOpen(false),
-        hideOnOuterClick,
-    );
+    const menuItems: DropdownMenuItem[] = actions.map((action: SplitButtonAction) => ({
+        key: action.id,
+        label: action.caption,
+        icon: action.icon,
+        title: action.title,
+        disabled: action.disabled,
+        onClick: action.onClick,
+    }) as DropdownMenuItem);
 
     const sizeClass = getSizeClassName(size);
 
@@ -96,9 +82,6 @@ const SplitButton: FC<SplitButtonProps> = ({
     const containerClassName = getClassName([
         "bbr-split-button",
         className,
-        isOpen ? "is-active" : "",
-        isOpenUp ? "is-up" : "",
-        "dropdown",
     ]);
 
     const dataAttributes = mapDataAttributes(data);
@@ -115,7 +98,6 @@ const SplitButton: FC<SplitButtonProps> = ({
 
             title={title}
             ref={containerRef}
-            data-split-button-id={id}
             className={containerClassName}
         >
             <div className="bbr-split-button__buttons">
@@ -143,30 +125,30 @@ const SplitButton: FC<SplitButtonProps> = ({
                         />
                     )}
                 </button>
-                <button
-                    type="button"
-                    disabled={disabled}
-                    onClick={onToggleClick}
-                    className={toggleClassName}
-                >
-                    <Icon
-                        size={iconSize}
-                        name="chevron-down"
-                    />
-                </button>
-            </div>
 
-            <div className="dropdown-menu bbr-split-button__menu">
-                <div className="dropdown-content">
-                    {actions.map((action: SplitButtonAction) => (
-                        <DropdownActionItem
-                            key={action.id}
+                <DropdownMenu
 
-                            action={action}
-                            onClick={onActionClick}
-                        />
-                    ))}
-                </div>
+                    items={menuItems}
+                    disabled={disabled || isLoading}
+
+                    onToggle={onMenuToggle}
+                    hideOnOuterClick={hideOnOuterClick}
+
+                    position={isOpenUp ? PopoverPosition.Top : PopoverPosition.Bottom}
+
+                    trigger={
+                        <button
+                            type="button"
+                            disabled={disabled}
+                            className={toggleClassName}
+                        >
+                            <Icon
+                                size={iconSize}
+                                name="chevron-down"
+                            />
+                        </button>
+                    }
+                />
             </div>
         </div>
     );
