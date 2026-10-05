@@ -1,8 +1,9 @@
-import { BaseElementProps, ElementColor, ElementSize } from "@bbr/types";
+import { BaseElementProps, ElementColor, SizableElement } from "@bbr/types";
 
 /** Progress component props */
 export type ProgressProps =
     & BaseElementProps
+    & SizableElement
     & {
         /** Current progress value (0-100) */
         value?: number;
@@ -12,9 +13,6 @@ export type ProgressProps =
 
         /** Minimum value (0 by default) */
         min?: number;
-
-        /** Element size */
-        size?: ElementSize;
 
         /** Element color */
         color?: ElementColor;

@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementColor, ElementSize } from "@bbr/types";
+import { BaseElementProps, DisableableElement, SizableElement, StylableElement } from "@bbr/types";
 
 /** Single radio item */
 export interface RadioItem {
@@ -19,59 +19,55 @@ export interface RadioItem {
 }
 
 /** RadioGroup component props type */
-export type RadioGroupProps = BaseElementProps & {
-    /** Radio items to display */
-    items: Array<RadioItem>;
+export type RadioGroupProps =
+    & BaseElementProps
+    & SizableElement
+    & StylableElement
+    & DisableableElement
+    & {
+        /** Radio items to display */
+        items: Array<RadioItem>;
 
-    /** Currently selected item id */
-    value?: string;
+        /** Currently selected item id */
+        value?: string;
 
-    /** Name attribute for all radio inputs in the group */
-    name?: string;
+        /** Name attribute for all radio inputs in the group */
+        name?: string;
 
-    /** Component size */
-    size?: ElementSize;
+        /**
+         * Display radio buttons in a row (horizontal).
+         * @default false (vertical)
+         */
+        horizontal?: boolean;
 
-    /** Style. Colors the radio buttons */
-    style?: ElementColor;
+        /**
+         * Is full colored radio (filled background).
+         * @default false
+         */
+        block?: boolean;
 
-    /** Is component disabled */
-    disabled?: boolean;
+        /**
+         * Display radio with circle style.
+         * @default true
+         */
+        circle?: boolean;
 
-    /**
-     * Display radio buttons in a row (horizontal).
-     * @default false (vertical)
-     */
-    horizontal?: boolean;
+        /**
+         * Remove the radio border.
+         * @default false
+         */
+        withoutBorder?: boolean;
 
-    /**
-     * Is full colored radio (filled background).
-     * @default false
-     */
-    block?: boolean;
+        /**
+         * Radio has background color.
+         * Only works if style is set.
+         * @default false
+         */
+        hasBackgroundColor?: boolean;
 
-    /**
-     * Display radio with circle style.
-     * @default true
-     */
-    circle?: boolean;
-
-    /**
-     * Remove the radio border.
-     * @default false
-     */
-    withoutBorder?: boolean;
-
-    /**
-     * Radio has background color.
-     * Only works if style is set.
-     * @default false
-     */
-    hasBackgroundColor?: boolean;
-
-    /**
-     * Handler of selection change
-     * @param item Selected item
-     */
-    onValueChange?: (item: RadioItem) => void;
-};
+        /**
+         * Handler of selection change
+         * @param item Selected item
+         */
+        onValueChange?: (item: RadioItem) => void;
+    };

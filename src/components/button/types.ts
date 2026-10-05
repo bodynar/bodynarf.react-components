@@ -1,4 +1,14 @@
-import { BaseElementProps, ButtonStyle, ClickableElement, ElementIcon, ElementSize } from "@bbr/types";
+import {
+    BaseElementProps,
+    ButtonStyle,
+    ClickableElement,
+    DisableableElement,
+    ElementIcon,
+    ElementWithIcon,
+    OutlinedElement,
+    RoundedElement,
+    SizableElement,
+} from "@bbr/types";
 
 // The enum lives in @bbr/types since v1.16; re-exported to keep the old import path working
 export { ButtonStyle };
@@ -6,6 +16,11 @@ export { ButtonStyle };
 export type ButtonProps =
     & BaseElementProps
     & ClickableElement
+    & ElementWithIcon
+    & SizableElement
+    & OutlinedElement
+    & RoundedElement
+    & DisableableElement
     & {
         /** Style */
         style: ButtonStyle;
@@ -19,26 +34,11 @@ export type ButtonProps =
          */
         type?: ButtonType;
 
-        /** Configuration of inner icon */
-        icon?: ElementIcon;
-
-        /** Button size  */
-        size?: ElementSize;
-
         /** Is button uses light version of color  */
         light?: boolean;
 
-        /** Is button outlined */
-        outlined?: boolean;
-
-        /** Should button corners be rounded  */
-        rounded?: boolean;
-
         /** Display loading icon */
         isLoading?: boolean;
-
-        /** Is button disabled */
-        disabled?: boolean;
 
         /** Is non-interactive button */
         static?: boolean;

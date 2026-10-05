@@ -1,58 +1,54 @@
-import { BaseElementProps, ElementSize } from "@bbr/types";
+import { BaseElementProps, DisableableElement, RoundedElement, SizableElement } from "@bbr/types";
 
 /** Search component props type */
-export type SearchProps = BaseElementProps & {
-    /**
-     * Search type: by typing, starts from minimum characters to search
-     * or by clicking on button next to search bar.
-     * Default `is byTyping`
-    */
-    searchType: "byTyping" | "byButton";
+export type SearchProps =
+    & BaseElementProps
+    & SizableElement
+    & RoundedElement
+    & DisableableElement
+    & {
+        /**
+         * Search type: by typing, starts from minimum characters to search
+         * or by clicking on button next to search bar.
+         * Default `is byTyping`
+        */
+        searchType: "byTyping" | "byButton";
 
-    /** Search caption */
-    caption: string;
+        /** Search caption */
+        caption: string;
 
-    /** Initial search value */
-    defaultValue?: string;
+        /** Initial search value */
+        defaultValue?: string;
 
-    /** Size of search bar */
-    size?: ElementSize;
+        /** Should loading icon be displayed in search bar */
+        isLoading?: boolean;
 
-    /** Should search bar be rounded */
-    rounded?: boolean;
+        /**
+         * Set focus on search field after render
+         *
+         * !NOTE! Only 1 element at page can have this flag
+         */
+        autoFocus?: boolean;
 
-    /** Is search bar disabled */
-    disabled?: boolean;
+        /**
+         * Caption for search button.
+         * Visible only in `searchType = "byButton"`
+         * @default "Search"
+         */
+        searchButtonCaption?: string;
 
-    /** Should loading icon be displayed in search bar */
-    isLoading?: boolean;
+        /**
+         * Title for search button.
+         * Visible only in `searchType = "byButton"`
+         */
+        searchButtonTitle?: string;
 
-    /**
-     * Set focus on search field after render
-     *
-     * !NOTE! Only 1 element at page can have this flag
-     */
-    autoFocus?: boolean;
+        /**
+         * Should search icon (magnifying glass) be displayed
+         * @default false
+         */
+        showIcon?: boolean;
 
-    /**
-     * Caption for search button.
-     * Visible only in `searchType = "byButton"`
-     * @default "Search"
-     */
-    searchButtonCaption?: string;
-
-    /**
-     * Title for search button.
-     * Visible only in `searchType = "byButton"`
-     */
-    searchButtonTitle?: string;
-
-    /**
-     * Should search icon (magnifying glass) be displayed
-     * @default false
-     */
-    showIcon?: boolean;
-
-    /** Search handler */
-    onSearch: (searchPattern: string) => void;
-};
+        /** Search handler */
+        onSearch: (searchPattern: string) => void;
+    };

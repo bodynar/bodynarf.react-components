@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementSize } from "@bbr/types";
+import { BaseElementProps, SizableElement } from "@bbr/types";
 
 /** Shared skeleton base props */
 type SkeletonBaseProps = BaseElementProps;
@@ -29,13 +29,7 @@ export type SkeletonTextProps = SkeletonBaseProps & {
 };
 
 /** Props for the Skeleton.Avatar variant — circular or square placeholder */
-export type SkeletonAvatarProps = SkeletonBaseProps & {
-    /**
-     * Avatar size (maps to common avatar dimensions).
-     * @default ElementSize.Normal
-     */
-    size?: ElementSize;
-
+export type SkeletonAvatarProps = SkeletonBaseProps & SizableElement & {
     /**
      * Render as a square instead of a circle.
      * @default false
@@ -44,13 +38,7 @@ export type SkeletonAvatarProps = SkeletonBaseProps & {
 };
 
 /** Props for the Skeleton.Button variant — button-shaped placeholder */
-export type SkeletonButtonProps = SkeletonBaseProps & {
-    /**
-     * Button size.
-     * @default ElementSize.Normal
-     */
-    size?: ElementSize;
-
+export type SkeletonButtonProps = SkeletonBaseProps & SizableElement & {
     /** Explicit width (CSS value). Overrides size-based width. */
     width?: string;
 };

@@ -1,9 +1,10 @@
-import { BaseElementProps, ClickableElement, ElementSize } from "@bbr/types";
+import { BaseElementProps, ClickableElement, SizableElement } from "@bbr/types";
 
 /** Icon component props */
 export type IconProps =
     & BaseElementProps
     & ClickableElement
+    & SizableElement
     & {
         /**
          * Icon name. Must be without `bi-`
@@ -12,7 +13,4 @@ export type IconProps =
          * // For class name check bootstrap icons website
         */
         name: string;
-
-        /** Icon size */
-        size?: ElementSize;
     };

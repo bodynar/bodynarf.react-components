@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementIcon, ElementPosition, ElementSize } from "@bbr/types";
+import { BaseElementProps, ElementIcon, ElementPosition, SizableElement } from "@bbr/types";
 
 /** Tabs component style */
 export enum TabsStyle {
@@ -38,7 +38,7 @@ export interface TabItem {
 }
 
 /** Tabs component props type */
-export interface TabsProps extends BaseElementProps {
+export interface TabsProps extends BaseElementProps, SizableElement {
     /** Tabs */
     items: Array<TabItem>;
 
@@ -47,12 +47,6 @@ export interface TabsProps extends BaseElementProps {
      * If not set - first item will be active
      */
     defaultActive?: TabItem;
-
-    /**
-     * Component size.
-     * Default is `normal`
-     */
-    size?: ElementSize;
 
     /** Component position */
     position?: ElementPosition;

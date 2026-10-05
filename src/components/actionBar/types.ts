@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { BaseElementProps, ElementSize, FloatPosition } from "@bbr/types";
+import { BaseElementProps, FloatPosition, SizableElement } from "@bbr/types";
 import { ButtonProps } from "@bbr/components/button";
 
 /**
@@ -23,34 +23,31 @@ export type ActionBarAction =
     & Partial<Pick<ButtonProps, "style">>;
 
 /** Floating action bar props. */
-export type ActionBarProps = BaseElementProps & {
-    /**
-     * Is the panel visible.
-     * Hidden panel is not unmounted, so the exit transition is played.
-     */
-    open: boolean;
+export type ActionBarProps =
+    & BaseElementProps
+    & SizableElement
+    & {
+        /**
+         * Is the panel visible.
+         * Hidden panel is not unmounted, so the exit transition is played.
+         */
+        open: boolean;
 
-    /** Actions displayed after the separator. */
-    actions: ActionBarAction[];
+        /** Actions displayed after the separator. */
+        actions: ActionBarAction[];
 
-    /** Left part of the panel, e.g. `5 items selected`. */
-    content?: ReactNode;
+        /** Left part of the panel, e.g. `5 items selected`. */
+        content?: ReactNode;
 
-    /** Show the close (×) button. Defaults to `true`. */
-    closable?: boolean;
+        /** Show the close (×) button. Defaults to `true`. */
+        closable?: boolean;
 
-    /**
-     * Panel size — single size applied to the panel and every action button.
-     * @default ElementSize.Normal
-     */
-    size?: ElementSize;
+        /** Screen edge to pin the panel to. Defaults to `bottom`. */
+        position?: ActionBarPosition;
 
-    /** Screen edge to pin the panel to. Defaults to `bottom`. */
-    position?: ActionBarPosition;
-
-    /**
-     * Called when the close (×) button is clicked.
-     * The button is rendered only when {@link ActionBarProps.closable} is `true`.
-     */
-    onClose?: () => void;
-};
+        /**
+         * Called when the close (×) button is clicked.
+         * The button is rendered only when {@link ActionBarProps.closable} is `true`.
+         */
+        onClose?: () => void;
+    };

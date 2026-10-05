@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementColor, ElementSize } from "@bbr/types";
+import { BaseElementProps, DisableableElement, ElementColor, ElementSize } from "@bbr/types";
 
 /** A single option in the segmented control */
 export type SegmentedOption<T extends string = string> = {
@@ -16,37 +16,34 @@ export type SegmentedOption<T extends string = string> = {
 };
 
 /** SegmentedControl component props */
-export type SegmentedControlProps<T extends string = string> = BaseElementProps & {
-    /** Available options */
-    options: SegmentedOption<T>[];
+export type SegmentedControlProps<T extends string = string> =
+    & BaseElementProps
+    & DisableableElement
+    & {
+        /** Available options */
+        options: SegmentedOption<T>[];
 
-    /** Currently selected value */
-    value: T;
+        /** Currently selected value */
+        value: T;
 
-    /**
-     * Size variant.
-     * @default ElementSize.Normal
-     */
-    size?: ElementSize.Small | ElementSize.Normal | ElementSize.Medium | ElementSize.Large;
+        /**
+         * Size variant.
+         * @default ElementSize.Normal
+         */
+        size?: ElementSize.Small | ElementSize.Normal | ElementSize.Medium | ElementSize.Large;
 
-    /**
-     * Accent colour applied to the active segment.
-     * @default ElementColor.Primary
-     */
-    color?: ElementColor;
+        /**
+         * Accent colour applied to the active segment.
+         * @default ElementColor.Primary
+         */
+        color?: ElementColor;
 
-    /**
-     * Stretch to fill the full container width.
-     * @default false
-     */
-    fullWidth?: boolean;
+        /**
+         * Stretch to fill the full container width.
+         * @default false
+         */
+        fullWidth?: boolean;
 
-    /**
-     * Disable all options globally.
-     * @default false
-     */
-    disabled?: boolean;
-
-    /** Called when the user selects a different option */
-    onChange: (value: T) => void;
-};
+        /** Called when the user selects a different option */
+        onChange: (value: T) => void;
+    };

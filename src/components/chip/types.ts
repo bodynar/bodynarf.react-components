@@ -1,9 +1,11 @@
-import { BaseElementProps, ClickableElement, ElementColor, ElementSize } from "@bbr/types";
+import { BaseElementProps, ClickableElement, ElementSize, RoundedElement, StylableElement } from "@bbr/types";
 
 /** Chip item prop types */
 export type ChipProps =
     & BaseElementProps
     & ClickableElement
+    & StylableElement
+    & RoundedElement
     & {
         /** Chip content */
         content: string;
@@ -13,12 +15,6 @@ export type ChipProps =
          * `Small` isn't allowed
         */
         size?: Exclude<ElementSize, ElementSize.Small>;
-
-        /** Element color */
-        style?: ElementColor;
-
-        /** Is element with rounded border */
-        rounded?: boolean;
 
         /** Is element has light color */
         lightColor?: boolean;

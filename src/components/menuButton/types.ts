@@ -1,6 +1,13 @@
 import { ActionFn } from "@bodynarf/utils";
 
-import { BaseElementProps, ElementIcon, ElementSize } from "@bbr/types";
+import {
+    BaseElementProps,
+    DisableableElement,
+    ElementIcon,
+    OutlinedElement,
+    RoundedElement,
+    SizableElement,
+} from "@bbr/types";
 
 import { ButtonStyle } from "@bbr/components/button";
 
@@ -40,15 +47,16 @@ export type MenuButtonEntry = MenuButtonAction | MenuButtonDivider;
 /** MenuButton component props type */
 export type MenuButtonProps =
     & BaseElementProps
+    & SizableElement
+    & OutlinedElement
+    & RoundedElement
+    & DisableableElement
     & {
         /** Style */
         style: ButtonStyle;
 
         /** Actions displayed in dropdown. Must contain at least 1 item */
         actions: [MenuButtonEntry, ...MenuButtonEntry[]];
-
-        /** Button size */
-        size?: ElementSize;
 
         /**
          * Icon to display inside the toggle button.
@@ -58,15 +66,6 @@ export type MenuButtonProps =
 
         /** Is button uses light version of color */
         light?: boolean;
-
-        /** Is button outlined */
-        outlined?: boolean;
-
-        /** Should button corners be rounded */
-        rounded?: boolean;
-
-        /** Is button disabled */
-        disabled?: boolean;
 
         /** Hide dropdown on outside click. Default is true */
         hideOnOuterClick?: boolean;
