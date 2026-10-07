@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementColor, ElementSize } from "@bbr/types";
+import { BaseElementProps, ElementColor, SizableElement } from "@bbr/types";
 
 /** Single step item */
 export interface StepItem {
@@ -22,60 +22,68 @@ export interface StepItem {
 export type StepStatus = "completed" | "current" | "upcoming";
 
 /** Stepper component props */
-export type StepperProps = BaseElementProps & {
-    /** Array of steps to display */
-    steps: Array<StepItem>;
+export type StepperProps =
+    & BaseElementProps
+    & SizableElement
+    & {
+        /** Array of steps to display */
+        steps: Array<StepItem>;
 
-    /** Currently active step id */
-    currentStep: string;
+        /** Currently active step id */
+        currentStep: string;
 
-    /** Component size */
-    size?: ElementSize;
+        /** Component color for completed/active steps */
+        color?: ElementColor;
 
-    /** Component color for completed/active steps */
-    color?: ElementColor;
+        /**
+         * Display stepper vertically.
+         * @default false
+         */
+        vertical?: boolean;
 
-    /**
-     * Display stepper vertically.
-     * @default false
-     */
-    vertical?: boolean;
+        /**
+         * Show step numbers instead of icons.
+         * @default true
+         */
+        showNumbers?: boolean;
 
-    /**
-     * Show step numbers instead of icons.
-     * @default true
-     */
-    showNumbers?: boolean;
+        /**
+         * Allow clicking on completed steps to navigate back.
+         * @default false
+         */
+        clickable?: boolean;
 
-    /**
-     * Allow clicking on completed steps to navigate back.
-     * @default false
-     */
-    clickable?: boolean;
+        /**
+         * Show connector lines between steps.
+         * @default true
+         */
+        showConnectors?: boolean;
 
-    /**
-     * Show connector lines between steps.
-     * @default true
-     */
-    showConnectors?: boolean;
+        /**
+         * Use animated connectors for completed steps.
+         * @default false
+         */
+        animated?: boolean;
 
-    /**
-     * Use animated connectors for completed steps.
-     * @default false
-     */
-    animated?: boolean;
+        /**
+         * Show arrow connectors (line with arrowhead) between steps.
+         * When enabled, replaces regular connectors with arrow-style connectors.
+         * @default false
+         */
+        showArrows?: boolean;
 
-    /**
-     * Show arrow connectors (line with arrowhead) between steps.
-     * When enabled, replaces regular connectors with arrow-style connectors.
-     * @default false
-     */
-    showArrows?: boolean;
+        /**
+         * Display variant.
+         * - `default` — circles connected by lines.
+         * - `panel` — full-width attached chevron/flag steps.
+         * @default "default"
+         */
+        variant?: "default" | "panel";
 
-    /**
-     * Handler when a step is clicked (only works with clickable=true).
-     * @param step The clicked step
-     * @param index Step index
-     */
-    onStepClick?: (step: StepItem, index: number) => void;
-};
+        /**
+         * Handler when a step is clicked (only works with clickable=true).
+         * @param step The clicked step
+         * @param index Step index
+         */
+        onStepClick?: (step: StepItem, index: number) => void;
+    };

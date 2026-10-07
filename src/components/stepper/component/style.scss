@@ -52,6 +52,16 @@ $stepper-title-upcoming-color: $grey !default;
 
 $stepper-description-color: $grey !default;
 
+// Light/dark shades for panel variant steps (Bulma 0.9.4 fallback values)
+$panel-colors: (
+    "primary": (var(--bulma-primary-light, #ebfffc), var(--bulma-primary-dark, #00947e)),
+    "link": (var(--bulma-link-light, #eff1fa), var(--bulma-link-dark, #3850b7)),
+    "info": (var(--bulma-info-light, #eff5fb), var(--bulma-info-dark, #296fa8)),
+    "success": (var(--bulma-success-light, #effaf5), var(--bulma-success-dark, #257953)),
+    "warning": (var(--bulma-warning-light, #fffaeb), var(--bulma-warning-dark, #946c00)),
+    "danger": (var(--bulma-danger-light, #feecf0), var(--bulma-danger-dark, #cc0f35))
+);
+
 // Animation
 @keyframes stepper-connector-fill {
     from {
@@ -76,6 +86,10 @@ $stepper-description-color: $grey !default;
             flex-direction: row;
             align-items: flex-start;
             width: 100%;
+
+            // reset the horizontal-mode side paddings, so every
+            // step is left-aligned the same way
+            padding: 0;
             padding-bottom: 1.5rem;
 
             &:last-child {
@@ -451,6 +465,103 @@ $stepper-description-color: $grey !default;
             }
 
             animation: stepper-connector-fill-vertical 0.5s ease forwards;
+        }
+    }
+
+    // Panel variant — full-width attached chevron/flag steps
+    &.bbr-stepper--panel {
+        align-items: stretch;
+
+        .bbr-stepper-step {
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.5rem 0.5rem 1.75rem;
+
+            // slight gap between the flags (~6px) instead of a full overlap
+            margin-left: -0.5rem;
+            background: $grey-lighter;
+            color: $grey-dark;
+            clip-path: polygon(0 0, calc(100% - 0.9rem) 0, 100% 50%, calc(100% - 0.9rem) 100%, 0 100%, 0.9rem 50%);
+            transition: background 0.2s ease, color 0.2s ease;
+
+            &:first-child {
+                margin-left: 0;
+                padding-left: 1rem;
+                clip-path: polygon(0 0, calc(100% - 0.9rem) 0, 100% 50%, calc(100% - 0.9rem) 100%, 0 100%);
+            }
+
+            &:last-child {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0.9rem 50%);
+            }
+
+            // chevron shape replaces the default connector
+            .bbr-stepper-connector {
+                display: none;
+            }
+
+            // marker becomes a plain inline label
+            .bbr-stepper-marker {
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                font-weight: 700;
+
+                // no explicit width/height: content-sized box bounded
+                // by min/max and kept proportional, so the glyph
+                // neither squeezes nor stretches
+                width: auto;
+                height: auto;
+                min-width: 1.5em;
+                max-width: 2.5em;
+                aspect-ratio: 1;
+
+                // don't let long titles squeeze the icon
+                flex-shrink: 0;
+
+                .bbr-stepper-icon,
+                .bbr-stepper-number {
+                    display: inline-flex;
+                }
+            }
+
+            .bbr-stepper-content {
+                margin-top: 0;
+                text-align: left;
+                min-width: 0;
+            }
+
+            &.is-completed {
+                .bbr-stepper-title {
+                    font-weight: 500;
+                }
+            }
+
+            &.is-current {
+                .bbr-stepper-title {
+                    font-weight: 700;
+                }
+            }
+
+            &.is-upcoming {
+                background: $grey-lighter;
+                color: $grey;
+            }
+        }
+
+        // color variations for panel steps: light tint background
+        // with a dark shade text keeps the labels readable
+        @each $name, $pair in $panel-colors {
+            $color-light: list.nth($pair, 1);
+            $color-dark: list.nth($pair, 2);
+
+            &.is-#{$name} {
+                .bbr-stepper-step.is-completed,
+                .bbr-stepper-step.is-current {
+                    background: $color-light;
+                    color: $color-dark;
+                }
+            }
         }
     }
 }

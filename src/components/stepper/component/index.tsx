@@ -42,6 +42,7 @@ const Stepper: FC<StepperProps> = ({
     showConnectors = true,
     animated = false,
     showArrows = false,
+    variant = "default",
     onStepClick,
 
     className,
@@ -56,7 +57,8 @@ const Stepper: FC<StepperProps> = ({
         vertical ? "is-vertical" : "",
         showConnectors === true || showArrows === true ? "has-connectors" : "",
         animated ? "is-animated" : "",
-    ]), [className, size, color, vertical, showConnectors, animated, showArrows]);
+        variant === "panel" ? "bbr-stepper--panel" : "",
+    ]), [className, size, color, vertical, showConnectors, animated, showArrows, variant]);
 
     const handleStepClick = useCallback(
         (step: StepItem, index: number) => {
