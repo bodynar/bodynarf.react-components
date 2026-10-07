@@ -1,8 +1,8 @@
 import { FC } from "react";
 
-import { getClassName } from "@bodynarf/utils";
+import { getClassName, isNotNullish } from "@bodynarf/utils";
 
-import { mapDataAttributes } from "@bbr/utils";
+import { mapDataAttributes, renderControlWithAddons } from "@bbr/utils";
 import InternalHint from "@bbr/internalComponent/hint";
 
 import { AutoCompleteProps } from "../..";
@@ -25,6 +25,7 @@ const AutoCompleteWithoutLabel: FC<AutoCompleteProps> = ({
     hint,
     validationState,
     className, title, data,
+    addonLeft, addonRight,
     ...hookProps
 }) => {
     const {
@@ -48,6 +49,8 @@ const AutoCompleteWithoutLabel: FC<AutoCompleteProps> = ({
 
     const dataAttributes = mapDataAttributes(data);
 
+    const hasAddons = isNotNullish(addonLeft) || isNotNullish(addonRight);
+
     return (
         <div
             {...dataAttributes}
@@ -56,27 +59,32 @@ const AutoCompleteWithoutLabel: FC<AutoCompleteProps> = ({
             ref={containerRef}
             className={getClassName(["bbr-autocomplete", isOpen ? "is-active" : "", className])}
         >
-            <AutoCompleteInputControl
-                size={size}
-                style={style}
-                isOpen={isOpen}
-                rounded={rounded}
-                inputId={inputId}
-                onBlur={handleBlur}
-                disabled={disabled}
-                readonly={readonly}
-                onClear={handleClear}
-                isInvalid={isInvalid}
-                onFocus={openDropdown}
-                clearTitle={clearTitle}
-                inputValue={inputValue}
-                placeholder={placeholder}
-                onKeyDown={handleKeyDown}
-                onChange={handleInputChange}
-                setClearPending={setClearPending}
-                showClearButton={showClearButton}
-                isLoading={isSearching || !!hookProps.loading}
-            />
+            {renderControlWithAddons(
+                <AutoCompleteInputControl
+                    size={size}
+                    style={style}
+                    isOpen={isOpen}
+                    rounded={rounded}
+                    inputId={inputId}
+                    onBlur={handleBlur}
+                    disabled={disabled}
+                    readonly={readonly}
+                    onClear={handleClear}
+                    isInvalid={isInvalid}
+                    onFocus={openDropdown}
+                    isExpanded={hasAddons}
+                    clearTitle={clearTitle}
+                    inputValue={inputValue}
+                    placeholder={placeholder}
+                    onKeyDown={handleKeyDown}
+                    onChange={handleInputChange}
+                    setClearPending={setClearPending}
+                    showClearButton={showClearButton}
+                    isLoading={isSearching || !!hookProps.loading}
+                />,
+                addonLeft,
+                addonRight
+            )}
             {isOpen ? (
                 <AutoCompleteDropdown
                     selectItem={selectItem}

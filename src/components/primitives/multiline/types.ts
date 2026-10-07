@@ -1,4 +1,4 @@
-import { BaseNotNullableInputElementProps, BlurableElement, KeyboardElement } from "@bbr/types";
+import { BaseNotNullableInputElementProps, BlurableElement, ElementWithAddons, KeyboardElement } from "@bbr/types";
 
 /** Multiline textual input component props type */
 export type MultilineProps = Omit<BaseNotNullableInputElementProps<string>, "rounded">
@@ -10,4 +10,5 @@ export type MultilineProps = Omit<BaseNotNullableInputElementProps<string>, "rou
 
         /** Number of initial rows count */
         rows?: number;
-    };
+    }
+    & ElementWithAddons;

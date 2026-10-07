@@ -1,9 +1,9 @@
 import { ChangeEvent, FC, FocusEvent, useCallback } from "react";
 
-import { emptyFn, generateGuid, getClassName, isStringEmpty } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNotNullish, isStringEmpty } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, getStyleClassName, mapDataAttributes, renderControlWithAddons } from "@bbr/utils";
 import InternalHint from "@bbr/internalComponent/hint";
 
 import { NumberProps } from "../..";
@@ -24,6 +24,7 @@ const NumberWithoutLabel: FC<NumberProps> = ({
 
     className, title, data,
     hint,
+    addonLeft, addonRight,
 }) => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLInputElement>) =>
@@ -52,10 +53,13 @@ const NumberWithoutLabel: FC<NumberProps> = ({
         "input",
     ]);
 
+    const hasAddons = isNotNullish(addonLeft) || isNotNullish(addonRight);
+
     const containerClassName = getClassName([
         "control",
         "bbr-input",
         loading ? "is-loading" : "",
+        hasAddons ? "is-expanded" : "",
     ]);
 
     const dataAttributes = mapDataAttributes(data);
@@ -64,27 +68,31 @@ const NumberWithoutLabel: FC<NumberProps> = ({
         <div
             className="bbr-field field"
         >
-            <div className={containerClassName}>
-                <input
-                    {...dataAttributes}
+            {renderControlWithAddons(
+                <div className={containerClassName}>
+                    <input
+                        {...dataAttributes}
 
-                    id={name}
-                    step={step}
-                    name={name}
-                    title={title}
-                    type="number"
-                    onKeyUp={onKeyUp}
-                    onChange={onChange}
-                    readOnly={readonly}
-                    disabled={disabled}
-                    onBlur={onInputBlur}
-                    onKeyDown={onKeyDown}
-                    autoFocus={autoFocus}
-                    className={elClassName}
-                    placeholder={placeholder}
-                    defaultValue={defaultValue}
-                />
-            </div>
+                        id={name}
+                        step={step}
+                        name={name}
+                        title={title}
+                        type="number"
+                        onKeyUp={onKeyUp}
+                        onChange={onChange}
+                        readOnly={readonly}
+                        disabled={disabled}
+                        onBlur={onInputBlur}
+                        onKeyDown={onKeyDown}
+                        autoFocus={autoFocus}
+                        className={elClassName}
+                        placeholder={placeholder}
+                        defaultValue={defaultValue}
+                    />
+                </div>,
+                addonLeft,
+                addonRight
+            )}
             <InternalHint
                 hint={hint}
                 validationState={validationState}

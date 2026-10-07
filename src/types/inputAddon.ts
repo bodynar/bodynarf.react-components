@@ -1,51 +1,46 @@
-import { MouseEventHandler } from "react";
-
-import { ElementColor, ElementIcon } from "@bbr/types";
+import {
+    ClickableElement,
+    DisableableElement,
+    ElementWithIcon,
+    StylableElement,
+} from "@bbr/types";
 
 /** Static, non-interactive text addon attached to an input. */
-export type InputTextAddon = {
-    /** Discriminator for a text addon. */
-    type: "text";
+export type InputTextAddon =
+    & StylableElement
+    & {
+        /** Discriminator for a text addon. */
+        type: "text";
 
-    /** Text shown inside the addon. */
-    content: string;
-
-    /** Optional addon color. */
-    color?: ElementColor;
-};
+        /** Text shown inside the addon. */
+        content: string;
+    };
 
 /** Static, non-interactive icon addon attached to an input. */
-export type InputIconAddon = {
-    /** Discriminator for an icon addon. */
-    type: "icon";
+export type InputIconAddon =
+    & Required<ElementWithIcon>
+    & StylableElement
+    & {
+        /** Discriminator for an icon addon. */
+        type: "icon";
+    };
 
-    /** Icon configuration. */
-    icon: ElementIcon;
+/**
+ * Interactive button addon attached to an input.
+ * `onClick` comes from {@link ClickableElement} and stays required — a button addon must do something
+ */
+export type InputButtonAddon =
+    & ElementWithIcon
+    & DisableableElement
+    & Required<ClickableElement>
+    & StylableElement
+    & {
+        /** Discriminator for a button addon. */
+        type: "button";
 
-    /** Optional addon color. */
-    color?: ElementColor;
-};
-
-/** Interactive button addon attached to an input. */
-export type InputButtonAddon = {
-    /** Discriminator for a button addon. */
-    type: "button";
-
-    /** Button caption. */
-    caption?: string;
-
-    /** Optional button icon. */
-    icon?: ElementIcon;
-
-    /** Button color. */
-    style?: ElementColor;
-
-    /** Whether the button is disabled. */
-    disabled?: boolean;
-
-    /** Click handler (required — a button addon must do something). */
-    onClick: MouseEventHandler<HTMLElement>;
-};
+        /** Button caption. */
+        caption?: string;
+    };
 
 /**
  * Addon that can be attached to the left or right of an input primitive.

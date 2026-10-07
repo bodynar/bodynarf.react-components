@@ -60,7 +60,7 @@ export const renderAddon = (addon: InputAddon): ReactNode => {
     if (addon.type === "icon") {
         return (
             <p className="control">
-                <a className={getClassName(["button", "is-static", getAddonColorClassName(addon.color)])}>
+                <a className={getClassName(["button", "is-static", getAddonColorClassName(addon.style)])}>
                     <Icon
                         name={addon.icon.name}
 
@@ -74,7 +74,7 @@ export const renderAddon = (addon: InputAddon): ReactNode => {
 
     return (
         <p className="control">
-            <a className={getClassName(["button", "is-static", getAddonColorClassName(addon.color)])}>
+            <a className={getClassName(["button", "is-static", getAddonColorClassName(addon.style)])}>
                 {addon.content}
             </a>
         </p>

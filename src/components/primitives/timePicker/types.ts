@@ -1,4 +1,4 @@
-import { BaseNullableInputElementProps, BlurableElement, InputAddon, KeyboardElement } from "@bbr/types";
+import { BaseNullableInputElementProps, BlurableElement, ElementWithAddons, KeyboardElement } from "@bbr/types";
 
 /** Time value representation */
 export interface TimeValue {
@@ -67,10 +67,4 @@ export type TimePickerProps =
         /** Title attribute for the clear button. @default "Clear" */
         clearTitle?: string;
     }
-    & {
-        /** Optional addon rendered before the input. */
-        addonLeft?: InputAddon;
-
-        /** Optional addon rendered after the input. */
-        addonRight?: InputAddon;
-    };
+    & ElementWithAddons;

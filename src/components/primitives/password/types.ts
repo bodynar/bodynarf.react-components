@@ -1,4 +1,4 @@
-import { BaseNotNullableInputElementProps, KeyboardElement } from "@bbr/types";
+import { BaseNotNullableInputElementProps, ElementWithAddons, KeyboardElement } from "@bbr/types";
 
 /** Password component props type */
 export type PasswordProps = Omit<
@@ -18,4 +18,5 @@ export type PasswordProps = Omit<
          * @default "Show password"
          */
         showPasswordIconTitle?: string;
-    };
+    }
+    & ElementWithAddons;

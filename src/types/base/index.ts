@@ -4,6 +4,7 @@ export * from "./blurableElement";
 export * from "./buttonStylableElement";
 export * from "./clickableElement";
 export * from "./disableableElement";
+export * from "./elementWithAddons";
 export * from "./elementWithIcon";
 export * from "./keyboardElement";
 export * from "./labeledElement";

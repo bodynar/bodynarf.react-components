@@ -1,9 +1,9 @@
 import { ChangeEvent, FC, useCallback, useState } from "react";
 
-import { emptyFn, generateGuid, getClassName } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { getStyleClassName, mapDataAttributes, renderControlWithAddons } from "@bbr/utils";
 import Icon from "@bbr/components/icon";
 import InternalHint from "@bbr/internalComponent/hint";
 
@@ -22,6 +22,7 @@ const PasswordWithoutLabel: FC<PasswordProps> = ({
 
     className, title, data,
     hint,
+    addonLeft, addonRight,
 }) => {
     const [contentIsHidden, setContentIsHidden] = useState(true);
 
@@ -42,12 +43,15 @@ const PasswordWithoutLabel: FC<PasswordProps> = ({
         "input",
     ]);
 
+    const hasAddons = isNotNullish(addonLeft) || isNotNullish(addonRight);
+
     const containerClassName = getClassName([
         "control",
         "bbr-input",
         loading ? "is-loading" : "",
         canShowPassword ? "has-icons-right" : "",
         "bbr-password__wrapper",
+        hasAddons ? "is-expanded" : "",
     ]);
 
     const dataAttributes = mapDataAttributes(data);
@@ -56,36 +60,40 @@ const PasswordWithoutLabel: FC<PasswordProps> = ({
         <div
             className="bbr-field field"
         >
-            <div className={containerClassName}>
-                <input
-                    {...dataAttributes}
+            {renderControlWithAddons(
+                <div className={containerClassName}>
+                    <input
+                        {...dataAttributes}
 
-                    id={name}
-                    name={name}
-                    title={title}
-                    onKeyUp={onKeyUp}
-                    disabled={disabled}
-                    onChange={onChange}
-                    onKeyDown={onKeyDown}
-                    autoFocus={autoFocus}
-                    className={elClassName}
-                    placeholder={placeholder}
-                    defaultValue={defaultValue}
-                    type={contentIsHidden ? "password" : "text"}
-                />
-                {!!canShowPassword && !loading &&
-                    <span
-                        onClick={onIconClick}
-                        title={showPasswordIconTitle}
-                        className={`icon is-right ${elSizeClassName}`}
-                    >
-                        <Icon
-                            size={size}
-                            name={contentIsHidden ? "eye" : "eye-slash"}
-                        />
-                    </span>
-                }
-            </div>
+                        id={name}
+                        name={name}
+                        title={title}
+                        onKeyUp={onKeyUp}
+                        disabled={disabled}
+                        onChange={onChange}
+                        onKeyDown={onKeyDown}
+                        autoFocus={autoFocus}
+                        className={elClassName}
+                        placeholder={placeholder}
+                        defaultValue={defaultValue}
+                        type={contentIsHidden ? "password" : "text"}
+                    />
+                    {!!canShowPassword && !loading &&
+                        <span
+                            onClick={onIconClick}
+                            title={showPasswordIconTitle}
+                            className={`icon is-right ${elSizeClassName}`}
+                        >
+                            <Icon
+                                size={size}
+                                name={contentIsHidden ? "eye" : "eye-slash"}
+                            />
+                        </span>
+                    }
+                </div>,
+                addonLeft,
+                addonRight
+            )}
             <InternalHint
                 hint={hint}
                 validationState={validationState}

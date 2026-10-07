@@ -1,8 +1,8 @@
 import { FC } from "react";
 
-import { getClassName } from "@bodynarf/utils";
+import { getClassName, isNotNullish } from "@bodynarf/utils";
 
-import { mapDataAttributes } from "@bbr/utils";
+import { mapDataAttributes, renderControlWithAddons } from "@bbr/utils";
 import InternalHint from "@bbr/internalComponent/hint";
 
 import { AutoCompleteProps } from "../..";
@@ -31,6 +31,7 @@ const AutoCompleteWithLabel: FC<AutoCompleteWithLabelProps> = ({
     hint,
     validationState,
     className, title, data,
+    addonLeft, addonRight,
     ...hookProps
 }) => {
     const {
@@ -54,7 +55,9 @@ const AutoCompleteWithLabel: FC<AutoCompleteWithLabelProps> = ({
 
     const dataAttributes = mapDataAttributes(data);
 
-    const inputControl = (
+    const hasAddons = isNotNullish(addonLeft) || isNotNullish(addonRight);
+
+    const inputControl = renderControlWithAddons(
         <AutoCompleteInputControl
             size={size}
             style={style}
@@ -67,6 +70,7 @@ const AutoCompleteWithLabel: FC<AutoCompleteWithLabelProps> = ({
             onClear={handleClear}
             isInvalid={isInvalid}
             onFocus={openDropdown}
+            isExpanded={hasAddons}
             clearTitle={clearTitle}
             inputValue={inputValue}
             onKeyDown={handleKeyDown}
@@ -75,7 +79,9 @@ const AutoCompleteWithLabel: FC<AutoCompleteWithLabelProps> = ({
             showClearButton={showClearButton}
             setClearPending={setClearPending}
             isLoading={isSearching || !!hookProps.loading}
-        />
+        />,
+        addonLeft,
+        addonRight
     );
 
     const dropdown = isOpen ? (
