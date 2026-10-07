@@ -210,3 +210,6 @@ export * from "./floatButton";
 
 export { default as ButtonGroup } from "./buttonGroup";
 export * from "./buttonGroup";
+
+export { default as TableOfContents } from "./tableOfContents";
+export * from "./tableOfContents";
