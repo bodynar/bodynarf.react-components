@@ -204,3 +204,6 @@ export * from "./avatarGroup";
 
 export { default as CircularMeter } from "./circularMeter";
 export * from "./circularMeter";
+
+export { default as FloatButton } from "./floatButton";
+export * from "./floatButton";
