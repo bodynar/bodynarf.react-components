@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { Children, FC, isValidElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 import { emptyFn, getClassName, isNotNullish } from "@bodynarf/utils";
 
@@ -8,7 +8,8 @@ import Icon from "@bbr/components/icon";
 
 import "./style.scss";
 
-import { AccordionProps } from "..";
+import { AccordionHeaderProps, AccordionProps } from "..";
+import AccordionHeader from "../components/header";
 
 /** Accordion panel */
 const Accordion: FC<AccordionProps> = ({
@@ -47,6 +48,14 @@ const Accordion: FC<AccordionProps> = ({
 
     const dataAttributes = mapDataAttributes(data);
 
+    let headerContent: ReactNode = null;
+
+    Children.forEach(children, child => {
+        if (isValidElement(child) && child.type === AccordionHeader) {
+            headerContent = (child.props as AccordionHeaderProps).children;
+        }
+    });
+
     return (
         <article
             {...dataAttributes}
@@ -59,7 +68,7 @@ const Accordion: FC<AccordionProps> = ({
                 className="message-header is-unselectable"
             >
                 <span title={title}>
-                    {caption}
+                    {headerContent ?? caption}
                 </span>
                 <Icon
                     size={size}
