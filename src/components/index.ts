@@ -207,3 +207,6 @@ export * from "./circularMeter";
 
 export { default as FloatButton } from "./floatButton";
 export * from "./floatButton";
+
+export { default as ButtonGroup } from "./buttonGroup";
+export * from "./buttonGroup";
