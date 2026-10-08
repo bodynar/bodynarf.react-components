@@ -3,7 +3,6 @@ import { FC, useState } from "react";
 import Calendar, { CalendarProps } from "@bodynarf/react.components/components/calendar";
 import { ElementColor, ElementSize } from "@bodynarf/react.components";
 
-import { ButtonStyle } from "@bodynarf/react.components/components/button";
 
 /**
  * Wrapper that owns the selected-date state so each demo is independently interactive.
@@ -153,8 +152,8 @@ Sizes
                                 <CalendarDemo
                                     size={size}
                                     initialValue={new Date(2026, 3, 10)}
-                                    todayButtonConfig={{ style: ButtonStyle.Default, caption: "Today" }}
-                                    clearButtonConfig={{ style: ButtonStyle.Default, caption: "Clear" }}
+                                    todayButtonConfig={{ caption: "Today" }}
+                                    clearButtonConfig={{ caption: "Clear" }}
                                 />
                             </div>
                         ))}
@@ -206,13 +205,13 @@ Today button
                             <p className="is-size-7 has-text-grey mb-2">
 Default label ("Today")
                             </p>
-                            <CalendarDemo todayButtonConfig={{ style: ButtonStyle.Default, caption: "Today" }} />
+                            <CalendarDemo todayButtonConfig={{ caption: "Today" }} />
                         </div>
                         <div>
                             <p className="is-size-7 has-text-grey mb-2">
 Custom label
                             </p>
-                            <CalendarDemo todayButtonConfig={{ style: ButtonStyle.Default, caption: "Go to today" }} />
+                            <CalendarDemo todayButtonConfig={{ caption: "Go to today" }} />
                         </div>
                         <div>
                             <p className="is-size-7 has-text-grey mb-2">
@@ -220,7 +219,7 @@ Russian label
                             </p>
                             <CalendarDemo
                                 locale="ru-RU"
-                                todayButtonConfig={{ style: ButtonStyle.Default, caption: "Сегодня" }}
+                                todayButtonConfig={{ caption: "Сегодня" }}
                             />
                         </div>
                     </div>
@@ -243,7 +242,7 @@ Clear only
                                 
                               showValue
                               initialValue={new Date(2026, 3, 10)}
-                              clearButtonConfig={{ style: ButtonStyle.Default, caption: "Clear" }}
+                              clearButtonConfig={{ caption: "Clear" }}
                             
                             />
                         </div>
@@ -255,8 +254,8 @@ Clear + Today
                                 
                               showValue
                               initialValue={new Date(2026, 3, 10)}
-                              clearButtonConfig={{ style: ButtonStyle.Default, caption: "Clear" }}
-                              todayButtonConfig={{ style: ButtonStyle.Default, caption: "Today" }}
+                              clearButtonConfig={{ caption: "Clear" }}
+                              todayButtonConfig={{ caption: "Today" }}
                             
                             />
                         </div>
@@ -277,7 +276,7 @@ Min / Max date
                       minDate={new Date(2026, 3, 5)}
                       maxDate={new Date(2026, 3, 20)}
                       initialValue={new Date(2026, 3, 10)}
-                      todayButtonConfig={{ style: ButtonStyle.Default, caption: "Today" }}
+                      todayButtonConfig={{ caption: "Today" }}
                     
                     />
                 </div>
@@ -382,7 +381,7 @@ range.
                             <CalendarDemo
                                 minDate={new Date(2026, 3, 1)}
                                 maxDate={new Date(2026, 3, 30)}
-                                todayButtonConfig={{ style: ButtonStyle.Default, caption: "Today" }}
+                                todayButtonConfig={{ caption: "Today" }}
                             />
                         </div>
                         <div>
@@ -394,7 +393,7 @@ range.
                               minDate={new Date(2026, 3, 1)}
                               maxDate={new Date(2026, 3, 10)}
                               initialValue={new Date(2026, 3, 5)}
-                              todayButtonConfig={{ style: ButtonStyle.Default, caption: "Today" }}
+                              todayButtonConfig={{ caption: "Today" }}
                             
                             />
                         </div>
@@ -407,7 +406,7 @@ range.
                               minDate={new Date(2026, 4, 1)}
                               maxDate={new Date(2026, 4, 31)}
                               initialValue={new Date(2026, 4, 15)}
-                              todayButtonConfig={{ style: ButtonStyle.Default, caption: "Today" }}
+                              todayButtonConfig={{ caption: "Today" }}
                             
                             />
                         </div>

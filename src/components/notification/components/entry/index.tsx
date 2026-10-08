@@ -21,7 +21,7 @@ const NotificationEntry: FC<NotificationEntryProps> = ({ item, onClose }) => {
     const notificationClassName = getClassName([
         "bbr-notification-entry",
         "notification",
-        getElementColorClassName(item.color ?? ElementColor.Default),
+        getElementColorClassName(item.style ?? item.color ?? ElementColor.Default),
     ]);
 
     const handleClose = () => onClose(item.id);

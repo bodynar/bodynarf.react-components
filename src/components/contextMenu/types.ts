@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { BaseElementProps } from "@bbr/types";
+import { BaseElementProps, DisableableElement } from "@bbr/types";
 
 /** A single context menu item */
 export type ContextMenuItem = {
@@ -21,16 +21,13 @@ export type ContextMenuItem = {
 };
 
 /** ContextMenu component props */
-export type ContextMenuProps = BaseElementProps & {
-    /** Items to show in the menu */
-    items: ContextMenuItem[];
+export type ContextMenuProps =
+    & BaseElementProps
+    & DisableableElement
+    & {
+        /** Items to show in the menu */
+        items: ContextMenuItem[];
 
-    /** The element that triggers the context menu on right-click */
-    children: ReactNode;
-
-    /**
-     * Whether the menu is disabled globally.
-     * @default false
-     */
-    disabled?: boolean;
-};
+        /** The element that triggers the context menu on right-click */
+        children: ReactNode;
+    };

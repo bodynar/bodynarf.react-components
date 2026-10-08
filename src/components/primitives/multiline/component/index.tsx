@@ -4,6 +4,8 @@ import { MultilineProps } from "..";
 import MultilineWithoutLabel from "../components/withoutLabel";
 import MultilineWithLabel from "../components/withLabel";
 
+import "./style.scss";
+
 /** Multiline textual input component */
 const Multiline = createLabelRouter<MultilineProps>(MultilineWithoutLabel, MultilineWithLabel);
 

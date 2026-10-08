@@ -1,6 +1,6 @@
 import { Optional } from "@bodynarf/utils";
 
-import { BaseElementProps, HintConfiguration, ValidationState, LabelConfiguration, ElementIcon } from "@bbr/types";
+import { BaseElementProps, DisableableElement, HintConfiguration, ValidationState, LabelConfiguration, ElementIcon } from "@bbr/types";
 
 /** Dropdown item */
 export interface SelectableItem {
@@ -21,7 +21,7 @@ export interface SelectableItem {
 }
 
 /** Dropdown component props type */
-export interface DropdownProps extends BaseElementProps {
+export interface DropdownProps extends BaseElementProps, DisableableElement {
     /** Items which can be selected */
     items: Array<SelectableItem>;
 
@@ -48,11 +48,6 @@ export interface DropdownProps extends BaseElementProps {
      * Will have width by maximum current selection item width
      */
     compact?: boolean;
-
-    /**
-     * Is element disabled
-     */
-    disabled?: boolean;
 
     /** Label configuration */
     label?: LabelConfiguration;

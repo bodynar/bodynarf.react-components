@@ -27,6 +27,7 @@ const OtpInput: FC<OtpInputProps> = ({
     autoFocus = false,
     disabled = false,
     color = ElementColor.Default,
+    style,
     size = ElementSize.Normal,
 
     className, title, data,
@@ -111,7 +112,9 @@ const OtpInput: FC<OtpInputProps> = ({
 
     const dataAttributes = mapDataAttributes(data);
 
-    const colorClass = color !== ElementColor.Default ? `bbr-otp--color-${color}` : "";
+    const effectiveColor = style ?? color;
+
+    const colorClass = effectiveColor !== ElementColor.Default ? `bbr-otp--color-${effectiveColor}` : "";
 
     const elClassName = getClassName([
         "bbr-otp",

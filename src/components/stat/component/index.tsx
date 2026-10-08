@@ -28,6 +28,7 @@ const Stat: FC<StatProps> = ({
     label,
     icon,
     color = ElementColor.Primary,
+    style,
     trend,
 
     className, title, data,
@@ -42,7 +43,7 @@ const Stat: FC<StatProps> = ({
 
     const iconBadgeClassName = getClassName([
         "bbr-stat__icon",
-        getElementColorClassName(color),
+        getElementColorClassName(style ?? color),
     ]);
 
     return (

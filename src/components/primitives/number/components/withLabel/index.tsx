@@ -1,9 +1,9 @@
 import { ChangeEvent, FC, FocusEvent, useCallback } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullish, isStringEmpty } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNotNullish, isNullish, isStringEmpty } from "@bodynarf/utils";
 
 import { ElementSize, LabeledElement } from "@bbr/types";
-import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, getStyleClassName, mapDataAttributes, renderControlWithAddons } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import InternalHint from "@bbr/internalComponent/hint";
 
@@ -26,6 +26,7 @@ const NumberWithLabel: FC<
 
     className, title, data,
     hint,
+    addonLeft, addonRight,
 }) => {
         const onChange = useCallback(
             (event: ChangeEvent<HTMLInputElement>) =>
@@ -53,9 +54,12 @@ const NumberWithLabel: FC<
             "input",
         ]);
 
+        const hasAddons = isNotNullish(addonLeft) || isNotNullish(addonRight);
+
         const inputContainerClassName = getClassName([
             "control",
             loading ? "is-loading" : "",
+            hasAddons ? "is-expanded" : "",
         ]);
 
         const dataAttributes = isNullish(data)
@@ -68,27 +72,31 @@ const NumberWithLabel: FC<
                 size={size}
                 label={label}
             >
-                <div className={inputContainerClassName}>
-                    <input
-                        {...dataAttributes}
+                {renderControlWithAddons(
+                    <div className={inputContainerClassName}>
+                        <input
+                            {...dataAttributes}
 
-                        id={name}
-                        step={step}
-                        name={name}
-                        title={title}
-                        type="number"
-                        onKeyUp={onKeyUp}
-                        onChange={onChange}
-                        readOnly={readonly}
-                        disabled={disabled}
-                        onBlur={onInputBlur}
-                        onKeyDown={onKeyDown}
-                        autoFocus={autoFocus}
-                        className={elClassName}
-                        placeholder={placeholder}
-                        defaultValue={defaultValue}
-                    />
-                </div>
+                            id={name}
+                            step={step}
+                            name={name}
+                            title={title}
+                            type="number"
+                            onKeyUp={onKeyUp}
+                            onChange={onChange}
+                            readOnly={readonly}
+                            disabled={disabled}
+                            onBlur={onInputBlur}
+                            onKeyDown={onKeyDown}
+                            autoFocus={autoFocus}
+                            className={elClassName}
+                            placeholder={placeholder}
+                            defaultValue={defaultValue}
+                        />
+                    </div>,
+                    addonLeft,
+                    addonRight
+                )}
                 <InternalHint
                     hint={hint}
                     validationState={validationState}

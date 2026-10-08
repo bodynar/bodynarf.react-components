@@ -1,0 +1,79 @@
+.bbr-circular-meter {
+    display: block;
+    width: 120px;
+    height: 120px;
+
+    --bbr-meter-arc: var(--bulma-primary, #00d1b2);
+
+    &.is-small {
+        width: 80px;
+        height: 80px;
+    }
+
+    &.is-medium {
+        width: 160px;
+        height: 160px;
+    }
+
+    &.is-large {
+        width: 200px;
+        height: 200px;
+    }
+
+    &.is-link {
+        --bbr-meter-arc: var(--bulma-link, #485fc7);
+    }
+
+    &.is-info {
+        --bbr-meter-arc: var(--bulma-info, #3e8ed0);
+    }
+
+    &.is-success {
+        --bbr-meter-arc: var(--bulma-success, #48c78e);
+    }
+
+    &.is-warning {
+        --bbr-meter-arc: var(--bulma-warning, #ffe08a);
+    }
+
+    &.is-danger {
+        --bbr-meter-arc: var(--bulma-danger, #f14668);
+    }
+
+    &.is-default {
+        --bbr-meter-arc: var(--bulma-grey, #7a7a7a);
+    }
+
+    &.is-editable {
+        cursor: pointer;
+        touch-action: none;
+        user-select: none;
+
+        // Circular focus ring in the arc color instead of the default square outline
+        &:focus {
+            outline: none;
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px var(--bbr-meter-arc);
+        }
+    }
+
+    &__track {
+        stroke: hsl(0, 0%, 90%);
+    }
+
+    &__arc {
+        stroke: var(--bbr-meter-arc);
+        transition: stroke-dashoffset 0.4s ease;
+    }
+
+    &__value {
+        fill: hsl(0, 0%, 21%);
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    &__label {
+        fill: hsl(0, 0%, 48%);
+        font-size: 9px;
+    }
+}

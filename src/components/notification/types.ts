@@ -1,39 +1,42 @@
 import { ReactNode } from "react";
 
-import { ElementColor, ElementFloatPosition } from "@bbr/types";
+import { ElementColor, ElementFloatPosition, StylableElement } from "@bbr/types";
 
 /** A single notification entry */
-export type NotificationItem = {
-    /** Unique identifier (auto-generated when using `useNotification`) */
-    id: string;
+export type NotificationItem =
+    & StylableElement
+    & {
+        /** Unique identifier (auto-generated when using `useNotification`) */
+        id: string;
 
-    /** Notification content */
-    content: ReactNode;
+        /** Notification content */
+        content: ReactNode;
 
-    /**
-     * Color variant.
-     * @default ElementColor.Default
-     */
-    color?: ElementColor;
+        /**
+         * Color variant.
+         * @deprecated [Will be removed in v1.18] Use `style` prop instead.
+         * @default ElementColor.Default
+         */
+        color?: ElementColor;
 
-    /**
-     * Auto-close delay in milliseconds.
-     * When omitted the notification stays until manually dismissed.
-     */
-    autoClose?: number;
+        /**
+         * Auto-close delay in milliseconds.
+         * When omitted the notification stays until manually dismissed.
+         */
+        autoClose?: number;
 
-    /**
-     * Show the close button.
-     * @default true
-     */
-    closable?: boolean;
+        /**
+         * Show the close button.
+         * @default true
+         */
+        closable?: boolean;
 
-    /**
-     * Accessible label for the dismiss button.
-     * @default "Dismiss"
-     */
-    dismissLabel?: string;
-};
+        /**
+         * Accessible label for the dismiss button.
+         * @default "Dismiss"
+         */
+        dismissLabel?: string;
+    };
 
 /** Options for adding a notification */
 export type AddNotificationOptions = Omit<NotificationItem, "id">;

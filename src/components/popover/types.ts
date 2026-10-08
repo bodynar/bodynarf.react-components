@@ -33,6 +33,9 @@ export type PopoverProps = BaseElementProps & {
      */
     position?: PopoverPosition;
 
+    /** Hide the popover on a click outside of it. Default is true */
+    hideOnOuterClick?: boolean;
+
     /**
      * Controlled visibility.
      * When provided, the component acts as a controlled component.

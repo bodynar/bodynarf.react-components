@@ -1,0 +1,72 @@
+.bbr-float-button {
+    position: fixed;
+    z-index: 1000;
+    padding: 0;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+    // the size class fully determines the actual box
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    &.is-small {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    &.is-medium {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    &.is-large {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+
+    // Bulma's .button.is-small narrows the border-radius (2px) — outrank it deterministically
+    &.button.is-small {
+        border-radius: 50%;
+    }
+
+    // placed after the size blocks: a caption expands any size into a pill,
+    // while the size keeps defining the height
+    &.button.has-caption {
+        width: auto;
+        padding: 0 1.25rem;
+        gap: 0.5rem;
+        border-radius: 9999px;
+    }
+
+    &--bottom-right {
+        right: var(--float-button-right, 1.5rem);
+        bottom: var(--float-button-bottom, 1.5rem);
+    }
+
+    &--bottom-left {
+        left: var(--float-button-left, 1.5rem);
+        bottom: var(--float-button-bottom, 1.5rem);
+    }
+
+    &--top-right {
+        right: var(--float-button-right, 1.5rem);
+        top: var(--float-button-top, 1.5rem);
+    }
+
+    &--top-left {
+        left: var(--float-button-left, 1.5rem);
+        top: var(--float-button-top, 1.5rem);
+    }
+
+    &__caption {
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+}

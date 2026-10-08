@@ -1,9 +1,9 @@
 import { ChangeEvent, FC, useCallback } from "react";
 
-import { emptyFn, generateGuid, getClassName } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNotNullish } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
-import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, getStyleClassName, mapDataAttributes, renderControlWithAddons } from "@bbr/utils";
 import InternalHint from "@bbr/internalComponent/hint";
 
 import { MultilineProps } from "../..";
@@ -23,6 +23,7 @@ const MultilineWithoutLabel: FC<MultilineProps> = ({
 
     className, title, data,
     hint,
+    addonLeft, addonRight,
 }) => {
     const onChange = useCallback(
         (event: ChangeEvent<HTMLTextAreaElement>) => onValueChange(event.target.value),
@@ -37,10 +38,13 @@ const MultilineWithoutLabel: FC<MultilineProps> = ({
         fixed ? "has-fixed-size" : "",
     ]);
 
+    const hasAddons = isNotNullish(addonLeft) || isNotNullish(addonRight);
+
     const inputContainerClassName = getClassName([
         "control",
         "bbr-input",
         loading ? "is-loading" : "",
+        hasAddons ? "is-expanded" : "",
     ]);
 
     const dataAttributes = mapDataAttributes(data);
@@ -49,27 +53,31 @@ const MultilineWithoutLabel: FC<MultilineProps> = ({
         <div
             className="bbr-field field"
         >
-            <div className={inputContainerClassName}>
-                <textarea
-                    {...dataAttributes}
+            {renderControlWithAddons(
+                <div className={inputContainerClassName}>
+                    <textarea
+                        {...dataAttributes}
 
-                    id={name}
-                    name={name}
-                    rows={rows}
-                    title={title}
-                    onBlur={onBlur}
-                    onKeyUp={onKeyUp}
-                    disabled={disabled}
-                    onChange={onChange}
-                    readOnly={readonly}
+                        id={name}
+                        name={name}
+                        rows={rows}
+                        title={title}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                        disabled={disabled}
+                        onChange={onChange}
+                        readOnly={readonly}
 
-                    autoFocus={autoFocus}
-                    onKeyDown={onKeyDown}
-                    className={elClassName}
-                    placeholder={placeholder}
-                    defaultValue={defaultValue}
-                />
-            </div>
+                        autoFocus={autoFocus}
+                        onKeyDown={onKeyDown}
+                        className={elClassName}
+                        placeholder={placeholder}
+                        defaultValue={defaultValue}
+                    />
+                </div>,
+                addonLeft,
+                addonRight
+            )}
             <InternalHint
                 hint={hint}
                 validationState={validationState}

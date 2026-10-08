@@ -1,4 +1,4 @@
-import { BaseElementProps, ClickableElement, ElementSize } from "@bbr/types";
+import { BaseElementProps, ClickableElement, SizableElement } from "@bbr/types";
 
 /** Avatar shape variant */
 export enum AvatarShape {
@@ -28,6 +28,7 @@ export enum AvatarStatus {
 export type AvatarProps =
     & BaseElementProps
     & ClickableElement
+    & SizableElement
     & {
         /** Image source URL */
         src?: string;
@@ -47,9 +48,6 @@ export type AvatarProps =
          * @example "person-fill"
          */
         icon?: string;
-
-        /** Avatar size */
-        size?: ElementSize;
 
         /**
          * Avatar shape.

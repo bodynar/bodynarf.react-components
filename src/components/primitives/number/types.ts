@@ -1,4 +1,4 @@
-import { BaseNullableInputElementProps, BlurableElement, KeyboardElement } from "@bbr/types";
+import { BaseNullableInputElementProps, BlurableElement, ElementWithAddons, KeyboardElement } from "@bbr/types";
 
 /** Number component props type */
 export type NumberProps = BaseNullableInputElementProps<number>
@@ -18,4 +18,5 @@ export type NumberProps = BaseNullableInputElementProps<number>
          * @default false
          */
         resetToDefaultOnBlur?: boolean;
-    };
+    }
+    & ElementWithAddons;

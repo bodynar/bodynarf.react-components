@@ -1,7 +1,11 @@
 {
     "name": "@bodynarf/react.components",
-    "version": "1.15.1",
+    "version": "1.16.0",
     "type": "module",
+    "sideEffects": [
+        "**/*.scss",
+        "**/*.css"
+    ],
     "author": {
         "name": "Artem",
         "email": "bodynar@gmail.com"
@@ -23,9 +27,9 @@
     ],
     "scripts": {
         "dev": "cd examples && npm run dev",
-        "build": "npx tsc && tsc-alias -p tsconfig.json",
+        "build": "npx tsc && tsc-alias -p tsconfig.json && npm run copy_styles",
         "copy_styles": "copyfiles -u 1 src/**/*.scss dist",
-        "copy_main": "copyfiles package.json *.md .npmignore dist",
+        "copy_main": "copyfiles package.json readme.md changelog.md .npmignore dist",
         "transfer": "npm run copy_styles && npm run copy_main",
         "build_transfer": "npm run build && npm run transfer",
         "prepublish": "npm run lint && npm run validate:scss && npm run build_transfer && cd dist && npm pack",

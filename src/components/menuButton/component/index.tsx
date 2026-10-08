@@ -1,17 +1,16 @@
-import { FC, useCallback, useId, useRef, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 
 import { getClassName } from "@bodynarf/utils";
 
 import { ElementSize } from "@bbr/types";
 import { getSizeClassName, mapDataAttributes, shouldOpenUpward } from "@bbr/utils";
-import { useComponentOutsideClick } from "@bbr/hooks";
 import Icon from "@bbr/components/icon";
+import DropdownMenu, { DropdownMenuItem } from "@bbr/components/dropdownMenu";
+import { PopoverPosition } from "@bbr/components/popover";
 
 import "./style.scss";
 
-import { MenuButtonAction, MenuButtonDivider, MenuButtonEntry, MenuButtonProps } from "..";
-
-import MenuButtonItem from "../components/menuButtonItem";
+import { MenuButtonDivider, MenuButtonEntry, MenuButtonProps } from "..";
 
 /** Button that opens a dropdown list of actions, without a primary action */
 const MenuButton: FC<MenuButtonProps> = ({
@@ -27,35 +26,26 @@ const MenuButton: FC<MenuButtonProps> = ({
 
     className, title, data,
 }) => {
-    const [isOpen, setIsOpen] = useState(false);
     const [isOpenUp, setIsOpenUp] = useState(false);
-    const id = useId();
     const containerRef = useRef<HTMLDivElement>(null);
 
-    const onToggleClick = useCallback(() => {
-        if (disabled) {
-            return;
+    const onMenuToggle = useCallback((next: boolean) => {
+        if (next && containerRef.current) {
+            setIsOpenUp(shouldOpenUpward(containerRef.current, actions.length));
         }
+    }, [actions.length]);
 
-        if (containerRef.current) {
-            const openUp = shouldOpenUpward(containerRef.current, actions.length);
-            setIsOpenUp(openUp);
-        }
-
-        setIsOpen(state => !state);
-    }, [disabled, actions.length]);
-
-    const onActionClick = useCallback(
-        (action: MenuButtonAction) => {
-            action.onClick();
-            setIsOpen(false);
-        }, []
-    );
-
-    useComponentOutsideClick(
-        `[data-menu-button-id="${id}"]`, isOpen,
-        () => setIsOpen(false),
-        hideOnOuterClick,
+    const menuItems: DropdownMenuItem[] = actions.map(entry =>
+        isMenuButtonDivider(entry)
+            ? { key: entry.id, type: "separator" }
+            : {
+                key: entry.id,
+                label: entry.caption,
+                icon: entry.icon,
+                title: entry.title,
+                disabled: entry.disabled,
+                onClick: entry.onClick,
+            }
     );
 
     const sizeClass = getSizeClassName(size);
@@ -79,10 +69,7 @@ const MenuButton: FC<MenuButtonProps> = ({
 
     const containerClassName = getClassName([
         "bbr-menu-button",
-        "dropdown",
         className,
-        isOpen ? "is-active" : "",
-        isOpenUp ? "is-up" : "",
     ]);
 
     const dataAttributes = mapDataAttributes(data);
@@ -93,43 +80,31 @@ const MenuButton: FC<MenuButtonProps> = ({
 
             title={title}
             ref={containerRef}
-            data-menu-button-id={id}
             className={containerClassName}
         >
-            <button
-                type="button"
+            <DropdownMenu
+
+                items={menuItems}
                 disabled={disabled}
-                onClick={onToggleClick}
-                className={toggleClassName}
-            >
-                <Icon
-                    name={icon}
-                    size={iconSize}
-                />
-            </button>
 
-            <div className="dropdown-menu bbr-menu-button__menu">
-                <div className="dropdown-content">
-                    {actions.map((entry: MenuButtonEntry) =>
-                        isMenuButtonDivider(entry)
-                            ? (
-                                <hr
-                                    key={entry.id}
+                onToggle={onMenuToggle}
+                hideOnOuterClick={hideOnOuterClick}
 
-                                    className="dropdown-divider"
-                                />
-                            )
-                            : (
-                                <MenuButtonItem
-                                    key={entry.id}
+                position={isOpenUp ? PopoverPosition.Top : PopoverPosition.Bottom}
 
-                                    action={entry}
-                                    onClick={onActionClick}
-                                />
-                            )
-                    )}
-                </div>
-            </div>
+                trigger={
+                    <button
+                        type="button"
+                        disabled={disabled}
+                        className={toggleClassName}
+                    >
+                        <Icon
+                            name={icon}
+                            size={iconSize}
+                        />
+                    </button>
+                }
+            />
         </div>
     );
 };

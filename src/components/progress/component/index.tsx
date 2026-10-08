@@ -16,6 +16,7 @@ const Progress: FC<ProgressProps> = ({
     max = 100,
     size = ElementSize.Normal,
     color = ElementColor.Primary,
+    style,
     showValue = true,
     indeterminate = false,
     loadingText = "Loading...",
@@ -28,7 +29,7 @@ const Progress: FC<ProgressProps> = ({
             "bbr-progress",
             "bbr-progress--indeterminate",
             className,
-            getElementColorClassName(color),
+            getElementColorClassName(style ?? color),
             getSizeClassName(size),
         ]);
 
@@ -59,7 +60,7 @@ const Progress: FC<ProgressProps> = ({
     const elClassName = getClassName([
         "bbr-progress",
         animated ? "bbr-progress--animated" : "",
-        getElementColorClassName(color),
+        getElementColorClassName(style ?? color),
         getSizeClassName(size),
         className,
     ]);

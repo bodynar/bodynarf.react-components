@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementColor, ElementSize } from "@bbr/types";
+import { BaseElementProps, SizableElement, StylableElement } from "@bbr/types";
 
 /** A date range — start and end dates */
 export type DateRange = {
@@ -10,44 +10,39 @@ export type DateRange = {
 };
 
 /** DateRangePicker component props */
-export type DateRangePickerProps = BaseElementProps & {
-    /** Currently selected range */
-    value?: DateRange;
+export type DateRangePickerProps =
+    & BaseElementProps
+    & SizableElement
+    & StylableElement
+    & {
+        /** Currently selected range */
+        value?: DateRange;
 
-    /**
-     * Bulma color style applied to accent elements.
-     * @default ElementColor.Primary
-     */
-    style?: ElementColor;
+        /** Minimum selectable date (inclusive) */
+        minDate?: Date;
 
-    /** Component size */
-    size?: ElementSize;
+        /** Maximum selectable date (inclusive) */
+        maxDate?: Date;
 
-    /** Minimum selectable date (inclusive) */
-    minDate?: Date;
+        /**
+         * BCP 47 locale for month/weekday labels.
+         * @default "en-US"
+         */
+        locale?: string;
 
-    /** Maximum selectable date (inclusive) */
-    maxDate?: Date;
+        /** Optional overrides for all user-visible text strings */
+        labelConfig?: DateRangePickerLabelConfig;
 
-    /**
-     * BCP 47 locale for month/weekday labels.
-     * @default "en-US"
-     */
-    locale?: string;
+        /**
+         * Render the calendar inside a Popover that opens on label click.
+         * When `false` (default) the calendar is always visible below the label.
+         * @default true
+         */
+        asPopover?: boolean;
 
-    /** Optional overrides for all user-visible text strings */
-    labelConfig?: DateRangePickerLabelConfig;
-
-    /**
-     * Render the calendar inside a Popover that opens on label click.
-     * When `false` (default) the calendar is always visible below the label.
-     * @default true
-     */
-    asPopover?: boolean;
-
-    /** Called when both start and end are selected, or when cleared */
-    onChange?: (range: DateRange) => void;
-};
+        /** Called when both start and end are selected, or when cleared */
+        onChange?: (range: DateRange) => void;
+    };
 
 /** Configurable user-visible texts rendered by the date range picker */
 export type DateRangePickerLabelConfig = {

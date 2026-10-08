@@ -22,6 +22,9 @@ type InputControlProps = {
     placeholder?: string;
     clearTitle?: string;
 
+    /** Whether the control should expand to fill the available width (when addons are present). */
+    isExpanded?: boolean;
+
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
     onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
     onBlur: () => void;
@@ -51,6 +54,7 @@ const AutoCompleteInputControl: FC<InputControlProps> = ({
     onClear,
     setClearPending,
     clearTitle = "Clear",
+    isExpanded = false,
 }) => {
     const inputClassName = getClassName([
         "input",
@@ -64,6 +68,7 @@ const AutoCompleteInputControl: FC<InputControlProps> = ({
         "control",
         isLoading ? "is-loading" : "",
         showClearButton ? "has-icons-right" : "",
+        isExpanded ? "is-expanded" : "",
     ]);
 
     const handleFocus = readonly ? undefined : onFocus;

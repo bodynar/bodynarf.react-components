@@ -3,10 +3,10 @@ import {
     useEffect, useMemo, useRef, useState,
 } from "react";
 
-import { emptyFn, generateGuid, getClassName, isNullish } from "@bodynarf/utils";
+import { emptyFn, generateGuid, getClassName, isNotNullish, isNullish } from "@bodynarf/utils";
 
 import { ElementSize, LabeledElement } from "@bbr/types";
-import { getSizeClassName, getStyleClassName, mapDataAttributes } from "@bbr/utils";
+import { getSizeClassName, getStyleClassName, mapDataAttributes, renderControlWithAddons } from "@bbr/utils";
 import ComponentWithLabel from "@bbr/internalComponent/componentWithLabel";
 import InternalHint from "@bbr/internalComponent/hint";
 import Popover, { PopoverPosition } from "@bbr/components/popover";
@@ -37,6 +37,7 @@ const DateInput: FC<
 
     className, title, data,
     hint,
+    addonLeft, addonRight,
 }) => {
         const desc = useMemo(() => parseFormat(format), [format]);
         const maxLen = useMemo(() => getFormatLength(desc), [desc]);
@@ -191,9 +192,12 @@ const DateInput: FC<
             "bbr-date-input__input",
         ]);
 
+        const hasAddons = isNotNullish(addonLeft) || isNotNullish(addonRight);
+
         const inputContainerClassName = getClassName([
             "control",
             loading ? "is-loading" : "",
+            hasAddons ? "is-expanded" : "",
         ]);
 
         const dataAttributes = isNullish(data)
@@ -202,54 +206,59 @@ const DateInput: FC<
 
         const inputElement = (
             <div className="bbr-date-input">
-                <Popover
-                    visible={calendarVisible}
-                    onToggle={onCalendarToggle}
-                    position={PopoverPosition.Bottom}
-                >
-                    <Popover.Trigger>
-                        <div className={inputContainerClassName}>
-                            <input
-                                {...dataAttributes}
+                {renderControlWithAddons(
+                    <Popover
+                        visible={calendarVisible}
+                        onToggle={onCalendarToggle}
+                        position={PopoverPosition.Bottom}
+                        className={hasAddons ? "control is-expanded" : undefined}
+                    >
+                        <Popover.Trigger>
+                            <div className={inputContainerClassName}>
+                                <input
+                                    {...dataAttributes}
 
-                                id={name}
-                                type="text"
-                                name={name}
-                                value={text}
-                                title={title}
-                                ref={inputRef}
-                                onBlur={onBlur}
-                                onKeyUp={onKeyUp}
-                                maxLength={maxLen}
-                                autoComplete="off"
-                                inputMode="numeric"
-                                readOnly={readonly}
-                                disabled={disabled}
-                                autoFocus={autoFocus}
-                                onClick={onInputClick}
-                                className={elClassName}
-                                onChange={onInputChange}
-                                placeholder={placeholder}
-                                onKeyDown={onInputKeyDown}
+                                    id={name}
+                                    type="text"
+                                    name={name}
+                                    value={text}
+                                    title={title}
+                                    ref={inputRef}
+                                    onBlur={onBlur}
+                                    onKeyUp={onKeyUp}
+                                    maxLength={maxLen}
+                                    autoComplete="off"
+                                    inputMode="numeric"
+                                    readOnly={readonly}
+                                    disabled={disabled}
+                                    autoFocus={autoFocus}
+                                    onClick={onInputClick}
+                                    className={elClassName}
+                                    onChange={onInputChange}
+                                    placeholder={placeholder}
+                                    onKeyDown={onInputKeyDown}
+                                />
+                            </div>
+                        </Popover.Trigger>
+                        <Popover.Content className="bbr-date-input__calendar">
+                            <Calendar
+                                key={calendarValue ? calendarValue.getTime() : "empty"}
+
+                                {...calendarConfig}
+
+                                size={size}
+                                style={style}
+                                locale={locale}
+                                minDate={minDate}
+                                maxDate={maxDate}
+                                value={calendarValue}
+                                onChange={onCalendarChange}
                             />
-                        </div>
-                    </Popover.Trigger>
-                    <Popover.Content className="bbr-date-input__calendar">
-                        <Calendar
-                            key={calendarValue ? calendarValue.getTime() : "empty"}
-
-                            {...calendarConfig}
-
-                            size={size}
-                            style={style}
-                            locale={locale}
-                            minDate={minDate}
-                            maxDate={maxDate}
-                            value={calendarValue}
-                            onChange={onCalendarChange}
-                        />
-                    </Popover.Content>
-                </Popover>
+                        </Popover.Content>
+                    </Popover>,
+                    addonLeft,
+                    addonRight
+                )}
                 <InternalHint
                     hint={hint}
                     validationState={validationState}

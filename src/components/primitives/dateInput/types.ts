@@ -1,4 +1,4 @@
-import { BaseInputElementProps, BaseNullableInputElementProps, BlurableElement, KeyboardElement } from "@bbr/types";
+import { BaseInputElementProps, BaseNullableInputElementProps, BlurableElement, ElementWithAddons, KeyboardElement } from "@bbr/types";
 import { CalendarProps } from "../../calendar";
 
 /** DateInput component props */
@@ -36,7 +36,8 @@ export type DateInputProps =
 
         /** Label configuration. When provided, input is wrapped with a label */
         label?: BaseInputElementProps<unknown>["label"];
-    };
+    }
+    & ElementWithAddons;
 
 /**
  * Parsed date format descriptor.

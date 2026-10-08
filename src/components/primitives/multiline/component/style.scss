@@ -1,0 +1,11 @@
+// The textarea is taller than a single control row — stretch the addon
+// controls in an attached-addons field to the full control height
+.field.has-addons:has(.textarea) {
+    align-items: stretch;
+
+    > .control:not(.is-expanded) {
+        .button {
+            height: 100%;
+        }
+    }
+}

@@ -1,7 +1,7 @@
-import { BaseElementProps, ElementColor, ElementSize } from "@bbr/types";
+import { BaseElementProps, ElementColor, SizableElement, StylableElement } from "@bbr/types";
 
 /** Single timeline event item */
-export interface TimelineItem {
+export interface TimelineItem extends StylableElement {
     /** Unique event identifier */
     id: string;
 
@@ -20,7 +20,10 @@ export interface TimelineItem {
      */
     icon?: string;
 
-    /** Optional color override for this specific item */
+    /**
+     * Optional color override for this specific item
+     * @deprecated [Will be removed in v1.18] Use `style` prop instead.
+     */
     color?: ElementColor;
 
     /** Optional custom marker content (text or icon) */
@@ -28,45 +31,49 @@ export interface TimelineItem {
 }
 
 /** Timeline component props */
-export type TimelineProps = BaseElementProps & {
-    /** Array of timeline events to display */
-    items: Array<TimelineItem>;
+export type TimelineProps =
+    & BaseElementProps
+    & SizableElement
+    & StylableElement
+    & {
+        /** Array of timeline events to display */
+        items: Array<TimelineItem>;
 
-    /** Component size */
-    size?: ElementSize;
+        /**
+         * Default color for timeline markers
+         * @deprecated [Will be removed in v1.18] Use `style` prop instead.
+         */
+        color?: ElementColor;
 
-    /** Default color for timeline markers */
-    color?: ElementColor;
+        /**
+         * Display timeline on the left side (markers on left, content on right).
+         * When false, timeline is centered with alternating content.
+         * @default true
+         */
+        leftAligned?: boolean;
 
-    /**
-     * Display timeline on the left side (markers on left, content on right).
-     * When false, timeline is centered with alternating content.
-     * @default true
-     */
-    leftAligned?: boolean;
+        /**
+         * Show connector lines between events.
+         * @default true
+         */
+        showConnectors?: boolean;
 
-    /**
-     * Show connector lines between events.
-     * @default true
-     */
-    showConnectors?: boolean;
+        /**
+         * Use animated appearance for items.
+         * @default false
+         */
+        animated?: boolean;
 
-    /**
-     * Use animated appearance for items.
-     * @default false
-     */
-    animated?: boolean;
+        /**
+         * Show timestamps on separate side from content.
+         * Only works when leftAligned is false (centered mode).
+         * @default false
+         */
+        showTimestampsSeparate?: boolean;
 
-    /**
-     * Show timestamps on separate side from content.
-     * Only works when leftAligned is false (centered mode).
-     * @default false
-     */
-    showTimestampsSeparate?: boolean;
-
-    /**
-     * Render markers as hollow (outlined) circles.
-     * @default false
-     */
-    hollow?: boolean;
-};
+        /**
+         * Render markers as hollow (outlined) circles.
+         * @default false
+         */
+        hollow?: boolean;
+    };

@@ -15,6 +15,7 @@ const Timeline: FC<TimelineProps> = ({
     items,
     size = ElementSize.Normal,
     color = ElementColor.Primary,
+    style,
     leftAligned = true,
     showConnectors = true,
     animated = false,
@@ -29,13 +30,13 @@ const Timeline: FC<TimelineProps> = ({
         "bbr-timeline",
         className,
         getSizeClassName(size, ElementSize.Normal),
-        getElementColorClassName(color),
+        getElementColorClassName(style ?? color),
         leftAligned ? "is-left-aligned" : "is-centered",
         showConnectors ? "has-connectors" : "",
         animated ? "is-animated" : "",
         showTimestampsSeparate && !leftAligned ? "has-separate-timestamps" : "",
         hollow ? "is-hollow" : "",
-    ]), [className, size, color, leftAligned, showConnectors, animated, showTimestampsSeparate, hollow]);
+    ]), [className, size, style, color, leftAligned, showConnectors, animated, showTimestampsSeparate, hollow]);
 
     const dataAttributes = mapDataAttributes(data);
 
@@ -53,8 +54,8 @@ const Timeline: FC<TimelineProps> = ({
                     item={item}
                     index={index}
                     animated={animated}
-                    defaultColor={color}
                     leftAligned={leftAligned}
+                    defaultColor={style ?? color}
                     showTimestampsSeparate={showTimestampsSeparate}
                     showConnector={showConnectors === true && index < items.length - 1}
                 />

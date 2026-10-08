@@ -1,6 +1,44 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.16.0
+
+### Removed
+
+- **Date primitive** — **Breaking:** the deprecated native `<input type="date">` wrapper (promised in v1.15.0). Use `DateInput`.
+- **Button** — **Breaking:** the deprecated `type` prop and the `ButtonType` union (deprecated since v1.14). Use `style` with the `ButtonStyle` enum.
+- **Breadcrumbs** — **Breaking:** the deprecated `BreadCrumb` fields `active`, `title`, `path`. Use `caption` / `href`.
+- **Paginator** — **Breaking:** the `showNextButtons` prop and the deprecated `resources` caption/title fields. Use `nextButtonsConfig` (`"inline"` or `"aside"` placement); `resources.openConcretePageTitleTemplate` stays.
+
+### Added
+
+- **Dropzone** — drag-and-drop file area with idle / accept / reject slots and click-to-browse; reports files via `onValueChange(File[])`.
+- **DndList** — reorderable list via native HTML5 drag-and-drop; items through a render prop, reordered array via `onReorder`, optional drag handle.
+- **TableOfContents** — scrollspy contents list (`IntersectionObserver`) with smooth scrolling and nesting indents.
+- **ButtonGroup** — attached buttons sharing a single style, horizontal or vertical.
+- **FloatButton** — floating action button pinned to a screen corner, icon with optional caption.
+- **BorderBeam** *(CSS)* — animated rotating border ring (`.bbr-border-beam--*`): 6 color variants and 4 gradient presets; respects `prefers-reduced-motion`.
+- **CircularMeter** — SVG circular progress meter with a value template; optionally interactive (drag / arrow keys).
+- **AvatarGroup** — overlapping avatar stack with a `+N` overflow popover and a uniform group size.
+- **DropdownMenu** — popover menu over any trigger: items, separators, headers, icons, disabled entries, keyboard-activatable; configurable position and `hideOnOuterClick`.
+- **RadioCardGroup** — card-style single selection in a grid; card `value` falls back to its `label`.
+- **ToggleButton / ToggleButtonGroup** — pressable buttons with an active state; the group supports radio (`single`) or checkbox (`multiple`) selection.
+- **Center** — absolute centering relative to the nearest positioned parent (`both` / `horizontal` / `vertical`).
+- **Stack** (`HStack` / `VStack`) — flexbox container with `gap`, `align`, `justify`, `wrap`.
+- **ActionBar** — floating panel with actions for selected items; positions from FloatButton corners plus centered `bottom` / `top`.
+
+### Updated
+
+- **Accordion** — added the `Accordion.Header` slot for custom header content; `caption` is optional and soft-deprecated.
+- **Input primitives** — `addonLeft` / `addonRight` addons (text / icon / button) on Text, Password, Multiline, Number, AutoComplete, DateInput and TimePicker.
+- **Stepper** — new `variant: "panel"` renders full-width attached flag steps.
+- **TimePicker** — reworked into a single masked input (auto separators, per-character validation, 12h AM/PM toggle, clearable, arrow-key segment stepping, `min` / `max`); `variant: "picker"` opens a time-columns popover instead.
+- **Tag** — added `iconLeft` / `iconRight`, `outlined` and `light`; `lightColor` is soft-deprecated.
+- **MenuButton / SplitButton** — dropdowns are now rendered through DropdownMenu (unified look, keyboard support); Popover gained `hideOnOuterClick`.
+- **Colors unification** — components exposing `color?: ElementColor` now accept `style` as well (`StylableElement`): Alert, Badge, CircularMeter, EmptyState, Notification, OtpInput, Progress, SegmentedControl, Spinner, Stat, Stepper, TagGroup, Timeline, Toast. `color` is deprecated (removal in v1.18); `style` takes precedence.
+- **Types** — reusable capability types in `@bbr/types` (`ElementWithIcon`, `SizableElement`, `StylableElement`, `ButtonStylableElement`, `OutlinedElement`, `RoundedElement`, `DisableableElement`), applied across component props. `ButtonStyle` moved into `@bbr/types` (old import path re-exported). No API changes.
+- **Package** — declared `sideEffects: ["**/*.scss", "**/*.css"]`: barrel imports are tree-shakeable now. Styles of non-imported components are no longer shipped.
+
 ## v1.15.1
 
 - **MenuButton** *(new)* — Icon button that opens a dropdown list of actions. Supports all `Button` style props (`style`, `size`, `light`, `outlined`, `rounded`). Actions list is validated at compile-time to contain at least 1 item. Supports divider items. Closes on outside click (configurable via `hideOnOuterClick`).

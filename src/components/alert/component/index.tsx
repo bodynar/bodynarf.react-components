@@ -13,6 +13,7 @@ import { AlertProps } from "..";
 const Alert: FC<AlertProps> = ({
     children,
     color = ElementColor.Info,
+    style,
     header,
     closable = true,
     onClose = emptyFn,
@@ -23,7 +24,7 @@ const Alert: FC<AlertProps> = ({
     const elClassName = getClassName([
         "bbr-alert",
         "message",
-        getElementColorClassName(color),
+        getElementColorClassName(style ?? color),
         className,
     ]);
 

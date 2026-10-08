@@ -101,7 +101,11 @@ const Slider: FC<SliderProps> = ({
                     <output
                         className={outputClassName}
                         style={vertical
-                            ? { top: `calc(${100 - progressPercent}% - ${1.5 + thumbSize / 2 - thumbSize * progressPercent / 100}rem)` }
+                            ? {
+                                // Calibrated so the output tracks the thumb along the track
+                                // for any track height: top = (100% - 0.9·T)·(1 - pct) - 0.4·T
+                                top: `calc(${100 - progressPercent}% - ${0.4 * thumbSize + 0.9 * thumbSize - 0.9 * thumbSize * progressPercent / 100}rem)`,
+                            }
                             : {
                                 left: `calc(${progressPercent}% - ${1.5 - thumbSize / 2 + thumbSize * progressPercent / 100}rem)`,
                                 marginBottom: valuePosition === "top" ? `${(thumbSize - 1) * 0.5}rem` : undefined,
