@@ -1,0 +1,111 @@
+.bbr-dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2rem 1.5rem;
+    border: 2px dashed hsl(0, 0%, 86%);
+    border-radius: 6px;
+    background-color: hsl(0, 0%, 98%);
+    color: hsl(0, 0%, 48%);
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+
+    &:hover:not(.is-disabled) {
+        border-color: hsl(217, 71%, 53%);
+        color: hsl(0, 0%, 29%);
+    }
+
+    &.is-drag-accept {
+        border-color: hsl(141, 53%, 53%);
+        background-color: hsl(141, 53%, 94%);
+        color: hsl(141, 53%, 40%);
+    }
+
+    &.is-drag-reject {
+        border-color: hsl(348, 86%, 61%);
+        background-color: hsl(348, 86%, 94%);
+        color: hsl(348, 86%, 50%);
+    }
+
+    &.is-disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    &.is-primary {
+        border-color: hsl(171, 100%, 41%);
+    }
+
+    &.is-info {
+        border-color: hsl(204, 86%, 53%);
+    }
+
+    &.is-link {
+        border-color: hsl(217, 71%, 53%);
+    }
+
+    &.is-success {
+        border-color: hsl(141, 53%, 53%);
+    }
+
+    &.is-warning {
+        border-color: hsl(48, 100%, 67%);
+    }
+
+    &.is-danger {
+        border-color: hsl(348, 86%, 61%);
+    }
+
+    &.is-small {
+        padding: 1rem;
+
+        .bbr-dropzone__text {
+            font-size: 0.85rem;
+        }
+
+        .bbr-dropzone__description {
+            font-size: 0.75rem;
+        }
+    }
+
+    &.is-medium {
+        padding: 3rem 2rem;
+
+        .bbr-dropzone__text {
+            font-size: 1.25rem;
+        }
+
+        .bbr-dropzone__description {
+            font-size: 1rem;
+        }
+    }
+
+    &.is-large {
+        padding: 4rem 2.5rem;
+
+        .bbr-dropzone__text {
+            font-size: 1.5rem;
+        }
+
+        .bbr-dropzone__description {
+            font-size: 1.1rem;
+        }
+    }
+
+    &__text {
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    &__description {
+        font-size: 0.85rem;
+        opacity: 0.85;
+    }
+
+    &__input {
+        display: none;
+    }
+}

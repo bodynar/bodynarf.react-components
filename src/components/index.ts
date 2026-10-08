@@ -216,3 +216,6 @@ export * from "./tableOfContents";
 
 export { default as DndList } from "./dndList";
 export * from "./dndList";
+
+export { default as Dropzone } from "./dropzone";
+export * from "./dropzone";
