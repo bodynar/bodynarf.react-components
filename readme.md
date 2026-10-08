@@ -17,46 +17,14 @@ Small library with react components based on Bulma CSS framework&nbsp; <a href="
 
 ## Demo
 Demo of using all components can be found on https://bodynar.github.io/bodynarf.react-components/ (or open latest build in github repository)
+
+## Components
+The full catalog of components, CSS utilities and hooks lives in [COMPONENTS.md](./COMPONENTS.md).
+
 ## Description
 Mostly all components have root css class with `bbr-` prefix. BBR - Bodynarf Bulma React
 
-### Simple components
-Simple react components based on html elements.
-
-#### Controls
- - **Checkbox** - (*see p.5 of installation*) Checkbox component based on [bulma-checkradio](https://wikiki.github.io/form/checkradio)
- - **ColorPicker** - control that allows picking color (with preview option)
- - **Date** - date input
- - **Multiline** - multiline text input
- - **Number** - number input with step
- - **Password** - single line password input (requires icon, see icon component description)
- - **RadioGroup** - group of radio buttons with vertical/horizontal layout and customizable styles
- - **Slider** - range input component with optional value display and progress track
- - **Switch** - toggle switch component with multiple style variants (rounded, outlined, thin)
- - **Text** - single line text input
- - **TimePicker** - time input component with hours, minutes and optional seconds
-
-#### Components
- - **Anchor** - simple anchor (link) component
- - **Button** - button that allows user to interact with system by clicking it _(assume everyone knows what is button)_
- - **SplitButton** - button with a primary action and a dropdown of alternative actions
- - **File** - file upload component with customizable placeholder, file type filtering and boxed style option
- - **Icon** - *see p.4 of installation*
- - **Progress** - progress bar component with percentage display, indeterminate state and animation
- - **Tag** - small component stands for tag visualization
- - **BreadCrumbs** - speaks for it self
- - **Table** - table with sortable headers and multi-row selection
-
-### Complex components
-Complex components is set of components built via combining simple components or represent complex logical component
- - **Accordion** - Collapsible container that can hide some content inside
- - **Dropdown** - Custom dropdown component, based on html div elements & css (requires icon, see icon component description)
- - **ModalWrapper** - Modal window component with customizable header, body and action buttons
- - **Multiselect** - Dropdown with option to select several records
- - **ComplexTable** - table with built-in pagination, search, sorting, and multi-row selection
- - **Paginator** - Pagination elements to navigate through paged list
-
-	Example:
+	Example of Paginator usage:
 	```tsx
 		const [{ currentPage, pagesCount, onPageChange }, paginate] = usePagination(items.length, ITEMS_PER_PAGE);
 		const pageItems = useMemo(() => paginate(items), [paginate, items]);
@@ -77,25 +45,7 @@ Complex components is set of components built via combining simple components or
 				nextButtonConfig: { style: ButtonStyle.Primary, caption: "Forward" },
 			}}
 		/>
-	```
- - **Search** - Search bar with optional button to perform search
- - **Stepper** - Step indicator component for multi-step processes with vertical/horizontal layout
- - **Tabs** - Container for multi-content with option of switching displaying content without refreshing\scrolling page
- - **Timeline** - Vertical timeline component for displaying chronological events
-
-### Hooks
-
- - **useComponentOutsideClick** - Attach watcher for mouse clicks and emit event when click was outside of component
- - **useDebounceHandler** - Create a cooldown event handler
- - **useEventListener** - Attach an event listener to window/document/element with automatic cleanup
- - **useInterval** - Execute a callback repeatedly with a fixed time delay
- - **useLocalStorage** - Store state in localStorage and keep it in sync
- - **useMount** - Handle component initial mount event
- - **usePagination** - Create a pagination config to easily manipulate with Paginator component
- - **usePrevious** - Get the previous value of a state or prop
- - **useTimeout** - Execute a callback after a specified delay
- - **useUnmount** - Handle component unmounting event. Useful as component cleanup fn
- - **useUpdateEffect** - Like useEffect, but skips execution on the initial render
+		```
 
 ## Import recommendations
 

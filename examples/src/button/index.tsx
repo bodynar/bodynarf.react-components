@@ -70,17 +70,6 @@ const ButtonExamples: FC = () => (
                     <Button style={ButtonStyle.Warning} icon={{ name: "gear" }}    onClick={() => {}} />
                 </div>
             </div>
-
-            {/* Button types (visual) */}
-            <div className="box">
-                <p className="subtitle is-5">Visual Type Override</p>
-                <p className="help mb-2">The <code>type</code> prop sets the visual type modifier independent of <code>style</code>.</p>
-                <div className="buttons">
-                    <Button style={ButtonStyle.Default} caption="type: info"    type="info"    onClick={() => {}} />
-                    <Button style={ButtonStyle.Default} caption="type: success" type="success" onClick={() => {}} />
-                    <Button style={ButtonStyle.Default} caption="type: danger"  type="danger"  onClick={() => {}} />
-                </div>
-            </div>
         </div>
     </section>
 );

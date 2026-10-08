@@ -4,15 +4,15 @@ import Breadcrumbs from "@bodynarf/react.components/components/breadcrumbs";
 import { BreadCrumb, ElementPosition, ElementSize } from "@bodynarf/react.components";
 
 const BASIC_ITEMS: Array<BreadCrumb> = [
-    { caption: "Home", href: "/", active: false },
-    { caption: "Products", href: "/products", active: false },
-    { caption: "Laptop", href: "/products/laptop", active: true },
+    { caption: "Home", href: "/" },
+    { caption: "Products", href: "/products" },
+    { caption: "Laptop", href: "/products/laptop" },
 ];
 
 const ICON_ITEMS: Array<BreadCrumb> = [
     { caption: "Home", href: "/", icon: { name: "house" } },
     { caption: "Dashboard", href: "/dashboard", icon: { name: "speedometer2" } },
-    { caption: "Settings", href: "/settings", icon: { name: "gear" }, active: true },
+    { caption: "Settings", href: "/settings", icon: { name: "gear" } },
 ];
 
 const BreadcrumbsExamples: FC = () => (

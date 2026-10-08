@@ -56,7 +56,7 @@ const BreadCrumbs: FC<BreadcrumbsProps> = ({
             <ul>
                 {items.map((breadCrumb, i, a) =>
                     <li
-                        key={breadCrumb.href ?? breadCrumb.path}
+                        key={breadCrumb.href}
 
                         className={i === a.length - 1 ? "is-active" : undefined}
                     >
@@ -83,7 +83,7 @@ const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
     if (isNullish(item.icon)) {
         return (
             <a
-                href={item.href ?? item.path}
+                href={item.href}
             >
                 {item.caption}
             </a>
@@ -93,7 +93,7 @@ const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
     if (item.icon.position === ElementPosition.Right) {
         return (
             <a
-                href={item.href ?? item.path}
+                href={item.href}
             >
                 {item.caption}
                 <Icon {...item.icon} />
@@ -103,7 +103,7 @@ const BreadCrumbItem: FC<BreadCrumbItemProps> = ({
 
     return (
         <a
-            href={item.href ?? item.path}
+            href={item.href}
         >
 
             <Icon {...item.icon} />

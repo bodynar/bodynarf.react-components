@@ -21,7 +21,7 @@ export type PaginatorProps =
 
         /**
          * Page numbers position.
-         * Useful with `showNextButtons = true`
+         * Useful with `nextButtonsConfig`
         */
         position?: ElementPosition;
 
@@ -38,58 +38,16 @@ export type PaginatorProps =
         };
 
         /**
-         * Display "Previous" \ "Next" buttons.
-         * @deprecated Use `nextButtonsConfig` prop instead
-         * @example
-         * <Paginator
-         *   ...
-         *   nextButtonsConfig={{
-         *     previousButtonConfig: { ... },
-         *     nextButtonConfig: { ... }
-         *   }}
-         * />
-         */
-        showNextButtons?: boolean;
-
-        /**
          * Max amount of pages from left & right from current page. `3` by default
          * @description If set to 2 it will show `[1, 2], 3, [4, 5]`
         */
         nearPagesCount?: number;
 
         /**
-         * Resources for paginator component. Used for buttons captions and titles.
+         * Resources for paginator component.
          * If not set, default values will be used.
          */
         resources?: {
-            /**
-             * Previous page button caption
-             * @default "Previous"
-             * @deprecated Use `nextButtonsConfig.previousButtonConfig.caption` prop instead
-             */
-            previousPageCaption?: string;
-
-            /**
-             * Previous page button title.
-             * Visible only if set
-             * @deprecated Use `nextButtonsConfig.previousButtonConfig.title` prop instead
-             */
-            previousPageTitle?: string;
-
-            /**
-             * Next page button caption
-             * @default "Next page"
-             * @deprecated Use `nextButtonsConfig.nextButtonConfig.caption` prop instead
-             */
-            nextPageCaption?: string;
-
-            /**
-             * Next page button title.
-             * Visible only if set
-             * @deprecated Use `nextButtonsConfig.nextButtonConfig.title` prop instead
-             */
-            nextPageTitle?: string;
-
             /**
              * Title for button for opening concrete page by its number.
              * Must be template with 1 parameter.

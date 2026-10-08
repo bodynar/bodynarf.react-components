@@ -9,11 +9,9 @@ export * from "./breadcrumbs";
 
 export { default as Calendar } from "./calendar";
 export * from "./calendar";
-export * from "./breadcrumbs";
 
 export { default as Card } from "./card";
 export * from "./card";
-export * from "./breadcrumbs";
 
 export { default as Button } from "./button";
 export * from "./button";
@@ -90,7 +88,6 @@ export * from "./tooltip";
 
 export { default as SidePanel } from "./sidePanel";
 export * from "./sidePanel";
-export * from "./tooltip";
 
 // Primitives
 export { default as Checkbox } from "./primitives/checkbox";

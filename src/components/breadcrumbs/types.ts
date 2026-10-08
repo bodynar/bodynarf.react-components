@@ -10,26 +10,8 @@ export interface BreadCrumb {
     /** Link address */
     href: string;
 
-    /**
-     * Is current page. Will be not clickable
-     * @deprecated [Will be removed in v1.15] Not used anymore
-     */
-    active?: boolean;
-
     /** Bootstrap icon class name */
     icon?: ElementIcon;
-
-    /**
-     * Displayed text
-     * @deprecated [Will be removed in v1.15] Use `caption` instead
-     */
-    title?: string;
-
-    /**
-     * Page address
-     * @deprecated [Will be removed in v1.15] Use `href`
-     */
-    path?: string;
 }
 
 /** Breadcrumbs component props type */

@@ -19,7 +19,7 @@ const Paginator: FC<PaginatorProps> = ({
     position = ElementPosition.Left, size = ElementSize.Normal,
     rounded = false,
     nearPagesCount = 3, resources,
-    showNextButtons = false, nextButtonsConfig, pageButtonsConfig,
+    nextButtonsConfig, pageButtonsConfig,
     ariaLabel = "pagination",
 
     className, title, data,
@@ -98,11 +98,7 @@ const Paginator: FC<PaginatorProps> = ({
                 rounded={rounded}
                 goForward={goForward}
                 canGoBack={canGoBack}
-                resources={resources}
-                pageChange={pageChange}
-                currentPage={currentPage}
                 canGoForward={canGoForward}
-                showNextButtons={showNextButtons}
                 nextButtonsConfig={nextButtonsConfig}
             />
 
