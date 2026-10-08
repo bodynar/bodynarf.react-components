@@ -24,29 +24,6 @@ The full catalog of components, CSS utilities and hooks lives in [COMPONENTS.md]
 ## Description
 Mostly all components have root css class with `bbr-` prefix. BBR - Bodynarf Bulma React
 
-	Example of Paginator usage:
-	```tsx
-		const [{ currentPage, pagesCount, onPageChange }, paginate] = usePagination(items.length, ITEMS_PER_PAGE);
-		const pageItems = useMemo(() => paginate(items), [paginate, items]);
-
-		// ...
-
-		<Paginator
-			count={pagesCount}
-			currentPage={currentPage}
-			onPageChange={onPageChange}
-			pageButtonsConfig={{
-				default: { style: ButtonStyle.Light },
-				active: { style: ButtonStyle.Primary },
-			}}
-			nextButtonsConfig={{
-				style: "inline",
-				previousButtonConfig: { style: ButtonStyle.Dark, caption: "Back" },
-				nextButtonConfig: { style: ButtonStyle.Primary, caption: "Forward" },
-			}}
-		/>
-		```
-
 ## Import recommendations
 
 Prefer importing components directly from their folder rather than from the package barrel file.
