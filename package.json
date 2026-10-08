@@ -11,7 +11,7 @@
         "email": "bodynar@gmail.com"
     },
     "repository": {
-        "url": "https://github.com/bodynar/bodynarf.react-components",
+        "url": "git+https://github.com/bodynar/bodynarf.react-components.git",
         "type": "git"
     },
     "bugs": {
@@ -29,11 +29,11 @@
         "dev": "cd examples && npm run dev",
         "build": "npx tsc && tsc-alias -p tsconfig.json && npm run copy_styles",
         "copy_styles": "copyfiles -u 1 src/**/*.scss dist",
-        "copy_main": "copyfiles package.json readme.md changelog.md .npmignore dist",
+        "copy_main": "copyfiles package.json readme.md changelog.md .npmignore dist && cd dist && npm pkg delete scripts devDependencies",
         "transfer": "npm run copy_styles && npm run copy_main",
         "build_transfer": "npm run build && npm run transfer",
-        "prepublish": "npm run lint && npm run validate:scss && npm run build_transfer && cd dist && npm pack",
-        "publish": "npm run lint && npm run validate:scss && npm run build_transfer && cd dist && npm publish --access=public",
+        "pack:dist": "npm run lint && npm run validate:scss && npm run build_transfer && cd dist && npm pack",
+        "release": "npm run lint && npm run validate:scss && npm run build_transfer && cd dist && npm publish --access=public",
         "lint": "npx eslint src/**/*.ts src/**/*.tsx",
         "lint:scss": "npx stylelint \"src/**/*.scss\"",
         "build:scss": "npx sass --load-path=node_modules src/:dist/ --no-source-map",
