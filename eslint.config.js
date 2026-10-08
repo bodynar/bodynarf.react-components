@@ -93,4 +93,23 @@ export default tseslint.config([
 			},
 		}
 	},
+	{
+		// Demo sandbox — JSX formatting rules are relaxed there
+		files: ["examples/**/*.{ts,tsx}"],
+		rules: {
+			"react/jsx-one-expression-per-line": "off",
+			"custom/jsx-props-per-line": "off",
+			"react/jsx-max-props-per-line": "off",
+			"react/jsx-closing-tag-location": "off",
+			"react/jsx-no-leaked-render": "off",
+			"react/no-unescaped-entities": "off",
+			"react/jsx-child-element-spacing": "off",
+			"react/button-has-type": "off",
+			"react/jsx-closing-bracket-location": "off",
+			"react/no-array-index-key": "off",
+			"react/jsx-handler-names": "off",
+			"react/jsx-max-depth": "off",
+			"react/self-closing-comp": "off",
+		},
+	},
 ]);
