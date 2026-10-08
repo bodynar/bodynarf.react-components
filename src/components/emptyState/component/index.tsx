@@ -17,6 +17,7 @@ const EmptyState: FC<EmptyStateProps> = ({
     description,
     icon = "inbox",
     color = ElementColor.Default,
+    style,
     action,
     children,
     compact = false,
@@ -33,12 +34,12 @@ const EmptyState: FC<EmptyStateProps> = ({
 
     const iconClassName = getClassName([
         "bbr-empty-state__icon",
-        getElementColorClassName(color),
+        getElementColorClassName(style ?? color),
     ]);
 
     const titleClassName = getClassName([
         "bbr-empty-state__title",
-        getElementColorClassName(color),
+        getElementColorClassName(style ?? color),
     ]);
 
     return (

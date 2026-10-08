@@ -43,7 +43,7 @@ const TimelineItemComponent: FC<TimelineItemProps> = ({
     showTimestampsSeparate,
     leftAligned,
 }) => {
-    const itemColorClass = getElementColorClassName(item.color ?? defaultColor);
+    const itemColorClass = getElementColorClassName(item.style ?? item.color ?? defaultColor);
 
     const itemClassName = getClassName([
         "bbr-timeline-item",

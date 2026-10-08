@@ -3,53 +3,41 @@ All changes will be published here in reverse chronological order
 
 ## v1.16.0
 
-- **Date primitive** *(removed)* — **Breaking:** the deprecated native `<input type="date">` wrapper is removed, as promised in v1.15.0. Use `DateInput` instead.
+### Removed
 
-- **Dropzone** *(new)* — Drag-and-drop file collection area. Native HTML5 DnD plus a hidden `<input type="file">` opened on click. Per-state content is customizable via the `Dropzone.Idle` / `Dropzone.Accept` / `Dropzone.Reject` slot components; without slots, `text` + `description` defaults are rendered. Supports `accept`, `multiple`, `disabled`, sizes and colors; files are reported through `onValueChange(File[])`.
+- **Date primitive** — **Breaking:** the deprecated native `<input type="date">` wrapper (promised in v1.15.0). Use `DateInput`.
+- **Button** — **Breaking:** the deprecated `type` prop and the `ButtonType` union (deprecated since v1.14). Use `style` with the `ButtonStyle` enum.
+- **Breadcrumbs** — **Breaking:** the deprecated `BreadCrumb` fields `active`, `title`, `path`. Use `caption` / `href`.
+- **Paginator** — **Breaking:** the `showNextButtons` prop and the deprecated `resources` caption/title fields. Use `nextButtonsConfig` (`"inline"` or `"aside"` placement); `resources.openConcretePageTitleTemplate` stays.
 
-- **DndList** *(new)* — Reorderable list built on native HTML5 drag-and-drop (no external dependencies). Items are rendered through a render prop (`children: (item, index) => ReactNode`); the full reordered array is reported via `onReorder`. Optional `withHandle` renders a drag handle icon.
+### Added
 
-- **TableOfContents** *(new)* — Navigation list that highlights the currently visible section via `IntersectionObserver` and scrolls to it smoothly on click. Entries support a nesting `order` used for indentation.
+- **Dropzone** — drag-and-drop file area with idle / accept / reject slots and click-to-browse; reports files via `onValueChange(File[])`.
+- **DndList** — reorderable list via native HTML5 drag-and-drop; items through a render prop, reordered array via `onReorder`, optional drag handle.
+- **TableOfContents** — scrollspy contents list (`IntersectionObserver`) with smooth scrolling and nesting indents.
+- **ButtonGroup** — attached buttons sharing a single style, horizontal or vertical.
+- **FloatButton** — floating action button pinned to a screen corner, icon with optional caption.
+- **BorderBeam** *(CSS)* — animated rotating border ring (`.bbr-border-beam--*`): 6 color variants and 4 gradient presets; respects `prefers-reduced-motion`.
+- **CircularMeter** — SVG circular progress meter with a value template; optionally interactive (drag / arrow keys).
+- **AvatarGroup** — overlapping avatar stack with a `+N` overflow popover and a uniform group size.
+- **DropdownMenu** — popover menu over any trigger: items, separators, headers, icons, disabled entries, keyboard-activatable; configurable position and `hideOnOuterClick`.
+- **RadioCardGroup** — card-style single selection in a grid; card `value` falls back to its `label`.
+- **ToggleButton / ToggleButtonGroup** — pressable buttons with an active state; the group supports radio (`single`) or checkbox (`multiple`) selection.
+- **Center** — absolute centering relative to the nearest positioned parent (`both` / `horizontal` / `vertical`).
+- **Stack** (`HStack` / `VStack`) — flexbox container with `gap`, `align`, `justify`, `wrap`.
+- **ActionBar** — floating panel with actions for selected items; positions from FloatButton corners plus centered `bottom` / `top`.
 
-- **ButtonGroup** *(new)* — Row (or column) of attached buttons sharing a single style: `items` (caption, icon, `onClick`, `disabled`, `title`) plus shared `style` (required), `size`, `outlined`, `rounded`, `light` and `vertical`.
+### Updated
 
-- **FloatButton** *(new)* — Floating action button pinned to a screen corner (`bottom-right` by default). Bootstrap icon with optional caption, button style/size and tooltip.
-
-- **BorderBeam** *(new, CSS)* — `.bbr-border-beam` classes in `animations.scss`: an animated rotating border ring for any `position: relative` element. Six single-color variants (`--primary`, `--link`, `--info`, `--success`, `--warning`, `--danger`) and four gradient presets (`--ocean`, `--aurora`, `--fire`, `--rainbow`). Automatically disabled under `prefers-reduced-motion`.
-
-- **CircularMeter** *(new)* — SVG circular progress meter with configurable `min`/`max`/`step`, arc and track colors, stroke width, sizes, center `label` and `valueTemplate` (`"{value}"` placeholder). `readonly={false}` makes the meter interactive — pointer drag and arrow keys — reporting changes via `onChange`.
-
-- **AvatarGroup** *(new)* — Overlapping avatar stack: `items: AvatarProps[]`, `maxVisible` (default `5`), a single group-level `size` applied to every avatar (item sizes are ignored to keep the row uniform) and a group-level `shape` (a per-item shape takes priority). Overflow renders a `+N` avatar opening a scrollable Popover list of the remaining members (`overflowPopoverTitle`); the popover opens upward when there is no space below.
-
-- **DropdownMenu** *(new)* — Menu panel over any `trigger` node, built on Popover. `items` support `type: "item" | "separator" | "header"`, `ElementIcon` icon configurations, optional per-item `title` tooltips, disabled entries and `onClick`; item anchors are keyboard-activatable (`role="menu"`). The menu `position` (Popover placement), `onToggle` and `hideOnOuterClick` are configurable; a `disabled` trigger never opens the menu.
-
-- **RadioCardGroup** *(new)* — Single selection from card-like options: controlled `value` / uncontrolled `defaultValue`, `onChange`, `columns` grid, `size`, accent `style` (`ElementColor`, tints the selected card, focus ring and icon), per-card `label`/`description`/`icon`/`disabled`; an omitted card `value` falls back to its `label`. Hidden native radio inputs keep it keyboard- and screen-reader-accessible.
-
-- **ToggleButton** *(new)* — Pressable button with an active state: controlled `active` / uncontrolled `defaultActive`, `onToggle`, caption or icon, standard Bulma button look (`style`, `size`, `outlined`, `rounded`). Renders `aria-pressed`.
-
-- **ToggleButtonGroup** *(new)* — Row of attached ToggleButtons with `mode: "single"` (radio) or `"multiple"` (checkbox) behavior, `value` / `defaultValue`, `onChange` (emits `string` in single mode, `string[]` in multiple; selection changes are reported through `onChange` only), items typed as a `Pick` of `ButtonProps` plus a unique `value`, shared button props and `vertical` layout.
-
-- **Center** *(new)* — Absolutely centers its content relative to the nearest `position: relative` parent: `axis: "both" | "horizontal" | "vertical"`.
-
-- **Stack** *(new)* — Flexbox layout container: `direction` (`"row"` / `"column"`), `gap` (number → px, or any CSS string), `align`, `justify`, `wrap`. `HStack` / `VStack` convenience shortcuts included.
-
-- **ActionBar** *(new)* — Floating action panel (fixed position) for selection flows: `open` visibility (kept mounted so the exit transition plays), `content` (e.g. "5 items selected"), `actions` (typed as a `Pick` of `ButtonProps`) rendered as buttons, `closable` close button, `position` — FloatButton corners plus centered `bottom` / `top`, and a single `size` applied to the panel and every action button.
-
-- **Accordion** *(update)* — Added the `Accordion.Header` compound slot for custom header content; `caption` is now optional when the slot is used and soft-deprecated in its favor.
-
-- **Input primitives** *(update)* — `Text`, `Password`, `Multiline`, `Number`, `AutoComplete`, `DateInput` and `TimePicker` gained `addonLeft` / `addonRight` props (`InputAddon`: static text, static icon or interactive button). With addons the input is wrapped in a Bulma `has-addons` field; rendering without addons is unchanged.
-
-- **Stepper** *(update)* — Added `variant?: "default" | "panel"`: the `panel` variant renders full-width attached chevron/flag steps, useful inside wizards and multi-step forms.
-
-- **TimePicker** *(update)* — Reworked from multiple selects into a single masked text input: auto-inserted `:` separators, per-character validation, `use12Hours` with an in-control AM/PM toggle, a reset button (`clearable` + `clearTitle`), ArrowUp / ArrowDown stepping of the segment under the caret and enforced `min` / `max` bounds. Controlled mode via `value`. `variant: "picker"` renders a read-only control that opens a popover with hour / minute / second (and AM/PM) columns instead of the typed input.
-
-- **Tag** *(update)* — Added `iconLeft` / `iconRight` (`ElementIcon`), `outlined` (transparent background with a colored border for each ElementColor, combinable with the light variant) and `light` as a synonym of `lightColor` (the latter is soft-deprecated). `outlined` is ignored when `customColor` is set.
-
-- **MenuButton / SplitButton** *(update)* — The dropdown list is now rendered internally through the new DropdownMenu component: unified popover-based menu look and keyboard-activatable items. Public APIs are unchanged. Popover gained an optional `hideOnOuterClick` prop (default `true`, previous behavior).
-
-- **Types** *(update)* — Added reusable prop capability types to `@bbr/types`: `ElementWithIcon`, `SizableElement`, `StylableElement` (`style: ElementColor`), `ButtonStylableElement` (`style: ButtonStyle`), `OutlinedElement`, `RoundedElement`, `DisableableElement` — compose them into component props to quickly attach or remove common modifiers; applied across the props types of all components. `ButtonStyle` moved into `@bbr/types`; the old `@bbr/components/button` import path keeps working via re-export. No component API changed — the props are identical.
-
-- **Package** *(update)* — Declared `sideEffects: ["**/*.scss", "**/*.css"]` in `package.json`. Bundlers can now tree-shake barrel imports: importing a single export (e.g. an enum) from the package root no longer pulls every library component into the consumer bundle. Note: styles of components that are not imported are no longer shipped — if you use library CSS classes in markup without importing the component, import the component or its stylesheet explicitly.
+- **Accordion** — added the `Accordion.Header` slot for custom header content; `caption` is optional and soft-deprecated.
+- **Input primitives** — `addonLeft` / `addonRight` addons (text / icon / button) on Text, Password, Multiline, Number, AutoComplete, DateInput and TimePicker.
+- **Stepper** — new `variant: "panel"` renders full-width attached flag steps.
+- **TimePicker** — reworked into a single masked input (auto separators, per-character validation, 12h AM/PM toggle, clearable, arrow-key segment stepping, `min` / `max`); `variant: "picker"` opens a time-columns popover instead.
+- **Tag** — added `iconLeft` / `iconRight`, `outlined` and `light`; `lightColor` is soft-deprecated.
+- **MenuButton / SplitButton** — dropdowns are now rendered through DropdownMenu (unified look, keyboard support); Popover gained `hideOnOuterClick`.
+- **Colors unification** — components exposing `color?: ElementColor` now accept `style` as well (`StylableElement`): Alert, Badge, CircularMeter, EmptyState, Notification, OtpInput, Progress, SegmentedControl, Spinner, Stat, Stepper, TagGroup, Timeline, Toast. `color` is deprecated (removal in v1.18); `style` takes precedence.
+- **Types** — reusable capability types in `@bbr/types` (`ElementWithIcon`, `SizableElement`, `StylableElement`, `ButtonStylableElement`, `OutlinedElement`, `RoundedElement`, `DisableableElement`), applied across component props. `ButtonStyle` moved into `@bbr/types` (old import path re-exported). No API changes.
+- **Package** — declared `sideEffects: ["**/*.scss", "**/*.css"]`: barrel imports are tree-shakeable now. Styles of non-imported components are no longer shipped.
 
 ## v1.15.1
 

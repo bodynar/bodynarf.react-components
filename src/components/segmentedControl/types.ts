@@ -1,4 +1,4 @@
-import { BaseElementProps, DisableableElement, ElementColor, ElementSize } from "@bbr/types";
+import { BaseElementProps, DisableableElement, ElementColor, ElementSize, StylableElement } from "@bbr/types";
 
 /** A single option in the segmented control */
 export type SegmentedOption<T extends string = string> = {
@@ -19,6 +19,7 @@ export type SegmentedOption<T extends string = string> = {
 export type SegmentedControlProps<T extends string = string> =
     & BaseElementProps
     & DisableableElement
+    & StylableElement
     & {
         /** Available options */
         options: SegmentedOption<T>[];
@@ -34,6 +35,7 @@ export type SegmentedControlProps<T extends string = string> =
 
         /**
          * Accent colour applied to the active segment.
+         * @deprecated [Will be removed in v1.18] Use `style` prop instead.
          * @default ElementColor.Primary
          */
         color?: ElementColor;

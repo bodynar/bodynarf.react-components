@@ -16,6 +16,7 @@ const DEFAULT_CONFIRM_KEYS = ["Enter", ","];
 const TagGroup: FC<TagGroupProps> = ({
     value,
     color = ElementColor.Primary,
+    style,
     size = ElementSize.Normal,
     placeholder = "Add tag…",
     addable = true,
@@ -94,7 +95,7 @@ const TagGroup: FC<TagGroupProps> = ({
 
                         size={size}
                         content={tag}
-                        style={color}
+                        style={style ?? color}
                         className="bbr-tag-group__tag"
                         onRemove={removable && !disabled ? () => removeTag(tag) : undefined}
                     />

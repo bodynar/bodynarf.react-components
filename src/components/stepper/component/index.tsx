@@ -36,6 +36,7 @@ const Stepper: FC<StepperProps> = ({
     currentStep,
     size = ElementSize.Normal,
     color = ElementColor.Primary,
+    style,
     vertical = false,
     showNumbers = true,
     clickable = false,
@@ -53,12 +54,12 @@ const Stepper: FC<StepperProps> = ({
         "bbr-stepper",
         className,
         getSizeClassName(size, ElementSize.Normal),
-        getElementColorClassName(color),
+        getElementColorClassName(style ?? color),
         vertical ? "is-vertical" : "",
         showConnectors === true || showArrows === true ? "has-connectors" : "",
         animated ? "is-animated" : "",
         variant === "panel" ? "bbr-stepper--panel" : "",
-    ]), [className, size, color, vertical, showConnectors, animated, showArrows, variant]);
+    ]), [className, size, style, color, vertical, showConnectors, animated, showArrows, variant]);
 
     const handleStepClick = useCallback(
         (step: StepItem, index: number) => {

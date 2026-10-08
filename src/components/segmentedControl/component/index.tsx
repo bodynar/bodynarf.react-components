@@ -16,6 +16,7 @@ const SegmentedControl: FC<SegmentedControlProps> = ({
     value,
     onChange,
     color = ElementColor.Primary,
+    style,
     size = ElementSize.Normal,
     fullWidth = false,
     disabled = false,
@@ -48,6 +49,7 @@ const SegmentedControl: FC<SegmentedControlProps> = ({
 
                     size={size}
                     color={color}
+                    style={style}
                     value={value}
                     option={option}
                     onChange={onChange}
@@ -62,7 +64,7 @@ export default SegmentedControl;
 
 /** Props for a single option within the segmented control */
 type SegmentedControlOptionProps =
-    & Pick<SegmentedControlProps, "value" | "onChange" | "color" | "size">
+    & Pick<SegmentedControlProps, "value" | "onChange" | "color" | "style" | "size">
     & {
         /** The option data for this segment */
         option: SegmentedControlProps["options"][number];
@@ -74,12 +76,14 @@ type SegmentedControlOptionProps =
 /** A single option within the segmented control */
 const SegmentedControlOption: FC<SegmentedControlOptionProps> = ({
     option, value, onChange, disabled,
-    color = ElementColor.Primary, size = ElementSize.Normal,
+    color = ElementColor.Primary, style, size = ElementSize.Normal,
 }) => {
     const isActive = option.value === value;
     const isDisabled = disabled || option.disabled;
 
-    const activeColorClass = color === ElementColor.Default ? "is-dark" : getElementColorClassName(color);
+    const effectiveColor = style ?? color;
+
+    const activeColorClass = effectiveColor === ElementColor.Default ? "is-dark" : getElementColorClassName(effectiveColor);
 
     const btnClassName = getClassName([
         "button",

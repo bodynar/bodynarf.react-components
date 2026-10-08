@@ -7,9 +7,16 @@ export type SpinnerProps =
     & {
         /**
          * Color variant.
+         * @deprecated [Will be removed in v1.18] Use `style` prop instead.
          * @default ElementColor.Primary
          */
         color?: Exclude<ElementColor, ElementColor.Default>;
+
+        /**
+         * Color variant.
+         * @default ElementColor.Primary
+         */
+        style?: Exclude<ElementColor, ElementColor.Default>;
 
         /**
          * When true, the spinner is absolutely positioned and fills its

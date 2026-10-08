@@ -13,6 +13,7 @@ import { SpinnerProps } from "..";
 const Spinner: FC<SpinnerProps> = ({
     size = ElementSize.Normal,
     color = ElementColor.Primary,
+    style,
     overlay = false,
     loadingLabel = "Loading",
 
@@ -22,7 +23,7 @@ const Spinner: FC<SpinnerProps> = ({
 
     const spinnerClassName = getClassName([
         "bbr-spinner",
-        getElementColorClassName(color),
+        getElementColorClassName(style ?? color),
         getSizeClassName(size),
         className,
     ]);

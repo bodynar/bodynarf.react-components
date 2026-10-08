@@ -16,6 +16,7 @@ const Badge: FC<BadgeProps> = ({
     dot = false,
     max = 99,
     color = ElementColor.Danger,
+    style,
     hidden = false,
 
     className, title, data,
@@ -29,7 +30,7 @@ const Badge: FC<BadgeProps> = ({
 
     const badgeClassName = getClassName([
         "bbr-badge__indicator",
-        getElementColorClassName(color),
+        getElementColorClassName(style ?? color),
         dot ? "bbr-badge__indicator--dot" : "",
         hidden ? "bbr-badge__indicator--hidden" : "",
     ]);

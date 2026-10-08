@@ -1,10 +1,11 @@
-import { BaseElementProps, DisableableElement, ElementColor, SizableElement } from "@bbr/types";
+import { BaseElementProps, DisableableElement, ElementColor, SizableElement, StylableElement } from "@bbr/types";
 
 /** OtpInput component props */
 export type OtpInputProps =
     & BaseElementProps
     & SizableElement
     & DisableableElement
+    & StylableElement
     & {
         /** Current OTP string value (length <= `length`) */
         value: string;
@@ -35,6 +36,7 @@ export type OtpInputProps =
 
         /**
          * Border colour applied to all cells.
+         * @deprecated [Will be removed in v1.18] Use `style` prop instead.
          * @default ElementColor.Default
          */
         color?: ElementColor;

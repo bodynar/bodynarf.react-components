@@ -16,6 +16,7 @@ import ToastFixedContainer from "../components/fixedContainer";
 const Toast: FC<ToastProps> = ({
     children,
     color = ElementColor.Default,
+    style,
     closable = true,
     onClose = emptyFn,
     position = ElementPosition.Right,
@@ -29,7 +30,7 @@ const Toast: FC<ToastProps> = ({
     const notificationClassName = getClassName([
         "bbr-toast",
         "notification",
-        getElementColorClassName(color),
+        getElementColorClassName(style ?? color),
         className,
     ]);
 

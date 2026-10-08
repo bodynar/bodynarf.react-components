@@ -1,7 +1,7 @@
-import { BaseElementProps, ElementColor, SizableElement } from "@bbr/types";
+import { BaseElementProps, ElementColor, SizableElement, StylableElement } from "@bbr/types";
 
 /** Single timeline event item */
-export interface TimelineItem {
+export interface TimelineItem extends StylableElement {
     /** Unique event identifier */
     id: string;
 
@@ -20,7 +20,10 @@ export interface TimelineItem {
      */
     icon?: string;
 
-    /** Optional color override for this specific item */
+    /**
+     * Optional color override for this specific item
+     * @deprecated [Will be removed in v1.18] Use `style` prop instead.
+     */
     color?: ElementColor;
 
     /** Optional custom marker content (text or icon) */
@@ -31,11 +34,15 @@ export interface TimelineItem {
 export type TimelineProps =
     & BaseElementProps
     & SizableElement
+    & StylableElement
     & {
         /** Array of timeline events to display */
         items: Array<TimelineItem>;
 
-        /** Default color for timeline markers */
+        /**
+         * Default color for timeline markers
+         * @deprecated [Will be removed in v1.18] Use `style` prop instead.
+         */
         color?: ElementColor;
 
         /**

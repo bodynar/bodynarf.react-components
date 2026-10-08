@@ -1,16 +1,18 @@
-import { BaseElementProps, DisableableElement, ElementColor, ElementSize } from "@bbr/types";
+import { BaseElementProps, DisableableElement, ElementColor, ElementSize, StylableElement } from "@bbr/types";
 import { TagProps } from "@bbr/components/tag";
 
 /** TagGroup component props */
 export type TagGroupProps =
     & BaseElementProps
     & DisableableElement
+    & StylableElement
     & {
         /** Controlled list of tag values */
         value: string[];
 
         /**
          * Tag color.
+         * @deprecated [Will be removed in v1.18] Use `style` prop instead.
          * @default ElementColor.Primary
          */
         color?: ElementColor;

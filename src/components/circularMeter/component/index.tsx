@@ -45,6 +45,7 @@ const CircularMeter: FC<CircularMeterProps> = ({
     step = 1,
     size = ElementSize.Normal,
     color,
+    style,
     trackColor,
     strokeWidth = DEFAULT_STROKE_WIDTH,
     label,
@@ -134,7 +135,7 @@ const CircularMeter: FC<CircularMeterProps> = ({
     const containerClassName = getClassName([
         "bbr-circular-meter",
         getSizeClassName(size, ElementSize.Normal),
-        getElementColorClassName(color),
+        getElementColorClassName(style ?? color),
         interactive ? "is-editable" : "",
         className,
     ]);

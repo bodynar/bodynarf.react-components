@@ -1,4 +1,4 @@
-import { BaseElementProps, ElementColor, SizableElement } from "@bbr/types";
+import { BaseElementProps, ElementColor, SizableElement, StylableElement } from "@bbr/types";
 
 /** Single step item */
 export interface StepItem {
@@ -25,6 +25,7 @@ export type StepStatus = "completed" | "current" | "upcoming";
 export type StepperProps =
     & BaseElementProps
     & SizableElement
+    & StylableElement
     & {
         /** Array of steps to display */
         steps: Array<StepItem>;
@@ -32,7 +33,10 @@ export type StepperProps =
         /** Currently active step id */
         currentStep: string;
 
-        /** Component color for completed/active steps */
+        /**
+         * Component color for completed/active steps
+         * @deprecated [Will be removed in v1.18] Use `style` prop instead.
+         */
         color?: ElementColor;
 
         /**

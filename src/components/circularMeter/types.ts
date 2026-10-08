@@ -1,9 +1,10 @@
-import { BaseElementProps, ElementColor, SizableElement } from "@bbr/types";
+import { BaseElementProps, ElementColor, SizableElement, StylableElement } from "@bbr/types";
 
 /** Circular progress meter props. */
 export type CircularMeterProps =
     & BaseElementProps
     & SizableElement
+    & StylableElement
     & {
         /** Current value. */
         value: number;
@@ -17,7 +18,10 @@ export type CircularMeterProps =
         /** Step used in the interactive mode (drag / arrow keys). @default 1 */
         step?: number;
 
-        /** Color of the value arc. */
+        /**
+         * Color of the value arc.
+         * @deprecated [Will be removed in v1.18] Use `style` prop instead.
+         */
         color?: ElementColor;
 
         /** CSS color of the background track (overrides the default). */
