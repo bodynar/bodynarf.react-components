@@ -1,0 +1,67 @@
+.bbr-dnd-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    // While a drag is in progress the resting items slightly fade back
+    // under a diagonal gray stripe pattern
+    &.is-drag-active &__item:not(.is-dragging) {
+        opacity: 0.75;
+        background-image: repeating-linear-gradient(
+            45deg,
+            hsl(0, 0%, 96%) 0,
+            hsl(0, 0%, 96%) 8px,
+            hsl(0, 0%, 100%) 8px,
+            hsl(0, 0%, 100%) 16px
+        );
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        background-color: hsl(0, 0%, 100%);
+        border: 1px solid hsl(0, 0%, 86%);
+        border-radius: 4px;
+        cursor: grab;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease, transform 0.15s ease;
+
+        &:hover {
+            border-color: hsl(0, 0%, 71%);
+        }
+
+        &:active {
+            cursor: grabbing;
+        }
+
+        &.has-handle {
+            cursor: default;
+        }
+
+        // The dragged item reads as a lifted card, not a faded ghost
+        &.is-dragging {
+            opacity: 1;
+            border: 1px dashed hsl(217, 71%, 53%);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+            transform: scale(1.02);
+            z-index: 1;
+        }
+
+        &.is-drag-over {
+            border-color: hsl(217, 71%, 53%);
+            box-shadow: inset 0 2px 0 hsl(217, 71%, 53%);
+        }
+    }
+
+    &__handle {
+        display: inline-flex;
+        align-items: center;
+        color: hsl(0, 0%, 71%);
+        cursor: grab;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+}
