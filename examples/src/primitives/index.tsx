@@ -6,7 +6,6 @@ import Text       from "@bodynarf/react.components/components/primitives/text";
 import NumberInput from "@bodynarf/react.components/components/primitives/number";
 import Multiline  from "@bodynarf/react.components/components/primitives/multiline";
 import Password   from "@bodynarf/react.components/components/primitives/password";
-import DatePicker from "@bodynarf/react.components/components/primitives/date";
 import ColorPicker from "@bodynarf/react.components/components/primitives/color";
 import Checkbox   from "@bodynarf/react.components/components/primitives/checkbox";
 import Switch     from "@bodynarf/react.components/components/primitives/switch";
@@ -43,7 +42,6 @@ const PrimitivesExamples: FC = () => {
     const [numVal,      setNumVal]      = useState<number | undefined>(42);
     const [multiVal,    setMultiVal]    = useState("");
     const [passVal,     setPassVal]     = useState("");
-    const [dateVal,     setDateVal]     = useState<Date | undefined>();
     const [colorVal,    setColorVal]    = useState<Color | undefined>(undefined);
     const [checkVal,    setCheckVal]    = useState(false);
     const [switchVal,   setSwitchVal]   = useState(false);
@@ -174,26 +172,6 @@ const PrimitivesExamples: FC = () => {
                         </div>
                         <div className="column is-4">
                             <Password label={LABEL("Disabled")} placeholder="disabled" disabled onValueChange={() => {}} />
-                        </div>
-                    </div>
-                </div>
-
-                {/* Date */}
-                <div className="box">
-                    <p className="subtitle is-5">Date Picker</p>
-                    <DatePicker label={LABEL("Date:")} onValueChange={setDateVal} />
-                    <p className="help mt-1">Selected: <strong>{dateVal?.toLocaleDateString() ?? "(none)"}</strong></p>
-
-                    <hr />
-                    <div className="columns">
-                        <div className="column is-4">
-                            <DatePicker label={LABEL("Disabled")} disabled onValueChange={() => {}} />
-                        </div>
-                        <div className="column is-4">
-                            <DatePicker label={LABEL("Readonly")} defaultValue={new Date()} readonly onValueChange={() => {}} />
-                        </div>
-                        <div className="column is-4">
-                            <DatePicker label={LABEL("Rounded")} rounded onValueChange={() => {}} />
                         </div>
                     </div>
                 </div>

@@ -84,9 +84,6 @@ export * from "./primitives/checkbox";
 export { default as Color } from "./primitives/color";
 export * from "./primitives/color";
 
-export { default as Date } from "./primitives/date";
-export * from "./primitives/date";
-
 export { default as Multiline } from "./primitives/multiline";
 export * from "./primitives/multiline";
 
