@@ -1,7 +1,7 @@
 import { FC, useCallback, useRef } from "react";
 
 import AvatarGroupComponent from "@bodynarf/react.components/components/avatarGroup";
-import { AvatarProps, AvatarShape } from "@bodynarf/react.components";
+import { AvatarProps, AvatarShape, AvatarStatus } from "@bodynarf/react.components";
 
 import Log, { LogRef } from "@app/sharedComponents/log";
 import ComponentUseCase from "@app/sharedComponents/useCase";

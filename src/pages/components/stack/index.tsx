@@ -116,17 +116,21 @@ const Stack: FC = () => {
                         code={[
                             `import Stack from "@bodynarf/react.components/components/stack";`,
                             "",
-                            `<Stack direction="row" align="center" style={{ height: 80 }}>…</Stack>`,
+                            `<div style={{ height: 80 }}>`,
+                            `    <Stack direction="row" align="center">…</Stack>`,
+                            `</div>`,
                         ].join("\n")}
                     />
                 }
             >
-                <StackComponent direction="row" align="center" style={{ height: "80px" }}>
-                    <Tag content="start" />
-                    <span className="tag is-primary is-medium">center</span>
-                    <span className="tag is-info is-large">center</span>
-                    <Tag content="end" />
-                </StackComponent>
+                <div style={{ height: "80px" }}>
+                    <StackComponent direction="row" align="center">
+                        <Tag content="start" />
+                        <span className="tag is-primary is-medium">center</span>
+                        <span className="tag is-info is-large">center</span>
+                        <Tag content="end" />
+                    </StackComponent>
+                </div>
             </ComponentUseCase>
 
             <ComponentUseCase
@@ -143,11 +147,13 @@ const Stack: FC = () => {
                     />
                 }
             >
-                <StackComponent direction="row" justify="space-between" style={{ border: "1px dashed #dbdbdb", padding: "8px" }}>
-                    <Tag content="first" />
-                    <Tag content="middle" />
-                    <Tag content="last" />
-                </StackComponent>
+                <div style={{ border: "1px dashed #dbdbdb", padding: "8px" }}>
+                    <StackComponent direction="row" justify="space-between">
+                        <Tag content="first" />
+                        <Tag content="middle" />
+                        <Tag content="last" />
+                    </StackComponent>
+                </div>
             </ComponentUseCase>
 
             <ComponentUseCase
@@ -164,14 +170,16 @@ const Stack: FC = () => {
                     />
                 }
             >
-                <StackComponent direction="row" wrap="wrap" style={{ maxWidth: "320px", border: "1px dashed #dbdbdb", padding: "8px" }}>
-                    <Tag content="tag 1" />
-                    <Tag content="tag 2" />
-                    <Tag content="tag 3" />
-                    <Tag content="tag 4" />
-                    <Tag content="tag 5" />
-                    <Tag content="tag 6" />
-                </StackComponent>
+                <div style={{ maxWidth: "320px", border: "1px dashed #dbdbdb", padding: "8px" }}>
+                    <StackComponent direction="row" wrap="wrap">
+                        <Tag content="tag 1" />
+                        <Tag content="tag 2" />
+                        <Tag content="tag 3" />
+                        <Tag content="tag 4" />
+                        <Tag content="tag 5" />
+                        <Tag content="tag 6" />
+                    </StackComponent>
+                </div>
             </ComponentUseCase>
 
             <ComponentUseCase

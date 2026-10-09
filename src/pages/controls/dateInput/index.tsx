@@ -16,6 +16,7 @@ const DateInput: FC = () => {
     const [labelValue, setLabelValue] = useState<Date | undefined>();
     const [calendarValue, setCalendarValue] = useState<Date | undefined>();
     const [addonValue, setAddonValue] = useState<Date | undefined>();
+    const [addonRemountKey, setAddonRemountKey] = useState(0);
 
     const today = new Date();
     const minDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
@@ -304,8 +305,9 @@ const DateInput: FC = () => {
                             "",
                             `const [value, setValue] = useState<Date | undefined>();`,
                             "",
+                            `// the control is uncontrolled — set defaultValue and track changes via onValueChange`,
                             `<DateInput`,
-                            `    value={value}`,
+                            `    defaultValue={value}`,
                             `    onValueChange={setValue}`,
                             `    addonLeft={{ type: "icon", icon: { name: "calendar-event" } }}`,
                             `    addonRight={{ type: "button", caption: "Today", onClick: () => setValue(new Date()) }}`,
@@ -316,10 +318,18 @@ const DateInput: FC = () => {
             >
                 <div>
                     <DateInputComponent
-                        value={addonValue}
+                        key={addonRemountKey}
+                        defaultValue={addonValue}
                         onValueChange={setAddonValue}
                         addonLeft={{ type: "icon", icon: { name: "calendar-event" } }}
-                        addonRight={{ type: "button", caption: "Today", onClick: () => setAddonValue(new Date()) }}
+                        addonRight={{
+                            type: "button",
+                            caption: "Today",
+                            onClick: () => {
+                                setAddonValue(new Date());
+                                setAddonRemountKey(key => key + 1);
+                            },
+                        }}
                     />
                     <p className="mt-1 has-text-grey">
                         Value:

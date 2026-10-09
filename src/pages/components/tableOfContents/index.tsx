@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from "react";
+import { CSSProperties, FC, ReactElement } from "react";
 
 import TableOfContentsComponent from "@bodynarf/react.components/components/tableOfContents";
 
@@ -16,7 +16,7 @@ const scrollBoxStyle: CSSProperties = {
     padding: "0 1rem",
 };
 
-const filler = (text: string): Array<JSX.Element> =>
+const filler = (text: string): Array<ReactElement> =>
     Array.from({ length: 3 }, (_, i) => (
         <p key={i} className="my-3 has-text-grey">
             {text} — paragraph {i + 1}. Scroll the box and watch the active entry on the left follow the topmost visible section.
