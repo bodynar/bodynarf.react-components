@@ -1,6 +1,12 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.16.2
+
+### Updated
+
+- **FloatButton** — fixed: the button could lose `position: fixed` when Bulma's shared control rule (`.button { position: relative }`) appeared later in the consumer's CSS bundle — equal `(0,1,0)` specificity made the outcome cascade-order dependent. The package now outranks it with a `.bbr-float-button.button` compound selector.
+
 ## v1.16.1
 
 ### Updated

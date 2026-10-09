@@ -1,5 +1,4 @@
 .bbr-float-button {
-    position: fixed;
     z-index: 1000;
     padding: 0;
     justify-content: center;
@@ -69,4 +68,12 @@
         font-size: 0.85rem;
         font-weight: 600;
     }
+}
+
+// Bulma's shared control rule (`.button { position: relative }`) has the same
+// (0,1,0) specificity as `.bbr-float-button` — when a consumer's CSS bundle
+// places Bulma later, the button silently loses `position: fixed`.
+// The compound selector outranks it regardless of cascade order.
+.bbr-float-button.button {
+    position: fixed;
 }

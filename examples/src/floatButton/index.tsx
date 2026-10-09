@@ -22,6 +22,8 @@ const FloatButtonExamples: FC = () => {
 
                 <p className="block help">
                     A fixed-position floating action button pinned to a viewport corner. Configure it below — the live button updates instantly.
+                    Since v1.16.2 the package outranks Bulma's <code>.button {"{ position: relative }"}</code> control rule
+                    with a compound selector — the button stays fixed regardless of the consumer's CSS bundle order.
                 </p>
 
                 <div className="box">
