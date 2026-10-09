@@ -6,12 +6,11 @@ import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
 
-// the beam ::before has z-index: -1 and would be painted under the opaque
-// content column background — a personal stacking context keeps it above
+// the beam ring keeps its own stacking context since v1.16.1 (isolation: isolate
+// in the package css) — no local workarounds needed
 const beamStyle: CSSProperties = {
     padding: "12px 16px",
     borderRadius: "8px",
-    isolation: "isolate",
 };
 
 /** animations.scss demo page */
@@ -166,7 +165,6 @@ const Animations: FC = () => {
                 <button
                     type="button"
                     className="button is-primary is-rounded bbr-border-beam bbr-border-beam--rainbow mt-4"
-                    style={{ isolation: "isolate" }}
                 >
                     Beam on a button
                 </button>
