@@ -33,12 +33,12 @@ const TimePicker: FC = () => {
             <DemoComponentTitleInfoMessage
                 name="TimePicker"
                 version="1.14"
-                description="Component for selecting time values (hours, minutes, and optionally seconds)."
+                description={"Reworked in v1.16 into a masked time input: automatic separators, per-character validation, optional 12-hour AM/PM mode, clearable and keyboard-friendly (arrow keys step the focused segment).\nThe `variant: \"picker\"` mode opens a time-columns popover instead."}
             />
 
             <ComponentUseCase
                 caption="Minimal use"
-                description="The component can be rendered without any props."
+                description="The component can be rendered without any props. The default variant is a masked input (`hh:mm`)."
                 code={
                     <CodeExample
                         code={[
@@ -50,6 +50,29 @@ const TimePicker: FC = () => {
                 }
             >
                 <TimePickerComponent label={{ caption: "TimePicker demo", horizontal: false }} />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="variant"
+                description="Since v1.16: `input` (default) renders a single masked input; `picker` renders a read-only display that opens a popover with hour / minute (and second) columns."
+                code={
+                    <CodeExample
+                        code={[
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
+                            "",
+                            `<TimePicker`,
+                            `    variant="picker"`,
+                            `    label={{ caption: "Picker variant", horizontal: true }}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TimePickerComponent
+                    variant="picker"
+                    label={{ caption: "Picker variant", horizontal: true }}
+                />
             </ComponentUseCase>
 
             <hr />
@@ -100,7 +123,7 @@ const TimePicker: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="showSeconds"
-                description="Adds a seconds input field. Defaults to false."
+                description="Extends the mask with a seconds segment (`hh:mm:ss`). Defaults to false."
                 code={
                     <CodeExample
                         code={[
@@ -124,15 +147,16 @@ const TimePicker: FC = () => {
 
             <ComponentUseCase
                 captionIsCode
-                caption="step"
-                description="Step increment for minutes (and seconds if shown). Defaults to 1."
+                caption="use12Hours"
+                description="Since v1.16: 12-hour mask with an AM / PM toggle. The value is still exchanged as a 24-hour `TimeValue`."
                 code={
                     <CodeExample
                         code={[
                             `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
                             "",
                             `<TimePicker`,
-                            `    step={15}`,
+                            `    use12Hours`,
+                            `    defaultValue={{ hours: 14, minutes: 30 }}`,
                             `    label={{ caption: "TimePicker demo", horizontal: true }}`,
                             `/>`,
                         ].join("\n")}
@@ -141,7 +165,57 @@ const TimePicker: FC = () => {
             >
                 <TimePickerComponent
                     label={{ caption: "TimePicker demo", horizontal: true }}
-                    step={15}
+                    use12Hours
+                    defaultValue={{ hours: 14, minutes: 30 }}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="clearable / clearTitle"
+                description="Since v1.16: show a clear (×) button that resets the value to `undefined`. `clearTitle` sets its tooltip (defaults to `Clear`)."
+                code={
+                    <CodeExample
+                        code={[
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
+                            "",
+                            `<TimePicker`,
+                            `    clearable`,
+                            `    clearTitle="Reset time"`,
+                            `    defaultValue={{ hours: 12, minutes: 0 }}`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TimePickerComponent
+                    label={{ caption: "TimePicker demo", horizontal: true }}
+                    clearable
+                    clearTitle="Reset time"
+                    defaultValue={{ hours: 12, minutes: 0 }}
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                caption="addonLeft / addonRight"
+                description="Since v1.16 inputs support addons on either side — static text, an icon or an interactive button (`InputAddon` union)."
+                code={
+                    <CodeExample
+                        code={[
+                            `import TimePicker from "@bodynarf/react.components/components/primitives/timePicker";`,
+                            "",
+                            `<TimePicker`,
+                            `    addonLeft={{ type: "icon", icon: { name: "clock" } }}`,
+                            `    label={{ caption: "TimePicker demo", horizontal: true }}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <TimePickerComponent
+                    label={{ caption: "TimePicker demo", horizontal: true }}
+                    addonLeft={{ type: "icon", icon: { name: "clock" } }}
                 />
             </ComponentUseCase>
 

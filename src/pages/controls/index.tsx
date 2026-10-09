@@ -84,6 +84,7 @@ const controls: MenuItem = {
             caption: "Time Picker",
             component: <TimePicker />,
             createVersion: "1.14",
+            updateVersion: "1.16",
         },
         {
             path: "/controls/autoComplete",
