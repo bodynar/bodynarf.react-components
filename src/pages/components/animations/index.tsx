@@ -1,10 +1,18 @@
-import { FC, useState } from "react";
+import { CSSProperties, FC, useState } from "react";
 
 import "@bodynarf/react.components/animations.css";
 
 import ComponentUseCase from "@app/sharedComponents/useCase";
 import DemoComponentTitleInfoMessage from "@app/sharedComponents/title";
 import CodeExample from "@app/sharedComponents/codeExample";
+
+// the beam ::before has z-index: -1 and would be painted under the opaque
+// content column background — a personal stacking context keeps it above
+const beamStyle: CSSProperties = {
+    padding: "12px 16px",
+    borderRadius: "8px",
+    isolation: "isolate",
+};
 
 /** animations.scss demo page */
 const Animations: FC = () => {
@@ -134,7 +142,7 @@ const Animations: FC = () => {
                         <div
                             key={variant}
                             className={`bbr-border-beam${variant !== "" ? ` bbr-border-beam--${variant}` : ""} box mb-0`}
-                            style={{ padding: "12px 16px", borderRadius: "8px" }}
+                            style={beamStyle}
                         >
                             <p className="is-size-7 has-text-grey" style={{ marginBottom: 0 }}>
                                 {variant === "" ? "bbr-border-beam" : `--${variant}`}
@@ -147,7 +155,7 @@ const Animations: FC = () => {
                         <div
                             key={variant}
                             className={`bbr-border-beam bbr-border-beam--${variant} box mb-0`}
-                            style={{ padding: "12px 16px", borderRadius: "8px" }}
+                            style={beamStyle}
                         >
                             <p className="is-size-7 has-text-grey" style={{ marginBottom: 0 }}>
                                 {`--${variant}`}
@@ -158,6 +166,7 @@ const Animations: FC = () => {
                 <button
                     type="button"
                     className="button is-primary is-rounded bbr-border-beam bbr-border-beam--rainbow mt-4"
+                    style={{ isolation: "isolate" }}
                 >
                     Beam on a button
                 </button>
