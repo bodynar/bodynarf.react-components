@@ -69,7 +69,7 @@ const Accordion: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="caption"
-                description="Text displayed in the accordion header bar."
+                description="Text displayed in the accordion header bar. Since v1.16 this prop is soft-deprecated in favor of the `Accordion.Header` slot — the slot content takes precedence over the string."
                 code={
                     <CodeExample
                         code={[
@@ -84,6 +84,36 @@ const Accordion: FC = () => {
             >
                 <AccordionComponent caption="My section title">
                     Content
+                </AccordionComponent>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                caption="Accordion.Header"
+                description="Compound slot for custom header content — any ReactNode instead of a plain string. Available since v1.16; takes precedence over `caption`."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Accordion from "@bodynarf/react.components/components/accordion";`,
+                            "",
+                            `<Accordion>`,
+                            "    <Accordion.Header>",
+                            `        <span className="icon"><i className="bi bi-star-fill" /></span>`,
+                            `        <strong>Featured section</strong>`,
+                            "    </Accordion.Header>",
+                            "    Content",
+                            "</Accordion>",
+                        ].join("\n")}
+                    />
+                }
+            >
+                <AccordionComponent defaultExpanded>
+                    <AccordionComponent.Header>
+                        <span className="icon has-text-warning">
+                            <i className="bi bi-star-fill" />
+                        </span>
+                        <strong>Featured section</strong>
+                    </AccordionComponent.Header>
+                    Content with a custom header
                 </AccordionComponent>
             </ComponentUseCase>
 

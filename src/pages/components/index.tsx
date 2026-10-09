@@ -74,6 +74,7 @@ const components: MenuItem = {
             caption: "Accordion",
             component: <Accordion />,
             createVersion: "1.6",
+            updateVersion: "1.16",
         },
         {
             path: "/components/button",
@@ -86,7 +87,7 @@ const components: MenuItem = {
             caption: "Tag",
             component: <Tag />,
             createVersion: "1.5",
-            updateVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/dropdown",
@@ -153,7 +154,7 @@ const components: MenuItem = {
             caption: "Stepper",
             component: <Stepper />,
             createVersion: "1.14",
-            updateVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/timeline",

@@ -174,6 +174,30 @@ const Number: FC = () => {
             </ComponentUseCase>
 
             <ComponentUseCase
+                caption="addonLeft / addonRight"
+                description="Since v1.16 inputs support addons on either side — static text, an icon or an interactive button (`InputAddon` union)."
+                code={
+                    <CodeExample
+                        code={[
+                            `import NumberInput from "@bodynarf/react.components/components/primitives/number";`,
+                            "",
+                            `<NumberInput`,
+                            `    addonLeft={{ type: "text", content: "$" }}`,
+                            `    addonRight={{ type: "text", content: ".00" }}`,
+                            `    placeholder="0"`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <NumberComponent
+                    addonLeft={{ type: "text", content: "$" }}
+                    addonRight={{ type: "text", content: ".00" }}
+                    placeholder="0"
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
                 captionIsCode
                 caption="rounded"
                 description="Applies border-radius to the component. Disabled by default."

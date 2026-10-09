@@ -241,7 +241,7 @@ const TagGroup: FC = () => {
                     <>
                         Additional configuration passed to every rendered tag.
                         Accepts all <code>TagProps</code> except <code>content</code>, <code>onRemove</code>, <code>size</code> and <code>style</code> (those are controlled by TagGroup directly).
-                        Useful for <code>rounded</code>, <code>lightColor</code> and <code>customColor</code>.
+                        Useful for <code>rounded</code>, <code>light</code> and <code>customColor</code>.
                     </>
                 }
                 code={
@@ -252,7 +252,7 @@ const TagGroup: FC = () => {
                             `<TagGroup`,
                             `    value={tags}`,
                             `    onChange={setTags}`,
-                            `    tagConfig={{ rounded: true, lightColor: true }}`,
+                            `    tagConfig={{ rounded: true, light: true }}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -268,18 +268,18 @@ const TagGroup: FC = () => {
                         />
                     </div>
                     <div>
-                        <p className="mb-2 is-italic has-text-grey is-size-7">lightColor</p>
+                        <p className="mb-2 is-italic has-text-grey is-size-7">light</p>
                         <TagGroupComponent
                             value={tagConfigTags}
-                            tagConfig={{ lightColor: true }}
+                            tagConfig={{ light: true }}
                             onChange={setTagConfigTags}
                         />
                     </div>
                     <div>
-                        <p className="mb-2 is-italic has-text-grey is-size-7">rounded + lightColor</p>
+                        <p className="mb-2 is-italic has-text-grey is-size-7">rounded + light</p>
                         <TagGroupComponent
                             value={tagConfigTags}
-                            tagConfig={{ rounded: true, lightColor: true }}
+                            tagConfig={{ rounded: true, light: true }}
                             onChange={setTagConfigTags}
                         />
                     </div>

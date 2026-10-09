@@ -155,6 +155,30 @@ const Password: FC = () => {
             </ComponentUseCase>
 
             <ComponentUseCase
+                caption="addonLeft / addonRight"
+                description="Since v1.16 inputs support addons on either side — static text, an icon or an interactive button (`InputAddon` union)."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Password from "@bodynarf/react.components/components/primitives/password";`,
+                            "",
+                            `<Password`,
+                            `    addonLeft={{ type: "icon", icon: { name: "key" } }}`,
+                            `    addonRight={{ type: "button", caption: "Generate", onClick: () => {} }}`,
+                            `    placeholder="Enter your password"`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <PasswordComponent
+                    addonLeft={{ type: "icon", icon: { name: "key" } }}
+                    addonRight={{ type: "button", caption: "Generate", onClick: () => onValueChangeLogRef.current?.append("Generate clicked") }}
+                    placeholder="Enter your password"
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
                 captionIsCode
                 caption="rounded"
                 description="Applies border-radius to the component. Disabled by default."
