@@ -7,6 +7,9 @@ import changelogRaw from "@bodynarf/react.components/changelog.md?raw";
 
 import routeList, { isRootMenuItem, RouteMenuItem } from "@app/pages/routing";
 
+/** Library changelog on GitHub */
+const CHANGELOG_URL = "https://github.com/bodynar/bodynarf.react-components/blob/master/changelog.md";
+
 interface VersionEntry {
     version: string;
     added: RouteMenuItem[];
@@ -120,35 +123,39 @@ const renderInlineMarkdown = (text: string): ReactNode => {
     );
 };
 
-/** Single changelog bullet: `**Name** <any marker> — description`, optionally with nested sub-points */
-const ChangelogItem: FC<{ item: ChangelogItemModel }> = ({ item }) => {
-    const { line, subs } = item;
+/** Split a changelog bullet line into bold name / marker / description parts (undefined when there is no em dash) */
+const parseChangelogLine = (line: string): { name: string; middle: string; description: string } | undefined => {
     const nameMatch = line.match(/^\*\*([^*]+)\*\*/);
     const dashIndex = line.indexOf("—");
 
     if (dashIndex === -1 || nameMatch === null || nameMatch[0].length > dashIndex) {
-        return (
-            <li>
-                {renderInlineMarkdown(line)}
-                {subs.length > 0 && (
-                    <ul style={{ listStyle: "circle", paddingLeft: "1.25rem", marginTop: "0.25rem" }}>
-                        {subs.map(sub => <li key={sub}>{renderInlineMarkdown(sub)}</li>)}
-                    </ul>
-                )}
-            </li>
-        );
+        return undefined;
     }
 
-    const name = nameMatch[1];
-    const middle = line.slice(nameMatch[0].length, dashIndex).trim();
-    const description = line.slice(dashIndex + 1).trim();
+    return {
+        name: nameMatch[1],
+        middle: line.slice(nameMatch[0].length, dashIndex).trim(),
+        description: line.slice(dashIndex + 1).trim(),
+    };
+};
+
+/** Single changelog bullet: `**Name** <any marker> — description`, optionally with nested sub-points */
+const ChangelogItem: FC<{ item: ChangelogItemModel }> = ({ item }) => {
+    const { line, subs } = item;
+    const parsed = parseChangelogLine(line);
 
     return (
         <li>
-            <strong>{name}</strong>
-            {middle !== "" && <> {renderInlineMarkdown(middle)}</>}
-            {" — "}
-            {renderInlineMarkdown(description)}
+            {parsed === undefined
+                ? renderInlineMarkdown(line)
+                : (
+                    <>
+                        <strong>{parsed.name}</strong>
+                        {parsed.middle !== "" && <> {renderInlineMarkdown(parsed.middle)}</>}
+                        {" — "}
+                        {renderInlineMarkdown(parsed.description)}
+                    </>
+                )}
             {subs.length > 0 && (
                 <ul style={{ listStyle: "circle", paddingLeft: "1.25rem", marginTop: "0.25rem" }}>
                     {subs.map(sub => <li key={sub}>{renderInlineMarkdown(sub)}</li>)}
@@ -156,6 +163,75 @@ const ChangelogItem: FC<{ item: ChangelogItemModel }> = ({ item }) => {
             )}
         </li>
     );
+};
+
+/** Normalize a component name into a matching key: "Tag Group" / "TagGroup" → "taggroup" */
+const normalizeKey = (value: string): string =>
+    value.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+/**
+ * Aggregate changelog bullets apply to many demo pages at once and cannot be matched by name —
+ * map their normalized bullet name to the affected page keys and a short summary
+ */
+const aggregateBullets: Record<string, { pages: string[]; summary: string }> = {
+    inputprimitives: {
+        pages: ["text", "password", "multiline", "number", "autocomplete", "dateinput", "timepicker"],
+        summary: "gained `addonLeft` / `addonRight` addons (text / icon / button)",
+    },
+    colorsunification: {
+        pages: [
+            "alert", "badge", "circularmeter", "emptystate", "notification", "otpinput",
+            "progress", "segmentedcontrol", "spinner", "stat", "stepper", "taggroup",
+            "timeline", "toast",
+        ],
+        summary: "`color` is deprecated — use `style` instead (removal in v1.18)",
+    },
+    borderbeam: {
+        pages: ["animations"],
+        summary: "added `.bbr-border-beam--*` CSS classes — animated border ring, 6 colors and 4 gradient presets",
+    },
+};
+
+/** Bold name of a changelog bullet, empty string when the line does not start with one */
+const bulletName = (line: string): string => {
+    const nameMatch = line.match(/^\*\*([^*]+)\*\*/);
+    return nameMatch !== null ? nameMatch[1] : "";
+};
+
+/** Changelog specifics for a demo page: descriptions of the version bullets mentioning it */
+const specificsForItem = (demoVersion: string, caption: string): string[] => {
+    const pageKey = normalizeKey(caption);
+    const result: string[] = [];
+
+    const push = (text: string): void => {
+        if (text !== "" && !result.includes(text)) {
+            result.push(text);
+        }
+    };
+
+    for (const block of sectionsForVersion(demoVersion)) {
+        for (const section of block.sections) {
+            for (const item of section.items) {
+                const name = bulletName(item.line);
+
+                if (name === "") {
+                    continue;
+                }
+
+                const nameParts = name.split("/").map(normalizeKey);
+                const aggregate = aggregateBullets[normalizeKey(name)];
+
+                if (nameParts.includes(pageKey)) {
+                    const parsed = parseChangelogLine(item.line);
+                    push(parsed !== undefined ? parsed.description : item.subs.join(" "));
+                } else if (aggregate !== undefined && aggregate.pages.includes(pageKey)) {
+                    push(aggregate.summary);
+                }
+            }
+        }
+    }
+
+    return result;
 };
 
 /** Changelog — all added / updated items grouped by version */
@@ -223,7 +299,7 @@ const Changelog: FC = () => {
                     Items in each list are ordered by menu group (Components, Controls, …), alphabetically inside a group.
                     {" Descriptions are taken from the "}
                     <a
-                        href="https://github.com/bodynar/bodynarf.react-components/blob/master/changelog.md"
+                        href={CHANGELOG_URL}
                         target="_blank"
                         rel="noreferrer"
                     >
@@ -251,6 +327,17 @@ const Changelog: FC = () => {
                                 <Icon name="chevron-right" />
                             </span>
                             v{entry.version}
+                            {official.length > 0 && (
+                                <a
+                                    href={`${CHANGELOG_URL}#v${official[0].version.replace(/\./g, "")}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    title="Open this version in the library changelog on GitHub"
+                                    onClick={e => e.stopPropagation()}
+                                >
+                                    <Icon name="box-arrow-up-right" />
+                                </a>
+                            )}
                         </h2>
 
                         {isOpen && official.length > 0 ? (
@@ -262,7 +349,14 @@ const Changelog: FC = () => {
                                     <div key={block.version} className="mb-3">
                                         {official.length > 1 && (
                                             <p className="is-size-7 has-text-grey mb-1">
-                                                v{block.version}
+                                                <a
+                                                    href={`${CHANGELOG_URL}#v${block.version.replace(/\./g, "")}`}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    className="has-text-grey"
+                                                >
+                                                    v{block.version}
+                                                </a>
                                             </p>
                                         )}
                                         {block.sections.map(section =>
@@ -323,13 +417,20 @@ const Changelog: FC = () => {
                                         </p>
                                         <ul style={{ listStyle: "none", paddingLeft: "0.5rem" }}>
                                             {entry.updated.map(item => (
-                                                <li key={item.path} className="mb-1 is-flex is-align-items-center" style={{ gap: "0.4rem" }}>
+                                                <li key={item.path} className="mb-2 is-flex is-align-items-flex-start" style={{ gap: "0.4rem" }}>
                                                     <span className="has-text-grey is-size-7" style={{ minWidth: "6rem" }}>
                                                         {entry.groupLabel(item)}
                                                     </span>
-                                                    <Link to={item.path} className="has-text-link">
-                                                        {item.caption}
-                                                    </Link>
+                                                    <div>
+                                                        <Link to={item.path} className="has-text-link">
+                                                            {item.caption}
+                                                        </Link>
+                                                        {specificsForItem(entry.version, item.caption).map(specific =>
+                                                            <p key={specific} className="is-size-7 has-text-grey mb-0">
+                                                                {renderInlineMarkdown(specific)}
+                                                            </p>
+                                                        )}
+                                                    </div>
                                                 </li>
                                             ))}
                                         </ul>
