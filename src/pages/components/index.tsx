@@ -50,6 +50,9 @@ import Stack from "./stack";
 import ButtonGroup from "./buttonGroup";
 import ToggleButton from "./toggleButton";
 import FloatButton from "./floatButton";
+import CircularMeter from "./circularMeter";
+import AvatarGroup from "./avatarGroup";
+import RadioCardGroup from "./radioCardGroup";
 
 const components: MenuItem = {
     name: "component-group",
@@ -362,6 +365,24 @@ const components: MenuItem = {
             path: "/components/floatButton",
             caption: "Float Button",
             component: <FloatButton />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/circularMeter",
+            caption: "Circular Meter",
+            component: <CircularMeter />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/avatarGroup",
+            caption: "Avatar Group",
+            component: <AvatarGroup />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/radioCardGroup",
+            caption: "Radio Card Group",
+            component: <RadioCardGroup />,
             createVersion: "1.16",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
