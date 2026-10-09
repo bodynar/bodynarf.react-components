@@ -130,27 +130,27 @@ const Animations: FC = () => {
                 }
             >
                 <div className="is-flex" style={{ gap: "12px", flexWrap: "wrap" }}>
-                    {(["bbr-border-beam", "bbr-border-beam--primary", "bbr-border-beam--link", "bbr-border-beam--info", "bbr-border-beam--success", "bbr-border-beam--warning", "bbr-border-beam--danger"] as const).map(cls => (
+                    {(["", "primary", "link", "info", "success", "warning", "danger"] as const).map(variant => (
                         <div
-                            key={cls}
-                            className={`${cls} box mb-0`}
+                            key={variant}
+                            className={`bbr-border-beam${variant !== "" ? ` bbr-border-beam--${variant}` : ""} box mb-0`}
                             style={{ padding: "12px 16px", borderRadius: "8px" }}
                         >
                             <p className="is-size-7 has-text-grey" style={{ marginBottom: 0 }}>
-                                {cls === "bbr-border-beam" ? "bbr-border-beam" : cls.replace("bbr-border-beam--", "--")}
+                                {variant === "" ? "bbr-border-beam" : `--${variant}`}
                             </p>
                         </div>
                     ))}
                 </div>
                 <div className="is-flex mt-2" style={{ gap: "12px", flexWrap: "wrap" }}>
-                    {(["bbr-border-beam--ocean", "bbr-border-beam--aurora", "bbr-border-beam--fire", "bbr-border-beam--rainbow"] as const).map(cls => (
+                    {(["ocean", "aurora", "fire", "rainbow"] as const).map(variant => (
                         <div
-                            key={cls}
-                            className={`${cls} box mb-0`}
+                            key={variant}
+                            className={`bbr-border-beam bbr-border-beam--${variant} box mb-0`}
                             style={{ padding: "12px 16px", borderRadius: "8px" }}
                         >
                             <p className="is-size-7 has-text-grey" style={{ marginBottom: 0 }}>
-                                {cls.replace("bbr-border-beam--", "--")}
+                                {`--${variant}`}
                             </p>
                         </div>
                     ))}
