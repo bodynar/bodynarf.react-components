@@ -83,6 +83,16 @@ const Changelog: FC = () => {
                 </h1>
                 <p className="has-text-grey">
                     All additions and updates to the documentation, grouped by library version.
+                    Items in each list are ordered by menu group (Components, Controls, …), alphabetically inside a group.
+                    {" See the "}
+                    <a
+                        href="https://github.com/bodynar/bodynarf.react-components/blob/master/changelog.md"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        full library changelog
+                    </a>
+                    {" on GitHub for the complete release notes."}
                 </p>
             </div>
 
@@ -115,18 +125,16 @@ const Changelog: FC = () => {
                                 Added
                             </p>
                             <ul style={{ listStyle: "none", paddingLeft: "0.5rem" }}>
-                                {entry.added
-                                    .sort((a, b) => a.caption.localeCompare(b.caption))
-                                    .map(item => (
-                                        <li key={item.path} className="mb-1 is-flex is-align-items-center" style={{ gap: "0.4rem" }}>
-                                            <span className="has-text-grey is-size-7" style={{ minWidth: "6rem" }}>
-                                                {entry.groupLabel(item)}
-                                            </span>
-                                            <Link to={item.path} className="has-text-link">
-                                                {item.caption}
-                                            </Link>
-                                        </li>
-                                    ))}
+                                {entry.added.map(item => (
+                                    <li key={item.path} className="mb-1 is-flex is-align-items-center" style={{ gap: "0.4rem" }}>
+                                        <span className="has-text-grey is-size-7" style={{ minWidth: "6rem" }}>
+                                            {entry.groupLabel(item)}
+                                        </span>
+                                        <Link to={item.path} className="has-text-link">
+                                            {item.caption}
+                                        </Link>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     ) : null}
@@ -141,18 +149,16 @@ const Changelog: FC = () => {
                                 Updated
                             </p>
                             <ul style={{ listStyle: "none", paddingLeft: "0.5rem" }}>
-                                {entry.updated
-                                    .sort((a, b) => a.caption.localeCompare(b.caption))
-                                    .map(item => (
-                                        <li key={item.path} className="mb-1 is-flex is-align-items-center" style={{ gap: "0.4rem" }}>
-                                            <span className="has-text-grey is-size-7" style={{ minWidth: "6rem" }}>
-                                                {entry.groupLabel(item)}
-                                            </span>
-                                            <Link to={item.path} className="has-text-link">
-                                                {item.caption}
-                                            </Link>
-                                        </li>
-                                    ))}
+                                {entry.updated.map(item => (
+                                    <li key={item.path} className="mb-1 is-flex is-align-items-center" style={{ gap: "0.4rem" }}>
+                                        <span className="has-text-grey is-size-7" style={{ minWidth: "6rem" }}>
+                                            {entry.groupLabel(item)}
+                                        </span>
+                                        <Link to={item.path} className="has-text-link">
+                                            {item.caption}
+                                        </Link>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     ) : null}
