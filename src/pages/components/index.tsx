@@ -106,7 +106,7 @@ const components: MenuItem = {
             caption: "Paginator",
             component: <Paginator />,
             createVersion: "1.4",
-            updateVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/breadcrumbs",
