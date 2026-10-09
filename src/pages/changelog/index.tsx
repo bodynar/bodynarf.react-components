@@ -43,6 +43,20 @@ const compareVersionsDesc = (a: string, b: string): number => {
     return bMin - aMin;
 };
 
+/** Display order of library changelog sections: Removed first, Added last, others in between */
+const sectionOrder = (caption: string): number => {
+    if (caption === "Removed") {
+        return 0;
+    }
+    if (caption === "Updated") {
+        return 1;
+    }
+    if (caption === "Added") {
+        return 3;
+    }
+    return 2;
+};
+
 /** Parse the library changelog.md (shipped inside the npm package) into version blocks */
 const parseChangelog = (raw: string): ChangelogVersion[] => {
     const result: ChangelogVersion[] = [];
@@ -81,6 +95,10 @@ const parseChangelog = (raw: string): ChangelogVersion[] => {
             const lastItem = currentSection.items[currentSection.items.length - 1];
             lastItem.subs.push(subMatch[1].trim());
         }
+    }
+
+    for (const version of result) {
+        version.sections.sort((a, b) => sectionOrder(a.caption) - sectionOrder(b.caption));
     }
 
     return result;
@@ -164,6 +182,59 @@ const ChangelogItem: FC<{ item: ChangelogItemModel }> = ({ item }) => {
         </li>
     );
 };
+
+/** `Added` section — compact name badges without descriptions */
+const ChangelogAddedSection: FC<{ section: ChangelogSection }> = ({ section }) => (
+    <div className="mb-2">
+        <p className="has-text-weight-semibold is-size-6 mb-1">
+            {section.caption}
+        </p>
+        <div className="is-flex is-flex-wrap-wrap" style={{ gap: "0.35rem" }}>
+            {section.items.map(item => {
+                const name = bulletName(item.line);
+                return (
+                    <Tag
+                        key={item.line}
+                        content={name !== "" ? name : item.line}
+                        style={ElementColor.Danger}
+                    />
+                );
+            })}
+        </div>
+    </div>
+);
+
+/** `Updated` section — name badge with the description from the changelog */
+const ChangelogUpdatedSection: FC<{ section: ChangelogSection }> = ({ section }) => (
+    <div className="mb-2">
+        <p className="has-text-weight-semibold is-size-6 mb-1">
+            {section.caption}
+        </p>
+        <ul style={{ listStyle: "none", paddingLeft: 0 }}>
+            {section.items.map(item => {
+                const name = bulletName(item.line);
+                const parsed = parseChangelogLine(item.line);
+                const description = parsed !== undefined ? parsed.description : "";
+
+                return (
+                    <li key={item.line} className="mb-2">
+                        {name !== "" && <Tag content={name} style={ElementColor.Info} />}
+                        {description !== "" && (
+                            <p className="mb-0 mt-1">
+                                {renderInlineMarkdown(description)}
+                            </p>
+                        )}
+                        {item.subs.length > 0 && (
+                            <ul style={{ listStyle: "circle", paddingLeft: "1.25rem", marginTop: "0.25rem" }}>
+                                {item.subs.map(sub => <li key={sub}>{renderInlineMarkdown(sub)}</li>)}
+                            </ul>
+                        )}
+                    </li>
+                );
+            })}
+        </ul>
+    </div>
+);
 
 /** Normalize a component name into a matching key: "Tag Group" / "TagGroup" → "taggroup" */
 const normalizeKey = (value: string): string =>
@@ -359,18 +430,26 @@ const Changelog: FC = () => {
                                                 </a>
                                             </p>
                                         )}
-                                        {block.sections.map(section =>
-                                            <div key={section.caption} className="mb-2">
-                                                <p className="has-text-weight-semibold is-size-6 mb-1">
-                                                    {section.caption}
-                                                </p>
-                                                <ul style={{ listStyle: "disc", paddingLeft: "1.5rem" }}>
-                                                    {section.items.map(item =>
-                                                        <ChangelogItem key={item.line} item={item} />
-                                                    )}
-                                                </ul>
-                                            </div>
-                                        )}
+                                        {block.sections.map(section => {
+                                            if (section.caption === "Added") {
+                                                return <ChangelogAddedSection key={section.caption} section={section} />;
+                                            }
+                                            if (section.caption === "Updated") {
+                                                return <ChangelogUpdatedSection key={section.caption} section={section} />;
+                                            }
+                                            return (
+                                                <div key={section.caption} className="mb-2">
+                                                    <p className="has-text-weight-semibold is-size-6 mb-1">
+                                                        {section.caption}
+                                                    </p>
+                                                    <ul style={{ listStyle: "disc", paddingLeft: "1.5rem" }}>
+                                                        {section.items.map(item =>
+                                                            <ChangelogItem key={item.line} item={item} />
+                                                        )}
+                                                    </ul>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 )}
                             </div>
@@ -382,32 +461,8 @@ const Changelog: FC = () => {
                                     Demo pages
                                 </p>
 
-                                {entry.added.length > 0 ? (
-                                    <div className="mb-3">
-                                        <p className="has-text-weight-semibold mb-2 is-flex is-align-items-center" style={{ gap: "0.5rem" }}>
-                                            <Tag
-                                                content="NEW"
-                                                style={ElementColor.Danger}
-                                            />
-                                            Added
-                                        </p>
-                                        <ul style={{ listStyle: "none", paddingLeft: "0.5rem" }}>
-                                            {entry.added.map(item => (
-                                                <li key={item.path} className="mb-1 is-flex is-align-items-center" style={{ gap: "0.4rem" }}>
-                                                    <span className="has-text-grey is-size-7" style={{ minWidth: "6rem" }}>
-                                                        {entry.groupLabel(item)}
-                                                    </span>
-                                                    <Link to={item.path} className="has-text-link">
-                                                        {item.caption}
-                                                    </Link>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                ) : null}
-
                                 {entry.updated.length > 0 ? (
-                                    <div>
+                                    <div className="mb-3">
                                         <p className="has-text-weight-semibold mb-2 is-flex is-align-items-center" style={{ gap: "0.5rem" }}>
                                             <Tag
                                                 content="UPD"
@@ -431,6 +486,30 @@ const Changelog: FC = () => {
                                                             </p>
                                                         )}
                                                     </div>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ) : null}
+
+                                {entry.added.length > 0 ? (
+                                    <div>
+                                        <p className="has-text-weight-semibold mb-2 is-flex is-align-items-center" style={{ gap: "0.5rem" }}>
+                                            <Tag
+                                                content="NEW"
+                                                style={ElementColor.Danger}
+                                            />
+                                            Added
+                                        </p>
+                                        <ul style={{ listStyle: "none", paddingLeft: "0.5rem" }}>
+                                            {entry.added.map(item => (
+                                                <li key={item.path} className="mb-1 is-flex is-align-items-center" style={{ gap: "0.4rem" }}>
+                                                    <span className="has-text-grey is-size-7" style={{ minWidth: "6rem" }}>
+                                                        {entry.groupLabel(item)}
+                                                    </span>
+                                                    <Link to={item.path} className="has-text-link">
+                                                        {item.caption}
+                                                    </Link>
                                                 </li>
                                             ))}
                                         </ul>
