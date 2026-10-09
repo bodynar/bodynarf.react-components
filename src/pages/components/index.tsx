@@ -47,6 +47,9 @@ import MenuButton from "./menuButton";
 import TreeView from "./treeView";
 import Center from "./center";
 import Stack from "./stack";
+import ButtonGroup from "./buttonGroup";
+import ToggleButton from "./toggleButton";
+import FloatButton from "./floatButton";
 
 const components: MenuItem = {
     name: "component-group",
@@ -341,6 +344,24 @@ const components: MenuItem = {
             path: "/components/stack",
             caption: "Stack",
             component: <Stack />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/buttonGroup",
+            caption: "Button Group",
+            component: <ButtonGroup />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/toggleButton",
+            caption: "Toggle Button",
+            component: <ToggleButton />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/floatButton",
+            caption: "Float Button",
+            component: <FloatButton />,
             createVersion: "1.16",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
