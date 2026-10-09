@@ -185,6 +185,7 @@ const components: MenuItem = {
             caption: "Animations",
             component: <Animations />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/avatar",
