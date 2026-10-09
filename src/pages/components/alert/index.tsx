@@ -68,7 +68,7 @@ const Alert: FC = () => {
 
             <ComponentColorCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="Color variant of the alert. Defaults to ElementColor.Info."
                 codeProvider={id =>
                     <CodeExample
@@ -77,7 +77,7 @@ const Alert: FC = () => {
                             `import Alert from "@bodynarf/react.components/components/alert";`,
                             "",
                             "<Alert",
-                            `    color={ElementColor.${id}}`,
+                            `    style={ElementColor.${id}}`,
                             ">",
                             "    Alert with color variant.",
                             "</Alert>",
@@ -85,7 +85,7 @@ const Alert: FC = () => {
                     />
                 }
                 componentProvider={color =>
-                    <AlertComponent color={color}>
+                    <AlertComponent style={color}>
                         Alert with <strong>{color}</strong> color variant.
                     </AlertComponent>
                 }
@@ -103,7 +103,7 @@ const Alert: FC = () => {
                             "",
                             "<Alert",
                             `    header="Important notice"`,
-                            `    color={ElementColor.Warning}`,
+                            `    style={ElementColor.Warning}`,
                             ">",
                             "    Please review the terms before proceeding.",
                             "</Alert>",
@@ -111,7 +111,7 @@ const Alert: FC = () => {
                     />
                 }
             >
-                <AlertComponent header="Important notice" color={ElementColor.Warning}>
+                <AlertComponent header="Important notice" style={ElementColor.Warning}>
                     Please review the terms before proceeding.
                 </AlertComponent>
             </ComponentUseCase>
@@ -130,7 +130,7 @@ const Alert: FC = () => {
                             "<Alert",
                             "    closable",
                             "    header=\"Notice\"",
-                            "    color={ElementColor.Info}",
+                            "    style={ElementColor.Info}",
                             ">",
                             "    Closable alert.",
                             "</Alert>",
@@ -139,7 +139,7 @@ const Alert: FC = () => {
                             "<Alert",
                             "    closable={false}",
                             "    header=\"Notice\"",
-                            "    color={ElementColor.Info}",
+                            "    style={ElementColor.Info}",
                             ">",
                             "    Non-closable alert.",
                             "</Alert>",
@@ -150,13 +150,13 @@ const Alert: FC = () => {
                 <div className="is-flex is-flex-direction-column" style={{ gap: "0.75rem" }}>
                     <div>
                         <p className="mb-1 has-text-grey">closable: true (default)</p>
-                        <AlertComponent header="Notice" color={ElementColor.Info} closable>
+                        <AlertComponent header="Notice" style={ElementColor.Info} closable>
                             Closable alert — close button is visible in the header.
                         </AlertComponent>
                     </div>
                     <div>
                         <p className="mb-1 has-text-grey">closable: false</p>
-                        <AlertComponent header="Notice" color={ElementColor.Info} closable={false}>
+                        <AlertComponent header="Notice" style={ElementColor.Info} closable={false}>
                             Non-closable alert — no close button.
                         </AlertComponent>
                     </div>
@@ -176,7 +176,7 @@ const Alert: FC = () => {
                             "<Alert",
                             `    header="Notice"`,
                             `    closeLabel="Dismiss"`,
-                            `    color={ElementColor.Info}`,
+                            `    style={ElementColor.Info}`,
                             ">",
                             "    Alert with custom close button label.",
                             "</Alert>",
@@ -184,7 +184,7 @@ const Alert: FC = () => {
                     />
                 }
             >
-                <AlertComponent header="Notice" color={ElementColor.Info} closeLabel="Dismiss">
+                <AlertComponent header="Notice" style={ElementColor.Info} closeLabel="Dismiss">
                     Alert with custom close button aria-label.
                 </AlertComponent>
             </ComponentUseCase>
@@ -201,7 +201,7 @@ const Alert: FC = () => {
                             "",
                             "<Alert",
                             `    header="Closable"`,
-                            `    color={ElementColor.Danger}`,
+                            `    style={ElementColor.Danger}`,
                             `    onClose={() => console.log("closed")}`,
                             ">",
                             "    Click the × to trigger onClose.",
@@ -212,7 +212,7 @@ const Alert: FC = () => {
             >
                 <AlertComponent
                     header="Closable"
-                    color={ElementColor.Danger}
+                    style={ElementColor.Danger}
                     onClose={() => onCloseLogRef.current?.append("onClose fired")}
                 >
                     Click the × to trigger onClose.

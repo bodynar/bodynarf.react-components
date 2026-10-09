@@ -209,7 +209,7 @@ const TagGroup: FC = () => {
 
             <ComponentColorCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="Tag color applied to all tags in the group"
                 codeProvider={id =>
                     <CodeExample
@@ -220,7 +220,7 @@ const TagGroup: FC = () => {
                             `<TagGroup`,
                             `    value={tags}`,
                             `    onChange={setTags}`,
-                            `    color={ElementColor.${id}}`,
+                            `    style={ElementColor.${id}}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -228,7 +228,7 @@ const TagGroup: FC = () => {
                 componentProvider={color =>
                     <TagGroupComponent
                         value={colorTags}
-                        color={color}
+                        style={color}
                         onChange={setColorTags}
                     />
                 }

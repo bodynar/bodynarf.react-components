@@ -174,7 +174,7 @@ const Progress: FC = () => {
 
             <ComponentColorCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="The component supports all colors defined in ElementColor"
                 codeProvider={id =>
                     <CodeExample
@@ -184,7 +184,7 @@ const Progress: FC = () => {
                             "",
                             "<Progress",
                             "    value={60}",
-                            `    color={ElementColor.${id}}`,
+                            `    style={ElementColor.${id}}`,
                             "/>",
                         ].join("\n")}
                     />
@@ -192,7 +192,7 @@ const Progress: FC = () => {
                 componentProvider={color =>
                     <ProgressComponent
                         value={60}
-                        color={color}
+                        style={color}
                     />
                 }
             />

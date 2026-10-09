@@ -60,7 +60,7 @@ const SplitButton: FC = () => {
                 name="Split Button"
                 version="1.14"
                 baseTypeName="BaseElementProps"
-                description="A button with a dropdown of additional actions"
+                description="A button with a dropdown of additional actions. Since v1.16 the dropdown is rendered through DropdownMenu — unified look and keyboard support."
             />
 
             <ComponentUseCase

@@ -105,6 +105,7 @@ const controls: MenuItem = {
             caption: "OTP Input",
             component: <OtpInput />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };

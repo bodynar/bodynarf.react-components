@@ -76,7 +76,7 @@ const MenuButton: FC = () => {
                 name="Menu Button"
                 version="1.15"
                 baseTypeName="BaseElementProps"
-                description="Icon button that opens a dropdown list of actions"
+                description="Icon button that opens a dropdown list of actions. Since v1.16 the dropdown is rendered through DropdownMenu — unified look and keyboard support."
             />
 
             <ComponentUseCase

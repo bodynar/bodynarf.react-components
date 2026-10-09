@@ -174,14 +174,14 @@ const Notification: FC = () => {
 
             <ComponentUseCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="Color variant of the notification. Uses ElementColor values. Default is ElementColor.Default."
                 code={
                     <CodeExample
                         code={[
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             "",
-                            `add({ content: "Success!", color: ElementColor.Success });`,
+                            `add({ content: "Success!", style: ElementColor.Success });`,
                         ].join("\n")}
                     />
                 }
@@ -192,7 +192,7 @@ const Notification: FC = () => {
                             key={color}
                             type="button"
                             className="button"
-                            onClick={() => add({ content: `Color: ${color || "default"}`, color })}
+                            onClick={() => add({ content: `Style: ${color || "default"}`, style: color })}
                         >
                             {color || "default"}
                         </button>
@@ -387,9 +387,9 @@ const Notification: FC = () => {
                         type="button"
                         className="button is-info"
                         onClick={() => {
-                            add({ content: "Notification A", color: ElementColor.Info });
-                            add({ content: "Notification B", color: ElementColor.Warning });
-                            add({ content: "Notification C", color: ElementColor.Danger });
+                            add({ content: "Notification A", style: ElementColor.Info });
+                            add({ content: "Notification B", style: ElementColor.Warning });
+                            add({ content: "Notification C", style: ElementColor.Danger });
                         }}
                     >
                         Add 3 notifications

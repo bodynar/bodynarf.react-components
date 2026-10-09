@@ -75,7 +75,7 @@ const Spinner: FC = () => {
 
             <ComponentUseCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="Spinner supports all available color variants"
                 code={
                     <CodeExample
@@ -83,7 +83,7 @@ const Spinner: FC = () => {
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import Spinner from "@bodynarf/react.components/components/spinner";`,
                             "",
-                            `<Spinner color={ElementColor.Success} />`,
+                            `<Spinner style={ElementColor.Success} />`,
                         ].join("\n")}
                     />
                 }
@@ -100,7 +100,7 @@ const Spinner: FC = () => {
                             key={value}
                             style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}
                         >
-                            <SpinnerComponent color={value} />
+                            <SpinnerComponent style={value} />
                             <span className="is-size-7 has-text-grey">{label}</span>
                         </div>
                     ))}

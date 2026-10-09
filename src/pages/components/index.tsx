@@ -161,25 +161,28 @@ const components: MenuItem = {
             caption: "Timeline",
             component: <Timeline />,
             createVersion: "1.14",
-            updateVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/progress",
             caption: "Progress",
             component: <Progress />,
             createVersion: "1.14",
+            updateVersion: "1.16",
         },
         {
             path: "/components/splitButton",
             caption: "Split Button",
             component: <SplitButton />,
             createVersion: "1.14",
+            updateVersion: "1.16",
         },
         {
             path: "/components/alert",
             caption: "Alert",
             component: <Alert />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/animations",
@@ -199,6 +202,7 @@ const components: MenuItem = {
             caption: "Badge",
             component: <Badge />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/calendar",
@@ -247,6 +251,7 @@ const components: MenuItem = {
             caption: "Empty State",
             component: <EmptyState />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/imageViewer",
@@ -265,6 +270,7 @@ const components: MenuItem = {
             caption: "Notification",
             component: <Notification />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/popover",
@@ -283,6 +289,7 @@ const components: MenuItem = {
             caption: "Segmented Control",
             component: <SegmentedControl />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/sidePanel",
@@ -301,24 +308,28 @@ const components: MenuItem = {
             caption: "Spinner",
             component: <Spinner />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/stat",
             caption: "Stat",
             component: <Stat />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/tagGroup",
             caption: "Tag Group",
             component: <TagGroup />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/toast",
             caption: "Toast",
             component: <Toast />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/tooltip",
@@ -343,6 +354,7 @@ const components: MenuItem = {
             caption: "Menu Button",
             component: <MenuButton />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/center",

@@ -457,7 +457,7 @@ const Stepper: FC = () => {
 
             <ComponentColorCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="The component supports all colors defined in the ElementColor type"
                 codeProvider={id =>
                     <CodeExample
@@ -468,7 +468,7 @@ const Stepper: FC = () => {
                             '<Stepper',
                             `    steps={steps}`,
                             `    currentStep="step2"`,
-                            `    color={ElementColor.${id}}`,
+                            `    style={ElementColor.${id}}`,
                             '/>',
                         ].join("\n")}
                     />
@@ -477,7 +477,7 @@ const Stepper: FC = () => {
                     <StepperComponent
                         steps={basicSteps}
                         currentStep="step2"
-                        color={color}
+                        style={color}
                     />
                 }
             />

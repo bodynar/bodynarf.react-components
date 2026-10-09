@@ -112,7 +112,7 @@ const EmptyState: FC = () => {
 
             <ComponentColorCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="Color applied to the icon and title. Defaults to Default."
                 codeProvider={id =>
                     <CodeExample
@@ -122,7 +122,7 @@ const EmptyState: FC = () => {
                             "",
                             `<EmptyState`,
                             `    title="Empty state"`,
-                            `    color={ElementColor.${id}}`,
+                            `    style={ElementColor.${id}}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -130,7 +130,7 @@ const EmptyState: FC = () => {
                 componentProvider={color =>
                     <EmptyStateComponent
                         title="Empty state"
-                        color={color}
+                        style={color}
                     />
                 }
             />
