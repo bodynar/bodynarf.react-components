@@ -74,6 +74,26 @@ const BorderBeamExamples: FC = () => (
                     </div>
                 </div>
             </div>
+
+            {/* On an opaque background — regression guard for the stacking context fix */}
+            <p className="subtitle is-5 mt-6">On an opaque background</p>
+            <div className="box p-5" style={{ background: "#fff" }}>
+                <div className="field is-grouped">
+                    <div className="control">
+                        <div className="box bbr-border-beam bbr-border-beam--aurora mb-0">
+                            <p className="title is-6">aurora on white panel</p>
+                        </div>
+                    </div>
+                    <div className="control">
+                        <button
+                            type="button"
+                            className="button is-medium bbr-border-beam bbr-border-beam--ocean"
+                        >
+                            ocean on white panel
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 );

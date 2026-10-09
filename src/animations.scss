@@ -257,6 +257,7 @@
 
 .bbr-border-beam {
     position: relative;
+    isolation: isolate; // own stacking context: the z-index:-1 ring must not depend on ancestor transparency
 
     --bbr-beam-color: var(--bulma-primary, #00d1b2);
     --bbr-beam-thickness: 2px;

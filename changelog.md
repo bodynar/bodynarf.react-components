@@ -1,6 +1,12 @@
 # Change log
 All changes will be published here in reverse chronological order
 
+## v1.16.1
+
+### Updated
+
+- **BorderBeam** *(CSS)* — fixed: the beam ring could be invisible when the element was placed on an opaque ancestor background. `.bbr-border-beam` now creates its own stacking context (`isolation: isolate`), so the `z-index: -1` ring no longer depends on ancestor transparency.
+
 ## v1.16.0
 
 ### Removed
