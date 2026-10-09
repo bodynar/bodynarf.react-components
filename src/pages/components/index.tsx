@@ -53,6 +53,11 @@ import FloatButton from "./floatButton";
 import CircularMeter from "./circularMeter";
 import AvatarGroup from "./avatarGroup";
 import RadioCardGroup from "./radioCardGroup";
+import DropdownMenu from "./dropdownMenu";
+import DndList from "./dndList";
+import Dropzone from "./dropzone";
+import TableOfContents from "./tableOfContents";
+import ActionBar from "./actionBar";
 
 const components: MenuItem = {
     name: "component-group",
@@ -383,6 +388,36 @@ const components: MenuItem = {
             path: "/components/radioCardGroup",
             caption: "Radio Card Group",
             component: <RadioCardGroup />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/dropdownMenu",
+            caption: "Dropdown Menu",
+            component: <DropdownMenu />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/dndList",
+            caption: "Drag & Drop List",
+            component: <DndList />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/dropzone",
+            caption: "Dropzone",
+            component: <Dropzone />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/tableOfContents",
+            caption: "Table Of Contents",
+            component: <TableOfContents />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/actionBar",
+            caption: "Action Bar",
+            component: <ActionBar />,
             createVersion: "1.16",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
