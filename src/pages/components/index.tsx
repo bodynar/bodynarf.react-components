@@ -45,6 +45,8 @@ import Breadcrumbs from "./breadcrumbs";
 import ComplexTable from "./complexTable";
 import MenuButton from "./menuButton";
 import TreeView from "./treeView";
+import Center from "./center";
+import Stack from "./stack";
 
 const components: MenuItem = {
     name: "component-group",
@@ -328,6 +330,18 @@ const components: MenuItem = {
             caption: "Menu Button",
             component: <MenuButton />,
             createVersion: "1.15",
+        },
+        {
+            path: "/components/center",
+            caption: "Center",
+            component: <Center />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/stack",
+            caption: "Stack",
+            component: <Stack />,
+            createVersion: "1.16",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };
