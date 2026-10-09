@@ -9,11 +9,3 @@ body,
     font-family: "Tomorrow", sans-serif;
     font-optical-sizing: auto;
 }
-
-// Bulma's shared control rule (`.button { position: relative }`) has the same
-// specificity as the package's `.bbr-float-button { position: fixed }` and,
-// being later in the bundle, silently un-floats the button.
-// Outrank it deterministically.
-.bbr-float-button.button {
-    position: fixed;
-}
