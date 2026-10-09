@@ -43,20 +43,6 @@ const compareVersionsDesc = (a: string, b: string): number => {
     return bMin - aMin;
 };
 
-/** Display order of library changelog sections: Removed first, Added last, others in between */
-const sectionOrder = (caption: string): number => {
-    if (caption === "Removed") {
-        return 0;
-    }
-    if (caption === "Updated") {
-        return 1;
-    }
-    if (caption === "Added") {
-        return 3;
-    }
-    return 2;
-};
-
 /** Parse the library changelog.md (shipped inside the npm package) into version blocks */
 const parseChangelog = (raw: string): ChangelogVersion[] => {
     const result: ChangelogVersion[] = [];
@@ -95,10 +81,6 @@ const parseChangelog = (raw: string): ChangelogVersion[] => {
             const lastItem = currentSection.items[currentSection.items.length - 1];
             lastItem.subs.push(subMatch[1].trim());
         }
-    }
-
-    for (const version of result) {
-        version.sections.sort((a, b) => sectionOrder(a.caption) - sectionOrder(b.caption));
     }
 
     return result;
@@ -182,59 +164,6 @@ const ChangelogItem: FC<{ item: ChangelogItemModel }> = ({ item }) => {
         </li>
     );
 };
-
-/** `Added` section — compact name badges without descriptions */
-const ChangelogAddedSection: FC<{ section: ChangelogSection }> = ({ section }) => (
-    <div className="mb-2">
-        <p className="has-text-weight-semibold is-size-6 mb-1">
-            {section.caption}
-        </p>
-        <div className="is-flex is-flex-wrap-wrap" style={{ gap: "0.35rem" }}>
-            {section.items.map(item => {
-                const name = bulletName(item.line);
-                return (
-                    <Tag
-                        key={item.line}
-                        content={name !== "" ? name : item.line}
-                        style={ElementColor.Danger}
-                    />
-                );
-            })}
-        </div>
-    </div>
-);
-
-/** `Updated` section — name badge with the description from the changelog */
-const ChangelogUpdatedSection: FC<{ section: ChangelogSection }> = ({ section }) => (
-    <div className="mb-2">
-        <p className="has-text-weight-semibold is-size-6 mb-1">
-            {section.caption}
-        </p>
-        <ul style={{ listStyle: "none", paddingLeft: 0 }}>
-            {section.items.map(item => {
-                const name = bulletName(item.line);
-                const parsed = parseChangelogLine(item.line);
-                const description = parsed !== undefined ? parsed.description : "";
-
-                return (
-                    <li key={item.line} className="mb-2">
-                        {name !== "" && <Tag content={name} style={ElementColor.Info} />}
-                        {description !== "" && (
-                            <p className="mb-0 mt-1">
-                                {renderInlineMarkdown(description)}
-                            </p>
-                        )}
-                        {item.subs.length > 0 && (
-                            <ul style={{ listStyle: "circle", paddingLeft: "1.25rem", marginTop: "0.25rem" }}>
-                                {item.subs.map(sub => <li key={sub}>{renderInlineMarkdown(sub)}</li>)}
-                            </ul>
-                        )}
-                    </li>
-                );
-            })}
-        </ul>
-    </div>
-);
 
 /** Normalize a component name into a matching key: "Tag Group" / "TagGroup" → "taggroup" */
 const normalizeKey = (value: string): string =>
@@ -383,6 +312,11 @@ const Changelog: FC = () => {
             {entries.map((entry, index) => {
                 const isOpen = openIndices.has(index);
                 const official = sectionsForVersion(entry.version);
+                const removed = official.flatMap(block =>
+                    block.sections
+                        .filter(section => section.caption === "Removed")
+                        .flatMap(section => section.items)
+                );
                 return (
                     <div
                         key={entry.version}
@@ -411,58 +345,23 @@ const Changelog: FC = () => {
                             )}
                         </h2>
 
-                        {isOpen && official.length > 0 ? (
-                            <div className="mb-4">
-                                <p className="is-size-7 has-text-weight-semibold has-text-grey mb-2">
-                                    Library changelog
-                                </p>
-                                {official.map(block =>
-                                    <div key={block.version} className="mb-3">
-                                        {official.length > 1 && (
-                                            <p className="is-size-7 has-text-grey mb-1">
-                                                <a
-                                                    href={`${CHANGELOG_URL}#v${block.version.replace(/\./g, "")}`}
-                                                    target="_blank"
-                                                    rel="noreferrer"
-                                                    className="has-text-grey"
-                                                >
-                                                    v{block.version}
-                                                </a>
-                                            </p>
-                                        )}
-                                        {block.sections.map(section => {
-                                            if (section.caption === "Added") {
-                                                return <ChangelogAddedSection key={section.caption} section={section} />;
-                                            }
-                                            if (section.caption === "Updated") {
-                                                return <ChangelogUpdatedSection key={section.caption} section={section} />;
-                                            }
-                                            return (
-                                                <div key={section.caption} className="mb-2">
-                                                    <p className="has-text-weight-semibold is-size-6 mb-1">
-                                                        {section.caption}
-                                                    </p>
-                                                    <ul style={{ listStyle: "disc", paddingLeft: "1.5rem" }}>
-                                                        {section.items.map(item =>
-                                                            <ChangelogItem key={item.line} item={item} />
-                                                        )}
-                                                    </ul>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                )}
-                            </div>
-                        ) : null}
-
-                        {isOpen && (entry.added.length > 0 || entry.updated.length > 0) ? (
+                        {isOpen && (removed.length > 0 || entry.added.length > 0 || entry.updated.length > 0) ? (
                             <div>
-                                <p className="is-size-7 has-text-weight-semibold has-text-grey mb-2">
-                                    Demo pages
-                                </p>
+                                {removed.length > 0 ? (
+                                    <div className="mb-4">
+                                        <p className="has-text-weight-semibold is-size-6 mb-2">
+                                            Removed
+                                        </p>
+                                        <ul style={{ listStyle: "disc", paddingLeft: "1.5rem" }}>
+                                            {removed.map(item =>
+                                                <ChangelogItem key={item.line} item={item} />
+                                            )}
+                                        </ul>
+                                    </div>
+                                ) : null}
 
                                 {entry.updated.length > 0 ? (
-                                    <div className="mb-3">
+                                    <div className="mb-4">
                                         <p className="has-text-weight-semibold mb-2 is-flex is-align-items-center" style={{ gap: "0.5rem" }}>
                                             <Tag
                                                 content="UPD"
@@ -470,7 +369,7 @@ const Changelog: FC = () => {
                                             />
                                             Updated
                                         </p>
-                                        <ul style={{ listStyle: "none", paddingLeft: "0.5rem" }}>
+                                        <ul style={{ listStyle: "none", paddingLeft: 0 }}>
                                             {entry.updated.map(item => (
                                                 <li key={item.path} className="mb-2 is-flex is-align-items-flex-start" style={{ gap: "0.4rem" }}>
                                                     <span className="has-text-grey is-size-7" style={{ minWidth: "6rem" }}>
@@ -496,12 +395,12 @@ const Changelog: FC = () => {
                                     <div>
                                         <p className="has-text-weight-semibold mb-2 is-flex is-align-items-center" style={{ gap: "0.5rem" }}>
                                             <Tag
-                                                content="NEW"
+                                                content="ADD"
                                                 style={ElementColor.Danger}
                                             />
                                             Added
                                         </p>
-                                        <ul style={{ listStyle: "none", paddingLeft: "0.5rem" }}>
+                                        <ul style={{ listStyle: "none", paddingLeft: 0 }}>
                                             {entry.added.map(item => (
                                                 <li key={item.path} className="mb-1 is-flex is-align-items-center" style={{ gap: "0.4rem" }}>
                                                     <span className="has-text-grey is-size-7" style={{ minWidth: "6rem" }}>
