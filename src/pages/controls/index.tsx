@@ -3,7 +3,6 @@ import { MenuItem } from "../routing";
 import AutoComplete from "./autoComplete";
 import ColorPicker from "./colorPicker";
 import Checkbox from "./checkbox";
-import Date from "./date";
 import DateInput from "./dateInput";
 import Text from "./text";
 import Multiline from "./multiline";
@@ -31,12 +30,6 @@ const controls: MenuItem = {
             component: <Checkbox />,
             createVersion: "1.3",
             updateVersion: "1.14",
-        },
-        {
-            path: "/controls/date",
-            caption: "Date picker",
-            component: <Date />,
-            createVersion: "0.1",
         },
         {
             path: "/controls/text",
