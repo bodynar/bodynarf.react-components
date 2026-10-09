@@ -146,7 +146,7 @@ const Badge: FC = () => {
 
             <ComponentColorCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="Color variant of the badge. Defaults to ElementColor.Danger."
                 codeProvider={id =>
                     <CodeExample
@@ -156,7 +156,7 @@ const Badge: FC = () => {
                             "",
                             "<Badge",
                             `    value={3}`,
-                            `    color={ElementColor.${id}}`,
+                            `    style={ElementColor.${id}}`,
                             ">",
                             "    <button className=\"button\">Button</button>",
                             "</Badge>",
@@ -164,7 +164,7 @@ const Badge: FC = () => {
                     />
                 }
                 componentProvider={color =>
-                    <BadgeComponent value={3} color={color}>
+                    <BadgeComponent value={3} style={color}>
                         <button type="button" className="button">Button</button>
                     </BadgeComponent>
                 }

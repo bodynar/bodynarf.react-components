@@ -15,6 +15,7 @@ const DateInput: FC = () => {
     const [minMaxValue, setMinMaxValue] = useState<Date | undefined>();
     const [labelValue, setLabelValue] = useState<Date | undefined>();
     const [calendarValue, setCalendarValue] = useState<Date | undefined>();
+    const [addonValue, setAddonValue] = useState<Date | undefined>();
 
     const today = new Date();
     const minDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
@@ -287,6 +288,44 @@ const DateInput: FC = () => {
                         {
                             calendarValue
                                 ? calendarValue.toLocaleDateString()
+                                : "null"
+                        }
+                    </p>
+                </div>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                caption="addonLeft / addonRight"
+                description="Since v1.16 inputs support addons on either side — static text, an icon or an interactive button (`InputAddon` union)."
+                code={
+                    <CodeExample
+                        code={[
+                            `import DateInput from "@bodynarf/react.components/components/primitives/dateInput";`,
+                            "",
+                            `const [value, setValue] = useState<Date | undefined>();`,
+                            "",
+                            `<DateInput`,
+                            `    value={value}`,
+                            `    onValueChange={setValue}`,
+                            `    addonLeft={{ type: "icon", icon: { name: "calendar-event" } }}`,
+                            `    addonRight={{ type: "button", caption: "Today", onClick: () => setValue(new Date()) }}`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <div>
+                    <DateInputComponent
+                        value={addonValue}
+                        onValueChange={setAddonValue}
+                        addonLeft={{ type: "icon", icon: { name: "calendar-event" } }}
+                        addonRight={{ type: "button", caption: "Today", onClick: () => setAddonValue(new Date()) }}
+                    />
+                    <p className="mt-1 has-text-grey">
+                        Value:
+                        {
+                            addonValue
+                                ? addonValue.toLocaleDateString()
                                 : "null"
                         }
                     </p>

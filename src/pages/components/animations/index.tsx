@@ -114,6 +114,56 @@ const Animations: FC = () => {
             </ComponentUseCase>
 
             <ComponentUseCase
+                caption="Border beam"
+                description="Animated rotating border ring (added in v1.16). Apply `bbr-border-beam` plus a modifier on any element: six color variants and four gradient presets. Respects `prefers-reduced-motion`. The element keeps its own `border-radius`."
+                code={
+                    <CodeExample
+                        code={[
+                            `<div className="bbr-border-beam bbr-border-beam--aurora">…</div>`,
+                            "",
+                            `// color variants:`,
+                            `//   bbr-border-beam--primary / --link / --info / --success / --warning / --danger`,
+                            `// gradient presets:`,
+                            `//   bbr-border-beam--ocean / --aurora / --fire / --rainbow`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <div className="is-flex" style={{ gap: "12px", flexWrap: "wrap" }}>
+                    {(["bbr-border-beam", "bbr-border-beam--primary", "bbr-border-beam--link", "bbr-border-beam--info", "bbr-border-beam--success", "bbr-border-beam--warning", "bbr-border-beam--danger"] as const).map(cls => (
+                        <div
+                            key={cls}
+                            className={`${cls} box mb-0`}
+                            style={{ padding: "12px 16px", borderRadius: "8px" }}
+                        >
+                            <p className="is-size-7 has-text-grey" style={{ marginBottom: 0 }}>
+                                {cls === "bbr-border-beam" ? "bbr-border-beam" : cls.replace("bbr-border-beam--", "--")}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+                <div className="is-flex mt-2" style={{ gap: "12px", flexWrap: "wrap" }}>
+                    {(["bbr-border-beam--ocean", "bbr-border-beam--aurora", "bbr-border-beam--fire", "bbr-border-beam--rainbow"] as const).map(cls => (
+                        <div
+                            key={cls}
+                            className={`${cls} box mb-0`}
+                            style={{ padding: "12px 16px", borderRadius: "8px" }}
+                        >
+                            <p className="is-size-7 has-text-grey" style={{ marginBottom: 0 }}>
+                                {cls.replace("bbr-border-beam--", "--")}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+                <button
+                    type="button"
+                    className="button is-primary is-rounded bbr-border-beam bbr-border-beam--rainbow mt-4"
+                >
+                    Beam on a button
+                </button>
+            </ComponentUseCase>
+
+            <ComponentUseCase
                 caption="bbr-anim-paused"
                 description="Add bbr-anim-paused alongside any infinite animation class to pause it."
                 code={

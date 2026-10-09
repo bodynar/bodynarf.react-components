@@ -304,10 +304,9 @@ const Home: FC = () => {
                 </h3>
                 <p className="mb-4">
                     This documentation site was originally written in Russian and translated to English
-                    with the help of
-                    {` `}
+                    with the help of{" "}
                     <strong>ChatGPT</strong>
-                    . The panel below is a component that you can use in your own projects to display
+                    {". The panel below is a component that you can use in your own projects to display "}
                     a similar translation or AI-assistance credit notice.
                 </p>
                 <TranslationPanel />

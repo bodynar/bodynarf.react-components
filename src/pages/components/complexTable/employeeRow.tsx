@@ -21,11 +21,11 @@ const EmployeeRow = ({
             {actions !== undefined && actions.length > 0 && (
                 <td>
                     <div className="is-flex" style={{ gap: "8px" }}>
-                        {actions.map((action, i) => {
+                        {actions.map(action => {
                             const { onClick, ...iconProps } = action;
                             return (
                                 <Icon
-                                    key={i}
+                                    key={iconProps.name}
                                     {...iconProps}
                                     onClick={() => onClick(item.id)}
                                 />

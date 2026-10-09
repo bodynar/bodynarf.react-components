@@ -69,7 +69,7 @@ const Stat: FC = () => {
 
             <ComponentColorCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="Color of the icon badge. Only visible when icon is provided."
                 codeProvider={id =>
                     <CodeExample
@@ -81,7 +81,7 @@ const Stat: FC = () => {
                             `    value="$48,200"`,
                             `    label="Monthly revenue"`,
                             `    icon="currency-dollar"`,
-                            `    color={ElementColor.${id}}`,
+                            `    style={ElementColor.${id}}`,
                             `/>`,
                         ].join("\n")}
                     />
@@ -91,7 +91,7 @@ const Stat: FC = () => {
                         value="$48,200"
                         label="Monthly revenue"
                         icon="currency-dollar"
-                        color={color}
+                        style={color}
                     />
                 }
             />

@@ -118,7 +118,7 @@ const OtpInput: FC = () => {
 
             <ComponentColorCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="Border color applied to all cells"
                 codeProvider={id =>
                     <CodeExample
@@ -129,13 +129,13 @@ const OtpInput: FC = () => {
                             `<OtpInput`,
                             `    value=""`,
                             `    onChange={() => {}}`,
-                            `    color={ElementColor.${id}}`,
+                            `    style={ElementColor.${id}}`,
                             `/>`,
                         ].join("\n")}
                     />
                 }
                 componentProvider={color =>
-                    <OtpInputComponent value={colorValue} color={color} onChange={setColorValue} />
+                    <OtpInputComponent value={colorValue} style={color} onChange={setColorValue} />
                 }
             />
 

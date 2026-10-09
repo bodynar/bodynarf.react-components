@@ -42,7 +42,7 @@ const ColorDropdownPreview: FC = () => {
             <ColorSelectorView viewMode="dropdown" value={selected} onSelect={handleSelect} />
             <div className="mt-3">
                 <SegmentedControlComponent
-                    color={selected.value as ElementColor}
+                    style={selected.value as ElementColor}
                     value={previewValue}
                     options={previewOptions}
                     onChange={setPreviewValue}
@@ -62,7 +62,7 @@ const ColorButtonsPreview: FC = () => {
             <ColorSelectorView viewMode="buttons" value={selected} onSelect={handleSelect} />
             <div className="mt-2">
                 <SegmentedControlComponent
-                    color={selected.value as ElementColor}
+                    style={selected.value as ElementColor}
                     value={previewValue}
                     options={previewOptions}
                     onChange={setPreviewValue}

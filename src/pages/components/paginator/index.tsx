@@ -314,7 +314,7 @@ const Paginator: FC = () => {
             <ComponentUseCase
                 captionIsCode
                 caption="resources"
-                description="Configuration of displayed component labels for Previous/Next buttons and page titles."
+                description="Component labels configuration. Since v1.16 only the open concrete page title template is configurable; Previous/Next buttons are set up via `nextButtonsConfig`."
                 code={
                     <CodeExample
                         code={[
@@ -322,15 +322,10 @@ const Paginator: FC = () => {
                             "",
                             '<Paginator',
                             '    count={10}',
-                            '    showNextButtons',
                             '    currentPage={page}',
                             '    onPageChange={setPage}',
                             '    resources={{',
-                            '        previousPageCaption: "previousPageCaption",',
-                            '        previousPageTitle: "previousPageTitle",',
-                            '        nextPageCaption: "nextPageCaption",',
-                            '        nextPageTitle: "nextPageTitle",',
-                            '        openConcretePageTitleTemplate: "openConcretePageTitleTemplate {0}",',
+                            '        openConcretePageTitleTemplate: "Open page {0}",',
                             '    }}',
                             '/>',
                         ].join("\n")}
@@ -339,15 +334,10 @@ const Paginator: FC = () => {
             >
                 <PaginatorComponent
                     count={10}
-                    showNextButtons
                     currentPage={page}
                     onPageChange={setPage}
                     nearPagesCount={1}
                     resources={{
-                        previousPageCaption: "previousPageCaption",
-                        previousPageTitle: "previousPageTitle",
-                        nextPageCaption: "nextPageCaption",
-                        nextPageTitle: "nextPageTitle",
                         openConcretePageTitleTemplate: "openConcretePageTitleTemplate {0}",
                     }}
                 />

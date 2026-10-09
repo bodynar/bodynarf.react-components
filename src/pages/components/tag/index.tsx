@@ -162,8 +162,8 @@ const Tag: FC = () => {
 
             <ComponentUseCase
                 captionIsCode
-                caption="lightColor"
-                description="Display light shades of the style color. Disabled by default."
+                caption="light"
+                description="Display light shades of the style color. Disabled by default. Since v1.16 — replaces the soft-deprecated `lightColor`."
                 code={
                     <CodeExample
                         code={[
@@ -171,8 +171,8 @@ const Tag: FC = () => {
                             `import Tag from "@bodynarf/react.components/components/tag";`,
                             "",
                             '<Tag',
-                            '    lightColor',
-                            '    content="Light color tag"',
+                            '    light',
+                            '    content="Light tag"',
                             '    style={ElementColor.Primary}',
                             '/>',
                         ].join("\n")}
@@ -180,10 +180,63 @@ const Tag: FC = () => {
                 }
             >
                 <TagComponent
-                    lightColor
-                    content="Light color tag"
+                    light
+                    content="Light tag"
                     style={ElementColor.Primary}
                 />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                captionIsCode
+                caption="outlined"
+                description="Since v1.16: display the tag with an outlined (border-only) style."
+                code={
+                    <CodeExample
+                        code={[
+                            `import { ElementColor } from "@bodynarf/react.components";`,
+                            `import Tag from "@bodynarf/react.components/components/tag";`,
+                            "",
+                            '<Tag',
+                            '    outlined',
+                            '    content="Outlined tag"',
+                            '    style={ElementColor.Danger}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <div className="is-flex" style={{ gap: "8px", flexWrap: "wrap" }}>
+                    <TagComponent outlined content="Outlined tag" style={ElementColor.Danger} />
+                    <TagComponent outlined rounded content="Outlined rounded" style={ElementColor.Info} />
+                    <TagComponent outlined light content="Outlined light" style={ElementColor.Success} />
+                </div>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                caption="iconLeft / iconRight"
+                description="Since v1.16: icons rendered inside the tag on the left / right side. Accepts a Bootstrap icon configuration (name without the bi- prefix)."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Tag from "@bodynarf/react.components/components/tag";`,
+                            "",
+                            '<Tag',
+                            '    content="New release"',
+                            '    iconLeft={{ name: "star" }}',
+                            '/>',
+                            '<Tag',
+                            '    content="v1.16"',
+                            '    iconRight={{ name: "tag" }}',
+                            '/>',
+                        ].join("\n")}
+                    />
+                }
+            >
+                <div className="is-flex" style={{ gap: "8px", flexWrap: "wrap" }}>
+                    <TagComponent content="New release" iconLeft={{ name: "star" }} style={ElementColor.Warning} />
+                    <TagComponent content="v1.16" iconRight={{ name: "tag" }} style={ElementColor.Link} />
+                    <TagComponent content="Both" iconLeft={{ name: "lightning" }} iconRight={{ name: "lightning" }} />
+                </div>
             </ComponentUseCase>
 
             <ComponentUseCase

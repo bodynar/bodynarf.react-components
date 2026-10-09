@@ -45,6 +45,19 @@ import Breadcrumbs from "./breadcrumbs";
 import ComplexTable from "./complexTable";
 import MenuButton from "./menuButton";
 import TreeView from "./treeView";
+import Center from "./center";
+import Stack from "./stack";
+import ButtonGroup from "./buttonGroup";
+import ToggleButton from "./toggleButton";
+import FloatButton from "./floatButton";
+import CircularMeter from "./circularMeter";
+import AvatarGroup from "./avatarGroup";
+import RadioCardGroup from "./radioCardGroup";
+import DropdownMenu from "./dropdownMenu";
+import DndList from "./dndList";
+import Dropzone from "./dropzone";
+import TableOfContents from "./tableOfContents";
+import ActionBar from "./actionBar";
 
 const components: MenuItem = {
     name: "component-group",
@@ -61,6 +74,7 @@ const components: MenuItem = {
             caption: "Accordion",
             component: <Accordion />,
             createVersion: "1.6",
+            updateVersion: "1.16",
         },
         {
             path: "/components/button",
@@ -73,7 +87,7 @@ const components: MenuItem = {
             caption: "Tag",
             component: <Tag />,
             createVersion: "1.5",
-            updateVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/dropdown",
@@ -106,7 +120,7 @@ const components: MenuItem = {
             caption: "Paginator",
             component: <Paginator />,
             createVersion: "1.4",
-            updateVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/breadcrumbs",
@@ -140,38 +154,42 @@ const components: MenuItem = {
             caption: "Stepper",
             component: <Stepper />,
             createVersion: "1.14",
-            updateVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/timeline",
             caption: "Timeline",
             component: <Timeline />,
             createVersion: "1.14",
-            updateVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/progress",
             caption: "Progress",
             component: <Progress />,
             createVersion: "1.14",
+            updateVersion: "1.16",
         },
         {
             path: "/components/splitButton",
             caption: "Split Button",
             component: <SplitButton />,
             createVersion: "1.14",
+            updateVersion: "1.16",
         },
         {
             path: "/components/alert",
             caption: "Alert",
             component: <Alert />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/animations",
             caption: "Animations",
             component: <Animations />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/avatar",
@@ -184,6 +202,7 @@ const components: MenuItem = {
             caption: "Badge",
             component: <Badge />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/calendar",
@@ -232,6 +251,7 @@ const components: MenuItem = {
             caption: "Empty State",
             component: <EmptyState />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/imageViewer",
@@ -250,6 +270,7 @@ const components: MenuItem = {
             caption: "Notification",
             component: <Notification />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/popover",
@@ -268,6 +289,7 @@ const components: MenuItem = {
             caption: "Segmented Control",
             component: <SegmentedControl />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/sidePanel",
@@ -286,24 +308,28 @@ const components: MenuItem = {
             caption: "Spinner",
             component: <Spinner />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/stat",
             caption: "Stat",
             component: <Stat />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/tagGroup",
             caption: "Tag Group",
             component: <TagGroup />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/toast",
             caption: "Toast",
             component: <Toast />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/components/tooltip",
@@ -328,6 +354,85 @@ const components: MenuItem = {
             caption: "Menu Button",
             component: <MenuButton />,
             createVersion: "1.15",
+            updateVersion: "1.16",
+        },
+        {
+            path: "/components/center",
+            caption: "Center",
+            component: <Center />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/stack",
+            caption: "Stack",
+            component: <Stack />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/buttonGroup",
+            caption: "Button Group",
+            component: <ButtonGroup />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/toggleButton",
+            caption: "Toggle Button",
+            component: <ToggleButton />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/floatButton",
+            caption: "Float Button",
+            component: <FloatButton />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/circularMeter",
+            caption: "Circular Meter",
+            component: <CircularMeter />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/avatarGroup",
+            caption: "Avatar Group",
+            component: <AvatarGroup />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/radioCardGroup",
+            caption: "Radio Card Group",
+            component: <RadioCardGroup />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/dropdownMenu",
+            caption: "Dropdown Menu",
+            component: <DropdownMenu />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/dndList",
+            caption: "Drag & Drop List",
+            component: <DndList />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/dropzone",
+            caption: "Dropzone",
+            component: <Dropzone />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/tableOfContents",
+            caption: "Table Of Contents",
+            component: <TableOfContents />,
+            createVersion: "1.16",
+        },
+        {
+            path: "/components/actionBar",
+            caption: "Action Bar",
+            component: <ActionBar />,
+            createVersion: "1.16",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };

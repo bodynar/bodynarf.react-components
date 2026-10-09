@@ -37,10 +37,10 @@ const eventsWithMarkers: Array<TimelineItem> = [
 ];
 
 const eventsWithColors: Array<TimelineItem> = [
-    { id: "event1", title: "Planning", content: "Initial planning", color: ElementColor.Info },
-    { id: "event2", title: "In Progress", content: "Development phase", color: ElementColor.Warning },
-    { id: "event3", title: "Review", content: "Code review", color: ElementColor.Primary },
-    { id: "event4", title: "Complete", content: "Deployed successfully", color: ElementColor.Success },
+    { id: "event1", title: "Planning", content: "Initial planning", style: ElementColor.Info },
+    { id: "event2", title: "In Progress", content: "Development phase", style: ElementColor.Warning },
+    { id: "event3", title: "Review", content: "Code review", style: ElementColor.Primary },
+    { id: "event4", title: "Complete", content: "Deployed successfully", style: ElementColor.Success },
 ];
 
 /** Timeline component demo */
@@ -165,7 +165,7 @@ const Timeline: FC = () => {
 
             <ComponentUseCase
                 caption="Item colors"
-                description="Each event can have its own color override using the color property"
+                description="Each event can have its own color override using the style property (color is deprecated since v1.16)"
                 code={
                     <CodeExample
                         code={[
@@ -173,9 +173,9 @@ const Timeline: FC = () => {
                             `import Timeline from "@bodynarf/react.components/components/timeline";`,
                             "",
                             `const events: Array<TimelineItem> = [`,
-                            `    { id: "e1", title: "Planning", content: "Initial planning", color: ElementColor.Info },`,
-                            `    { id: "e2", title: "In Progress", content: "Development", color: ElementColor.Warning },`,
-                            `    { id: "e3", title: "Complete", content: "Deployed", color: ElementColor.Success },`,
+                            `    { id: "e1", title: "Planning", content: "Initial planning", style: ElementColor.Info },`,
+                            `    { id: "e2", title: "In Progress", content: "Development", style: ElementColor.Warning },`,
+                            `    { id: "e3", title: "Complete", content: "Deployed", style: ElementColor.Success },`,
                             `];`,
                             "",
                             `<Timeline items={events} />`,
@@ -348,7 +348,7 @@ const Timeline: FC = () => {
 
             <ComponentColorCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="The default color for timeline markers (can be overridden per item)"
                 codeProvider={id =>
                     <CodeExample
@@ -358,7 +358,7 @@ const Timeline: FC = () => {
                             "",
                             "<Timeline",
                             `    items={events}`,
-                            `    color={ElementColor.${id}}`,
+                            `    style={ElementColor.${id}}`,
                             "/>",
                         ].join("\n")}
                     />
@@ -366,7 +366,7 @@ const Timeline: FC = () => {
                 componentProvider={(color: ElementColor) =>
                     <TimelineComponent
                         items={basicEvents}
-                        color={color}
+                        style={color}
                     />
                 }
             />

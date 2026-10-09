@@ -120,6 +120,31 @@ const Stepper: FC = () => {
                 />
             </ComponentUseCase>
 
+            <ComponentUseCase
+                captionIsCode
+                caption="variant"
+                description="Since v1.16: `panel` renders full-width attached flag steps instead of the default separated circles. Compare both variants below."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Stepper from "@bodynarf/react.components/components/stepper";`,
+                            "",
+                            `<Stepper`,
+                            `    steps={steps}`,
+                            `    currentStep="step2"`,
+                            `    variant="panel"`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <StepperComponent
+                    steps={stepsWithDescriptions}
+                    currentStep="step2"
+                    variant="panel"
+                />
+            </ComponentUseCase>
+
             <hr />
 
             <div className="block">
@@ -432,7 +457,7 @@ const Stepper: FC = () => {
 
             <ComponentColorCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="The component supports all colors defined in the ElementColor type"
                 codeProvider={id =>
                     <CodeExample
@@ -443,7 +468,7 @@ const Stepper: FC = () => {
                             '<Stepper',
                             `    steps={steps}`,
                             `    currentStep="step2"`,
-                            `    color={ElementColor.${id}}`,
+                            `    style={ElementColor.${id}}`,
                             '/>',
                         ].join("\n")}
                     />
@@ -452,7 +477,7 @@ const Stepper: FC = () => {
                     <StepperComponent
                         steps={basicSteps}
                         currentStep="step2"
-                        color={color}
+                        style={color}
                     />
                 }
             />

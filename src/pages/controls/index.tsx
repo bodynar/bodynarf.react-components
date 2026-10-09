@@ -3,7 +3,6 @@ import { MenuItem } from "../routing";
 import AutoComplete from "./autoComplete";
 import ColorPicker from "./colorPicker";
 import Checkbox from "./checkbox";
-import Date from "./date";
 import DateInput from "./dateInput";
 import Text from "./text";
 import Multiline from "./multiline";
@@ -33,35 +32,32 @@ const controls: MenuItem = {
             updateVersion: "1.14",
         },
         {
-            path: "/controls/date",
-            caption: "Date picker",
-            component: <Date />,
-            createVersion: "0.1",
-        },
-        {
             path: "/controls/text",
             caption: "Text",
             component: <Text />,
             createVersion: "0.1",
+            updateVersion: "1.16",
         },
         {
             path: "/controls/multiline",
             caption: "Multiline",
             component: <Multiline />,
             createVersion: "0.1",
+            updateVersion: "1.16",
         },
         {
             path: "/controls/number",
             caption: "Number",
             component: <Number />,
             createVersion: "1.4",
-            updateVersion: "1.14",
+            updateVersion: "1.16",
         },
         {
             path: "/controls/password",
             caption: "Password",
             component: <Password />,
             createVersion: "1.4",
+            updateVersion: "1.16",
         },
         {
             path: "/controls/switch",
@@ -88,24 +84,28 @@ const controls: MenuItem = {
             caption: "Time Picker",
             component: <TimePicker />,
             createVersion: "1.14",
+            updateVersion: "1.16",
         },
         {
             path: "/controls/autoComplete",
             caption: "Auto Complete",
             component: <AutoComplete />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/controls/dateInput",
             caption: "Date Input",
             component: <DateInput />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
         {
             path: "/controls/otpInput",
             caption: "OTP Input",
             component: <OtpInput />,
             createVersion: "1.15",
+            updateVersion: "1.16",
         },
     ].sort((x, y) => x.caption.localeCompare(y.caption))
 };

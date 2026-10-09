@@ -105,7 +105,7 @@ const Changelog: FC = () => {
                             v{entry.version}
                         </h2>
 
-                    {isOpen && entry.added.length > 0 && (
+                    {isOpen && entry.added.length > 0 ? (
                         <div className="mb-3">
                             <p className="has-text-weight-semibold mb-2 is-flex is-align-items-center" style={{ gap: "0.5rem" }}>
                                 <Tag
@@ -129,9 +129,9 @@ const Changelog: FC = () => {
                                     ))}
                             </ul>
                         </div>
-                    )}
+                    ) : null}
 
-                    {isOpen && entry.updated.length > 0 && (
+                    {isOpen && entry.updated.length > 0 ? (
                         <div>
                             <p className="has-text-weight-semibold mb-2 is-flex is-align-items-center" style={{ gap: "0.5rem" }}>
                                 <Tag
@@ -155,7 +155,7 @@ const Changelog: FC = () => {
                                     ))}
                             </ul>
                         </div>
-                    )}
+                    ) : null}
                     </div>
                 );
             })}

@@ -90,7 +90,7 @@ const SegmentedControl: FC = () => {
 
             <ComponentColorCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="Accent color applied to the active segment. Defaults to Primary."
                 codeProvider={id =>
                     <CodeExample
@@ -102,14 +102,14 @@ const SegmentedControl: FC = () => {
                             `    value={value}`,
                             `    options={[...]}`,
                             `    onChange={setValue}`,
-                            `    color={ElementColor.${id}}`,
+                            `    style={ElementColor.${id}}`,
                             `/>`,
                         ].join("\n")}
                     />
                 }
                 componentProvider={color =>
                     <SegmentedControlComponent
-                        color={color}
+                        style={color}
                         value={colorValue}
                         options={abcOptions}
                         onChange={setColorValue}

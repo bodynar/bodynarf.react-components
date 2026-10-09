@@ -13,6 +13,7 @@ import Log, { LogRef } from "@app/sharedComponents/log";
 /** Text component demo */
 const Text: FC = () => {
     const onValueChangeLogRef = useRef<LogRef>(null);
+    const addonLogRef = useRef<LogRef>(null);
 
     return (
         <section>
@@ -104,6 +105,42 @@ const Text: FC = () => {
                     placeholder="Enter text here"
                     label={{ caption: "Text demo", horizontal: true }}
                 />
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                caption="addonLeft / addonRight"
+                description="Since v1.16 inputs support addons on either side — static text, an icon or an interactive button (`InputAddon` union)."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Text from "@bodynarf/react.components/components/primitives/text";`,
+                            "",
+                            `<Text`,
+                            `    addonLeft={{ type: "text", content: "https://" }}`,
+                            `    placeholder="example.com"`,
+                            `/>`,
+                            "",
+                            `<Text`,
+                            `    addonLeft={{ type: "icon", icon: { name: "envelope" } }}`,
+                            `    addonRight={{ type: "button", caption: "Check", onClick: () => {} }}`,
+                            `    placeholder="name@example.com"`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <div className="is-flex is-flex-direction-column" style={{ gap: "8px", maxWidth: "420px" }}>
+                    <TextComponent
+                        addonLeft={{ type: "text", content: "https://" }}
+                        placeholder="example.com"
+                    />
+                    <TextComponent
+                        addonLeft={{ type: "icon", icon: { name: "envelope" } }}
+                        addonRight={{ type: "button", caption: "Check", onClick: () => addonLogRef.current?.append("Check clicked") }}
+                        placeholder="name@example.com"
+                    />
+                </div>
+                <Log ref={addonLogRef} />
             </ComponentUseCase>
 
             <ComponentUseCase

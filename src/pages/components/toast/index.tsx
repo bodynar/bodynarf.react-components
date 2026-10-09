@@ -45,7 +45,7 @@ const Toast: FC = () => {
 
             <ComponentColorCase
                 captionIsCode
-                caption="color"
+                caption="style"
                 description="Toast supports all available color variants"
                 codeProvider={id =>
                     <CodeExample
@@ -53,14 +53,14 @@ const Toast: FC = () => {
                             `import { ElementColor } from "@bodynarf/react.components";`,
                             `import Toast from "@bodynarf/react.components/components/toast";`,
                             "",
-                            `<Toast color={ElementColor.${id}}>`,
+                            `<Toast style={ElementColor.${id}}>`,
                             "    Toast message.",
                             "</Toast>",
                         ].join("\n")}
                     />
                 }
                 componentProvider={color =>
-                    <ToastComponent color={color}>
+                    <ToastComponent style={color}>
                         Toast with <strong>{color}</strong> color.
                     </ToastComponent>
                 }
@@ -83,10 +83,10 @@ const Toast: FC = () => {
                 }
             >
                 <div className="is-flex" style={{ gap: "12px", flexDirection: "column" }}>
-                    <ToastComponent color={ElementColor.Info}>
+                    <ToastComponent style={ElementColor.Info}>
                         closable (default — button is visible)
                     </ToastComponent>
-                    <ToastComponent color={ElementColor.Info} closable={false}>
+                    <ToastComponent style={ElementColor.Info} closable={false}>
                         closable=false — no close button
                     </ToastComponent>
                 </div>
@@ -108,7 +108,7 @@ const Toast: FC = () => {
                             "",
                             "{visible && (",
                             "    <Toast",
-                            `        color={ElementColor.Warning}`,
+                            `        style={ElementColor.Warning}`,
                             "        onClose={() => setVisible(false)}",
                             "    >",
                             "        Click × to close.",
@@ -131,7 +131,7 @@ const Toast: FC = () => {
                     {onCloseVisible
                         ? (
                             <ToastComponent
-                                color={ElementColor.Warning}
+                                style={ElementColor.Warning}
                                 onClose={() => {
                                     setOnCloseVisible(false);
                                     onCloseLogRef.current?.append("onClose called");
@@ -159,7 +159,7 @@ const Toast: FC = () => {
                             "{isVisible && (",
                             "    <Toast",
                             "        fixed",
-                            "        color={ElementColor.Success}",
+                            "        style={ElementColor.Success}",
                             "        onClose={() => setIsVisible(false)}",
                             "    >",
                             "        Fixed toast",
@@ -181,7 +181,7 @@ const Toast: FC = () => {
                         ? (
                             <ToastComponent
                                 fixed
-                                color={ElementColor.Success}
+                                style={ElementColor.Success}
                                 position={ElementPosition.Right}
                                 onClose={() => setFixedVisible(false)}
                             >
@@ -206,7 +206,7 @@ const Toast: FC = () => {
                             `<Toast`,
                             `    fixed`,
                             `    onClose={...}`,
-                            `    color={ElementColor.Info}`,
+                            `    style={ElementColor.Info}`,
                             `    position={ElementPosition.Left}`,
                             `>`,
                             "    Left-side toast",
@@ -242,7 +242,7 @@ const Toast: FC = () => {
                         ? (
                             <ToastComponent
                                 fixed
-                                color={ElementColor.Info}
+                                style={ElementColor.Info}
                                 position={positionValue}
                                 onClose={() => setPositionVisible(false)}
                             >
@@ -266,7 +266,7 @@ const Toast: FC = () => {
                             "",
                             `<Toast`,
                             `    autoClose={3000}`,
-                            `    color={ElementColor.Info}`,
+                            `    style={ElementColor.Info}`,
                             `    onClose={() => setVisible(false)}`,
                             `>`,
                             "    This toast auto-closes in 3 seconds.",
@@ -287,7 +287,7 @@ const Toast: FC = () => {
                     {autoCloseVisible
                         ? (
                             <ToastComponent
-                                color={ElementColor.Info}
+                                style={ElementColor.Info}
                                 autoClose={3000}
                                 onClose={() => setAutoCloseVisible(false)}
                             >

@@ -153,6 +153,30 @@ const Multiline: FC = () => {
             </ComponentUseCase>
 
             <ComponentUseCase
+                caption="addonLeft / addonRight"
+                description="Since v1.16 inputs support addons on either side — static text, an icon or an interactive button (`InputAddon` union)."
+                code={
+                    <CodeExample
+                        code={[
+                            `import Multiline from "@bodynarf/react.components/components/primitives/multiline";`,
+                            "",
+                            `<Multiline`,
+                            `    addonLeft={{ type: "text", content: "Note" }}`,
+                            `    addonRight={{ type: "icon", icon: { name: "pencil" } }}`,
+                            `    placeholder="Enter your text here..."`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <MultilineComponent
+                    addonLeft={{ type: "text", content: "Note" }}
+                    addonRight={{ type: "icon", icon: { name: "pencil" } }}
+                    placeholder="Enter your text here..."
+                />
+            </ComponentUseCase>
+
+            <ComponentUseCase
                 captionIsCode
                 caption="disabled"
                 description="Renders a non-interactive disabled textarea. Not set by default."

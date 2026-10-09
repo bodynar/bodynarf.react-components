@@ -32,6 +32,7 @@ const AutoComplete: FC = () => {
     const debounceLogRef = useRef<LogRef>(null);
     const clearableLogRef = useRef<LogRef>(null);
     const clearTitleLogRef = useRef<LogRef>(null);
+    const addonLogRef = useRef<LogRef>(null);
 
     const handleAsyncSearch = async (query: string): Promise<AutoCompleteItem[]> => {
         await new Promise(resolve => setTimeout(resolve, 300));
@@ -176,6 +177,35 @@ const AutoComplete: FC = () => {
                         onValueChange={value => onValueChangeLogRef.current?.append(`"${value}"`)}
                     />
                     <Log ref={onValueChangeLogRef} />
+                </div>
+            </ComponentUseCase>
+
+            <ComponentUseCase
+                caption="addonLeft / addonRight"
+                description="Since v1.16 inputs support addons on either side — static text, an icon or an interactive button (`InputAddon` union)."
+                code={
+                    <CodeExample
+                        code={[
+                            `import AutoComplete from "@bodynarf/react.components/components/autoComplete";`,
+                            "",
+                            `<AutoComplete`,
+                            `    items={items}`,
+                            `    addonLeft={{ type: "icon", icon: { name: "search" } }}`,
+                            `    addonRight={{ type: "button", caption: "Go", onClick: () => {} }}`,
+                            `    placeholder="Search..."`,
+                            `/>`,
+                        ].join("\n")}
+                    />
+                }
+            >
+                <div>
+                    <AutoCompleteComponent
+                        items={staticItems}
+                        addonLeft={{ type: "icon", icon: { name: "search" } }}
+                        addonRight={{ type: "button", caption: "Go", onClick: () => addonLogRef.current?.append("Go clicked") }}
+                        placeholder="Search..."
+                    />
+                    <Log ref={addonLogRef} />
                 </div>
             </ComponentUseCase>
 
